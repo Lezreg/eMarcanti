@@ -1,0 +1,60 @@
+# Numerous always-ignore extensions
+*.class
+*~
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# Package Files #
+#*.jar util pour les libs
+*.war
+*.ear
+
+# Folders to ignore
+CVS/
+classes/
+dist/
+node_modules/
+.svn
+.CVS
+target/
+bin/
+tmp/
+trash/
+/target/
+/lib/
+/bin/
+/java.io.tmpdir/
+/target-AVANT/
+ 
+#################
+## Eclipse
+#################
+*.pydevproject
+.project
+.cache
+.metadata
+local.properties
+.classpath
+.loadpath
+ 
+# Locally stored "Eclipse launch configurations"
+*.launch
+ 
+# CDT-specific
+.cproject
+ 
+# PDT-specific
+.buildpath
+ 
+ 
+############
+## Windows
+############
+ 
+# Windows image file caches
+Thumbs.db
+ 
+# Folder config file
+Desktop.ini
