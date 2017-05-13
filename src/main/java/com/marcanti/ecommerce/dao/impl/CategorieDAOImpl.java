@@ -1,5 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+	 * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -19,67 +19,63 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
-import com.marcanti.ecommerce.dao.ProduitDAO;
-import com.marcanti.ecommerce.model.Produit;
+import com.marcanti.ecommerce.model.Categorie;
 
 /**
  *
  * @author lezreg
  */
-public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements ProduitDAO {
-
-	private static final Logger logger = LoggerFactory.getLogger(ProduitDAOImpl.class);
+@Repository
+public class CategorieDAOImpl extends AbstractGenericDAO<Categorie> {
 
 	@PersistenceContext
     private EntityManager em;
 
-    public ProduitDAOImpl() {
-        super(Produit.class);
-		logger.info("dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+    public CategorieDAOImpl() {
+        super(Categorie.class);
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Produit entity) {
+    public void create(Categorie entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Long id, Produit entity) {
+    public void edit(@PathParam("id") Short id, Categorie entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public void remove(@PathParam("id") Short id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Produit find(@PathParam("id") Long id) {
+    public Categorie find(@PathParam("id") Short id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Produit> findAll() {
+    public List<Categorie> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Produit> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Categorie> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
@@ -95,13 +91,4 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
         return em;
     }
     
-
-	public void setEm(EntityManager em) {
-		this.em = em;
-	}
-
-	@Override
-	public List<Produit> getAllProduits() {
-		return super.findAll();
-	}
 }

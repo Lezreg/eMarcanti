@@ -38,7 +38,7 @@ trash/
 local.properties
 .classpath
 .loadpath
- 
+.settings
 # Locally stored "Eclipse launch configurations"
 *.launch
  
