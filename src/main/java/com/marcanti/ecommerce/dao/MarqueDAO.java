@@ -1,5 +1,7 @@
 package com.marcanti.ecommerce.dao;
 
-public interface MarqueDAO {
+import com.marcanti.ecommerce.model.Marque;
+
+public interface MarqueDAO extends GenericDAO<Marque> {
 
 }

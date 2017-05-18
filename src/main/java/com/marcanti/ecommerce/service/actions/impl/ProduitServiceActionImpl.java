@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.marcanti.ecommerce.dao.MarqueDAO;
 import com.marcanti.ecommerce.dao.ProduitDAO;
+import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 
@@ -21,7 +23,10 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 
 	@Autowired
 	private ProduitDAO produitDAO;
-	 
+
+	@Autowired
+	private MarqueDAO marqueDAO;
+
     @Override
     @Transactional
 	public void AddProduit(Produit produit) {
@@ -36,6 +41,11 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 
 	public void setProduitDAO(ProduitDAO produitDAO) {
 		this.produitDAO = produitDAO;
+	}
+
+	@Override
+	public List<Marque> getBrands() {
+		return marqueDAO.findAll();
 	}
  
 }

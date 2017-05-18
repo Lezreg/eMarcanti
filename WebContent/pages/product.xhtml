@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:customer="http://java.sun.com/jsf/composite/components/customer" 
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>parfum</title>
+	<style type="text/css">
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+}
+
+.tg td {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+}
+
+.tg th {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #f0f0f0;
+}
+
+.tg .tg-4eph {
+	background-color: #f9f9f9
+}
+</style>
+
+<h:outputStylesheet name="/resources/css/style.css" />
+
+</h:head>
+<h:body>
+
+
+	<h:form>
+    <p:dataTable var="produit" value="#{dtFilterView.produits}" widgetVar="produitsTable"
+                 emptyMessage="No produits found with given criteria" filteredValue="#{dtFilterView.filteredProduits}" >
+ 
+        <f:facet name="header">
+            <p:outputPanel>
+<!--                 <h:outputText value="Search all fields:" /> -->
+                <p:inputText id="globalFilter" onkeyup="PF('produitsTable').filter()" style="text-align=right" placeholder="Rechercher"/>
+            </p:outputPanel>
+        </f:facet>
+ 	
+  		<p:column style="width:50px">
+            <h:outputText value="#{produit.idProduit}" />
+        </p:column>
+        
+        <p:column filterBy="#{produit.idMarque.marqueNom}" headerText="Marque" footerText="exact" filterMatchMode="exact">
+            <f:facet name="filter">
+                <p:selectOneMenu onchange="PF('produitsTable').filter()" style="width:80%">
+                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{dtFilterView.brands}" />
+                </p:selectOneMenu>
+            </f:facet>
+<!--             <p:graphicImage url="/images/100X100/#{produit.produitPhotoURL}" width="100" /> -->
+            <p:graphicImage url="/images/100X100/#{empty produit.produitPhotoURL ? 'default.jpg' : produit.produitPhotoURL}" width="100" />
+<!--              <h:outputText value="#{empty produit.produitPhotoURL ? 'default.jpg' : produit.produitPhotoURL}" /> -->
+            <h:outputText value="#{produit.idMarque.marqueNom}" />
+        </p:column>
+        
+         <p:column filterBy="#{produit.produitDescription}" headerText="Description" footerText="contains" filterMatchMode="contains">
+            <h:outputText value="#{produit.produitDescription}" />
+        </p:column>
+        
+         <p:column filterBy="#{produit.produitDetail}" style="width:150px" headerText="Detail" footerText="contains" filterMatchMode="contains">
+            <h:outputText value="Pour #{produit.produitDetail}" />
+        </p:column>
+        
+        <p:column filterBy="#{produit.prixPublic}" style="width:110px" headerText="Prix constaté" footerText="custom (min)" filterFunction="#{dtFilterView.filterByPrice}">
+            <h:outputText value="#{produit.prixPublic}">
+                <f:convertNumber currencySymbol="€" type="currency"/>
+            </h:outputText>
+        </p:column>
+        
+  		<p:column filterBy="#{produit.notrePrix}" style="width:110px" headerText="Notre prix" footerText="custom (min)" filterFunction="#{dtFilterView.filterByPrice}">
+            <h:outputText value="#{produit.notrePrix}">
+                <f:convertNumber currencySymbol="€" type="currency"/>
+            </h:outputText>
+        </p:column>
+<!--         <p:column> -->
+<!-- 	        <h:commandLink value="" > -->
+<!-- 			<h:graphicImage  value="/images/icons/panier.jpg" width="100" height="100"/> -->
+<!-- 			</h:commandLink> -->
+<!--        </p:column>  -->
+			 <p:column style="width:110px" >
+			 	<h:commandButton  value="Ajouter" style="color:red;" />
+			 </p:column>
+
+    </p:dataTable>
+</h:form>
+
+</h:body>
+</html>

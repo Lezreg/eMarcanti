@@ -188,6 +188,9 @@ public class Produit implements Serializable {
     }
 
     public String getProduitPhotoURL() {
+		if (produitPhotoURL == null) {
+			return "";
+		}
         return produitPhotoURL;
     }
 

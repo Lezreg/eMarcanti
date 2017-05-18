@@ -68,6 +68,8 @@
 <!-- 	<context:component-scan base-package="com.marcanti" /> -->
 	<context:component-scan base-package="com.marcanti.ecommerce.dao.impl" />
 	<context:component-scan base-package="com.marcanti.ecommerce.service.actions.impl" />
+		<context:component-scan base-package="com.marcanti.ecommerce.filter" />
+	
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
@@ -89,7 +91,8 @@
 
 	<beans:bean id="produitDAO" class="com.marcanti.ecommerce.dao.impl.ProduitDAOImpl">
 	</beans:bean>
-
+	<beans:bean id="marqueDAO" class="com.marcanti.ecommerce.dao.impl.MarqueDAOImpl">
+	</beans:bean>
 
 	<beans:bean id="produitService"
 		class="com.marcanti.ecommerce.service.actions.impl.ProduitServiceActionImpl">

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.marcanti.ecommerce.model.Produit;
 
-public interface ProduitDAO {
+public interface ProduitDAO extends GenericDAO<Produit> {
 
 	/**
 	 * ajouter un nouveau produit

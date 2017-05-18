@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author admin
  */
 @Transactional
-public abstract class AbstractGenericDAO<T> {
+public abstract class AbstractGenericDAO<T> implements GenericDAO<T> {
 
     private Class<T> entityClass;
 
