@@ -101,6 +101,8 @@ public class Membre implements Serializable {
     @JoinColumn(name = "idProfil", referencedColumnName = "idProfil")
     @ManyToOne(optional = false)
     private Profil idProfil;
+    
+    private boolean isAuthenticated = false;
 
     public Membre() {
     }
@@ -266,8 +268,24 @@ public class Membre implements Serializable {
     public void setIdProfil(Profil idProfil) {
         this.idProfil = idProfil;
     }
+    
+    public boolean isAuthenticated() {
+		return isAuthenticated;
+	}
 
-    @Override
+	public void setAuthenticated(boolean isAuthenticated) {
+		this.isAuthenticated = isAuthenticated;
+	}
+
+	public void setActif(boolean isActif) {
+		this.isActif = isActif;
+	}
+
+	public void setDefaultPassword(boolean isDefaultPassword) {
+		this.isDefaultPassword = isDefaultPassword;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idMembre != null ? idMembre.hashCode() : 0);

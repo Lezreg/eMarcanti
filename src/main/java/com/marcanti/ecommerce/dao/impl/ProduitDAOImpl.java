@@ -39,7 +39,6 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 
     public ProduitDAOImpl() {
         super(Produit.class);
-		logger.info("dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
     }
 
     @POST
