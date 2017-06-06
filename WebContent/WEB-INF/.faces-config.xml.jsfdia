@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#*" PATH="/*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:0" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="product::#pages#product.xhtml" NAME="output"
+    PATH="/pages/product.xhtml" TARGET="rules:#pages#product.xhtml"
+    TITLE="product" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
+  SHAPE="24,136,50,73" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
+   PATH="/login.xhtml" SHAPE="424,382,47,31" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="success:#{authentificationBean.checkAuthentication}:#pages#private#index.xhtml"
+    NAME="output" PATH="/pages/private/index.xhtml"
+    TARGET="rules:#pages#private#index.xhtml"
+    TITLE="#{authentificationBean.checkAuthentication}:success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="failure:#{authentificationBean.checkAuthentication}:#pages#login.xhtml"
+    NAME="output1" PATH="/pages/login.xhtml"
+    TARGET="rules:#pages#login.xhtml"
+    TITLE="#{authentificationBean.checkAuthentication}:failure" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:1" PATH="/*" SHAPE="32,273,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:1" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="change_password::#pages#public#change_password.xhtml"
+    NAME="output" PATH="/pages/public/change_password.xhtml"
+    TARGET="rules:#pages#public#change_password.xhtml"
+    TITLE="change_password" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#product.xhtml"
+  PATH="/pages/product.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#public#change_password.xhtml"
+  PATH="/pages/public/change_password.xhtml" SHAPE="240,289,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#index.xhtml"
+  PATH="/pages/private/index.xhtml" SHAPE="256,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#private#index.xhtml:0" NAME="item"
+   PATH="/pages/private/index.xhtml" model-entity="JSFProcessItem"/>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#login.xhtml" PATH="/pages/login.xhtml"
+  SHAPE="256,401,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#login.xhtml:0" NAME="item"
+   PATH="/pages/login.xhtml" model-entity="JSFProcessItem"/>
+ </PROCESS-ITEM>
+</PROCESS>

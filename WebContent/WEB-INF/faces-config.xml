@@ -1,14 +1,72 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<faces-config version="2.2"
-              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
-              http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                
+	http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+	
     <application>
         <el-resolver>
             org.springframework.web.jsf.el.SpringBeanFacesELResolver
         </el-resolver>
     </application>
     
+    <lifecycle>
+	    <phase-listener id="parfum">com.marcanti.ecommerce.listener.ParfumSecurityListener</phase-listener>
+	</lifecycle>
+
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>product</from-outcome>
+			<to-view-id>/pages/product.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>change_password</from-outcome>
+			<to-view-id>/pages/public/change_password.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{authentificationBean.checkAuthentication}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/pages/private/index.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{authentificationBean.checkAuthentication}</from-action>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/pages/login.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login</display-name>
+		<from-view-id>/pages/login.xhtml</from-view-id>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>login</display-name>
+		<from-view-id>/pages/private/index.xhtml</from-view-id>
+	</navigation-rule>	
+	<application>
+		<resource-bundle>
+			<base-name>ressources.parfumLibelle</base-name>
+			<var>msg</var>
+		</resource-bundle>
+		<locale-config>
+			<default-locale>fr</default-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
+	</application>
+	<application>
+		<resource-bundle>
+			<base-name>ressources.ApplicationMessage</base-name>
+			<var>msgError</var>
+		</resource-bundle>
+		<locale-config>
+			<default-locale>fr</default-locale>
+			<supported-locale>en</supported-locale>
+		</locale-config>
+	</application>
 </faces-config>

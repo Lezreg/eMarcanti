@@ -1,0 +1,108 @@
+
+<h:form id="formBandeau" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:of="http://omnifaces.org/functions">
+
+
+	<table style="center" cellspacing="4" cellpadding="0" border="0">
+		<TR>
+			<TD><rich:toolbar>
+
+					<rich:dropDownMenu mode="ajax" >
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:outputText value="#{msg.libelle_cat}" />
+							</h:panelGroup>
+						</f:facet>
+						<rich:menuItem label="#{msg.libelle_parfum_homme}" action="spm">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_parfum_femme}" action="um">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_parfum_enfant}" action="cce">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_testeur}" action="brokermonitor">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_coffret}" action="brokerserver">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_creme_soin}" action="mws">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_miniatures}" action="MWIS">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_pile_accessoire}" action="MWIS">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_lots}" action="MWIS">
+						</rich:menuItem>												
+					</rich:dropDownMenu>
+					<rich:column>
+						<h:outputText value="#{msg.libelle_nouv}" />
+					</rich:column>
+					<rich:column>
+						<h:outputText value="#{msg.libelle_promos}" />
+					</rich:column>
+					<rich:column>
+						<h:outputText value="#{msg.libelle_decouvrir}" />
+					</rich:column>
+					
+					<rich:dropDownMenu mode="ajax" >
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:outputText value="#{msg.libelle_mes_cmd}" />
+							</h:panelGroup>
+						</f:facet>
+						<rich:menuItem label="#{msg.libelle_cours}" action="apache">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_pre}" action="instanceapache">
+						</rich:menuItem>
+					</rich:dropDownMenu>
+					
+					<rich:dropDownMenu mode="ajax" >
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:outputText value="#{msg.libelle_parrainage}" />
+							</h:panelGroup>
+						</f:facet>
+						<rich:menuItem label="#{msg.libelle_mes_filleuls}" action="apache">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_leur_cmd}" action="instanceapache">
+						</rich:menuItem>
+					</rich:dropDownMenu>					
+
+					<rich:dropDownMenu mode="ajax" >
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:outputText value="#{msg.libelle_cmd_grp}" />
+							</h:panelGroup>
+						</f:facet>
+						<rich:menuItem label="#{msg.libelle_recap_cours}" action="apache">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_recap_pre}" action="instanceapache">
+						</rich:menuItem>
+					</rich:dropDownMenu>
+					
+					<rich:dropDownMenu mode="ajax" >
+						<f:facet name="label">
+							<h:panelGroup>
+								<h:outputText value="#{msg.libelle_admin}" />
+							</h:panelGroup>
+						</f:facet>
+						<rich:menuItem label="#{msg.libelle_membres}" action="apache">
+						</rich:menuItem>
+						<rich:menuItem label="#{msg.libelle_dpt_grp}" action="instanceapache">
+						</rich:menuItem>
+					</rich:dropDownMenu>	
+					
+					<rich:column>
+						<h:link value="#{msg.libelle_deconexion}" outcome="#{authentificationBean.deconnection()}" />
+					</rich:column>
+
+				</rich:toolbar>
+			</TD>
+		</TR>
+
+	</table>
+</h:form>
+
