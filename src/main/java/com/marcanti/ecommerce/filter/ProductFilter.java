@@ -10,9 +10,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
-import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
+import com.marcanti.ecommerce.service.ProduitServiceAction;
 
 @ManagedBean(name = "dtFilterView")
 @ViewScoped
@@ -26,8 +27,21 @@ public class ProductFilter implements Serializable {
 
 	private List<Produit> filteredProduits;
 
+	private Produit selectedProduit;
+
 	@ManagedProperty("#{produitService}")
 	private ProduitServiceAction service;
+
+	@ManagedProperty("#{basketView}")
+	private BasketController basket;
+	
+	public BasketController getBasket() {
+		return basket;
+	}
+
+	public void setBasket(BasketController basket) {
+		this.basket = basket;
+	}
 
 	@PostConstruct
 	public void init() {
@@ -55,6 +69,11 @@ public class ProductFilter implements Serializable {
 		return brands;
 
 	}
+
+	public void addToBasket() {
+		basket.addPoduct(selectedProduit, 1);
+	}
+
 	public List<Produit> getFilteredProduits() {
 		return filteredProduits;
 	}
@@ -73,5 +92,13 @@ public class ProductFilter implements Serializable {
 
 	public void setService(ProduitServiceAction service) {
 		this.service = service;
+	}
+
+	public Produit getSelectedProduit() {
+		return selectedProduit;
+	}
+
+	public void setSelectedProduit(Produit selectedProduit) {
+		this.selectedProduit = selectedProduit;
 	}
 }

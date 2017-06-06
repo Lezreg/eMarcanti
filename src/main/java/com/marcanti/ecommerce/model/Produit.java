@@ -365,7 +365,8 @@ public class Produit implements Serializable {
 
     @Override
     public String toString() {
-        return "com.parfum.ce.model.Produit[ idProduit=" + idProduit + " ]";
+		return "com.parfum.ce.model.Produit[ idProduit=" + idProduit + "produitDescription= " + produitDescription
+				+ "notrePrix= " + notrePrix + " ]";
     }
     
 }

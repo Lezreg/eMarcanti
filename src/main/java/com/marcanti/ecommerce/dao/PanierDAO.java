@@ -1,5 +1,7 @@
 package com.marcanti.ecommerce.dao;
 
-public interface PanierDAO {
+import com.marcanti.ecommerce.model.Panier;
+
+public interface PanierDAO extends GenericDAO<Panier> {
 
 }

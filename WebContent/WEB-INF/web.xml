@@ -68,6 +68,7 @@
     <param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
     <param-value>true</param-value>
   </context-param>
+
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>casablanca</param-value>
@@ -104,4 +105,5 @@
      <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   
+
 </web-app>

@@ -34,7 +34,7 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/WebContent/**" location="/WebContent/" />
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
 	<beans:bean id="hibernate4AnnotatedSessionFactory"
@@ -50,12 +50,24 @@
 		</beans:property>
 	</beans:bean>
 
+	<!-- Activates various annotations to be detected in bean classes: Spring's 
+		@Required and @Autowired, as well as JSR 250's @PostConstruct, @PreDestroy 
+		and @Resource (if available) and JPA's @PersistenceContext and @PersistenceUnit 
+		(if available). -->
+	<context:annotation-config />
 	<!-- <context:component-scan base-package="com.marcanti" /> -->
-	<context:component-scan base-package="com.marcanti.ecommerce.dao.impl" />
-	<context:component-scan base-package="com.marcanti.ecommerce.service.actions.impl" />
-		<context:component-scan base-package="com.marcanti.ecommerce.filter" />
-	
-	<context:component-scan base-package="com.marcanti.ecommerce.filter" />
+	<context:component-scan base-package="com.marcanti" />
+	<context:component-scan base-package="com.marcanti.ecommerce.service" />
+	<context:component-scan base-package="com.marcanti.ecommerce.dao" />
+	<context:component-scan base-package="com.marcanti.ecommerce.controller" />
+
+<!--     <context:component-scan base-package="net.javaonline.spring.inventory,net.javaonline.web.jsf.inventory" /> -->
+
+	<!-- Instruct Spring to perform declarative transaction management automatically 
+		on annotated classes. -->
+	<!-- <tx:annotation-driven /> -->
+
+
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!-- transaction manager for hibernate -->
@@ -74,21 +86,10 @@
 
 	<!-- list of beans -->
 
-	<beans:bean id="produitDAO"
-		class="com.marcanti.ecommerce.dao.impl.ProduitDAOImpl">
-	</beans:bean>
-	<beans:bean id="marqueDAO"
-		class="com.marcanti.ecommerce.dao.impl.MarqueDAOImpl">
-	</beans:bean>
-<<<<<<< HEAD
-	<beans:bean id="marqueDAO" class="com.marcanti.ecommerce.dao.impl.MarqueDAOImpl">
-	</beans:bean>
-=======
->>>>>>> login
-
 	<beans:bean id="produitService"
-		class="com.marcanti.ecommerce.service.actions.impl.ProduitServiceActionImpl">
-		<beans:property name="produitDAO" ref="produitDAO"></beans:property>
-	</beans:bean>
+		class="com.marcanti.ecommerce.service.ProduitServiceActionImpl"/>
+		
+	<beans:bean id="panierService"
+		class="com.marcanti.ecommerce.service.PanierServiceActionImpl"/>
 
 </beans:beans>

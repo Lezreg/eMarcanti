@@ -19,4 +19,11 @@ public interface ProduitDAO extends GenericDAO<Produit> {
 	 */
 	List<Produit> getAllProduits();
 
+	/**
+	 * 
+	 * @param CatCOde
+	 * @return
+	 */
+	public List<Produit> findProduitByCategorie(String CatCOde);
+
 }
