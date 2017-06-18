@@ -45,7 +45,7 @@ public class OrganisationDAOImpl extends AbstractGenericDAO<Organisation> implem
     }
 
     @Override
-    public List<Organisation> findAll() {
+    public List<Organisation> getOrganisationList() {
         return super.findAll();
     }
 

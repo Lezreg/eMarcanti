@@ -1,10 +1,8 @@
 package com.marcanti.ecommerce.utils;
 
-import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -12,9 +10,7 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -23,13 +19,13 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.marcanti.ecommerce.ApplicationConfig;
+import com.marcanti.ecommerce.model.UserSession;
 
 /**
  * 
@@ -37,6 +33,8 @@ import com.marcanti.ecommerce.ApplicationConfig;
  *
  */
 public class ParfumUtils {
+	
+	public static final String BEAN_SESSION_NAME = "USER_SESSION";
 
 	/**
 	 * Gestion des Logs.
@@ -45,81 +43,36 @@ public class ParfumUtils {
 
 	private static ResourceBundle bundleApplication = ResourceBundle.getBundle("ressources.ApplicationMessage");
 
+	private static ResourceBundle bundleLibelle = ResourceBundle.getBundle("ressources.parfumLibelle");
+
 	public ParfumUtils() {
 
 	}
 
-	public static List<SelectItem> getListeFichierRequest() {
-		return getListeFichier(ParfumUtils.getAppConfig().getRequestRepFile());
-	}
-
-	private static List<SelectItem> getListeFichier(String urlFile) {
-		List<SelectItem> listeFichiersItems = Collections.emptyList();
-		listeFichiersItems = new ArrayList<SelectItem>();
-		File f = new File(urlFile);
-		File[] listfichier = f.listFiles();
-		for (int i = 0; i < listfichier.length; i++) {
-			File fichier = listfichier[i];
-			// si c'est un fichier on l'ajoute � la liste d 'item
-			if (!fichier.isDirectory() && fichier.getName().toLowerCase().matches(".*\\.xml")) {
-				listeFichiersItems.add(new SelectItem(fichier.getAbsolutePath(), fichier.getName()));
-			}
-			// si c'est un r�pertoire on regarde � l'interieur
-			else if (fichier.isDirectory()) {
-				listeFichiersItems.addAll(getListeFichier(fichier.getAbsolutePath()));
-			}
-		}
-
-		return listeFichiersItems;
-	}
-
 	public static boolean checkPasswordFormat(String password) {
 
-		//au moins 1 majuscule
+		// au moins 1 majuscule
 		boolean resu1 = Pattern.matches(".*[A-Z]{1,}.*", password);
-		//au moins 1 minuscule
+		// au moins 1 minuscule
 		boolean resu2 = Pattern.matches(".*[a-z]{1,}.*", password);
-		//au moins 1 chiffre
+		// au moins 1 chiffre
 		boolean resu3 = Pattern.matches(".*[0-9]{1,}.*", password);
-		//au moins 8 caractères
+		// au moins 8 caractères
 		boolean resu4 = Pattern.matches(".{8,}", password);
-		
+
 		return (resu1 && resu2 && resu3 && resu4);
 
 	}
 
-	public static ApplicationConfig getAppConfig() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		ServletContext servletContext = (ServletContext) context.getExternalContext().getContext();
-		ApplicationConfig appBean = (ApplicationConfig) servletContext.getAttribute(ApplicationConfig.BEAN_KEY);
-		return appBean;
+	public static UserSession getUserSessionBean() {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		return (UserSession)session.getAttribute(BEAN_SESSION_NAME);
 	}
-
-	public static Object getBean(String beanName) {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
-		Object bean = (Object) request.getSession().getAttribute(beanName);
-		return bean;
-	}
-
-	/*
-	 * public static UserSessionBean getUserSessionBean() throws InesException {
-	 * HttpServletRequest request =
-	 * (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext(
-	 * ).getRequest(); UserSessionBean userSessionBean =
-	 * (UserSessionBean)request.getSession().getAttribute(UserSessionBean.
-	 * BEAN_KEY); if(userSessionBean == null) throw new
-	 * InesException(bundleApplication.getString("Code_GetUserSessionBean"),
-	 * bundleApplication.getString("Libelle_GetUserSessionBean")); return
-	 * userSessionBean; }
-	 */
-
-	public static Object getSessionObject(String objName) {
-		FacesContext ctx = FacesContext.getCurrentInstance();
-		ExternalContext extCtx = ctx.getExternalContext();
-		Map<String, Object> sessionMap = extCtx.getSessionMap();
-		return sessionMap.get(objName);
-	}
+	
+	public static void setUserSessionBean(UserSession userSession) {
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		session.setAttribute(BEAN_SESSION_NAME,userSession);
+	}	
 
 	public static boolean checkPattern(String chaine, String regex) {
 
@@ -223,12 +176,35 @@ public class ParfumUtils {
 	}
 
 	public static HttpServletRequest getRequest() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+				.getRequest();
 		return request;
 	}
 
 	public static ResourceBundle getBundleApplication() {
 		return bundleApplication;
+	}
+
+	public static ResourceBundle getBundleLibelle() {
+		return bundleLibelle;
+	}
+
+	public static String getDateNowEN() {
+
+		Date dt = new java.util.Date();
+
+		java.text.SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		return sdf.format(dt);
+	}
+
+	public static String getDateNowFR() {
+
+		Date dt = new java.util.Date();
+
+		java.text.SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+		return sdf.format(dt);
 	}
 
 	public static void main(String[] args) {

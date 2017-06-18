@@ -5,16 +5,18 @@ import java.text.MessageFormat;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.marcanti.ecommerce.model.Membre;
-import com.marcanti.ecommerce.service.ServiceAuthentification;
+import com.marcanti.ecommerce.model.UserSession;
+import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 import com.marcanti.ecommerce.utils.Mail;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
@@ -29,17 +31,18 @@ public class AuthentificationBean implements Serializable {
 	
 	private String username;
 	private String password;
-	private String password2;
+	private String passwordConfirmation;
 	private String code;
 
+	@ManagedProperty("#{authentificationService}")
+	private AuthentificationServiceAction service;
 	
 	public AuthentificationBean() 
 	{
 		username="";
 		password="";
-		password2="";
+		passwordConfirmation="";
 		code="";
-		
 	}
 
 	public String getUsername() {
@@ -66,12 +69,20 @@ public class AuthentificationBean implements Serializable {
 		this.code = code;
 	}
 	
-	public String getPassword2() {
-		return password2;
+	public String getPasswordConfirmation() {
+		return passwordConfirmation;
 	}
 
-	public void setPassword2(String password2) {
-		this.password2 = password2;
+	public void setPasswordConfirmation(String passwordConfirmation) {
+		this.passwordConfirmation = passwordConfirmation;
+	}
+	
+	public AuthentificationServiceAction getService() {
+		return service;
+	}
+
+	public void setService(AuthentificationServiceAction service) {
+		this.service = service;
 	}
 
 	public String checkAuthentication()
@@ -81,22 +92,23 @@ public class AuthentificationBean implements Serializable {
 		boolean resu = false;
 		boolean isOK = false;
 		boolean[] resuTab = new boolean[2];
-		String ecran="/pages/private/index.xhtml";
+		String ecran="index";
 		
 		try {
-			resu = ServiceAuthentification.emailExist(getUsername());
+			resu = service.emailExist(getUsername());
 		} catch (Exception e) {
 			logger.error("ERROR check email exist : ",e);
 		}
 		if(resu){
 			try {
-				resu = ServiceAuthentification.isAuthenticated(getUsername(),getPassword());
+				String passwordSHA512 = DigestUtils.sha512Hex(getPassword());
+				resu = service.isAuthenticated(getUsername(),passwordSHA512);
 			} catch (Exception e) {
 				logger.error("ERROR authentication : ",e);
 			}
 			if(resu){
 				try {
-					resuTab = ServiceAuthentification.isUserAndOrgaActif(getUsername());
+					resuTab = service.isUserAndOrgaActif(getUsername());
 				} catch (Exception e) {
 					logger.error("ERROR user and orga actif : ",e);
 				}
@@ -129,23 +141,22 @@ public class AuthentificationBean implements Serializable {
 
 	    if(isOK){
 	    	try {
-				boolean isDefaultPassword = ServiceAuthentification.getIsDefaultPassword(getUsername());
+	    		boolean isDefaultPassword = service.getIsDefaultPassword(getUsername());
 				if(isDefaultPassword){
-					HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-					Membre membre = new Membre();
-					request.getSession().setAttribute("membre", membre);
-					ecran = "/pages/private/index.xhtml";
+					UserSession userSession = service.getUserSession(getUsername());
+					ParfumUtils.setUserSessionBean(userSession);
+					ecran = "index";
 				}else{
 					HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 					request.setAttribute("email", getUsername());
-					ecran = "/pages/private/new_password.xhtml";
+					ecran = "new_password";
 				}
 			} catch (Exception e) {
 				logger.error("ERROR getIsDefaultPassword : ",e);
 			}
 	    return ecran;
 	    }else{
-	    	return "/pages/login.xhtml";
+	    	return "login";
 	    }
 	}
 	
@@ -157,7 +168,7 @@ public class AuthentificationBean implements Serializable {
 		boolean isOK = false;
 		
 		try {
-			resu = ServiceAuthentification.emailExist(getUsername());
+			resu = service.emailExist(getUsername());
 		} catch (Exception e) {
 			logger.error("ERROR check email exist : ",e);
 		}
@@ -168,7 +179,7 @@ public class AuthentificationBean implements Serializable {
 			
 			//mise à jour du champs 'codeVerificationPassword' dans la table membe
 			try {
-				ServiceAuthentification.updateCode(getUsername(),code);
+				service.updateCode(getUsername(),code);
 			} catch (Exception e) {
 				logger.error("ERROR update code : ",e);
 			}
@@ -193,9 +204,9 @@ public class AuthentificationBean implements Serializable {
 		}
 		
 	    if(isOK){
-	    	return "/pages/public/code.xhtml";
+	    	return "code";
 	    }else{
-	    	return "/pages/public/change_password.xhtml";
+	    	return "change_password";
 	    }
 	}
 	
@@ -211,7 +222,7 @@ public class AuthentificationBean implements Serializable {
 		String email = (String)request.getAttribute("email");
 		
 		try {
-			resu = ServiceAuthentification.codeExist(email,getCode());
+			resu = service.codeExist(email,getCode());
 		} catch (Exception e) {
 			logger.error("ERROR check code exist : ",e);
 		}
@@ -222,7 +233,8 @@ public class AuthentificationBean implements Serializable {
 			
 			//mise à jour du champs 'codeVerificationPassword' et du password dans la table membe
 			try {
-				ServiceAuthentification.updateGeneratedPassword(email,password,0);
+				String passwordSHA512 = DigestUtils.sha512Hex(password);
+				service	.updateGeneratedPassword(email,passwordSHA512,0);
 			} catch (Exception e) {
 				logger.error("ERROR update Generated password : ",e);
 			} 
@@ -247,9 +259,9 @@ public class AuthentificationBean implements Serializable {
 	    	facesMessage.setDetail(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-	    	return "/include/message.xhtml";
+	    	return "message";
 	    }else{
-	    	return "/pages/public/code.xhtml";
+	    	return "code";
 	    }
 	}
 	
@@ -262,14 +274,14 @@ public class AuthentificationBean implements Serializable {
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String email = (String)request.getAttribute("email");
 		
-		resu = getPassword().equals(getPassword2());
+		resu = getPassword().equals(getPasswordConfirmation());
 		
 		if(!resu){
 	    	msg = ParfumUtils.getBundleApplication().getString("message.confirmation.error");
 	    	facesMessage.setDetail(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-		    return "/pages/private/new_password.xhtml";
+		    return "new_password";
 		}
 		
 		resu = ParfumUtils.checkPasswordFormat(getPassword());
@@ -279,26 +291,28 @@ public class AuthentificationBean implements Serializable {
 	    	facesMessage.setDetail(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-		    return "/pages/private/new_password.xhtml";
+		    return "new_password";
 		}		
 		
 		try {
-			ServiceAuthentification.updateGeneratedPassword(email, getPassword(), 1);
+			String passwordSHA512 = DigestUtils.sha512Hex(getPassword());
+			service.updateGeneratedPassword(email, passwordSHA512, 1);
 		} catch (Exception e) {
 			logger.error("ERROR update Generated password : ",e);
 		}
 		
-    	return "/pages/private/index.xhtml";
+    	return "index";
 	}	
 	
 	public String deconnection() throws Exception
 	{
 
-		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		request.getSession().invalidate();
-		logger.info(getUsername() + " : deconnexion ");
+		//HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+	    //session.invalidate();
+	    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		logger.info(getUsername() + " : deconnexion !!! ");
 		
-	    return "/pages/login";
+	    return "login";
 	}
 	
 

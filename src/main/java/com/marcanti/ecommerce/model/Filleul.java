@@ -6,6 +6,7 @@
 package com.marcanti.ecommerce.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,20 +14,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author admin
  */
 @Entity
-@XmlRootElement
+@Table(name = "Filleul") 
 @NamedQueries({
     @NamedQuery(name = "Filleul.findAll", query = "SELECT f FROM Filleul f")
     , @NamedQuery(name = "Filleul.findByIdFilleul", query = "SELECT f FROM Filleul f WHERE f.idFilleul = :idFilleul")
-    , @NamedQuery(name = "Filleul.findByParrainNom", query = "SELECT f FROM Filleul f WHERE f.parrainNom = :parrainNom")})
+    , @NamedQuery(name = "Filleul.findByParrainNom", query = "SELECT f FROM Filleul f WHERE f.parrainNom = :parrainNom")
+    , @NamedQuery(name = "Filleul.getFilleulsList", query = "SELECT m FROM Membre m, Filleul f WHERE m.idMembre = f.idFilleul and f.idMembreParrain = :idMembreParrain")	
+    })
 public class Filleul implements Serializable {
 
     private static final long serialVersionUID = 1L;
