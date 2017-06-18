@@ -13,53 +13,35 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.marcanti.ecommerce.model.Filleul;
+import com.marcanti.ecommerce.model.Membre;
+
 
 /**
  *
- * @author lezreg
+ * @author RK
  */
 @Repository
 public class FilleulDAOImpl extends AbstractGenericDAO<Filleul> implements FilleulDAO {
 
 	@PersistenceContext
-    private EntityManager em;
+	private EntityManager em;
+	
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
-    public FilleulDAOImpl() {
-        super(Filleul.class);
-    }
+	public void setEntityManager(EntityManager entityManager) {
+		this.em = entityManager;
+	}
 
-    public void create(Filleul entity) {
-        super.create(entity);
-    }
+	public FilleulDAOImpl() {
+		super(Filleul.class);
+	}
 
-	public void edit(Long id, Filleul entity) {
-        super.edit(entity);
-    }
-
-	public void remove(Long id) {
-        super.remove(super.find(id));
-    }
-
-	public Filleul find(Long id) {
-        return super.find(id);
-    }
-
-    @Override
-    public List<Filleul> findAll() {
-        return super.findAll();
-    }
-
-	public List<Filleul> findRange(Integer from, Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+	@Override
+	public List<Membre> getFilleulsList(Membre idMembreParrain) {
+		return em.createNamedQuery("Filleul.getFilleulsList", Membre.class).setParameter("idMembreParrain", idMembreParrain).getResultList();
+	}
     
 }

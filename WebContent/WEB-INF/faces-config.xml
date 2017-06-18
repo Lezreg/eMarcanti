@@ -9,7 +9,7 @@
     </application>
     
     <lifecycle>
-	    <phase-listener id="parfum">com.marcanti.ecommerce.listener.ParfumSecurityListener</phase-listener>
+	    <phase-listener id="parfum">com.marcanti.ecommerce.listener.ParfumSecuriteListener</phase-listener>
 	</lifecycle>
 
 	<navigation-rule>
@@ -27,25 +27,46 @@
 		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
-		<from-view-id>/login.xhtml</from-view-id>
+		<from-view-id>/*</from-view-id>
 		<navigation-case>
-			<from-action>#{authentificationBean.checkAuthentication}</from-action>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/pages/private/index.xhtml</to-view-id>
+			<from-outcome>code</from-outcome>
+			<to-view-id>/pages/public/code.xhtml</to-view-id>
 		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
 		<navigation-case>
-			<from-action>#{authentificationBean.checkAuthentication}</from-action>
-			<from-outcome>failure</from-outcome>
+			<from-outcome>new_password</from-outcome>
+			<to-view-id>/pages/private/new_password.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
 			<to-view-id>/pages/login.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>login</display-name>
-		<from-view-id>/pages/login.xhtml</from-view-id>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>index</from-outcome>
+			<to-view-id>/pages/private/index.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
-		<display-name>login</display-name>
-		<from-view-id>/pages/private/index.xhtml</from-view-id>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>message</from-outcome>
+			<to-view-id>/pages/private/message.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>filleuls</from-outcome>
+			<to-view-id>/pages/private/filleuls.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
 	  <from-view-id>/pages/categories.xhtml</from-view-id>
@@ -54,7 +75,29 @@
 	   <to-view-id>/pages/panier/panier.xhtml</to-view-id>
 	  </navigation-case>
 	 </navigation-rule>
- 
+	 
+	 <navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>filleul</from-outcome>
+			<to-view-id>/pages/private/filleul.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	
+	<navigation-rule>
+		<from-view-id>/login</from-view-id>
+		<navigation-case>
+			<from-action>#{authentificationBean.checkAuthentication}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{authentificationBean.checkAuthentication}</from-action>
+			<from-outcome>failure</from-outcome>
+			<to-view-id>/login</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	<application>
 		<resource-bundle>
 			<base-name>ressources.parfumLibelle</base-name>

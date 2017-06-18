@@ -1,5 +1,12 @@
 package com.marcanti.ecommerce.dao;
 
-public interface FilleulDAO {
+import java.util.List;
+
+import com.marcanti.ecommerce.model.Filleul;
+import com.marcanti.ecommerce.model.Membre;
+
+public interface FilleulDAO extends GenericDAO<Filleul> {
+	
+	public List<Membre> getFilleulsList(Membre idMembre);
 
 }

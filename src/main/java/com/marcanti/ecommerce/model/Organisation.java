@@ -53,52 +53,68 @@ public class Organisation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Long idOrga;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     private String orgaNom;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     private String orgaAdresse;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
     private String orgaCodePostal;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     private String orgaVille;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     private String orgaPays;
+    
     @Size(max = 140)
     private String orgaAdresseLivraison;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 30)
     private String orgaAlias;
+    
     @Basic(optional = false)
     @NotNull
     private boolean isAlivrerAvantPaiement;
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModification;
+    
     @Basic(optional = false)
     @NotNull
     private boolean isActive;
+    
     @Basic(optional = false)
     @NotNull
     private boolean accesCatalogueComplet;
+    
     @Basic(optional = false)
     @NotNull
     private boolean envoiMailConfirmation;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrga")
     private Collection<Departement> departementCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrga")
     private Collection<CommandeGroupee> commandeGroupeeCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrga")
     private Collection<Membre> membreCollection;
 
