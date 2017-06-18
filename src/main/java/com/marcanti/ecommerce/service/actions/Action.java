@@ -1,4 +1,4 @@
-package com.marcanti.ecommerce.service;
+package com.marcanti.ecommerce.service.actions;
 
 /**
  * Generic Action interface

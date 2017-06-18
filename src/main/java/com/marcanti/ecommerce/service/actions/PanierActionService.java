@@ -1,4 +1,4 @@
-package com.marcanti.ecommerce.service;
+package com.marcanti.ecommerce.service.actions;
 
 import com.marcanti.ecommerce.model.Membre;
 import com.marcanti.ecommerce.model.Panier;

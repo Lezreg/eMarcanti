@@ -1,5 +1,6 @@
-package com.marcanti.ecommerce.service;
+package com.marcanti.ecommerce.service.actions;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +89,11 @@ public class PanierServiceActionImpl implements PanierActionService {
 				panierProduitDAO.create(panierProduit);
 				// update panier (quantite et Montant)
 				updatePanier(produit, panierEnCours);
+
+				Collection<PanierProduit> panierProduitCollection = panierEnCours.getPanierProduitCollection();
+				for (PanierProduit panierProduit2 : panierProduitCollection) {
+					panierProduit2.getProduit();
+				}
 			}
 
 

@@ -1,14 +1,14 @@
-package com.marcanti.ecommerce.service.actions.impl;
+package com.marcanti.ecommerce.service.actions;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.marcanti.ecommerce.dao.FilleulDAO;
 import com.marcanti.ecommerce.model.Membre;
-import com.marcanti.ecommerce.service.actions.FilleulsServiceAction;
 
-
+@Service("filleulsService")
 public class FilleulsServiceActionImpl implements FilleulsServiceAction {
 
 

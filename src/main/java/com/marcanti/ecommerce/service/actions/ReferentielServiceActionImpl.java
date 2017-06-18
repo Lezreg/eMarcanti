@@ -1,16 +1,17 @@
-package com.marcanti.ecommerce.service.actions.impl;
+package com.marcanti.ecommerce.service.actions;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.marcanti.ecommerce.dao.OrganisationDAO;
 import com.marcanti.ecommerce.dao.ProfilDAO;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
-import com.marcanti.ecommerce.service.actions.ReferentielServiceAction;
 
 
+@Service("referentielService")
 public class ReferentielServiceActionImpl implements ReferentielServiceAction {
 
 

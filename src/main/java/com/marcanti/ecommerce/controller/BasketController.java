@@ -20,8 +20,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.model.Panier;
 import com.marcanti.ecommerce.model.Produit;
-import com.marcanti.ecommerce.service.PanierActionService;
-import com.marcanti.ecommerce.service.ProduitServiceAction;
+import com.marcanti.ecommerce.service.actions.PanierActionService;
+import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 
 @ManagedBean(name = "basketView")
 @SessionScoped
@@ -57,13 +57,15 @@ public class BasketController implements Serializable {
 	public void addPoduct(Produit produit, int quantite) {
 		// FIXME not support quantity
 		logger.info(produit.toString());
-
+		// TODO return panier after update
 			panierService.addProduct(produit, null);
 
 		// produit.setPanierProduitCollection(panier.getPanierProduitCollection());
 		// produitServiceAction.AddProduit(produit);
 		// FIXME reload database
 		produitsAdded.add(produit);
+
+		// produitsAdded = panierService.getallProduitbyPanier();
 	}
 
 	public List<Produit> getProduitsAdded() {

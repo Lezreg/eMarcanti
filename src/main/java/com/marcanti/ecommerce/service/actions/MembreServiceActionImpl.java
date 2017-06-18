@@ -1,12 +1,12 @@
-package com.marcanti.ecommerce.service.actions.impl;
+package com.marcanti.ecommerce.service.actions;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.marcanti.ecommerce.dao.MembreDAO;
 import com.marcanti.ecommerce.model.Membre;
-import com.marcanti.ecommerce.service.actions.MembreServiceAction;
 
-
+@Service("membreService")
 public class MembreServiceActionImpl implements MembreServiceAction {
 
 

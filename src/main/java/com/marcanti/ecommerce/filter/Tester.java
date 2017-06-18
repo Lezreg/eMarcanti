@@ -18,7 +18,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
-import com.marcanti.ecommerce.service.ProduitServiceAction;
+import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 
 @ManagedBean(name = "TFilterView")
 @ViewScoped

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.marcanti.ecommerce.dao.impl;
+package com.marcanti.ecommerce.dao;
 
 import java.math.BigInteger;
 
@@ -15,8 +15,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.marcanti.ecommerce.dao.AbstractGenericDAO;
-import com.marcanti.ecommerce.dao.AuthentificationDAO;
 import com.marcanti.ecommerce.model.Membre;
 import com.marcanti.ecommerce.model.UserSession;
 

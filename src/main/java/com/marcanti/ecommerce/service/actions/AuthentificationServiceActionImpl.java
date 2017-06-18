@@ -1,12 +1,12 @@
-package com.marcanti.ecommerce.service.actions.impl;
+package com.marcanti.ecommerce.service.actions;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.marcanti.ecommerce.dao.AuthentificationDAO;
 import com.marcanti.ecommerce.model.UserSession;
-import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 
-
+@Service("authentificationService")
 public class AuthentificationServiceActionImpl implements AuthentificationServiceAction {
 
 
