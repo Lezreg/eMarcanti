@@ -1,5 +1,7 @@
 package com.marcanti.ecommerce.dao;
 
-public interface MembreDAO {
+import com.marcanti.ecommerce.model.Membre;
+
+public interface MembreDAO extends GenericDAO<Membre> {
 
 }

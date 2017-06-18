@@ -8,6 +8,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.model.Marque;
@@ -24,8 +30,8 @@ public class Tester {
 	
 	private Produit selectedProduit;
 
-	@ManagedProperty("#{produitService}")
-	private ProduitServiceAction service;
+	@Autowired
+	private ProduitServiceAction produitServiceAction;
 
 	@ManagedProperty("#{basketView}")
 	private BasketController basket;
@@ -40,7 +46,12 @@ public class Tester {
 
 	@PostConstruct
 	public void init() {
-		setProduits(service.getTester());
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		ServletContext servletContext = (ServletContext) externalContext.getContext();
+		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
+				.autowireBean(this);
+
+		setProduits(produitServiceAction.getTester());
 	}
 	
 	public boolean filterByPrice(Object value, Object filter, Locale locale) {
@@ -58,7 +69,7 @@ public class Tester {
 	
 	public List<String> getBrands() {
 		List<String> brands = new ArrayList<>();
-		for (Marque m : service.getBrands()) {
+		for (Marque m : produitServiceAction.getBrands()) {
 			brands.add(m.getMarqueNom());
 		}
 		return brands;
@@ -86,7 +97,7 @@ public class Tester {
 	}
 	
 	public void setService(ProduitServiceAction service) {
-		this.service = service;
+		this.produitServiceAction = service;
 	}
 
 	public Produit getSelectedProduit() {

@@ -9,10 +9,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import com.marcanti.ecommerce.exception.IllegalDataValueException;
+import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
+import com.marcanti.ecommerce.model.Membre;
 
 /**
  *
@@ -31,6 +35,8 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 
     public void create(CommandeIndividuelle entity) {
         super.create(entity);
+		em.getTransaction().commit();
+		em.flush();
     }
 
 	public void edit(Long id, CommandeIndividuelle entity) {
@@ -61,5 +67,37 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
     protected EntityManager getEntityManager() {
         return em;
     }
+
+	@Override
+	public boolean verifyExistingCommandeIndividuelle(Membre membre, CommandeGroupee commandeGroupee) {
+		Query query = em
+				.createQuery(
+						"SELECT c FROM CommandeIndividuelle c WHERE c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee")
+				.setParameter("idMembre", membre.getIdMembre())
+				.setParameter("idCdeGroupee", commandeGroupee.getIdCdeGroupee()).setMaxResults(1);
+		if (query.getResultList() == null || query.getResultList().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public CommandeIndividuelle getCommandeIndividuellByMembreAndCmdGroupe(Membre membre,
+			CommandeGroupee commandeGroupee) {
+		Query query = em
+				.createQuery(
+						"SELECT c FROM CommandeIndividuelle c WHERE c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.isPaiementEffectue = :isPaiementEffectue")
+				.setParameter("idMembre", membre.getIdMembre())
+				.setParameter("idCdeGroupee", commandeGroupee.getIdCdeGroupee())
+				.setParameter("isPaiementEffectue", Boolean.FALSE);
+
+		if (query.getResultList().size() > 1) {
+			throw new IllegalDataValueException();
+		}
+		if (query.getResultList() == null || query.getResultList().isEmpty()) {
+			return null;
+		}
+		return (CommandeIndividuelle) query.getResultList().get(0);
+	}
     
 }

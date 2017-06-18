@@ -1,5 +1,7 @@
 package com.marcanti.ecommerce.dao;
 
-public interface CommandeGroupeeDAO {
+import com.marcanti.ecommerce.model.CommandeGroupee;
+
+public interface CommandeGroupeeDAO extends GenericDAO<CommandeGroupee> {
 
 }

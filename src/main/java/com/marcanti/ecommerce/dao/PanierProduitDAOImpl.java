@@ -9,9 +9,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import com.marcanti.ecommerce.exception.IllegalDataValueException;
 import com.marcanti.ecommerce.model.PanierProduit;
 
 /**
@@ -33,7 +35,9 @@ public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> impl
     }
 
 	public PanierProduit edit(PanierProduit entity) {
+
 		return super.edit(entity);
+
     }
 
 	public void remove(long id) {
@@ -57,5 +61,23 @@ public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> impl
     protected EntityManager getEntityManager() {
         return em;
     }
+
+	@Override
+	public PanierProduit getPanierProduitByPanierAndProduit(Long idPanier, Long idProduit) {
+		Query query = em
+				.createQuery(
+						"SELECT p FROM PanierProduit p WHERE p.panierProduitPK.idProduit = :idProduit AND p.panierProduitPK.idPanier = :idPanier")
+				.setParameter("idProduit", idProduit).setParameter("idPanier", idPanier);
+
+		if (query.getResultList().size() > 1) {
+			throw new IllegalDataValueException();
+		}
+
+		if (query.getResultList() == null || query.getResultList().isEmpty()) {
+			return null;
+		}
+
+		return (PanierProduit) query.getResultList().get(0);
+	}
     
 }

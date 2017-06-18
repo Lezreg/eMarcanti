@@ -1,13 +1,11 @@
 package com.marcanti.ecommerce.view.bean;
 
 import java.io.Serializable;
-import java.text.MessageFormat;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -15,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.model.Membre;
 import com.marcanti.ecommerce.service.ServiceAuthentification;
-import com.marcanti.ecommerce.utils.Mail;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 
@@ -177,12 +174,14 @@ public class AuthentificationBean implements Serializable {
 			request.setAttribute("email", getUsername());
 			
 			// envoi du mail avec le code généré plus haut
-			try {
-				logger.info("send mail with generated code : " + code);
-				Mail.send(getUsername(), ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.code.verification"),String.valueOf(code)));
-			} catch (MessagingException e) {
-				logger.error("ERROR send mail with generated code : ",e);
-			}
+			// try {
+			// logger.info("send mail with generated code : " + code);
+			// // Mail.send(getUsername(),
+			// //
+			// ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.code.verification"),String.valueOf(code)));
+			// } catch (MessagingException e) {
+			// logger.error("ERROR send mail with generated code : ",e);
+			// }
 			
 		}else{
 			msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_invalidEmail");
@@ -227,12 +226,13 @@ public class AuthentificationBean implements Serializable {
 				logger.error("ERROR update Generated password : ",e);
 			} 
 			// envoi du mail avec le password sur 8 caractères
-			try {
-				logger.info("send mail with generated password : " + password);
-				Mail.send(email, ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.membre.password.regenere"),email,password));
-			} catch (MessagingException e) {
-				logger.error("ERROR send mail with generated password : ",e);
-			}
+			// try {
+			// logger.info("send mail with generated password : " + password);
+			// Mail.send(email,
+			// ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.membre.password.regenere"),email,password));
+			// } catch (MessagingException e) {
+			// logger.error("ERROR send mail with generated password : ",e);
+			// }
 			
 		}else{
 			msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_invalidCode");

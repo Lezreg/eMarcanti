@@ -2,9 +2,6 @@ package com.marcanti.ecommerce.service;
 
 import java.util.List;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +12,7 @@ import com.marcanti.ecommerce.dao.ProduitDAO;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 
-@Service
-@ManagedBean(name = "produitService")
-@SessionScoped
+@Service("produitServiceAction")
 public class ProduitServiceActionImpl implements ProduitServiceAction {
 
 	@Autowired

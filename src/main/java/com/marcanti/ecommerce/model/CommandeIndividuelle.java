@@ -8,6 +8,7 @@ package com.marcanti.ecommerce.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,6 +44,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CommandeIndividuelle.findByPrenomModifieur", query = "SELECT c FROM CommandeIndividuelle c WHERE c.prenomModifieur = :prenomModifieur")
     , @NamedQuery(name = "CommandeIndividuelle.findByReduction", query = "SELECT c FROM CommandeIndividuelle c WHERE c.reduction = :reduction")
     , @NamedQuery(name = "CommandeIndividuelle.findByTotalAPayer", query = "SELECT c FROM CommandeIndividuelle c WHERE c.totalAPayer = :totalAPayer")
+    , @NamedQuery(name = "CommandeIndividuelle.findByCmdGroupeeAndMembre", query = "SELECT c FROM CommandeIndividuelle c WHERE c.totalAPayer = :totalAPayer")
     , @NamedQuery(name = "CommandeIndividuelle.findByCommentaire", query = "SELECT c FROM CommandeIndividuelle c WHERE c.commentaire = :commentaire")})
 public class CommandeIndividuelle implements Serializable {
 
@@ -81,15 +83,15 @@ public class CommandeIndividuelle implements Serializable {
     @JoinColumn(name = "idStatus", referencedColumnName = "idStatus")
     @ManyToOne(optional = false)
     private CommandeIndividuelleStatus idStatus;
-    @JoinColumn(name = "idMembre", referencedColumnName = "idMembre")
+	@JoinColumn(name = "idMembre", referencedColumnName = "idMembre")
     @ManyToOne(optional = false)
-    private Membre idMembre;
-    @JoinColumn(name = "idPanier", referencedColumnName = "idPanier")
+	private Membre idMembre;
+	@JoinColumn(name = "idPanier", referencedColumnName = "idPanier")
     @OneToOne(optional = false)
-    private Panier idPanier;
+	private Panier idPanier;
     @JoinColumn(name = "idTransactionPaiement", referencedColumnName = "idTransactionPaiement")
     @ManyToOne
-    private TransactionPaiement idTransactionPaiement;
+	private TransactionPaiement idTransactionPaiement;
 
     public CommandeIndividuelle() {
     }
