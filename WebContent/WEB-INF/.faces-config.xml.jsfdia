@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
- <PROCESS-ITEM NAME="rules:#pages#categories.xhtml"
-  PATH="/pages/categories.xhtml" SHAPE="143,164,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#pages#categories.xhtml:0" NAME="item"
-   PATH="/pages/categories.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="panier::#pages#panier#panier.xhtml"
-    NAME="output" PATH="/pages/panier/panier.xhtml"
-    TARGET="rules:#pages#panier#panier.xhtml" TITLE="panier" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#pages#panier#panier.xhtml"
   PATH="/pages/panier/panier.xhtml" SHAPE="412,168,0,0"
   model-entity="JSFProcessGroup" persistent="true"/>
- <PROCESS-ITEM NAME="rules:#*" PATH="/*" SHAPE="32,241,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*" PATH="/*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:0" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="product::#pages#product.xhtml" NAME="output"
     PATH="/pages/product.xhtml" TARGET="rules:#pages#product.xhtml"
     TITLE="product" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#*:1" PATH="/*" SHAPE="32,353,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:1" PATH="/*" SHAPE="32,273,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:1" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="change_password::#pages#public#change_password.xhtml"
@@ -28,34 +19,82 @@
     TITLE="change_password" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#login.xhtml" PATH="/login.xhtml"
-  SHAPE="32,465,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#login.xhtml:0" NAME="item"
-   PATH="/login.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="success:#{authentificationBean.checkAuthentication}:#pages#private#index.xhtml"
-    NAME="output" PATH="/pages/private/index.xhtml"
-    TARGET="rules:#pages#private#index.xhtml"
-    TITLE="#{authentificationBean.checkAuthentication}:success" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="failure:#{authentificationBean.checkAuthentication}:#pages#login.xhtml"
-    NAME="output1" PATH="/pages/login.xhtml"
-    TARGET="rules:#pages#login.xhtml"
-    TITLE="#{authentificationBean.checkAuthentication}:failure" model-entity="JSFProcessItemOutput"/>
+ <PROCESS-ITEM NAME="rules:#pages#login.xhtml" PATH="/pages/login.xhtml"
+  SHAPE="256,401,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#index.xhtml"
+  PATH="/pages/private/index.xhtml" SHAPE="256,145,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#public#change_password.xhtml"
+  PATH="/pages/public/change_password.xhtml" SHAPE="240,289,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#product.xhtml"
+  PATH="/pages/product.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#*:2" PATH="/*" SHAPE="32,577,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:2" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="code::#pages#public#code.xhtml"
+    NAME="output" PATH="/pages/public/code.xhtml"
+    TARGET="rules:#pages#public#code.xhtml" TITLE="code" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#login.xhtml" PATH="/pages/login.xhtml"
-  SHAPE="256,625,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#pages#login.xhtml:0" NAME="item"
-   PATH="/pages/login.xhtml" model-entity="JSFProcessItem"/>
+ <PROCESS-ITEM NAME="rules:#*:3" PATH="/*" SHAPE="32,689,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:3" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="new_password::#pages#private#new_password.xhtml" NAME="output"
+    PATH="/pages/private/new_password.xhtml"
+    TARGET="rules:#pages#private#new_password.xhtml"
+    TITLE="new_password" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#index.xhtml"
-  PATH="/pages/private/index.xhtml" SHAPE="256,481,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#pages#private#index.xhtml:0" NAME="item"
-   PATH="/pages/private/index.xhtml" model-entity="JSFProcessItem"/>
+ <PROCESS-ITEM NAME="rules:#*:4" PATH="/*" SHAPE="32,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:4" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#pages#login.xhtml" NAME="output"
+    PATH="/pages/login.xhtml" TARGET="rules:#pages#login.xhtml"
+    TITLE="login" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#public#change_password.xhtml"
-  PATH="/pages/public/change_password.xhtml" SHAPE="240,369,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pages#product.xhtml"
-  PATH="/pages/product.xhtml" SHAPE="240,257,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#*:5" PATH="/*" SHAPE="32,465,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:5" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="index::#pages#private#index.xhtml"
+    NAME="output" PATH="/pages/private/index.xhtml"
+    TARGET="rules:#pages#private#index.xhtml" TITLE="index" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:6" PATH="/*" SHAPE="32,801,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:6" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="message::#pages#private#message.xhtml"
+    NAME="output" PATH="/pages/private/message.xhtml"
+    TARGET="rules:#pages#private#message.xhtml" TITLE="message" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:7" PATH="/*" SHAPE="32,913,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:7" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="filleuls::#pages#private#filleuls.xhtml"
+    NAME="output" PATH="/pages/private/filleuls.xhtml"
+    TARGET="rules:#pages#private#filleuls.xhtml" TITLE="filleuls" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:8" PATH="/*" SHAPE="32,1025,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:8" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="filleul::#pages#private#filleul.xhtml"
+    NAME="output" PATH="/pages/private/filleul.xhtml"
+    TARGET="rules:#pages#private#filleul.xhtml" TITLE="filleul" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#private#filleul.xhtml"
+  PATH="/pages/private/filleul.xhtml" SHAPE="240,1041,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#filleuls.xhtml"
+  PATH="/pages/private/filleuls.xhtml" SHAPE="240,929,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#new_password.xhtml"
+  PATH="/pages/private/new_password.xhtml" SHAPE="240,705,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#message.xhtml"
+  PATH="/pages/private/message.xhtml" SHAPE="240,817,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#public#code.xhtml"
+  PATH="/pages/public/code.xhtml" SHAPE="240,593,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#categories.xhtml"
+  PATH="/pages/categories.xhtml" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#categories.xhtml:0" NAME="item"
+   PATH="/pages/categories.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="panier::#pages#panier#panier.xhtml"
+    NAME="output" PATH="/pages/panier/panier.xhtml"
+    TARGET="rules:#pages#panier#panier.xhtml" TITLE="panier" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

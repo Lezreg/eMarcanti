@@ -9,10 +9,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
 import com.marcanti.ecommerce.model.Membre;
+import com.marcanti.ecommerce.utils.ParfumUtils;
 
 /**
  *
@@ -58,10 +60,49 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
     public String countREST() {
         return String.valueOf(super.count());
     }
+    
+    public Membre getMembre(Membre idMembre)
+    {
+    	return em.createNamedQuery("Membre.findByIdMembre", Membre.class).setParameter("idMembre", idMembre.getIdMembre()).getSingleResult();
+    }
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
+
+	@Override
+	public void updateFilleul(Membre filleul) {
+		Query query = em.createNativeQuery("UPDATE membre SET membreNom=?, "
+				+ "membrePrenom=?, "
+				+ "membreEmail=?, "
+				+ "membreTel=?, "
+				+ "isActif=?, "
+				+ "isDefaultPassword=?, "
+				+ "dateModification=? "
+				+ "WHERE idMembre=?")
+				.setParameter(1, filleul.getMembreNom())
+				.setParameter(2, filleul.getMembrePrenom())
+				.setParameter(3, filleul.getMembreEmail())
+				.setParameter(4, filleul.getMembreTel())
+				.setParameter(5, filleul.getIsActif())
+				.setParameter(6, filleul.getIsDefaultPassword())
+				.setParameter(7, ParfumUtils.getDateNowEN())
+				.setParameter(8, filleul.getIdMembre());
+		query.executeUpdate();
+	}
+	
+	@Override
+	public void insertFilleul(Membre filleul) {
+		Query query = em.createNativeQuery("INSERT INTO membre (membreNom, membrePrenom, membreEmail, membreTel, isActif, isDefaultPassword, dateCreation) VALUES (?, ?, ?, ?, ?, ?, ?)")
+				.setParameter(1, filleul.getMembreNom())
+				.setParameter(2, filleul.getMembrePrenom())
+				.setParameter(3, filleul.getMembreEmail())
+				.setParameter(4, filleul.getMembreTel())
+				.setParameter(5, filleul.getIsActif())
+				.setParameter(6, filleul.getIsDefaultPassword())
+				.setParameter(7, ParfumUtils.getDateNowEN());
+		query.executeUpdate();
+	}	
     
 }

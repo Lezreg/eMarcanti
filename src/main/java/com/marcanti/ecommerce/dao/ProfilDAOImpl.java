@@ -45,7 +45,7 @@ public class ProfilDAOImpl extends AbstractGenericDAO<Profil> implements ProfilD
         return super.find(id);
     }
 
-    public List<Profil> findAll() {
+    public List<Profil> getProfilList() {
         return super.findAll();
     }
 

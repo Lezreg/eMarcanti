@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author admin
  */
 @Entity
+@Table(name = "Membre")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Membre.findAll", query = "SELECT m FROM Membre m")
@@ -54,52 +56,69 @@ public class Membre implements Serializable {
     @Basic(optional = false)
     @NotNull
     private Long idMembre;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
     private String membreNom;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
     private String membrePrenom;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 120)
     private String membreEmail;
+    
     @Size(max = 20)
     private String membreTel;
+    
     @Basic(optional = false)
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreation;
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateModification;
+    
     @Basic(optional = false)
     @NotNull
     private boolean hasReduc;
+    
     @Basic(optional = false)
     @NotNull
     private boolean isActif;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 128)
     private String password;
+    
     @Basic(optional = false)
     @NotNull
     private boolean isDefaultPassword;
+    
     private Integer codeVerificationPassword;
+    
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateDerniereConnexion;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMembre")
     private Collection<CommandeIndividuelle> commandeIndividuelleCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMembreParrain")
     private Collection<Filleul> filleulCollection;
+    
     @JoinColumn(name = "idDepartement", referencedColumnName = "idDepartement")
     @ManyToOne
     private Departement idDepartement;
+    
     @JoinColumn(name = "idOrga", referencedColumnName = "idOrga")
     @ManyToOne(optional = false)
     private Organisation idOrga;
+    
     @JoinColumn(name = "idProfil", referencedColumnName = "idProfil")
     @ManyToOne(optional = false)
     private Profil idProfil;
@@ -270,14 +289,6 @@ public class Membre implements Serializable {
     public void setIdProfil(Profil idProfil) {
         this.idProfil = idProfil;
     }
-    
-    public boolean isAuthenticated() {
-		return isAuthenticated;
-	}
-
-	public void setAuthenticated(boolean isAuthenticated) {
-		this.isAuthenticated = isAuthenticated;
-	}
 
 	public void setActif(boolean isActif) {
 		this.isActif = isActif;
