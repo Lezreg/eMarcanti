@@ -97,17 +97,4 @@
     TARGET="rules:#pages#panier#panier.xhtml" TITLE="panier" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#login" PATH="/login" SHAPE="32,1137,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#login:0" NAME="item" PATH="/login" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="success:#{authentificationBean.checkAuthentication}:#index"
-    NAME="output" PATH="/index" TARGET="rules:#index"
-    TITLE="#{authentificationBean.checkAuthentication}:success" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT
-    ID="failure:#{authentificationBean.checkAuthentication}:#login"
-    NAME="output1" PATH="/login" TARGET="rules:#login"
-    TITLE="#{authentificationBean.checkAuthentication}:failure" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#index" PATH="/index" SHAPE="256,1153,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

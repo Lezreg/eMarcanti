@@ -84,20 +84,6 @@
 		</navigation-case>
 	</navigation-rule>	
 	
-	
-	<navigation-rule>
-		<from-view-id>/login</from-view-id>
-		<navigation-case>
-			<from-action>#{authentificationBean.checkAuthentication}</from-action>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/index</to-view-id>
-		</navigation-case>
-		<navigation-case>
-			<from-action>#{authentificationBean.checkAuthentication}</from-action>
-			<from-outcome>failure</from-outcome>
-			<to-view-id>/login</to-view-id>
-		</navigation-case>
-	</navigation-rule>
 	<application>
 		<resource-bundle>
 			<base-name>ressources.parfumLibelle</base-name>
