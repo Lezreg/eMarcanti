@@ -3,8 +3,8 @@ package com.marcanti.ecommerce.service.actions.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.marcanti.ecommerce.dao.AuthentificationDAO;
-import com.marcanti.ecommerce.model.UserSession;
 import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 
 public class AuthentificationServiceActionImpl implements AuthentificationServiceAction {
@@ -58,7 +58,7 @@ public class AuthentificationServiceActionImpl implements AuthentificationServic
 	}
 
 	@Override
-	public UserSession getUserSession(String email) {
+	public UserSessionBean getUserSession(String email) {
 		return authentificationDAO.getUserSession(email);
 	}
 	

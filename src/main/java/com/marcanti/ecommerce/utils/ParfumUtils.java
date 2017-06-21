@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.marcanti.ecommerce.model.UserSession;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 /**
  * 
@@ -64,12 +64,12 @@ public class ParfumUtils {
 
 	}
 
-	public static UserSession getUserSessionBean() {
+	public static UserSessionBean getUserSessionBean() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		return (UserSession)session.getAttribute(BEAN_SESSION_NAME);
+		return (UserSessionBean)session.getAttribute(BEAN_SESSION_NAME);
 	}
 	
-	public static void setUserSessionBean(UserSession userSession) {
+	public static void setUserSessionBean(UserSessionBean userSession) {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.setAttribute(BEAN_SESSION_NAME,userSession);
 	}	

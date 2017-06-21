@@ -11,19 +11,20 @@
 
 		<ui:define name="content">
 			<h:form id="formFilleul">
+				<ui:include  src="/pages/private/message.xhtml" />
 				<h:inputHidden value="#{filleulsBean.filleul.idMembre}"  />
 				<h:panelGrid columns="2" border="0" cellpadding="10" cellspacing="1">
 					<h:outputLabel value="#{msg.libelle_nom}" />
-					<h:inputText value="#{filleulsBean.filleul.membreNom}" />
+					<h:inputText value="#{filleulsBean.filleul.membreNom}" maxlength="60" required="true" requiredMessage="#{msg.nom_obligatoire}" />
 					
 					<h:outputLabel value="#{msg.libelle_prenom}" />
-					<h:inputText value="#{filleulsBean.filleul.membrePrenom}" />
+					<h:inputText value="#{filleulsBean.filleul.membrePrenom}" maxlength="60" required="true" requiredMessage="#{msg.prenom_obligatoire}" />
 					
 					<h:outputLabel value="#{msg.libelle_email}" />
-					<h:inputText value="#{filleulsBean.filleul.membreEmail}" />
+					<h:inputText value="#{filleulsBean.filleul.membreEmail}" maxlength="120" required="true" requiredMessage="#{msg.email_obligatoire}" />
 					
 					<h:outputLabel value="#{msg.libelle_tel}" />
-					<h:inputText value="#{filleulsBean.filleul.membreTel}" />	
+					<h:inputText value="#{filleulsBean.filleul.membreTel}" maxlength="20" required="true" requiredMessage="#{msg.tel_obligatoire}" />	
 					
 					<h:outputLabel value="#{msg.libelle_orga}" />
 					<h:selectOneMenu value="#{filleulsBean.filleul.idOrga.idOrga}" disabled="true">
@@ -48,16 +49,7 @@
 			   		</h:selectOneRadio>			   		
 			   		
 			   		<h:button type="button" value="#{msg.libelle_retour}" outcome="filleuls"/>
-			   		
-			   		<c:choose>
-					    <c:when test="${empty filleulsBean.filleul.idMembre}">
-							<!--  c:set var="filleulsBean.filleul.idMembre" value="0"/-->
-							<h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{filleulsBean.insertFilleul()}"/>				        
-					    </c:when>    
-					    <c:otherwise>
-					    	<h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{filleulsBean.updateFilleul()}"/> 
-					    </c:otherwise>
-					</c:choose>
+					<h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{filleulsBean.insertOrUpdateFilleul()}"/>				        
 				</h:panelGrid>
 			</h:form>
 		</ui:define>

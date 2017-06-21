@@ -1,6 +1,8 @@
 package com.marcanti.ecommerce.view.bean;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -11,13 +13,14 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.model.Departement;
 import com.marcanti.ecommerce.model.Membre;
 import com.marcanti.ecommerce.model.Organisation;
-import com.marcanti.ecommerce.model.UserSession;
+import com.marcanti.ecommerce.model.Profil;
 import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 import com.marcanti.ecommerce.service.actions.FilleulsServiceAction;
 import com.marcanti.ecommerce.service.actions.MembreServiceAction;
@@ -60,8 +63,8 @@ public class FilleulsBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		//TODO : récupéré l'objet session pour renseigner idMembre
-		//ParfumUtils.getUserSessionBean().getIdMembre();
-		Membre membre = new Membre(1L);
+		UserSessionBean userSession = ParfumUtils.getUserSessionBean();
+		Membre membre = new Membre(userSession.getIdMembre());
 		this.filleulsList = filleulsService.getFilleulsList(membre);
 		this.radioButtonOuiNon = ReferentielBean.radioButtonOuiNon;
 		this.filleul = new Membre(0L);
@@ -169,12 +172,11 @@ public class FilleulsBean implements Serializable {
 	
 	public String editFilleul() {
 
-		//TODO : renseigner idOrga du membre connecté et non pas idOrga du filleuil
 		Membre membre = new Membre(getIdMembre());
 		membre= membreService.getMembre(membre);
-		//UserSession userSession = ParfumUtils.getUserSessionBean();
-		//membre.setIdOrga(new Organisation(userSession.getIdOrga()));
-		//membre.setIdDepartement(new Departement(userSession.getIdDepartement()));
+		UserSessionBean userSession = ParfumUtils.getUserSessionBean();
+		membre.setIdOrga(new Organisation(userSession.getIdOrga()));
+		membre.setIdDepartement(new Departement(userSession.getIdDepartement()));
 		setFilleul(membre);
 		return "filleul";
 
@@ -184,40 +186,55 @@ public class FilleulsBean implements Serializable {
 		System.out.println("addFilleulView");
 		return "filleul";
 
-	}
-	
-	public String insertFilleul() {
-		
-		FacesMessage facesMessage = new FacesMessage();
-		
-		System.out.println("insertFilleul");
-		System.out.println("id  : " + getIdMembre());
-		System.out.println("nom : " + getMembreNom());
-		System.out.println("prenom : " + getMembrePrenom());
-		System.out.println("email : " + getMembreEmail());
-		System.out.println("tel : " + getMembreTel());
-		
-		if(authentificationService.emailExist(getMembreEmail())){
-			String msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_emailExist");
-			facesMessage.setDetail(msg); 
-			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-		}else{
-			membreService.insertFilleul(filleul);
-		}
-		return "filleul";
 	}	
 	
-	public String updateFilleul() {
-		System.out.println("updateFilleul");
-		System.out.println("id membre : " + this.filleul.getIdMembre());
-		System.out.println("nom : " + this.filleul.getMembreNom());
-		System.out.println("prenom : " + this.filleul.getMembrePrenom());
-		System.out.println("email : " + this.filleul.getMembreEmail());
-		System.out.println("tel : " + this.filleul.getMembreTel());
-		System.out.println("isActif : " + this.filleul.getIsActif());
-		System.out.println("isDefaultPassword : " + this.filleul.getIsDefaultPassword());
-		membreService.updateFilleul(filleul);
+	public String listFilleulView() {
+		System.out.println("listFilleulView");
+		return "filleuls";
+
+	}	
+	
+	public String insertOrUpdateFilleul() {
+		
+		FacesMessage facesMessage = new FacesMessage();
+		Calendar calendar = Calendar.getInstance();
+		Date dateToday =  calendar.getTime();
+		String msg;
+		
+		System.out.println("insertOrUpdateFilleul");
+
+		if(filleul.getIdMembre()==null || filleul.getIdMembre()==0L){
+			if(authentificationService.emailExist(getMembreEmail())){
+				msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_emailExist");
+				facesMessage.setDetail(msg); 
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			}else{
+				
+				UserSessionBean userSession = ParfumUtils.getUserSessionBean();
+				filleul.setIdOrga(new Organisation(userSession.getIdOrga()));
+				filleul.setIdDepartement(new Departement(userSession.getIdDepartement()));
+				//TODO : récupérer idProfil = filleul + password par défaut
+				filleul.setIdProfil(new Profil((short) 2));	
+				String password = "@AuBonParfum";
+				filleul.setPassword(DigestUtils.sha512Hex(password));
+				filleul.setDateCreation(dateToday);
+				membreService.insertFilleul(filleul);
+				msg = ParfumUtils.getBundleApplication().getString("message.ajouter.filleul");
+				facesMessage.setDetail(msg); 
+				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			}
+		}else{
+			//TODO : traiter le cas ou l'email change et qu'il existe dejà
+			filleul.setDateModification(dateToday);
+			membreService.updateFilleul(filleul);
+			msg = ParfumUtils.getBundleApplication().getString("message.modif.filleul");
+			facesMessage.setDetail(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		}
+			
 		return "filleul";
 
 	}	

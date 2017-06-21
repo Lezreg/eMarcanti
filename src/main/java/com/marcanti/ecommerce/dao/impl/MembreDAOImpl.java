@@ -14,7 +14,6 @@ import javax.persistence.Query;
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.MembreDAO;
 import com.marcanti.ecommerce.model.Membre;
-import com.marcanti.ecommerce.utils.ParfumUtils;
 
 /**
  *
@@ -86,22 +85,33 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
 				.setParameter(4, filleul.getMembreTel())
 				.setParameter(5, filleul.getIsActif())
 				.setParameter(6, filleul.getIsDefaultPassword())
-				.setParameter(7, ParfumUtils.getDateNowEN())
+				.setParameter(7, filleul.getDateModification())
 				.setParameter(8, filleul.getIdMembre());
 		query.executeUpdate();
+		//em.merge(filleul);
+		//em.refresh(filleul);
+		//edit(filleul);
 	}
 	
 	@Override
 	public void insertFilleul(Membre filleul) {
-		Query query = em.createNativeQuery("INSERT INTO membre (membreNom, membrePrenom, membreEmail, membreTel, isActif, isDefaultPassword, dateCreation) VALUES (?, ?, ?, ?, ?, ?, ?)")
-				.setParameter(1, filleul.getMembreNom())
-				.setParameter(2, filleul.getMembrePrenom())
-				.setParameter(3, filleul.getMembreEmail())
-				.setParameter(4, filleul.getMembreTel())
-				.setParameter(5, filleul.getIsActif())
-				.setParameter(6, filleul.getIsDefaultPassword())
-				.setParameter(7, ParfumUtils.getDateNowEN());
+		Query query = em.createNativeQuery("INSERT INTO membre (idOrga, idDepartement, idProfil, membreNom, membrePrenom, membreEmail, membreTel, isActif, password, isDefaultPassword, dateCreation) VALUES (?,?,?,?,?,?,?,?,?,?,?)")
+				.setParameter(1, filleul.getIdOrga().getIdOrga())
+				.setParameter(2, filleul.getIdDepartement().getIdDepartement())
+				.setParameter(3, filleul.getIdProfil().getIdProfil())
+				.setParameter(4, filleul.getMembreNom())
+				.setParameter(5, filleul.getMembrePrenom())
+				.setParameter(6, filleul.getMembreEmail())
+				.setParameter(7, filleul.getMembreTel())
+				.setParameter(8, filleul.getIsActif())
+				.setParameter(9, filleul.getPassword())
+				.setParameter(10, filleul.getIsDefaultPassword())
+				.setParameter(11, filleul.getDateCreation());
 		query.executeUpdate();
+		//create(filleul);
+		//em.persist(filleul);
+		Long idMembre = filleul.getIdMembre();
+		System.out.println("new idMembre : " + idMembre);
 	}	
     
 }

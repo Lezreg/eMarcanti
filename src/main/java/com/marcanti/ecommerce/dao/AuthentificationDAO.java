@@ -1,7 +1,7 @@
 package com.marcanti.ecommerce.dao;
 
 import com.marcanti.ecommerce.model.Membre;
-import com.marcanti.ecommerce.model.UserSession;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 public interface AuthentificationDAO extends GenericDAO<Membre> {
 	
@@ -19,7 +19,7 @@ public interface AuthentificationDAO extends GenericDAO<Membre> {
 	
 	public boolean getIsDefaultPassword(String email);	
 	
-	public UserSession getUserSession(String email);
+	public UserSessionBean getUserSession(String email);
 	
 
 }

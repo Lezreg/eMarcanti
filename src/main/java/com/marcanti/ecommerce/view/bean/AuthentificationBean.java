@@ -15,7 +15,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.marcanti.ecommerce.model.UserSession;
 import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 import com.marcanti.ecommerce.utils.Mail;
 import com.marcanti.ecommerce.utils.ParfumUtils;
@@ -143,7 +142,7 @@ public class AuthentificationBean implements Serializable {
 	    	try {
 	    		boolean isDefaultPassword = service.getIsDefaultPassword(getUsername());
 				if(isDefaultPassword){
-					UserSession userSession = service.getUserSession(getUsername());
+					UserSessionBean userSession = service.getUserSession(getUsername());
 					ParfumUtils.setUserSessionBean(userSession);
 					ecran = "index";
 				}else{
@@ -303,17 +302,6 @@ public class AuthentificationBean implements Serializable {
 		
     	return "index";
 	}	
-	
-	public String deconnection() throws Exception
-	{
-
-		//HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	    //session.invalidate();
-	    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		logger.info(getUsername() + " : deconnexion !!! ");
-		
-	    return "login";
-	}
 	
 
 }
