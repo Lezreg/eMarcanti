@@ -11,9 +11,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.MembreDAO;
 import com.marcanti.ecommerce.model.Membre;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 /**
  *
@@ -94,7 +97,7 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
 	}
 	
 	@Override
-	public void insertFilleul(Membre filleul) {
+	public void insertFilleul(Membre filleul, UserSessionBean parrain) {
 		Query query = em.createNativeQuery("INSERT INTO membre (idOrga, idDepartement, idProfil, membreNom, membrePrenom, membreEmail, membreTel, isActif, password, isDefaultPassword, dateCreation) VALUES (?,?,?,?,?,?,?,?,?,?,?)")
 				.setParameter(1, filleul.getIdOrga().getIdOrga())
 				.setParameter(2, filleul.getIdDepartement().getIdDepartement())
@@ -110,8 +113,9 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
 		query.executeUpdate();
 		//create(filleul);
 		//em.persist(filleul);
-		Long idMembre = filleul.getIdMembre();
-		System.out.println("new idMembre : " + idMembre);
+		filleul.setIdMembre(em.createNamedQuery("Membre.findByMembreEmail", Membre.class).setParameter("membreEmail", filleul.getMembreEmail()).getSingleResult().getIdMembre());
+		query = em.createNativeQuery("INSERT INTO filleul (idMembreParrain, parrainNom) VALUES (?,?)").setParameter(1, parrain.getIdMembre()).setParameter(2, parrain.getMembreNom());
+		query.executeUpdate();
 	}	
     
 }

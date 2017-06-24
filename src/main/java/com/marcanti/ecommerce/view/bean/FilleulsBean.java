@@ -44,6 +44,9 @@ public class FilleulsBean implements Serializable {
 	
 	@ManagedProperty("#{param.idMembre}")
 	private Long idMembre;
+	
+	@ManagedProperty("#{param.oldMembreEmail}")
+	private String oldMembreEmail;	
 
 	@ManagedProperty("#{filleulsService}")
 	private FilleulsServiceAction filleulsService;
@@ -112,6 +115,14 @@ public class FilleulsBean implements Serializable {
 		this.idMembre = idMembre;
 	}
 	
+	public String getOldMembreEmail() {
+		return oldMembreEmail;
+	}
+
+	public void setOldMembreEmail(String oldMembreEmail) {
+		this.oldMembreEmail = oldMembreEmail;
+	}
+
 	public Membre getFilleul() {
 		return filleul;
 	}
@@ -200,6 +211,7 @@ public class FilleulsBean implements Serializable {
 		Calendar calendar = Calendar.getInstance();
 		Date dateToday =  calendar.getTime();
 		String msg;
+		String ecran ="filleul";
 		
 		System.out.println("insertOrUpdateFilleul");
 
@@ -219,24 +231,42 @@ public class FilleulsBean implements Serializable {
 				String password = "@AuBonParfum";
 				filleul.setPassword(DigestUtils.sha512Hex(password));
 				filleul.setDateCreation(dateToday);
-				membreService.insertFilleul(filleul);
-				msg = ParfumUtils.getBundleApplication().getString("message.ajouter.filleul");
+				membreService.insertFilleul(filleul,userSession);
+				this.filleulsList = filleulsService.getFilleulsList(new Membre(userSession.getIdMembre()));
+				/*msg = ParfumUtils.getBundleApplication().getString("message.ajouter.filleul");
 				facesMessage.setDetail(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
-			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);*/
+			    ecran="filleuls";
 			}
 		}else{
 			//TODO : traiter le cas ou l'email change et qu'il existe dejà
-			filleul.setDateModification(dateToday);
-			membreService.updateFilleul(filleul);
-			msg = ParfumUtils.getBundleApplication().getString("message.modif.filleul");
-			facesMessage.setDetail(msg); 
-			facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
-		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			if(getMembreEmail().equals(getOldMembreEmail())){
+				filleul.setDateModification(dateToday);
+				membreService.updateFilleul(filleul);
+				msg = ParfumUtils.getBundleApplication().getString("message.modif.filleul");
+				facesMessage.setDetail(msg); 
+				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				
+			}else{
+				
+				if(authentificationService.emailExist(getMembreEmail())){
+					msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_emailExist");
+					facesMessage.setDetail(msg); 
+					facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				}else{
+					filleul.setDateModification(dateToday);
+					membreService.updateFilleul(filleul);
+					msg = ParfumUtils.getBundleApplication().getString("message.modif.filleul");
+					facesMessage.setDetail(msg); 
+					facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+				    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				}
+			}
 		}
-			
-		return "filleul";
-
+		return ecran;
 	}	
 	
 	

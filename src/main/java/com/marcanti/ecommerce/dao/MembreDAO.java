@@ -1,6 +1,7 @@
 package com.marcanti.ecommerce.dao;
 
 import com.marcanti.ecommerce.model.Membre;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 public interface MembreDAO {
 	
@@ -8,6 +9,6 @@ public interface MembreDAO {
 	
 	public void updateFilleul(Membre filleul);
 	
-	public void insertFilleul(Membre filleul);
+	public void insertFilleul(Membre filleul, UserSessionBean parrain);
 
 }

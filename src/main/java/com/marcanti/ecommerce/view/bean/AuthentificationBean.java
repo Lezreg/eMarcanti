@@ -2,6 +2,8 @@ package com.marcanti.ecommerce.view.bean;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -91,6 +93,8 @@ public class AuthentificationBean implements Serializable {
 		boolean resu = false;
 		boolean isOK = false;
 		boolean[] resuTab = new boolean[2];
+		Calendar calendar = Calendar.getInstance();
+		Date dateToday =  calendar.getTime();
 		String ecran="index";
 		
 		try {
@@ -144,6 +148,7 @@ public class AuthentificationBean implements Serializable {
 				if(isDefaultPassword){
 					UserSessionBean userSession = service.getUserSession(getUsername());
 					ParfumUtils.setUserSessionBean(userSession);
+					service.updateLastConnectionDate(dateToday, getUsername());
 					ecran = "index";
 				}else{
 					HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();

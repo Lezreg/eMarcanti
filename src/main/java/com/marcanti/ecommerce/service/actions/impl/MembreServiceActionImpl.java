@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.marcanti.ecommerce.dao.MembreDAO;
 import com.marcanti.ecommerce.model.Membre;
 import com.marcanti.ecommerce.service.actions.MembreServiceAction;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 
 public class MembreServiceActionImpl implements MembreServiceAction {
@@ -33,8 +34,8 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 	}
 
 	@Override
-	public void insertFilleul(Membre filleul) {
-		membreDAO.insertFilleul(filleul);
+	public void insertFilleul(Membre filleul, UserSessionBean parrain) {
+		membreDAO.insertFilleul(filleul,parrain);
 		
 	}
 

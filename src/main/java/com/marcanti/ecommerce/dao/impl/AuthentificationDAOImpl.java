@@ -6,6 +6,7 @@
 package com.marcanti.ecommerce.dao.impl;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -101,6 +102,14 @@ public class AuthentificationDAOImpl extends AbstractGenericDAO<Membre> implemen
 			idDepartement = null;
 		}
 		return new UserSessionBean(((BigInteger)tab[0]).longValue(),(Short)tab[1],((BigInteger)tab[2]).longValue(),idDepartement,(String)tab[4],(String)tab[5],(String)tab[6],(String)tab[7],(String)tab[8]);
+	}
+
+	@Override
+	public void updateLastConnectionDate(Date toDay, String email) {
+		Query query = em.createNativeQuery("update membre set dateDerniereConnexion=? where membreEmail=? ").setParameter(1, toDay).setParameter(2, email);
+		query.executeUpdate();
+		
+		
 	}
 
 

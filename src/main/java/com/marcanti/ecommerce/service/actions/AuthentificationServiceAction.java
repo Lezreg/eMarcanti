@@ -1,5 +1,7 @@
 package com.marcanti.ecommerce.service.actions;
 
+import java.util.Date;
+
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 public interface AuthentificationServiceAction {
@@ -19,5 +21,7 @@ public interface AuthentificationServiceAction {
 	public boolean getIsDefaultPassword(String email);
 	
 	public UserSessionBean getUserSession(String email);
+	
+	public void updateLastConnectionDate(Date toDay, String email);
      
 }

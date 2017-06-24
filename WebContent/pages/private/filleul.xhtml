@@ -13,6 +13,7 @@
 			<h:form id="formFilleul">
 				<ui:include  src="/pages/private/message.xhtml" />
 				<h:inputHidden value="#{filleulsBean.filleul.idMembre}"  />
+				<h:inputHidden value="#{filleulsBean.oldMembreEmail}"  />
 				<h:panelGrid columns="2" border="0" cellpadding="10" cellspacing="1">
 					<h:outputLabel value="#{msg.libelle_nom}" />
 					<h:inputText value="#{filleulsBean.filleul.membreNom}" maxlength="60" required="true" requiredMessage="#{msg.nom_obligatoire}" />

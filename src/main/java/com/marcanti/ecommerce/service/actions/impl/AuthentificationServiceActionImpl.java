@@ -1,5 +1,7 @@
 package com.marcanti.ecommerce.service.actions.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.marcanti.ecommerce.dao.AuthentificationDAO;
@@ -61,6 +63,14 @@ public class AuthentificationServiceActionImpl implements AuthentificationServic
 	public UserSessionBean getUserSession(String email) {
 		return authentificationDAO.getUserSession(email);
 	}
+
+	@Override
+	public void updateLastConnectionDate(Date toDay, String email) {
+		authentificationDAO.updateLastConnectionDate(toDay, email);
+		
+	}
+	
+	
 	
 	
 }
