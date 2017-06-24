@@ -9,9 +9,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.ParamDAO;
+import com.marcanti.ecommerce.model.Membre;
 import com.marcanti.ecommerce.model.Param;
 
 /**
@@ -61,5 +63,10 @@ public class ParamDAOImpl extends AbstractGenericDAO<Param> implements ParamDAO 
     protected EntityManager getEntityManager() {
         return em;
     }
+
+	@Override
+	public String getDefaultPassword() {
+		return (String)em.createNativeQuery("SELECT param.value FROM param where param.key='default.password'").getSingleResult();
+	}
     
 }

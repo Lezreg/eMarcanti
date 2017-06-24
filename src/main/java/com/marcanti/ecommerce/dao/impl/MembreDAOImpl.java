@@ -114,7 +114,7 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
 		//create(filleul);
 		//em.persist(filleul);
 		filleul.setIdMembre(em.createNamedQuery("Membre.findByMembreEmail", Membre.class).setParameter("membreEmail", filleul.getMembreEmail()).getSingleResult().getIdMembre());
-		query = em.createNativeQuery("INSERT INTO filleul (idMembreParrain, parrainNom) VALUES (?,?)").setParameter(1, parrain.getIdMembre()).setParameter(2, parrain.getMembreNom());
+		query = em.createNativeQuery("INSERT INTO filleul (idFilleul,idMembreParrain, parrainNom) VALUES (?,?,?)").setParameter(1, filleul.getIdMembre()).setParameter(2, parrain.getIdMembre()).setParameter(3, parrain.getMembreNom());
 		query.executeUpdate();
 	}	
     

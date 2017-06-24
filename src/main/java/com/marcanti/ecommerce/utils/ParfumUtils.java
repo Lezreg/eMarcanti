@@ -35,6 +35,11 @@ import com.marcanti.ecommerce.view.bean.UserSessionBean;
 public class ParfumUtils {
 	
 	public static final String BEAN_SESSION_NAME = "USER_SESSION";
+	
+	public static final short PROFIL_MEMBRE  = 1;
+	public static final short PROFIL_FILLEUL = 2;
+	public static final short PROFIL_MANAGER = 3;
+	public static final short PROFIL_ADMIN   = 4;
 
 	/**
 	 * Gestion des Logs.

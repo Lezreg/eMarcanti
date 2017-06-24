@@ -54,22 +54,24 @@ public class FilleulsBean implements Serializable {
 	@ManagedProperty("#{membreService}")
 	private MembreServiceAction membreService;	
 	
-	@ManagedProperty("#{referentielService}")
-	private ReferentielServiceAction referentielService;	
+	//@ManagedProperty("#{referentielService}")
+	//private ReferentielServiceAction referentielService;	
 	
 	@ManagedProperty("#{authentificationService}")
 	private AuthentificationServiceAction authentificationService;
+	
+	@ManagedProperty("#{referentielBean}")
+	private ReferentielBean referentielBean;
 
 	public FilleulsBean() {
 	}
 
 	@PostConstruct
 	public void init() {
-		//TODO : récupéré l'objet session pour renseigner idMembre
 		UserSessionBean userSession = ParfumUtils.getUserSessionBean();
 		Membre membre = new Membre(userSession.getIdMembre());
 		this.filleulsList = filleulsService.getFilleulsList(membre);
-		this.radioButtonOuiNon = ReferentielBean.radioButtonOuiNon;
+		this.radioButtonOuiNon = referentielBean.radioButtonOuiNon;
 		this.filleul = new Membre(0L);
 	}
 	
@@ -147,17 +149,24 @@ public class FilleulsBean implements Serializable {
 		this.membreService = membreService;
 	}
 
-	public ReferentielServiceAction getReferentielService() {
+	/*public ReferentielServiceAction getReferentielService() {
 		return referentielService;
 	}
 
 	public void setReferentielService(ReferentielServiceAction referentielService) {
 		this.referentielService = referentielService;
-	}
+	}*/
 	
-
 	public AuthentificationServiceAction getAuthentificationService() {
 		return authentificationService;
+	}
+
+	public ReferentielBean getReferentielBean() {
+		return referentielBean;
+	}
+
+	public void setReferentielBean(ReferentielBean referentielBean) {
+		this.referentielBean = referentielBean;
 	}
 
 	public void setAuthentificationService(AuthentificationServiceAction authentificationService) {
@@ -226,9 +235,8 @@ public class FilleulsBean implements Serializable {
 				UserSessionBean userSession = ParfumUtils.getUserSessionBean();
 				filleul.setIdOrga(new Organisation(userSession.getIdOrga()));
 				filleul.setIdDepartement(new Departement(userSession.getIdDepartement()));
-				//TODO : récupérer idProfil = filleul + password par défaut
-				filleul.setIdProfil(new Profil((short) 2));	
-				String password = "@AuBonParfum";
+				filleul.setIdProfil(new Profil(ParfumUtils.PROFIL_FILLEUL));	
+				String password = referentielBean.getDefaultPassword();
 				filleul.setPassword(DigestUtils.sha512Hex(password));
 				filleul.setDateCreation(dateToday);
 				membreService.insertFilleul(filleul,userSession);
@@ -240,7 +248,6 @@ public class FilleulsBean implements Serializable {
 			    ecran="filleuls";
 			}
 		}else{
-			//TODO : traiter le cas ou l'email change et qu'il existe dejà
 			if(getMembreEmail().equals(getOldMembreEmail())){
 				filleul.setDateModification(dateToday);
 				membreService.updateFilleul(filleul);

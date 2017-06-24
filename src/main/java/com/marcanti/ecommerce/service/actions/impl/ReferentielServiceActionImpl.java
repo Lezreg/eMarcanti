@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.marcanti.ecommerce.dao.OrganisationDAO;
+import com.marcanti.ecommerce.dao.ParamDAO;
 import com.marcanti.ecommerce.dao.ProfilDAO;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
@@ -20,6 +21,9 @@ public class ReferentielServiceActionImpl implements ReferentielServiceAction {
 	@Autowired
 	private ProfilDAO profilDAO;	
  
+	@Autowired
+	private ParamDAO paramDAO;
+	
 	public OrganisationDAO getOrganisationDAO() {
 		return organisationDAO;
 	}
@@ -46,7 +50,18 @@ public class ReferentielServiceActionImpl implements ReferentielServiceAction {
 		return profilDAO.getProfilList();
 	}
 
+	@Override
+	public String getDefaultPassword() {
+		return paramDAO.getDefaultPassword();
+	}
 
-	
+	public ParamDAO getParamDAO() {
+		return paramDAO;
+	}
+
+	public void setParamDAO(ParamDAO paramDAO) {
+		this.paramDAO = paramDAO;
+	}
+
 	
 }

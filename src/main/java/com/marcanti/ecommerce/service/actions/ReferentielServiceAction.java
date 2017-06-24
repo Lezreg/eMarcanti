@@ -11,5 +11,5 @@ public interface ReferentielServiceAction {
 	
 	public List<Profil> getProfilList();
 	
-     
+    public String getDefaultPassword();
 }

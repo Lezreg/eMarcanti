@@ -30,8 +30,10 @@ public class ReferentielBean implements Serializable {
 	
 	private List<Profil> profilList;
 	
-	public static Map<String,Object> radioButtonOuiNon;
-	static{
+	private String defaultPassword;
+	
+	public Map<String,Object> radioButtonOuiNon;
+	{
 		radioButtonOuiNon = new LinkedHashMap<String,Object>();
 		radioButtonOuiNon.put(ParfumUtils.getBundleLibelle().getString("libelle_oui"), "true"); //label, value
 		radioButtonOuiNon.put(ParfumUtils.getBundleLibelle().getString("libelle_non"), "false");
@@ -65,6 +67,15 @@ public class ReferentielBean implements Serializable {
 		this.referentielService = referentielService;
 	}
 
+	public String getDefaultPassword() {
+		return defaultPassword;
+	}
+
+	public void setDefaultPassword(String defaultPassword) {
+		this.defaultPassword = defaultPassword;
+	}
+	
+
 	public ReferentielBean() {
 	}
 
@@ -72,6 +83,7 @@ public class ReferentielBean implements Serializable {
 	public void init() {
 		this.organisationList = referentielService.getOrganisationList();
 		this.profilList = referentielService.getProfilList();
+		this.defaultPassword = referentielService.getDefaultPassword();
 	}
 	
 }

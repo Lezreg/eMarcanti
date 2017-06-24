@@ -29,13 +29,13 @@
 					
 					<h:outputLabel value="#{msg.libelle_orga}" />
 					<h:selectOneMenu value="#{filleulsBean.filleul.idOrga.idOrga}" disabled="true">
-			   			<f:selectItems value="#{filleulsBean.referentielService.organisationList}" var="c"
+			   			<f:selectItems value="#{filleulsBean.referentielBean.organisationList}" var="c"
 			   			itemLabel="#{c.orgaNom}" itemValue="#{c.idOrga}" />
 			   		</h:selectOneMenu>
 			   		
 					<h:outputLabel value="#{msg.libelle_role}" />
 					<h:selectOneMenu value="#{filleulsBean.filleul.idProfil.idProfil}" disabled="true">
-			   			<f:selectItems value="#{filleulsBean.referentielService.profilList}" var="c"
+			   			<f:selectItems value="#{filleulsBean.referentielBean.profilList}" var="c"
 			   			itemLabel="#{c.profilLibelle}" itemValue="#{c.idProfil}" />
 			   		</h:selectOneMenu>			   		
 			   		

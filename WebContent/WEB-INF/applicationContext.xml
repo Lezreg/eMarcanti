@@ -115,10 +115,14 @@
 	<beans:bean id="profilDAO"
 		class="com.marcanti.ecommerce.dao.impl.ProfilDAOImpl">
 	</beans:bean>	
+	<beans:bean id="paramDAO"
+		class="com.marcanti.ecommerce.dao.impl.ParamDAOImpl">
+	</beans:bean>	
 	<beans:bean id="referentielService"
 		class="com.marcanti.ecommerce.service.actions.impl.ReferentielServiceActionImpl">
 		<beans:property name="organisationDAO" ref="organisationDAO"></beans:property>
 		<beans:property name="profilDAO" ref="profilDAO"></beans:property>
+		<beans:property name="paramDAO" ref="paramDAO"></beans:property>
 	</beans:bean>	
 
 </beans:beans>
