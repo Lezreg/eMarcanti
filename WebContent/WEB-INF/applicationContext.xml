@@ -124,5 +124,29 @@
 		<beans:property name="profilDAO" ref="profilDAO"></beans:property>
 		<beans:property name="paramDAO" ref="paramDAO"></beans:property>
 	</beans:bean>	
+	
+	<beans:bean id="sousCategorieDAO"
+		class="com.marcanti.ecommerce.dao.impl.SousCategorieDAOImpl">
+	</beans:bean>
+	<beans:bean id="sousCategorieService"
+		class="com.marcanti.ecommerce.service.actions.impl.SousCategorieServiceActionImpl">
+		<beans:property name="sousCategorieDAO" ref="sousCategorieDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="categorieDAO" 
+		class="com.marcanti.ecommerce.dao.impl.CategorieDAOImpl">
+	</beans:bean>
+	<beans:bean id="categorieService"
+		class="com.marcanti.ecommerce.service.actions.impl.CategorieServiceActionImpl">
+		<beans:property name="categorieDAO" ref="categorieDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="catalogueDAO"
+		class="com.marcanti.ecommerce.dao.impl.VCatalogueAdminDAOImpl">
+	</beans:bean>
+	<beans:bean id="catalogueService"
+		class="com.marcanti.ecommerce.service.actions.impl.VCatalogueAdminServiceActionImpl">
+		<beans:property name="catalogueDAO" ref="catalogueDAO"></beans:property>
+	</beans:bean>	
 
 </beans:beans>

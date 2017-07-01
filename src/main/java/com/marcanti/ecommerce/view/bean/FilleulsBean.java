@@ -1,6 +1,7 @@
 package com.marcanti.ecommerce.view.bean;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.MessagingException;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
@@ -25,6 +27,7 @@ import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 import com.marcanti.ecommerce.service.actions.FilleulsServiceAction;
 import com.marcanti.ecommerce.service.actions.MembreServiceAction;
 import com.marcanti.ecommerce.service.actions.ReferentielServiceAction;
+import com.marcanti.ecommerce.utils.Mail;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 @ManagedBean(name = "filleulsBean")
@@ -241,6 +244,12 @@ public class FilleulsBean implements Serializable {
 				filleul.setDateCreation(dateToday);
 				membreService.insertFilleul(filleul,userSession);
 				this.filleulsList = filleulsService.getFilleulsList(new Membre(userSession.getIdMembre()));
+				try {
+					logger.info("send mail filleul with password : " + password);
+					Mail.send(filleul.getMembreEmail(), ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.filleul.mail"),filleul.getMembreEmail(),password));
+				} catch (MessagingException e) {
+					logger.error("ERROR send mail filleul with password : ",e);
+				}
 				/*msg = ParfumUtils.getBundleApplication().getString("message.ajouter.filleul");
 				facesMessage.setDetail(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);

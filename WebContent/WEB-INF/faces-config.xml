@@ -77,6 +77,34 @@
 			<to-view-id>/pages/private/filleul.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>sousCategories</from-outcome>
+			<to-view-id>/pages/private/sous_categories.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>sousCategorie</from-outcome>
+			<to-view-id>/pages/private/sous_categorie.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>categories</from-outcome>
+			<to-view-id>/pages/private/categories.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>categorie</from-outcome>
+			<to-view-id>/pages/private/categorie.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
 	
 	<application>
 		<resource-bundle>

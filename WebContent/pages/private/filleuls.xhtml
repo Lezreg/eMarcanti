@@ -36,7 +36,7 @@
 							rowsPerPageTemplate="2,10,20">
 							<f:facet name="header">
 								<p:outputPanel>
-									<h:outputText value="Rechercher :" />
+									<h:outputText value="#{msg.libelle_rechercher} :" />
 									<p:inputText id="globalFilter"
 										onkeyup="PF('filleulTable').filter()" style="width:150px"
 										placeholder="Saisir mot clé" />
@@ -48,30 +48,30 @@
 							<p:rowExpansion>
 								<p:panelGrid columns="2" columnClasses="label,value"
 									style="width:300px">
-									<h:outputText value="Nom:" />
+									<h:outputText value="#{msg.libelle_nom}:" />
 									<p:cellEditor>
 										<h:outputText value="#{filleul.membreNom}" />
 									</p:cellEditor>
-									<h:outputText value="Prenom" />
+									<h:outputText value="#{msg.libelle_prenom}" />
 									<h:outputText value="#{filleul.membrePrenom}" />
 								</p:panelGrid>
 							</p:rowExpansion>
-							<p:column headerText="Nom" sortBy="#{filleul.membreNom}"
+							<p:column headerText="#{msg.libelle_nom}" sortBy="#{filleul.membreNom}"
 								filterBy="#{filleul.membreNom}" filterMatchMode="contains">
 								<h:outputText value="#{filleul.membreNom}" />
 							</p:column>
-							<p:column headerText="Prénom" sortBy="#{filleul.membrePrenom}"
+							<p:column headerText="#{msg.libelle_prenom}" sortBy="#{filleul.membrePrenom}"
 								filterBy="#{filleul.membrePrenom}" filterMatchMode="contains">
 								<h:outputText value="#{filleul.membrePrenom}" />
 							</p:column>
-							<p:column headerText="Email" sortBy="#{filleul.membreEmail}"
+							<p:column headerText="#{msg.libelle_email}" sortBy="#{filleul.membreEmail}"
 								filterBy="#{filleul.membreEmail}" filterMatchMode="contains">
 								<h:outputText value="#{filleul.membreEmail}" />
 							</p:column>
-							<p:column headerText="Tél" sortBy="#{filleul.membreTel}">
+							<p:column headerText="#{msg.libelle_tel}" sortBy="#{filleul.membreTel}">
 								<h:outputText value="#{filleul.membreTel}" />
 							</p:column>
-							<p:column headerText="Actif" sortBy="#{filleul.isActif}"
+							<p:column headerText="#{msg.libelle_actif}" sortBy="#{filleul.isActif}"
 								filterBy="#{filleul.isActif}" filterMatchMode="equals">
 								<f:facet name="filter">
 									<p:selectOneButton onchange="PF('filleulTable').filter()">

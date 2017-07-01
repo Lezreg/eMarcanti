@@ -22,14 +22,16 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.stereotype.Repository;
 
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
+import com.marcanti.ecommerce.dao.CategorieDAO;
 import com.marcanti.ecommerce.model.Categorie;
+import com.marcanti.ecommerce.model.Membre;
 
 /**
  *
  * @author lezreg
  */
 @Repository
-public class CategorieDAOImpl extends AbstractGenericDAO<Categorie> {
+public class CategorieDAOImpl extends AbstractGenericDAO<Categorie> implements CategorieDAO {
 
 	@PersistenceContext
     private EntityManager em;
@@ -90,5 +92,28 @@ public class CategorieDAOImpl extends AbstractGenericDAO<Categorie> {
     protected EntityManager getEntityManager() {
         return em;
     }
+
+	@Override
+	public List<Categorie> getCategorieList() {
+		return em.createNamedQuery("Categorie.findAll", Categorie.class).getResultList();
+	}
+
+	@Override
+	public Categorie getCategorie(Categorie categorie) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertCategorie(Categorie categorie) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateCategorie(Categorie categorie) {
+		// TODO Auto-generated method stub
+		
+	}
     
 }

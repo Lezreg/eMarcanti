@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.marcanti.ecommerce.dao.CategorieDAO;
 import com.marcanti.ecommerce.dao.OrganisationDAO;
 import com.marcanti.ecommerce.dao.ParamDAO;
 import com.marcanti.ecommerce.dao.ProfilDAO;
+import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
 import com.marcanti.ecommerce.service.actions.ReferentielServiceAction;
@@ -24,6 +26,26 @@ public class ReferentielServiceActionImpl implements ReferentielServiceAction {
 	@Autowired
 	private ParamDAO paramDAO;
 	
+	@Autowired
+	private CategorieDAO categorieDAO;	
+	
+	
+	public List<Organisation> getOrganisationList() {
+		return organisationDAO.getOrganisationList();
+	}
+
+	public List<Profil> getProfilList() {
+		return profilDAO.getProfilList();
+	}
+
+	public String getDefaultPassword() {
+		return paramDAO.getDefaultPassword();
+	}
+
+	public List<Categorie> getCategorieList() {
+		return categorieDAO.getCategorieList();
+	}
+
 	public OrganisationDAO getOrganisationDAO() {
 		return organisationDAO;
 	}
@@ -40,21 +62,6 @@ public class ReferentielServiceActionImpl implements ReferentielServiceAction {
 		this.profilDAO = profilDAO;
 	}
 
-	@Override
-	public List<Organisation> getOrganisationList() {
-		return organisationDAO.getOrganisationList();
-	}
-
-	@Override
-	public List<Profil> getProfilList() {
-		return profilDAO.getProfilList();
-	}
-
-	@Override
-	public String getDefaultPassword() {
-		return paramDAO.getDefaultPassword();
-	}
-
 	public ParamDAO getParamDAO() {
 		return paramDAO;
 	}
@@ -63,5 +70,14 @@ public class ReferentielServiceActionImpl implements ReferentielServiceAction {
 		this.paramDAO = paramDAO;
 	}
 
+	public CategorieDAO getCategorieDAO() {
+		return categorieDAO;
+	}
+
+	public void setCategorieDAO(CategorieDAO categorieDAO) {
+		this.categorieDAO = categorieDAO;
+	}
+
+	
 	
 }

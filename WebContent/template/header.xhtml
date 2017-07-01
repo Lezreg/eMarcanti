@@ -77,10 +77,9 @@
 									<h:outputText value="#{msg.libelle_cmd_grp}" />
 								</h:panelGroup>
 							</f:facet>
-							<rich:menuItem label="#{msg.libelle_recap_cours}" action="#">
-							</rich:menuItem>
-							<rich:menuItem label="#{msg.libelle_recap_pre}" action="#">
-							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_recap_cours}" action="#"/>
+							<rich:menuItem label="#{msg.libelle_recap_pre}" action="#"/>
+							<rich:menuItem label="#{msg.libelle_reduction}" action="#"/>
 						</rich:dropDownMenu>
 
 						<rich:dropDownMenu>
@@ -89,10 +88,12 @@
 									<h:outputText value="#{msg.libelle_admin}" />
 								</h:panelGroup>
 							</f:facet>
-							<rich:menuItem label="#{msg.libelle_membres}" action="#">
-							</rich:menuItem>
-							<rich:menuItem label="#{msg.libelle_dpt_grp}" action="#">
-							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_orgas}" action="#"/>							
+							<rich:menuItem label="#{msg.libelle_membres}" action="#"/>
+							<rich:menuItem label="#{msg.libelle_dpt_grp}" action="#"/>
+							<rich:menuItem label="#{msg.libelle_marques}" action="#"/>
+							<rich:menuItem label="#{msg.libelle_menu_categories}" action="categories"/>
+							<rich:menuItem label="#{msg.libelle_menu_ss_categories}" action="sousCategories"/>
 						</rich:dropDownMenu>
 
 						<rich:menuItem label="#{msg.libelle_deconexion}" action="#{userSessionBean.deconnection()}"/>
