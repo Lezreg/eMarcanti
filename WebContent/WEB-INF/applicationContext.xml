@@ -120,18 +120,29 @@
 <!-- 		<beans:property name="membreDAO" ref="membreDAO"></beans:property> -->
 <!-- 	</beans:bean>	 -->
 	
-<!-- 	<beans:bean id="organisationDAO" -->
-<!-- 		class="com.marcanti.ecommerce.dao.OrganisationDAOImpl"> -->
-<!-- 	</beans:bean>	 -->
-<!-- 	<beans:bean id="profilDAO" -->
-<!-- 		class="com.marcanti.ecommerce.dao.ProfilDAOImpl"> -->
-<!-- 	</beans:bean>	 -->
-<!-- 	<beans:bean id="referentielService" -->
-<!-- 		class="com.marcanti.ecommerce.service.actions.ReferentielServiceActionImpl"> -->
-<!-- 		<beans:property name="organisationDAO" ref="organisationDAO"></beans:property> -->
-<!-- 		<beans:property name="profilDAO" ref="profilDAO"></beans:property> -->
-<!-- 	</beans:bean>	 -->
-
+	<beans:bean id="sousCategorieDAO"
+		class="com.marcanti.ecommerce.dao.impl.SousCategorieDAOImpl">
+	</beans:bean>
+	<beans:bean id="sousCategorieService"
+		class="com.marcanti.ecommerce.service.actions.impl.SousCategorieServiceActionImpl">
+		<beans:property name="sousCategorieDAO" ref="sousCategorieDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="categorieDAO" 
+		class="com.marcanti.ecommerce.dao.impl.CategorieDAOImpl">
+	</beans:bean>
+	<beans:bean id="categorieService"
+		class="com.marcanti.ecommerce.service.actions.impl.CategorieServiceActionImpl">
+		<beans:property name="categorieDAO" ref="categorieDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="catalogueDAO"
+		class="com.marcanti.ecommerce.dao.impl.VCatalogueAdminDAOImpl">
+	</beans:bean>
+	<beans:bean id="catalogueService"
+		class="com.marcanti.ecommerce.service.actions.impl.VCatalogueAdminServiceActionImpl">
+		<beans:property name="catalogueDAO" ref="catalogueDAO"></beans:property>
+	</beans:bean>	
 
 
 </beans:beans>

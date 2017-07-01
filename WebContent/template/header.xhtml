@@ -1,108 +1,105 @@
 
-<h:form id="formBandeau" xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:of="http://omnifaces.org/functions">
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
 
+<ui:composition>
+	<h:form id="form">
+		<table style="" cellspacing="4" cellpadding="0" border="0">
+			<TR>
+				<TD><rich:toolbar>
+						<rich:dropDownMenu>
+							<f:facet name="label">
+								<h:panelGroup>
+									<h:outputText value="#{msg.libelle_cat}" />
+								</h:panelGroup>
+							</f:facet>
+							<rich:menuItem label="#{msg.libelle_parfum_homme}" action="#">
+							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_parfum_femme}" action="#">
+							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_parfum_enfant}" action="#">
+							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_testeur}" action="#">
+							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_coffret}" action="#">
+							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_creme_soin}" action="#">
+							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_miniatures}" action="#">
+							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_pile_accessoire}" action="#">
+							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_lots}" action="#">
+							</rich:menuItem>
+						</rich:dropDownMenu>
+						<rich:column>
+							<h:outputText value="#{msg.libelle_nouv}" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="#{msg.libelle_promos}" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="#{msg.libelle_decouvrir}" />
+						</rich:column>
 
-	<table style="center" cellspacing="4" cellpadding="0" border="0">
-		<TR>
-			<TD><rich:toolbar>
+						<rich:dropDownMenu>
+							<f:facet name="label">
+								<h:panelGroup>
+									<h:outputText value="#{msg.libelle_mes_cmd}" />
+								</h:panelGroup>
+							</f:facet>
+							<rich:menuItem label="#{msg.libelle_cours}" action="#">
+							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_pre}" action="#">
+							</rich:menuItem>
+						</rich:dropDownMenu>
 
-					<rich:dropDownMenu mode="ajax">
-						<f:facet name="label">
-							<h:panelGroup>
-								<h:outputText value="#{msg.libelle_cat}" />
-							</h:panelGroup>
-						</f:facet>
-						<rich:menuItem label="#{msg.libelle_parfum_homme}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_parfum_femme}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_parfum_enfant}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_testeur}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_coffret}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_creme_soin}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_miniatures}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_pile_accessoire}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_lots}" action="#">
-						</rich:menuItem>												
-					</rich:dropDownMenu>
-					<rich:column>
-						<h:outputText value="#{msg.libelle_nouv}" />
-					</rich:column>
-					<rich:column>
-						<h:outputText value="#{msg.libelle_promos}" />
-					</rich:column>
-					<rich:column>
-						<h:outputText value="#{msg.libelle_decouvrir}" />
-					</rich:column>
-					
-					<rich:dropDownMenu mode="ajax" >
-						<f:facet name="label">
-							<h:panelGroup>
-								<h:outputText value="#{msg.libelle_mes_cmd}" />
-							</h:panelGroup>
-						</f:facet>
-						<rich:menuItem label="#{msg.libelle_cours}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_pre}" action="#">
-						</rich:menuItem>
-					</rich:dropDownMenu>
-					
-					<rich:dropDownMenu mode="ajax" >
-						<f:facet name="label">
-							<h:panelGroup>
-								<h:outputText value="#{msg.libelle_parrainage}" />
-							</h:panelGroup>
-						</f:facet>
-						<rich:menuItem label="#{msg.libelle_mes_filleuls}" action="filleuls">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_leur_cmd}" action="#">
-						</rich:menuItem>
-					</rich:dropDownMenu>					
+						<rich:dropDownMenu>
+							<f:facet name="label">
+								<h:panelGroup>
+									<h:outputText value="#{msg.libelle_parrainage}" />
+								</h:panelGroup>
+							</f:facet>
+							<rich:menuItem label="#{msg.libelle_mes_filleuls}"
+								action="filleuls">
+							</rich:menuItem>
+							<rich:menuItem label="#{msg.libelle_leur_cmd}" action="#">
+							</rich:menuItem>
+						</rich:dropDownMenu>
 
-					<rich:dropDownMenu mode="ajax" >
-						<f:facet name="label">
-							<h:panelGroup>
-								<h:outputText value="#{msg.libelle_cmd_grp}" />
-							</h:panelGroup>
-						</f:facet>
-						<rich:menuItem label="#{msg.libelle_recap_cours}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_recap_pre}" action="#">
-						</rich:menuItem>
-					</rich:dropDownMenu>
-					
-					<rich:dropDownMenu mode="ajax" >
-						<f:facet name="label">
-							<h:panelGroup>
-								<h:outputText value="#{msg.libelle_admin}" />
-							</h:panelGroup>
-						</f:facet>
-						<rich:menuItem label="#{msg.libelle_membres}" action="#">
-						</rich:menuItem>
-						<rich:menuItem label="#{msg.libelle_dpt_grp}" action="#">
-						</rich:menuItem>
-					</rich:dropDownMenu>	
-					
-					<rich:column>
-						<h:link value="#{msg.libelle_deconexion}" outcome="#{authentificationBean.deconnection()}" />
-					</rich:column>
+						<rich:dropDownMenu>
+							<f:facet name="label">
+								<h:panelGroup>
+									<h:outputText value="#{msg.libelle_cmd_grp}" />
+								</h:panelGroup>
+							</f:facet>
+							<rich:menuItem label="#{msg.libelle_recap_cours}" action="#"/>
+							<rich:menuItem label="#{msg.libelle_recap_pre}" action="#"/>
+							<rich:menuItem label="#{msg.libelle_reduction}" action="#"/>
+						</rich:dropDownMenu>
 
-				</rich:toolbar>
-			</TD>
-		</TR>
+						<rich:dropDownMenu>
+							<f:facet name="label">
+								<h:panelGroup>
+									<h:outputText value="#{msg.libelle_admin}" />
+								</h:panelGroup>
+							</f:facet>
+							<rich:menuItem label="#{msg.libelle_orgas}" action="#"/>							
+							<rich:menuItem label="#{msg.libelle_membres}" action="#"/>
+							<rich:menuItem label="#{msg.libelle_dpt_grp}" action="#"/>
+							<rich:menuItem label="#{msg.libelle_marques}" action="#"/>
+							<rich:menuItem label="#{msg.libelle_menu_categories}" action="categories"/>
+							<rich:menuItem label="#{msg.libelle_menu_ss_categories}" action="sousCategories"/>
+						</rich:dropDownMenu>
 
-	</table>
-</h:form>
-
+						<rich:menuItem label="#{msg.libelle_deconexion}" action="#{userSessionBean.deconnection()}"/>
+					</rich:toolbar></TD>
+			</TR>
+		</table>
+	</h:form>
+</ui:composition>
+</html>

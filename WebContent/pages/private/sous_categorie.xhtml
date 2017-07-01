@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<ui:define name="content">
+			<h:form id="formFilleul">
+				<ui:include  src="/pages/private/message.xhtml" />
+				<h:inputHidden value="#{sousCategoriesBean.sousCategorie.idSousCategorie}"  />
+				<h:panelGrid columns="2" border="0" cellpadding="10" cellspacing="1">
+					<h:outputLabel value="#{msg.libelle_nom_ss_categorie}" />
+					<h:inputText value="#{sousCategoriesBean.sousCategorie.sousCategorieNom}" maxlength="120" required="true" requiredMessage="#{msg.nom_ss_categorie_obligatoire}" />
+					
+					<h:outputLabel value="#{msg.libelle_categorie_rat}" />
+					<h:selectOneMenu value="#{sousCategoriesBean.idCategorie}">
+			   			<f:selectItems value="#{sousCategoriesBean.referentielBean.categorieList}" var="c"
+			   			itemLabel="#{c.categorieNom}" itemValue="#{c.idCategorie}" />
+			   		</h:selectOneMenu>
+			   		
+			   		<h:button type="button" value="#{msg.libelle_retour}" outcome="sousCategories"/>
+					<h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{sousCategoriesBean.insertOrUpdateSousCategorie()}"/>				        
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>
