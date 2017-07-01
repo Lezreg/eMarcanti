@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.marcanti.ecommerce.constants.CommandeIndividuelleStatus;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
+import com.marcanti.ecommerce.dao.CommandeIndividuelleStatusDAO;
 import com.marcanti.ecommerce.dao.MembreDAO;
 import com.marcanti.ecommerce.dao.PanierDAO;
 import com.marcanti.ecommerce.dao.PanierProduitDAO;
@@ -39,6 +41,8 @@ public class PanierServiceActionImpl implements PanierActionService {
 	private CommandeGroupeeDAO commandeGroupeeDAO;
 	@Autowired
 	private MembreDAO membreDAO;
+	@Autowired
+	private CommandeIndividuelleStatusDAO commandeIndividuelleStatusDAO;
 
 	@Override
 	public Panier create(Panier panier) {
@@ -47,11 +51,11 @@ public class PanierServiceActionImpl implements PanierActionService {
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
-	public void addProduct(Produit produit, Membre utilisateur) {
+	public Panier addProduct(Produit produit, Membre utilisateur) {
 		// ParametersChecker.checkParameter("utilisateur is null ",
 		// utilisateur);
 		ParametersChecker.checkParameter("produit is null ", produit);
-
+		Panier panierEnCours = null;
 		// bouchon commandeGroupee
 		// @mock
 		// FIXME
@@ -76,7 +80,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 				panierProduit.setQteSouhaitee(ShortUtils.incrementShort(panierProduit.getQteSouhaitee()));
 				panierProduitDAO.edit(panierProduit);
 				// update panier
-				Panier panierEnCours = panierProduit.getPanier();
+				panierEnCours = panierProduit.getPanier();
 				updatePanier(produit, panierEnCours);
 				// update commande individuelle
 				updateCommandeIndividuel(utilisateur, commandeIndividuel);
@@ -84,7 +88,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 			} else {
 				// si le produit n'est pas encore ajouté , alors on cree un
 				// objet panierproduit
-				Panier panierEnCours = commandeIndividuel.getIdPanier();
+				panierEnCours = commandeIndividuel.getIdPanier();
 				panierProduit = getNewPanierProduit(commandeIndividuel.getIdPanier(), produit);
 				panierProduitDAO.create(panierProduit);
 				// update panier (quantite et Montant)
@@ -107,11 +111,11 @@ public class PanierServiceActionImpl implements PanierActionService {
 			panierProduitDAO.create(panierProduit);
 
 			// create commande indiv
-			CommandeIndividuelle commandeIndividuelle = getNewCommandeIndividuelle(utilisateur, panier);
+			CommandeIndividuelle commandeIndividuelle = getNewCommandeIndividuelle(utilisateur, panier, cmdgroupee);
 			commandeIndividuelleDAO.create(commandeIndividuelle);
 		}
 		
-	
+		return panierEnCours;
 
 	}
 
@@ -147,18 +151,21 @@ public class PanierServiceActionImpl implements PanierActionService {
 		this.membreDAO = membreDAO;
 	}
 
-	private CommandeIndividuelle getNewCommandeIndividuelle(Membre utilisateur, Panier panier) {
+	private CommandeIndividuelle getNewCommandeIndividuelle(Membre utilisateur, Panier panier,
+			CommandeGroupee cmdgroupee) {
 		CommandeIndividuelle commandeIndividuelle = new CommandeIndividuelle();
 		commandeIndividuelle.setDateCreation(new Date());
 		commandeIndividuelle.setIsPaiementEffectue(false);
 		commandeIndividuelle.setIdMembre(utilisateur);
 		commandeIndividuelle.setIdPanier(panier);
+		commandeIndividuelle.setIdCdeGroupee(cmdgroupee);
 		commandeIndividuelle.setCdeIndivNom(
 				utilisateur.getIdOrga().getOrgaNom() + "_" + utilisateur.getMembreNom() + "_" + new Date().toString());
-		// FIXME add commande id status
-		// commandeIndividuelle.setIdStatus(idStatus);
+		commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO
+				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatus.CDE_INDIVID_NON_CONFIRMEE.getCode()));
 
 		commandeIndividuelle.setTotalAPayer(panier.getPanierMontant());
+		// TODO
 		// commandeIndividuelle.setReduction(reduction);
 
 		return commandeIndividuelle;
@@ -228,6 +235,14 @@ public class PanierServiceActionImpl implements PanierActionService {
 	public boolean isExistingCommandeGroupee(Membre utilisateur) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	public CommandeIndividuelleStatusDAO getCommandeIndividuelleStatusDAO() {
+		return commandeIndividuelleStatusDAO;
+	}
+
+	public void setCommandeIndividuelleStatusDAO(CommandeIndividuelleStatusDAO commandeIndividuelleStatusDAO) {
+		this.commandeIndividuelleStatusDAO = commandeIndividuelleStatusDAO;
 	}
 
 }

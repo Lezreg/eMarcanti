@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.model.Panier;
+import com.marcanti.ecommerce.model.PanierProduit;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.PanierActionService;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
@@ -40,9 +42,17 @@ public class BasketController implements Serializable {
 	@Autowired
 	private ProduitServiceAction produitServiceAction;
 
-	private Panier panier;
+	private Panier panierEnCours;
 
-	private List<Produit> produitsAdded;
+	public Panier getPanierEnCours() {
+		return panierEnCours;
+	}
+
+	public void setPanierEnCours(Panier panierEnCours) {
+		this.panierEnCours = panierEnCours;
+	}
+
+	private List<PanierProduit> panierProduitList;
 
 	@PostConstruct
 	private void init() {
@@ -51,30 +61,22 @@ public class BasketController implements Serializable {
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
 
-		produitsAdded = new ArrayList<>();
+		setPanierProduitList(new ArrayList<PanierProduit>());
 	}
 
 	public void addPoduct(Produit produit, int quantite) {
 		// FIXME not support quantity
 		logger.info(produit.toString());
 		// TODO return panier after update
-			panierService.addProduct(produit, null);
-
-		// produit.setPanierProduitCollection(panier.getPanierProduitCollection());
-		// produitServiceAction.AddProduit(produit);
-		// FIXME reload database
-		produitsAdded.add(produit);
-
-		// produitsAdded = panierService.getallProduitbyPanier();
+		panierEnCours = panierService.addProduct(produit, null);
+		Collection<PanierProduit> panierProduitCollection = null;
+		if (panierEnCours != null && panierEnCours.getPanierProduitCollection() != null) {
+			panierProduitCollection = panierEnCours.getPanierProduitCollection();
+			// FIXME reload database
+			setPanierProduitList(new ArrayList<PanierProduit>(panierProduitCollection));
+		}
 	}
 
-	public List<Produit> getProduitsAdded() {
-		return produitsAdded;
-	}
-
-	public void setProduitsAdded(List<Produit> produitsAdded) {
-		this.produitsAdded = produitsAdded;
-	}
 
 	public String redirect() {
 		return "panier";
@@ -92,4 +94,13 @@ public class BasketController implements Serializable {
 		ois.defaultReadObject();
 		init();
 	}
+
+	public List<PanierProduit> getPanierProduitList() {
+		return panierProduitList;
+	}
+
+	public void setPanierProduitList(List<PanierProduit> panierProduit) {
+		this.panierProduitList = panierProduit;
+	}
+
 }

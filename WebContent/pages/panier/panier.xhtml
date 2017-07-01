@@ -8,28 +8,33 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form id="panierId">
-			<p:dataTable var="produitAdded" value="#{basketView.produitsAdded}">
+			<p:dataTable var="panierProduit" value="#{basketView.panierProduitList}">
 
-				<p:column headerText="Marque" footerText="">
+				<p:column headerText="Marque">
 					<p:graphicImage
-						url="/images/100X100/#{empty produit.produitPhotoURL ? 'default.jpg' : produit.produitPhotoURL}"
+						url="/images/100X100/#{empty panierProduit.produit.produitPhotoURL ? 'default.jpg' : panierProduit.produit.produitPhotoURL}"
 						width="100" />
 					<h:outputText value="#{produitAdded.idMarque.marqueNom}" />
 				</p:column>
 
-				<p:column headerText="Description" footerText="Total">
-					<h:outputText value="#{produitAdded.produitDescription}" />
+				<p:column headerText="Description">
+					<h:outputText value="#{panierProduit.produit.produitDescription}" />
 				</p:column>
-
+				
 				<p:column style="width:110px" headerText="Notre prix" footerText="">
-					<h:outputText value="#{produitAdded.notrePrix}">
+					<h:outputText value="#{panierProduit.produit.notrePrix}">
 						<f:convertNumber currencySymbol="€" type="currency" />
 					</h:outputText>
 				</p:column>
-
-				<p:column headerText="Year">
-					<h:outputText value="#{produitAdded.produitDescription}" />
+				
+				<p:column headerText="Qté">
+					<h:outputText value="#{panierProduit.qteSouhaitee}" />
 				</p:column>
+				
+				<p:column headerText="Sous Total">
+					<h:outputText value="#{panierProduit.qteSouhaitee} * #{panierProduit.produit.notrePrix}" />
+				</p:column>
+				
 			</p:dataTable>
 		</h:form>
 	</ui:define>
