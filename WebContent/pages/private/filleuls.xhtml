@@ -1,93 +1,98 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"	
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:customer="http://java.sun.com/jsf/composite/components/customer"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:body>
 	<ui:composition template="/template/template.xhtml">
 
 		<ui:define name="content">
-			<h:panelGrid columns="" border="0" cellpadding="10"
-				cellspacing="1" width="100%">
-				<h:outputLabel value="#{msg.libelle_mes_filleuls}"
-					style="font-weight:bold;" />
-				<h:outputLabel value="#{msg.libelle_filleuls_accueil}" />
-			</h:panelGrid>
-			<br />
-			<h:panelGrid columns="1" border="0" cellpadding="10" cellspacing="1">
-				<h:button type="button" value="#{msg.libelle_ajouter}" outcome="#{filleulsBean.addFilleulView()}"/>
-			</h:panelGrid>
+			<div id="itme" class="cadre-container">
+				<h:panelGrid columns="" border="0" cellpadding="10" cellspacing="1"
+					width="100%">
+					<h:outputLabel value="#{msg.libelle_mes_filleuls}"
+						style="font-weight:bold;" />
+					<h:outputLabel value="#{msg.libelle_filleuls_accueil}" />
+				</h:panelGrid>
+				<br />
+				<h:panelGrid columns="1" border="0" cellpadding="10" cellspacing="1">
+					<h:button type="button" value="#{msg.libelle_ajouter}"
+						outcome="#{filleulsBean.addFilleulView()}" />
+				</h:panelGrid>
 
-			<h:form id="formFilleuls">
-				<p:dataTable var="filleul" value="#{filleulsBean.filleulsList}" 
-					rendered="true" 
-					draggableColumns="true"
-					style="margin-bottom:40px" paginator="true" rows="10"
-					widgetVar="filleulTable" emptyMessage="pas de filleul"
-					filteredValue="#{filleulsBean.filteredFilleulsList}"
-					resizableColumns="true"
-					scrollable="true" scrollHeight="200"
-					editable="true"
-					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="2,10,20">
-					<f:facet name="header">
-						<p:outputPanel>
-							<h:outputText value="Rechercher :" />
-							<p:inputText id="globalFilter"
-								onkeyup="PF('filleulTable').filter()" style="width:150px"
-								placeholder="Saisir mot clé" />
-						</p:outputPanel>
-					</f:facet>
-					<p:column style="width:16px">
-            			<p:rowToggler />
-        			</p:column>
-        			 <p:rowExpansion>
-			            <p:panelGrid  columns="2" columnClasses="label,value" style="width:300px">
-			                <h:outputText value="Nom:" />
-			                <p:cellEditor>
-			                <h:outputText value="#{filleul.membreNom}" />
-			                </p:cellEditor>
-			                <h:outputText value="Prenom" />
-			                <h:outputText value="#{filleul.membrePrenom}" />
-			            </p:panelGrid>
-			        </p:rowExpansion>
-					<p:column headerText="Nom" sortBy="#{filleul.membreNom}" filterBy="#{filleul.membreNom}" filterMatchMode="contains">
-						<h:outputText value="#{filleul.membreNom}" />
-					</p:column>
-					<p:column headerText="Prénom" sortBy="#{filleul.membrePrenom}" filterBy="#{filleul.membrePrenom}" filterMatchMode="contains">
-						<h:outputText value="#{filleul.membrePrenom}" />
-					</p:column>
-					<p:column headerText="Email" sortBy="#{filleul.membreEmail}" filterBy="#{filleul.membreEmail}" filterMatchMode="contains">
-						<h:outputText value="#{filleul.membreEmail}" />
-					</p:column>
-					<p:column headerText="Tél" sortBy="#{filleul.membreTel}">
-						<h:outputText value="#{filleul.membreTel}" />
-					</p:column>
-					<p:column headerText="Actif" sortBy="#{filleul.isActif}" filterBy="#{filleul.isActif}" filterMatchMode="equals">
-						<f:facet name="filter">
-							<p:selectOneButton onchange="PF('filleulTable').filter()">
-								<f:converter converterId="javax.faces.Boolean" />
-								<f:selectItem itemLabel="All" itemValue="" />
-								<f:selectItem itemLabel="true" itemValue="true" />
-								<f:selectItem itemLabel="false" itemValue="false" />
-							</p:selectOneButton>
-						</f:facet>
-						<h:outputText value="#{filleul.isActif ? 'true': 'false'}" />
-					</p:column>
-					<p:column>
-				       <h:commandLink action="#{filleulsBean.editFilleul}" value="Edit">
-				         <f:param name="idMembre" value="#{filleul.idMembre}" />
-				       </h:commandLink>
-				    </p:column>
-				</p:dataTable>
-			</h:form>
+				<h:form id="formFilleuls">
+					<a4j:region>
+						<p:dataTable var="filleul" value="#{filleulsBean.filleulsList}"
+							rendered="true" draggableColumns="true"
+							style="margin-bottom:40px" paginator="true" rows="10"
+							widgetVar="filleulTable" emptyMessage="pas de filleul"
+							filteredValue="#{filleulsBean.filteredFilleulsList}"
+							resizableColumns="true" scrollable="true" scrollHeight="200"
+							editable="true"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="2,10,20">
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText value="#{msg.libelle_rechercher} :" />
+									<p:inputText id="globalFilter"
+										onkeyup="PF('filleulTable').filter()" style="width:150px"
+										placeholder="Saisir mot clé" />
+								</p:outputPanel>
+							</f:facet>
+							<p:column style="width:16px">
+								<p:rowToggler />
+							</p:column>
+							<p:rowExpansion>
+								<p:panelGrid columns="2" columnClasses="label,value"
+									style="width:300px">
+									<h:outputText value="#{msg.libelle_nom}:" />
+									<p:cellEditor>
+										<h:outputText value="#{filleul.membreNom}" />
+									</p:cellEditor>
+									<h:outputText value="#{msg.libelle_prenom}" />
+									<h:outputText value="#{filleul.membrePrenom}" />
+								</p:panelGrid>
+							</p:rowExpansion>
+							<p:column headerText="#{msg.libelle_nom}" sortBy="#{filleul.membreNom}"
+								filterBy="#{filleul.membreNom}" filterMatchMode="contains">
+								<h:outputText value="#{filleul.membreNom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_prenom}" sortBy="#{filleul.membrePrenom}"
+								filterBy="#{filleul.membrePrenom}" filterMatchMode="contains">
+								<h:outputText value="#{filleul.membrePrenom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_email}" sortBy="#{filleul.membreEmail}"
+								filterBy="#{filleul.membreEmail}" filterMatchMode="contains">
+								<h:outputText value="#{filleul.membreEmail}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_tel}" sortBy="#{filleul.membreTel}">
+								<h:outputText value="#{filleul.membreTel}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_actif}" sortBy="#{filleul.isActif}"
+								filterBy="#{filleul.isActif}" filterMatchMode="equals">
+								<f:facet name="filter">
+									<p:selectOneButton onchange="PF('filleulTable').filter()">
+										<f:converter converterId="javax.faces.Boolean" />
+										<f:selectItem itemLabel="All" itemValue="" />
+										<f:selectItem itemLabel="true" itemValue="true" />
+										<f:selectItem itemLabel="false" itemValue="false" />
+									</p:selectOneButton>
+								</f:facet>
+								<h:outputText value="#{filleul.isActif ? 'true': 'false'}" />
+							</p:column>
+							<p:column>
+								<h:commandLink action="#{filleulsBean.editFilleul}" value="Edit">
+									<f:param name="idMembre" value="#{filleul.idMembre}" />
+									<f:param name="oldMembreEmail" value="#{filleul.membreEmail}" />
+								</h:commandLink>
+							</p:column>
+						</p:dataTable>
+					</a4j:region>
+				</h:form>
+			</div>
 		</ui:define>
 	</ui:composition>
 </h:body>

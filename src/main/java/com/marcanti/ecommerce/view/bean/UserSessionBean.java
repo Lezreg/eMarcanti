@@ -3,16 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.marcanti.ecommerce.model;
+package com.marcanti.ecommerce.view.bean;
 
 import java.io.Serializable;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  * @author admin
  */
 
-public class UserSession implements Serializable {
+@ManagedBean(name="userSessionBean")
+@SessionScoped
+public class UserSessionBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,14 +41,14 @@ public class UserSession implements Serializable {
     
     private String departementNom;
 
-    public UserSession() {
+    public UserSessionBean() {
     }
 
-    public UserSession(Long idMembre) {
+    public UserSessionBean(Long idMembre) {
         this.idMembre = idMembre;
     }
 
-	public UserSession(Long idMembre, Short idProfil, Long idOrga, Long idDepartement, String membreNom,
+	public UserSessionBean(Long idMembre, Short idProfil, Long idOrga, Long idDepartement, String membreNom,
 			String membrePrenom, String membreEmail, String orgaNom, String departementNom) {
 		super();
 		this.idMembre = idMembre;
@@ -129,6 +136,17 @@ public class UserSession implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	public void deconnection() throws Exception
+	{
+
+		System.out.println("deconnexion : " + getMembreNom());
+	    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+	    HttpServletResponse response = (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		response.sendRedirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/login.xhtml");
+		
+	    //return "/pages/login.xhtml";
 	}
 
 }

@@ -6,7 +6,7 @@ import com.marcanti.ecommerce.model.Produit;
 
 public interface PanierActionService {
 
-	void addProduct(Produit produit, Membre utilisateur);
+	Panier addProduct(Produit produit, Membre utilisateur);
 
 	Panier create(Panier panier);
 

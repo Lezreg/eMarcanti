@@ -64,5 +64,11 @@ public class CommandeIndividuelleStatusDAOImpl extends AbstractGenericDAO<Comman
     protected EntityManager getEntityManager() {
         return em;
     }
+
+	@Override
+	public CommandeIndividuelleStatus getCommandeIndividuelleStatusByCode(String statusCode) {
+		return (CommandeIndividuelleStatus) em.createNamedQuery("CommandeIndividuelleStatus.findByStatusCode")
+				.setParameter("statusCode", statusCode).getSingleResult();
+	}
     
 }

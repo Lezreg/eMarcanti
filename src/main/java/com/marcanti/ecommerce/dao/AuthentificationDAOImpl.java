@@ -6,6 +6,7 @@
 package com.marcanti.ecommerce.dao;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +17,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.marcanti.ecommerce.model.Membre;
-import com.marcanti.ecommerce.model.UserSession;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 @Repository("AuthentificationDAOImpl")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -85,7 +86,7 @@ public class AuthentificationDAOImpl extends AbstractGenericDAO<Membre> implemen
 	}
 
 	@Override
-	public UserSession getUserSession(String email) {
+	public UserSessionBean getUserSession(String email) {
 		Query query = em.createNativeQuery("select idMembre, idProfil, m.idOrga, m.idDepartement, membreNom, membrePrenom, membreEmail, o.orgaNom, d.departementNom "
 											+ "FROM membre as m "
 											+ "LEFT JOIN organisation as o ON m.idOrga = o.idOrga "
@@ -98,7 +99,15 @@ public class AuthentificationDAOImpl extends AbstractGenericDAO<Membre> implemen
 		}else {
 			idDepartement = null;
 		}
-		return new UserSession(((BigInteger)tab[0]).longValue(),(Short)tab[1],((BigInteger)tab[2]).longValue(),idDepartement,(String)tab[4],(String)tab[5],(String)tab[6],(String)tab[7],(String)tab[8]);
+		return new UserSessionBean(((BigInteger)tab[0]).longValue(),(Short)tab[1],((BigInteger)tab[2]).longValue(),idDepartement,(String)tab[4],(String)tab[5],(String)tab[6],(String)tab[7],(String)tab[8]);
+	}
+
+	@Override
+	public void updateLastConnectionDate(Date toDay, String email) {
+		Query query = em.createNativeQuery("update membre set dateDerniereConnexion=? where membreEmail=? ").setParameter(1, toDay).setParameter(2, email);
+		query.executeUpdate();
+		
+		
 	}
 
 

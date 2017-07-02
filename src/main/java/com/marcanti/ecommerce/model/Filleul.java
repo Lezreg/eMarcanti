@@ -37,8 +37,10 @@ public class Filleul implements Serializable {
     @Basic(optional = false)
     @NotNull
     private Long idFilleul;
+    
     @Size(max = 60)
     private String parrainNom;
+    
     @JoinColumn(name = "idMembreParrain", referencedColumnName = "idMembre")
     @ManyToOne(optional = false)
     private Membre idMembreParrain;

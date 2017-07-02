@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.marcanti.ecommerce.dao.MembreDAO;
 import com.marcanti.ecommerce.model.Membre;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
+
 
 @Service("membreService")
 public class MembreServiceActionImpl implements MembreServiceAction {
@@ -33,8 +35,8 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 	}
 
 	@Override
-	public void insertFilleul(Membre filleul) {
-		membreDAO.insertFilleul(filleul);
+	public void insertFilleul(Membre filleul, UserSessionBean parrain) {
+		membreDAO.insertFilleul(filleul,parrain);
 		
 	}
 

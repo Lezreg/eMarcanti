@@ -1,6 +1,8 @@
 package com.marcanti.ecommerce.view.bean;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,7 +15,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.marcanti.ecommerce.model.UserSession;
 import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
@@ -89,6 +90,8 @@ public class AuthentificationBean implements Serializable {
 		boolean resu = false;
 		boolean isOK = false;
 		boolean[] resuTab = new boolean[2];
+		Calendar calendar = Calendar.getInstance();
+		Date dateToday =  calendar.getTime();
 		String ecran="index";
 		
 		try {
@@ -140,8 +143,9 @@ public class AuthentificationBean implements Serializable {
 	    	try {
 	    		boolean isDefaultPassword = service.getIsDefaultPassword(getUsername());
 				if(isDefaultPassword){
-					UserSession userSession = service.getUserSession(getUsername());
+					UserSessionBean userSession = service.getUserSession(getUsername());
 					ParfumUtils.setUserSessionBean(userSession);
+					service.updateLastConnectionDate(dateToday, getUsername());
 					ecran = "index";
 				}else{
 					HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -303,17 +307,6 @@ public class AuthentificationBean implements Serializable {
 		
     	return "index";
 	}	
-	
-	public String deconnection() throws Exception
-	{
-
-		//HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-	    //session.invalidate();
-	    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		logger.info(getUsername() + " : deconnexion !!! ");
-		
-	    return "login";
-	}
 	
 
 }

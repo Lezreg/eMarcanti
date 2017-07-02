@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
 import com.marcanti.ecommerce.service.actions.ReferentielServiceAction;
@@ -30,13 +31,16 @@ public class ReferentielBean implements Serializable {
 	
 	private List<Profil> profilList;
 	
-	public static Map<String,Object> radioButtonOuiNon;
-	static{
+	private String defaultPassword;
+	
+	public Map<String,Object> radioButtonOuiNon;
+	{
 		radioButtonOuiNon = new LinkedHashMap<String,Object>();
 		radioButtonOuiNon.put(ParfumUtils.getBundleLibelle().getString("libelle_oui"), "true"); //label, value
 		radioButtonOuiNon.put(ParfumUtils.getBundleLibelle().getString("libelle_non"), "false");
 	}
 	
+	private List<Categorie> categorieList;
 
 	@ManagedProperty("#{referentielService}")
 	private ReferentielServiceAction referentielService;
@@ -65,6 +69,22 @@ public class ReferentielBean implements Serializable {
 		this.referentielService = referentielService;
 	}
 
+	public String getDefaultPassword() {
+		return defaultPassword;
+	}
+
+	public void setDefaultPassword(String defaultPassword) {
+		this.defaultPassword = defaultPassword;
+	}
+	
+	public List<Categorie> getCategorieList() {
+		return categorieList;
+	}
+
+	public void setCategorieList(List<Categorie> categorieList) {
+		this.categorieList = categorieList;
+	}
+
 	public ReferentielBean() {
 	}
 
@@ -72,6 +92,8 @@ public class ReferentielBean implements Serializable {
 	public void init() {
 		this.organisationList = referentielService.getOrganisationList();
 		this.profilList = referentielService.getProfilList();
+		this.defaultPassword = referentielService.getDefaultPassword();
+		this.categorieList = referentielService.getCategorieList();
 	}
 	
 }

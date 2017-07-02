@@ -35,8 +35,6 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 
     public void create(CommandeIndividuelle entity) {
         super.create(entity);
-		em.getTransaction().commit();
-		em.flush();
     }
 
 	public void edit(Long id, CommandeIndividuelle entity) {
