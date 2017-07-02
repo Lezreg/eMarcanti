@@ -1,4 +1,4 @@
-package com.marcanti.ecommerce.service.actions.impl;
+package com.marcanti.ecommerce.service.actions;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ import com.marcanti.ecommerce.dao.CategorieDAO;
 import com.marcanti.ecommerce.dao.SousCategorieDAO;
 import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.SousCategorie;
-import com.marcanti.ecommerce.service.actions.SousCategorieServiceAction;
 
 
 public class SousCategorieServiceActionImpl implements SousCategorieServiceAction {
