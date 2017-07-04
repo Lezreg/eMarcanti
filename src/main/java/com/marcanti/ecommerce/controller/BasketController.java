@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,11 +18,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Panier;
 import com.marcanti.ecommerce.model.PanierProduit;
 import com.marcanti.ecommerce.model.Produit;
+import com.marcanti.ecommerce.service.actions.CommandeIndividuelleServiceAction;
 import com.marcanti.ecommerce.service.actions.PanierActionService;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
+import com.marcanti.ecommerce.utils.ParfumUtils;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 @ManagedBean(name = "basketView")
 @SessionScoped
@@ -42,7 +45,17 @@ public class BasketController implements Serializable {
 	@Autowired
 	private ProduitServiceAction produitServiceAction;
 
+	@Autowired
+	private CommandeIndividuelleServiceAction commandeIndividuelleServiceAction;
+
+
 	private Panier panierEnCours;
+
+	private List<CommandeIndividuelle> cmdEnCours;
+
+	private String selectedCmd;
+
+	private CommandeIndividuelle selectedCmd_old;
 
 	public Panier getPanierEnCours() {
 		return panierEnCours;
@@ -61,22 +74,25 @@ public class BasketController implements Serializable {
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
 
+		// FIXME load panier produit
+		// if commande groupee not exist then send message ("Impossible
+		// d'ajouter des produits "page 26)
+
+		// by default last commandeInd will be selected
 		setPanierProduitList(new ArrayList<PanierProduit>());
+		setCmdEnCours(new ArrayList<CommandeIndividuelle>());
 	}
 
 	public void addPoduct(Produit produit, int quantite) {
+
+		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 		// FIXME not support quantity
 		logger.info(produit.toString());
 		// TODO return panier after update
-		panierEnCours = panierService.addProduct(produit, null);
-		Collection<PanierProduit> panierProduitCollection = null;
-		if (panierEnCours != null && panierEnCours.getPanierProduitCollection() != null) {
-			panierProduitCollection = panierEnCours.getPanierProduitCollection();
-			// FIXME reload database
-			setPanierProduitList(new ArrayList<PanierProduit>(panierProduitCollection));
-		}
+		panierEnCours = panierService.addProduct(produit, userSessionBean.getIdMembre(), userSessionBean.getIdOrga());
+		// panierService
+		setPanierProduitList(panierService.getProduitsByPAnier(panierEnCours));
 	}
-
 
 	public String redirect() {
 		return "panier";
@@ -96,11 +112,41 @@ public class BasketController implements Serializable {
 	}
 
 	public List<PanierProduit> getPanierProduitList() {
+		if (selectedCmd != null) {
+			panierProduitList = panierService.getProduitsByCmdIndiv(new Long(selectedCmd));
+		}
 		return panierProduitList;
 	}
 
 	public void setPanierProduitList(List<PanierProduit> panierProduit) {
 		this.panierProduitList = panierProduit;
 	}
+
+	public List<CommandeIndividuelle> getCmdEnCours() {
+		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
+		return commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(), 1L);
+	}
+
+	public void setCmdEnCours(List<CommandeIndividuelle> cmdEnCours) {
+		this.cmdEnCours = cmdEnCours;
+	}
+
+	public CommandeIndividuelleServiceAction getCommandeIndividuelleServiceAction() {
+		return commandeIndividuelleServiceAction;
+	}
+
+	public void setCommandeIndividuelleServiceAction(CommandeIndividuelleServiceAction commandeIndividuelleServiceAction) {
+		this.commandeIndividuelleServiceAction = commandeIndividuelleServiceAction;
+	}
+
+	public String getSelectedCmd() {
+		return selectedCmd;
+	}
+
+	public void setSelectedCmd(String selectedCmd) {
+		this.selectedCmd = selectedCmd;
+	}
+
+
 
 }

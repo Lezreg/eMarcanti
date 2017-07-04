@@ -2,6 +2,7 @@ package com.marcanti.ecommerce.service.actions;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ import com.marcanti.ecommerce.utils.ShortUtils;
 
 
 @Service("panierActionService")
+@Transactional
 public class PanierServiceActionImpl implements PanierActionService {
 
 	@Autowired
@@ -51,26 +53,15 @@ public class PanierServiceActionImpl implements PanierActionService {
 
 	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
-	public Panier addProduct(Produit produit, Membre utilisateur) {
-		// ParametersChecker.checkParameter("utilisateur is null ",
-		// utilisateur);
+	public Panier addProduct(Produit produit, Long idMembre, Long idOrg) {
 		ParametersChecker.checkParameter("produit is null ", produit);
 		Panier panierEnCours = null;
-		// bouchon commandeGroupee
-		// @mock
-		// FIXME
 		CommandeGroupee cmdgroupee = commandeGroupeeDAO.find(1L);// with id
-																	// membre :
-																	// 2 ;)
-		utilisateur = membreDAO.find(2L);
-
-		/**
-		 * 
-		 */
+		Membre member = membreDAO.find(idMembre);
 
 		// verifier si panier existe deja (commande indiv)
 		CommandeIndividuelle commandeIndividuel = commandeIndividuelleDAO
-				.getCommandeIndividuellByMembreAndCmdGroupe(utilisateur, cmdgroupee);
+				.getCommandeIndividuellByMembreAndCmdGroupe(member, cmdgroupee);
 
 		if (commandeIndividuel != null) {
 			PanierProduit panierProduit = panierProduitDAO.getPanierProduitByPanierAndProduit(
@@ -83,7 +74,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 				panierEnCours = panierProduit.getPanier();
 				updatePanier(produit, panierEnCours);
 				// update commande individuelle
-				updateCommandeIndividuel(utilisateur, commandeIndividuel);
+				updateCommandeIndividuel(member, commandeIndividuel);
 
 			} else {
 				// si le produit n'est pas encore ajouté , alors on cree un
@@ -104,14 +95,14 @@ public class PanierServiceActionImpl implements PanierActionService {
 		}else{
 			// else: create panier
 			// create panier
-			Panier panier = getNewPanier(produit, utilisateur);
+			Panier panier = getNewPanier(produit, member);
 			panier = create(panier);
 			// create panierproduit
 			PanierProduit panierProduit = getNewPanierProduit(panier, produit);
 			panierProduitDAO.create(panierProduit);
 
 			// create commande indiv
-			CommandeIndividuelle commandeIndividuelle = getNewCommandeIndividuelle(utilisateur, panier, cmdgroupee);
+			CommandeIndividuelle commandeIndividuelle = getNewCommandeIndividuelle(member, panier, cmdgroupee);
 			commandeIndividuelleDAO.create(commandeIndividuelle);
 		}
 		
@@ -135,21 +126,6 @@ public class PanierServiceActionImpl implements PanierActionService {
 		panierDao.edit(panierEnCours);
 	}
 
-	public PanierProduitDAO getPanierProduitDAO() {
-		return panierProduitDAO;
-	}
-
-	public void setPanierProduitDAO(PanierProduitDAO panierProduitDAO) {
-		this.panierProduitDAO = panierProduitDAO;
-	}
-
-	public MembreDAO getMembreDAO() {
-		return membreDAO;
-	}
-
-	public void setMembreDAO(MembreDAO membreDAO) {
-		this.membreDAO = membreDAO;
-	}
 
 	private CommandeIndividuelle getNewCommandeIndividuelle(Membre utilisateur, Panier panier,
 			CommandeGroupee cmdgroupee) {
@@ -189,6 +165,22 @@ public class PanierServiceActionImpl implements PanierActionService {
 		panier.setPanierMontant(produit.getNotrePrix());
 		panier.setPanierNbreProduit(ShortUtils.ONE);
 		return panier;
+	}
+
+	@Override
+	public List<PanierProduit> getProduitsByCmdIndiv(Long idCmdIndiv) {
+		return panierProduitDAO.findByCmdIndiv(idCmdIndiv);
+	}
+
+	@Override
+	public boolean isExistingCommandeGroupee(Membre utilisateur) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<PanierProduit> getProduitsByPAnier(Panier panier) {
+		return panierProduitDAO.getPanierProduitByPanier(panier.getIdPanier());
 	}
 
 	public PanierDAO getPanierDao() {
@@ -231,12 +223,6 @@ public class PanierServiceActionImpl implements PanierActionService {
 		this.commandeIndividuelleDAO = commandeIndividuelleDAO;
 	}
 
-	@Override
-	public boolean isExistingCommandeGroupee(Membre utilisateur) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	public CommandeIndividuelleStatusDAO getCommandeIndividuelleStatusDAO() {
 		return commandeIndividuelleStatusDAO;
 	}
@@ -244,5 +230,23 @@ public class PanierServiceActionImpl implements PanierActionService {
 	public void setCommandeIndividuelleStatusDAO(CommandeIndividuelleStatusDAO commandeIndividuelleStatusDAO) {
 		this.commandeIndividuelleStatusDAO = commandeIndividuelleStatusDAO;
 	}
+
+	public PanierProduitDAO getPanierProduitDAO() {
+		return panierProduitDAO;
+	}
+
+	public void setPanierProduitDAO(PanierProduitDAO panierProduitDAO) {
+		this.panierProduitDAO = panierProduitDAO;
+	}
+
+	public MembreDAO getMembreDAO() {
+		return membreDAO;
+	}
+
+	public void setMembreDAO(MembreDAO membreDAO) {
+		this.membreDAO = membreDAO;
+	}
+
+
 
 }

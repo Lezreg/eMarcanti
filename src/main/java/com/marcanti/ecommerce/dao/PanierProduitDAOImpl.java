@@ -5,6 +5,7 @@
  */
 package com.marcanti.ecommerce.dao;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -78,6 +79,33 @@ public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> impl
 		}
 
 		return (PanierProduit) query.getResultList().get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<PanierProduit> getPanierProduitByPanier(Long idPanier) {
+		Query query = em
+				.createQuery(
+						"SELECT p FROM PanierProduit p WHERE p.panierProduitPK.idPanier = :idPanier")
+				.setParameter("idPanier", idPanier);
+
+		if (query.getResultList() == null || query.getResultList().isEmpty()) {
+			return Collections.<PanierProduit>emptyList();
+		}
+		return query.getResultList();
+	}
+
+	@Override
+	public List<PanierProduit> findByCmdIndiv(Long idCmdIndiv) {
+		Query query = em
+				.createQuery(
+						"SELECT p FROM PanierProduit p WHERE p.panier.commandeIndividuelle.idCdeIndiv = :idCmdIndiv")
+				.setParameter("idCmdIndiv", idCmdIndiv);
+
+		if (query.getResultList() == null) {
+			return Collections.<PanierProduit>emptyList();
+		}
+		return query.getResultList();
 	}
     
 }

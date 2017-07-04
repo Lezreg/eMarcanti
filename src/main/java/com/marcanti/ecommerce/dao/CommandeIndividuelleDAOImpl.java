@@ -13,7 +13,6 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import com.marcanti.ecommerce.exception.IllegalDataValueException;
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Membre;
@@ -89,13 +88,25 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 				.setParameter("idCdeGroupee", commandeGroupee.getIdCdeGroupee())
 				.setParameter("isPaiementEffectue", Boolean.FALSE);
 
-		if (query.getResultList().size() > 1) {
-			throw new IllegalDataValueException();
-		}
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
 			return null;
 		}
 		return (CommandeIndividuelle) query.getResultList().get(0);
 	}
     
+	@Override
+	public List<CommandeIndividuelle> getCommandeIndivListByMembreAndCmdGroupe(Long idMembre,
+			Long idCdeGroupee) {
+		Query query = em
+				.createQuery(
+						"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.isPaiementEffectue = :isPaiementEffectue) order by date(dateCreation) asc")
+				.setParameter("idMembre", idMembre)
+				.setParameter("idCdeGroupee", idCdeGroupee)
+				.setParameter("isPaiementEffectue", Boolean.FALSE);
+
+		if (query.getResultList() == null || query.getResultList().isEmpty()) {
+			return null;
+		}
+		return (List<CommandeIndividuelle>) query.getResultList();
+	}
 }

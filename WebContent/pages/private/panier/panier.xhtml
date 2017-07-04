@@ -8,7 +8,14 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form id="panierId">
-			<p:dataTable var="panierProduit" value="#{basketView.panierProduitList}">
+		
+			<p:selectOneMenu id="cmdIdiv" value="#{basketView.selectedCmd}" required="true" label="choisir une commande"
+			    style="width: 200px">
+			    <f:selectItems value="#{basketView.cmdEnCours}" var="order" itemLabel="#{order.cdeIndivNom}" itemValue="#{order.idCdeIndiv}" />
+			    <p:ajax  update="panierProduitTable" />
+			</p:selectOneMenu>
+
+			<p:dataTable id="panierProduitTable" var="panierProduit" value="#{basketView.panierProduitList}">
 
 				<p:column headerText="Marque">
 					<p:graphicImage
