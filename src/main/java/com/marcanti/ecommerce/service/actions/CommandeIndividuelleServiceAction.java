@@ -8,4 +8,6 @@ public interface CommandeIndividuelleServiceAction {
 
 	List<CommandeIndividuelle> getCmdEnCoursParMembre(Long idMembre, Long idCdeGroupee);
 
+	CommandeIndividuelle getCommandeIndividuelleById(Long idCde);
+
 }

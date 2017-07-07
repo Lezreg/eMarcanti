@@ -55,7 +55,7 @@ public class BasketController implements Serializable {
 
 	private String selectedCmd;
 
-	private CommandeIndividuelle selectedCmd_old;
+	private CommandeIndividuelle commandeIndividuelle = new CommandeIndividuelle();
 
 	public Panier getPanierEnCours() {
 		return panierEnCours;
@@ -145,6 +145,18 @@ public class BasketController implements Serializable {
 
 	public void setSelectedCmd(String selectedCmd) {
 		this.selectedCmd = selectedCmd;
+	}
+
+	public CommandeIndividuelle getCommandeIndividuelle() {
+
+		if (selectedCmd != null && !selectedCmd.isEmpty()) {
+			return commandeIndividuelleServiceAction.getCommandeIndividuelleById(new Long(selectedCmd));
+		}
+		return commandeIndividuelle;
+	}
+
+	public void setCommandeIndividuelle(CommandeIndividuelle commandeIndividuelle) {
+		this.commandeIndividuelle = commandeIndividuelle;
 	}
 
 

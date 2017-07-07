@@ -25,6 +25,11 @@ public class CommandeIndividuelleServiceActionImpl implements CommandeIndividuel
 		return CommandeIndividuelleDAO.getCommandeIndivListByMembreAndCmdGroupe(idMembre, idCdeGroupee);
 	}
 
+	@Override
+	public CommandeIndividuelle getCommandeIndividuelleById(Long idCde) {
+		return CommandeIndividuelleDAO.find(idCde);
+	}
+
 
 	public CommandeIndividuelleDAO getCommandeIndividuelleDAO() {
 		return CommandeIndividuelleDAO;
@@ -34,5 +39,4 @@ public class CommandeIndividuelleServiceActionImpl implements CommandeIndividuel
 	public void setCommandeIndividuelleDAO(CommandeIndividuelleDAO commandeIndividuelleDAO) {
 		CommandeIndividuelleDAO = commandeIndividuelleDAO;
 	}
-
 }

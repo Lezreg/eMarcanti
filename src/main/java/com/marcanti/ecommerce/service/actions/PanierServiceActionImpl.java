@@ -74,7 +74,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 				panierEnCours = panierProduit.getPanier();
 				updatePanier(produit, panierEnCours);
 				// update commande individuelle
-				updateCommandeIndividuel(member, commandeIndividuel);
+				updateCommandeIndividuel(member, commandeIndividuel, panierEnCours);
 
 			} else {
 				// si le produit n'est pas encore ajouté , alors on cree un
@@ -88,6 +88,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 				Collection<PanierProduit> panierProduitCollection = panierEnCours.getPanierProduitCollection();
 				for (PanierProduit panierProduit2 : panierProduitCollection) {
 					panierProduit2.getProduit();
+					// TODO
 				}
 			}
 
@@ -110,11 +111,13 @@ public class PanierServiceActionImpl implements PanierActionService {
 
 	}
 
-	private void updateCommandeIndividuel(Membre utilisateur, CommandeIndividuelle commandeIndividuel) {
+	private void updateCommandeIndividuel(Membre utilisateur, CommandeIndividuelle commandeIndividuel,
+			Panier panierEnCours) {
 		commandeIndividuel.setDateModification(new Date());
 		// nom et prenom modifieur
 		commandeIndividuel.setNomModifieur(utilisateur.getMembreNom());
 		commandeIndividuel.setPrenomModifieur(utilisateur.getMembrePrenom());
+		commandeIndividuel.setTotalAPayer(panierEnCours.getPanierMontant());
 		// update
 		commandeIndividuelleDAO.edit(commandeIndividuel);
 	}

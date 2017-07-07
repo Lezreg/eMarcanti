@@ -10,12 +10,12 @@
 		<h:form id="panierId">
 		
 			<p:selectOneMenu id="cmdIdiv" value="#{basketView.selectedCmd}" required="true" label="choisir une commande"
-			    style="width: 200px">
+			    style="width: 200px" sortBy="#{panierProduit.qteSouhaitee}">
 			    <f:selectItems value="#{basketView.cmdEnCours}" var="order" itemLabel="#{order.cdeIndivNom}" itemValue="#{order.idCdeIndiv}" />
 			    <p:ajax  update="panierProduitTable" />
 			</p:selectOneMenu>
 
-			<p:dataTable id="panierProduitTable" var="panierProduit" value="#{basketView.panierProduitList}">
+			<p:dataTable id="panierProduitTable" var="panierProduit" value="#{basketView.panierProduitList}" emptyMessage="Nenhuma entrada!" liveResize="true">
 
 				<p:column headerText="Marque">
 					<p:graphicImage
@@ -41,6 +41,18 @@
 				<p:column headerText="Sous Total">
 					<h:outputText value="#{panierProduit.qteSouhaitee} * #{panierProduit.produit.notrePrix}" />
 				</p:column>
+				
+				<p:summaryRow>
+<!-- 		            <p:column colspan="3" style="text-align:right"> -->
+		            <p:column colspan="4">
+		                <h:outputText value="Total:" />
+		            </p:column>
+		            <p:column>
+		                <h:outputText value="22">
+<!-- 		                    <f:convertNumber type="currency" currencySymbol="€" /> -->
+		                </h:outputText>
+		            </p:column>
+		        </p:summaryRow>
 				
 			</p:dataTable>
 		</h:form>
