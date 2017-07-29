@@ -127,6 +127,20 @@ public class ShortUtils {
 		return (value == null ? 0 + nbre : toInt(value.shortValue()) + nbre);
 	}
 
+	public static int sum(@Nullable final Short nb1, Short nb2) {
+		return (nb1 == null ? 0 + nb1 : toInt(nb1.shortValue()) + (nb2 == null ? 0 + nb2 : toInt(nb2.shortValue())));
+	}
+
+	public static Short sum2Short(@Nullable final Short nb1, Short nb2) {
+		return toShort(
+				nb1 == null ? 0 + nb1 : toInt(nb1.shortValue()) + (nb2 == null ? 0 + nb2 : toInt(nb2.shortValue())));
+	}
+
+	public static Short substract2Short(@Nullable final Short nb1, Short nb2) {
+		return toShort(
+				nb1 == null ? 0 + nb1 : toInt(nb1.shortValue()) - (nb2 == null ? 0 + nb2 : toInt(nb2.shortValue())));
+	}
+
 	public static int toInt(@Nullable final Short value, final int defaultValue) {
 		return (value == null ? defaultValue : toInt(value.shortValue()));
 	}

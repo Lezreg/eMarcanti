@@ -71,7 +71,9 @@ public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> impl
 				.setParameter("idProduit", idProduit).setParameter("idPanier", idPanier);
 
 		if (query.getResultList().size() > 1) {
-			throw new IllegalDataValueException();
+
+			throw new IllegalDataValueException(
+					"Plusieur panierProduits qui corresponds à un seul produit dans le même panier");
 		}
 
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {

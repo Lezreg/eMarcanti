@@ -12,9 +12,31 @@
 			<p:selectOneMenu id="cmdIdiv" value="#{basketView.selectedCmd}" required="true" label="choisir une commande"
 			    style="width: 200px" sortBy="#{panierProduit.qteSouhaitee}">
 			    <f:selectItems value="#{basketView.cmdEnCours}" var="order" itemLabel="#{order.cdeIndivNom}" itemValue="#{order.idCdeIndiv}" />
-			    <p:ajax  update="panierProduitTable" />
+			    <p:ajax  update="panierProduitTable ttp" />
 			</p:selectOneMenu>
-
+			<br/>
+			
+			<p:growl id="growl" for="qte" showDetail="true" sticky="true" /> 
+			
+			<table style="border-spacing: 25px;">
+				  	<tr>
+				  		<td align="left">
+				  			<h:outputText value="Dernière Modification " />
+				  		</td>
+				  		<td align="left" class="textInfo">
+				  			<h:outputText id="modifId" style="color : rgb(108, 107, 98);" value="#{basketView.commandeIndividuelle.dateModification} par #{basketView.commandeIndividuelle.prenomModifieur} #{basketView.commandeIndividuelle.nomModifieur}" />
+				  		</td>
+				  		
+				  		<td align="right">
+				  			<h:outputText value="Etat: " />
+				  		</td>
+				  		<td align="right">
+				  			<h:outputText id="statutid" style="color : rgb(48, 186, 50);margin-left:-4px;" value="#{basketView.commandeIndividuelle.idStatus.statusLibelle}" />
+				  		</td>
+				  	</tr>
+				  	
+			</table>
+			
 			<p:dataTable id="panierProduitTable" var="panierProduit" value="#{basketView.panierProduitList}" emptyMessage="Nenhuma entrada!" liveResize="true">
 
 				<p:column headerText="Marque">
@@ -35,26 +57,42 @@
 				</p:column>
 				
 				<p:column headerText="Qté">
-					<h:outputText value="#{panierProduit.qteSouhaitee}" />
+					<h:inputText id="qte" value="#{panierProduit.qteSouhaitee}" />
+					<p:outputLabel for="qte"/> 
 				</p:column>
 				
 				<p:column headerText="Sous Total">
-					<h:outputText value="#{panierProduit.qteSouhaitee} * #{panierProduit.produit.notrePrix}" />
+					<h:outputText value="#{panierProduit.sousTotal}">
+						<f:convertNumber currencySymbol="€" type="currency" />
+					</h:outputText>
 				</p:column>
 				
-				<p:summaryRow>
-<!-- 		            <p:column colspan="3" style="text-align:right"> -->
-		            <p:column colspan="4">
-		                <h:outputText value="Total:" />
-		            </p:column>
-		            <p:column>
-		                <h:outputText value="22">
-<!-- 		                    <f:convertNumber type="currency" currencySymbol="€" /> -->
-		                </h:outputText>
-		            </p:column>
-		        </p:summaryRow>
-				
 			</p:dataTable>
+			
+				<table>
+				  	<tr>
+				  		<td align="left">
+							<p:commandButton value="Recalculer" id="calculButton" update="panierProduitTable" actionListener="#{basketView.reCalculer}" styleClass="ui-priority-primary" />
+				  		</td>
+				  	</tr>
+				  	<tr>
+				  		<td align="left">
+				  			<h:outputText value="Total à payer : " />
+				  		</td>
+				  		<td align="left">
+							<h:outputText id="ttp" value="#{basketView.commandeIndividuelle.totalAPayer}" title="Total à payer" >
+								<f:convertNumber currencySymbol="€" type="currency" />
+							</h:outputText>
+				  		</td>
+				  	</tr>
+				  	<tr>
+				  		<td align="right">
+				  			<p:commandButton value="Confirmer" id="confirmButton" update="panierProduitTable" actionListener="#{basketView.confirmerCommandeIndiv}" styleClass="ui-priority-primary"/>
+				  		</td>
+				  	</tr>
+				</table>
+		
 		</h:form>
+			
 	</ui:define>
 </ui:composition>

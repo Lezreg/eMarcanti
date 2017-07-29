@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.marcanti.ecommerce.exception.ProductNotAvailableException;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Panier;
 import com.marcanti.ecommerce.model.PanierProduit;
@@ -37,7 +39,7 @@ public class BasketController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1960368412588524596L;
 
-	private static final Logger logger = LoggerFactory.getLogger(BasketController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(BasketController.class);
 
 	@Autowired
 	private PanierActionService panierService;
@@ -48,14 +50,13 @@ public class BasketController implements Serializable {
 	@Autowired
 	private CommandeIndividuelleServiceAction commandeIndividuelleServiceAction;
 
-
 	private Panier panierEnCours;
 
 	private List<CommandeIndividuelle> cmdEnCours;
 
 	private String selectedCmd;
 
-	private CommandeIndividuelle commandeIndividuelle = new CommandeIndividuelle();
+	private CommandeIndividuelle commandeIndividuelle;
 
 	public Panier getPanierEnCours() {
 		return panierEnCours;
@@ -87,7 +88,7 @@ public class BasketController implements Serializable {
 
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 		// FIXME not support quantity
-		logger.info(produit.toString());
+		LOGGER.info(produit.toString());
 		// TODO return panier after update
 		panierEnCours = panierService.addProduct(produit, userSessionBean.getIdMembre(), userSessionBean.getIdOrga());
 		// panierService
@@ -113,8 +114,12 @@ public class BasketController implements Serializable {
 
 	public List<PanierProduit> getPanierProduitList() {
 		if (selectedCmd != null) {
+
+			this.commandeIndividuelle = commandeIndividuelleServiceAction
+					.getCommandeIndividuelleById(new Long(selectedCmd));
 			panierProduitList = panierService.getProduitsByCmdIndiv(new Long(selectedCmd));
 		}
+
 		return panierProduitList;
 	}
 
@@ -124,7 +129,13 @@ public class BasketController implements Serializable {
 
 	public List<CommandeIndividuelle> getCmdEnCours() {
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-		return commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(), 1L);
+
+			cmdEnCours = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(), 1L);
+			if (selectedCmd == null || selectedCmd.isEmpty()) {
+				selectedCmd = cmdEnCours.get(0).getIdCdeIndiv().toString();
+
+		}
+		return cmdEnCours;
 	}
 
 	public void setCmdEnCours(List<CommandeIndividuelle> cmdEnCours) {
@@ -135,7 +146,8 @@ public class BasketController implements Serializable {
 		return commandeIndividuelleServiceAction;
 	}
 
-	public void setCommandeIndividuelleServiceAction(CommandeIndividuelleServiceAction commandeIndividuelleServiceAction) {
+	public void setCommandeIndividuelleServiceAction(
+			CommandeIndividuelleServiceAction commandeIndividuelleServiceAction) {
 		this.commandeIndividuelleServiceAction = commandeIndividuelleServiceAction;
 	}
 
@@ -148,10 +160,6 @@ public class BasketController implements Serializable {
 	}
 
 	public CommandeIndividuelle getCommandeIndividuelle() {
-
-		if (selectedCmd != null && !selectedCmd.isEmpty()) {
-			return commandeIndividuelleServiceAction.getCommandeIndividuelleById(new Long(selectedCmd));
-		}
 		return commandeIndividuelle;
 	}
 
@@ -159,6 +167,40 @@ public class BasketController implements Serializable {
 		this.commandeIndividuelle = commandeIndividuelle;
 	}
 
+	/**
+	 * recalculer la panier après la modification
+	 */
+	public void reCalculer() {
 
+		try {
+			this.panierProduitList = panierService.recalculer(panierProduitList);
+
+		} catch (ProductNotAvailableException e) {
+			LOGGER.error(e.getMessage());
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, e.getMessage(),
+					"! Mettez à jour le panier");
+			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Problème Technique : ",
+					" Contactez votre administrateur");
+			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
+		}
+	}
+
+	public void confirmerCommandeIndiv() {
+		try {
+			UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
+			panierService.confirmerCommandeIndiv(commandeIndividuelle, panierProduitList, userSessionBean);
+		} catch (ProductNotAvailableException e) {
+			LOGGER.error(e.getMessage());
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, e.getMessage(),
+					"! Mettez à jour le panier");
+			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
+		}
+
+
+
+	}
 
 }
