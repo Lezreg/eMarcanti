@@ -1,5 +1,7 @@
 package com.marcanti.ecommerce.dao;
 
-public interface TransactionPaiementDAO {
+import com.marcanti.ecommerce.model.TransactionPaiement;
+
+public interface TransactionPaiementDAO extends GenericDAO<TransactionPaiement> {
 
 }

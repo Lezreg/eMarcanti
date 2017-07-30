@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/new/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="panierId">
+			<div style="overflow-x:auto;">			
+				<table style="border-spacing: 25px;background-color: #f2f2f2;width: 70%;">
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Numéro de commande :" />
+					  		</td>
+					  		<td align="left" class="textInfo">
+					  			<h:outputText id="cdCommId" value="#{carteView.cmdIndivEnCours.cdeIndivNom}">
+									<f:convertNumber currencySymbol="€" type="currency" />
+								</h:outputText>
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Total à payer :" />
+					  		</td>
+					  		<td align="left" class="textInfo">
+					  			<h:outputText id="ttp" value="#{carteView.cmdIndivEnCours.totalAPayer}" title="Total à payer" >
+									<f:convertNumber currencySymbol="€" type="currency" />
+								</h:outputText>
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Bénéficiaire :" />
+					  		</td>
+					  		<td align="left">
+					  			<h:outputText id="beneId" style="color : rgb(48, 186, 50);" value="TODO" />
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Payer avec :" />
+					  		</td>
+					  		<td align="left">
+<!-- 					  			<img src="/WebContent/images/visa-card.png" alt="Visa" style=""/> -->
+					  			<p:graphicImage	url="/images/visa-card.png" style="width:100px;height:38px;" />
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Titulaire de la carte :" />
+					  		</td>
+					  		<td align="left">
+					  			<h:inputText id="titulaireId" value="" style="width:300px;padding:8px 5px;" required="true" requiredMessage="Merci de renseigner votre Nom sur la carte" />
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Numéro de la carte :" />
+					  		</td>
+					  		<td align="left">
+					  			<h:inputText id="codeId" value="" style="width:300px;padding:8px 5px;font-family:georgia, serif;" required="true" requiredMessage="Merci de renseigner le numéro de la carte"  />
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Date d'expiration :" />
+					  		</td>
+					  		<td align="left">
+					  			<p:selectOneMenu id="moisID" value="" style="width:20px">
+						            <f:selectItem itemLabel="01" itemValue="01" />
+						            <f:selectItem itemLabel="02" itemValue="02" />
+						            <f:selectItem itemLabel="03" itemValue="03" />
+						            <f:selectItem itemLabel="04" itemValue="04" />
+						        </p:selectOneMenu>
+						        <p:selectOneMenu id="anneeId" value="" style="width:50px">
+						            <f:selectItem itemLabel="2017" itemValue="01" />
+						            <f:selectItem itemLabel="2018" itemValue="02" />
+						            <f:selectItem itemLabel="2019" itemValue="03" />
+						            <f:selectItem itemLabel="2020" itemValue="04" />
+						        </p:selectOneMenu>
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Code vérification de la carte :" />
+					  		</td>
+					  		<td align="left">
+					  			<h:inputText id="code" value="" style="width:100px;padding:8px 5px;font-family:georgia, serif;"/>
+					  		</td>
+					  	</tr>
+					  	<tr align="center">
+					  		<td colspan="2" align="center">
+					  			<p:commandButton value=" OUI, JE CONFIME MON PAIEMENT " id="validerButton" actionListener="#{carteView.payerCommande}"  style="background-color:#ff6600;color: black;"/>
+					  		</td>
+					  	</tr>
+				</table>
+			</div>
+		</h:form>
+			
+	</ui:define>
+</ui:composition>

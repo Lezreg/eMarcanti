@@ -99,17 +99,47 @@ public class BasketController implements Serializable {
 		return "panier";
 	}
 
-	public PanierActionService getPanierService() {
-		return panierService;
-	}
-
-	public void setPanierService(PanierActionService panierService) {
-		this.panierService = panierService;
+	public String payer() {
+		return "payer";
 	}
 
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
 		init();
+	}
+
+	/**
+	 * recalculer la panier après la modification
+	 */
+	public void reCalculer() {
+
+		try {
+			this.panierProduitList = panierService.recalculer(panierProduitList);
+
+		} catch (ProductNotAvailableException e) {
+			LOGGER.error(e.getMessage());
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, e.getMessage(),
+					"! Mettez à jour le panier");
+			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Problème Technique : ",
+					" Contactez votre administrateur");
+			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
+		}
+	}
+
+	public void confirmerCommandeIndiv() {
+		try {
+			UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
+			panierService.confirmerCommandeIndiv(commandeIndividuelle, panierProduitList, userSessionBean);
+		} catch (ProductNotAvailableException e) {
+			LOGGER.error(e.getMessage());
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, e.getMessage(),
+					"! Mettez à jour le panier");
+			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
+		}
+
 	}
 
 	public List<PanierProduit> getPanierProduitList() {
@@ -167,40 +197,13 @@ public class BasketController implements Serializable {
 		this.commandeIndividuelle = commandeIndividuelle;
 	}
 
-	/**
-	 * recalculer la panier après la modification
-	 */
-	public void reCalculer() {
-
-		try {
-			this.panierProduitList = panierService.recalculer(panierProduitList);
-
-		} catch (ProductNotAvailableException e) {
-			LOGGER.error(e.getMessage());
-			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, e.getMessage(),
-					"! Mettez à jour le panier");
-			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Problème Technique : ",
-					" Contactez votre administrateur");
-			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
-		}
+	public PanierActionService getPanierService() {
+		return panierService;
 	}
 
-	public void confirmerCommandeIndiv() {
-		try {
-			UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-			panierService.confirmerCommandeIndiv(commandeIndividuelle, panierProduitList, userSessionBean);
-		} catch (ProductNotAvailableException e) {
-			LOGGER.error(e.getMessage());
-			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, e.getMessage(),
-					"! Mettez à jour le panier");
-			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
-		}
-
-
-
+	public void setPanierService(PanierActionService panierService) {
+		this.panierService = panierService;
 	}
+
 
 }

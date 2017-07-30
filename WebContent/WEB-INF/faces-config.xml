@@ -154,7 +154,14 @@
 			<to-view-id>/pages/private/panier/panier.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-		<!-- navigation rules commandes  -->		
+	<!-- navigation rules card  -->		
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>payer</from-outcome>
+			<to-view-id>/pages/private/carte/carte.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
 	
 	
 	<application>
