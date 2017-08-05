@@ -99,10 +99,6 @@ public class BasketController implements Serializable {
 		return "panier";
 	}
 
-	public String payer() {
-		return "payer";
-	}
-
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
 		ois.defaultReadObject();
 		init();
@@ -159,7 +155,6 @@ public class BasketController implements Serializable {
 
 	public List<CommandeIndividuelle> getCmdEnCours() {
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-
 			cmdEnCours = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(), 1L);
 			if (selectedCmd == null || selectedCmd.isEmpty()) {
 				selectedCmd = cmdEnCours.get(0).getIdCdeIndiv().toString();

@@ -10,6 +10,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -24,6 +26,16 @@ import com.marcanti.ecommerce.view.bean.UserSessionBean;
 @ManagedBean(name = "carteView")
 @SessionScoped
 public class CarteController implements Serializable {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(CarteController.class);
+
+	public TransactionPaiement getTransactionPaiement() {
+		return transactionPaiement;
+	}
+
+	public void setTransactionPaiement(TransactionPaiement transactionPaiement) {
+		this.transactionPaiement = transactionPaiement;
+	}
 
 	/**
 	 * 
@@ -65,7 +77,12 @@ public class CarteController implements Serializable {
 
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 
-		paiementService.payerCommande(cmdIndivEnCours, transactionPaiement, userSessionBean);
+		paiementService.payerCommande(getCmdIndivEnCours(), transactionPaiement, userSessionBean);
+	}
+
+	public String payer() {
+		LOGGER.info("-------------payer--------------");
+		return "payer";
 	}
 
 	public BasketController getBasketController() {

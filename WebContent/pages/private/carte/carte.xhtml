@@ -52,7 +52,7 @@
 					  			<h:outputText value="Titulaire de la carte :" />
 					  		</td>
 					  		<td align="left">
-					  			<h:inputText id="titulaireId" value="" style="width:300px;padding:8px 5px;" required="true" requiredMessage="Merci de renseigner votre Nom sur la carte" />
+					  			<h:inputText id="titulaireId" value="#{carteView.transactionPaiement.nomSurCB}" style="width:300px;padding:8px 5px;" required="true" requiredMessage="Merci de renseigner votre Nom sur la carte" />
 					  		</td>
 					  	</tr>
 					  	<tr>
@@ -60,7 +60,7 @@
 					  			<h:outputText value="Numéro de la carte :" />
 					  		</td>
 					  		<td align="left">
-					  			<h:inputText id="codeId" value="" style="width:300px;padding:8px 5px;font-family:georgia, serif;" required="true" requiredMessage="Merci de renseigner le numéro de la carte"  />
+					  			<h:inputText id="codeId" value="#{carteView.transactionPaiement.quatreDerniersDigitsCB}" style="width:300px;padding:8px 5px;font-family:georgia, serif;" required="true" requiredMessage="Merci de renseigner le numéro de la carte"  />
 					  		</td>
 					  	</tr>
 					  	<tr>
@@ -68,13 +68,14 @@
 					  			<h:outputText value="Date d'expiration :" />
 					  		</td>
 					  		<td align="left">
-					  			<p:selectOneMenu id="moisID" value="" style="width:20px">
+<!-- 					  		TODO -->
+					  			<p:selectOneMenu id="moisID" value="#{carteView.transactionPaiement.emailPaypal}" style="width:20px">
 						            <f:selectItem itemLabel="01" itemValue="01" />
 						            <f:selectItem itemLabel="02" itemValue="02" />
 						            <f:selectItem itemLabel="03" itemValue="03" />
 						            <f:selectItem itemLabel="04" itemValue="04" />
 						        </p:selectOneMenu>
-						        <p:selectOneMenu id="anneeId" value="" style="width:50px">
+						        <p:selectOneMenu id="anneeId" value="#{carteView.transactionPaiement.commentaire}" style="width:50px">
 						            <f:selectItem itemLabel="2017" itemValue="01" />
 						            <f:selectItem itemLabel="2018" itemValue="02" />
 						            <f:selectItem itemLabel="2019" itemValue="03" />
@@ -87,7 +88,8 @@
 					  			<h:outputText value="Code vérification de la carte :" />
 					  		</td>
 					  		<td align="left">
-					  			<h:inputText id="code" value="" style="width:100px;padding:8px 5px;font-family:georgia, serif;"/>
+<!-- 					  		TODO -->
+					  			<h:inputText id="code" value="#{carteView.transactionPaiement.typeCB}" style="width:100px;padding:8px 5px;font-family:georgia, serif;"/>
 					  		</td>
 					  	</tr>
 					  	<tr align="center">
