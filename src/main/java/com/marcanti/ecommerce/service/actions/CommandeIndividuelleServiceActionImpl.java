@@ -21,8 +21,11 @@ public class CommandeIndividuelleServiceActionImpl implements CommandeIndividuel
 	
 	
 	@Override
-	public List<CommandeIndividuelle> getCmdEnCoursParMembre(Long idMembre, Long idCdeGroupee) {
-		return CommandeIndividuelleDAO.getCommandeIndivListByMembreAndCmdGroupe(idMembre, idCdeGroupee);
+	public List<CommandeIndividuelle> getCmdEnCoursParMembre(Long idMembre, Long idCdeGroupee, boolean isCurrentCmd) {
+		if (isCurrentCmd) {
+			return CommandeIndividuelleDAO.getCommandeIndivListByMembreAndCmdGroupe(idMembre, idCdeGroupee);
+		}
+		return CommandeIndividuelleDAO.getCommandeIndivLivreListByMembre(idMembre);
 	}
 
 	@Override

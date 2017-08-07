@@ -26,7 +26,6 @@ import com.marcanti.ecommerce.model.PanierProduit;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.CommandeIndividuelleServiceAction;
 import com.marcanti.ecommerce.service.actions.PanierActionService;
-import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
@@ -45,18 +44,17 @@ public class BasketController implements Serializable {
 	private PanierActionService panierService;
 
 	@Autowired
-	private ProduitServiceAction produitServiceAction;
-
-	@Autowired
 	private CommandeIndividuelleServiceAction commandeIndividuelleServiceAction;
 
 	private Panier panierEnCours;
 
-	private List<CommandeIndividuelle> cmdEnCours;
+	private List<CommandeIndividuelle> commandes;
 
 	private String selectedCmd;
 
 	private CommandeIndividuelle commandeIndividuelle;
+
+	private boolean isCurrrentCmds = false;
 
 	public Panier getPanierEnCours() {
 		return panierEnCours;
@@ -81,7 +79,8 @@ public class BasketController implements Serializable {
 
 		// by default last commandeInd will be selected
 		setPanierProduitList(new ArrayList<PanierProduit>());
-		setCmdEnCours(new ArrayList<CommandeIndividuelle>());
+		setCommandes(new ArrayList<CommandeIndividuelle>());
+
 	}
 
 	public void addPoduct(Produit produit, int quantite) {
@@ -95,8 +94,14 @@ public class BasketController implements Serializable {
 		setPanierProduitList(panierService.getProduitsByPAnier(panierEnCours));
 	}
 
-	public String redirect() {
-		return "panier";
+	public String redirectCurrentCmd() {
+		this.isCurrrentCmds = true;
+		return "commandes_enCours";
+	}
+
+	public String redirectPrecCmd() {
+		this.isCurrrentCmds = false;
+		return "commandes_pre";
 	}
 
 	private void readObject(ObjectInputStream ois) throws ClassNotFoundException, IOException {
@@ -125,6 +130,9 @@ public class BasketController implements Serializable {
 		}
 	}
 
+	/**
+	 * Confimer une commande
+	 */
 	public void confirmerCommandeIndiv() {
 		try {
 			UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
@@ -138,34 +146,38 @@ public class BasketController implements Serializable {
 
 	}
 
+	/**
+	 * 
+	 * @return la liste des panierProduit pour une commande
+	 */
 	public List<PanierProduit> getPanierProduitList() {
 		if (selectedCmd != null) {
-
 			this.commandeIndividuelle = commandeIndividuelleServiceAction
 					.getCommandeIndividuelleById(new Long(selectedCmd));
 			panierProduitList = panierService.getProduitsByCmdIndiv(new Long(selectedCmd));
 		}
-
 		return panierProduitList;
+	}
+
+	/**
+	 * 
+	 * @return la liste des commandes en cours ou précedentes par membre
+	 */
+	public List<CommandeIndividuelle> getCommandes() {
+		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
+		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(), 1L,
+				isCurrrentCmds);
+		if (selectedCmd == null || selectedCmd.isEmpty()) {
+			selectedCmd = commandes.get(0).getIdCdeIndiv().toString();
+		}
+		return commandes;
 	}
 
 	public void setPanierProduitList(List<PanierProduit> panierProduit) {
 		this.panierProduitList = panierProduit;
 	}
 
-	public List<CommandeIndividuelle> getCmdEnCours() {
-		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-			cmdEnCours = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(), 1L);
-			if (selectedCmd == null || selectedCmd.isEmpty()) {
-				selectedCmd = cmdEnCours.get(0).getIdCdeIndiv().toString();
 
-		}
-		return cmdEnCours;
-	}
-
-	public void setCmdEnCours(List<CommandeIndividuelle> cmdEnCours) {
-		this.cmdEnCours = cmdEnCours;
-	}
 
 	public CommandeIndividuelleServiceAction getCommandeIndividuelleServiceAction() {
 		return commandeIndividuelleServiceAction;
@@ -198,6 +210,11 @@ public class BasketController implements Serializable {
 
 	public void setPanierService(PanierActionService panierService) {
 		this.panierService = panierService;
+	}
+
+
+	public void setCommandes(List<CommandeIndividuelle> commandes) {
+		this.commandes = commandes;
 	}
 
 

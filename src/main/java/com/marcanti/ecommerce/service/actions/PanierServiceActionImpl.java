@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.marcanti.ecommerce.constants.CommandeIndividuelleStatus;
+import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleStatusDAO;
@@ -147,7 +147,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 		commandeIndividuelle.setCdeIndivNom(
 				utilisateur.getIdOrga().getOrgaNom() + "_" + utilisateur.getMembreNom() + "_" + new Date().toString());
 		commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO
-				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatus.CDE_INDIVID_NON_CONFIRMEE.getCode()));
+				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatusEnum.CDE_INDIVID_NON_CONFIRMEE.getCode()));
 
 		commandeIndividuelle.setTotalAPayer(panier.getPanierMontant());
 		// TODO
@@ -242,7 +242,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 		commandeIndividuelle.setNomModifieur(userSessionBean.getMembreNom());
 		commandeIndividuelle.setPrenomModifieur(userSessionBean.getMembrePrenom());
 		commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO
-				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatus.CDE_INDIVID_CONFIRMEE.getCode()));
+				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatusEnum.CDE_INDIVID_CONFIRMEE.getCode()));
 		commandeIndividuelleDAO.edit(commandeIndividuelle);
 	}
 

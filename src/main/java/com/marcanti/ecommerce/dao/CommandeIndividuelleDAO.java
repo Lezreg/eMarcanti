@@ -28,10 +28,19 @@ public interface CommandeIndividuelleDAO extends GenericDAO<CommandeIndividuelle
 	CommandeIndividuelle getCommandeIndividuellByMembreAndCmdGroupe(Membre membre, CommandeGroupee commandeGroupee);
 
 	/**
+	 * recherche la liste des commandes en cours indiv par membre
 	 * 
 	 * @param idMembre
 	 * @param idCdeGroupee
 	 * @return
 	 */
 	List<CommandeIndividuelle> getCommandeIndivListByMembreAndCmdGroupe(Long idMembre, Long idCdeGroupee);
+
+	/**
+	 * recherche la liste des commandes indiv par membre
+	 * 
+	 * @param idMembre
+	 * @return
+	 */
+	List<CommandeIndividuelle> getCommandeIndivLivreListByMembre(Long idMembre);
 }

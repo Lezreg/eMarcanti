@@ -11,8 +11,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Membre;
@@ -24,6 +27,8 @@ import com.marcanti.ecommerce.model.Membre;
 @Repository
 public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndividuelle>
 		implements CommandeIndividuelleDAO {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(CommandeIndividuelleDAOImpl.class);
 
 	@PersistenceContext
     private EntityManager em;
@@ -88,6 +93,8 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 				.setParameter("idCdeGroupee", commandeGroupee.getIdCdeGroupee())
 				.setParameter("isPaiementEffectue", Boolean.FALSE);
 
+		LOGGER.info(query.toString());
+
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
 			return null;
 		}
@@ -99,10 +106,28 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 			Long idCdeGroupee) {
 		Query query = em
 				.createQuery(
-						"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.isPaiementEffectue = :isPaiementEffectue) order by date(dateCreation) asc")
+						"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.idStatus.statusCode != :statusCode) order by date(dateCreation) desc")
 				.setParameter("idMembre", idMembre)
 				.setParameter("idCdeGroupee", idCdeGroupee)
-				.setParameter("isPaiementEffectue", Boolean.FALSE);
+				.setParameter("statusCode", CommandeIndividuelleStatusEnum.CDE_INDIVID_LIVREE.getCode());
+		
+		LOGGER.info(query.toString());
+
+		if (query.getResultList() == null || query.getResultList().isEmpty()) {
+			return null;
+		}
+		return (List<CommandeIndividuelle>) query.getResultList();
+	}
+
+	@Override
+	public List<CommandeIndividuelle> getCommandeIndivLivreListByMembre(Long idMembre) {
+		Query query = em
+				.createQuery(
+						"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.idStatus.statusCode = :statusCode) order by date(dateCreation) desc")
+				.setParameter("idMembre", idMembre)
+				.setParameter("statusCode", CommandeIndividuelleStatusEnum.CDE_INDIVID_LIVREE.getCode());
+
+		LOGGER.info(query.toString());
 
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
 			return null;

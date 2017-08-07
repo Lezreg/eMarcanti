@@ -11,7 +11,7 @@
 		
 			<p:selectOneMenu id="cmdIdiv" value="#{basketView.selectedCmd}" required="true" label="choisir une commande"
 			    style="width: 200px" sortBy="#{panierProduit.qteSouhaitee}">
-			    <f:selectItems value="#{basketView.cmdEnCours}" var="order" itemLabel="#{order.cdeIndivNom}" itemValue="#{order.idCdeIndiv}" />
+			    <f:selectItems value="#{basketView.commandes}" var="order" itemLabel="#{order.cdeIndivNom}" itemValue="#{order.idCdeIndiv}" />
 			    <p:ajax  update="panierProduitTable ttp" />
 			</p:selectOneMenu>
 			<br/>
@@ -92,7 +92,7 @@
 				  	</tr>
 				  	<tr>
 				  		<td align="right">
-				  			<p:commandButton value="Payer" id="pButton" action="#{carteView.payer}" styleClass="ui-priority-primary" />
+				  			<p:commandButton value="Payer" id="pButton" action="payer" styleClass="ui-priority-primary" />
 				  		</td>
 				  	</tr>
 				</table>

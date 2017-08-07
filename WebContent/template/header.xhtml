@@ -52,9 +52,9 @@
 									<h:outputText value="#{msg.libelle_mes_cmd}" />
 								</h:panelGroup>
 							</f:facet>
-							<rich:menuItem label="#{msg.libelle_cours}" action="commandesEnCours">
+							<rich:menuItem label="#{msg.libelle_cours}" action="#{basketView.redirectCurrentCmd()}">
 							</rich:menuItem>
-							<rich:menuItem label="#{msg.libelle_pre}" action="#">
+							<rich:menuItem label="#{msg.libelle_pre}" action="#{basketView.redirectPrecCmd()}">
 							</rich:menuItem>
 						</rich:dropDownMenu>
 

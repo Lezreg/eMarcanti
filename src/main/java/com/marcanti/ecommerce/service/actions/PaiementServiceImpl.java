@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.marcanti.ecommerce.constants.CommandeIndividuelleStatus;
+import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
 import com.marcanti.ecommerce.constants.StatutTransactionFournissPaiement;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleStatusDAO;
@@ -69,7 +69,7 @@ public class PaiementServiceImpl implements PaiementService {
 		commandeIndividuelle.setPrenomModifieur(userSessionBean.getMembreNom());
 		
 		commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO
-				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatus.CDE_INDIVID_PAYEE.getCode()));
+				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatusEnum.CDE_INDIVID_PAYEE.getCode()));
 		commandeIndividuelle.setIdTransactionPaiement(transactionPaiement);
 		commandeIndividuelle.setDateModification(new Date());
 

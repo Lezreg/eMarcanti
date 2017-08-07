@@ -1,6 +1,6 @@
 package com.marcanti.ecommerce.constants;
 
-public enum CommandeIndividuelleStatus {
+public enum CommandeIndividuelleStatusEnum {
 
 	CDE_INDIVID_NON_CONFIRMEE("CDE_INDIVID_NON_CONFIRMEE"),
 	CDE_INDIVID_CONFIRMEE("CDE_INDIVID_CONFIRMEE"), 
@@ -14,7 +14,7 @@ public enum CommandeIndividuelleStatus {
 
 	private String code;
 
-	CommandeIndividuelleStatus(String code) {
+	CommandeIndividuelleStatusEnum(String code) {
 		this.setCode(code);
 	}
 
