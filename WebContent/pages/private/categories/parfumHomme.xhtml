@@ -104,7 +104,13 @@
             </h:outputText>
         </p:column>
 		<p:column style="width:110px">
-			<p:commandButton update=":basketform:bag" icon="ui-icon-cart"
+<!-- 			<p:commandButton update=":basketform:bag" icon="ui-icon-cart" -->
+<!-- 				title="View" action="#{PHFilterView.addToBasket()}"> -->
+<!-- 				<f:setPropertyActionListener value="#{produitHomme}" -->
+<!-- 					target="#{PHFilterView.selectedProduit}" /> -->
+<!-- 			</p:commandButton> -->
+			
+			<p:commandButton icon="ui-icon-cart"
 				title="View" action="#{PHFilterView.addToBasket()}">
 				<f:setPropertyActionListener value="#{produitHomme}"
 					target="#{PHFilterView.selectedProduit}" />

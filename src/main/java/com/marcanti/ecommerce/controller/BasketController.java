@@ -86,6 +86,8 @@ public class BasketController implements Serializable {
 	public void addPoduct(Produit produit, int quantite) {
 
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
+		if (produit == null)
+			return;
 		// FIXME not support quantity
 		LOGGER.info(produit.toString());
 		// TODO return panier after update
