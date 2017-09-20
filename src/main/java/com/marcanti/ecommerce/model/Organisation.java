@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -31,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Organisation.findAll", query = "SELECT o FROM Organisation o")
+    @NamedQuery(name = "Organisation.findAll", query = "SELECT o FROM Organisation o ORDER BY o.orgaNom asc")
     , @NamedQuery(name = "Organisation.findByIdOrga", query = "SELECT o FROM Organisation o WHERE o.idOrga = :idOrga")
     , @NamedQuery(name = "Organisation.findByOrgaNom", query = "SELECT o FROM Organisation o WHERE o.orgaNom = :orgaNom")
     , @NamedQuery(name = "Organisation.findByOrgaAdresse", query = "SELECT o FROM Organisation o WHERE o.orgaAdresse = :orgaAdresse")
@@ -79,6 +80,9 @@ public class Organisation implements Serializable {
     @Size(min = 1, max = 45)
     private String orgaPays;
     
+    @Size(max = 20)
+    private String orgaTel;    
+    
     @Size(max = 140)
     private String orgaAdresseLivraison;
     
@@ -109,6 +113,9 @@ public class Organisation implements Serializable {
     @NotNull
     private boolean envoiMailConfirmation;
     
+    @Transient
+    private long nbrMembre;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrga")
     private Collection<Departement> departementCollection;
     
@@ -125,13 +132,14 @@ public class Organisation implements Serializable {
         this.idOrga = idOrga;
     }
 
-    public Organisation(Long idOrga, String orgaNom, String orgaAdresse, String orgaCodePostal, String orgaVille, String orgaPays, String orgaAlias, boolean isAlivrerAvantPaiement, boolean isActive, boolean accesCatalogueComplet, boolean envoiMailConfirmation) {
+    public Organisation(Long idOrga, String orgaNom, String orgaAdresse, String orgaCodePostal, String orgaVille, String orgaPays, String orgaTel, String orgaAlias, boolean isAlivrerAvantPaiement, boolean isActive, boolean accesCatalogueComplet, boolean envoiMailConfirmation) {
         this.idOrga = idOrga;
         this.orgaNom = orgaNom;
         this.orgaAdresse = orgaAdresse;
         this.orgaCodePostal = orgaCodePostal;
         this.orgaVille = orgaVille;
         this.orgaPays = orgaPays;
+        this.orgaTel = orgaTel;
         this.orgaAlias = orgaAlias;
         this.isAlivrerAvantPaiement = isAlivrerAvantPaiement;
         this.isActive = isActive;
@@ -186,8 +194,16 @@ public class Organisation implements Serializable {
     public void setOrgaPays(String orgaPays) {
         this.orgaPays = orgaPays;
     }
+    
+    public String getOrgaTel() {
+		return orgaTel;
+	}
 
-    public String getOrgaAdresseLivraison() {
+	public void setOrgaTel(String orgaTel) {
+		this.orgaTel = orgaTel;
+	}
+
+	public String getOrgaAdresseLivraison() {
         return orgaAdresseLivraison;
     }
 
@@ -206,6 +222,12 @@ public class Organisation implements Serializable {
     public boolean getIsAlivrerAvantPaiement() {
         return isAlivrerAvantPaiement;
     }
+    
+    public String getIsAlivrerAvantPaiementStr() {
+    	// TODO : apeller le fichier local
+    	if (isAlivrerAvantPaiement) return "oui";
+    	else return "non";
+    }    
 
     public void setIsAlivrerAvantPaiement(boolean isAlivrerAvantPaiement) {
         this.isAlivrerAvantPaiement = isAlivrerAvantPaiement;
@@ -234,6 +256,16 @@ public class Organisation implements Serializable {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
+    
+    public String getIsActiveStr() {
+    	if (isActive) return "y";
+    	else return "n";
+    }    
+    
+    public String getIsActiveStyle() {
+    	if (isActive) return "greenclass fa fa-check";
+    	else return "redclass fa fa-times";
+    }     
 
     public boolean getAccesCatalogueComplet() {
         return accesCatalogueComplet;
@@ -250,8 +282,16 @@ public class Organisation implements Serializable {
     public void setEnvoiMailConfirmation(boolean envoiMailConfirmation) {
         this.envoiMailConfirmation = envoiMailConfirmation;
     }
+    
+    public long getNbrMembre() {
+		return nbrMembre;
+	}
 
-    @XmlTransient
+	public void setNbrMembre(long nbrMembre) {
+		this.nbrMembre = nbrMembre;
+	}
+
+	@XmlTransient
     public Collection<Departement> getDepartementCollection() {
         return departementCollection;
     }

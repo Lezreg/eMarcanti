@@ -2,7 +2,6 @@ package com.marcanti.ecommerce.utils;
 
 import java.util.Properties;
 
-import javax.annotation.Resource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -10,63 +9,45 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class Mail  {
- 
-    @Resource(name = "java:jboss/mail/parfumMail")
-    private static Session session;
-    
-    public static void sendMail(String addresses, String topic, String textMessage) throws MessagingException {
- 
- 
-            Message message = new MimeMessage(session);
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(addresses));
-            message.setSubject(topic);
-            message.setText(textMessage);
- 
-            Transport.send(message);
- 
-    }
-    
-    public static void send(String addresses, String topic, String textMessage) throws MessagingException {    
-        // Recipient's email ID needs to be mentioned.
-        //String to = "rachid.khalia@gmail.com";
+import com.marcanti.ecommerce.view.bean.ReferentielBean;
 
-        // Sender's email ID needs to be mentioned
-        //String from = "quicklypizza@orange.fr";
-    	String from = "rachid.khalifa@sfr.fr";
+public class Mail {
+	
 
-        // Assuming you are sending email from localhost
-        String host = "smtp.sfr.fr";
+	public static void send(String addresses, String topic, String textMessage) throws MessagingException {
 
-        // Get system properties
-        Properties properties = System.getProperties();
+		// Sender's email ID needs to be mentioned
+		//String from = "rachid.khalifa@sfr.fr";
 
-        // Setup mail server
-        properties.setProperty("mail.smtp.host", host);
-        
-        //properties.setProperty("mail.user", "quicklypizza@orange.fr");
-        //properties.setProperty("mail.password", "pizza1975");
+		// Assuming you are sending email from localhost
+		//String host = "smtp.sfr.fr";
 
-        // Get the default Session object.
-        Session session = Session.getDefaultInstance(properties);
+		// Get system properties
+		Properties properties = new Properties();
 
-           // Create a default MimeMessage object.
-           MimeMessage message = new MimeMessage(session);
+		properties.setProperty("mail.smtp.host",ReferentielBean.getSmtpHost());
+		properties.put("mail.smtp.port", ReferentielBean.getSmtpPort());
 
-           // Set From: header field of the header.
-           message.setFrom(new InternetAddress(from));
+		// Get the default Session object.
+		Session session = Session.getDefaultInstance(properties);
 
-           // Set To: header field of the header.
-           //message.addRecipient(Message.RecipientType.TO, new InternetAddress(addresses));
-           message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(addresses));
+		// Create a default MimeMessage object.
+		MimeMessage message = new MimeMessage(session);
 
-           // Set Subject: header field
-           message.setSubject(topic);
+		// Set From: header field of the header.
+		message.setFrom(new InternetAddress(ReferentielBean.getSmtpFrom()));
 
-           // Now set the actual message
-           message.setText(textMessage);
+		// Set To: header field of the header.
+		// message.addRecipient(Message.RecipientType.TO, new InternetAddress(addresses));
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(addresses));
 
-           // Send message
-           Transport.send(message);
-     }
+		// Set Subject: header field
+		message.setSubject(topic);
+
+		// Now set the actual message
+		message.setText(textMessage);
+
+		// Send message
+		Transport.send(message);
+	}
 }

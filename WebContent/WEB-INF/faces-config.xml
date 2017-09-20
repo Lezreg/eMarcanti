@@ -105,6 +105,62 @@
 			<to-view-id>/pages/private/categorie.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>		
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>departements</from-outcome>
+			<to-view-id>/pages/private/departements.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>departement</from-outcome>
+			<to-view-id>/pages/private/departement.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>organisations</from-outcome>
+			<to-view-id>/pages/private/organisations.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>organisation</from-outcome>
+			<to-view-id>/pages/private/organisation.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>membres</from-outcome>
+			<to-view-id>/pages/private/membres.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>membre</from-outcome>
+			<to-view-id>/pages/private/membre.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>membres</from-outcome>
+			<to-view-id>/pages/private/carousels.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>membre</from-outcome>
+			<to-view-id>/pages/private/carousel.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
 	
 	<application>
 		<resource-bundle>

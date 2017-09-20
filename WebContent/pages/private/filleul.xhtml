@@ -29,7 +29,7 @@
 					
 					<h:outputLabel value="#{msg.libelle_orga}" />
 					<h:selectOneMenu value="#{filleulsBean.filleul.idOrga.idOrga}" disabled="true">
-			   			<f:selectItems value="#{filleulsBean.referentielBean.organisationList}" var="c"
+			   			<f:selectItems value="#{referentielBean.organisationList}" var="c"
 			   			itemLabel="#{c.orgaNom}" itemValue="#{c.idOrga}" />
 			   		</h:selectOneMenu>
 			   		
@@ -41,12 +41,12 @@
 			   		
 					<h:outputLabel value="#{msg.libelle_cpt_active}" />
 					<h:selectOneRadio value="#{filleulsBean.filleul.isActif}">
-			   			<f:selectItems value="#{filleulsBean.radioButtonOuiNon}" />
+			   			<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
 			   		</h:selectOneRadio>
 			   		
 					<h:outputLabel value="#{msg.libelle_init_passwd}" />
 					<h:selectOneRadio value="#{filleulsBean.filleul.isDefaultPassword}">
-			   			<f:selectItems value="#{filleulsBean.radioButtonOuiNon}" />
+			   			<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
 			   		</h:selectOneRadio>			   		
 			   		
 			   		<h:button type="button" value="#{msg.libelle_retour}" outcome="filleuls"/>

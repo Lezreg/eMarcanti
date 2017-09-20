@@ -9,9 +9,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.MarqueDAO;
+import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Marque;
 
 /**
@@ -62,5 +64,40 @@ public class MarqueDAOImpl extends AbstractGenericDAO<Marque> implements MarqueD
     protected EntityManager getEntityManager() {
         return em;
     }
+
+	@Override
+	public List<Marque> getMarqueList() {
+		return em.createNamedQuery("Marque.findAll", Marque.class).getResultList();
+	}
+
+	@Override
+	public Marque getMarque(Marque marque) {
+		return em.createNamedQuery("Marque.findByIdMarque", Marque.class).setParameter("idMarque", marque.getIdMarque()).getSingleResult();
+	}
+
+	@Override
+	public void insertMarque(Marque marque) {
+		Query query = em.createNativeQuery("INSERT INTO marque (marqueNom, commentaire, isFullAccess) VALUES (?,?,?)")
+				.setParameter(1, marque.getMarqueNom())
+				.setParameter(2, marque.getCommentaire())
+				.setParameter(3, marque.getIsFullAccess());
+		query.executeUpdate();
+		//em.persist(marque);
+	}
+
+	@Override
+	public void updateMarque(Marque marque) {
+		Query query = em.createNativeQuery("UPDATE marque SET "
+				+ "marqueNom=?, "
+				+ "commentaire=?, "
+				+ "isFullAccess=? "
+				+ "WHERE idMarque=?")
+				.setParameter(1, marque.getMarqueNom())
+				.setParameter(2, marque.getCommentaire())
+				.setParameter(3, marque.getIsFullAccess())
+				.setParameter(4, marque.getIdMarque().shortValue());
+		query.executeUpdate();
+		//em.persist(marque);
+	}
     
 }

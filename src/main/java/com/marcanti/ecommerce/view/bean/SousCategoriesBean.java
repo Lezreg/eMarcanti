@@ -127,11 +127,6 @@ public class SousCategoriesBean implements Serializable {
 
 	}	
 	
-	public String listSousCategorieView() {
-		logger.info("listSousCategorieView");
-		return "sousCategories";
-
-	}	
 	
 	public String insertOrUpdateSousCategorie() {
 		
@@ -146,19 +141,16 @@ public class SousCategoriesBean implements Serializable {
 			sousCategorieService.insertSousCategorie(sousCategorie);
 			this.sousCategorieList=sousCategorieService.getSousCategorieList();
 			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.ss_categorie");
-			facesMessage.setDetail(msg); 
-			facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
-		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		    ecran="sousCategories";
 		    
 		}else{
 				
 			sousCategorieService.updateSousCategorie(this.sousCategorie);;
 			msg = ParfumUtils.getBundleApplication().getString("message.modif.ss_categorie");
-			facesMessage.setDetail(msg); 
-			facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
-		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
+		facesMessage.setDetail(msg); 
+		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);		
 		return ecran;
 	}
 	

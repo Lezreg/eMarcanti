@@ -8,5 +8,7 @@ import com.marcanti.ecommerce.model.Membre;
 public interface FilleulDAO extends GenericDAO<Filleul> {
 	
 	public List<Membre> getFilleulsList(Membre idMembre);
+	
+	public Filleul getFilleul(Long idFilleul);
 
 }

@@ -77,9 +77,6 @@
 	<beans:bean id="produitDAO"
 		class="com.marcanti.ecommerce.dao.impl.ProduitDAOImpl">
 	</beans:bean>
-	<beans:bean id="marqueDAO" 
-		class="com.marcanti.ecommerce.dao.impl.MarqueDAOImpl">
-	</beans:bean>
 	<beans:bean id="produitService"
 		class="com.marcanti.ecommerce.service.actions.impl.ProduitServiceActionImpl">
 		<beans:property name="produitDAO" ref="produitDAO"></beans:property>
@@ -141,6 +138,35 @@
 		<beans:property name="categorieDAO" ref="categorieDAO"></beans:property>
 	</beans:bean>
 	
+	<beans:bean id="marqueDAO" 
+		class="com.marcanti.ecommerce.dao.impl.MarqueDAOImpl">
+	</beans:bean>
+	<beans:bean id="marqueService"
+		class="com.marcanti.ecommerce.service.actions.impl.MarqueServiceActionImpl">
+		<beans:property name="marqueDAO" ref="marqueDAO"></beans:property>
+	</beans:bean>	
+	
+	<beans:bean id="departementDAO" 
+		class="com.marcanti.ecommerce.dao.impl.DepartementDAOImpl">
+	</beans:bean>
+	<beans:bean id="departementService"
+		class="com.marcanti.ecommerce.service.actions.impl.DepartementServiceActionImpl">
+		<beans:property name="departementDAO" ref="departementDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="organisationService"
+		class="com.marcanti.ecommerce.service.actions.impl.OrganisationServiceActionImpl">
+		<beans:property name="organisationDAO" ref="organisationDAO"></beans:property>
+	</beans:bean>	
+	
+	<beans:bean id="carouselDAO"
+		class="com.marcanti.ecommerce.dao.impl.CarouselDAOImpl">
+	</beans:bean>
+	<beans:bean id="carouselService"
+		class="com.marcanti.ecommerce.service.actions.impl.CarouselServiceActionImpl">
+		<beans:property name="carouselDAO" ref="carouselDAO"></beans:property>
+	</beans:bean>
+			
 	<beans:bean id="catalogueDAO"
 		class="com.marcanti.ecommerce.dao.impl.VCatalogueAdminDAOImpl">
 	</beans:bean>

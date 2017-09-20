@@ -145,10 +145,11 @@ public class AuthentificationBean implements Serializable {
 	    if(isOK){
 	    	try {
 	    		boolean isDefaultPassword = service.getIsDefaultPassword(getUsername());
+	    		UserSessionBean userSession = service.getUserSession(getUsername());
+	    		userSession.setMenuRight();
+				ParfumUtils.setUserSessionBean(userSession);
+				service.updateLastConnectionDate(dateToday, getUsername());
 				if(isDefaultPassword){
-					UserSessionBean userSession = service.getUserSession(getUsername());
-					ParfumUtils.setUserSessionBean(userSession);
-					service.updateLastConnectionDate(dateToday, getUsername());
 					ecran = "index";
 				}else{
 					HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();

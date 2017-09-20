@@ -1,9 +1,13 @@
 package com.marcanti.ecommerce.service.actions.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.marcanti.ecommerce.dao.MembreDAO;
 import com.marcanti.ecommerce.model.Membre;
+import com.marcanti.ecommerce.model.Organisation;
+import com.marcanti.ecommerce.model.Profil;
 import com.marcanti.ecommerce.service.actions.MembreServiceAction;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
@@ -37,6 +41,42 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 	public void insertFilleul(Membre filleul, UserSessionBean parrain) {
 		membreDAO.insertFilleul(filleul,parrain);
 		
+	}
+
+	@Override
+	public List<Membre> getMembreList() {
+		return membreDAO.findAll();
+	}
+
+	@Override
+	public List<Membre> getMembreByOrgaList(Organisation idOrga) {
+		return membreDAO.getMembreByOrgaList(idOrga);
+	}
+
+	@Override
+	public void updateMembre(Membre membre) {
+		membreDAO.updateMembre(membre);
+	}
+
+	@Override
+	public void insertMembre(Membre membre) {
+		membreDAO.insertMembre(membre);
+	}
+
+	@Override
+	public List<Membre> getParrainByOrgaList(Organisation idOrga, List<Profil> idProfilList) {
+		return membreDAO.getParrainByOrgaList(idOrga, idProfilList);
+	}
+
+	@Override
+	public void insertMembreFilleul(Membre filleul, Membre membreParrain) {
+		membreDAO.insertMembreFilleul(filleul,membreParrain);
+		
+	}
+
+	@Override
+	public void updateMembreFilleul(Membre filleul, Membre membreParrain) {
+		membreDAO.updateMembreFilleul(filleul, membreParrain);
 	}
 
 

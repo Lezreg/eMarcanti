@@ -9,12 +9,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.DepartementDAO;
 import com.marcanti.ecommerce.model.Departement;
+import com.marcanti.ecommerce.model.Organisation;
 
 /**
  *
@@ -63,5 +65,48 @@ public class DepartementDAOImpl extends AbstractGenericDAO<Departement> implemen
     protected EntityManager getEntityManager() {
         return em;
     }
+    
+	@Override
+	public List<Departement> getDepartementList() {
+		return em.createNamedQuery("Departement.findAll", Departement.class).getResultList();
+	}
+
+	@Override
+	public Departement getDepartement(Departement departement) {
+		return em.createNamedQuery("Departement.findByIdDepartement", Departement.class).setParameter("idDepartement", departement.getIdDepartement()).getSingleResult();
+	}
+
+	@Override
+	public void insertDepartement(Departement departement) {
+		Query query = em.createNativeQuery("INSERT INTO departement (idOrga, departementNom, isActif, commentaire) VALUES (?,?,?,?)")
+				.setParameter(1, departement.getIdOrga().getIdOrga())
+				.setParameter(2, departement.getDepartementNom())
+				.setParameter(3, departement.getIsActif())
+				.setParameter(4, departement.getCommentaire());
+		query.executeUpdate();
+		//em.persist(departement);
+	}
+
+	@Override
+	public void updateDepartement(Departement departement) {
+		Query query = em.createNativeQuery("UPDATE departement SET idOrga=?, "
+				+ "departementNom=?, "
+				+ "isActif=?, "
+				+ "commentaire=? "
+				+ "WHERE idDepartement=?")
+				.setParameter(1, departement.getIdOrga().getIdOrga())
+				.setParameter(2, departement.getDepartementNom())
+				.setParameter(3, departement.getIsActif())
+				.setParameter(4, departement.getCommentaire())
+				.setParameter(5, departement.getIdDepartement());
+		query.executeUpdate();
+		//em.persist(departement);
+	}
+
+	@Override
+	public List<Departement> getDepartementByOrgaList(Organisation idOrga) {
+		List<Departement> departementList =  em.createNamedQuery("Departement.findByIdOrga", Departement.class).setParameter("idOrga", idOrga).getResultList();
+		return departementList;
+	}
     
 }

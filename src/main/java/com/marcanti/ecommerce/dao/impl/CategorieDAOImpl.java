@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,7 +25,6 @@ import org.springframework.stereotype.Repository;
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.CategorieDAO;
 import com.marcanti.ecommerce.model.Categorie;
-import com.marcanti.ecommerce.model.Membre;
 
 /**
  *
@@ -100,20 +100,28 @@ public class CategorieDAOImpl extends AbstractGenericDAO<Categorie> implements C
 
 	@Override
 	public Categorie getCategorie(Categorie categorie) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.createNamedQuery("Categorie.findByIdCategorie", Categorie.class).setParameter("idCategorie", categorie.getIdCategorie()).getSingleResult();
 	}
 
 	@Override
 	public void insertCategorie(Categorie categorie) {
-		// TODO Auto-generated method stub
-		
+		Query query = em.createNativeQuery("INSERT INTO categorie (categorieNom, categorieCode) VALUES (?,?)")
+				.setParameter(1, categorie.getCategorieNom())
+				.setParameter(2, categorie.getCategorieCode());
+		query.executeUpdate();
+		//em.persist(categorie);
 	}
 
 	@Override
 	public void updateCategorie(Categorie categorie) {
-		// TODO Auto-generated method stub
-		
+		Query query = em.createNativeQuery("UPDATE categorie SET categorieNom=?, "
+				+ "categorieCode=? "
+				+ "WHERE idCategorie=?")
+				.setParameter(1, categorie.getCategorieNom())
+				.setParameter(2, categorie.getCategorieCode())
+				.setParameter(3, categorie.getIdCategorie().shortValue());
+		query.executeUpdate();
+		//em.persist(categorie);
 	}
     
 }

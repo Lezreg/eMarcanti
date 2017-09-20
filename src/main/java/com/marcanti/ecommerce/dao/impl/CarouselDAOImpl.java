@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,5 +67,53 @@ public class CarouselDAOImpl extends AbstractGenericDAO<Carousel> implements Car
     protected EntityManager getEntityManager() {
         return em;
     }
+
+	@Override
+	public List<Carousel> getCarouselList() {
+		return em.createNamedQuery("Carousel.findAll", Carousel.class).getResultList();
+	}
+
+	@Override
+	public Carousel getCarousel(Carousel carousel) {
+		return em.createNamedQuery("Carousel.findByIdCarousel", Carousel.class).setParameter("idCarousel", carousel.getIdCarousel()).getSingleResult();
+	}
+
+	@Override
+	public void insertCarousel(Carousel carousel) {
+		Query query = em.createNativeQuery("INSERT INTO carousel (elementNom, elementImageURL, elementLienURL, elementRang, isVisible) VALUES (?,?,?,?,?)")
+				.setParameter(1, carousel.getElementNom())
+				.setParameter(2, carousel.getElementImageURL())
+				.setParameter(3, carousel.getElementLienURL())
+				.setParameter(4, carousel.getElementRang())
+				.setParameter(5, carousel.getIsVisible());
+		query.executeUpdate();
+		//em.persist(carousel);
+		
+	}
+
+	@Override
+	public void updateCarousel(Carousel carousel) {
+		Query query = em.createNativeQuery("UPDATE carousel SET "
+				+ "elementNom=?, "
+				+ "elementImageURL=?, "
+				+ "elementLienURL=?, "
+				+ "elementRang=?, "
+				+ "isVisible=? "
+				+ "WHERE idCarousel=?")
+				.setParameter(1, carousel.getElementNom())
+				.setParameter(2, carousel.getElementImageURL())
+				.setParameter(3, carousel.getElementLienURL())
+				.setParameter(4, carousel.getElementRang())
+				.setParameter(5, carousel.getIsVisible())
+				.setParameter(6, carousel.getIdCarousel());
+		query.executeUpdate();
+		//em.persist(carousel);
+	}
+	
+	
+	@Override
+	public boolean isRangExist(Carousel carousel) {
+		return !em.createNamedQuery("Carousel.findByElementRang", Carousel.class).setParameter("elementRang", carousel.getElementRang()).getResultList().isEmpty();
+	}
     
 }

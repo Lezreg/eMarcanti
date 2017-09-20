@@ -5,27 +5,111 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+
 <h:body>
 	<ui:composition template="/template/template.xhtml">
-
 		<ui:define name="content">
-			<h:form id="formFilleul">
-				<ui:include  src="/pages/private/message.xhtml" />
-				<h:inputHidden value="#{categoriesBean.categorie.idCategorie}"  />
-				<h:panelGrid columns="2" border="0" cellpadding="10" cellspacing="1">
-					<h:outputLabel value="#{msg.libelle_nom_categorie}" />
-					<h:inputText value="#{categoriesBean.categorie.categorieNom}" maxlength="120" required="true" requiredMessage="#{msg.nom_categorie_obligatoire}" />
-					
-					<h:outputLabel value="#{msg.libelle_code_categorie}" />
-					<h:inputText value="#{categoriesBean.categorie.categorieCode}" maxlength="60" required="true" requiredMessage="#{msg.code_categorie_obligatoire}" />
-			   		
-			   		<h:button type="button" value="#{msg.libelle_retour}" outcome="categories"/>
-					<h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{categoriesBean.insertOrUpdateCategorie()}"/>				        
-				</h:panelGrid>
+			<h:form id="formCategorie">
+				<ui:include src="/pages/private/message.xhtml" />
+				<h:inputHidden value="#{categoriesBean.categorie.idCategorie}" />
+
+				<div class="breadcrumsrea">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="breadcrumslist">
+									<ul>
+										<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="categorie.xhtml"><h:outputLabel value="#{msg.libelle_categorie}" /></h:outputLink></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<section class="modifyaproductarea">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="modifyproductinner">
+									<div class="modifymaintitle">
+										<h3>Nouvelle Catégorie</h3>
+									</div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_nom_categorie}" /><span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{categoriesBean.categorie.categorieNom}" maxlength="120" required="true" requiredMessage="#{msg.nom_categorie_obligatoire}" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_code_categorie}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{categoriesBean.categorie.categorieCode}" maxlength="60" required="true" requiredMessage="#{msg.code_categorie_obligatoire}" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_url_categorie}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<textarea class="form-control" rows="1"></textarea>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-12">
+											<div class="modifysavecancelbutton">
+												<button><h:link value="#{msg.libelle_annuler}" outcome="marques" styleClass="cancelbutton" /></button>
+												<button><h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{categoriesBean.insertOrUpdateCategorie()}" styleClass="savebutton"/></button>
+											</div>
+										</div>
+
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 			</h:form>
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>
