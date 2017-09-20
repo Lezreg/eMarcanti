@@ -1,0 +1,1643 @@
+
+
+/*****************************************
+	 RESPONSIVE STYLING FOR CSS
+*****************************************/
+
+@media (max-width: 767px){
+	
+	
+	
+.headertop > p {
+  text-align: center;
+}
+.flagsinnerarea {
+text-align: center;
+margin-top: 10px;
+}
+	
+.dropdown-menu {
+  border-radius: 0;
+  left: 0;
+  min-width: 155px;
+  right: 0;
+  width: 50%;
+  margin: 0px auto;
+}	
+.logo a img {
+  margin: 0 auto;
+  width: 40%;
+}	
+.searchbox p,
+.cartarea,
+.myaccount,
+.logo {
+  text-align: center;
+}	
+	
+	
+.searchbox {
+    margin-bottom: 20px;
+    width: 80%;
+    margin: 0px auto 20px;
+}
+.navbar-toggle {
+  float: none;
+  color: #fc8440;
+  background: #fc8440!important;
+  border: none;
+}	
+.main_ularea li a {
+  padding: 10px 10px!important;
+}	
+.navbar-nav .open .dropdown-menu {
+  border-bottom: 1px solid white;
+  border-radius: 0;
+  text-align: center;
+  background: #fcfcfc;
+}	
+.carousel-control.left,	
+.carousel-control.right {
+  height: 40px;
+  line-height: 35px;
+  top: 46%;
+  width: 40px;
+}	
+.right_carousel i, .left_carousel i {
+  font-size: 20px;
+  padding-top: 0;
+}	
+
+.btn-filter-wrap .btn-filter {
+  font-size: 20px;
+  margin: 2px 30px;
+}
+.bestSellerWomen .moistitle h2 span {
+  display: inline-block;
+  margin-left: 10px;
+  text-indent: 1e+9px;
+}
+.moistitle{
+  padding-left: 20px
+}
+.moistitle h2 {
+  color: #535353;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: inherit;
+}	
+.moistitle h2 span {
+
+  height: 50px;
+  line-height: 50px;
+  margin-right: 40px;
+  text-indent: -99999px;
+  width: 9px;
+}	
+
+.single_bfw_product {
+  margin: 0 20px;
+  padding: 10px 0;
+  width: 85%;
+  margin-bottom: 30px;
+}	
+.bestwomenseller {
+  text-align: center;
+}	
+.bestSellerfmen {
+  padding: 0 0 0px;
+}
+.single_customerSupport {
+  text-align: center;
+  margin-bottom: 25px;
+	border:none;
+}	
+.footerToparea{
+	margin-bottom: 25px;
+}	
+	
+.paymentlist ul {
+  text-align: center;
+}
+	.copyrightarea p {
+  color: #26292c;
+  text-align: center;
+  text-transform: capitalize;
+}
+.paymentlist ul li {
+  display: inline;
+  margin: 0 5px;
+}	
+
+
+.bestSellerWomen .moistitle h2 .borderright{
+  margin-left:20px;
+  margin-right: 20px;
+}
+.bestSellerWomen .moistitle{
+  padding-left:0px;
+}
+.cartarea {
+  text-align: left;
+}
+.searchbox p {
+  text-align: center;
+  margin-bottom: 0px;
+}
+
+
+
+.third_slide_content .specialslideinner,
+.second_slide_content .specialslideinner,
+.first_slide_content .specialslideinner {
+  top: 30%;
+    width: 35%;
+    left:0;
+    right:0;
+ 
+} 
+.carousel-control.left, .carousel-control.right {
+  top: 38%;
+}
+.third_slideInner,
+.second_slideInner,
+.first_slideInner {
+   margin-bottom: 10px;
+   padding: 5px 0;
+}
+
+.second_slideInner h1,
+.first_slideInner h1 {
+  font-size: 16px;
+}
+.third_slide_content .percentageslide,
+.second_slideInner .percentageslide,
+.first_slideInner .percentageslide {
+
+  font-size: 24px;
+  line-height: 0px;
+}
+
+.third_slide_content button,
+.second_slide_content button,
+.first_slide_content button {
+  padding: 8px 20px;
+  font-size: 14px;
+}
+
+.third_slide_content .percentageslide{
+  font-size: 16px!important;
+  line-height: 0px!important
+  margin:0px!important;
+}
+
+.owl-prev{
+  left:0px;
+}
+.owl-next{
+  right:0px;
+}
+.single_bfw_product figure sup{
+  right:0;
+}
+.single_bfm_product figure sup{
+  right:0;
+}
+
+.single_bfw_product figure {
+
+  margin:0px auto;
+  position: relative;
+  
+}
+
+
+.single_bfw_product {
+  display: block;
+  margin: 0 auto 35px;
+  padding: 10px 0;
+}
+
+.productimage {
+  margin: 0 auto;
+  position: relative;
+  width: 60%;
+}
+
+.productNew{
+  right:0;
+}
+.panel_contents{
+	overflow: auto;
+}	
+.catainnertrow td.catgeneraltd {
+  /*line-height: 118px;*/
+  font-size: 14px;
+}
+.catalougeimagename p span {
+  display: block;
+	text-align:left;
+}
+	
+.catalougeimagename p img {
+  display: block;
+  margin-right: 0;
+}	
+.panel-default > .panel-heading {
+  padding: 0 10px 0px;
+  text-align: left;
+}
+	
+.innertabsarea {
+  margin-top: 0;
+}
+.innertabsarea .table-responsive {
+  padding-top: 30px;
+}
+.allCategoriesTabarea ul {
+    text-align: center;
+    margin: 0px auto;
+}
+.nav-tabs>li {
+		float: none;
+		margin-bottom: -1px;
+}	
+.allCategoriesTabarea ul li a{
+		width:60%;
+	display: inline-block;
+}	
+	
+.dataTables_length {
+  float: none;
+  margin: 0 auto 15px;
+  text-align: center;
+  width: 100%;
+	top:0px;
+}	
+.exporttobutton {
+  margin: 0 auto 20px;
+  position: relative;
+  text-align: center;
+  top: 0;
+  width: 100%;
+}
+#example_filter {
+  margin-bottom: 15px;
+}
+.catelougeaddtocart p img {
+  display: block;
+  margin: 0px auto;
+}	
+.catelougeaddtocart p button {
+  font-size: 12px;
+  line-height: 30px;
+  margin-top: 0;
+  padding: 8px 11px;
+}
+	
+.catainnertrow td.catgeneraltd {
+  font-size: 14px;
+   /*line-height: 118px;*/
+  padding-left: 10px!important;
+  padding-right: 10px!important;
+}	
+.dataTables_wrapper .dataTables_paginate {
+  margin-bottom: 30px;
+  margin-top: 1em;
+}
+	
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
+bottom:7px;
+}
+	
+table.dataTable thead .marquetext::after {
+  right: 12px;
+}		
+
+	
+.moisarea {
+    padding: 70px 0px 10px;
+}		
+	
+.bestSellerWomen {
+    padding: 0px 0px 10px;
+}	
+	
+	
+
+table{
+width:100%!important;
+}	
+.table-responsive{
+	overflow: initial!important;
+}
+.catalougetheadarea th {
+  font-size: 13px!important;
+	padding: 20px 0px;
+}
+table.dataTable thead .marquetext::after {
+    right: 28px;
+}	
+	
+table.dataTable thead .descriptionstext::after {
+  left: 0;
+  right: -98px;
+}
+table.dataTable thead .categoryclass::after {
+ 
+  right: 0px;
+}
+	
+	
+.dtr-data p strong{
+	font-size: 18px!important;
+	font-family: 'Lato', sans-serif;
+}	
+	
+.modal-dialog {
+  margin: 30px auto;
+  width: 90%;
+}	
+	
+.modal {
+ 
+  top: 20%;
+  z-index: 99999999;
+  width: 90%;
+  margin: 0px auto;
+}	
+	.bigpopupimage img {
+  margin: 0 auto 15px;
+}
+.bigpopupimage {
+  float: none;
+}
+	
+.popupdetals h2 {
+font-size: 18px;
+line-height: 22px;
+}	
+	
+.popbothbutton {
+  padding-left: 0;
+  padding-top: 20px;
+  text-align: center;
+}
+	
+.popbothbutton button {
+  border: medium none;
+  font-size: 15px;
+  padding: 15px 40px;
+  text-align: center;
+  width: 170px;
+}
+.continuebutton {
+
+margin-bottom: 10px;
+margin-right: 0;
+}
+	
+.catalougenew p:before{
+	right:20%;
+}	
+.catalougepromo p:before{
+	right:15%;
+}	
+	
+.single_nouveProduct{
+	margin-bottom: 30px;
+}	
+.filterbytitle {
+    margin-right: 10px;
+}	
+.select {
+    margin-bottom: 0px;
+    width: 32%;
+    margin-right: 10px;
+}	
+	
+.select select{
+	font-size: 16px;
+}	
+.nouveprobutton{
+	width:inherit;
+	height: 50px;
+	padding:15px 80px 28px;
+	margin:10px auto 0px;
+}	
+.showingentries {
+  text-align: center;
+  margin-bottom: 20px;
+}
+	
+.nouve_pagination {
+  text-align: center;
+}	
+	
+.overlayitem {
+  height: 85%;
+}	
+.single_nouveProduct p{
+	font-size: 16px;
+}	
+	
+.single_nouveProduct .text h5{
+	margin-top:15px;
+}	
+.mess-innertablearea table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, .mess-innertablearea table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
+  top: 40px!important;
+	left:0px!important;
+}		
+	
+.messtoplinkarrow ul li a {
+  width: 300px;
+	margin-bottom: 5px;
+}	
+	
+#messcommandes_filter{
+	text-align: right;
+}	
+#messcommandes_filter label input {
+
+	width:160px;
+}	
+.dropdown-menu {
+  right: 0;
+	min-width:60%;
+  width: 200px;
+
+}
+	
+#messcommandes_filter {
+  text-align: center;
+  margin: 50px auto 30px;
+}
+	
+#messcommandes_length {
+  top: 35px;
+}
+	
+.newbutton {
+  left: 0;
+  margin: 10px auto;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: -30px;
+  z-index: 102;
+}	
+.messcommedsfilter .select {
+  width: 40%;
+}	
+	
+.messProgressBararea ul{
+	text-align: center;
+}	
+.messProgressBararea ul li {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 10px;
+}	
+
+.progressbartitle span {
+  display: inline-block;
+  text-align: center;
+  margin: 10px auto;
+  width: 100%;
+}	
+	
+.progressbartitle h3{
+	margin-bottom: 20px;
+}	
+
+.printexcelbutton {
+  position: relative;
+  top: 0;
+  text-align: left;
+}	
+.main_ularea li ul {
+  text-align: center;
+}
+	
+.marquedescription .select {
+  width: 100%;
+}	
+.marquestext p {
+  margin-bottom: 10px;
+}	
+
+#datepicker-example3, #datepicker-example4, #datepicker-example2, #datepicker-example1 {
+  margin-left: 0px;
+	margin-top:10px;
+}	
+.checkbox label .toggle, .checkbox-inline .toggle {
+  margin-left: 0px;
+  margin-right: 5px;
+  margin-top: 10px;
+}	
+.modifysavecancelbutton button {
+  margin-bottom: 15px;
+  margin-right: 0px;
+}
+.marquedescription textarea{
+	width:100%;
+}
+	
+#datepicker-example5, #datepicker-example6, #datepicker-example3, #datepicker-example4, #datepicker-example2, #datepicker-example1 {
+  height: 36px;
+  margin-left: 20px!important;
+  padding-left: 10px;
+}
+	
+.marquestext > strong {
+  margin-bottom: 10px;
+  display: block;
+}	
+.marquedescription .select {
+  margin-right: 0;
+  width: 110%;
+}	
+	
+.marquedescription input[type="email"], .marquedescription input[type="text"] {
+  height: 34px;
+  width: 100%;
+}	
+
+.mobilenewbuttonajour{
+	top:-65px;
+}
+	
+.carouselbutton{
+	top:-55px;
+}	
+	
+.sousbuttonmobile{
+	top:-65px;
+}	
+.organizationmobilesec{
+	margin-top:50px;
+}	
+	
+.membermobilemtop{
+	margin-top:60px;
+}	
+
+.commandesmobilesec{
+	padding-top:30px;
+	}	
+	
+}
+
+
+/******************************************
+ FOR TABLET SIZE DEVICES
+********************************************/ 
+
+
+@media (min-width: 768px) and (max-width: 991px){
+.logo a img {
+  margin: 0 auto;
+  width: 40%;
+}	
+.logo {
+  text-align: center;
+  margin-bottom: 20px;
+}	
+.cartarea p {
+  text-align: right;
+}
+.main_ularea li a {
+    font-size: 17px!important;
+    padding: 10px 15px!important;
+}
+	
+.main_ularea .dropdown-menu{
+	min-width: auto;
+padding: 10px!important;
+}	
+
+.btn-filter-wrap .btn-filter {
+  margin: 0 25px;
+}	
+.single_item_caro .addtocartbutton{
+	width:215px;
+}
+.owl-prev{
+	left:0%;
+}	
+.owl-next{
+	right:0%;
+}	
+	
+
+.bestwomenseller {
+  text-align: center;
+}	
+.single_bfw_product {
+  margin: 0 30px;
+  padding: 10px 0;
+  width: 23%;
+}	
+.single_bfw_product .addtocartbutton {
+  font-size: 14px;
+  height: 40px;
+  line-height: 40px;
+  width: 200px;
+}
+
+.desktopmarleftless{
+	margin-left:0px!important;
+}	
+.single_bfw_product figure sup {
+  right: -15%;
+  top: 10%;
+}	
+	
+.single_bfm_product figure sup {
+  right: -29%;
+  top: 10%;
+}
+	
+.bestSellerWomen {
+  padding: 0 0 50px;
+}	
+.footerToparea {
+  margin-bottom: 30px;
+}	
+
+
+
+.second_slide_content .specialslideinner,
+.first_slide_content .specialslideinner {
+  top: 25%;
+  width: 35%;
+ 
+} 
+
+.second_slideInner,
+.first_slideInner {
+   margin-bottom: 30px;
+}
+
+.second_slideInner h1,
+.first_slideInner h1 {
+  font-size: 28px;
+}
+.second_slideInner .percentageslide,
+.first_slideInner .percentageslide {
+
+  font-size: 80px;
+  line-height: 60px;
+}
+.third_slide_content .percentageslide {
+  font-size: 32px!important;
+  line-height: 38px!important;
+}
+.carousel-control.left,
+.carousel-control.right{
+  top:42%;
+}
+	.productNew{
+  right:-15px;
+}
+	
+.dataTables_length {
+  float: none;
+  margin: 0 auto;
+  text-align: center;
+  width: 35%;
+}	
+.dataTables_filter {
+  position: relative;
+  text-align: right;
+  top: -26px;
+  width: 36%;
+}
+.panel_contents{
+	overflow: auto;
+}	
+.catainnertrow td.catgeneraltd {
+  /*line-height: 118px;*/
+  font-size: 14px;
+}
+.catalougeimagename p span {
+  display: block;
+	text-align:left;
+}
+	
+.catalougeimagename p img {
+  display: block;
+  margin-right: 0;
+}	
+.panel-default > .panel-heading {
+  padding: 0 10px 0px;
+  text-align: left;
+}
+	
+.innertabsarea {
+  margin-top: 0;
+}
+.innertabsarea .table-responsive {
+  padding-top: 30px;
+}	
+	
+	
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+  margin: auto;
+	height: 100%;
+	max-height: 500px;
+}	
+.dataTables_filter {
+  top: -5px;
+  width: 100%;
+}
+.dataTables_length {
+  top: 34px;
+  width: 100%;
+}	
+#example_filter label input {
+  padding: 3px 20px;
+}	
+.exporttobutton {
+  position: absolute;
+  top: 58px;
+}	
+	
+.catalougetfootarea input{
+	width:70%;
+}	
+table.dataTable thead .marquetext::after {
+  right: 0px;
+}	
+	
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
+  bottom: 5px;
+  left: 20px;
+}	
+#example_filter label input {
+  width: 170px;
+}	
+	
+.searchbox p input {
+    width: 50%;
+}
+	
+.moisarea {
+    padding: 70px 0px 40px;
+}	
+	
+.bigpopupimage {
+    float: none;
+}	
+.bigpopupimage img {
+    margin: 0px auto 20px;
+    display: block;	
+}
+	
+.popupdetals h2 {
+    color: #ff1515;
+    font-size: 20px;
+}
+		
+.dtr-data p{
+	font-weight: 400!important;
+}	
+	
+	
+table.dataTable thead .categoryclass::after {
+  right: 0;
+}
+	
+.catalougetheadarea th{
+	font-size: 14px!important;
+}	
+
+.prixcontats.sorting,
+.categoryclass.sorting{
+	padding: 15px 20px!important;
+}	
+	
+.catalougenew p:before{
+	right:20%;
+}	
+.catalougepromo p:before{
+	right:15%;
+}	
+	
+.single_nouveProduct{
+	margin-bottom: 30px;
+}		
+.select{
+	width:17%;
+}	
+.select__arrow{
+	top:20px;
+}
+	
+.single_nouveProduct p{
+font-size: 16px;
+}
+.single_nouveProduct .text h5{
+	margin-top:15px;
+}
+.mess-innertablearea table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, .mess-innertablearea table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
+    top: 40px!important;
+	left:0px!important;
+}		
+	
+.messcommedsfilter .select {
+  width: 36%;
+}	
+	
+.messcommedsfilter .select__arrow {
+  top: 16px;
+}	
+	
+	
+/* mess commandes css desktop view*/	
+	
+	
+.messProgressBararea ul li img {
+  width: 74%;
+}
+.smallerpbar {
+  margin-left: -96px;
+}	
+.innerlistone {
+  height: 100%;
+  left: -18%;
+  line-height: 4;
+}
+	
+.innerlistone p {
+  font-size: 15px;
+}	
+.messProgressBararea ul {
+  text-align: left;
+}	
+	
+	
+.marginlesstablet{
+	margin-left:0px;
+}	
+	
+.marquedescription .select {
+  width: 100%;
+}	
+	
+.marquedescription textarea{
+	width:100%;
+}	
+	
+.marquedescription input[type="email"], .marquedescription input[type="text"] {
+  height: 34px;
+  width: 100%;
+}	
+	
+	
+	
+}
+
+
+
+
+/*************************************************
+              FOR DESKTOP DEVICES  
+**************************************************/
+
+@media (min-width: 992px) and (max-width: 1199px){
+.searchbox p input {
+	padding: 9px 2px;
+}
+	
+.searchbox p button{
+padding: 10px;
+}
+.main_ularea li a {
+    font-size: 14px!important;
+    padding: 30px 10px!important;
+}
+	
+.main_ularea .dropdown-menu{
+	min-width: auto;
+padding: 10px!important;
+
+}	
+
+	
+.owl-prev{
+	left:0%;
+}	
+.owl-next{
+	right:0%;
+}	
+	
+.best_sellerWomenimage img {
+    height: 100%;
+    min-height: 323px;
+}
+
+.productNew{
+  right:0;
+}
+
+.bestwomenseller {
+  text-align: left;
+}	
+.single_bfw_product {
+  margin: 0 30px;
+  padding: 10px 0;
+  width: 23%;
+}	
+.single_bfw_product .addtocartbutton {
+  font-size: 14px;
+  height: 40px;
+  line-height: 40px;
+  width: 200px;
+}
+.single_bfm_product .addtocartbutton {
+    font-size: 14px;
+    height: 40px;
+    line-height: 40px;
+    width: 155px;
+}
+	
+.single_bfm_product .innerbfwproduct {
+    margin: 13px 0px;
+}	
+	
+.desktopmarleftless{
+	margin-left:0px!important;
+}	
+.single_bfw_product figure sup {
+right:-26%;
+}	
+.single_bfw_product figure sup {
+  right: -32%!important;
+  top: 12%;
+}	
+.second_slide_content .specialslideinner,
+.first_slide_content .specialslideinner {
+  top: 33%;
+  width: 35%;
+ 
+}	
+
+.second_slideInner,
+.first_slideInner {
+   margin-bottom: 30px;
+}
+
+.second_slideInner h1,
+.first_slideInner h1 {
+  font-size: 32px;
+}
+.second_slideInner .percentageslide,
+.first_slideInner .percentageslide {
+
+  font-size: 120px;
+  line-height: 90px;
+}
+.ladymillans {
+  font-size: 40px!important;
+  line-height: 45px!important;
+}
+
+.third_slide_content .percentageslide{
+  font-size: 45px!important;
+}
+
+	
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+  margin: auto;
+	height: 100%;
+	max-height: 600px;
+}	
+	
+.single_bfw_product {
+  margin: 0 27px;
+  padding: 0;
+  width: 24%;
+}	
+	
+	
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
+  bottom: 10px;
+  left: 20px;
+}	
+
+.logo a img{
+	width:80%;
+}	
+	
+.popup-inner{
+	width:80%;
+}
+	
+.sucessfulpopup h2 {
+    font-size: 28px;
+}	
+	
+	
+table.dataTable thead .categoryclass::after {
+  right: 0;
+}
+	
+.catalougetheadarea th{
+	font-size: 14px!important;
+}	
+
+.prixcontats.sorting,
+.categoryclass.sorting{
+	padding: 15px 20px!important;
+}	
+	
+	
+.single_nouveProduct {
+  height: 525px;
+}	
+.blackparagraph {
+  color: #000;
+  margin-top: 0;
+}
+	
+.mess-innertablearea table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, .mess-innertablearea table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
+  top: 40px!important;
+}	
+	
+.messcommedsfilter .select {
+  width: 26%;
+}	
+	
+	
+	
+	
+/* mess commandes css desktop view*/	
+	
+	
+.messProgressBararea ul li img {
+  width: 74%;
+}
+.smallerpbar {
+  margin-left: -96px;
+}	
+.innerlistone {
+  height: 100%;
+  left: -18%;
+  line-height: 4;
+}
+	
+.innerlistone p {
+  font-size: 15px;
+}	
+	
+	
+	.fordesktopfulwidth input{
+		width:80%!important;
+	}	
+	
+}
+	
+	
+	
+	
+/***************************************************
+       EXTRA CSS MEDIA QUERIES FOR TESTING
+****************************************************/
+
+  
+
+@media (min-width:1200px){
+  .best_sellerWomenimage img {
+  height: auto;
+  min-height: 320px;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+.owl-prev{
+  left:-3%;
+}
+
+.owl-next{
+  right:-3%;
+}
+	
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
+  bottom: 10px;
+  left: 21px;
+}	
+	
+	
+
+	
+	
+}
+/*	
+
+table.dataTable thead .sorting::after {
+  content: "";
+  opacity: 0.2;
+  right: 30px;
+}
+table.dataTable thead .sorting_asc::after {
+  content: "";
+  margin: 0 auto;
+  right: 70px;
+  text-align: center;
+}
+
+table.dataTable thead .sorting_asc::after {
+  content: "";
+  margin: 0 auto;
+  right: 32px;
+  text-align: center;
+}
+
+table.dataTable thead .marquetext::after {
+  right: 66px;
+}
+
+table.dataTable thead .prixcontats::after {
+  right: 20px;
+}
+
+table.dataTable thead .descriptionstext::after {
+  right: 70px;
+}
+table.dataTable thead .categoryclass::after {
+  right: 30px;
+}
+table.dataTable thead .notreprix::after {
+  right: 30px;
+}
+	
+*/	
+@media (min-width: 992px){
+.searchbox p input{
+	width:60%;
+}
+.popupdetals h2 {
+  color: #ff1515;
+  font-size: 24px;
+  line-height: 24px;
+  padding-bottom: 15px;
+  text-align: left;
+}
+.popbothbutton button {
+  padding: 15px 30px;
+}
+	
+/*	
+table.dataTable thead .categoryclass::after {
+  right: 0;
+}
+	
+.catalougetheadarea th{
+	font-size: 14px!important;
+}	
+
+.prixcontats.sorting,
+.categoryclass.sorting{
+	padding: 15px 20px!important;
+}	
+*/	
+
+}
+
+
+@media(min-width:1680px){
+	
+.innerbfwproduct {
+margin: 50px 0;
+}
+
+.single_bfm_product .innerbfwproduct {
+  margin: 50px 0;
+}	
+	
+.carouselarea img {
+  width: 100%;
+}
+}
+
+@media(min-width:1920px){
+	
+.innerbfwproduct {
+margin: 50px 0;
+}
+.single_bfw_product p {
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+.best_sellerWomenimage img {
+  height: auto;
+  max-height: 400px!important;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+	
+.carouselarea img {
+  width: 100%;
+	max-height: 100%;
+}	
+	
+}
+
+
+
+  
+/* ================================================ */
+/* Responsive - Media queries                       */
+/* Based on:                                        */
+/* http://lab.maltewassermann.com/viewport-resizer/ */
+/* ================================================ */
+
+
+/* ============================================== */
+/* HDTV                                           */
+/*                                      1920x1080 */
+/* ============================================== */
+@media screen and (min-width: 1080px) and (max-width: 1920px) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+
+
+}
+
+/* ============================================== */
+/* Widescreen                                     */
+/*                                       1280x800 */
+/* ============================================== */
+@media screen and (min-width: 800px) and (max-width: 1280px) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+
+
+}
+
+/* ============================================== */
+/* Twitter Bootstrap                              */
+/*                                       980x     */
+/* ============================================== */
+@media screen and (min-width: 980px) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+.panel_contents {
+  overflow: auto!important;
+}
+
+}
+
+/* ============================================== */
+/* Twitter Bootstrap                              */
+/*                                       x979     */
+/* ============================================== */
+@media screen and (max-width: 979px) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+	.searchbox p input{
+		width:60%;
+	}
+
+}
+ 
+/* ============================================== */
+/* iPad Landscape & Portrait                      */
+/*                                       1024x768 */
+/* ============================================== */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+. . .
+
+}
+
+/* ============================================== */
+/* iPad Landscape                                 */
+/*                                       1024x768 */
+/* ============================================== */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:landscape) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+.best_sellerWomenimage img {
+  height: 100%;
+  min-height: 338px;
+}
+.panel-default > .panel-heading {
+  padding: 0 10px 0px;
+  text-align: left;
+}	
+
+.productNew{
+  right: -15px;
+}
+
+}
+
+/* ============================================== */
+/* iPad Portrait                                  */
+/*                                       768x1024 */
+/* ============================================== */
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation:portrait) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+.best_sellerWomenimage img {
+  height: 100%;
+  min-height: 338px;
+}
+
+
+}
+
+/* ============================================== */
+/* Small Tablet Landscape/Portrait                */
+/*                                        800x600 */
+/* ============================================== */
+@media screen and (min-width: 600px) and (max-width: 800px) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+  .single_bfw_product figure {
+  margin: 0 auto;
+  position: relative;
+  width: 60%;
+}
+}
+
+
+
+
+
+/* ============================================== */
+/* iPhone5/Android landscape (& narrow browser)   */
+/*                                        568x320 */
+/* ============================================== */
+@media screen and (min-width: 320px) and (max-width:568px) {
+.third_slide_content .specialslideinner,
+.second_slide_content .specialslideinner,
+.first_slide_content .specialslideinner {
+  top: 30%;
+    width: 50%;
+    left:0;
+    right:0;
+ 
+} 
+.carousel-control.left, .carousel-control.right {
+  top: 38%;
+}
+.third_slideInner,
+.second_slideInner,
+.first_slideInner {
+   margin-bottom: 10px;
+   padding: 5px 0;
+}
+
+.second_slideInner h1,
+.first_slideInner h1 {
+  font-size: 16px;
+}
+.third_slide_content .percentageslide,
+.second_slideInner .percentageslide,
+.first_slideInner .percentageslide {
+
+  font-size: 24px;
+  line-height: 0px;
+}
+
+.third_slide_content button,
+.second_slide_content button,
+.first_slide_content button {
+  padding: 8px 20px;
+  font-size: 14px;
+}
+
+.third_slide_content .percentageslide{
+  font-size: 16px!important;
+  line-height: 0px!important
+  margin:0px!important;
+}
+
+.owl-prev{
+  left:0px;
+}
+.owl-next{
+  right:0px;
+}
+
+.single_bfw_product figure sup{
+  right:-10%;
+}
+.single_bfm_product figure sup{
+  right:-10%;
+}
+
+
+
+
+}
+
+
+
+
+
+
+
+/* ============================================== */
+/* iPhone4/Android landscape (& narrow browser)   */
+/*                                        480x320 */
+/* ============================================== */
+@media screen and (min-width: 320px) and (max-width:480px) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+.third_slide_content .specialslideinner,
+.second_slide_content .specialslideinner,
+.first_slide_content .specialslideinner {
+  top: 30%;
+    width: 40%;
+    left:0;
+    right:0;
+ 
+} 
+.carousel-control.left, .carousel-control.right {
+  top: 38%;
+}
+.third_slideInner,
+.second_slideInner,
+.first_slideInner {
+   margin-bottom: 10px;
+   padding: 5px 0;
+}
+
+.second_slideInner h1,
+.first_slideInner h1 {
+  font-size: 16px;
+}
+.third_slide_content .percentageslide,
+.second_slideInner .percentageslide,
+.first_slideInner .percentageslide {
+
+  font-size: 24px;
+  line-height: 0px;
+}
+
+.third_slide_content button,
+.second_slide_content button,
+.first_slide_content button {
+  padding: 8px 20px;
+  font-size: 14px;
+}
+
+.third_slide_content .percentageslide{
+  font-size: 16px!important;
+  line-height: 0px!important
+  margin:0px!important;
+}
+
+.single_bfw_product figure sup{
+  right:0;
+}
+.single_bfm_product figure sup{
+  right:0;
+}
+
+.select {
+  margin-bottom: 0;
+  margin-right: 10px;
+  width: 80%;
+  margin-bottom: 10px;
+}
+}
+
+/* ============================================== */
+/* iPhone4/Android portrait               320x480 */
+/* iPhone5 portrait                       320x568 */
+/* ============================================== */
+@media screen and (max-width:320px) {
+
+.third_slide_content .specialslideinner,
+.second_slide_content .specialslideinner,
+.first_slide_content .specialslideinner {
+  top: 18%;
+    width: 50%;
+    left:0;
+    right:0;
+ 
+} 
+.carousel-control.left, .carousel-control.right {
+  top: 38%;
+}
+.third_slideInner,
+.second_slideInner,
+.first_slideInner {
+   margin-bottom: 10px;
+   padding: 5px 0;
+}
+
+.second_slideInner h1,
+.first_slideInner h1 {
+  font-size: 16px;
+}
+.third_slide_content .percentageslide,
+.second_slideInner .percentageslide,
+.first_slideInner .percentageslide {
+
+  font-size: 24px;
+  line-height: 0px;
+}
+
+.third_slide_content button,
+.second_slide_content button,
+.first_slide_content button {
+  padding: 8px 20px;
+  font-size: 14px;
+}
+
+.third_slide_content .percentageslide{
+  font-size: 16px!important;
+  line-height: 0px!important
+  margin:0px!important;
+}
+
+
+.single_bfw_product {
+  display: block;
+  margin: 0 auto 35px;
+  padding: 10px 0;
+  width: 100%;
+}
+}
+
+/* ============================================== */
+/* Smaller devices                                */
+/* Android Landscape                      320x240 */
+/* ============================================== */
+@media screen and (min-width:240px) and (max-width:320px) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+.select {
+  margin-bottom: 0;
+  margin-right: 10px;
+  width: 80%;
+  margin-bottom: 10px;
+}
+}
+
+/* ============================================== */
+/* Smaller devices                                */
+/* Android Portrait                       240x320 */
+/* ============================================== */
+@media screen and (max-width:240px) {
+/* ADD YOUR CSS ADJUSTMENTS BELOW HERE */
+. . .
+}
+@media (width:320px;){
+  .single_bfw_product figure {
+  position: relative;
+  width:100%;
+} 
+	
+
+	
+}
+@media (width:320px){
+  .messcommedsfilter .select {
+  width: 100%;
+}
+#messcommandes_info {
+  float: none;
+  width: 100%;
+}	
+#messcommandes_paginate {
+  float: none;
+  width: 100%;
+}
+	
+}
+
+
+@media (max-width:480px){
+  .messcommedsfilter .select {
+  width: 100%;
+}
+	
+#messcommandes_info {
+  float: none;
+  width: 100%;
+}
+	
+#messcommandes_paginate {
+  float: none;
+  width: 100%;
+}	
+	
+}
+
+
+@media (max-width:480px;){
+  .single_bfw_product figure {
+  position: relative;
+  width:80%;
+} 
+	
+	
+	
+}
+@media (width:640px;){
+  .single_bfw_product figure {
+  position: relative;
+  width:70%;
+} 
+}
+
+
