@@ -5,30 +5,102 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+
 <h:body>
 	<ui:composition template="/template/template.xhtml">
-
 		<ui:define name="content">
 			<h:form id="formSousCategorie">
-				<ui:include  src="/pages/private/message.xhtml" />
-				<h:inputHidden value="#{sousCategoriesBean.sousCategorie.idSousCategorie}"  />
-				<h:panelGrid columns="2" border="0" cellpadding="10" cellspacing="1">
-					<h:outputLabel value="#{msg.libelle_nom_ss_categorie}" />
-					<h:inputText value="#{sousCategoriesBean.sousCategorie.sousCategorieNom}" maxlength="120" required="true" requiredMessage="#{msg.nom_ss_categorie_obligatoire}" />
-					
-					<h:outputLabel value="#{msg.libelle_categorie_rat}" />
-					<h:selectOneMenu value="#{sousCategoriesBean.idCategorie}">
-			   			<f:selectItems value="#{sousCategoriesBean.referentielBean.categorieList}" var="c"
-			   			itemLabel="#{c.categorieNom}" itemValue="#{c.idCategorie}" />
-			   		</h:selectOneMenu>
-			   		
-			   		<h:button type="button" value="#{msg.libelle_retour}" outcome="sousCategories"/>
-					<h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{sousCategoriesBean.insertOrUpdateSousCategorie()}"/>				        
-				</h:panelGrid>
+				<ui:include src="/pages/private/message.xhtml" />
+				<h:inputHidden
+					value="#{sousCategoriesBean.sousCategorie.idSousCategorie}" />
+
+				<div class="breadcrumsrea">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="breadcrumslist">
+									<ul>
+										<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="sous_categorie.xhtml"><h:outputLabel value="#{msg.libelle_ss_categorie}" /></h:outputLink></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<section class="modifyaproductarea">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="modifyproductinner">
+									<div class="modifymaintitle">
+										<h3>Nouvelle Sous-Catégorie</h3>
+									</div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_nom_ss_categorie}" /><span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{sousCategoriesBean.sousCategorie.sousCategorieNom}" maxlength="120" required="true" requiredMessage="#{msg.nom_ss_categorie_obligatoire}" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_categorie_rat}" /><span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription oransationadmin">
+												<div class="select">
+													<h:selectOneMenu value="#{sousCategoriesBean.idCategorie}">
+											   			<f:selectItems value="#{sousCategoriesBean.referentielBean.categorieList}" var="c"
+											   			itemLabel="#{c.categorieNom}" itemValue="#{c.idCategorie}" />
+											   		</h:selectOneMenu>
+													<div class="select__arrow"></div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-12">
+											<div class="modifysavecancelbutton">
+												<button><h:link value="#{msg.libelle_annuler}" outcome="sousCategories" styleClass="cancelbutton" /></button>
+												<button><h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{sousCategoriesBean.insertOrUpdateSousCategorie()}" styleClass="savebutton"/></button>
+											</div>
+										</div>
+
+									</div>
+									
+									<div class="clearfix"></div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 			</h:form>
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>
