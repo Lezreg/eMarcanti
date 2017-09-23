@@ -22,6 +22,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -123,6 +124,9 @@ public class Membre implements Serializable {
     @JoinColumn(name = "idProfil", referencedColumnName = "idProfil")
     @ManyToOne(optional = false)
     private Profil idProfil;
+    
+    @Transient
+    private String nomParrain;
     
 
     public Membre() {
@@ -306,6 +310,14 @@ public class Membre implements Serializable {
 
 	public void setDefaultPassword(boolean isDefaultPassword) {
 		this.isDefaultPassword = isDefaultPassword;
+	}
+	
+	public String getNomParrain() {
+		return nomParrain;
+	}
+
+	public void setNomParrain(String nomParrain) {
+		this.nomParrain = nomParrain;
 	}
 
 	@Override

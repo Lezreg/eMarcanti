@@ -58,7 +58,9 @@ public class ParfumUtils {
 
 	public static UserSessionBean getUserSessionBean() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		return (UserSessionBean)session.getAttribute(ReferentielBean.BEAN_SESSION_NAME);
+		if (session!=null)
+			return (UserSessionBean)session.getAttribute(ReferentielBean.BEAN_SESSION_NAME);
+		else return null;
 	}
 	
 	public static void setUserSessionBean(UserSessionBean userSession) {

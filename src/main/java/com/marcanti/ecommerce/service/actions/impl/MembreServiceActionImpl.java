@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.marcanti.ecommerce.dao.FilleulDAO;
 import com.marcanti.ecommerce.dao.MembreDAO;
 import com.marcanti.ecommerce.model.Membre;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
 import com.marcanti.ecommerce.service.actions.MembreServiceAction;
+import com.marcanti.ecommerce.view.bean.ReferentielBean;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 
@@ -17,6 +19,9 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 
 	@Autowired
 	private MembreDAO membreDAO;
+	
+	@Autowired
+	private FilleulDAO filleulDAO;	
  
 	public MembreDAO getMembreDAO() {
 		return membreDAO;
@@ -50,7 +55,15 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 
 	@Override
 	public List<Membre> getMembreByOrgaList(Organisation idOrga) {
-		return membreDAO.getMembreByOrgaList(idOrga);
+		Membre membre = null;
+		List<Membre> membres = membreDAO.getMembreByOrgaList(idOrga);
+		for (int i = 0; i < membres.size(); i++) {
+			membre = membres.get(i);
+			if(membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
+				membre.setNomParrain(filleulDAO.getFilleul(membre.getIdMembre()).getParrainNom());
+			}
+		}
+		return membres;
 	}
 
 	@Override

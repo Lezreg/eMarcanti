@@ -52,5 +52,5 @@ public class FilleulDAOImpl extends AbstractGenericDAO<Filleul> implements Fille
 		} 
 		return filleul;
 	}
-    
+	
 }
