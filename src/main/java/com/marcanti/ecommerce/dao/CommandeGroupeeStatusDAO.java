@@ -1,5 +1,10 @@
 package com.marcanti.ecommerce.dao;
 
-public interface CommandeGroupeeStatusDAO {
+import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
+import com.marcanti.ecommerce.model.CommandeIndividuelleStatus;
+
+public interface CommandeGroupeeStatusDAO extends GenericDAO<CommandeGroupeeStatus> {
+
+	CommandeGroupeeStatus getCommandeGroupeeStatusByCode(String statusCode);
 
 }

@@ -172,6 +172,31 @@
 		</navigation-case>
 	</navigation-rule>		
 	
+	<!-- navigation rules cmdGroupee  -->		
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>cmdGroupees</from-outcome>
+			<to-view-id>/pages/private/cmdGroupees.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>createCmd</from-outcome>
+			<to-view-id>/pages/private/cmdGroupeeDetail.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>cmdList</from-outcome>
+			<to-view-id>/pages/private/cmdGroupees.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
 	
 	<application>
 		<resource-bundle>
