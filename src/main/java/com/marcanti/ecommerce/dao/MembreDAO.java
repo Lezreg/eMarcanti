@@ -15,9 +15,9 @@ public interface MembreDAO {
 	
 	public Membre getMembre(Membre idMembre);
 	
-	public void updateFilleul(Membre filleul);
+	public void updateFilleulMembre(Membre filleul);
 	
-	public void insertFilleul(Membre filleul, UserSessionBean parrain);
+	public void insertFilleulMembre(Membre filleul, UserSessionBean parrain);
 	
 	public void updateMembre(Membre membre);
 	
@@ -27,6 +27,10 @@ public interface MembreDAO {
 	
 	public void insertMembreFilleul(Membre filleul, Membre membreParrain);
 	
+	public void insertFilleul(Membre filleul, Membre membreParrain);
+	
 	public void updateMembreFilleul(Membre filleul, Membre membreParrain);
+	
+	public void updateFilleul(Membre filleul, Membre membreParrain);
 
 }

@@ -84,13 +84,19 @@
 
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-12">
-											<div class="modifysavecancelbutton">
-												<button><h:link value="#{msg.libelle_annuler}" outcome="sousCategories" styleClass="cancelbutton" /></button>
-												<button><h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{sousCategoriesBean.insertOrUpdateSousCategorie()}" styleClass="savebutton"/></button>
+											<div class="newmodiysvecan modifysavecancelbutton">
+												<div class="button-1">
+													<div class="eff-1"></div>
+													<h:link value="#{msg.libelle_annuler}" outcome="sousCategories" />
+												</div>
+
+												<div class="button-2">
+													<div class="eff-2"></div>
+													<h:commandLink value="#{msg.libelle_valider}" action="#{sousCategoriesBean.insertOrUpdateSousCategorie()}" />
+												</div>
 											</div>
 										</div>
-
-									</div>
+									</div>									
 									
 									<div class="clearfix"></div>
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>#{msg.libelle_appli}</title>
+
+	<h:outputStylesheet>
+	
+  	div.centre {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    width: 200px;
+    height: 200px;
+    margin-left: -100px; 
+    margin-top: -100px; 
+	}
+ 
+	</h:outputStylesheet>
+
+</h:head>
+
+
+<h:body>
+
+	<div>
+		<h:form>
+		
+			<h:panelGrid id="titre" columns="1" border="0" cellpadding="10" cellspacing="1" width="100%">
+				<h:outputLabel value="#{msg.libelle_rappel_identifiants}" style="font-weight:bold;" />
+				<h:outputLabel value="#{msg.libelle_code_msg}" />
+			</h:panelGrid>
+			<br/>	
+			<ui:include  src="/pages/private/message.xhtml" />	
+			<h:panelGrid id="connection" columns="2" border="0" cellpadding="10" cellspacing="1">
+				<h:outputLabel value="#{msg.libelle_code}" />
+				<h:inputText value="#{authentificationBean.code}" size="10" />
+				<h:inputHidden value="#{email}"  />
+				<f:facet name="footer">
+					<h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{authentificationBean.checkCodeAndSendPassword()}" />
+				</f:facet>
+			</h:panelGrid>
+		</h:form>
+	</div>
+
+</h:body>
+</html>

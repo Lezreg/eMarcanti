@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"	
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<ui:define name="content">
+			<div id="itme" class="cadre-container">
+				<h:panelGrid columns="" border="0" cellpadding="10" cellspacing="1" width="100%">
+					<h:outputLabel value="#{msg.libelle_gestion_categorie}" style="font-weight:bold;" />
+				</h:panelGrid>
+				<br />
+				<h:panelGrid columns="1" border="0" cellpadding="10" cellspacing="1">
+					<h:button type="button" value="#{msg.libelle_ajouter}"
+						outcome="#{categoriesBean.addCategorieView()}" />
+				</h:panelGrid>
+
+				<h:form id="formCategories">
+					<a4j:region>
+						<p:dataTable var="categorie" value="#{categoriesBean.categorieList}"
+							rendered="true" draggableColumns="true"
+							style="margin-bottom:40px" paginator="true" rows="10"
+							widgetVar="categorieTable" emptyMessage="#{msg.libelle_pas_categorie}"
+							filteredValue="#{categoriesBean.filteredCategorieList}"
+							resizableColumns="true" scrollable="true" scrollHeight="200"
+							editable="true"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="2,10,50">
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText value="#{msg.libelle_rechercher} :" />
+									<p:inputText id="globalFilter"
+										onkeyup="PF('categorieTable').filter()" style="width:150px"
+										placeholder="" />
+								</p:outputPanel>
+							</f:facet>
+							<p:column headerText="#{msg.libelle_categorie}" sortBy="#{categorie.categorieNom}"
+								filterBy="#{categorie.categorieNom}" filterMatchMode="contains">
+								<h:outputText value="#{categorie.categorieNom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_code_categorie}" sortBy="#{categorie.categorieCode}"
+								filterBy="#{categorie.categorieCode}" filterMatchMode="contains">
+								<h:outputText value="#{categorie.categorieCode}" />
+							</p:column>
+							<p:column>
+								<h:commandLink action="#{categoriesBean.editCategorie()}" value="Edit">
+									<f:param name="idCategorie" value="#{categorie.idCategorie.shortValue()}" />
+								</h:commandLink>
+							</p:column>
+						</p:dataTable>
+						<ui:include  src="/pages/private/message.xhtml" />
+					</a4j:region>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

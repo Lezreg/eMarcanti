@@ -14,10 +14,10 @@ public interface MembreServiceAction {
 	public Membre getMembre(Membre idMembre);
 	
 	@Transactional
-	public void updateFilleul(Membre filleul);
+	public void updateFilleulMembre(Membre filleul);
 	
 	@Transactional
-	public void insertFilleul(Membre filleul, UserSessionBean parrain);
+	public void insertFilleulMembre(Membre filleul, UserSessionBean parrain);
 	
 	public List<Membre> getMembreList();
 	

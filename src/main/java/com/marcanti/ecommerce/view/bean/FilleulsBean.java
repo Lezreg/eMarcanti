@@ -211,7 +211,7 @@ public class FilleulsBean implements Serializable {
 				String password = referentielBean.getDefaultPassword();
 				filleul.setPassword(DigestUtils.sha512Hex(password));
 				filleul.setDateCreation(dateToday);
-				membreService.insertFilleul(filleul,userSession);
+				membreService.insertFilleulMembre(filleul,userSession);
 				this.filleulsList = filleulsService.getFilleulsList(new Membre(userSession.getIdMembre()));
 				try {
 					logger.info("send mail filleul with password : " + password);
@@ -228,7 +228,7 @@ public class FilleulsBean implements Serializable {
 		}else{
 			if(getMembreEmail().equals(getOldMembreEmail())){
 				filleul.setDateModification(dateToday);
-				membreService.updateFilleul(filleul);
+				membreService.updateFilleulMembre(filleul);
 				msg = ParfumUtils.getBundleApplication().getString("message.modif.filleul");
 				facesMessage.setDetail(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
@@ -243,7 +243,7 @@ public class FilleulsBean implements Serializable {
 				    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 				}else{
 					filleul.setDateModification(dateToday);
-					membreService.updateFilleul(filleul);
+					membreService.updateFilleulMembre(filleul);
 					msg = ParfumUtils.getBundleApplication().getString("message.modif.filleul");
 					facesMessage.setDetail(msg); 
 					facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);

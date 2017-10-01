@@ -259,11 +259,21 @@ margin-top: 10px;
     margin: 0px auto;
 }
 .nav-tabs>li {
-		float: none;
+		float: left;
 		margin-bottom: -1px;
 }	
+	
+.productinfotabinner ul li a{
+	  padding: 10px;
+}	
+	
 .allCategoriesTabarea ul li a{
 		width:60%;
+	display: inline-block;
+}	
+	
+.cataloucopynewtabarea ul li a{
+		width:100%;
 	display: inline-block;
 }	
 	
@@ -417,7 +427,8 @@ margin-right: 0;
 }	
 	
 .select select{
-	font-size: 16px;
+	font-size: 15px;
+	padding: 10px 5px;
 }	
 .nouveprobutton{
 	width:inherit;
@@ -555,12 +566,13 @@ margin-right: 0;
 }	
 .marquedescription .select {
   margin-right: 0;
-  width: 110%;
+  width: 100%;
 }	
 	
 .marquedescription input[type="email"], .marquedescription input[type="text"] {
   height: 34px;
   width: 100%;
+	  font-size: 16px;
 }	
 
 .mobilenewbuttonajour{
@@ -584,7 +596,435 @@ margin-right: 0;
 
 .commandesmobilesec{
 	padding-top:30px;
-	}	
+}	
+
+	
+/* INDIVDUAL ALL STATUS */	
+	
+.individualtablerow p img{
+	float:none;
+	margin-bottom: 20px;
+}
+.individualtablerow p{
+	text-align: left;
+}	
+.individulaallrow tr td {
+  line-height: inherit!important;
+}	
+	
+.quantityformarea span{
+	margin-top: 15px;
+}	
+.individualtablerow tr td.quantityformarea{
+	padding-left:0px!important;
+	padding-right:0px!important;
+}
+	
+	
+.individualtabletop table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, 
+.individualtabletop table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child::before {
+  left: 0;
+  top: 85%!important;
+}
+
+.quantityamountspan{
+	color:#fc8440;
+	text-transform: capitalize;
+	text-align:center;
+}	
+#myform {
+  padding: 0;
+  text-align: center;
+  margin: 0px 0px;
+}
+	
+.seemoreoptionsbutton ul li {
+  display: block;
+  margin: 15px 0px;
+}	
+	
+.seemoreoptionsbutton ul {
+  padding-top: 0px;
+  text-align: left;
+}	
+	
+.seemoretableinfo .table-responsive{
+	overflow: auto!important;
+}	
+	
+input.qtyminusone, input.qtyminus {
+  background: #f7f7f7 none repeat scroll 0 0;
+  border: medium none;
+  height: 25px;
+  width: 60px;
+	display: inline-block;
+}
+	
+.qtyone, .qty {
+  height: 40px;
+  text-align: center;
+  width: 60px;
+}
+	
+input.qtyplusone, input.qtyplus {
+  background: #f7f7f7 none repeat scroll 0 0;
+  border: medium none;
+  height: 25px;
+  width: 60px;
+	display: inline-block;
+}		
+	
+.quantityformarea span {
+  line-height: 20px!important;
+  margin-top: 15px;
+}	
+	
+.unpaidbutton {
+    text-align: center;
+    margin: 20px auto 0px;
+}	
+
+.indicommanfilter .select{
+	width:100%;
+}	
+	
+.button-1{
+	margin-bottom: 20px;
+}	
+	
+.moyenbodyareatotal{
+	width:100%;
+}		
+
+.moyencontenmodal .button-1{
+
+}
+	
+	
+.moyenbodyarea{
+	padding: 20px 0 60px;
+position: relative;
+	}
+	
+.moyenbodyarea input{
+	font-size: 14px;
+	width:100%!important;
+}	
+.nouveautesarea .filterbytitle{
+ float: none;
+}
+	
+	.nouveautesarea .filterbyarea .select {
+  width: 80%;
+  display: inline-block;
+		margin-bottom: 15px;
+}	
+	
+.borderedamount {
+  border: 1px solid #333;
+  padding: 5px 30px;
+  margin: 5px 0px!important;
+  display: inline-block;
+}	
+	
+	
+.nouvellearea .modifyproductinner .button-1 {
+  margin-right: 20px!important;
+}	
+	
+.nouvellearea .modifyproductinner textarea,	
+.nouvellearea .modifyproductinner input{
+	font-size: 12px;
+}
+	
+.nouvellembody {
+  padding: 20px 15px 60px!important;
+  position: relative;
+}	
+	
+.cogmodifirst input{
+	width:100%!important;
+}		
+.paiementreinput input{
+	width:50%!important;
+}
+	
+.commandgrmodifyinfop .select{
+	width:100%;
+}	
+.messmodaldia{
+	width:90%;
+}		
+.messmodaldia .modifyproductinner {
+  padding: 10px!important;
+}
+.messmodaldia .modal-body {
+  padding: 10px;
+}	
+	
+.messpopupinput .select, .messpopupinput textarea {
+  width: 100%!important;
+  font-size: 12px!important;
+}	
+.modifyproductinner {
+  background: #f7f7f7 none repeat scroll 0 0;
+  padding: 10px;
+}
+	
+.Zebra_DatePicker_Icon_Wrapper {
+  width: 100%;
+}	
+
+
+.comandomodifyarea .marquedescription textarea{
+		width:100%;
+}
+
+	
+.comandomodifyarea .paiementreinput input{
+	width:100%!important;
+}	
+	
+.paddingless{
+	padding-left:0px;
+}	
+.loginhand {
+  left: 0;
+  position: relative;
+  top: 0;
+}
+	
+	
+.productrightinfo {
+  margin-top: 30px;
+}	
+	
+.gallery .thumbs {
+  text-align: center;
+}	
+.gallery .thumbs {
+  height: auto;
+}	
+	
+.gallery .thumbs .thumb {
+  height: 100px;
+  width: 100px;
+}		
+	
+.single_keylist {
+  border-right: 1px solid #dadada;
+  display: block;
+  width: auto;
+}
+	
+.ratingsnumber ul {
+  text-align: center;
+}	
+	
+.ratingtitle {
+  border-bottom: 1px solid #dddddd;
+  border-right:0px;
+  height: auto;
+  margin-top: 0px;
+}	
+.productrinfotitle {
+  float: none;
+  margin-bottom: 20px;
+}
+	
+.probuttoninfo {
+  float: none;
+}	
+
+.organisationdescripss textarea{
+	width:100%!important;
+}	
+	
+	
+div.browse-wrap {
+  width: 70%;
+}	
+.relatedimages {
+  width: 20%;
+}	
+.ratingsnumber {
+  padding-top: 20px;
+}	
+	
+.paymentoptioninfpu ul li input {
+  width: auto!important;
+}	
+	
+.payerdateinput{
+	margin-bottom:20px;
+}	
+.paymentoptioninfpu ul li {
+  display: block;
+  margin-bottom: 8px;
+}
+	
+.payerheaderarea ul li {
+  display: block;
+  margin-bottom: 10px;
+}
+	
+.payerheaderarea ul li a {
+  display: inline-block;
+  width: 100%;
+}
+	
+.payeparlogo {
+  width: 100%;
+}	
+.firstthreecolumn {
+  margin-top: 0px!important;
+}
+	
+.quantititables{
+	overflow: scroll!important;
+}	
+	
+	
+	
+.loginforbuttonss{
+float:none;
+}
+.forgotloginbuttone{
+float:none;
+margin:0px auto 10px;
+}
+.forgotloginbuttontwo{
+float:none;
+margin:0px auto 10px;
+}	
+	
+.globalauthorisbutton button {
+  font-size: 16px;
+  margin-bottom: 15px;
+  padding: 15px 30px;
+  text-align: center;
+  width: 100%;
+}	
+.globalpayment .tooltiptextss {
+font-size: 14px;
+left: 0;
+width: 300px;
+margin: 0px auto;
+text-align: center;
+right: 0;
+}	
+	
+.globalauthorisbutton button {
+  font-size: 16px;
+  margin-bottom: 15px;
+  width: 100%;
+	margin-left:0px;
+}	
+.authorizebutton .tooltiptextss {
+font-size: 14px;
+left: 0;
+width: 300px;
+margin: 0px auto;
+text-align: center;
+right: 0;
+}	
+	
+	
+.paymentoptioninfpu label input {
+  position: relative!important;
+  margin-bottom: 10px!important;
+  margin-left: 0px!important;
+}	
+.payerheaderarea ul li {
+  display: block;
+  width: 100%;
+}	
+
+.payerheaderarea ul li img {
+  display: inline-block;
+  margin: 0 auto;
+  width: 100%;
+}	
+
+.datepickertwentyarea .Zebra_DatePicker_Icon_Wrapper {
+  width: 80%;
+}
+	
+.exportexcellbutton{
+	margin-left:0px!important;
+	margin-right:0px!important;
+	margin-bottom:15px;
+}	
+	
+.admincatdatepicker .Zebra_DatePicker_Icon_Wrapper{
+display: block!important;
+width:80%!important;
+}	
+.admincatdatepicker input{
+margin-left:0px!important;
+margin-top:5px;
+}	
+
+.adcarouseltitle{
+	margin-bottom:60px;
+}
+
+.forgotemailtextss p{
+	text-align:left;
+}
+	
+	
+.cartrolloverdetails{
+	right:0;
+}	
+	
+	
+.newspcialslider {
+  top: 6%;
+  width: 50%;
+}	
+.sliderparfumtext h2 {
+  font-size: 24px;
+}	
+
+.sliderpriceitem span {
+  display: block;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 40px;
+}	
+.newfirstslidecontent button {
+  font-size: 16px;
+  padding: 8px 30px;
+  text-transform: capitalize;
+}		
+.second_slideInner h1, .first_slideInner h1 {
+  font-size: 20px;
+  margin: 0 0 5px;
+}	
+.sliderpriceitem span {
+  display: block;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 30px;
+}
+	
+.sliderparfumtext h2 {
+  font-size: 17px;
+  margin: 0 0 5px;
+}
+.sliderparfumtext span {
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: inherit;
+}	
+	
+	
+.newspcialslider {
+  top: 20%;
+  width: 50%;
+}		
+	
 	
 }
 
@@ -679,8 +1119,8 @@ padding: 10px!important;
    margin-bottom: 30px;
 }
 
-.second_slideInner h1,
-.first_slideInner h1 {
+
+.newsliderheadeing h1 {
   font-size: 28px;
 }
 .second_slideInner .percentageslide,
@@ -895,6 +1335,157 @@ font-size: 16px;
 }	
 	
 	
+/* INDIVDUAL ALL STATUS */	
+	
+.individualtablerow p img{
+	float:none;
+	margin-bottom: 20px;
+}
+.individualtablerow p{
+	text-align: left;
+}	
+.individulaallrow tr td {
+  line-height: inherit!important;
+}	
+	
+.quantityformarea span{
+	margin-top: 15px;
+font-size: 11px;
+}	
+.individualtablerow tr td.quantityformarea{
+	padding-left:0px!important;
+	padding-right:0px!important;
+}	
+	
+.seemoreoptionsbutton ul li {
+  margin-right: 15%;
+}	
+.indicommanfilter .select{
+	width:60%;
+}
+	
+
+.moyenbodyareatotal{
+	width:100%;
+}		
+.nouveautesarea .filterbyarea .select {
+  width: 35%;
+}	
+.borderedamount {
+  border: 1px solid #333;
+  padding: 5px 30px;
+  margin: 5px 0px!important;
+  display: inline-block;
+}
+	
+.nouvellearea .modifyproductinner textarea,	
+.nouvellearea .modifyproductinner input{
+	width:100%;
+	margin-top:10px;
+}		
+	
+	
+.moyenbodyarea .comindiconinput input {
+  width: 100%!important;
+}
+	
+	
+.cogmodifirst input{
+	width:100%!important;
+}
+	
+.paiementreinput input{
+	width:50%!important;
+}	
+.messmodaldia{
+	width:90%;
+}	
+
+.productrightinfo {
+  margin-top: 30px;
+}	
+	
+.gallery .thumbs {
+  text-align: center;
+}	
+.gallery .thumbs {
+  height: auto;
+}	
+	
+.gallery .thumbs .thumb {
+  height: 100px;
+  width: 100px;
+}	
+	
+	
+.organisationdescripss textarea{
+	width:100%!important;
+}	
+	
+	
+.paymentoptioninfpu ul li img {
+  width: 20%;
+}	
+.firstthreecolumn {
+  margin-top: 0px!important;
+}	
+	
+	
+.adminmarqueinput textarea{
+	width:80%!important;
+}	
+	
+.payerheaderarea ul li {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+  width: auto;
+}
+.payerheaderarea ul li img {
+  display: block;
+  margin: 0 auto 20px;
+  width: 30%;
+}
+.payeparlogo {
+  float: none;
+}	
+.payerheaderarea ul li {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+  width: auto;
+}
+.securitylogopayer {
+  float: none;
+  margin: 10px auto;
+}	
+	
+.newspcialslider {
+  width: 40%;
+  top: 20%;
+}		
+.sliderparfumtext h2 {
+  font-size: 24px;
+}	
+
+.sliderpriceitem span {
+  display: block;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 40px;
+}	
+.newfirstslidecontent button {
+  font-size: 24px;
+  padding: 15px 40px;
+  text-transform: capitalize;
+}	
+	
+	
+	
+.firstSoldessliderinner{
+	width:50%!important;
+}	
+	
 	
 }
 
@@ -988,9 +1579,8 @@ right:-26%;
    margin-bottom: 30px;
 }
 
-.second_slideInner h1,
-.first_slideInner h1 {
-  font-size: 32px;
+.newsliderheadeing h1{
+  font-size: 40px;
 }
 .second_slideInner .percentageslide,
 .first_slideInner .percentageslide {
@@ -1092,9 +1682,83 @@ table.dataTable thead .categoryclass::after {
 }	
 	
 	
-	.fordesktopfulwidth input{
-		width:80%!important;
-	}	
+.fordesktopfulwidth input{
+	width:80%!important;
+}	
+.indicommanfilter .select{
+	width:60%;
+}		
+
+
+.moyenbodyareatotal{
+	width:85%;
+}	
+.nouveautesarea .filterbyarea .select {
+  width: 25%;
+}	
+	
+.nouvellearea .modifyproductinner textarea,	
+.nouvellearea .modifyproductinner input{
+	width:80%;
+}	
+
+.single_keylist {
+  border-right: 1px solid #dadada;
+  display: inline-block;
+  width: inherit;
+}	
+	
+.single_keylist ul {
+  padding: 15px;
+}	
+
+.gallery .thumbs .thumb {
+  height: 90px;
+  margin: 3px;
+  padding: 6px;
+  position: relative;
+  width: 75px;
+}	
+.oransationadmin .select {
+  width: 60%;
+}	
+	
+	
+.bilanredtotal > span {
+  background: #ff2727 none repeat scroll 0 0;
+  color: #fff;
+  padding: 10px 50px!important;
+}	
+.stockareafirst tr td {
+  padding: 20px 5px!important;
+  text-align: center;
+}	
+	
+	
+.forgotpassworddesc input[type="email"]{
+	width:100%;
+}	
+	
+	
+.messmodaldia{
+	width:80%;
+}	
+.oransationadmin .select {
+  width: 80%;
+}
+	
+.adminmarqueinput textarea{
+	width:90%!important;
+}		
+.seemoreoptionsbutton ul li {
+  margin-right: 20%;
+}	
+
+.newspcialslider {
+  width: 40%;
+  top: 20%;
+}	
+	
 	
 }
 	
@@ -1129,50 +1793,24 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child::before, tabl
 }	
 	
 	
+.forgotpassworddesc input[type="email"]{
+	width:60%;
+}	
 
+.messmodaldia{
+	width:80%;
+}	
 	
 	
-}
-/*	
+.newspcialslider{
+  width: 40%;
+	top: 30%;
 
-table.dataTable thead .sorting::after {
-  content: "";
-  opacity: 0.2;
-  right: 30px;
-}
-table.dataTable thead .sorting_asc::after {
-  content: "";
-  margin: 0 auto;
-  right: 70px;
-  text-align: center;
 }
 
-table.dataTable thead .sorting_asc::after {
-  content: "";
-  margin: 0 auto;
-  right: 32px;
-  text-align: center;
+
 }
 
-table.dataTable thead .marquetext::after {
-  right: 66px;
-}
-
-table.dataTable thead .prixcontats::after {
-  right: 20px;
-}
-
-table.dataTable thead .descriptionstext::after {
-  right: 70px;
-}
-table.dataTable thead .categoryclass::after {
-  right: 30px;
-}
-table.dataTable thead .notreprix::after {
-  right: 30px;
-}
-	
-*/	
 @media (min-width: 992px){
 .searchbox p input{
 	width:60%;
@@ -1188,21 +1826,8 @@ table.dataTable thead .notreprix::after {
   padding: 15px 30px;
 }
 	
-/*	
-table.dataTable thead .categoryclass::after {
-  right: 0;
-}
-	
-.catalougetheadarea th{
-	font-size: 14px!important;
-}	
 
-.prixcontats.sorting,
-.categoryclass.sorting{
-	padding: 15px 20px!important;
-}	
-*/	
-
+		
 }
 
 
@@ -1219,6 +1844,19 @@ margin: 50px 0;
 .carouselarea img {
   width: 100%;
 }
+	
+.owl-carouseltwo .owl-controls .owl-prev {
+    left: 8%!important;
+}	
+	
+.forgotpassworddesc input[type="email"]{
+	width:100%;
+}
+	
+.messmodaldia{
+	width:80%;
+}		
+	
 }
 
 @media(min-width:1920px){
@@ -1242,6 +1880,18 @@ margin: 50px 0;
   width: 100%;
 	max-height: 100%;
 }	
+	
+.owl-carouseltwo .owl-controls .owl-prev {
+left:11%!important;
+}	
+	
+.forgotpassworddesc input[type="email"]{
+	width:100%;
+}
+	
+.messmodaldia{
+	width:80%;
+}		
 	
 }
 
@@ -1296,6 +1946,8 @@ margin: 50px 0;
 	.searchbox p input{
 		width:60%;
 	}
+	
+	
 
 }
  
@@ -1327,6 +1979,9 @@ margin: 50px 0;
 .productNew{
   right: -15px;
 }
+	
+	
+
 
 }
 
@@ -1602,8 +2257,17 @@ margin: 50px 0;
   float: none;
   width: 100%;
 }
+
+.commandbutton .othermeanbutotn {
+  margin: 0px 0px 30px;
+}	
+
 	
 }
+
+
+
+
 
 
 @media (max-width:480px){
@@ -1620,8 +2284,40 @@ margin: 50px 0;
   float: none;
   width: 100%;
 }	
+.commandbutton .othermeanbutotn {
+ 
+  margin-right: 20px;
+  
+  margin: 0px 0px 30px;
+}	
+	
+	
 	
 }
+
+
+
+
+
+@media(max-width:640px){
+		
+.Zebra_DatePicker_Icon_Wrapper {
+  width: 60%;
+}	
+	
+}
+
+
+
+@media(max-width:320px){
+		
+.newspcialslider {
+  top: 5%!important;
+  width: 50%;
+}
+}
+
+
 
 
 @media (max-width:480px;){

@@ -1,0 +1,96 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"	
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<ui:define name="content">
+			<div id="itme" class="cadre-container">
+				<h:panelGrid columns="" border="0" cellpadding="10" cellspacing="1" width="100%">
+					<h:outputLabel value="#{msg.libelle_gestion_orga}" style="font-weight:bold;" />
+				</h:panelGrid>
+				<br />
+				<h:panelGrid columns="1" border="0" cellpadding="10" cellspacing="1">
+					<h:button type="button" value="#{msg.libelle_ajouter}" outcome="#{organisationsBean.addOrganisationView()}" />
+				</h:panelGrid>
+
+				<h:form id="formOrganisations">
+					<a4j:region>
+						<p:dataTable var="organisation" value="#{organisationsBean.organisationList}"
+							rendered="true" draggableColumns="true"
+							style="margin-bottom:40px" paginator="true" rows="10"
+							widgetVar="organisationTable" emptyMessage="#{msg.libelle_pas_organisation}"
+							filteredValue="#{organisationsBean.filteredOrganisationList}"
+							resizableColumns="true" scrollable="true" scrollHeight="200"
+							editable="true"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="2,10,50">
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText value="#{msg.libelle_rechercher} :" />
+									<p:inputText id="globalFilter"
+										onkeyup="PF('organisationTable').filter()" style="width:150px"
+										placeholder="" />
+								</p:outputPanel>
+							</f:facet>
+							<p:column headerText="#{msg.libelle_orga}" sortBy="#{organisation.orgaNom}"
+								filterBy="#{organisation.orgaNom}" filterMatchMode="contains">
+								<h:outputText value="#{organisation.orgaNom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_prefixe_alias}" sortBy="#{organisation.orgaAlias}"
+								filterBy="#{organisation.orgaAlias}" filterMatchMode="contains">
+								<h:outputText value="#{organisation.orgaAlias}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_liv_paie}" sortBy="#{organisation.isAlivrerAvantPaiement}"
+								filterBy="#{organisation.isAlivrerAvantPaiement}" filterMatchMode="equals">
+								<f:facet name="filter">
+									<p:selectOneButton onchange="PF('organisationTable').filter()">
+										<f:converter converterId="javax.faces.Boolean" />
+										<f:selectItem itemLabel="All" itemValue="" />
+										<f:selectItem itemLabel="oui" itemValue="oui" />
+										<f:selectItem itemLabel="non" itemValue="non" />
+									</p:selectOneButton>
+								</f:facet>
+								<h:outputText value="#{organisation.isAlivrerAvantPaiement ? 'oui': 'non'}" />
+							</p:column>								
+							<p:column headerText="#{msg.libelle_nbr_membre}" sortBy="#{organisation.nbrMembre}"
+								filterBy="#{organisation.nbrMembre}" filterMatchMode="contains">
+								<h:outputText value="#{organisation.nbrMembre}" />
+							</p:column>	
+							<p:column headerText="#{msg.libelle_actif}" sortBy="#{organisation.isActive}"
+								filterBy="#{organisation.isActive}" filterMatchMode="equals">
+								<f:facet name="filter">
+									<p:selectOneButton onchange="PF('organisationTable').filter()">
+										<f:converter converterId="javax.faces.Boolean" />
+										<f:selectItem itemLabel="All" itemValue="" />
+										<f:selectItem itemLabel="true" itemValue="true" />
+										<f:selectItem itemLabel="false" itemValue="false" />
+									</p:selectOneButton>
+								</f:facet>
+								<h:outputText value="#{organisation.isActive ? 'true': 'false'}" />
+							</p:column>	
+							<p:column headerText="#{msg.libelle_modif_le}" sortBy="#{organisation.dateModification}"
+								filterBy="#{organisation.dateModification}" filterMatchMode="contains">
+								<h:outputText value="#{organisation.dateModification}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</p:column>
+							<p:column>
+								<h:commandLink action="#{organisationsBean.editOrganisation()}" value="Edit">
+									<f:param name="idOrga" value="#{organisation.idOrga}" />
+								</h:commandLink>
+							</p:column>
+						</p:dataTable>
+						<ui:include  src="/pages/private/message.xhtml" />
+					</a4j:region>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

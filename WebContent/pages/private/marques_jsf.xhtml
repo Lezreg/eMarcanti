@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"	
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<ui:define name="content">
+			<div id="itme" class="cadre-container">
+				<h:panelGrid columns="" border="0" cellpadding="10" cellspacing="1" width="100%">
+					<h:outputLabel value="#{msg.libelle_gestion_marque}" style="font-weight:bold;" />
+				</h:panelGrid>
+				<br />
+				<h:panelGrid columns="1" border="0" cellpadding="10" cellspacing="1">
+					<h:button type="button" value="#{msg.libelle_ajouter}"
+						outcome="#{marquesBean.addMarqueView()}" />
+				</h:panelGrid>
+
+				<h:form id="formMarques">
+					<a4j:region>
+						<p:dataTable var="marque" value="#{marquesBean.marqueList}"
+							rendered="true" draggableColumns="true"
+							style="margin-bottom:40px" paginator="true" rows="10"
+							widgetVar="marqueTable" emptyMessage="#{msg.libelle_pas_marque}"
+							filteredValue="#{marquesBean.filteredMarqueList}"
+							resizableColumns="true" scrollable="true" scrollHeight="200"
+							editable="true"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="2,10,50">
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText value="#{msg.libelle_rechercher} :" />
+									<p:inputText id="globalFilter"
+										onkeyup="PF('marqueTable').filter()" style="width:150px"
+										placeholder="" />
+								</p:outputPanel>
+							</f:facet>
+							<p:column headerText="#{msg.libelle_marque}" sortBy="#{marque.marqueNom}"
+								filterBy="#{marque.marqueNom}" filterMatchMode="contains">
+								<h:outputText value="#{marque.marqueNom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_acces}" sortBy="#{marque.isFullAccess}"
+								filterBy="#{marque.isFullAccess}" filterMatchMode="equals">
+								<f:facet name="filter">
+									<p:selectOneButton onchange="PF('marqueTable').filter()">
+										<f:converter converterId="javax.faces.Boolean" />
+										<f:selectItem itemLabel="All" itemValue="" />
+										<f:selectItem itemLabel="true" itemValue="true" />
+										<f:selectItem itemLabel="false" itemValue="false" />
+									</p:selectOneButton>
+								</f:facet>
+								<h:outputText value="#{marque.isFullAccess ? 'true': 'false'}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_commentaire}" sortBy="#{marque.commentaire}"
+								filterBy="#{marque.commentaire}" filterMatchMode="contains">
+								<h:outputText value="#{marque.commentaire}" />
+							</p:column>							
+							<p:column>
+								<h:commandLink action="#{marquesBean.editMarque()}" value="Edit">
+									<f:param name="idMarque" value="#{marque.idMarque.shortValue()}" />
+								</h:commandLink>
+							</p:column>
+						</p:dataTable>
+						<ui:include  src="/pages/private/message.xhtml" />
+					</a4j:region>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

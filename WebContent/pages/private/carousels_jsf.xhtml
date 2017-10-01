@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"	
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<ui:define name="content">
+			<div id="itme" class="cadre-container">
+				<h:panelGrid columns="" border="0" cellpadding="10" cellspacing="1" width="100%">
+					<h:outputLabel value="#{msg.libelle_gestion_carousel}" style="font-weight:bold;" />
+				</h:panelGrid>
+				<br />
+				<h:panelGrid columns="1" border="0" cellpadding="10" cellspacing="1">
+					<h:button type="button" value="#{msg.libelle_ajouter}"
+						outcome="#{carouselsBean.addCarouselView()}" />
+				</h:panelGrid>
+
+				<h:form id="formCarousels">
+					<a4j:region>
+						<p:dataTable var="carousel" value="#{carouselsBean.carouselList}"
+							rendered="true" draggableColumns="true"
+							style="margin-bottom:40px" paginator="true" rows="10"
+							widgetVar="carouselTable" emptyMessage="#{msg.libelle_pas_item}"
+							filteredValue="#{carouselsBean.filteredCarouselList}"
+							resizableColumns="true" scrollable="true" scrollHeight="200"
+							editable="true"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="2,10,50">
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText value="#{msg.libelle_rechercher} :" />
+									<p:inputText id="globalFilter"
+										onkeyup="PF('carouselTable').filter()" style="width:150px"
+										placeholder="" />
+								</p:outputPanel>
+							</f:facet>
+							<p:column headerText="#{msg.libelle_nom_item}" sortBy="#{carousel.elementNom}"
+								filterBy="#{carousel.elementNom}" filterMatchMode="contains">
+								<h:outputText value="#{carousel.elementNom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_url_image}" sortBy="#{carousel.elementImageURL}"
+								filterBy="#{carousel.elementImageURL}" filterMatchMode="contains">
+								<h:outputText value="#{carousel.elementImageURL}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_url_lien}" sortBy="#{carousel.elementLienURL}"
+								filterBy="#{carousel.elementLienURL}" filterMatchMode="contains">
+								<h:outputText value="#{carousel.elementLienURL}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_visible}" sortBy="#{carousel.isVisible}"
+								filterBy="#{carouselisVisible}" filterMatchMode="equals">
+								<f:facet name="filter">
+									<p:selectOneButton onchange="PF('carouselTable').filter()">
+										<f:converter converterId="javax.faces.Boolean" />
+										<f:selectItem itemLabel="All" itemValue="" />
+										<f:selectItem itemLabel="true" itemValue="true" />
+										<f:selectItem itemLabel="false" itemValue="false" />
+									</p:selectOneButton>
+								</f:facet>
+								<h:outputText value="#{carousel.isVisible ? 'true': 'false'}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_rang}" sortBy="#{carousel.elementRang}"
+								filterBy="#{carousel.elementRang}" filterMatchMode="contains">
+								<h:outputText value="#{carousel.elementRang}" />
+							</p:column>							
+							<p:column>
+								<h:commandLink action="#{carouselsBean.editCarousel()}" value="Edit">
+									<f:setPropertyActionListener target="#{carouselsBean.idCarousel}" value="#{carousel.idCarousel}" />
+								</h:commandLink>
+							</p:column>
+						</p:dataTable>
+						<ui:include  src="/pages/private/message.xhtml" />
+					</a4j:region>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

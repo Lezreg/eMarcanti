@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.marcanti.ecommerce.dao.FilleulDAO;
 import com.marcanti.ecommerce.dao.MembreDAO;
+import com.marcanti.ecommerce.model.Filleul;
 import com.marcanti.ecommerce.model.Membre;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
@@ -37,20 +38,31 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 	}
 
 	@Override
-	public void updateFilleul(Membre filleul) {
-		membreDAO.updateFilleul(filleul);
+	public void updateFilleulMembre(Membre filleul) {
+		membreDAO.updateFilleulMembre(filleul);
 		
 	}
 
 	@Override
-	public void insertFilleul(Membre filleul, UserSessionBean parrain) {
-		membreDAO.insertFilleul(filleul,parrain);
+	public void insertFilleulMembre(Membre filleul, UserSessionBean parrain) {
+		membreDAO.insertFilleulMembre(filleul,parrain);
 		
 	}
 
 	@Override
 	public List<Membre> getMembreList() {
-		return membreDAO.findAll();
+		Membre membre = null;
+		List<Membre> membres = membreDAO.findAll();
+		for (int i = 0; i < membres.size(); i++) {
+			membre = membres.get(i);
+			if(membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
+				Filleul filleul = filleulDAO.getFilleul(membre.getIdMembre());
+				if(filleul!=null){
+					membre.setNomParrain(filleul.getParrainNom());
+				}
+			}
+		}
+		return membres;
 	}
 
 	@Override
@@ -60,7 +72,10 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 		for (int i = 0; i < membres.size(); i++) {
 			membre = membres.get(i);
 			if(membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
-				membre.setNomParrain(filleulDAO.getFilleul(membre.getIdMembre()).getParrainNom());
+				Filleul filleul = filleulDAO.getFilleul(membre.getIdMembre());
+				if(filleul!=null){
+					membre.setNomParrain(filleul.getParrainNom());
+				}
 			}
 		}
 		return membres;

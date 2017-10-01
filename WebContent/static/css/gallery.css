@@ -1,0 +1,87 @@
+.gallery .images .image {
+  display: none;
+  height: 380px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.gallery .images .image.active {
+  display: block;
+}
+
+.gallery .images .image .content {
+  height: 100%;
+  background: center no-repeat;
+  background-size: cover;
+}
+
+.gallery .images .image .content img{
+	margin:0px auto;
+	text-align: center;
+}
+
+
+.gallery .thumbs {
+  margin-top: 10px;
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .gallery .thumbs {
+    height: 80px;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
+.gallery .thumbs .thumb {
+background: rgba(0, 0, 0, 0) none no-repeat scroll center center / cover ;
+border: 2px solid transparent;
+box-sizing: border-box;
+cursor: pointer;
+display: inline-block;
+margin: 3px;
+padding: 6px;
+position: relative;
+width: 100px;
+}
+
+.gallery .thumbs .thumb img{
+	margin:0px auto;
+	text-align:center;
+}
+
+
+.gallery .thumbs .thumb:before {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 45px;
+  top: -8px;
+}
+
+@media (max-width: 768px) {
+  .gallery .thumbs .thumb {
+    width: 65px;
+    height: 65px;
+  }
+
+  .gallery .thumbs .thumb:before {
+    left: 25px;
+  }
+}
+
+.gallery .thumbs .thumb {
+  border-color: #dadada;
+}
+
+.gallery .thumbs .thumb.active {
+  border-color: #fc8440;
+}
+
+.gallery .thumbs .thumb.active:before {
+  border-bottom-color: #fc8440;
+}

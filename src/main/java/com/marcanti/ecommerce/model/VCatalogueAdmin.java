@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "VCatalogueAdmin.findAll", query = "SELECT v FROM VCatalogueAdmin v")
+    @NamedQuery(name = "VCatalogueAdmin.findAll", query = "SELECT v FROM v_catalogue_admin v")
     , @NamedQuery(name = "VCatalogueAdmin.findByProduitPhotoURL", query = "SELECT v FROM VCatalogueAdmin v WHERE v.produitPhotoURL = :produitPhotoURL")
     , @NamedQuery(name = "VCatalogueAdmin.findByMarqueNom", query = "SELECT v FROM VCatalogueAdmin v WHERE v.marqueNom = :marqueNom")
     , @NamedQuery(name = "VCatalogueAdmin.findByProduitDescription", query = "SELECT v FROM VCatalogueAdmin v WHERE v.produitDescription = :produitDescription")

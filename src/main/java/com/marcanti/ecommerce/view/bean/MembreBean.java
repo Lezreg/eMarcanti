@@ -2,6 +2,7 @@ package com.marcanti.ecommerce.view.bean;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -38,6 +39,8 @@ public class MembreBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private final static Logger logger = LoggerFactory.getLogger(MembreBean.class);
+	
+	private SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
 	private List<Organisation> organisationList;
 	
@@ -65,6 +68,8 @@ public class MembreBean implements Serializable {
 	
 	private String isAddAction="false";
 	
+	private String titreMembre="";
+	
 	@ManagedProperty("#{membreService}")
 	private MembreServiceAction membreService;
 	
@@ -82,6 +87,9 @@ public class MembreBean implements Serializable {
 	
 	@ManagedProperty("#{referentielBean}")
 	private ReferentielBean referentielBean;
+	
+	//@ManagedProperty("#{messageBean}")
+	//private MessageBean messageBean;	
 
 	public MembreBean() {
 	}
@@ -168,22 +176,43 @@ public class MembreBean implements Serializable {
 	public Date getDateCreation() {
 		return membre.getDateCreation();
 	}
-
+	
+	public String getDateCreationStr() {
+		if(membre.getDateCreation()!=null)
+			return formatDate.format(membre.getDateCreation());
+		else
+			return "";
+	}	
+	
 	public void setDateCreation(Date dateCreation) {
 		membre.setDateCreation(dateCreation);
 	}
-
+	
 	public Date getDateModification() {
 		return membre.getDateModification();
 	}
+	
+	public String getDateModificationStr() {
+		if(membre.getDateModification()!=null)
+			return formatDate.format(membre.getDateModification());
+		else
+			return "";		
+	}	
 
 	public void setDateModification(Date dateModification) {
 		membre.setDateModification(dateModification);
 	}
-
+	
 	public Date getDateDerniereConnexion() {
 		return membre.getDateDerniereConnexion();
 	}
+	
+	public String getDateDerniereConnexionStr() {
+		if(membre.getDateDerniereConnexion()!=null)
+			return formatDate.format(membre.getDateDerniereConnexion());
+		else 
+			return "";
+	}	
 
 	public void setDateDerniereConnexion(Date dateDerniereConnexion) {
 		membre.setDateDerniereConnexion(dateDerniereConnexion);
@@ -277,6 +306,14 @@ public class MembreBean implements Serializable {
 	public void setIsAddAction(String isAddAction) {
 		this.isAddAction = isAddAction;
 	}
+	
+	public String getTitreMembre() {
+		return titreMembre;
+	}
+
+	public void setTitreMembre(String titreMembre) {
+		this.titreMembre = titreMembre;
+	}
 
 	public String getOrgaDisabled() {
 		return orgaDisabled;
@@ -326,6 +363,14 @@ public class MembreBean implements Serializable {
 		this.referentielBean = referentielBean;
 	}
 	
+	/*public MessageBean getMessageBean() {
+		return messageBean;
+	}
+
+	public void setMessageBean(MessageBean messageBean) {
+		this.messageBean = messageBean;
+	}*/
+
 	public List<Organisation> getOrganisationList() {
 		return organisationList;
 	}
@@ -374,10 +419,9 @@ public class MembreBean implements Serializable {
 			if(filleul!=null){
 				setIdMembreParrain(filleul.getIdMembreParrain().getIdMembre());
 			}
-			// TODO : traiter le cas si le parrain n'existe pas 
-			
 		}
 		setIsAddAction("false");
+		this.titreMembre = ParfumUtils.getBundleApplication().getString("libelle_modifier_membre");
 		return "membre";
 	}
 	
@@ -388,6 +432,7 @@ public class MembreBean implements Serializable {
 		this.membre.setIdDepartement(new Departement(0L));
 		this.membre.setIdProfil(new Profil());
 		this.membre.setIdOrga(new Organisation(0L));
+		this.titreMembre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_membre");
 		setParrainRendered("false");
 		if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_MANAGER){
 			this.membre.setIdOrga(new Organisation((userSessionBean.getIdOrga())));
@@ -419,6 +464,7 @@ public class MembreBean implements Serializable {
 				facesMessage.setDetail(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				//messageBean.error(msg);
 			}else{
 				
 				UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
@@ -431,13 +477,11 @@ public class MembreBean implements Serializable {
 				}else{
 					membreService.insertMembre(membre);
 				}
+				this.titreMembre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_membre");
 				if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_MANAGER){
-					//Organisation idOrga = new Organisation(userSessionBean.getIdOrga());
-					//this.membresList = membreService.getMembreByOrgaList(idOrga);
 					setHasReducRendered("false");
 					setOrgaDisabled("true");
 				}else if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_ADMIN){
-					//this.membresList = membreService.getMembreList();
 					setHasReducRendered("true");
 					setOrgaDisabled("false");
 				}
@@ -451,6 +495,7 @@ public class MembreBean implements Serializable {
 				facesMessage.setDetail(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				//messageBean.info(msg);
 			    ecran="membres";
 			}
 		}else{
@@ -467,6 +512,7 @@ public class MembreBean implements Serializable {
 				facesMessage.setDetail(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				//messageBean.info(msg);
 				
 			}else{
 				
@@ -475,6 +521,7 @@ public class MembreBean implements Serializable {
 					facesMessage.setDetail(msg); 
 					facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 				    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+					//messageBean.error(msg);
 				}else{
 					membre.setDateModification(dateToday);
 					membreService.updateMembre(membre);
@@ -482,8 +529,10 @@ public class MembreBean implements Serializable {
 					facesMessage.setDetail(msg); 
 					facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 				    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+					//messageBean.info(msg);
 				}
 			}
+			this.titreMembre = ParfumUtils.getBundleApplication().getString("libelle_modifier_membre");
 		}
 		MembresBean membresBean =  (MembresBean)ParfumUtils.getSessionObject("membresBean");
 		if(membresBean.getIdOrga().getIdOrga()==0L){

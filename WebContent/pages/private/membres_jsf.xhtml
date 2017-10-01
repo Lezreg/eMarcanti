@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"	
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="content">
+		
+		
+			<div id="itme" class="cadre-container">
+				<h:form id="formMembres">
+					<h:panelGrid columns="" border="0" cellpadding="10" cellspacing="1" width="100%">
+						<h:outputLabel value="#{msg.libelle_gestion_membres}" style="font-weight:bold;" />
+					</h:panelGrid>
+					<br />
+					<h:panelGrid columns="2" border="0" cellpadding="10" cellspacing="1">
+						<h:outputLabel for="idorga" value="#{msg.libelle_orga}" />
+						<p:selectOneMenu id="idorga" value="#{membresBean.membre.idOrga.idOrga}" styleClass="none" disabled="#{membresBean.orgaDisabled}">
+							 <p:ajax listener="#{membresBean.onOrganisationChange}" update="membresTable" />
+						    <f:selectItems value="#{membresBean.organisationList}" var="c" itemLabel="#{c.orgaNom}" itemValue="#{c.idOrga}" />
+						</p:selectOneMenu>
+					</h:panelGrid>	
+					<h:panelGrid columns="1" border="0" cellpadding="10" cellspacing="1">
+						<h:button type="button" value="#{msg.libelle_ajouter}" outcome="#{membreBean.addMembreView()}" />
+					</h:panelGrid>				
+					<a4j:region>
+						<p:dataTable var="membre" value="#{membresBean.membresList}" id="membresTable"
+							rendered="true" draggableColumns="true"
+							style="margin-bottom:40px" paginator="true" rows="10"
+							widgetVar="membreTable" emptyMessage="pas de membre"
+							filteredValue="#{membresBean.filteredMembresList}"
+							resizableColumns="true" scrollable="true" scrollHeight="200"
+							editable="true"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="20,10,20">
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText value="#{msg.libelle_rechercher} :" />
+									<p:inputText id="globalFilter"
+										onkeyup="PF('membreTable').filter()" style="width:150px"
+										placeholder="Saisir mot clé" />
+								</p:outputPanel>
+							</f:facet>
+							<p:column style="width:16px">
+								<p:rowToggler />
+							</p:column>
+							<p:rowExpansion>
+								<p:panelGrid columns="2" columnClasses="label,value"
+									style="width:300px">
+									<h:outputText value="#{msg.libelle_nom}:" />
+									<p:cellEditor>
+										<h:outputText value="#{membre.membreNom}" />
+									</p:cellEditor>
+									<h:outputText value="#{msg.libelle_prenom}" />
+									<h:outputText value="#{membre.membrePrenom}" />
+								</p:panelGrid>
+							</p:rowExpansion>
+							<p:column headerText="#{msg.libelle_orga}" sortBy="#{membre.idOrga.orgaNom}"
+								filterBy="#{membre.idOrga.orgaNom}" filterMatchMode="contains">
+								<h:outputText value="#{membre.idOrga.orgaNom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_dept}" sortBy="#{membre.idDepartement.departementNom}"
+								filterBy="#{membre.idDepartement.departementNom}" filterMatchMode="contains">
+								<h:outputText value="#{membre.idDepartement.departementNom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_nom}" sortBy="#{membre.membreNom}"
+								filterBy="#{membre.membreNom}" filterMatchMode="contains">
+								<h:outputText value="#{membre.membreNom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_prenom}" sortBy="#{membre.membrePrenom}">
+								<h:outputText value="#{membre.membrePrenom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_email}" sortBy="#{membre.membreEmail}">
+								<h:outputText value="#{membre.membreEmail}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_role}" sortBy="#{membre.idProfil.profilLibelle}">
+								<h:outputText value="#{membre.idProfil.profilLibelle}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_actif}" sortBy="#{membre.isActif}"
+								filterBy="#{membre.isActif}" filterMatchMode="equals">
+								<f:facet name="filter">
+									<p:selectOneButton onchange="PF('membreTable').filter()">
+										<f:converter converterId="javax.faces.Boolean" />
+										<f:selectItem itemLabel="All" itemValue="" />
+										<f:selectItem itemLabel="true" itemValue="true" />
+										<f:selectItem itemLabel="false" itemValue="false" />
+									</p:selectOneButton>
+								</f:facet>
+								<h:outputText value="#{membre.isActif ? 'true': 'false'}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_modif_le}" sortBy="#{membre.dateModification}"
+								filterBy="#{membre.dateModification}" filterMatchMode="contains">
+								<h:outputText value="#{membre.dateModification}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</p:column>	
+							<p:column>
+								<h:commandLink action="#{membreBean.editMembre()}" value="Edit">
+									<f:setPropertyActionListener target="#{membreBean.idMembre}" value="#{membre.idMembre}" />
+									<f:setPropertyActionListener target="#{membreBean.oldMembreEmail}" value="#{membre.membreEmail}" />
+									<f:setPropertyActionListener target="#{membreBean.idOrgaSelected}" value="#{membre.idOrga.idOrga}" />
+								</h:commandLink>
+							</p:column>
+						</p:dataTable>
+						<ui:include  src="/pages/private/message.xhtml" />
+					</a4j:region>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

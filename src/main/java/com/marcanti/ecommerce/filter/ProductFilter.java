@@ -34,18 +34,16 @@ public class ProductFilter implements Serializable {
 		setProduits(service.listAllProduit());
 	}
 
-	public boolean filterByPrice(Object value, Object filter, Locale locale) {
-		String filterText = (filter == null) ? null : filter.toString().trim();
-		if (filterText == null || filterText.equals("")) {
-			return true;
-		}
-
-		if (value == null) {
-			return false;
-		}
-
-		return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
-	}
+	 public boolean filterByPrice(Object value, Object filter, Locale locale) {
+	        String filterText = (filter == null) ? null : filter.toString().trim();
+	        if(filterText == null||filterText.equals("")) {
+	            return true;
+	        }
+	        if(value == null) {
+	            return false;
+	        }
+	        return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
+	    }
 
 	public List<String> getBrands() {
 		List<String> brands = new ArrayList<>();

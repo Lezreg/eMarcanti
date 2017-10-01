@@ -1,57 +1,313 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:f="http://java.sun.com/jsf/core" class="no-js" lang="en">
 
-<h:head>
-	<title>#{msg.libelle_appli}</title>
 
-	<h:outputStylesheet>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<title><h:outputText value="#{msg.libelle_appli}" /></title>
+	<meta name="description" content="Responsive website"/>
+	<meta name="keywords" content="responsive website"/>
+	<meta name="author" content="site"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	
-  	div.centre {
-    position:absolute;
-    left: 50%;
-    top: 50%;
-    width: 200px;
-    height: 200px;
-    margin-left: -100px; 
-    margin-top: -100px; 
-	}
- 
-	</h:outputStylesheet>
+	<!--google fonts-->
+	<!--font awesome-->
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/fonts-googleapis.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/font-awesome.min.css"/>
+	<!--end font awesome-->
+	
+	
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/flaticon.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/flags.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/owl.carousel.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/owl.theme.default.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/template.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/normalize.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/style.css"/>
+	<link rel="stylesheet" href="#{request.contextPath}/static/css/responsive.css"/>
+	<script src="#{request.contextPath}/static/js/vendor/modernizr-2.6.2.min.js"></script>
+	<!--[if lt IE 9]>
+				<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+				<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
 	
 	<script type="text/javascript">
 
 	function changePasswordPopup() { 
-    	window.open('/eCommerce/faces/pages/public/change_password.xhtml','parfum', 'resizable=no,toolbar=no,scrollbars=no,height=350,width=600,top=145,left=235');
+    	window.open('/eCommerce/faces/pages/public/change_password.xhtml','parfum', 'resizable=no,toolbar=no,scrollbars=no,height=550,width=950,top=100,left=145');
      	return true;
  	}
 
 	</script>
 
-</h:head>
+</head>
+
+<body>
 
 
-<h:body>
 
-	<div class="centre">
-		<h:form>
-			
-			<ui:include  src="/pages/private/message.xhtml" />
-			<h:panelGrid id="connection" columns="2" border="0" cellpadding="10" cellspacing="1" style="white-space: nowrap">
+	<!-- Start header -->
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-lg-5">
+					<div class="logo">
+						<h:outputLink value="login.xhtml"><h:graphicImage value="/static/img/logo_big.svg" styleClass="img-responsive" alt="logo"/></h:outputLink>
+					</div>
+				</div>
+				<!--end col-->
 
-				<h:outputLabel value="#{msg.libelle_login}" />
-				<h:inputText value="#{authentificationBean.username}" />
-				<h:outputLabel value="#{msg.libelle_password}" />
-				<h:inputSecret value="#{authentificationBean.password}" />
-				<h:commandButton type="submit" value="#{msg.libelle_valider}"
-					action="#{authentificationBean.checkAuthentication()}" />
-			</h:panelGrid>
-		</h:form>
-		<h:link value="#{msg.libelle_password_oublie}" onclick="javascript:changePasswordPopup();" />
+				<div class="col-xs-8 col-sm-3 col-md-2">
+					<div class="myaccount">
+						<ul>
+							<li><a href="mon_compte.html"><i class="fa fa-user-o"></i>Mon Compte</a></li>
+						</ul>
+					</div>
+				</div>
+				<!--end col-->
+
+				<div class="col-xs-4 col-sm-3 col-md-2">
+					<div class="cartarea cartareatwoss">
+						<p class="cartlinkarea">
+							<a href=""><i class="flaticon-shopping-cart"></i><sup class="cartnumber">3</sup></a>
+						</p>
+
+
+						<!-- start cart roll over area-->
+						<div class="cartrolloverdetails">
+
+
+							<div class="singlecartitems">
+								<div class="media">
+									<div class="media-body">
+										<div class="singleitemstexts">
+											<a href="">1 x Burberry Body</a> <a href="">Lait pour le
+												corps, Flacon, 85 ml</a> <span>23,87 € </span>
+										</div>
+									</div>
+									<div class="media-left">
+										<div class="trashbutton">
+											<i class="fa fa-trash"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--end single cart item-->
+
+							<div class="singlecartitems">
+
+
+								<div class="media">
+									<div class="media-body">
+										<div class="singleitemstexts">
+											<a href="">1 x Burberry Body</a> <a href="">Lolita
+												Lempicka EDP 100ml Vapo Tester</a> <span>39€</span>
+										</div>
+									</div>
+									<div class="media-left">
+										<div class="trashbutton">
+											<i class="fa fa-trash"></i>
+										</div>
+									</div>
+								</div>
+
+
+
+							</div>
+							<!--end single cart item-->
+
+							<div class="clearfix"></div>
+
+							<div class="totaltextitem">
+								<p>
+									Total<span>27,86 €</span>
+								</p>
+								<div class="clearfix"></div>
+							</div>
+							<a href="commande-individuelle-not-confirmed.html"
+								class="commanderbutton">Commander</a>
+						</div>
+						<!-- end cart roll over area-->
+
+					</div>
+				</div>
+				<!--end col-->
+
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+					<div class="searchbox">
+						<p>
+							<input type="search" name="search" id="search"
+								placeholder="Search..."/>
+							<button>
+								<i class="fa fa-search"></i>
+							</button>
+						</p>
+					</div>
+				</div>
+				<!--end col-->
+
+			</div>
+		</div>
+	</header>
+	<!-- end header -->
+
+
+	<div class="logintoptext">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="innertextlogin">
+						<p>Site réservé aux comités d’entreprise, aux associations, et
+							aux organisations souhaitant faire bénéficier à leurs
+							collaborateurs d’offres exceptionnelles sur les parfums, les
+							cosmétiques … Prix professionnels appliqués !</p>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
-</h:body>
+
+	<section class="loginpagearea">
+		<h2 class="section_header">sec</h2>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="paddingless col-sm-4 col-md-6">
+					<div class="loginhand">
+						<h:graphicImage value="/static/img/hand.png" styleClass="img-responsive" alt="hand"/>
+					</div>
+				</div>
+				<div class="col-sm-7 col-md-5">
+					<div class="loginformarea">
+						<h2>#{msg.libelle_acces_membre}</h2>
+						<h:form>
+							<div class="form-group">
+								<h:inputText value="#{authentificationBean.username}" id="email" styleClass="form-control" pt:placeholder="#{msg.libelle_email}" />
+							</div>
+							<div class="form-group">
+								<h:inputSecret value="#{authentificationBean.password}" id="password" styleClass="form-control" pt:placeholder="#{msg.libelle_password}" />
+							</div>
+
+							<div class="checkboxinput checkbox">
+								<label class="rememberlable" style="text-transform: inherit;">
+									<input type="checkbox"/>Se souvenir de moi 
+								</label> 
+								<label class="forgotpassword" data-toggle="modal" data-target="#forgotid" style="text-transform: inherit;"><h:link value="#{msg.libelle_password_oublie}" onclick="javascript:changePasswordPopup();" /></label>
+							</div>
+							<h:commandButton styleClass="loginbutton btn btn-default" value="#{msg.libelle_connexion}" action="#{authentificationBean.checkAuthentication()}" />
+							<p>Non inscrit ?</p>
+							<button type="submit" class="signupbutton btn btn-default">Inscription</button>
+						</h:form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!--end footer top area-->
+	<section class="footerToplistarea" style="margin-top: 0px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="footerToparea">
+						<h5>support</h5>
+						<ul>
+							<li><i class="fa fa-angle-right"></i><a href="">blogs</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">FAQs</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">terms &#38; conditions</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">privacy policy</a></li>
+						</ul>
+					</div>
+				</div>
+				<!--end col-->
+
+				<div class="col-sm-3">
+					<div class="footerToparea">
+						<h5>about us</h5>
+						<ul>
+							<li><i class="fa fa-angle-right"></i><a href="">why us</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">who we are</a></li>
+						</ul>
+					</div>
+				</div>
+				<!--end col-->
+
+				<div class="col-sm-3">
+					<div class="footerToparea">
+						<h5>social links</h5>
+						<ul>
+							<li><i class="fa fa-angle-right"></i><a href="">facebook</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">twitter</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">linkedin</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">pinterest</a></li>
+						</ul>
+					</div>
+				</div>
+				<!--end col-->
+
+				<div class="col-sm-3">
+					<div class="footerToparea">
+						<h5>contact us</h5>
+						<ul>
+							<li>3 rue du Paradis</li>
+							<li>75000, Paris</li>
+							<li>Email:contact@parfum achat groupé</li>
+						</ul>
+					</div>
+				</div>
+				<!--end col-->
+
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="copyrightarea">
+						<p>&#169; 2017 parfum achat groupé all right reserved</p>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="paymentlist">
+						<ul>
+							<li><a href=""><h:graphicImage value="/static/img/visacard.png" styleClass="img-responsive" alt="paymentcard"/></a></li>
+							<li><a href=""><h:graphicImage value="/static/img/mastercard.png" styleClass="img-responsive" alt="paymentcard"/></a></li>
+							<li><a href=""><h:graphicImage value="/static/img/discovercard.png" styleClass="img-responsive" alt="paymentcard"/></a></li>
+							<li><a href=""><h:graphicImage value="/static/img/americanexpress.png" styleClass="img-responsive" alt="paymentcard"/></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+
+	<!-- script here -->
+	<h:outputScript>
+		<![CDATA[
+	    	window.jQuery || document.write('<script src="/eCommerce/static/js/vendor/jquery.min.js"><\/script>')
+	   	]]>
+	</h:outputScript>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="#{request.contextPath}/static/js/jquery.owl-filter.js"></script>
+	<script src="#{request.contextPath}/static/js/owl.carousel.js"></script>
+	<script src="#{request.contextPath}/static/js/jquery.flagstrap.js"></script>
+	<script src="#{request.contextPath}/static/js/scripts.js"></script>
+	<script src="#{request.contextPath}/static/js/bootstrap.min.js"></script>	
+
+</body>
+
 </html>
