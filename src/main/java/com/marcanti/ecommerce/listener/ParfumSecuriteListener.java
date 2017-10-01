@@ -19,7 +19,7 @@ public class ParfumSecuriteListener implements PhaseListener {
 
 	public void beforePhase(PhaseEvent event) {
 		
-		FacesContext facesContext = event.getFacesContext();
+		/*FacesContext facesContext = event.getFacesContext();
 		HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 		response.addHeader("Pragma", "no-cache");
 		response.addHeader("Cache-Control", "no-cache");
@@ -27,7 +27,7 @@ public class ParfumSecuriteListener implements PhaseListener {
 		response.addHeader("Cache-Control", "no-store");
 		response.addHeader("Cache-Control", "must-revalidate");
 		// some date in the past
-		response.addHeader("Expires", "Mon, 8 Aug 2006 10:00:00 GMT");
+		response.addHeader("Expires", "Mon, 8 Aug 2006 10:00:00 GMT");*/
 		
 		
 		/*HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();

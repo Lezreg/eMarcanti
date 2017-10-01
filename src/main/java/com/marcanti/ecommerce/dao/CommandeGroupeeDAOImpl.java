@@ -9,10 +9,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.marcanti.ecommerce.model.CommandeGroupee;
+import com.marcanti.ecommerce.model.CommandeIndividuelle;
 
 /**
  *
@@ -20,10 +24,40 @@ import com.marcanti.ecommerce.model.CommandeGroupee;
  */
 @Repository
 public class CommandeGroupeeDAOImpl extends AbstractGenericDAO<CommandeGroupee> implements CommandeGroupeeDAO {
+	/**
+	 * 
+	 */
+	private static final Logger LOGGER = LoggerFactory.getLogger(CommandeGroupeeDAOImpl.class);
+	
 
 	@PersistenceContext
     private EntityManager em;
-
+	
+	@Override
+	public Long getIdDerniereCdeGoupee(Long idOrg) {
+		Query query = em
+				.createQuery(
+						"SELECT max (c.idCdeGroupee) FROM CommandeGroupee c WHERE c.idOrga.idOrga = :idOrga and  c.idStatus.statusCode = :statusCode ")
+				.setParameter("idOrga", idOrg)
+				.setParameter("statusCode", "CDE_GROUPEE_A_LIVRER");
+		
+		if (query.getResultList() == null || query.getResultList().isEmpty()) {
+			return null;
+		}
+		return (Long) query.getResultList().get(0);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CommandeGroupee> getCmdGroupeesByOrg(Long idOrg) {
+		Query query = em
+				.createQuery(
+						"SELECT c FROM CommandeGroupee c WHERE c.idOrga.idOrga = :idOrga")
+				.setParameter("idOrga", idOrg);
+		return (List<CommandeGroupee>) query.getResultList();
+	}
+	
+	
     public CommandeGroupeeDAOImpl() {
         super(CommandeGroupee.class);
     }
@@ -60,5 +94,10 @@ public class CommandeGroupeeDAOImpl extends AbstractGenericDAO<CommandeGroupee> 
     protected EntityManager getEntityManager() {
         return em;
     }
+
+
+	
+
+	
     
 }

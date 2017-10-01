@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
+import com.marcanti.ecommerce.model.CommandeIndividuelleStatus;
 
 /**
  *
@@ -28,6 +29,14 @@ public class CommandeGroupeeStatusDAOImpl extends AbstractGenericDAO<CommandeGro
     public CommandeGroupeeStatusDAOImpl() {
         super(CommandeGroupeeStatus.class);
     }
+    
+    
+    @Override
+	public CommandeGroupeeStatus getCommandeGroupeeStatusByCode(String statusCode) {
+		return (CommandeGroupeeStatus) em.createNamedQuery("CommandeGroupeeStatus.findByStatusCode")
+				.setParameter("statusCode", statusCode).getSingleResult();
+	}
+    
 
     public void create(CommandeGroupeeStatus entity) {
         super.create(entity);

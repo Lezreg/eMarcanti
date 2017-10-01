@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.marcanti.ecommerce.model.UserSession;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 /**
  * 
@@ -35,6 +35,11 @@ import com.marcanti.ecommerce.model.UserSession;
 public class ParfumUtils {
 	
 	public static final String BEAN_SESSION_NAME = "USER_SESSION";
+	
+	public static final short PROFIL_MEMBRE  = 1;
+	public static final short PROFIL_FILLEUL = 2;
+	public static final short PROFIL_MANAGER = 3;
+	public static final short PROFIL_ADMIN   = 4;
 
 	/**
 	 * Gestion des Logs.
@@ -64,12 +69,12 @@ public class ParfumUtils {
 
 	}
 
-	public static UserSession getUserSessionBean() {
+	public static UserSessionBean getUserSessionBean() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		return (UserSession)session.getAttribute(BEAN_SESSION_NAME);
+		return (UserSessionBean)session.getAttribute(BEAN_SESSION_NAME);
 	}
 	
-	public static void setUserSessionBean(UserSession userSession) {
+	public static void setUserSessionBean(UserSessionBean userSession) {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		session.setAttribute(BEAN_SESSION_NAME,userSession);
 	}	

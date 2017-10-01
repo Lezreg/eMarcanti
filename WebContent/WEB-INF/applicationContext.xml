@@ -43,8 +43,7 @@
 		<beans:property name="packagesToScan" value="com.marcanti.ecommerce.model" />
 		<beans:property name="hibernateProperties">
 			<beans:props>
-				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
-				</beans:prop>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
 				<beans:prop key="hibernate.show_sql">true</beans:prop>
 			</beans:props>
 		</beans:property>
@@ -86,52 +85,63 @@
 
 	<!-- list of beans -->
 
-	<beans:bean id="produitService"
-		class="com.marcanti.ecommerce.service.ProduitServiceActionImpl">
-		<beans:property name="produitDAO" ref="produitDAOImpl" />
-	</beans:bean>
+<!-- 	<beans:bean id="produitService" -->
+<!-- 		class="com.marcanti.ecommerce.service.ProduitServiceActionImpl"> -->
+<!-- 		<beans:property name="produitDAO" ref="produitDAOImpl" /> -->
+<!-- 	</beans:bean> -->
 
-	<beans:bean id="panierService"
-		class="com.marcanti.ecommerce.service.PanierServiceActionImpl">
-		<beans:property name="panierDao" ref="panierDAOImpl" />
+<!-- 	<beans:bean id="panierService" -->
+<!-- 		class="com.marcanti.ecommerce.service.PanierServiceActionImpl"> -->
+<!-- 		<beans:property name="panierDao" ref="panierDAOImpl" /> -->
+<!-- 	</beans:bean> -->
+	
+<!-- 	<beans:bean id="authentificationDAO" -->
+<!-- 		class="com.marcanti.ecommerce.dao.AuthentificationDAOImpl"> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="authentificationService" -->
+<!-- 		class="com.marcanti.ecommerce.service.actions.AuthentificationServiceActionImpl"> -->
+<!-- 		<beans:property name="authentificationDAO" ref="authentificationDAO"></beans:property> -->
+<!-- 	</beans:bean>	 -->
+	
+<!-- 	<beans:bean id="filleulDAO" -->
+<!-- 		class="com.marcanti.ecommerce.dao.impl.FilleulDAOImpl"> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="filleulsService" -->
+<!-- 		class="com.marcanti.ecommerce.service.actions.FilleulsServiceActionImpl"> -->
+<!-- 		<beans:property name="filleulDAO" ref="filleulDAO"></beans:property> -->
+<!-- 	</beans:bean>	 -->
+	
+<!-- 	<beans:bean id="membreDAO" -->
+<!-- 		class="com.marcanti.ecommerce.dao.MembreDAOImpl"> -->
+<!-- 	</beans:bean>	 -->
+<!-- 	<beans:bean id="membreService" -->
+<!-- 		class="com.marcanti.ecommerce.service.actions.MembreServiceActionImpl"> -->
+<!-- 		<beans:property name="membreDAO" ref="membreDAO"></beans:property> -->
+<!-- 	</beans:bean>	 -->
+	
+	<beans:bean id="sousCategorieDAO"
+		class="com.marcanti.ecommerce.dao.SousCategorieDAOImpl">
+	</beans:bean>
+	<beans:bean id="sousCategorieService"
+		class="com.marcanti.ecommerce.service.actions.SousCategorieServiceActionImpl">
+		<beans:property name="sousCategorieDAO" ref="sousCategorieDAO"></beans:property>
 	</beans:bean>
 	
-	<beans:bean id="authentificationDAO"
-		class="com.marcanti.ecommerce.dao.impl.AuthentificationDAOImpl">
+	<beans:bean id="categorieDAO" 
+		class="com.marcanti.ecommerce.dao.CategorieDAOImpl">
 	</beans:bean>
-	<beans:bean id="authentificationService"
-		class="com.marcanti.ecommerce.service.actions.impl.AuthentificationServiceActionImpl">
-		<beans:property name="authentificationDAO" ref="authentificationDAO"></beans:property>
-	</beans:bean>	
-	
-	<beans:bean id="filleulDAO"
-		class="com.marcanti.ecommerce.dao.impl.FilleulDAOImpl">
+	<beans:bean id="categorieService"
+		class="com.marcanti.ecommerce.service.actions.CategorieServiceActionImpl">
+		<beans:property name="categorieDAO" ref="categorieDAO"></beans:property>
 	</beans:bean>
-	<beans:bean id="filleulsService"
-		class="com.marcanti.ecommerce.service.actions.impl.FilleulsServiceActionImpl">
-		<beans:property name="filleulDAO" ref="filleulDAO"></beans:property>
-	</beans:bean>	
 	
-	<beans:bean id="membreDAO"
-		class="com.marcanti.ecommerce.dao.impl.MembreDAOImpl">
-	</beans:bean>	
-	<beans:bean id="membreService"
-		class="com.marcanti.ecommerce.service.actions.impl.MembreServiceActionImpl">
-		<beans:property name="membreDAO" ref="membreDAO"></beans:property>
-	</beans:bean>	
-	
-	<beans:bean id="organisationDAO"
-		class="com.marcanti.ecommerce.dao.impl.OrganisationDAOImpl">
-	</beans:bean>	
-	<beans:bean id="profilDAO"
-		class="com.marcanti.ecommerce.dao.impl.ProfilDAOImpl">
-	</beans:bean>	
-	<beans:bean id="referentielService"
-		class="com.marcanti.ecommerce.service.actions.impl.ReferentielServiceActionImpl">
-		<beans:property name="organisationDAO" ref="organisationDAO"></beans:property>
-		<beans:property name="profilDAO" ref="profilDAO"></beans:property>
-	</beans:bean>	
-
+<!-- 	<beans:bean id="catalogueDAO" -->
+<!-- 		class="com.marcanti.ecommerce.dao.VCatalogueAdminDAOImpl"> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="catalogueService" -->
+<!-- 		class="com.marcanti.ecommerce.service.actions.CatalogueAdminServiceActionImpl"> -->
+<!-- 		<beans:property name="catalogueDAO" ref="catalogueDAO"></beans:property> -->
+<!-- 	</beans:bean>	 -->
 
 
 </beans:beans>

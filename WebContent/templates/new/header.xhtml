@@ -20,7 +20,7 @@
 </style>
 	<center>
 		<h:form id="basketform">
-			<h:commandLink id="bag" value="(#{basketView.produitsAdded.size()})" styleClass="right"  action="#{basketView.redirect()}">
+			<h:commandLink id="bag" value="(#{basketView.panierEnCours.panierNbreProduit})" styleClass="right"  action="#{basketView.redirect()}">
 				<h:graphicImage value="/images/icons/shopping-cart-64.png"/>
 			</h:commandLink>
 		</h:form>

@@ -62,5 +62,10 @@ public class ParamDAOImpl extends AbstractGenericDAO<Param> implements ParamDAO 
     protected EntityManager getEntityManager() {
         return em;
     }
+
+	@Override
+	public String getDefaultPassword() {
+		return (String)em.createNativeQuery("SELECT param.value FROM param where param.key='default.password'").getSingleResult();
+	}
     
 }

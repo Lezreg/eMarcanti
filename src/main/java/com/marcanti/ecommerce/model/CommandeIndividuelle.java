@@ -176,8 +176,9 @@ public class CommandeIndividuelle implements Serializable {
         return totalAPayer;
     }
 
-    public void setTotalAPayer(BigDecimal totalAPayer) {
+	public CommandeIndividuelle setTotalAPayer(BigDecimal totalAPayer) {
         this.totalAPayer = totalAPayer;
+		return this;
     }
 
     public String getCommentaire() {

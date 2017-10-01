@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="panierId">
+		
+			<p:selectOneMenu id="cmdIdiv" value="#{basketView.selectedCmd}" required="true" label="choisir une commande"
+			    style="width: 200px" sortBy="#{panierProduit.qteSouhaitee}">
+			    <f:selectItems value="#{basketView.commandes}" var="order" itemLabel="#{order.cdeIndivNom}" itemValue="#{order.idCdeIndiv}" />
+			    <p:ajax  update="panierProduitTable ttp" />
+			</p:selectOneMenu>
+			<br/>
+			
+			<p:growl id="growl" for="qte" showDetail="true" sticky="true" /> 
+			
+			<table style="border-spacing: 25px;">
+				  	<tr>
+				  		<td align="left">
+				  			<h:outputText value="Dernière Modification " />
+				  		</td>
+				  		<td align="left" class="textInfo">
+				  			<h:outputText id="modifId" style="color : rgb(108, 107, 98);" value="#{basketView.commandeIndividuelle.dateModification} par #{basketView.commandeIndividuelle.prenomModifieur} #{basketView.commandeIndividuelle.nomModifieur}" />
+				  		</td>
+				  		
+				  		<td align="right">
+				  			<h:outputText value="Etat: " />
+				  		</td>
+				  		<td align="right">
+				  			<h:outputText id="statutid" style="color : rgb(48, 186, 50);margin-left:-4px;" value="#{basketView.commandeIndividuelle.idStatus.statusLibelle}" />
+				  		</td>
+				  	</tr>
+				  	
+			</table>
+			
+			<p:dataTable id="panierProduitTable" var="panierProduit" value="#{basketView.panierProduitList}" emptyMessage="Nenhuma entrada!" liveResize="true">
+
+				<p:column headerText="Marque">
+					<p:graphicImage
+						url="/images/100X100/#{empty panierProduit.produit.produitPhotoURL ? 'default.jpg' : panierProduit.produit.produitPhotoURL}"
+						width="100" />
+					<h:outputText value="#{produitAdded.idMarque.marqueNom}" />
+				</p:column>
+
+				<p:column headerText="Description">
+					<h:outputText value="#{panierProduit.produit.produitDescription}" />
+				</p:column>
+				
+				<p:column style="width:110px" headerText="Notre prix" footerText="">
+					<h:outputText value="#{panierProduit.produit.notrePrix}">
+						<f:convertNumber currencySymbol="€" type="currency" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Qté">
+					<h:inputText id="qte" value="#{panierProduit.qteSouhaitee}" />
+					<p:outputLabel for="qte"/> 
+				</p:column>
+				
+				<p:column headerText="Sous Total">
+					<h:outputText value="#{panierProduit.sousTotal}">
+						<f:convertNumber currencySymbol="€" type="currency" />
+					</h:outputText>
+				</p:column>
+				
+			</p:dataTable>
+			
+				<table>
+				  	<tr>
+				  		<td align="left">
+							<p:commandButton value="Recalculer" id="calculButton" update="panierProduitTable" action="#{basketView.reCalculer}" styleClass="ui-priority-primary" />
+				  		</td>
+				  	</tr>
+				  	<tr>
+				  		<td align="left">
+				  			<h:outputText value="Total à payer : " />
+				  		</td>
+				  		<td align="left">
+							<h:outputText id="ttp" value="#{basketView.commandeIndividuelle.totalAPayer}" title="Total à payer" >
+								<f:convertNumber currencySymbol="€" type="currency" />
+							</h:outputText>
+				  		</td>
+				  	</tr>
+				  	<tr>
+				  		<td align="right">
+				  			<p:commandButton value="Confirmer" id="confirmButton" update="panierProduitTable" action="#{basketView.confirmerCommandeIndiv}" styleClass="ui-priority-primary"/>
+				  		</td>
+				  	</tr>
+				  	<tr>
+				  		<td align="right">
+				  			<p:commandButton value="Payer" id="pButton" action="payer" styleClass="ui-priority-primary" />
+				  		</td>
+				  	</tr>
+				</table>
+		
+		</h:form>
+			
+	</ui:define>
+</ui:composition>

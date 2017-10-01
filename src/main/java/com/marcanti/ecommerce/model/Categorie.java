@@ -10,6 +10,8 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,21 +37,27 @@ public class Categorie implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     private Short idCategorie;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 120)
     private String categorieNom;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
     private String categorieCode;
+    
     @Size(max = 512)
     private String categorieIconeURL;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategorieProduit")
     private Collection<SousCategorie> sousCategorieCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategorie")
     private Collection<Produit> produitCollection;
 

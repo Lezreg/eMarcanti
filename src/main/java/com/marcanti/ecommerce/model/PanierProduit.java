@@ -6,6 +6,8 @@
 package com.marcanti.ecommerce.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+
 import javax.persistence.Basic;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -14,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -43,8 +46,19 @@ public class PanierProduit implements Serializable {
     @JoinColumn(name = "idProduit", referencedColumnName = "idProduit", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Produit produit;
+	/** juste pour l'affichage **/
+	@Transient
+	private BigDecimal sousTotal;
 
-    public PanierProduit() {
+	public BigDecimal getSousTotal() {
+		return getProduit().getNotrePrix().multiply(new BigDecimal(getQteSouhaitee()));
+	}
+
+	public void setSousTotal(BigDecimal sousTotal) {
+		this.sousTotal = sousTotal;
+	}
+
+	public PanierProduit() {
     }
 
     public PanierProduit(PanierProduitPK panierProduitPK) {
