@@ -1,7 +1,0 @@
-.ui-icon-panier{
-    background-image: url("#{WebContent['/images/icons/panier.jpg']}");
-}
-
-.ui-state-default .ui-icon-basket {
-     background-image: url("#{WebContent['/images/icons/basket.png']}");
-}

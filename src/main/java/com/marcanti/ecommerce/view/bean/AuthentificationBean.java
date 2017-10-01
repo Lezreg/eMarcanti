@@ -1,6 +1,7 @@
 package com.marcanti.ecommerce.view.bean;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -9,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -16,6 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
+import com.marcanti.ecommerce.utils.Mail;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 
@@ -142,10 +145,11 @@ public class AuthentificationBean implements Serializable {
 	    if(isOK){
 	    	try {
 	    		boolean isDefaultPassword = service.getIsDefaultPassword(getUsername());
+	    		UserSessionBean userSession = service.getUserSession(getUsername());
+	    		userSession.setMenuRight();
+				ParfumUtils.setUserSessionBean(userSession);
+				service.updateLastConnectionDate(dateToday, getUsername());
 				if(isDefaultPassword){
-					UserSessionBean userSession = service.getUserSession(getUsername());
-					ParfumUtils.setUserSessionBean(userSession);
-					service.updateLastConnectionDate(dateToday, getUsername());
 					ecran = "index";
 				}else{
 					HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
@@ -189,14 +193,12 @@ public class AuthentificationBean implements Serializable {
 			request.setAttribute("email", getUsername());
 			
 			// envoi du mail avec le code généré plus haut
-			// try {
-			// logger.info("send mail with generated code : " + code);
-			// // Mail.send(getUsername(),
-			// //
-			// ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.code.verification"),String.valueOf(code)));
-			// } catch (MessagingException e) {
-			// logger.error("ERROR send mail with generated code : ",e);
-			// }
+			try {
+				logger.info("send mail with generated code : " + code);
+				Mail.send(getUsername(), ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.code.verification"),String.valueOf(code)));
+			} catch (MessagingException e) {
+				logger.error("ERROR send mail with generated code : ",e);
+			}
 			
 		}else{
 			msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_invalidEmail");
@@ -242,13 +244,12 @@ public class AuthentificationBean implements Serializable {
 				logger.error("ERROR update Generated password : ",e);
 			} 
 			// envoi du mail avec le password sur 8 caractères
-			// try {
-			// logger.info("send mail with generated password : " + password);
-			// Mail.send(email,
-			// ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.membre.password.regenere"),email,password));
-			// } catch (MessagingException e) {
-			// logger.error("ERROR send mail with generated password : ",e);
-			// }
+			try {
+				logger.info("send mail with generated password : " + password);
+				Mail.send(email, ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.membre.password.regenere"),email,password));
+			} catch (MessagingException e) {
+				logger.error("ERROR send mail with generated password : ",e);
+			}
 			
 		}else{
 			msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_invalidCode");

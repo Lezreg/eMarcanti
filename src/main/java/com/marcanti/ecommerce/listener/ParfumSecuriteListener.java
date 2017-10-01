@@ -1,10 +1,16 @@
 package com.marcanti.ecommerce.listener;
 
+import javax.faces.application.NavigationHandler;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.marcanti.ecommerce.model.Membre;
+import com.marcanti.ecommerce.utils.ParfumUtils;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 public class ParfumSecuriteListener implements PhaseListener {
 	
@@ -19,8 +25,8 @@ public class ParfumSecuriteListener implements PhaseListener {
 
 	public void beforePhase(PhaseEvent event) {
 		
-		/*FacesContext facesContext = event.getFacesContext();
-		HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+		FacesContext facesContext = event.getFacesContext();
+		/*HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
 		response.addHeader("Pragma", "no-cache");
 		response.addHeader("Cache-Control", "no-cache");
 		// Stronger according to blog comment below that references HTTP spec
@@ -30,15 +36,15 @@ public class ParfumSecuriteListener implements PhaseListener {
 		response.addHeader("Expires", "Mon, 8 Aug 2006 10:00:00 GMT");*/
 		
 		
-		/*HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String uri = request.getRequestURL().toString();
 		boolean isPrivatePage = uri.contains("private");
-		Membre membre = (Membre)request.getSession().getAttribute("membre");
-		if(membre==null && isPrivatePage){
-			request.getSession().invalidate();
+		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
+		if((userSessionBean==null || userSessionBean.getIdMembre()==null) && isPrivatePage){
 			NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
 			nh.handleNavigation(facesContext, null, "login");
-		}*/
+			request.getSession().invalidate();
+		}
 		
 		
 		//System.out.println("url : " + uri);

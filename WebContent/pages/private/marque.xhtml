@@ -1,0 +1,123 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="content">
+			<h:form id="formMarque">
+				<ui:include src="/pages/private/message.xhtml" />
+				<h:inputHidden value="#{marquesBean.marque.idMarque}" />
+
+				<div class="breadcrumsrea">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="breadcrumslist">
+									<ul>
+										<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="marque.xhtml"><h:outputLabel value="#{msg.libelle_marque}" /></h:outputLink></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<section class="modifyaproductarea">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="modifyproductinner">
+									<div class="modifymaintitle">
+										<h3>MARQUES</h3>
+									</div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_nom_marque}" /><span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{marquesBean.marque.marqueNom}" maxlength="120" required="true" requiredMessage="#{msg.nom_marque_obligatoire}" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_acces}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+												<div class="maequescheckb checkbox">
+													<h:selectOneRadio value="#{marquesBean.marque.isFullAccess}">
+			   											<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+			   										</h:selectOneRadio>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_commentaire}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{marquesBean.marque.commentaire}" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+								
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-12">
+											<div class="newmodiysvecan modifysavecancelbutton">
+												<div class="button-1">
+													<div class="eff-1"></div>
+													<h:link value="#{msg.libelle_annuler}" outcome="marques" />
+												</div>
+
+												<div class="button-2">
+													<div class="eff-2"></div>
+													<h:commandLink value="#{msg.libelle_valider}" action="#{marquesBean.insertOrUpdateMarque()}" />
+												</div>
+											</div>
+										</div>
+									</div>
+																		
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

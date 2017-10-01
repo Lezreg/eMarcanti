@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="content">
+			<div class="breadcrumsrea">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="breadcrumslist">
+								<ul>
+									<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="carousels.xhtml"><h:outputLabel value="#{msg.libelle_menu_carousel}" /></h:outputLink></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<section class="messcomandesarea">
+				<h2 class="section_header">sec</h2>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="filterheading">
+								<h3>
+									<h:outputLabel value="#{msg.libelle_gestion_carousel}" />
+								</h3>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<h:form id="formCarousels">
+				<section class="mess-commandestable">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row customrow">
+							<div class="col-xs-12">
+								<div class="mess-innertablearea">
+									<div class="newbutton ajouterbutton deptorgabutton carouselbutton">
+										<button><h:link value="#{msg.libelle_ajouter}" outcome="#{carouselsBean.addCarouselView()}" /></button>
+									</div>
+									<table id="carouselid"
+										class="table table-striped table-bordered dt-responsive"
+										cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th class="nameoforder"><h:outputLabel value="#{msg.libelle_nom_item}" /></th>
+												<th class="creationdate"><h:outputLabel value="#{msg.libelle_url_image}" /></th>
+												<th class="creationdate"><h:outputLabel value="#{msg.libelle_url_lien}" /></th>
+												<th class="creationdate"><h:outputLabel value="#{msg.libelle_visible}" /></th>
+												<th class="creationdate"><h:outputLabel value="#{msg.libelle_rang}" /></th>
+												<th class="blankth"></th>
+
+											</tr>
+										</thead>
+
+										<tfoot class="catalougetfootarea messcommandestfarea">
+											<tr>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th class="blankth"></th>
+
+											</tr>
+										</tfoot>
+										<tbody>
+
+											<ui:repeat var="carousel" value="#{carouselsBean.carouselList}">
+												<tr>
+													<td>#{carousel.elementNom}</td>
+													<td>#{carousel.elementImageURL}</td>
+													<td>#{carousel.elementLienURL}</td>
+													<td class="organyesnooption"><small>#{carousel.isVisibleStr}</small><i class="#{carousel.isVisibleStyle}"></i></td>
+													<td>#{carousel.elementRang}</td>
+													<td>
+														<h:commandLink action="#{carouselsBean.editCarousel()}" styleClass="fa fa-pencil-square-o">
+															<f:setPropertyActionListener target="#{carouselsBean.idCarousel}" value="#{carousel.idCarousel}" />
+														</h:commandLink>
+													</td>
+												</tr>
+											</ui:repeat>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -11,16 +11,6 @@ public interface ProduitServiceAction {
 
 	public List<Produit> listAllProduit();
 
-	public List<Produit> listProduitByCategorie(String code);
-
 	public List<Marque> getBrands();
-
-	public List<Produit> getParfumHomme();
-
-	public List<Produit> getParfumFemme();
-
-	public List<Produit> getParfumEnfant();
-
-	public List<Produit> getTester();
      
 }

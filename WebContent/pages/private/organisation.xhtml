@@ -1,0 +1,316 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="content">
+			<h:form id="formorganisation">
+				<h:inputHidden value="#{organisationsBean.organisation.idOrga}" />
+				
+				<div class="breadcrumsrea">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="breadcrumslist">
+									<ul>
+										<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="organisation.xhtml"><h:outputLabel value="#{msg.libelle_orga}" /></h:outputLink></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<section class="modifyaproductarea">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="modifyproductinner">
+									<div class="modifymaintitle">
+										<h3>#{msg.libelle_orga}"</h3>
+									</div>
+									
+									<div>
+										<h:messages errorClass="redclass" infoClass="greenclass" />
+									</div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_nom}" /><span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{organisationsBean.organisation.orgaNom}" maxlength="100" required="true" requiredMessage="#{msg.nom_orga_obligatoire}" styleClass="marquedescription" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_adresse}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{organisationsBean.organisation.orgaAdresse}" maxlength="100" required="true" requiredMessage="#{msg.adresse_orga_obligatoire}" />
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_code_postal}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{organisationsBean.organisation.orgaCodePostal}" maxlength="10" required="true" requiredMessage="#{msg.code_orga_obligatoire}" />
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_ville}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{organisationsBean.organisation.orgaVille}" maxlength="45" required="true" requiredMessage="#{msg.ville_orga_obligatoire}" />
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_pays}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{organisationsBean.organisation.orgaPays}" maxlength="45" required="true" requiredMessage="#{msg.pays_orga_obligatoire}" />
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_tel}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{organisationsBean.organisation.orgaTel}" maxlength="20" required="true" requiredMessage="#{msg.tel_orga_obligatoire}" />
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_adresse_liv}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{organisationsBean.organisation.orgaAdresseLivraison}" maxlength="140" />
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_prefixe_alias}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{organisationsBean.organisation.orgaAlias}" maxlength="30" required="true" requiredMessage="#{msg.prefixe_orga_obligatoire}" />
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_nbr_max_prd}" /><br /> <small><h:outputLabel value="#{msg.libelle_item_panier}" /></small>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<input type="text" name="Préfixe" />
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p><h:outputLabel value="#{msg.libelle_activee}" /></p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+
+												<div class="maequescheckb checkbox">
+												<h:selectOneRadio value="#{organisationsBean.organisation.isActive}">
+									   				<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+									   			</h:selectOneRadio>
+													<!-- input data-toggle="toggle" type="checkbox" /-->
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_liv_paie}" /><span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+												<div class="maequescheckb checkbox">
+												<h:selectOneRadio value="#{organisationsBean.organisation.isAlivrerAvantPaiement}">
+										   			<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+										   		</h:selectOneRadio>
+													<!-- input data-toggle="toggle" type="checkbox" /-->
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_acces_complet}" /><span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+												<div class="maequescheckb checkbox">
+												<h:selectOneRadio value="#{organisationsBean.organisation.accesCatalogueComplet}">
+										   			<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+										   		</h:selectOneRadio>
+													<!-- input data-toggle="toggle" type="checkbox" /-->
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_envoi_mail}" /><br /> <small><h:outputLabel value="#{msg.libelle_conf_dem}" /></small> <span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+												<div class="maequescheckb checkbox">
+												<h:selectOneRadio value="#{organisationsBean.organisation.envoiMailConfirmation}">
+										   			<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+										   		</h:selectOneRadio>
+													<!-- input data-toggle="toggle" type="checkbox" /-->
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--end inner div-->
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-12">
+											<div class="newmodiysvecan modifysavecancelbutton">
+												<div class="button-1">
+													<div class="eff-1"></div>
+													<h:link value="#{msg.libelle_annuler}" outcome="organisations" />
+												</div>
+
+												<div class="button-2">
+													<div class="eff-2"></div>
+													<h:commandLink value="#{msg.libelle_valider}" action="#{organisationsBean.insertOrUpdateOrganisation()}" />
+												</div>
+											</div>
+										</div>
+									</div>									
+
+									<div class="clearfix"></div>
+
+								</div>
+								<!--end main inner div-->
+							</div>
+						</div>
+						<!--end row-->
+					</div>
+					<!--end cont.-->
+				</section>
+				<!--end sec-->
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

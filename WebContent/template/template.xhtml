@@ -1,13 +1,51 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" class="no-js" lang="en">
+
+<h:head></h:head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title><h:outputText value="#{msg.libelle_appli}" /></title>
+<meta name="description" content="Responsive website" />
+<meta name="keywords" content="responsive website" />
+<meta name="author" content="site" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+<!--google fonts-->
+<!--font awesome-->
+<link rel="stylesheet" href="#{request.contextPath}/static/css/fonts-googleapis.css"/>
+<link rel="stylesheet" href="#{request.contextPath}/static/css/font-awesome.min.css"/>
+<!--end font awesome-->
+   
+<link rel="stylesheet" href="#{request.contextPath}/static/css/dataTables.bootstrap.min.css"/>
+<link rel="stylesheet" href="#{request.contextPath}/static/css/responsive.bootstrap.min.css"/>
+<link rel="stylesheet" href="#{request.contextPath}/static/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" href="#{request.contextPath}/static/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="#{request.contextPath}/static/css/normalize.css"/>
+<link rel="stylesheet" href="#{request.contextPath}/static/css/style.css"/>
+<link rel="stylesheet" href="#{request.contextPath}/static/css/responsive.css"/>
+    
+<script src="#{request.contextPath}/static/js/vendor/modernizr-2.6.2.min.js"></script>
+<!--[if lt IE 9]>
+	<script src="#{request.contextPath}/static/js/vendor/html5shiv.js"></script>
+	<script src="#{request.contextPath}/static/js/vendor/respond.min.js"></script>
+<![endif]-->
+		
+		
+
 <h:head>
-	<title><ui:insert name="title">Parfum</ui:insert></title>
-	<link rel="stylesheet" type="text/css" title="xWeb" href="css/style.css" />
+	<title><ui:insert name="title"><h:outputText value="#{msg.libelle_appli}" /></ui:insert></title>
 </h:head>
 
 <body>

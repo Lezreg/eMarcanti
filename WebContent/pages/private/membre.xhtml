@@ -1,0 +1,380 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="content">
+			<div class="breadcrumsrea">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="breadcrumslist">
+								<ul>
+									<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="membres.xhtml"><h:outputLabel value="#{msg.libelle_membres}" /></h:outputLink></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<h:form id="formMembre">
+				<h:inputHidden value="#{membreBean.membre.idMembre}" />
+				<h:inputHidden value="#{membreBean.oldMembreEmail}" />
+				<section class="modifyaproductarea">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="modifyproductinner">
+									<div class="modifymaintitle">
+										<h3>#{membreBean.titreMembre}</h3>
+									</div>
+									
+									<div>
+										<h:messages errorClass="redclass" infoClass="greenclass" />
+									</div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_nom}" />
+													<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{membreBean.membre.membreNom}"
+														maxlength="60" required="true"
+														requiredMessage="#{msg.nom_obligatoire}" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_prenom}" />
+													<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{membreBean.membre.membrePrenom}"
+													maxlength="60" required="true"
+													requiredMessage="#{msg.prenom_obligatoire}" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_email}" />
+													<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription fordesktopfulwidth">
+												<h:inputText value="#{membreBean.membre.membreEmail}"
+													maxlength="120" required="true"
+													requiredMessage="#{msg.email_obligatoire}" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_tel}" />
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{membreBean.membre.membreTel}"
+													maxlength="20" required="true"
+													requiredMessage="#{msg.tel_obligatoire}" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel for="idorga" value="#{msg.libelle_orga}" />
+													<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription oransationadmin">
+												<div class="select">
+													<h:selectOneMenu id="idorga"
+														value="#{membreBean.membre.idOrga.idOrga}"
+														disabled="#{membreBean.orgaDisabled}">
+														<p:ajax listener="#{membreBean.onOrganisationChange}"
+															update="idDepartement,formMembre" />
+														<f:selectItems value="#{membreBean.organisationList}"
+															var="c" itemLabel="#{c.orgaNom}" itemValue="#{c.idOrga}" />
+													</h:selectOneMenu>
+													<div class="select__arrow"></div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel for="idDepartement"
+														value="#{msg.libelle_dept}" />
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription oransationadmin">
+												<div class="select">
+													<h:selectOneMenu id="idDepartement"
+														value="#{membreBean.membre.idDepartement.idDepartement}">
+														<f:selectItems value="#{membreBean.departementList}"
+															var="c" itemLabel="#{c.departementNom}"
+															itemValue="#{c.idDepartement}" />
+													</h:selectOneMenu>
+													<div class="select__arrow"></div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_role}" />
+													<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription oransationadmin">
+												<div class="select">
+													<h:selectOneMenu
+														value="#{membreBean.membre.idProfil.idProfil}">
+														<p:ajax listener="#{membreBean.onRoleChange}"
+															update="formMembre" />
+														<f:selectItems value="#{membreBean.roleList}" var="c"
+															itemLabel="#{c.profilLibelle}" itemValue="#{c.idProfil}" />
+													</h:selectOneMenu>
+													<div class="select__arrow"></div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel id="idParrain_libelle"
+														value="#{msg.libelle_parrain}"
+														rendered="#{membreBean.parrainRendered}" />
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription oransationadmin">
+												<h:selectOneMenu id="idParrain"
+													value="#{membreBean.idMembreParrain}"
+													rendered="#{membreBean.parrainRendered}">
+													<f:selectItems value="#{membreBean.parrainList}" var="c"
+														itemLabel="#{c.membrePrenom} #{c.membreNom}"
+														itemValue="#{c.idMembre}" />
+												</h:selectOneMenu>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_cpt_active}" />
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+												<div class="maequescheckb checkbox">
+													<h:selectOneRadio value="#{membreBean.membre.isActif}">
+														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>	
+												</div>									        
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_drt_reduc}" rendered="#{membreBean.hasReducRendered}" />
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+												<div class="maequescheckb checkbox">
+													<h:selectOneRadio value="#{membreBean.membre.hasReduc}" rendered="#{membreBean.hasReducRendered}">
+														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_reinitialiser}" />
+													<br />
+													<h:outputLabel value="#{msg.libelle_password}" />
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+
+												<div class="maequescheckb checkbox">
+													<h:selectOneRadio value="#{membreBean.membre.isDefaultPassword}">
+														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<c:if test="${!membreBean.isAddAction}" scope="session">
+										<div class="marqueinfo marginRow">
+											<div class="paddingless col-sm-4">
+												<div class="marquestext">
+													<p>
+														<h:outputLabel value="#{msg.libelle_cree_le}" />
+													</p>
+												</div>
+											</div>
+											<div class="paddingless col-sm-8">
+												<div class="marquedescription admininput">
+												<input type="text" name="crele" placeholder="#{membreBean.dateCreationStr}" disabled="disabled"/>
+												</div>
+											</div>
+										</div>
+
+										<div class="clearfix"></div>
+
+										<div class="marqueinfo marginRow">
+											<div class="paddingless col-sm-4">
+												<div class="marquestext">
+													<p>
+														<h:outputLabel value="#{msg.libelle_modifie_le}" />
+													</p>
+												</div>
+											</div>
+											<div class="paddingless col-sm-8">
+												<div class="marquedescription admininput">
+													<input type="text" name="Modifié" placeholder="#{membreBean.dateModificationStr}" disabled="disabled"/>
+												</div>
+									
+											</div>
+										</div>
+
+										<div class="clearfix"></div>
+
+										<div class="marqueinfo marginRow">
+											<div class="paddingless col-sm-4">
+												<div class="marquestext">
+													<p>
+														<h:outputLabel value="#{msg.libelle_der_connexion}" />
+													</p>
+												</div>
+											</div>
+											<div class="paddingless col-sm-8">
+												<div class="marquedescription admininput">
+													<input type="text" name="Dernière" placeholder="#{membreBean.dateDerniereConnexionStr}" disabled="disabled"/>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+									</c:if>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-12">
+											<div class="newmodiysvecan modifysavecancelbutton">
+												<div class="button-1">
+													<div class="eff-1"></div>
+													<h:link value="#{msg.libelle_annuler}" outcome="membres" />
+												</div>
+
+												<div class="button-2">
+													<div class="eff-2"></div>
+													<h:commandLink value="#{msg.libelle_valider}" action="#{membreBean.insertOrUpdateMembre()}" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

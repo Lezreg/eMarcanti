@@ -118,6 +118,16 @@ public class Carousel implements Serializable {
     public void setIsVisible(boolean isVisible) {
         this.isVisible = isVisible;
     }
+    
+    public String getIsVisibleStr() {
+    	if (isVisible) return "y";
+    	else return "n";
+    }    
+    
+    public String getIsVisibleStyle() {
+    	if (isVisible) return "greenclass fa fa-check";
+    	else return "redclass fa fa-times";
+    }    
 
     @Override
     public int hashCode() {

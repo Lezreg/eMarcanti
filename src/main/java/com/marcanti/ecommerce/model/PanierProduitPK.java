@@ -6,7 +6,6 @@
 package com.marcanti.ecommerce.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
@@ -18,9 +17,7 @@ import javax.validation.constraints.NotNull;
 @Embeddable
 public class PanierProduitPK implements Serializable {
 
-	private static final long serialVersionUID = 3437482822267363006L;
-
-	@Basic(optional = false)
+    @Basic(optional = false)
     @NotNull
     private long idPanier;
     @Basic(optional = false)

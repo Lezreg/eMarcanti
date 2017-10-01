@@ -37,6 +37,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Membre.findAll", query = "SELECT m FROM Membre m")
     , @NamedQuery(name = "Membre.findByIdMembre", query = "SELECT m FROM Membre m WHERE m.idMembre = :idMembre")
+    , @NamedQuery(name = "Membre.findByIdOrga", query = "SELECT m FROM Membre m WHERE m.idOrga = :idOrga")
+    , @NamedQuery(name = "Membre.findParrainByIdOrga", query = "SELECT m FROM Membre m WHERE m.idOrga = :idOrga AND m.idProfil IN (:idProfilList) ")
     , @NamedQuery(name = "Membre.findByMembreNom", query = "SELECT m FROM Membre m WHERE m.membreNom = :membreNom")
     , @NamedQuery(name = "Membre.findByMembrePrenom", query = "SELECT m FROM Membre m WHERE m.membrePrenom = :membrePrenom")
     , @NamedQuery(name = "Membre.findByMembreEmail", query = "SELECT m FROM Membre m WHERE m.membreEmail = :membreEmail")
@@ -122,8 +124,10 @@ public class Membre implements Serializable {
     @JoinColumn(name = "idProfil", referencedColumnName = "idProfil")
     @ManyToOne(optional = false)
     private Profil idProfil;
-	@Transient
-    private boolean isAuthenticated = false;
+    
+    @Transient
+    private String nomParrain;
+    
 
     public Membre() {
     }
@@ -215,6 +219,16 @@ public class Membre implements Serializable {
     public void setIsActif(boolean isActif) {
         this.isActif = isActif;
     }
+    
+    public String getIsActifStr() {
+    	if (isActif) return "y";
+    	else return "n";
+    }    
+    
+    public String getIsActifStyle() {
+    	if (isActif) return "greenclass fa fa-check";
+    	else return "redclass fa fa-times";
+    }    
 
     public String getPassword() {
         return password;
@@ -296,6 +310,14 @@ public class Membre implements Serializable {
 
 	public void setDefaultPassword(boolean isDefaultPassword) {
 		this.isDefaultPassword = isDefaultPassword;
+	}
+	
+	public String getNomParrain() {
+		return nomParrain;
+	}
+
+	public void setNomParrain(String nomParrain) {
+		this.nomParrain = nomParrain;
 	}
 
 	@Override

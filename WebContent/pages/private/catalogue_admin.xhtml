@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"	
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<ui:define name="content">
+			<div id="itme" class="cadre-container">
+				<h:panelGrid columns="" border="0" cellpadding="10" cellspacing="1" width="100%">
+					<h:outputLabel value="#{msg.libelle_gestion_categorie}" style="font-weight:bold;" />
+				</h:panelGrid>
+				<br />
+
+				<h:form id="formCatalogue">
+					<a4j:region>
+						<p:dataTable var="catalogue" value="#{catalogueBean.catalogueList}" styleClass="font-size:8px;"
+							rendered="true" draggableColumns="true"
+							style="margin-bottom:40px" paginator="true" rows="10"
+							widgetVar="catalogueTable" emptyMessage="#{msg.libelle_pas_categorie}"
+							filteredValue="#{catalogueBean.filteredCatalogueList}"
+							resizableColumns="true" scrollable="true" scrollHeight="200"
+							editable="true"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="2,10,50">
+							<f:facet name="header">
+								<p:outputPanel>
+									<h:outputText value="#{msg.libelle_rechercher} :" />
+									<p:inputText id="globalFilter"
+										onkeyup="PF('catalogueTable').filter()" style="width:150px"
+										placeholder="" />
+								</p:outputPanel>
+							</f:facet>
+							<p:column headerText="#{msg.libelle_categorie}" sortBy="#{catalogue.marqueNom}"
+								filterBy="#{catalogue.marqueNom}" filterMatchMode="contains">
+								<h:outputText value="#{catalogue.marqueNom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_code_categorie}" sortBy="#{catalogue.produitDescription}"
+								filterBy="#{catalogue.produitDescription}" filterMatchMode="contains">
+								<h:outputText value="#{catalogue.produitDescription}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_code_categorie}" sortBy="#{catalogue.sousCategorieNom}"
+								filterBy="#{catalogue.sousCategorieNom}" filterMatchMode="contains">
+								<h:outputText value="#{catalogue.sousCategorieNom}" />
+							</p:column>
+							<p:column headerText="#{msg.libelle_code_categorie}" sortBy="#{catalogue.prixPublic}"
+								filterBy="#{catalogue.prixPublic}" filterMatchMode="contains">
+								<h:outputText value="#{catalogue.prixPublic}" />
+							</p:column>							
+						</p:dataTable>
+					</a4j:region>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

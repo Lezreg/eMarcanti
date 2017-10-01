@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Departement.findByIdDepartement", query = "SELECT d FROM Departement d WHERE d.idDepartement = :idDepartement")
     , @NamedQuery(name = "Departement.findByDepartementNom", query = "SELECT d FROM Departement d WHERE d.departementNom = :departementNom")
     , @NamedQuery(name = "Departement.findByIsActif", query = "SELECT d FROM Departement d WHERE d.isActif = :isActif")
+    , @NamedQuery(name = "Departement.findByIdOrga", query = "SELECT d FROM Departement d WHERE d.idOrga = :idOrga")
     , @NamedQuery(name = "Departement.findByCommentaire", query = "SELECT d FROM Departement d WHERE d.commentaire = :commentaire")})
 public class Departement implements Serializable {
 
@@ -41,16 +42,21 @@ public class Departement implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Long idDepartement;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
     private String departementNom;
+    
     private Boolean isActif;
+    
     @Size(max = 120)
     private String commentaire;
+    
     @JoinColumn(name = "idOrga", referencedColumnName = "idOrga")
     @ManyToOne(optional = false)
     private Organisation idOrga;
+    
     @OneToMany(mappedBy = "idDepartement")
     private Collection<Membre> membreCollection;
 
@@ -89,6 +95,16 @@ public class Departement implements Serializable {
     public void setIsActif(Boolean isActif) {
         this.isActif = isActif;
     }
+    
+    public String getIsActifStr() {
+    	if (isActif) return "y";
+    	else return "n";
+    }    
+    
+    public String getIsActifStyle() {
+    	if (isActif) return "greenclass fa fa-check";
+    	else return "redclass fa fa-times";
+    }    
 
     public String getCommentaire() {
         return commentaire;

@@ -94,6 +94,16 @@ public class Marque implements Serializable {
     public void setIsFullAccess(boolean isFullAccess) {
         this.isFullAccess = isFullAccess;
     }
+    
+    public String getIsFullAccessStr() {
+    	if (isFullAccess) return "y";
+    	else return "n";
+    }   
+    
+    public String getIsFullAccessStyle() {
+    	if (isFullAccess) return "greenclass fa fa-check";
+    	else return "redclass fa fa-times";
+    }     
 
     @XmlTransient
     public Collection<Produit> getProduitCollection() {

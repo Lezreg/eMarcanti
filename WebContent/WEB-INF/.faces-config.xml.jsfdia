@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
- <PROCESS-ITEM NAME="rules:#pages#panier#panier.xhtml"
-  PATH="/pages/panier/panier.xhtml" SHAPE="412,168,0,0"
-  model-entity="JSFProcessGroup" persistent="true"/>
  <PROCESS-ITEM NAME="rules:#*" PATH="/*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:0" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="product::#pages#product.xhtml" NAME="output"
@@ -10,7 +7,7 @@
     TITLE="product" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#*:1" PATH="/*" SHAPE="32,273,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:1" PATH="/*" SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:1" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="change_password::#pages#public#change_password.xhtml"
@@ -22,19 +19,21 @@
  <PROCESS-ITEM NAME="rules:#pages#login.xhtml" PATH="/pages/login.xhtml"
   SHAPE="256,401,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#private#index.xhtml"
-  PATH="/pages/private/index.xhtml" SHAPE="256,145,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/pages/private/index.xhtml" SHAPE="256,257,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#public#change_password.xhtml"
-  PATH="/pages/public/change_password.xhtml" SHAPE="240,289,0,0" model-entity="JSFProcessGroup"/>
+  PATH="/pages/public/change_password.xhtml" SHAPE="240,145,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#product.xhtml"
   PATH="/pages/product.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#*:2" PATH="/*" SHAPE="32,577,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:2" PATH="/*" SHAPE="40,488,53,42" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:2" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="code::#pages#public#code.xhtml"
     NAME="output" PATH="/pages/public/code.xhtml"
     TARGET="rules:#pages#public#code.xhtml" TITLE="code" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#*:3" PATH="/*" SHAPE="32,689,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#pages#public#code.xhtml"
+  PATH="/pages/public/code.xhtml" SHAPE="240,513,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#*:3" PATH="/*" SHAPE="32,600,53,42" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:3" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="new_password::#pages#private#new_password.xhtml" NAME="output"
@@ -43,27 +42,31 @@
     TITLE="new_password" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#*:4" PATH="/*" SHAPE="32,353,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#pages#private#new_password.xhtml"
+  PATH="/pages/private/new_password.xhtml" SHAPE="240,625,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#*:4" PATH="/*" SHAPE="32,656,53,42" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:4" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="login::#pages#login.xhtml" NAME="output"
     PATH="/pages/login.xhtml" TARGET="rules:#pages#login.xhtml"
     TITLE="login" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#*:5" PATH="/*" SHAPE="32,465,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:5" PATH="/*" SHAPE="32,776,53,42" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:5" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="index::#pages#private#index.xhtml"
     NAME="output" PATH="/pages/private/index.xhtml"
     TARGET="rules:#pages#private#index.xhtml" TITLE="index" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#*:6" PATH="/*" SHAPE="32,801,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:6" PATH="/*" SHAPE="32,712,53,42" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:6" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="message::#pages#private#message.xhtml"
     NAME="output" PATH="/pages/private/message.xhtml"
     TARGET="rules:#pages#private#message.xhtml" TITLE="message" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#private#message.xhtml"
+  PATH="/pages/private/message.xhtml" SHAPE="240,849,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#*:7" PATH="/*" SHAPE="32,913,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:7" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="filleuls::#pages#private#filleuls.xhtml"
@@ -71,24 +74,18 @@
     TARGET="rules:#pages#private#filleuls.xhtml" TITLE="filleuls" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#*:8" PATH="/*" SHAPE="32,1025,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#pages#private#filleuls.xhtml"
+  PATH="/pages/private/filleuls.xhtml" SHAPE="208,912,50,57" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#filleul.xhtml"
+  PATH="/pages/private/filleul.xhtml" SHAPE="520,952,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#*:8" PATH="/*" SHAPE="240,1041,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:8" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="filleul::#pages#private#filleul.xhtml"
     NAME="output" PATH="/pages/private/filleul.xhtml"
     TARGET="rules:#pages#private#filleul.xhtml" TITLE="filleul" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#filleul.xhtml"
-  PATH="/pages/private/filleul.xhtml" SHAPE="240,1041,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pages#private#filleuls.xhtml"
-  PATH="/pages/private/filleuls.xhtml" SHAPE="240,929,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pages#private#new_password.xhtml"
-  PATH="/pages/private/new_password.xhtml" SHAPE="240,705,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pages#private#message.xhtml"
-  PATH="/pages/private/message.xhtml" SHAPE="240,817,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pages#public#code.xhtml"
-  PATH="/pages/public/code.xhtml" SHAPE="240,593,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#*:9" PATH="/*" SHAPE="32,1137,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:9" PATH="/*" SHAPE="240,1153,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:9" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="sousCategories::#pages#private#sous_categories.xhtml"
@@ -97,6 +94,8 @@
     TITLE="sousCategories" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#private#sous_categories.xhtml"
+  PATH="/pages/private/sous_categories.xhtml" SHAPE="448,1137,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#*:10" PATH="/*" SHAPE="32,1249,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:10" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
@@ -106,24 +105,24 @@
     TITLE="sousCategorie" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#*:11" PATH="/*" SHAPE="32,1361,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#pages#private#sous_categorie.xhtml"
+  PATH="/pages/private/sous_categorie.xhtml" SHAPE="240,1265,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#*:11" PATH="/*" SHAPE="240,1377,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:11" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="categories::#pages#private#categories.xhtml"
     NAME="output" PATH="/pages/private/categories.xhtml"
     TARGET="rules:#pages#private#categories.xhtml" TITLE="categories" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#*:12" PATH="/*" SHAPE="32,1473,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:12" PATH="/*" SHAPE="32,1361,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:12" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="categorie::#pages#private#categories.xhtml"
     NAME="output" PATH="/pages/private/categories.xhtml"
     TARGET="rules:#pages#private#categories.xhtml" TITLE="categorie" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#sous_categorie.xhtml"
-  PATH="/pages/private/sous_categorie.xhtml" SHAPE="240,1265,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#pages#private#categories.xhtml"
-  PATH="/pages/private/categories.xhtml" SHAPE="240,1377,0,0" model-entity="JSFProcessGroup">
+  PATH="/pages/private/categories.xhtml" SHAPE="448,1361,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#pages#private#categories.xhtml:0" NAME="item"
    PATH="/pages/private/categories.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="panier::#pages#private#panier#panier.xhtml"
@@ -131,8 +130,6 @@
     TARGET="rules:#pages#private#panier#panier.xhtml" TITLE="panier" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#sous_categories.xhtml"
-  PATH="/pages/private/sous_categories.xhtml" SHAPE="240,1153,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#*:13" PATH="/*" SHAPE="32,1585,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:13" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
@@ -142,10 +139,7 @@
     TITLE="parfumHomme" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#categories#parfumHomme.xhtml"
-  PATH="/pages/private/categories/parfumHomme.xhtml"
-  SHAPE="240,1601,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#*:14" PATH="/*" SHAPE="32,1697,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:14" PATH="/*" SHAPE="32,1473,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:14" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="parfumFemme::#pages#private#categories#parfumFemme.xhtml"
@@ -154,9 +148,10 @@
     TITLE="parfumFemme" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#categories#parfumFemme.xhtml"
-  PATH="/pages/private/categories/parfumFemme.xhtml"
-  SHAPE="240,1713,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#departements.xhtml"
+  PATH="/pages/private/departements.xhtml" SHAPE="240,1601,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#departement.xhtml"
+  PATH="/pages/private/departement.xhtml" SHAPE="240,1713,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#*:15" PATH="/*" SHAPE="32,1809,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:15" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
@@ -166,10 +161,7 @@
     TITLE="parfumEnfant" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#categories#parfumEnfant.xhtml"
-  PATH="/pages/private/categories/parfumEnfant.xhtml"
-  SHAPE="240,1825,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#*:16" PATH="/*" SHAPE="32,1921,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:16" PATH="/*" SHAPE="32,1697,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:16" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="tester::#pages#private#categories#tester.xhtml" NAME="output"
@@ -177,8 +169,10 @@
     TARGET="rules:#pages#private#categories#tester.xhtml" TITLE="tester" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#categories#tester.xhtml"
-  PATH="/pages/private/categories/tester.xhtml" SHAPE="240,1937,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#organisations.xhtml"
+  PATH="/pages/private/organisations.xhtml" SHAPE="240,1825,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#organisation.xhtml"
+  PATH="/pages/private/organisation.xhtml" SHAPE="240,1937,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#*:17" PATH="/*" SHAPE="32,2033,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:17" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
@@ -188,9 +182,7 @@
     TITLE="commandes_pre" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#panier#panier.xhtml"
-  PATH="/pages/private/panier/panier.xhtml" SHAPE="240,2049,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#*:18" PATH="/*" SHAPE="32,2145,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:18" PATH="/*" SHAPE="32,1921,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:18" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="commandes_enCours::#pages#private#panier#panier.xhtml"
@@ -199,8 +191,10 @@
     TITLE="commandes_enCours" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#carte.xhtml"
-  PATH="/pages/private/carte.xhtml" SHAPE="240,2161,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#membres.xhtml"
+  PATH="/pages/private/membres.xhtml" SHAPE="240,2049,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#membre.xhtml"
+  PATH="/pages/private/membre.xhtml" SHAPE="240,2161,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#*:19" PATH="/*" SHAPE="32,2257,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:19" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="payer::#pages#private#carte.xhtml"
@@ -216,9 +210,11 @@
     TARGET="rules:#pages#private#cmdGroupees.xhtml" TITLE="cmdGroupees" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#cmdGroupees.xhtml"
-  PATH="/pages/private/cmdGroupees.xhtml" SHAPE="240,2385,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#*:21" PATH="/*" SHAPE="32,2481,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#pages#private#carousels.xhtml"
+  PATH="/pages/private/carousels.xhtml" SHAPE="240,2273,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#carousel.xhtml"
+  PATH="/pages/private/carousel.xhtml" SHAPE="240,2385,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#*:21" PATH="/*" SHAPE="32,4049,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:21" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="createCmd::#pages#private#cmdGroupeeDetail.xhtml" NAME="output"
@@ -227,13 +223,93 @@
     TITLE="createCmd" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#pages#private#cmdGroupeeDetail.xhtml"
-  PATH="/pages/private/cmdGroupeeDetail.xhtml" SHAPE="240,2497,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#*:22" PATH="/*" SHAPE="32,2593,0,0" model-entity="JSFProcessGroup">
+ <PROCESS-ITEM NAME="rules:#*:22" PATH="/*" SHAPE="32,3713,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#*:22" NAME="item" PATH="/*" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="cmdList::#pages#private#cmdGroupees.xhtml"
     NAME="output" PATH="/pages/private/cmdGroupees.xhtml"
     TARGET="rules:#pages#private#cmdGroupees.xhtml" TITLE="cmdList" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:23" PATH="/*" SHAPE="32,2705,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:23" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="departements::#pages#private#departements.xhtml" NAME="output"
+    PATH="/pages/private/departements.xhtml"
+    TARGET="rules:#pages#private#departements.xhtml"
+    TITLE="departements" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:24" PATH="/*" SHAPE="32,2817,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:24" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="departement::#pages#private#departement.xhtml" NAME="output"
+    PATH="/pages/private/departement.xhtml"
+    TARGET="rules:#pages#private#departement.xhtml" TITLE="departement" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:25" PATH="/*" SHAPE="32,3153,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:25" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="organisations::#pages#private#organisations.xhtml" NAME="output"
+    PATH="/pages/private/organisations.xhtml"
+    TARGET="rules:#pages#private#organisations.xhtml"
+    TITLE="organisations" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:26" PATH="/*" SHAPE="32,3265,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:26" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="organisation::#pages#private#organisation.xhtml" NAME="output"
+    PATH="/pages/private/organisation.xhtml"
+    TARGET="rules:#pages#private#organisation.xhtml"
+    TITLE="organisation" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:27" PATH="/*" SHAPE="32,3377,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:27" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="membres::#pages#private#membres.xhtml"
+    NAME="output" PATH="/pages/private/membres.xhtml"
+    TARGET="rules:#pages#private#membres.xhtml" TITLE="membres" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:28" PATH="/*" SHAPE="32,3489,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:28" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="membre::#pages#private#membre.xhtml"
+    NAME="output" PATH="/pages/private/membre.xhtml"
+    TARGET="rules:#pages#private#membre.xhtml" TITLE="membre" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:29" PATH="/*" SHAPE="32,3825,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:29" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="membres::#pages#private#carousels.xhtml"
+    NAME="output" PATH="/pages/private/carousels.xhtml"
+    TARGET="rules:#pages#private#carousels.xhtml" TITLE="membres" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#*:30" PATH="/*" SHAPE="32,3937,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#*:30" NAME="item" PATH="/*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="membre::#pages#private#carousel.xhtml"
+    NAME="output" PATH="/pages/private/carousel.xhtml"
+    TARGET="rules:#pages#private#carousel.xhtml" TITLE="membre" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#private#categories#parfumFemme.xhtml"
+  PATH="/pages/private/categories/parfumFemme.xhtml"
+  SHAPE="240,2609,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#categories#tester.xhtml"
+  PATH="/pages/private/categories/tester.xhtml" SHAPE="240,3057,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#panier#panier.xhtml"
+  PATH="/pages/private/panier/panier.xhtml" SHAPE="704,1377,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#categories#parfumHomme.xhtml"
+  PATH="/pages/private/categories/parfumHomme.xhtml"
+  SHAPE="240,2497,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#cmdGroupees.xhtml"
+  PATH="/pages/private/cmdGroupees.xhtml" SHAPE="256,3729,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#categories#parfumEnfant.xhtml"
+  PATH="/pages/private/categories/parfumEnfant.xhtml"
+  SHAPE="240,2945,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#carte.xhtml"
+  PATH="/pages/private/carte.xhtml" SHAPE="240,3617,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#private#cmdGroupeeDetail.xhtml"
+  PATH="/pages/private/cmdGroupeeDetail.xhtml" SHAPE="240,4065,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

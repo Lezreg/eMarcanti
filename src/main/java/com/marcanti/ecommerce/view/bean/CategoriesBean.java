@@ -15,7 +15,10 @@ import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.service.actions.CategorieServiceAction;
+<<<<<<< HEAD
 import com.marcanti.ecommerce.service.actions.SousCategorieServiceAction;
+=======
+>>>>>>> adminstration: authentification + list,add,update filleul + integration charte graphique
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 @ManagedBean(name = "categoriesBean")
@@ -134,19 +137,16 @@ public class CategoriesBean implements Serializable {
 			categorieService.insertCategorie(categorie);
 			this.categorieList=categorieService.getCategorieList();
 			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.categorie");
-			facesMessage.setDetail(msg); 
-			facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
-		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-		    ecran="sousCategories";
+		    ecran="categories";
 		    
 		}else{
 				
 			categorieService.updateCategorie(this.categorie);;
 			msg = ParfumUtils.getBundleApplication().getString("message.modif.categorie");
-			facesMessage.setDetail(msg); 
-			facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
-		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
+		facesMessage.setDetail(msg); 
+		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
+	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);		
 		return ecran;
 	}
 	

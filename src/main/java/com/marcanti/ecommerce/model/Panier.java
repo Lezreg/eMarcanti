@@ -42,19 +42,24 @@ public class Panier implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Long idPanier;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 120)
     private String panierNom;
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     private BigDecimal panierMontant;
+    
     @Basic(optional = false)
     @NotNull
     private short panierNbreProduit;
+    
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "idPanier")
     private CommandeIndividuelle commandeIndividuelle;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "panier")
     private Collection<PanierProduit> panierProduitCollection;
 

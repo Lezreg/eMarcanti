@@ -15,9 +15,9 @@
 		infrastructure -->
 
 	<!-- jndi entity manager -->
-	<beans:bean id="dataSource"
+	<beans:bean id="jndiDataSource"
 		class="org.springframework.jndi.JndiObjectFactoryBean">
-		<beans:property name="jndiName" value="java:/parfumDS" />
+		<beans:property name="jndiName" value="java:/ParfumDS" />
 	</beans:bean>
 
 	<beans:bean id="hibernateJpaAdapter"
@@ -27,19 +27,19 @@
 
 	<beans:bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="dataSource" ref="jndiDataSource" />
 		<beans:property name="packagesToScan" value="com.marcanti.ecommerce.model" />
 		<beans:property name="jpaVendorAdapter" ref="hibernateJpaAdapter" />
 	</beans:bean>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
-	<resources mapping="/WebContent/**" location="/WebContent/" />
+	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
 	<beans:bean id="hibernate4AnnotatedSessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="dataSource" ref="jndiDataSource" />
 		<beans:property name="packagesToScan" value="com.marcanti.ecommerce.model" />
 		<beans:property name="hibernateProperties">
 			<beans:props>
@@ -49,23 +49,11 @@
 		</beans:property>
 	</beans:bean>
 
-	<!-- Activates various annotations to be detected in bean classes: Spring's 
-		@Required and @Autowired, as well as JSR 250's @PostConstruct, @PreDestroy 
-		and @Resource (if available) and JPA's @PersistenceContext and @PersistenceUnit 
-		(if available). -->
-	<context:annotation-config />
 	<!-- <context:component-scan base-package="com.marcanti" /> -->
-	<context:component-scan base-package="com.marcanti" />
-	<context:component-scan base-package="com.marcanti.ecommerce.service" />
-	<context:component-scan base-package="com.marcanti.ecommerce.dao" />
-	<context:component-scan base-package="com.marcanti.ecommerce.controller" />
-
-<!--     <context:component-scan base-package="net.javaonline.spring.inventory,net.javaonline.web.jsf.inventory" /> -->
-
-	<!-- Instruct Spring to perform declarative transaction management automatically 
-		on annotated classes. -->
-	<!-- <tx:annotation-driven /> -->
-
+	<context:component-scan base-package="com.marcanti.ecommerce.dao.impl" />
+	<context:component-scan base-package="com.marcanti.ecommerce.service.actions.impl" />
+	<context:component-scan base-package="com.marcanti.ecommerce.filter" />
+	
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
@@ -94,6 +82,13 @@
 <!-- 		class="com.marcanti.ecommerce.service.PanierServiceActionImpl"> -->
 <!-- 		<beans:property name="panierDao" ref="panierDAOImpl" /> -->
 <!-- 	</beans:bean> -->
+	<beans:bean id="produitDAO"
+		class="com.marcanti.ecommerce.dao.impl.ProduitDAOImpl">
+	</beans:bean>
+	<beans:bean id="produitService"
+		class="com.marcanti.ecommerce.service.actions.impl.ProduitServiceActionImpl">
+		<beans:property name="produitDAO" ref="produitDAO"></beans:property>
+	</beans:bean>
 	
 <!-- 	<beans:bean id="authentificationDAO" -->
 <!-- 		class="com.marcanti.ecommerce.dao.AuthentificationDAOImpl"> -->
@@ -135,13 +130,73 @@
 		<beans:property name="categorieDAO" ref="categorieDAO"></beans:property>
 	</beans:bean>
 	
-<!-- 	<beans:bean id="catalogueDAO" -->
-<!-- 		class="com.marcanti.ecommerce.dao.VCatalogueAdminDAOImpl"> -->
-<!-- 	</beans:bean> -->
-<!-- 	<beans:bean id="catalogueService" -->
-<!-- 		class="com.marcanti.ecommerce.service.actions.CatalogueAdminServiceActionImpl"> -->
-<!-- 		<beans:property name="catalogueDAO" ref="catalogueDAO"></beans:property> -->
-<!-- 	</beans:bean>	 -->
-
+	<beans:bean id="organisationDAO"
+		class="com.marcanti.ecommerce.dao.impl.OrganisationDAOImpl">
+	</beans:bean>	
+	<beans:bean id="profilDAO"
+		class="com.marcanti.ecommerce.dao.impl.ProfilDAOImpl">
+	</beans:bean>	
+	<beans:bean id="paramDAO"
+		class="com.marcanti.ecommerce.dao.impl.ParamDAOImpl">
+	</beans:bean>	
+	<beans:bean id="referentielService"
+		class="com.marcanti.ecommerce.service.actions.impl.ReferentielServiceActionImpl">
+		<beans:property name="organisationDAO" ref="organisationDAO"></beans:property>
+		<beans:property name="profilDAO" ref="profilDAO"></beans:property>
+		<beans:property name="paramDAO" ref="paramDAO"></beans:property>
+	</beans:bean>	
+	
+	<beans:bean id="sousCategorieDAO"
+		class="com.marcanti.ecommerce.dao.impl.SousCategorieDAOImpl">
+	</beans:bean>
+	<beans:bean id="sousCategorieService"
+		class="com.marcanti.ecommerce.service.actions.impl.SousCategorieServiceActionImpl">
+		<beans:property name="sousCategorieDAO" ref="sousCategorieDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="categorieDAO" 
+		class="com.marcanti.ecommerce.dao.impl.CategorieDAOImpl">
+	</beans:bean>
+	<beans:bean id="categorieService"
+		class="com.marcanti.ecommerce.service.actions.impl.CategorieServiceActionImpl">
+		<beans:property name="categorieDAO" ref="categorieDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="marqueDAO" 
+		class="com.marcanti.ecommerce.dao.impl.MarqueDAOImpl">
+	</beans:bean>
+	<beans:bean id="marqueService"
+		class="com.marcanti.ecommerce.service.actions.impl.MarqueServiceActionImpl">
+		<beans:property name="marqueDAO" ref="marqueDAO"></beans:property>
+	</beans:bean>	
+	
+	<beans:bean id="departementDAO" 
+		class="com.marcanti.ecommerce.dao.impl.DepartementDAOImpl">
+	</beans:bean>
+	<beans:bean id="departementService"
+		class="com.marcanti.ecommerce.service.actions.impl.DepartementServiceActionImpl">
+		<beans:property name="departementDAO" ref="departementDAO"></beans:property>
+	</beans:bean>
+	
+	<beans:bean id="organisationService"
+		class="com.marcanti.ecommerce.service.actions.impl.OrganisationServiceActionImpl">
+		<beans:property name="organisationDAO" ref="organisationDAO"></beans:property>
+	</beans:bean>	
+	
+	<beans:bean id="carouselDAO"
+		class="com.marcanti.ecommerce.dao.impl.CarouselDAOImpl">
+	</beans:bean>
+	<beans:bean id="carouselService"
+		class="com.marcanti.ecommerce.service.actions.impl.CarouselServiceActionImpl">
+		<beans:property name="carouselDAO" ref="carouselDAO"></beans:property>
+	</beans:bean>
+			
+	<beans:bean id="catalogueDAO"
+		class="com.marcanti.ecommerce.dao.impl.VCatalogueAdminDAOImpl">
+	</beans:bean>
+	<beans:bean id="catalogueService"
+		class="com.marcanti.ecommerce.service.actions.impl.VCatalogueAdminServiceActionImpl">
+		<beans:property name="catalogueDAO" ref="catalogueDAO"></beans:property>
+	</beans:bean>	
 
 </beans:beans>

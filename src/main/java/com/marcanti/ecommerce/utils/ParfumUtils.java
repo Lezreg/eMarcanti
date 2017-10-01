@@ -1,30 +1,24 @@
 package com.marcanti.ecommerce.utils;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Properties;
+import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.marcanti.ecommerce.view.bean.ReferentielBean;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 /**
@@ -71,12 +65,18 @@ public class ParfumUtils {
 
 	public static UserSessionBean getUserSessionBean() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+<<<<<<< HEAD
 		return (UserSessionBean)session.getAttribute(BEAN_SESSION_NAME);
+=======
+		if (session!=null)
+			return (UserSessionBean)session.getAttribute(ReferentielBean.BEAN_SESSION_NAME);
+		else return null;
+>>>>>>> adminstration: authentification + list,add,update filleul + integration charte graphique
 	}
 	
 	public static void setUserSessionBean(UserSessionBean userSession) {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		session.setAttribute(BEAN_SESSION_NAME,userSession);
+		session.setAttribute(ReferentielBean.BEAN_SESSION_NAME,userSession);
 	}	
 
 	public static boolean checkPattern(String chaine, String regex) {
@@ -127,62 +127,8 @@ public class ParfumUtils {
 		return password;
 	}
 
-	public static void sendMail(final String username, final String password, String smtHost, String port,
-			String fromEmail, String toEmailList, String subject, String text) {
-
-		// final String username = "rachid.khalifa@opcma.com";
-		// final String password = "Mypwd2014";
-		// smtHost : smtp.orange.com
-		// mail=quicklypizza@orange.fr password=pizza1975
-
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		// props.put("mail.smtp.host", "mail.opcma.com");
-		props.put("mail.smtp.host", smtHost);
-		// props.put("mail.smtp.port", "25");
-		props.put("mail.smtp.port", port);
-
-		Session session = Session.getInstance(props, new Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		});
-
-		try {
-			// Create a default MimeMessage object.
-			Message message = new MimeMessage(session);
-
-			// Set From: header field of the header.
-			message.setFrom(new InternetAddress(fromEmail));
-
-			String email = "";
-			ArrayList<InternetAddress> addresses = new ArrayList<InternetAddress>();
-			InternetAddress address = null;
-			StringTokenizer stk = new StringTokenizer(toEmailList, ";");
-			while (stk.hasMoreTokens()) {
-				email = stk.nextToken();
-				address = new InternetAddress(email);
-				addresses.add(address);
-			}
-			InternetAddress[] internetAddress = addresses.toArray(new InternetAddress[addresses.size()]);
-			message.setRecipients(Message.RecipientType.TO, internetAddress);
-
-			// Set Subject: header field
-			message.setSubject(subject);
-			message.setText(text);
-
-			// Send message
-			Transport.send(message);
-
-		} catch (MessagingException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
 	public static HttpServletRequest getRequest() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
-				.getRequest();
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		return request;
 	}
 
@@ -211,9 +157,52 @@ public class ParfumUtils {
 
 		return sdf.format(dt);
 	}
+	
+	public static Object getSessionObject(String objName) {
+	    FacesContext ctx = FacesContext.getCurrentInstance();
+	    ExternalContext extCtx = ctx.getExternalContext();
+	    Map<String, Object> sessionMap = extCtx.getSessionMap();
+	    return sessionMap.get(objName);
+	}	
+	
+	public static boolean isUniqueName(String pathFolder, String nameFile) {
+
+		boolean resu = true;
+		File folder = new File(pathFolder);
+		File[] listOfFiles = folder.listFiles();
+
+		for (int i = 0; i < listOfFiles.length; i++) {
+			//System.out.println("file name : " + listOfFiles[i].getName());
+			if (listOfFiles[i].isFile() && listOfFiles[i].getName().equals(nameFile)) {
+				resu=false;
+				break;
+			} 
+		}
+		return resu;
+	}
+	
+	public static String getUniqueName(String pathFolder, String nameFile) {
+
+		int i = 0;
+		StringTokenizer st = new StringTokenizer(nameFile, ".");
+		String copyNameFile = new String(st.nextToken());
+		String extFile = new String(st.nextToken());
+
+		while(!isUniqueName(pathFolder,nameFile)){
+			i++;
+			nameFile = new String(copyNameFile);
+			nameFile = nameFile + "_" + i + "." + extFile;
+		}
+		return nameFile;
+	}	
 
 	public static void main(String[] args) {
-		System.out.println(ParfumUtils.checkPasswordFormat("A1ERTYuI"));
+		//System.out.println(ParfumUtils.checkPasswordFormat("A1ERTYuI"));
+		//System.out.println(isUniqueName("C:\\RK\\independant\\Parfum\\upload","passede.gif"));
+		System.out.println(getUniqueName("C:\\RK\\independant\\Parfum\\upload","passed.gif"));
 	}
+	
+	
+
 
 }

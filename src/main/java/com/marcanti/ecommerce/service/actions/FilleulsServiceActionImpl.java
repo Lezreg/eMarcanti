@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcanti.ecommerce.dao.FilleulDAO;
+import com.marcanti.ecommerce.model.Filleul;
 import com.marcanti.ecommerce.model.Membre;
 
 @Service("filleulsService")
@@ -27,6 +28,11 @@ public class FilleulsServiceActionImpl implements FilleulsServiceAction {
 	@Override
 	public List<Membre> getFilleulsList(Membre idMembreParrain) {
 		return filleulDAO.getFilleulsList(idMembreParrain);
+	}
+
+	@Override
+	public Filleul getFilleul(Long idFilleul) {
+		return filleulDAO.getFilleul(idFilleul);
 	}
 
 
