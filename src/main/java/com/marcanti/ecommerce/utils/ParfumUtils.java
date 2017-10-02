@@ -28,13 +28,6 @@ import com.marcanti.ecommerce.view.bean.UserSessionBean;
  */
 public class ParfumUtils {
 	
-	public static final String BEAN_SESSION_NAME = "USER_SESSION";
-	
-	public static final short PROFIL_MEMBRE  = 1;
-	public static final short PROFIL_FILLEUL = 2;
-	public static final short PROFIL_MANAGER = 3;
-	public static final short PROFIL_ADMIN   = 4;
-
 	/**
 	 * Gestion des Logs.
 	 */
@@ -65,13 +58,9 @@ public class ParfumUtils {
 
 	public static UserSessionBean getUserSessionBean() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-<<<<<<< HEAD
-		return (UserSessionBean)session.getAttribute(BEAN_SESSION_NAME);
-=======
 		if (session!=null)
 			return (UserSessionBean)session.getAttribute(ReferentielBean.BEAN_SESSION_NAME);
 		else return null;
->>>>>>> adminstration: authentification + list,add,update filleul + integration charte graphique
 	}
 	
 	public static void setUserSessionBean(UserSessionBean userSession) {

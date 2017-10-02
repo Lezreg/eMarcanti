@@ -15,10 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.service.actions.CategorieServiceAction;
-<<<<<<< HEAD
-import com.marcanti.ecommerce.service.actions.SousCategorieServiceAction;
-=======
->>>>>>> adminstration: authentification + list,add,update filleul + integration charte graphique
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 @ManagedBean(name = "categoriesBean")

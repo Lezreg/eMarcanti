@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.TransactionPaiementDAO;
 import com.marcanti.ecommerce.model.TransactionPaiement;
@@ -18,7 +20,7 @@ import com.marcanti.ecommerce.model.TransactionPaiement;
  *
  * @author lezreg
  */
-
+@Repository
 public class TransactionPaiementDAOImpl extends AbstractGenericDAO<TransactionPaiement>
 		implements TransactionPaiementDAO {
 

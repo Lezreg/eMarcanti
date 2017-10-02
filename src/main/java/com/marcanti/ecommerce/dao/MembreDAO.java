@@ -3,11 +3,8 @@ package com.marcanti.ecommerce.dao;
 import java.util.List;
 
 import com.marcanti.ecommerce.model.Membre;
-<<<<<<< HEAD
-=======
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
->>>>>>> adminstration: authentification + list,add,update filleul + integration charte graphique
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 public interface MembreDAO {
@@ -34,10 +31,6 @@ public interface MembreDAO {
 	
 	public void updateMembreFilleul(Membre filleul, Membre membreParrain);
 	
-<<<<<<< HEAD
-	public void insertFilleul(Membre filleul, UserSessionBean parrain);
-=======
 	public void updateFilleul(Membre filleul, Membre membreParrain);
->>>>>>> adminstration: authentification + list,add,update filleul + integration charte graphique
 
 }

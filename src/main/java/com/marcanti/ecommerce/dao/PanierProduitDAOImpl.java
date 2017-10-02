@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.marcanti.ecommerce.dao.impl;
+package com.marcanti.ecommerce.dao;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,8 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.marcanti.ecommerce.dao.AbstractGenericDAO;
-import com.marcanti.ecommerce.dao.PanierProduitDAO;
+import org.springframework.stereotype.Repository;
+
 import com.marcanti.ecommerce.exception.IllegalDataValueException;
 import com.marcanti.ecommerce.model.PanierProduit;
 
@@ -21,7 +21,7 @@ import com.marcanti.ecommerce.model.PanierProduit;
  *
  * @author lezreg
  */
-
+@Repository
 public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> implements PanierProduitDAO {
 
 	@PersistenceContext
@@ -35,8 +35,10 @@ public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> impl
         super.create(entity);
     }
 
-	public void edit(PanierProduit entity) {
-        super.edit(entity);
+	public PanierProduit edit(PanierProduit entity) {
+
+		return super.edit(entity);
+
     }
 
 	public void remove(long id) {
