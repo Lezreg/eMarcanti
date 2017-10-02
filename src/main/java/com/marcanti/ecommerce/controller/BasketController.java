@@ -17,6 +17,7 @@ import javax.servlet.ServletContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.exception.ProductNotAvailableException;
@@ -41,6 +42,7 @@ public class BasketController implements Serializable {
 	private static final Logger LOGGER = LoggerFactory.getLogger(BasketController.class);
 
 	@Autowired
+	@Qualifier("panierActionService")
 	private PanierActionService panierService;
 
 	@Autowired

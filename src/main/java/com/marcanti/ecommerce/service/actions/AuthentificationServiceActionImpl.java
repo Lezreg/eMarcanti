@@ -2,21 +2,16 @@ package com.marcanti.ecommerce.service.actions;
 
 import java.util.Date;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.marcanti.ecommerce.dao.AuthentificationDAO;
-import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 
-@Service("authentificationService")
 public class AuthentificationServiceActionImpl implements AuthentificationServiceAction {
 
 
-	@Autowired
+	@Autowired(required=true)
 	private AuthentificationDAO authentificationDAO;
  
 	public AuthentificationDAO getAuthentificationDAO() {

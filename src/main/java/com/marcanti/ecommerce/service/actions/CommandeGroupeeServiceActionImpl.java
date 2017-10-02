@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
-import com.marcanti.ecommerce.dao.CommandeGroupeeDAOImpl;
 import com.marcanti.ecommerce.dao.CommandeGroupeeStatusDAO;
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeGroupeeStatus;

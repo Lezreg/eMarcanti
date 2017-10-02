@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.PanierDAO;
 import com.marcanti.ecommerce.model.Panier;
@@ -19,6 +21,7 @@ import com.marcanti.ecommerce.model.Panier;
  * @author lezreg
  */
 
+@Repository
 public class PanierDAOImpl extends AbstractGenericDAO<Panier> implements PanierDAO {
 
 	@PersistenceContext

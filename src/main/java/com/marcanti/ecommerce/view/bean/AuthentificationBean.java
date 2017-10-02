@@ -5,17 +5,22 @@ import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 import com.marcanti.ecommerce.utils.Mail;
@@ -35,6 +40,8 @@ public class AuthentificationBean implements Serializable {
 	private String passwordConfirmation;
 	private String code;
 
+	
+	
 	@ManagedProperty("#{authentificationService}")
 	private AuthentificationServiceAction service;
 	

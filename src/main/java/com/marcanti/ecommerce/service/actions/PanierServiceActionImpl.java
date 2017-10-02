@@ -166,7 +166,6 @@ public class PanierServiceActionImpl implements PanierActionService {
 	}
 
 	private Panier getNewPanier(Produit produit, Membre utilisateur) {
-		ParametersChecker.checkParameter("utilisateur cannot be null ", utilisateur);
 		Panier panier = new Panier();
 		// TODO fix nom de panier
 		Organisation organisation = utilisateur.getIdOrga();

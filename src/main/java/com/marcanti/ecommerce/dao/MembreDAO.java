@@ -4,10 +4,11 @@ import java.util.List;
 
 import com.marcanti.ecommerce.model.Membre;
 import com.marcanti.ecommerce.model.Organisation;
+import com.marcanti.ecommerce.model.Panier;
 import com.marcanti.ecommerce.model.Profil;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
-public interface MembreDAO {
+public interface MembreDAO extends GenericDAO<Membre>{
 	
 	public List<Membre> findAll();
 	

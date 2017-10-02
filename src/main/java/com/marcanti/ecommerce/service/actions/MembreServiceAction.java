@@ -15,14 +15,7 @@ import com.marcanti.ecommerce.view.bean.UserSessionBean;
 public interface MembreServiceAction {
  
 	public Membre getMembre(Membre idMembre);
-	
-	@Transactional
-<<<<<<< HEAD
-	public void updateFilleul(Membre filleul);
-	
-	@Transactional
-	public void insertFilleul(Membre filleul, UserSessionBean parrain);
-=======
+
 	public void updateFilleulMembre(Membre filleul);
 	
 	@Transactional
@@ -41,7 +34,6 @@ public interface MembreServiceAction {
 	public void insertMembreFilleul(Membre filleul, Membre membreParrain);
 	
 	public void updateMembreFilleul(Membre filleul, Membre membreParrain);
->>>>>>> adminstration: authentification + list,add,update filleul + integration charte graphique
 	
      
 }

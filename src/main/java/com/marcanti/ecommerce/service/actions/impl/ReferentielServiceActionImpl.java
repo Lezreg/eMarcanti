@@ -1,4 +1,4 @@
-package com.marcanti.ecommerce.service.actions;
+package com.marcanti.ecommerce.service.actions.impl;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import com.marcanti.ecommerce.dao.ProfilDAO;
 import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
+import com.marcanti.ecommerce.service.actions.ReferentielServiceAction;
 
 
 @Service("referentielService")

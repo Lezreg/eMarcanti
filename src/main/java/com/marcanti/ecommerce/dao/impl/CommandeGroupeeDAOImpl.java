@@ -18,7 +18,6 @@ import org.springframework.stereotype.Repository;
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.model.CommandeGroupee;
-import com.marcanti.ecommerce.model.CommandeIndividuelle;
 
 /**
  *

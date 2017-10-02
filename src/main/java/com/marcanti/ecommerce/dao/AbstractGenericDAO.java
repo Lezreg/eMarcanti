@@ -31,8 +31,8 @@ public abstract class AbstractGenericDAO<T> implements GenericDAO<T> {
         getEntityManager().persist(entity);
     }
 
-    public void edit(T entity) {
-        getEntityManager().merge(entity);
+    public T edit(T entity) {
+        return getEntityManager().merge(entity);
     }
 
     public void remove(T entity) {

@@ -9,18 +9,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.ProduitDAO;
@@ -30,6 +23,7 @@ import com.marcanti.ecommerce.model.Produit;
  *
  * @author lezreg
  */
+@Repository
 public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements ProduitDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(ProduitDAOImpl.class);
@@ -41,59 +35,44 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
         super(Produit.class);
     }
 
-    @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void create(Produit entity) {
         super.create(entity);
     }
 
-    @PUT
-    @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Long id, Produit entity) {
+	public void edit(Long id, Produit entity) {
         super.edit(entity);
     }
 
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+	public void remove(Long id) {
         super.remove(super.find(id));
     }
 
-    @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Produit find(@PathParam("id") Long id) {
+	public Produit find(Long id) {
         return super.find(id);
     }
 
-    @GET
-    @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Produit> findAll() {
         return super.findAll();
     }
 
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Produit> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+	public List<Produit> findRange(Integer from, Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
+	public List<Produit> findProduitByCategorie(String CatCOde) {
+		Query query = em
+				.createQuery("SELECT p FROM Produit p WHERE p.qteEnStock>0 and p.idCategorie.categorieCode = :CatCOde")
+				.setParameter("CatCOde", CatCOde);
+		return query.getResultList();
+	}
     public String countREST() {
         return String.valueOf(super.count());
     }
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-    
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
 	public void setEm(EntityManager em) {
 		this.em = em;

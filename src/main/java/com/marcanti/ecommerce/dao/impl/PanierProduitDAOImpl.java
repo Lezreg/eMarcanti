@@ -12,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
+
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.PanierProduitDAO;
 import com.marcanti.ecommerce.exception.IllegalDataValueException;
@@ -21,7 +23,7 @@ import com.marcanti.ecommerce.model.PanierProduit;
  *
  * @author lezreg
  */
-
+@Repository
 public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> implements PanierProduitDAO {
 
 	@PersistenceContext
@@ -35,9 +37,6 @@ public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> impl
         super.create(entity);
     }
 
-	public void edit(PanierProduit entity) {
-        super.edit(entity);
-    }
 
 	public void remove(long id) {
 		super.remove(super.find(id));

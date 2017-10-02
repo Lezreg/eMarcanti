@@ -3,14 +3,15 @@ package com.marcanti.ecommerce.service.actions.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.marcanti.ecommerce.dao.CategorieDAO;
-import com.marcanti.ecommerce.dao.SousCategorieDAO;
 import com.marcanti.ecommerce.model.Categorie;
-import com.marcanti.ecommerce.model.SousCategorie;
 import com.marcanti.ecommerce.service.actions.CategorieServiceAction;
 
-
+@Service("categorieServiceAction")
+@Transactional
 public class CategorieServiceActionImpl implements CategorieServiceAction {
 
 

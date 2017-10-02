@@ -47,5 +47,11 @@ public class OrganisationServiceActionImpl implements OrganisationServiceAction 
 	public List<Organisation> getActiveOrganisationList() {
 		return organisationDAO.getActiveOrganisationList();
 	}
+
+	@Override
+	public Organisation getOrganisationById(Long orgId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

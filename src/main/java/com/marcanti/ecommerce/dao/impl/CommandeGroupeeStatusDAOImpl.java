@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.CommandeGroupeeStatusDAO;
 import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
-import com.marcanti.ecommerce.model.CommandeIndividuelleStatus;
 
 /**
  *

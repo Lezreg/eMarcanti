@@ -1,5 +1,7 @@
 package com.marcanti.ecommerce.utils;
 
+import javax.annotation.Nullable;
+
 /**
  * This class provides operations on {@code short} primitives and {@link Short}
  * objects.
@@ -27,11 +29,11 @@ public class ShortUtils {
 	 */
 	public static final int UNSIGNED_MAX = 0xFFFF;
 
-	public static short toPrimitive(final Short value) {
+	public static short toPrimitive(@Nullable final Short value) {
 		return (value == null ? DEFAULT : value.shortValue());
 	}
 
-	public static short toPrimitive(final Short value, final short defaultValue) {
+	public static short toPrimitive(@Nullable final Short value, final short defaultValue) {
 		return (value == null ? defaultValue : value.shortValue());
 	}
 
@@ -39,11 +41,11 @@ public class ShortUtils {
 		return (value != 0);
 	}
 
-	public static boolean toBoolean(final Short value) {
+	public static boolean toBoolean(@Nullable final Short value) {
 		return (value == null ? false : toBoolean(value.shortValue()));
 	}
 
-	public static boolean toBoolean(final Short value, final boolean defaultValue) {
+	public static boolean toBoolean(@Nullable final Short value, final boolean defaultValue) {
 		return (value == null ? defaultValue : toBoolean(value.shortValue()));
 	}
 
@@ -51,11 +53,11 @@ public class ShortUtils {
 		return Boolean.valueOf(toBoolean(value));
 	}
 
-	public static Boolean toBooleanObject(final Short value) {
+	public static Boolean toBooleanObject(@Nullable final Short value) {
 		return (value == null ? null : toBooleanObject(value.shortValue()));
 	}
 
-	public static Boolean toBooleanObject(final Short value, final Boolean defaultValue) {
+	public static Boolean toBooleanObject(@Nullable final Short value, @Nullable final Boolean defaultValue) {
 		return (value == null ? defaultValue : toBooleanObject(value.shortValue()));
 	}
 
@@ -63,7 +65,7 @@ public class ShortUtils {
 		return (char) value;
 	}
 
-	public static char toChar(final Short value, final char defaultValue) {
+	public static char toChar(@Nullable final Short value, final char defaultValue) {
 		return (value == null ? defaultValue : toChar(value.shortValue()));
 	}
 
@@ -71,11 +73,11 @@ public class ShortUtils {
 		return Character.valueOf(toChar(value));
 	}
 
-	public static Character toCharObject(final Short value) {
+	public static Character toCharObject(@Nullable final Short value) {
 		return (value == null ? null : toCharObject(value.shortValue()));
 	}
 
-	public static Character toCharObject(final Short value, final Character defaultValue) {
+	public static Character toCharObject(@Nullable final Short value, @Nullable final Character defaultValue) {
 		return (value == null ? defaultValue : toCharObject(value.shortValue()));
 	}
 
@@ -83,7 +85,9 @@ public class ShortUtils {
 		return (byte) value;
 	}
 
-	public static byte toByte(final Short value, final byte defaultValue) {
+
+
+	public static byte toByte(@Nullable final Short value, final byte defaultValue) {
 		return (value == null ? defaultValue : toByte(value.shortValue()));
 	}
 
@@ -91,11 +95,11 @@ public class ShortUtils {
 		return Byte.valueOf(toByte(value));
 	}
 
-	public static Byte toByteObject(final Short value) {
+	public static Byte toByteObject(@Nullable final Short value) {
 		return (value == null ? null : toByteObject(value.shortValue()));
 	}
 
-	public static Byte toByteObject(final Short value, final Byte defaultValue) {
+	public static Byte toByteObject(@Nullable final Short value, @Nullable final Byte defaultValue) {
 		return (value == null ? defaultValue : toByteObject(value.shortValue()));
 	}
 
@@ -103,41 +107,41 @@ public class ShortUtils {
 		return value;
 	}
 
-	public static int toInt(final Short value) {
+	public static int toInt(@Nullable final Short value) {
 		return (value == null ? 0 : toInt(value.shortValue()));
 	}
 
-	public static short incrementShort(final Short value) {
+	public static short incrementShort(@Nullable final Short value) {
 		return toShort(increment(value, 1));
 	}
 
-	public static short incrementShort(final Short value, final int nbre) {
+	public static short incrementShort(@Nullable final Short value, final int nbre) {
 		return toShort(increment(value, nbre));
 	}
 
-	public static int increment(final Short value) {
+	public static int increment(@Nullable final Short value) {
 		return increment(value, 1);
 	}
 
-	public static int increment(final Short value, int nbre) {
+	public static int increment(@Nullable final Short value, int nbre) {
 		return (value == null ? 0 + nbre : toInt(value.shortValue()) + nbre);
 	}
 
-	public static int sum(final Short nb1, Short nb2) {
+	public static int sum(@Nullable final Short nb1, Short nb2) {
 		return (nb1 == null ? 0 + nb1 : toInt(nb1.shortValue()) + (nb2 == null ? 0 + nb2 : toInt(nb2.shortValue())));
 	}
 
-	public static Short sum2Short(final Short nb1, Short nb2) {
+	public static Short sum2Short(@Nullable final Short nb1, Short nb2) {
 		return toShort(
 				nb1 == null ? 0 + nb1 : toInt(nb1.shortValue()) + (nb2 == null ? 0 + nb2 : toInt(nb2.shortValue())));
 	}
 
-	public static Short substract2Short(final Short nb1, Short nb2) {
+	public static Short substract2Short(@Nullable final Short nb1, Short nb2) {
 		return toShort(
 				nb1 == null ? 0 + nb1 : toInt(nb1.shortValue()) - (nb2 == null ? 0 + nb2 : toInt(nb2.shortValue())));
 	}
 
-	public static int toInt(final Short value, final int defaultValue) {
+	public static int toInt(@Nullable final Short value, final int defaultValue) {
 		return (value == null ? defaultValue : toInt(value.shortValue()));
 	}
 
@@ -145,11 +149,11 @@ public class ShortUtils {
 		return Integer.valueOf(toInt(value));
 	}
 
-	public static Integer toIntObject(final Short value) {
+	public static Integer toIntObject(@Nullable final Short value) {
 		return (value == null ? null : toIntObject(value.shortValue()));
 	}
 
-	public static Integer toIntObject(final Short value, final Integer defaultValue) {
+	public static Integer toIntObject(@Nullable final Short value, @Nullable final Integer defaultValue) {
 		return (value == null ? defaultValue : toIntObject(value.shortValue()));
 	}
 
@@ -161,11 +165,10 @@ public class ShortUtils {
 		return (short) value;
 	}
 
-	public static short toShort(final Integer value) {
+	public static short toShort(@Nullable final Integer value) {
 		return (value == null ? 0 : toShort(value.intValue()));
 	}
-
-	public static short toShort(final Integer value, final short defaultValue) {
+	public static short toShort(@Nullable final Integer value, final short defaultValue) {
 		return (value == null ? defaultValue : toShort(value.intValue()));
 	}
 
@@ -173,11 +176,12 @@ public class ShortUtils {
 		return Short.valueOf(toShort(value));
 	}
 
-	public static Short toShortObject(final Integer value) {
+	public static Short toShortObject(@Nullable final Integer value) {
 		return (value == null ? null : toShortObject(value.intValue()));
 	}
 
-	public static long toLong(final Short value, final long defaultValue) {
+
+	public static long toLong(@Nullable final Short value, final long defaultValue) {
 		return (value == null ? defaultValue : toLong(value.shortValue()));
 	}
 
@@ -185,11 +189,11 @@ public class ShortUtils {
 		return Long.valueOf(toLong(value));
 	}
 
-	public static Long toLongObject(final Short value) {
+	public static Long toLongObject(@Nullable final Short value) {
 		return (value == null ? null : toLongObject(value.shortValue()));
 	}
 
-	public static Long toLongObject(final Short value, final Long defaultValue) {
+	public static Long toLongObject(@Nullable final Short value, @Nullable final Long defaultValue) {
 		return (value == null ? defaultValue : toLongObject(value.shortValue()));
 	}
 
@@ -197,7 +201,9 @@ public class ShortUtils {
 		return value;
 	}
 
-	public static float toFloat(final Short value, final float defaultValue) {
+
+
+	public static float toFloat(@Nullable final Short value, final float defaultValue) {
 		return (value == null ? defaultValue : toFloat(value.shortValue()));
 	}
 
@@ -205,11 +211,11 @@ public class ShortUtils {
 		return Float.valueOf(toFloat(value));
 	}
 
-	public static Float toFloatObject(final Short value) {
+	public static Float toFloatObject(@Nullable final Short value) {
 		return (value == null ? null : toFloatObject(value.shortValue()));
 	}
 
-	public static Float toFloatObject(final Short value, final Float defaultValue) {
+	public static Float toFloatObject(@Nullable final Short value, @Nullable final Float defaultValue) {
 		return (value == null ? defaultValue : toFloatObject(value.shortValue()));
 	}
 
@@ -217,11 +223,11 @@ public class ShortUtils {
 		return value;
 	}
 
-	public static double toDouble(final Short value) {
+	public static double toDouble(@Nullable final Short value) {
 		return (value == null ? 0 : toDouble(value.shortValue()));
 	}
 
-	public static double toDouble(final Short value, final double defaultValue) {
+	public static double toDouble(@Nullable final Short value, final double defaultValue) {
 		return (value == null ? defaultValue : toDouble(value.shortValue()));
 	}
 
@@ -229,11 +235,11 @@ public class ShortUtils {
 		return Double.valueOf(toDouble(value));
 	}
 
-	public static Double toDoubleObject(final Short value) {
+	public static Double toDoubleObject(@Nullable final Short value) {
 		return (value == null ? null : toDoubleObject(value.shortValue()));
 	}
 
-	public static Double toDoubleObject(final Short value, final Double defaultValue) {
+	public static Double toDoubleObject(@Nullable final Short value, @Nullable final Double defaultValue) {
 		return (value == null ? defaultValue : toDoubleObject(value.shortValue()));
 	}
 
@@ -241,12 +247,13 @@ public class ShortUtils {
 		return Integer.toString(value, 10);
 	}
 
-	public static String toString(final Short value) {
+	public static String toString(@Nullable final Short value) {
 		return (value == null ? null : toString(value.shortValue()));
 	}
 
-	public static String toString(final Short value, final String defaultValue) {
+	public static String toString(@Nullable final Short value, @Nullable final String defaultValue) {
 		return (value == null ? defaultValue : toString(value.shortValue()));
 	}
+
 
 }
