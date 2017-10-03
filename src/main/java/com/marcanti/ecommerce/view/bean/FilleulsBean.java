@@ -199,7 +199,7 @@ public class FilleulsBean implements Serializable {
 		if(filleul.getIdMembre()==null || filleul.getIdMembre()==0L){
 			if(authentificationService.emailExist(getMembreEmail())){
 				msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_emailExist");
-				facesMessage.setDetail(msg); 
+				facesMessage.setSummary(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 			}else{
@@ -220,7 +220,7 @@ public class FilleulsBean implements Serializable {
 					logger.error("ERROR send mail filleul with password : ",e);
 				}
 				msg = ParfumUtils.getBundleApplication().getString("message.ajouter.filleul");
-				facesMessage.setDetail(msg); 
+				facesMessage.setSummary(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 			    ecran="filleuls";
@@ -230,7 +230,7 @@ public class FilleulsBean implements Serializable {
 				filleul.setDateModification(dateToday);
 				membreService.updateFilleulMembre(filleul);
 				msg = ParfumUtils.getBundleApplication().getString("message.modif.filleul");
-				facesMessage.setDetail(msg); 
+				facesMessage.setSummary(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 				
@@ -238,14 +238,14 @@ public class FilleulsBean implements Serializable {
 				
 				if(authentificationService.emailExist(getMembreEmail())){
 					msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_emailExist");
-					facesMessage.setDetail(msg); 
+					facesMessage.setSummary(msg); 
 					facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 				    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 				}else{
 					filleul.setDateModification(dateToday);
 					membreService.updateFilleulMembre(filleul);
 					msg = ParfumUtils.getBundleApplication().getString("message.modif.filleul");
-					facesMessage.setDetail(msg); 
+					facesMessage.setSummary(msg); 
 					facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 				    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 				}

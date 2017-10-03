@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ import com.marcanti.ecommerce.service.actions.OrganisationServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 @ManagedBean(name = "organisationsBean")
-@RequestScoped
+@SessionScoped
 public class OrganisationsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,8 +33,9 @@ public class OrganisationsBean implements Serializable {
 	
 	private Organisation organisation;
 	
+	private String titre="";
 	
-	@ManagedProperty("#{param.idOrga}")
+	//@ManagedProperty("#{param.idOrga}")
 	private long idOrga;
 	
 	@ManagedProperty("#{organisationService}")
@@ -89,6 +90,14 @@ public class OrganisationsBean implements Serializable {
 	public void setOrganisation(Organisation organisation) {
 		this.organisation = organisation;
 	}
+	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
 	public long getIdOrga() {
 		return idOrga;
@@ -124,12 +133,15 @@ public class OrganisationsBean implements Serializable {
 		Organisation organisation = new Organisation(getIdOrga());
 		organisation= organisationService.getOrganisation(organisation);
 		setOrganisation(organisation);
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_orga");
 		return "organisation";
 
 	}
 	
 	public String addOrganisationView() {
 		logger.info("addOrganisationView");
+		this.organisation = new Organisation();
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_orga");
 		return "organisation";
 
 	}	
@@ -151,6 +163,7 @@ public class OrganisationsBean implements Serializable {
 			organisationService.insertOrganisation(organisation);
 			this.organisationList=organisationService.getOrganisationList();
 			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.orga");
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_membre");
 		    ecran="organisations";
 		    
 		}else{
@@ -158,9 +171,10 @@ public class OrganisationsBean implements Serializable {
 			organisation.setDateModification(dateToday);
 			organisationService.updateOrganisation(organisation);
 			msg = ParfumUtils.getBundleApplication().getString("message.modif.orga");
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_orga");
 
 		}
-		facesMessage.setDetail(msg); 
+		facesMessage.setSummary(msg); 
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);		
 		return ecran;

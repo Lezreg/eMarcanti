@@ -129,18 +129,13 @@
 													<td><h:outputText value="#{membre.dateModification}">
 															<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
 														</h:outputText></td>
-													<td><h:commandLink action="#{membreBean.editMembre()}"
-															styleClass="fa fa-pencil-square-o">
-															<f:setPropertyActionListener
-																target="#{membreBean.idMembre}"
-																value="#{membre.idMembre}" />
-															<f:setPropertyActionListener
-																target="#{membreBean.oldMembreEmail}"
-																value="#{membre.membreEmail}" />
-															<f:setPropertyActionListener
-																target="#{membreBean.idOrgaSelected}"
-																value="#{membre.idOrga.idOrga}" />
-														</h:commandLink></td>
+													<td>
+														<h:commandLink action="#{membreBean.editMembre()}" styleClass="fa fa-pencil-square-o">
+															<f:setPropertyActionListener target="#{membreBean.idMembre}" value="#{membre.idMembre}" />
+															<f:setPropertyActionListener target="#{membreBean.oldMembreEmail}" value="#{membre.membreEmail}" />
+															<f:setPropertyActionListener target="#{membreBean.idOrgaSelected}" value="#{membre.idOrga.idOrga}" />
+														</h:commandLink>
+													</td>
 													<td>#{membre.membreEmail}</td>
 													<td>#{membre.nomParrain}</td>
 												</tr>

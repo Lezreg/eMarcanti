@@ -163,7 +163,7 @@ public class CarouselsBean implements Serializable {
 		
 		if(!getOldRangItem().equals(getElementRang()) && carouselService.isRangExist(carousel)){
 			msg = MessageFormat.format(ParfumUtils.getBundleApplication().getString("libelle_Erreur_rang"),String.valueOf(getElementRang()));
-			facesMessage.setDetail(msg);
+			facesMessage.setSummary(msg);
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 			return ecran;
@@ -173,7 +173,7 @@ public class CarouselsBean implements Serializable {
 			
 			if(this.uploadedFile==null){
 				msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_upload");
-				facesMessage.setDetail(msg);
+				facesMessage.setSummary(msg);
 				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 				return ecran;
@@ -189,7 +189,7 @@ public class CarouselsBean implements Serializable {
 			carouselService.updateCarousel(this.carousel);
 			msg = ParfumUtils.getBundleApplication().getString("message.modif.carousel");
 		}
-		facesMessage.setDetail(msg);
+		facesMessage.setSummary(msg);
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		

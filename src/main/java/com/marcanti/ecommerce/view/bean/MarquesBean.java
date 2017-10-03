@@ -144,7 +144,7 @@ public class MarquesBean implements Serializable {
 			marqueService.updateMarque(this.marque);;
 			msg = ParfumUtils.getBundleApplication().getString("message.modif.marque");
 		}
-		facesMessage.setDetail(msg); 
+		facesMessage.setSummary(msg); 
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		return ecran;

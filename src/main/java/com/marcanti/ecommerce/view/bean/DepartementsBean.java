@@ -199,7 +199,7 @@ public class DepartementsBean implements Serializable {
 			departementService.updateDepartement(this.departement);;
 			msg = ParfumUtils.getBundleApplication().getString("message.modif.dept");
 		}
-		facesMessage.setDetail(msg); 
+		facesMessage.setSummary(msg); 
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);		
 		return ecran;
