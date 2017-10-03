@@ -8,8 +8,8 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:body>
-			<h:form id="homme">
-				<p:dataTable var="tester" value="#{TFilterView.produits}"
+			<h:form id="soinsFormId">
+				<p:dataTable var="product" value="#{SOFilterView.produits}"
 					widgetVar="produitsTesterTable"
 					emptyMessage="No produits found with given criteria"
 					filteredValue="#{TFilterView.filteredProduits}">
@@ -24,60 +24,60 @@
 					</f:facet>
 
 					<p:column style="width:50px">
-						<h:outputText value="#{tester.idProduit}" />
+						<h:outputText value="#{product.idProduit}" />
 					</p:column>
 
-					<p:column filterBy="#{tester.idMarque.marqueNom}"
+					<p:column filterBy="#{product.idMarque.marqueNom}"
 						headerText="Marque" footerText="exact" filterMatchMode="exact">
 						<f:facet name="filter">
 							<p:selectOneMenu onchange="PF('produitsTesterTable').filter()"
 								style="width:80%">
 								<f:selectItem itemLabel="Select One" itemValue="#{null}"
 									noSelectionOption="true" />
-								<f:selectItems value="#{TFilterView.brands}" />
+								<f:selectItems value="#{SOFilterView.brands}" />
 							</p:selectOneMenu>
 						</f:facet>
-						<!--             <p:graphicImage url="/images/100X100/#{tester.produitPhotoURL}" width="100" /> -->
+						<!--             <p:graphicImage url="/images/100X100/#{product.produitPhotoURL}" width="100" /> -->
 						<p:graphicImage
-							url="/images/100X100/#{empty tester.produitPhotoURL ? 'default.jpg' : tester.produitPhotoURL}"
+							url="/images/100X100/#{empty product.produitPhotoURL ? 'default.jpg' : product.produitPhotoURL}"
 							width="100" />
 						<!--              <h:outputText value="#{empty produit.produitPhotoURL ? 'default.jpg' : produit.produitPhotoURL}" /> -->
-						<h:outputText value="#{tester.idMarque.marqueNom}" />
+						<h:outputText value="#{product.idMarque.marqueNom}" />
 					</p:column>
 
-					<p:column filterBy="#{tester.produitDescription}"
+					<p:column filterBy="#{product.produitDescription}"
 						headerText="Description" footerText="contains"
 						filterMatchMode="contains">
-						<h:outputText value="#{tester.produitDescription}" />
+						<h:outputText value="#{product.produitDescription}" />
 					</p:column>
 
-					<p:column filterBy="#{tester.produitDetail}" style="width:150px"
+					<p:column filterBy="#{product.produitDetail}" style="width:150px"
 						headerText="Detail" footerText="contains"
 						filterMatchMode="contains">
-						<h:outputText value="#{tester.produitDetail}" />
+						<h:outputText value="#{product.produitDetail}" />
 					</p:column>
 
-					<p:column filterBy="#{tester.prixPublic}" style="width:110px"
+					<p:column filterBy="#{product.prixPublic}" style="width:110px"
 						headerText="Prix constaté" footerText="custom (min)"
-						filterFunction="#{TFilterView.filterByPrice}">
-						<h:outputText value="#{tester.prixPublic}">
+						filterFunction="#{SOFilterView.filterByPrice}">
+						<h:outputText value="#{product.prixPublic}">
 							<f:convertNumber currencySymbol="€" type="currency" />
 						</h:outputText>
 					</p:column>
 
-					<p:column filterBy="#{tester.notrePrix}" style="width:110px"
+					<p:column filterBy="#{product.notrePrix}" style="width:110px"
 						headerText="Notre prix" footerText="custom (min)"
-						filterFunction="#{TFilterView.filterByPrice}">
-						<h:outputText value="#{tester.notrePrix}">
+						filterFunction="#{SOFilterView.filterByPrice}">
+						<h:outputText value="#{product.notrePrix}">
 							<f:convertNumber currencySymbol="€" type="currency" />
 						</h:outputText>
 					</p:column>
 
 					<p:column style="width:110px">
 						<p:commandButton icon="ui-icon-cart" title="View"
-							action="#{TFilterView.addToBasket()}">
-							<f:setPropertyActionListener value="#{tester}"
-								target="#{TFilterView.selectedProduit}" />
+							action="#{SOFilterView.addToBasket()}">
+							<f:setPropertyActionListener value="#{product}"
+								target="#{SOFilterView.selectedProduit}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>

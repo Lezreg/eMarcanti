@@ -21,14 +21,6 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	@Autowired
 	private MarqueDAO marqueDAO;
 
-	private List<Produit> parfumHomme;
-
-	private List<Produit> parfumFemme;
-
-	private List<Produit> parfumEnfant;
-
-	private List<Produit> tester;
-
 	@Override
 	@Transactional
 	public void AddProduit(Produit produit) {
@@ -57,47 +49,41 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	}
 
 	public List<Produit> getParfumHomme() {
-		// if (parfumHomme == null || parfumHomme.isEmpty()) {
-			this.parfumHomme = produitDAO.findProduitByCategorie(Categories.PARFUM_HOMME.getCode());
-		//// }
-		return parfumHomme;
+		return produitDAO.findProduitByCategorie(Categories.PARFUM_HOMME.getCode());
 	}
 
-	public void setParfumHomme(List<Produit> parfumHomme) {
-		this.parfumHomme = parfumHomme;
-	}
 
 	public List<Produit> getParfumFemme() {
-		if (parfumFemme == null || parfumFemme.isEmpty()) {
-			this.parfumFemme = produitDAO.findProduitByCategorie(Categories.PARFUM_FEMME.getCode());
-		}
-		return parfumFemme;
-	}
+		return produitDAO.findProduitByCategorie(Categories.PARFUM_FEMME.getCode());
 
-	public void setParfumFemme(List<Produit> parfumFemme) {
-		this.parfumFemme = parfumFemme;
 	}
 
 	public List<Produit> getParfumEnfant() {
-		if (parfumEnfant == null || parfumEnfant.isEmpty()) {
-			this.parfumEnfant = produitDAO.findProduitByCategorie(Categories.PARFUM_ENFANT.getCode());
-		}
-		return parfumEnfant;
+		return produitDAO.findProduitByCategorie(Categories.PARFUM_ENFANT.getCode());
 	}
 
-	public void setParfumEnfant(List<Produit> parfumEnfant) {
-		this.parfumEnfant = parfumEnfant;
+	public List<Produit> getTesteurs() {
+			return produitDAO.findProduitByCategorie(Categories.TESTER.getCode());
 	}
 
-	public List<Produit> getTester() {
-		if (tester == null || tester.isEmpty()) {
-			this.tester = produitDAO.findProduitByCategorie(Categories.TESTER.getCode());
-		}
-		return tester;
+	@Override
+	public List<Produit> getCoffrets() {
+		return produitDAO.findProduitByCategorie(Categories.COFFRET.getCode());	}
+
+	@Override
+	public List<Produit> getSoins() {
+		//Miniatures et soins
+		return produitDAO.findProduitByCategorie(Categories.MINIATURE.getCode());
 	}
 
-	public void setTester(List<Produit> tester) {
-		this.tester = tester;
+	@Override
+	public List<Produit> getAccessoires() {
+		return produitDAO.findProduitByCategorie(Categories.PILE_ACCESSOIRE.getCode());
+	}
+
+	@Override
+	public List<Produit> getLots() {
+		return produitDAO.findProduitByCategorie(Categories.LOTS.getCode());
 	}
 
 }

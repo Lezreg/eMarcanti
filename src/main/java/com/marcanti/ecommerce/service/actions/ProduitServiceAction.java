@@ -21,6 +21,15 @@ public interface ProduitServiceAction {
 
 	public List<Produit> getParfumEnfant();
 
-	public List<Produit> getTester();
+	public List<Produit> getTesteurs();
+	
+	public List<Produit> getCoffrets();
+	
+	public List<Produit> getSoins();
+	
+	public List<Produit> getAccessoires();
+	
+	public List<Produit> getLots();
+
      
 }
