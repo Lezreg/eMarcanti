@@ -20,9 +20,12 @@ import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 
-@ManagedBean(name = "TFilterView")
+@ManagedBean(name = "ACCFilterView")
 @ViewScoped
-public class Tester {
+public class Accessoires {
+
+
+	
 	
 	private List<Produit> produits;
 	
@@ -43,15 +46,14 @@ public class Tester {
 	public void setBasket(BasketController basket) {
 		this.basket = basket;
 	}
-
+	
 	@PostConstruct
 	public void init() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		ServletContext servletContext = (ServletContext) externalContext.getContext();
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
-
-		setProduits(produitServiceAction.getTesteurs());
+		setProduits(produitServiceAction.getAccessoires());
 	}
 	
 	public boolean filterByPrice(Object value, Object filter, Locale locale) {
@@ -67,6 +69,7 @@ public class Tester {
 		return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
 	}
 	
+	// FIXME extract this methods in other session scopped bean
 	public List<String> getBrands() {
 		List<String> brands = new ArrayList<>();
 		for (Marque m : produitServiceAction.getBrands()) {
@@ -108,6 +111,5 @@ public class Tester {
 		this.selectedProduit = selectedProduit;
 	}
 
-	
-}
 
+}

@@ -75,9 +75,9 @@
 									<li><h:link value="#{msg.libelle_testeur}" outcome="tester" /></li>
 									<li><h:link value="#{msg.libelle_coffret}" outcome="coffret" /></li>
 									<li><h:link value="#{msg.libelle_creme_soin}" outcome="soins" /></li>
-									<li><h:link value="#{msg.libelle_miniatures}" outcome="organisations" /></li>
-									<li><h:link value="#{msg.libelle_pile_accessoire}" outcome="organisations" /></li>
-									<li><h:link value="#{msg.libelle_lots}" outcome="organisations" /></li>
+									<li><h:link value="#{msg.libelle_miniatures}" outcome="miniatures" /></li>
+									<li><h:link value="#{msg.libelle_pile_accessoire}" outcome="accessoires" /></li>
+									<li><h:link value="#{msg.libelle_lots}" outcome="lots" /></li>
 								</ul>
 							</li>						
 						</c:if>
@@ -116,7 +116,7 @@
 							<li class="dropdown"><a href="commandes_groupees.html" class="dropdown-toggle" data-toggle=""><h:outputText value="#{msg.libelle_cmd_grp}" /> <i class="fa fa-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<c:if test="${USER_SESSION.MENU_COMMANDES_GRP_RC}" scope="session">
-										<li class="kopie"><h:link value="#{msg.libelle_recap_cours}" outcome="organisations" /></li>
+										<li class="kopie"><h:link value="#{msg.libelle_recap_cours}" outcome="cmdGroupees" /></li>
 									</c:if>
 									<c:if test="${USER_SESSION.MENU_COMMANDES_GRP_RP}" scope="session">
 										<li><h:link value="#{msg.libelle_recap_pre}" outcome="organisations" /></li>

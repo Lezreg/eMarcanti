@@ -9,10 +9,10 @@
 	<ui:define name="content">
 		<h:body>
 			<h:form id="soinsFormId">
-				<p:dataTable var="product" value="#{SOFilterView.produits}"
+				<p:dataTable var="product" value="#{ACCFilterView.produits}"
 					widgetVar="produitsTesterTable"
 					emptyMessage="No produits found with given criteria"
-					filteredValue="#{SOFilterView.filteredProduits}">
+					filteredValue="#{ACCFilterView.filteredProduits}">
 
 					<f:facet name="header">
 						<p:outputPanel>
@@ -34,7 +34,7 @@
 								style="width:80%">
 								<f:selectItem itemLabel="Select One" itemValue="#{null}"
 									noSelectionOption="true" />
-								<f:selectItems value="#{SOFilterView.brands}" />
+								<f:selectItems value="#{ACCFilterView.brands}" />
 							</p:selectOneMenu>
 						</f:facet>
 						<!--             <p:graphicImage url="/images/100X100/#{product.produitPhotoURL}" width="100" /> -->
@@ -59,7 +59,7 @@
 
 					<p:column filterBy="#{product.prixPublic}" style="width:110px"
 						headerText="Prix constaté" footerText="custom (min)"
-						filterFunction="#{SOFilterView.filterByPrice}">
+						filterFunction="#{ACCFilterView.filterByPrice}">
 						<h:outputText value="#{product.prixPublic}">
 							<f:convertNumber currencySymbol="€" type="currency" />
 						</h:outputText>
@@ -67,7 +67,7 @@
 
 					<p:column filterBy="#{product.notrePrix}" style="width:110px"
 						headerText="Notre prix" footerText="custom (min)"
-						filterFunction="#{SOFilterView.filterByPrice}">
+						filterFunction="#{ACCFilterView.filterByPrice}">
 						<h:outputText value="#{product.notrePrix}">
 							<f:convertNumber currencySymbol="€" type="currency" />
 						</h:outputText>
@@ -75,9 +75,9 @@
 
 					<p:column style="width:110px">
 						<p:commandButton icon="ui-icon-cart" title="View"
-							action="#{SOFilterView.addToBasket()}">
+							action="#{ACCFilterView.addToBasket()}">
 							<f:setPropertyActionListener value="#{product}"
-								target="#{SOFilterView.selectedProduit}" />
+								target="#{ACCFilterView.selectedProduit}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>

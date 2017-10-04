@@ -73,7 +73,7 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	@Override
 	public List<Produit> getSoins() {
 		//Miniatures et soins
-		return produitDAO.findProduitByCategorie(Categories.MINIATURE.getCode());
+		return produitDAO.findProduitByCategorie(Categories.CREME.getCode());
 	}
 
 	@Override
@@ -84,6 +84,11 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	@Override
 	public List<Produit> getLots() {
 		return produitDAO.findProduitByCategorie(Categories.LOTS.getCode());
+	}
+
+	@Override
+	public List<Produit> getMiniatures() {
+		return produitDAO.findProduitByCategorie(Categories.MINIATURE.getCode());
 	}
 
 }

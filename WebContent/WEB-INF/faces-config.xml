@@ -162,6 +162,31 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>miniatures</from-outcome>
+			<to-view-id>/pages/private/categories/miniatures.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>lots</from-outcome>
+			<to-view-id>/pages/private/categories/lots.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>accessoires</from-outcome>
+			<to-view-id>/pages/private/categories/accessoires.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 	
 	<!-- /navigation rules catégories  -->		
 	
@@ -209,13 +234,13 @@
 		</navigation-case>
 	</navigation-rule>	
 	
-	<navigation-rule>
-		<from-view-id>/*</from-view-id>
-		<navigation-case>
-			<from-outcome>cmdList</from-outcome>
-			<to-view-id>/pages/private/cmdGroupees.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>		
+<!-- 	<navigation-rule> -->
+<!-- 		<from-view-id>/*</from-view-id> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>cmdList</from-outcome> -->
+<!-- 			<to-view-id>/pages/private/cmdGroupees.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule>		 -->
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>

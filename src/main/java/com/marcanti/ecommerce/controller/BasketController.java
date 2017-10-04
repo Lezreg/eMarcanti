@@ -25,6 +25,7 @@ import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Panier;
 import com.marcanti.ecommerce.model.PanierProduit;
 import com.marcanti.ecommerce.model.Produit;
+import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 import com.marcanti.ecommerce.service.actions.CommandeIndividuelleServiceAction;
 import com.marcanti.ecommerce.service.actions.PanierActionService;
 import com.marcanti.ecommerce.utils.ParfumUtils;
@@ -44,10 +45,14 @@ public class BasketController implements Serializable {
 	@Autowired
 	@Qualifier("panierActionService")
 	private PanierActionService panierService;
+	
+	@Autowired
+	@Qualifier("commandeGroupeeServiceAction")
+	private CommandeGroupeeServiceAction  commandeGroupeeServiceAction;
 
 	@Autowired
 	private CommandeIndividuelleServiceAction commandeIndividuelleServiceAction;
-
+	
 	private Panier panierEnCours;
 
 	private List<CommandeIndividuelle> commandes;
@@ -56,7 +61,7 @@ public class BasketController implements Serializable {
 
 	private CommandeIndividuelle commandeIndividuelle;
 
-	private boolean isCurrrentCmds = false;
+	private boolean isCurrrentCmds = true;
 
 	public Panier getPanierEnCours() {
 		return panierEnCours;
@@ -169,7 +174,10 @@ public class BasketController implements Serializable {
 	 */
 	public List<CommandeIndividuelle> getCommandes() {
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(), 1L,
+		
+		Long derniereCdeGoupee = commandeGroupeeServiceAction.getIdDerniereCdeGoupee(userSessionBean.getIdOrga());
+		
+		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(), derniereCdeGoupee,
 				isCurrrentCmds);
 		if (selectedCmd == null || selectedCmd.isEmpty()) {
 			selectedCmd = commandes.get(0).getIdCdeIndiv().toString();
@@ -219,6 +227,14 @@ public class BasketController implements Serializable {
 
 	public void setCommandes(List<CommandeIndividuelle> commandes) {
 		this.commandes = commandes;
+	}
+
+	public CommandeGroupeeServiceAction getCommandeGroupeeServiceAction() {
+		return commandeGroupeeServiceAction;
+	}
+
+	public void setCommandeGroupeeServiceAction(CommandeGroupeeServiceAction commandeGroupeeServiceAction) {
+		this.commandeGroupeeServiceAction = commandeGroupeeServiceAction;
 	}
 
 

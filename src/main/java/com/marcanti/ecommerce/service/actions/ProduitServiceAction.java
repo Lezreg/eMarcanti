@@ -30,6 +30,8 @@ public interface ProduitServiceAction {
 	public List<Produit> getAccessoires();
 	
 	public List<Produit> getLots();
+	
+	public List<Produit> getMiniatures();
 
      
 }
