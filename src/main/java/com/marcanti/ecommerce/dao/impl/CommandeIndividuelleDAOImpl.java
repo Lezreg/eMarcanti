@@ -5,6 +5,8 @@
  */
 package com.marcanti.ecommerce.dao.impl;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -116,7 +118,7 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 		LOGGER.info(query.toString());
 
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
-			return null;
+			return Collections.emptyList();
 		}
 		return (List<CommandeIndividuelle>) query.getResultList();
 	}
@@ -132,7 +134,7 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 		LOGGER.info(query.toString());
 
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
-			return null;
+			return Collections.emptyList();
 		}
 		return (List<CommandeIndividuelle>) query.getResultList();
 	}

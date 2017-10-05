@@ -15,7 +15,8 @@
 				<h:outputText id="ttp" value="#{cmdGroupeeView.organisation.orgaNom}" title="Organisation" />
 				<br />
 				<br />
-				<p:commandButton value="Ajouter" id="pButton" action="#{cmdGroupeeView.createNew}" styleClass="ui-priority-primary" />
+				
+				<h:commandButton value="Ajouter" id="enrgId" action="#{cmdGroupeeView.createNew}" style="padding: 5px 5px 5px 30px;color:#262626;font-family:Arial Black, Helvetica, sans-serif;" />
 				
 				<br />
 				<br />
@@ -63,9 +64,9 @@
 					</p:column>
 					
 					 <p:column style="width:32px;text-align: center">
-			             <p:commandButton action="createCmd" icon="ui-icon-search" title="View">
+			             <h:commandButton value="View" action="createCmd"  title="View">
 			                <f:setPropertyActionListener value="#{cmdGr}" target="#{cmdGroupeeView.commandeGroupee}" />
-			            </p:commandButton>
+			            </h:commandButton>
 			        </p:column>
 				</p:dataTable>	
 			</div>

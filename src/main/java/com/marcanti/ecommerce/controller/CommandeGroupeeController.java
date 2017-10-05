@@ -68,7 +68,6 @@ public class CommandeGroupeeController implements Serializable {
 
 	public String createNew() {
 		this.commandeGroupee = newCommandeGroupee();
-
 		return "createCmd";
 	}
 
@@ -96,7 +95,7 @@ public class CommandeGroupeeController implements Serializable {
 			commandeGroupee.setPrenomModifieur(userSessionBean.getMembrePrenom());
 		}
 		commandeGroupeeServiceAction.saveCmdGroupee(commandeGroupee);
-		return "cmdList";
+		return "cmdGroupees";
 	}
 
 	private CommandeGroupee newCommandeGroupee() {
