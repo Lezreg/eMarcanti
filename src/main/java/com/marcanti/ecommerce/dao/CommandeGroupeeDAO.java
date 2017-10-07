@@ -9,5 +9,7 @@ public interface CommandeGroupeeDAO extends GenericDAO<CommandeGroupee> {
 	Long getIdDerniereCdeGoupee(Long idOrg);
 
 	List<CommandeGroupee> getCmdGroupeesByOrg(Long idOrg);
+	
+	
 
 }

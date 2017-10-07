@@ -62,12 +62,13 @@ public class PanierServiceActionImpl implements PanierActionService {
 	public Panier addProduct(Produit produit, Long idMembre, Long idOrg) {
 		ParametersChecker.checkParameter("produit is null ", produit);
 		Panier panierEnCours = null;
-		CommandeGroupee cmdgroupee = commandeGroupeeDAO.find(1L);// with id
+		Long cmdgroupeeId = commandeGroupeeDAO.getIdDerniereCdeGoupee(idOrg);
+		CommandeGroupee currentCmdGroupee = commandeGroupeeDAO.find(cmdgroupeeId);
 		Membre member = membreDAO.find(idMembre);
 
 		// verifier si panier existe deja (commande indiv)
 		CommandeIndividuelle commandeIndividuel = commandeIndividuelleDAO
-				.getCommandeIndividuellByMembreAndCmdGroupe(member, cmdgroupee);
+				.getCommandeIndividuellByMembreAndCmdGroupe(member, currentCmdGroupee);
 
 		if (commandeIndividuel != null) {
 			PanierProduit panierProduit = panierProduitDAO.getPanierProduitByPanierAndProduit(
@@ -102,14 +103,13 @@ public class PanierServiceActionImpl implements PanierActionService {
 		}else{
 			// else: create panier
 			// create panier
-			Panier panier = getNewPanier(produit, member);
-			panier = create(panier);
+			panierEnCours = create(getNewPanier(produit, member));
 			// create panierproduit
-			PanierProduit panierProduit = getNewPanierProduit(panier, produit);
+			PanierProduit panierProduit = getNewPanierProduit(panierEnCours, produit);
 			panierProduitDAO.create(panierProduit);
 
 			// create commande indiv
-			CommandeIndividuelle commandeIndividuelle = getNewCommandeIndividuelle(member, panier, cmdgroupee);
+			CommandeIndividuelle commandeIndividuelle = getNewCommandeIndividuelle(member, panierEnCours,currentCmdGroupee );
 			commandeIndividuelleDAO.create(commandeIndividuelle);
 		}
 		
@@ -258,6 +258,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 
 	@Override
 	public List<PanierProduit> getProduitsByPAnier(Panier panier) {
+		ParametersChecker.checkParameter("------------------panier is null ", panier);
 		return panierProduitDAO.getPanierProduitByPanier(panier.getIdPanier());
 	}
 

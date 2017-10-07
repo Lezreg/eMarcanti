@@ -69,18 +69,18 @@
 					  		</td>
 					  		<td align="left">
 <!-- 					  		TODO -->
-					  			<p:selectOneMenu id="moisID" value="#{carteView.transactionPaiement.emailPaypal}" style="width:20px">
+					  			<h:selectOneMenu id="moisID" value="#{carteView.transactionPaiement.emailPaypal}" style="width:20px">
 						            <f:selectItem itemLabel="01" itemValue="01" />
 						            <f:selectItem itemLabel="02" itemValue="02" />
 						            <f:selectItem itemLabel="03" itemValue="03" />
 						            <f:selectItem itemLabel="04" itemValue="04" />
-						        </p:selectOneMenu>
-						        <p:selectOneMenu id="anneeId" value="#{carteView.transactionPaiement.commentaire}" style="width:50px">
+						        </h:selectOneMenu>
+						        <h:selectOneMenu id="anneeId" value="#{carteView.transactionPaiement.commentaire}" style="width:50px">
 						            <f:selectItem itemLabel="2017" itemValue="01" />
 						            <f:selectItem itemLabel="2018" itemValue="02" />
 						            <f:selectItem itemLabel="2019" itemValue="03" />
 						            <f:selectItem itemLabel="2020" itemValue="04" />
-						        </p:selectOneMenu>
+						        </h:selectOneMenu>
 					  		</td>
 					  	</tr>
 					  	<tr>
@@ -94,7 +94,7 @@
 					  	</tr>
 					  	<tr align="center">
 					  		<td colspan="2" align="center">
-					  			<p:commandButton value=" OUI, JE CONFIME MON PAIEMENT " id="validerButton" actionListener="#{carteView.payerCommande}"  style="background-color:#ff6600;color: black;"/>
+					  			<h:commandButton value=" OUI, JE CONFIME MON PAIEMENT " id="validerButton" actionListener="#{carteView.payerCommande}"  style="background-color:#ff6600;color: black;padding: 5px 5px 5px 30px;"/>
 					  		</td>
 					  	</tr>
 				</table>

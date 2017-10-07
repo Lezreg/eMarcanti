@@ -9,11 +9,11 @@
 	<ui:define name="content">
 		<h:form id="panierId">
 		
-			<p:selectOneMenu id="cmdIdiv" value="#{basketView.selectedCmd}" required="true" label="choisir une commande"
+			<h:selectOneMenu id="cmdIdiv" value="#{basketView.selectedCmd}" required="true" label="choisir une commande"
 			    style="width: 200px" sortBy="#{panierProduit.qteSouhaitee}">
 			    <f:selectItems value="#{basketView.commandes}" var="order" itemLabel="#{order.cdeIndivNom}" itemValue="#{order.idCdeIndiv}" />
 			    <p:ajax  update="panierProduitTable ttp" />
-			</p:selectOneMenu>
+			</h:selectOneMenu>
 			<br/>
 			
 			<p:growl id="growl" for="qte" showDetail="true" sticky="true" /> 
@@ -37,7 +37,7 @@
 				  	
 			</table>
 			
-			<p:dataTable id="panierProduitTable" var="panierProduit" value="#{basketView.panierProduitList}" emptyMessage="Nenhuma entrada!" liveResize="true">
+			<p:dataTable id="panierProduitTable" var="panierProduit" value="#{basketView.panierProduitList}" emptyMessage="Aucune commande en cours !" liveResize="true">
 
 				<p:column headerText="Marque">
 					<p:graphicImage
@@ -72,7 +72,7 @@
 				<table>
 				  	<tr>
 				  		<td align="left">
-							<p:commandButton value="Recalculer" id="calculButton" update="panierProduitTable" action="#{basketView.reCalculer}" styleClass="ui-priority-primary" />
+							<h:commandButton value="Recalculer" id="calculButton" update="panierProduitTable" action="#{basketView.reCalculer}" styleClass="ui-priority-primary" />
 				  		</td>
 				  	</tr>
 				  	<tr>
@@ -87,12 +87,12 @@
 				  	</tr>
 				  	<tr>
 				  		<td align="right">
-				  			<p:commandButton value="Confirmer" id="confirmButton" update="panierProduitTable" action="#{basketView.confirmerCommandeIndiv}" styleClass="ui-priority-primary"/>
+				  			<h:commandButton value="Confirmer" id="confirmButton" update="panierProduitTable" action="#{basketView.confirmerCommandeIndiv}" styleClass="ui-priority-primary"/>
 				  		</td>
 				  	</tr>
 				  	<tr>
 				  		<td align="right">
-				  			<p:commandButton value="Payer" id="pButton" action="payer" styleClass="ui-priority-primary" />
+				  			<h:commandButton value="Payer" id="pButton" action="payer" styleClass="ui-priority-primary" />
 				  		</td>
 				  	</tr>
 				</table>
