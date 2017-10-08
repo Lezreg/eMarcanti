@@ -195,7 +195,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>commandes_pre</from-outcome>
-			<to-view-id>/pages/private/panier/panier.xhtml</to-view-id>
+			<to-view-id>/pages/private/panier/cmdIndivPrec.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
