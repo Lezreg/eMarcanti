@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import com.marcanti.ecommerce.service.actions.MarqueServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 @ManagedBean(name = "marquesBean")
-@RequestScoped
+@SessionScoped
 public class MarquesBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,8 +31,9 @@ public class MarquesBean implements Serializable {
 	
 	private Marque marque;
 	
+	private String titre="";
 	
-	@ManagedProperty("#{param.idMarque}")
+	//@ManagedProperty("#{param.idMarque}")
 	private Short idMarque;
 	
 	@ManagedProperty("#{marqueService}")
@@ -83,6 +84,14 @@ public class MarquesBean implements Serializable {
 	public void setMarque(Marque marque) {
 		this.marque = marque;
 	}
+	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
 	public Short getIdMarque() {
 		return idMarque;
@@ -113,12 +122,14 @@ public class MarquesBean implements Serializable {
 		Marque marque = new Marque(getIdMarque().shortValue());
 		marque= marqueService.getMarque(marque);
 		setMarque(marque);
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_marque");
 		return "marque";
 
 	}
 	
 	public String addMarqueView() {
 		logger.info("addMarqueView");
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_marque");
 		return "marque";
 
 	}	
@@ -135,15 +146,18 @@ public class MarquesBean implements Serializable {
 		if(this.marque.getIdMarque()==null || this.marque.getIdMarque().shortValue()==0){
 				
 			marqueService.insertMarque(marque);
-			this.marqueList=marqueService.getMarqueList();
 			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.marque");
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_marque");
 		    ecran="marques";
 		    
 		}else{
 			
 			marqueService.updateMarque(this.marque);;
 			msg = ParfumUtils.getBundleApplication().getString("message.modif.marque");
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_marque");
 		}
+		//on rafraichit la liste des marques
+		this.marqueList=marqueService.getMarqueList();
 		facesMessage.setSummary(msg); 
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);

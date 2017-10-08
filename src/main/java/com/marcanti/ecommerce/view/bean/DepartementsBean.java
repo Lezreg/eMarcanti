@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ import com.marcanti.ecommerce.service.actions.OrganisationServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 @ManagedBean(name = "departementsBean")
-@RequestScoped
+@SessionScoped
 public class DepartementsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -35,9 +35,11 @@ public class DepartementsBean implements Serializable {
 	
 	private Departement departement;
 	
+	private String titre="";
+	
 	private String orgaDisabled="true";
 	
-	@ManagedProperty("#{param.idDepartement}")
+	//@ManagedProperty("#{param.idDepartement}")
 	private long idDepartement;
 	
 	@ManagedProperty("#{departementService}")
@@ -120,6 +122,14 @@ public class DepartementsBean implements Serializable {
 	public void setDepartement(Departement departement) {
 		this.departement = departement;
 	}
+	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
 	public long getIdDepartement() {
 		return idDepartement;
@@ -164,12 +174,14 @@ public class DepartementsBean implements Serializable {
 		Departement departement = new Departement(getIdDepartement());
 		departement= departementService.getDepartement(departement);
 		setDepartement(departement);
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_dept");
 		return "departement";
 
 	}
 	
 	public String addDepartementView() {
 		logger.info("addDepartementView");
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_dept");
 		return "departement";
 
 	}	
@@ -185,19 +197,22 @@ public class DepartementsBean implements Serializable {
 		if(departement.getIdDepartement()==null || departement.getIdDepartement()==0L){
 				
 			departementService.insertDepartement(departement);
-			if(ParfumUtils.getUserSessionBean().getIdProfil()==ReferentielBean.PROFIL_MANAGER){
-				Organisation idOrga = new Organisation(ParfumUtils.getUserSessionBean().getIdOrga());
-				this.departementList = departementService.getDepartementByOrgaList(idOrga);
-			}else if(ParfumUtils.getUserSessionBean().getIdProfil()==ReferentielBean.PROFIL_ADMIN){
-				this.departementList = departementService.getDepartementList();
-			}
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_membre");
 			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.dept");
 		    ecran="departements";
 		    
 		}else{
 				
-			departementService.updateDepartement(this.departement);;
+			departementService.updateDepartement(this.departement);
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_dept");
 			msg = ParfumUtils.getBundleApplication().getString("message.modif.dept");
+		}
+		//on rafraichit la liste des departements
+		if(ParfumUtils.getUserSessionBean().getIdProfil()==ReferentielBean.PROFIL_MANAGER){
+			Organisation idOrga = new Organisation(ParfumUtils.getUserSessionBean().getIdOrga());
+			this.departementList = departementService.getDepartementByOrgaList(idOrga);
+		}else if(ParfumUtils.getUserSessionBean().getIdProfil()==ReferentielBean.PROFIL_ADMIN){
+			this.departementList = departementService.getDepartementList();
 		}
 		facesMessage.setSummary(msg); 
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);

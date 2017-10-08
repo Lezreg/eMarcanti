@@ -63,11 +63,18 @@
 			<to-view-id>/pages/private/message.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
-	<navigation-rule>
+<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>filleuls</from-outcome>
-			<to-view-id>/pages/private/filleuls.xhtml</to-view-id>
+			<to-view-id>/pages/private/parrainage/filleuls.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>filleul</from-outcome>
+			<to-view-id>/pages/private/parrainage/filleul.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
@@ -77,48 +84,13 @@
 	   <to-view-id>/pages/private/panier/panier.xhtml</to-view-id>
 	  </navigation-case>
 	 </navigation-rule>
-	 
-	 <navigation-rule>
-		<from-view-id>/*</from-view-id>
-		<navigation-case>
-			<from-outcome>filleul</from-outcome>
-			<to-view-id>/pages/private/filleul.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>	
-	<navigation-rule>
-		<from-view-id>/*</from-view-id>
-		<navigation-case>
-			<from-outcome>sousCategories</from-outcome>
-			<to-view-id>/pages/private/sous_categories.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>	
-	<navigation-rule>
-		<from-view-id>/*</from-view-id>
-		<navigation-case>
-			<from-outcome>sousCategorie</from-outcome>
-			<to-view-id>/pages/private/sous_categorie.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>	
-	<navigation-rule>
-		<from-view-id>/*</from-view-id>
-		<navigation-case>
-			<from-outcome>categories</from-outcome>
-			<to-view-id>/pages/private/categories.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>	
-	<navigation-rule>
-		<from-view-id>/*</from-view-id>
-		<navigation-case>
-			<from-outcome>categorie</from-outcome>
-			<to-view-id>/pages/private/categories.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
+
 	<!-- navigation rules catégories  -->		
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>parfumHomme</from-outcome>
-			<to-view-id>/pages/private/categories/parfumHomme.xhtml</to-view-id>
+			<to-view-id>/pages/private/catalogue/parfumHomme.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -126,7 +98,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>parfumFemme</from-outcome>
-			<to-view-id>/pages/private/categories/parfumFemme.xhtml</to-view-id>
+			<to-view-id>/pages/private/catalogue/parfumFemme.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -134,7 +106,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>parfumEnfant</from-outcome>
-			<to-view-id>/pages/private/categories/parfumEnfant.xhtml</to-view-id>
+			<to-view-id>/pages/private/catalogue/parfumEnfant.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -142,7 +114,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>tester</from-outcome>
-			<to-view-id>/pages/private/categories/tester.xhtml</to-view-id>
+			<to-view-id>/pages/private/catalogue/tester.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -150,7 +122,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>coffret</from-outcome>
-			<to-view-id>/pages/private/categories/coffret.xhtml</to-view-id>
+			<to-view-id>/pages/private/catalogue/coffret.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -158,7 +130,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>soins</from-outcome>
-			<to-view-id>/pages/private/categories/soins.xhtml</to-view-id>
+			<to-view-id>/pages/private/catalogue/soins.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -166,7 +138,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>miniatures</from-outcome>
-			<to-view-id>/pages/private/categories/miniatures.xhtml</to-view-id>
+			<to-view-id>/pages/private/catalogue/miniatures.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -175,7 +147,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>lots</from-outcome>
-			<to-view-id>/pages/private/categories/lots.xhtml</to-view-id>
+			<to-view-id>/pages/private/catalogue/lots.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -183,7 +155,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>accessoires</from-outcome>
-			<to-view-id>/pages/private/categories/accessoires.xhtml</to-view-id>
+			<to-view-id>/pages/private/catalogue/accessoires.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -195,7 +167,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>commandes_pre</from-outcome>
-			<to-view-id>/pages/private/panier/cmdIndivPrec.xhtml</to-view-id>
+			<to-view-id>/pages/private/panier/panier.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -233,68 +205,102 @@
 			<to-view-id>/pages/private/cmdGroupeeDetail.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
-	
-<!-- 	<navigation-rule> -->
-<!-- 		<from-view-id>/*</from-view-id> -->
-<!-- 		<navigation-case> -->
-<!-- 			<from-outcome>cmdList</from-outcome> -->
-<!-- 			<to-view-id>/pages/private/cmdGroupees.xhtml</to-view-id> -->
-<!-- 		</navigation-case> -->
-<!-- 	</navigation-rule>		 -->
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
-			<from-outcome>departements</from-outcome>
-			<to-view-id>/pages/private/departements.xhtml</to-view-id>
+			<from-outcome>membres</from-outcome>
+			<to-view-id>/pages/private/admin/membres.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
-			<from-outcome>departement</from-outcome>
-			<to-view-id>/pages/private/departement.xhtml</to-view-id>
+			<from-outcome>membre</from-outcome>
+			<to-view-id>/pages/private/admin/membre.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>organisations</from-outcome>
-			<to-view-id>/pages/private/organisations.xhtml</to-view-id>
+			<to-view-id>/pages/private/admin/organisations.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>organisation</from-outcome>
-			<to-view-id>/pages/private/organisation.xhtml</to-view-id>
+			<to-view-id>/pages/private/admin/organisation.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
-			<from-outcome>membres</from-outcome>
-			<to-view-id>/pages/private/membres.xhtml</to-view-id>
+			<from-outcome>departements</from-outcome>
+			<to-view-id>/pages/private/admin/departements.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
-			<from-outcome>membre</from-outcome>
-			<to-view-id>/pages/private/membre.xhtml</to-view-id>
+			<from-outcome>departement</from-outcome>
+			<to-view-id>/pages/private/admin/departement.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+			<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>marques</from-outcome>
+			<to-view-id>/pages/private/admin/marques.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
-			<from-outcome>membres</from-outcome>
-			<to-view-id>/pages/private/carousels.xhtml</to-view-id>
+			<from-outcome>marque</from-outcome>
+			<to-view-id>/pages/private/admin/marque.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>categories</from-outcome>
+			<to-view-id>/pages/private/admin/categories.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
-			<from-outcome>membre</from-outcome>
-			<to-view-id>/pages/private/carousel.xhtml</to-view-id>
+			<from-outcome>categorie</from-outcome>
+			<to-view-id>/pages/private/admin/categorie.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>sousCategories</from-outcome>
+			<to-view-id>/pages/private/admin/sous_categories.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>sousCategorie</from-outcome>
+			<to-view-id>/pages/private/admin/sous_categorie.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>carousels</from-outcome>
+			<to-view-id>/pages/private/admin/carousels.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>carousel</from-outcome>
+			<to-view-id>/pages/private/admin/carousel.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	

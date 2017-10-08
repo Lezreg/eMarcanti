@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import com.marcanti.ecommerce.service.actions.SousCategorieServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 @ManagedBean(name = "sousCategoriesBean")
-@RequestScoped
+@SessionScoped
 public class SousCategoriesBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,8 +31,9 @@ public class SousCategoriesBean implements Serializable {
 	
 	private SousCategorie sousCategorie;
 	
+	private String titre="";
 	
-	@ManagedProperty("#{param.idSousCategorie}")
+	//@ManagedProperty("#{param.idSousCategorie}")
 	private Short idSousCategorie;
 	
 	@ManagedProperty("#{sousCategorieService}")
@@ -85,6 +86,14 @@ public class SousCategoriesBean implements Serializable {
 	public void setSousCategorie(SousCategorie sousCategorie) {
 		this.sousCategorie = sousCategorie;
 	}
+	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
 	public Short getIdSousCategorie() {
 		return idSousCategorie;
@@ -117,12 +126,14 @@ public class SousCategoriesBean implements Serializable {
 		SousCategorie sousCategorie = new SousCategorie(getIdSousCategorie().shortValue());
 		sousCategorie= sousCategorieService.getSousCategorie(sousCategorie);
 		setSousCategorie(sousCategorie);
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_ss_categorie");
 		return "sousCategorie";
 
 	}
 	
 	public String addSousCategorieView() {
 		logger.info("addSousCategorieView");
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_ss_categorie");
 		return "sousCategorie";
 
 	}	
@@ -139,15 +150,18 @@ public class SousCategoriesBean implements Serializable {
 		if(this.sousCategorie.getIdSousCategorie()==null || this.sousCategorie.getIdSousCategorie().shortValue()==0){
 				
 			sousCategorieService.insertSousCategorie(sousCategorie);
-			this.sousCategorieList=sousCategorieService.getSousCategorieList();
 			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.ss_categorie");
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_ss_categorie");
 		    ecran="sousCategories";
 		    
 		}else{
 				
-			sousCategorieService.updateSousCategorie(this.sousCategorie);;
+			sousCategorieService.updateSousCategorie(this.sousCategorie);
 			msg = ParfumUtils.getBundleApplication().getString("message.modif.ss_categorie");
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_ss_categorie");
 		}
+		//on rafraichit la liste des sous-categories
+		this.sousCategorieList=sousCategorieService.getSousCategorieList();
 		facesMessage.setSummary(msg); 
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);		

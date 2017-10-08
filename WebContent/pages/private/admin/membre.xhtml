@@ -36,7 +36,6 @@
 									<div class="modifymaintitle">
 										<h3>#{membreBean.titre}</h3>
 									</div>
-									
 									<div>
 										<h:messages errorClass="redclass" infoClass="greenclass" />
 									</div>
@@ -123,154 +122,140 @@
 
 									<div class="clearfix"></div>
 
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>
-													<h:outputLabel for="idorga" value="#{msg.libelle_orga}" />
-													<span>*</span>
-												</p>
+									<c:if test="${!membreBean.isAdminRendered}" scope="session">
+										<div class="marqueinfo marginRow">
+											<div class="paddingless col-sm-4">
+												<div class="marquestext">
+													<p>
+														<h:outputLabel for="idorga" value="#{msg.libelle_orga}" />
+														<span>*</span>
+													</p>
+												</div>
+											</div>
+											<div class="paddingless col-sm-8">
+												<div class="marquedescription oransationadmin">
+													<div class="select">
+														<h:selectOneMenu id="idorga" value="#{membreBean.membre.idOrga.idOrga}" disabled="#{membreBean.orgaDisabled}">
+															<p:ajax listener="#{membreBean.onOrganisationChange}" update="idDepartement,formMembre" />
+															<f:selectItems value="#{membreBean.organisationList}" var="c" itemLabel="#{c.orgaNom}" itemValue="#{c.idOrga}" />
+														</h:selectOneMenu>
+														<div class="select__arrow"></div>
+													</div>
+	
+												</div>
 											</div>
 										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquedescription oransationadmin">
-												<div class="select">
-													<h:selectOneMenu id="idorga"
-														value="#{membreBean.membre.idOrga.idOrga}"
-														disabled="#{membreBean.orgaDisabled}">
-														<p:ajax listener="#{membreBean.onOrganisationChange}"
-															update="idDepartement,formMembre" />
-														<f:selectItems value="#{membreBean.organisationList}"
-															var="c" itemLabel="#{c.orgaNom}" itemValue="#{c.idOrga}" />
+	
+										<div class="clearfix"></div>
+	
+										<div class="marqueinfo marginRow">
+											<div class="paddingless col-sm-4">
+												<div class="marquestext">
+													<p>
+														<h:outputLabel for="idDepartement"
+															value="#{msg.libelle_dept}" />
+													</p>
+												</div>
+											</div>
+											<div class="paddingless col-sm-8">
+												<div class="marquedescription oransationadmin">
+													<div class="select">
+														<h:selectOneMenu id="idDepartement" value="#{membreBean.membre.idDepartement.idDepartement}">
+															<f:selectItems value="#{membreBean.departementList}" var="c" itemLabel="#{c.departementNom}" itemValue="#{c.idDepartement}" />
+														</h:selectOneMenu>
+														<div class="select__arrow"></div>
+													</div>
+	
+												</div>
+											</div>
+										</div>
+	
+										<div class="clearfix"></div>
+	
+										<div class="marqueinfo marginRow">
+											<div class="paddingless col-sm-4">
+												<div class="marquestext">
+													<p>
+														<h:outputLabel value="#{msg.libelle_role}" />
+														<span>*</span>
+													</p>
+												</div>
+											</div>
+											<div class="paddingless col-sm-8">
+												<div class="marquedescription oransationadmin">
+													<div class="select">
+														<h:selectOneMenu value="#{membreBean.membre.idProfil.idProfil}">
+															<p:ajax listener="#{membreBean.onRoleChange}" update="formMembre" />
+															<f:selectItems value="#{membreBean.roleList}" var="c" itemLabel="#{c.profilLibelle}" itemValue="#{c.idProfil}" />
+														</h:selectOneMenu>
+														<div class="select__arrow"></div>
+													</div>
+	
+												</div>
+											</div>
+										</div>
+	
+										<div class="clearfix"></div>
+	
+										<div class="marqueinfo marginRow">
+											<div class="paddingless col-sm-4">
+												<div class="marquestext">
+													<p>
+														<h:outputLabel id="idParrain_libelle" value="#{msg.libelle_parrain}" rendered="#{membreBean.parrainRendered}" />
+													</p>
+												</div>
+											</div>
+											<div class="paddingless col-sm-8">
+												<div class="marquedescription oransationadmin">
+													<h:selectOneMenu id="idParrain" value="#{membreBean.idMembreParrain}" rendered="#{membreBean.parrainRendered}">
+														<f:selectItems value="#{membreBean.parrainList}" var="c" itemLabel="#{c.membrePrenom} #{c.membreNom}" itemValue="#{c.idMembre}" />
 													</h:selectOneMenu>
-													<div class="select__arrow"></div>
-												</div>
-
-											</div>
-										</div>
-									</div>
-
-									<div class="clearfix"></div>
-
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>
-													<h:outputLabel for="idDepartement"
-														value="#{msg.libelle_dept}" />
-												</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquedescription oransationadmin">
-												<div class="select">
-													<h:selectOneMenu id="idDepartement"
-														value="#{membreBean.membre.idDepartement.idDepartement}">
-														<f:selectItems value="#{membreBean.departementList}"
-															var="c" itemLabel="#{c.departementNom}"
-															itemValue="#{c.idDepartement}" />
-													</h:selectOneMenu>
-													<div class="select__arrow"></div>
-												</div>
-
-											</div>
-										</div>
-									</div>
-
-									<div class="clearfix"></div>
-
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>
-													<h:outputLabel value="#{msg.libelle_role}" />
-													<span>*</span>
-												</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquedescription oransationadmin">
-												<div class="select">
-													<h:selectOneMenu
-														value="#{membreBean.membre.idProfil.idProfil}">
-														<p:ajax listener="#{membreBean.onRoleChange}"
-															update="formMembre" />
-														<f:selectItems value="#{membreBean.roleList}" var="c"
-															itemLabel="#{c.profilLibelle}" itemValue="#{c.idProfil}" />
-													</h:selectOneMenu>
-													<div class="select__arrow"></div>
-												</div>
-
-											</div>
-										</div>
-									</div>
-
-									<div class="clearfix"></div>
-
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>
-													<h:outputLabel id="idParrain_libelle"
-														value="#{msg.libelle_parrain}"
-														rendered="#{membreBean.parrainRendered}" />
-												</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquedescription oransationadmin">
-												<h:selectOneMenu id="idParrain"
-													value="#{membreBean.idMembreParrain}"
-													rendered="#{membreBean.parrainRendered}">
-													<f:selectItems value="#{membreBean.parrainList}" var="c"
-														itemLabel="#{c.membrePrenom} #{c.membreNom}"
-														itemValue="#{c.idMembre}" />
-												</h:selectOneMenu>
-											</div>
-										</div>
-									</div>
-
-									<div class="clearfix"></div>
-
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>
-													<h:outputLabel value="#{msg.libelle_cpt_active}" />
-												</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquestext">
-												<div class="maequescheckb checkbox">
-													<h:selectOneRadio value="#{membreBean.membre.isActif}">
-														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
-													</h:selectOneRadio>	
-												</div>									        
-											</div>
-										</div>
-									</div>
-
-									<div class="clearfix"></div>
-
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>
-													<h:outputLabel value="#{msg.libelle_drt_reduc}" rendered="#{membreBean.hasReducRendered}" />
-												</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquestext">
-												<div class="maequescheckb checkbox">
-													<h:selectOneRadio value="#{membreBean.membre.hasReduc}" rendered="#{membreBean.hasReducRendered}">
-														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
-													</h:selectOneRadio>
 												</div>
 											</div>
 										</div>
-									</div>
+	
+										<div class="clearfix"></div>
+	
+										<div class="marqueinfo marginRow">
+											<div class="paddingless col-sm-4">
+												<div class="marquestext">
+													<p>
+														<h:outputLabel value="#{msg.libelle_cpt_active}" />
+													</p>
+												</div>
+											</div>
+											<div class="paddingless col-sm-8">
+												<div class="marquestext">
+													<div class="maequescheckb checkbox">
+														<h:selectOneRadio value="#{membreBean.membre.isActif}">
+															<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+														</h:selectOneRadio>	
+													</div>									        
+												</div>
+											</div>
+										</div>
+	
+										<div class="clearfix"></div>
+	
+										<div class="marqueinfo marginRow">
+											<div class="paddingless col-sm-4">
+												<div class="marquestext">
+													<p>
+														<h:outputLabel value="#{msg.libelle_drt_reduc}" rendered="#{membreBean.hasReducRendered}" />
+													</p>
+												</div>
+											</div>
+											<div class="paddingless col-sm-8">
+												<div class="marquestext">
+													<div class="maequescheckb checkbox">
+														<h:selectOneRadio value="#{membreBean.membre.hasReduc}" rendered="#{membreBean.hasReducRendered}">
+															<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+														</h:selectOneRadio>
+													</div>
+												</div>
+											</div>
+										</div>
+									</c:if>
 
 									<div class="clearfix"></div>
 
@@ -356,7 +341,12 @@
 											<div class="newmodiysvecan modifysavecancelbutton">
 												<div class="button-1">
 													<div class="eff-1"></div>
-													<h:link value="#{msg.libelle_annuler}" outcome="membres" />
+													<c:if test="${membreBean.isEditMembre}" scope="session">
+														<h:link value="#{msg.libelle_annuler}" outcome="membres" />
+													</c:if>
+													<c:if test="${!membreBean.isEditMembre}" scope="session">
+														<h:link value="#{msg.libelle_annuler}" outcome="index" />
+													</c:if>
 												</div>
 
 												<div class="button-2">

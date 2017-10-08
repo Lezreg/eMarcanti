@@ -161,9 +161,8 @@ public class OrganisationsBean implements Serializable {
 				
 			organisation.setDateCreation(dateToday);
 			organisationService.insertOrganisation(organisation);
-			this.organisationList=organisationService.getOrganisationList();
 			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.orga");
-			this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_membre");
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_orga");
 		    ecran="organisations";
 		    
 		}else{
@@ -174,6 +173,8 @@ public class OrganisationsBean implements Serializable {
 			this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_orga");
 
 		}
+		//on rafraichit la liste des organisations
+		this.organisationList=organisationService.getOrganisationList();
 		facesMessage.setSummary(msg); 
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);		

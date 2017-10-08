@@ -180,7 +180,7 @@ public class CarouselsBean implements Serializable {
 			}
 
 			carouselService.insertCarousel(carousel);
-			this.carouselList = carouselService.getCarouselList();
+			//this.carouselList = carouselService.getCarouselList();
 			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.carousel");
 			ecran = "carousels";
 
@@ -193,8 +193,9 @@ public class CarouselsBean implements Serializable {
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		
-		CarouselsBean carouselsBean =  (CarouselsBean)ParfumUtils.getSessionObject("carouselsBean");
-		carouselsBean.setCarouselList(carouselService.getCarouselList());
+		//CarouselsBean carouselsBean =  (CarouselsBean)ParfumUtils.getSessionObject("carouselsBean");
+		//carouselsBean.setCarouselList(carouselService.getCarouselList());
+		this.carouselList = carouselService.getCarouselList();
 		
 		return ecran;
 	}

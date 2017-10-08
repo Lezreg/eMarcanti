@@ -58,6 +58,18 @@ public class MembreBean implements Serializable {
 	
 	private String parrainRendered="false";
 	
+	/*private String orgaRendered="true";
+	
+	private String departementRendered="true";
+	
+	private String roleRendered="true";
+	
+	private String isActifRendered="true";*/
+	
+	private String isMembreConnectedAdmin="false";
+	
+	private String isAdminRendered="false";
+	
 	private Long idMembre;
 	
 	private Long idMembreParrain;	
@@ -67,6 +79,8 @@ public class MembreBean implements Serializable {
 	private Long idOrgaSelected;	
 	
 	private String isAddAction="false";
+	
+	private String isEditMembre="false";
 	
 	private String titre="";
 	
@@ -88,9 +102,6 @@ public class MembreBean implements Serializable {
 	@ManagedProperty("#{referentielBean}")
 	private ReferentielBean referentielBean;
 	
-	//@ManagedProperty("#{messageBean}")
-	//private MessageBean messageBean;	
-
 	public MembreBean() {
 	}
 
@@ -113,6 +124,7 @@ public class MembreBean implements Serializable {
 		}else if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_ADMIN){
 			setHasReducRendered("true");
 			setOrgaDisabled("false");
+			setIsMembreConnectedAdmin("true");
 			this.roleList=ReferentielBean.getAdminRoleList();
 		}else if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_MEMBRE){
 			this.membre.setIdOrga(idOrgaUserConnected);
@@ -125,9 +137,6 @@ public class MembreBean implements Serializable {
 		this.parrainList = new ArrayList<Membre>();
 		if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
 			setParrainRendered("true");
-			//Filleul filleul = filleulsServiceAction.getFilleul(getIdMembre());
-			//setIdMembreParrain(filleul.getIdMembreParrain().getIdMembre());
-			
 		}else{
 			setParrainRendered("false");
 		}
@@ -278,10 +287,26 @@ public class MembreBean implements Serializable {
 		return parrainRendered;
 	}
 
+	public String getIsMembreConnectedAdmin() {
+		return isMembreConnectedAdmin;
+	}
+
+	public String getIsAdminRendered() {
+		return isAdminRendered;
+	}
+
+	public void setIsAdminRendered(String isAdminRendered) {
+		this.isAdminRendered = isAdminRendered;
+	}
+
+	public void setIsMembreConnectedAdmin(String isMembreConnectedAdmin) {
+		this.isMembreConnectedAdmin = isMembreConnectedAdmin;
+	}
+
 	public void setParrainRendered(String parrainRendered) {
 		this.parrainRendered = parrainRendered;
 	}
-
+	
 	public String getOldMembreEmail() {
 		return oldMembreEmail;
 	}
@@ -297,7 +322,6 @@ public class MembreBean implements Serializable {
 	public void setIdOrgaSelected(Long idOrgaSelected) {
 		this.idOrgaSelected = idOrgaSelected;
 	}
-	
 
 	public String getIsAddAction() {
 		return isAddAction;
@@ -307,6 +331,14 @@ public class MembreBean implements Serializable {
 		this.isAddAction = isAddAction;
 	}
 	
+	public String getIsEditMembre() {
+		return isEditMembre;
+	}
+
+	public void setIsEditMembre(String isEditMembre) {
+		this.isEditMembre = isEditMembre;
+	}
+
 	public String getTitre() {
 		return titre;
 	}
@@ -420,7 +452,13 @@ public class MembreBean implements Serializable {
 				setIdMembreParrain(filleul.getIdMembreParrain().getIdMembre());
 			}
 		}
+		if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_ADMIN){
+			setIsAdminRendered("true");
+		}else{
+			setIsAdminRendered("false");
+		}
 		setIsAddAction("false");
+		setIsEditMembre("true");
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_membre");
 		return "membre";
 	}
@@ -443,7 +481,13 @@ public class MembreBean implements Serializable {
 				setIdMembreParrain(filleul.getIdMembreParrain().getIdMembre());
 			}
 		}
+		if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_ADMIN){
+			setIsAdminRendered("true");
+		}else{
+			setIsAdminRendered("false");
+		}
 		setIsAddAction("false");
+		setIsEditMembre("false");
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_mon_compte");
 		return "membre";
 	}	
@@ -464,6 +508,7 @@ public class MembreBean implements Serializable {
 			this.departementList = departementService.getDepartementByOrgaList(organisationList.get(0));
 			
 		}
+		setIsAdminRendered("false");
 		setIsAddAction("true");
 		return "membre";
 	}	
@@ -512,12 +557,7 @@ public class MembreBean implements Serializable {
 				} catch (MessagingException e) {
 					logger.error("ERROR send mail membre with password : ",e);
 				}
-				MembresBean membresBean =  (MembresBean)ParfumUtils.getSessionObject("membresBean");
-				if(membresBean.getIdOrga().getIdOrga()==0L){
-					membresBean.setMembresList(membreService.getMembreList());
-				}else{
-					membresBean.setMembresList(membreService.getMembreByOrgaList(membresBean.getIdOrga()));
-				}
+
 				msg = ParfumUtils.getBundleApplication().getString("message.ajouter.membre");
 				facesMessage.setSummary(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
@@ -557,7 +597,18 @@ public class MembreBean implements Serializable {
 			}
 			this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_membre");
 		}
-		
+		if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_ADMIN){
+			setIsAdminRendered("true");
+		}else{
+			setIsAdminRendered("false");
+		}
+		//on rafraichit la liste des membres
+		MembresBean membresBean =  (MembresBean)ParfumUtils.getSessionObject("membresBean");
+		if(membresBean.getIdOrga().getIdOrga()==0L){
+			membresBean.setMembresList(membreService.getMembreList());
+		}else{
+			membresBean.setMembresList(membreService.getMembreByOrgaList(membresBean.getIdOrga()));
+		}
 		this.departementList = departementService.getDepartementByOrgaList(getIdOrga());
 		return ecran;
 	}	

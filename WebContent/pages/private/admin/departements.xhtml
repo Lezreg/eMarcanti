@@ -31,10 +31,11 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="filterheading">
-								<h3>
-									<h:outputLabel value="#{msg.libelle_gestion_dept}" />
-								</h3>
+								<h3>#{msg.libelle_gestion_dept}</h3>
 							</div>
+							<div>
+								<h:messages errorClass="redclass" infoClass="greenclass" />
+							</div>								
 						</div>
 					</div>
 				</div>
@@ -82,7 +83,7 @@
 											<td>#{departement.commentaire}</td>
 											<td>
 												<h:commandLink action="#{departementsBean.editDepartement()}" styleClass="fa fa-pencil-square-o">
-													<f:param name="idDepartement" value="#{departement.idDepartement}" />
+													<f:setPropertyActionListener target="#{departementsBean.idDepartement}" value="#{departement.idDepartement}" />
 												</h:commandLink>
 											</td>
 										</tr>

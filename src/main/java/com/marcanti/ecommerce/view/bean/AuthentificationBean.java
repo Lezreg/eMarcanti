@@ -5,22 +5,17 @@ import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 import com.marcanti.ecommerce.utils.Mail;
@@ -29,7 +24,7 @@ import com.marcanti.ecommerce.utils.ParfumUtils;
 
 
 @ManagedBean(name="authentificationBean")
-@ViewScoped
+@RequestScoped
 public class AuthentificationBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -40,8 +35,6 @@ public class AuthentificationBean implements Serializable {
 	private String passwordConfirmation;
 	private String code;
 
-	
-	
 	@ManagedProperty("#{authentificationService}")
 	private AuthentificationServiceAction service;
 	
@@ -142,7 +135,7 @@ public class AuthentificationBean implements Serializable {
 		
 		if(msg!=null){
 			logger.info(getUsername() + " : " + msg);
-			facesMessage.setDetail(msg); 
+			facesMessage.setSummary(msg);
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}else{
@@ -210,7 +203,7 @@ public class AuthentificationBean implements Serializable {
 		}else{
 			msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_invalidEmail");
 			logger.info(getUsername() + " : " + msg);
-			facesMessage.setDetail(msg); 
+			facesMessage.setSummary(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
@@ -261,14 +254,14 @@ public class AuthentificationBean implements Serializable {
 		}else{
 			msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_invalidCode");
 			logger.info(email + " : " + msg);
-			facesMessage.setDetail(msg); 
+			facesMessage.setSummary(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
 	    
 	    if(isOK){
 	    	msg = ParfumUtils.getBundleApplication().getString("message.send.password");
-	    	facesMessage.setDetail(msg); 
+	    	facesMessage.setSummary(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 	    	return "message";
@@ -290,7 +283,7 @@ public class AuthentificationBean implements Serializable {
 		
 		if(!resu){
 	    	msg = ParfumUtils.getBundleApplication().getString("message.confirmation.error");
-	    	facesMessage.setDetail(msg); 
+	    	facesMessage.setSummary(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		    return "new_password";
@@ -300,7 +293,7 @@ public class AuthentificationBean implements Serializable {
 		
 		if(!resu){
 	    	msg = ParfumUtils.getBundleApplication().getString("message.password.format");
-	    	facesMessage.setDetail(msg); 
+	    	facesMessage.setSummary(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
 		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		    return "new_password";

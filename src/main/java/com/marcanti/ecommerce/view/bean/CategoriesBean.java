@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import com.marcanti.ecommerce.service.actions.CategorieServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 @ManagedBean(name = "categoriesBean")
-@RequestScoped
+@SessionScoped
 public class CategoriesBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -30,8 +30,9 @@ public class CategoriesBean implements Serializable {
 	
 	private Categorie categorie;
 	
+	private String titre="";
 	
-	@ManagedProperty("#{param.idCategorie}")
+	//@ManagedProperty("#{param.idCategorie}")
 	private Short idCategorie;
 	
 	@ManagedProperty("#{categorieService}")
@@ -82,6 +83,14 @@ public class CategoriesBean implements Serializable {
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
+	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
 	public Short getIdCategorie() {
 		return idCategorie;
@@ -104,19 +113,15 @@ public class CategoriesBean implements Serializable {
 		Categorie categorie = new Categorie(getIdCategorie().shortValue());
 		categorie= categorieService.getCategorie(categorie);
 		setCategorie(categorie);
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_categorie");
 		return "categorie";
 
 	}
 	
 	public String addCategorieView() {
 		logger.info("addCategorieView");
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_categorie");
 		return "categorie";
-
-	}	
-	
-	public String listCategorieView() {
-		logger.info("listCategorieView");
-		return "categories";
 
 	}	
 	
@@ -131,16 +136,19 @@ public class CategoriesBean implements Serializable {
 		if(this.categorie.getIdCategorie()==null || this.categorie.getIdCategorie().shortValue()==0){
 				
 			categorieService.insertCategorie(categorie);
-			this.categorieList=categorieService.getCategorieList();
 			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.categorie");
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_categorie");
 		    ecran="categories";
 		    
 		}else{
 				
-			categorieService.updateCategorie(this.categorie);;
+			categorieService.updateCategorie(this.categorie);
 			msg = ParfumUtils.getBundleApplication().getString("message.modif.categorie");
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_categorie");
 		}
-		facesMessage.setDetail(msg); 
+		//on rafraichit la liste des categories
+		this.categorieList=categorieService.getCategorieList();
+		facesMessage.setSummary(msg); 
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);		
 		return ecran;
