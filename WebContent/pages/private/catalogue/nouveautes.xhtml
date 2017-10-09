@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+	<h:body>
+		<h:form id="homme">
+		    <p:dataTable id="dataNov" var="product" value="#{NovFilterView.newProducts}" widgetVar="produitsTable"
+		                 emptyMessage="No produits found with given criteria" filteredValue="#{NovFilterView.filteredProduits}" >
+		        <f:facet name="header">
+		            <p:outputPanel>
+		<!--                 <h:outputText value="Search all fields:" /> -->
+		                <p:inputText id="globalFilter" onkeyup="PF('produitsTable').filter()" style="text-align=right" placeholder="Rechercher"/>
+		            </p:outputPanel>
+		        </f:facet>
+		        
+		  		<p:column style="width:50px">
+		            <h:outputText value="#{product.idProduit}" />
+		        </p:column>
+		        
+		        <p:column filterBy="#{product.idMarque.marqueNom}" headerText="Marque" footerText="exact" filterMatchMode="exact">
+		            <f:facet name="filter">
+		                <p:selectOneMenu onchange="PF('produitsTable').filter()" style="width:80%">
+		                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
+		                    <f:selectItems value="#{NovFilterView.brands}" />
+		                </p:selectOneMenu>
+		            </f:facet>
+		            <p:graphicImage url="/images/100X100/#{empty product.produitPhotoURL ? 'default.jpg' : product.produitPhotoURL}" width="100" />
+		            <h:outputText value="#{product.marqueNom}" />
+		        </p:column>
+		        
+		         <p:column filterBy="#{product.produitDescription}" headerText="Description" footerText="contains" filterMatchMode="contains">
+		            <h:outputText value="#{product.produitDescription}" />
+		        </p:column>
+		        
+		         <p:column filterBy="#{product.produitDetail}" style="width:150px" headerText="Detail" footerText="contains" filterMatchMode="contains">
+		            <h:outputText value="#{product.produitDetail}" />
+		        </p:column>
+		        
+		        <p:column filterBy="#{product.prixPublic}" style="width:110px" headerText="Prix constaté" footerText="custom (min)" filterFunction="#{NovFilterView.filterByPrice}">
+		            <h:outputText value="#{product.prixPublic}">
+		                <f:convertNumber currencySymbol="€" type="currency"/>
+		            </h:outputText>
+		        </p:column>
+		        
+		  		<p:column filterBy="#{product.notrePrix}" style="width:110px" headerText="Notre prix" footerText="custom (min)" filterFunction="#{NovFilterView.filterByPrice}">
+		            <h:outputText value="#{product.notrePrix}">
+		                <f:convertNumber currencySymbol="€" type="currency"/>
+		            </h:outputText>
+		        </p:column>
+				<p:column style="width:110px">
+					<p:commandButton icon="ui-icon-cart"
+						title="View" action="#{NovFilterView.addToBasket()}">
+						<f:setPropertyActionListener value="#{product}"
+							target="#{NovFilterView.selectedProduit}" />
+					</p:commandButton>
+				</p:column>
+		
+		    </p:dataTable>
+		</h:form>
+	</h:body>
+</ui:define>
+</ui:composition>

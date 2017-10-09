@@ -9,7 +9,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.annotation.concurrent.Immutable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @Table(name = "v_catalogue_restreint_avec_stock")
+@Immutable
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "VCatalogueRestreintAvecStock.findAll", query = "SELECT v FROM VCatalogueRestreintAvecStock v")
@@ -56,7 +60,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "VCatalogueRestreintAvecStock.findByDateFinADecouvrir", query = "SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.dateFinADecouvrir = :dateFinADecouvrir")
     , @NamedQuery(name = "VCatalogueRestreintAvecStock.findByDateDebutPromo", query = "SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.dateDebutPromo = :dateDebutPromo")
     , @NamedQuery(name = "VCatalogueRestreintAvecStock.findByDateFinPromo", query = "SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.dateFinPromo = :dateFinPromo")})
-public class VCatalogueRestreintAvecStock implements Serializable {
+public class VCatalogueRestreintAvecStock extends VCatalogueAvecStock implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Size(max = 512)
@@ -90,6 +94,8 @@ public class VCatalogueRestreintAvecStock implements Serializable {
     private String categorieCode;
     @Basic(optional = false)
     @NotNull
+    @Id
+    @Column(name = "idProduit", updatable = false, nullable = false)
     private long idProduit;
     @Basic(optional = false)
     @NotNull

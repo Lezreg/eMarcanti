@@ -85,7 +85,7 @@
 	  </navigation-case>
 	 </navigation-rule>
 
-	<!-- navigation rules catégories  -->		
+	<!-- navigation rules catalogues  -->		
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
@@ -160,7 +160,15 @@
 	</navigation-rule>
 	
 	
-	<!-- /navigation rules catégories  -->		
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>nouveautes</from-outcome>
+			<to-view-id>/pages/private/catalogue/nouveautes.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- /navigation rules catalogues  -->		
 	
 	<!-- navigation rules commandes  -->		
 	<navigation-rule>

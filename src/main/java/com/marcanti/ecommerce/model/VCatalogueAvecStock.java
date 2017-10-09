@@ -9,7 +9,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.annotation.concurrent.Immutable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -24,6 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author admin
  */
 
+@Entity
+@Immutable
 @Table(name = "v_catalogue_avec_stock")
 @XmlRootElement
 @NamedQueries({
@@ -56,6 +62,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "VCatalogueAvecStock.findByDateFinADecouvrir", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateFinADecouvrir = :dateFinADecouvrir")
     , @NamedQuery(name = "VCatalogueAvecStock.findByDateDebutPromo", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutPromo = :dateDebutPromo")
     , @NamedQuery(name = "VCatalogueAvecStock.findByDateFinPromo", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateFinPromo = :dateFinPromo")})
+
+
 public class VCatalogueAvecStock implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -90,6 +98,8 @@ public class VCatalogueAvecStock implements Serializable {
     private String categorieCode;
     @Basic(optional = false)
     @NotNull
+    @Id
+    @Column(name = "idProduit", updatable = false, nullable = false)
     private long idProduit;
     @Basic(optional = false)
     @NotNull
