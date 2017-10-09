@@ -1,98 +1,112 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a4j="http://richfaces.org/a4j"
-    xmlns:rich="http://richfaces.org/rich"	
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:body>
 	<ui:composition template="/template/template.xhtml">
-
 		<ui:define name="content">
-			<div id="itme" class="cadre-container">
-				<h:panelGrid columns="" border="0" cellpadding="10" cellspacing="1"
-					width="100%">
-					<h:outputLabel value="#{msg.libelle_mes_filleuls}"
-						style="font-weight:bold;" />
-					<h:outputLabel value="#{msg.libelle_filleuls_accueil}" />
-				</h:panelGrid>
-				<br />
-				<h:panelGrid columns="1" border="0" cellpadding="10" cellspacing="1">
-					<h:button type="button" value="#{msg.libelle_ajouter}"
-						outcome="#{filleulsBean.addFilleulView()}" />
-				</h:panelGrid>
-
-				<h:form id="formFilleuls">
-					<a4j:region>
-						<p:dataTable var="filleul" value="#{filleulsBean.filleulsList}"
-							rendered="true" draggableColumns="true"
-							style="margin-bottom:40px" paginator="true" rows="10"
-							widgetVar="filleulTable" emptyMessage="pas de filleul"
-							filteredValue="#{filleulsBean.filteredFilleulsList}"
-							resizableColumns="true" scrollable="true" scrollHeight="200"
-							editable="true"
-							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-							rowsPerPageTemplate="2,10,20">
-							<f:facet name="header">
-								<p:outputPanel>
-									<h:outputText value="#{msg.libelle_rechercher} :" />
-									<p:inputText id="globalFilter"
-										onkeyup="PF('filleulTable').filter()" style="width:150px"
-										placeholder="Saisir mot clé" />
-								</p:outputPanel>
-							</f:facet>
-							<p:column style="width:16px">
-								<p:rowToggler />
-							</p:column>
-							<p:rowExpansion>
-								<p:panelGrid columns="2" columnClasses="label,value"
-									style="width:300px">
-									<h:outputText value="#{msg.libelle_nom}:" />
-									<p:cellEditor>
-										<h:outputText value="#{filleul.membreNom}" />
-									</p:cellEditor>
-									<h:outputText value="#{msg.libelle_prenom}" />
-									<h:outputText value="#{filleul.membrePrenom}" />
-								</p:panelGrid>
-							</p:rowExpansion>
-							<p:column headerText="#{msg.libelle_nom}" sortBy="#{filleul.membreNom}"
-								filterBy="#{filleul.membreNom}" filterMatchMode="contains">
-								<h:outputText value="#{filleul.membreNom}" />
-							</p:column>
-							<p:column headerText="#{msg.libelle_prenom}" sortBy="#{filleul.membrePrenom}"
-								filterBy="#{filleul.membrePrenom}" filterMatchMode="contains">
-								<h:outputText value="#{filleul.membrePrenom}" />
-							</p:column>
-							<p:column headerText="#{msg.libelle_email}" sortBy="#{filleul.membreEmail}"
-								filterBy="#{filleul.membreEmail}" filterMatchMode="contains">
-								<h:outputText value="#{filleul.membreEmail}" />
-							</p:column>
-							<p:column headerText="#{msg.libelle_tel}" sortBy="#{filleul.membreTel}">
-								<h:outputText value="#{filleul.membreTel}" />
-							</p:column>
-							<p:column headerText="#{msg.libelle_actif}" sortBy="#{filleul.isActif}"
-								filterBy="#{filleul.isActif}" filterMatchMode="equals">
-								<f:facet name="filter">
-									<p:selectOneButton onchange="PF('filleulTable').filter()">
-										<f:converter converterId="javax.faces.Boolean" />
-										<f:selectItem itemLabel="All" itemValue="" />
-										<f:selectItem itemLabel="true" itemValue="true" />
-										<f:selectItem itemLabel="false" itemValue="false" />
-									</p:selectOneButton>
-								</f:facet>
-								<h:outputText value="#{filleul.isActif ? 'true': 'false'}" />
-							</p:column>
-							<p:column>
-								<h:commandLink action="#{filleulsBean.editFilleul}" value="Edit">
-									<f:param name="idMembre" value="#{filleul.idMembre}" />
-									<f:param name="oldMembreEmail" value="#{filleul.membreEmail}" />
-								</h:commandLink>
-							</p:column>
-						</p:dataTable>
-					</a4j:region>
-				</h:form>
+			<div class="breadcrumsrea">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="breadcrumslist">
+								<ul>
+									<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="filleuls.xhtml"><h:outputLabel value="#{msg.libelle_mes_filleuls}" /></h:outputLink></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+
+			<section class="messcomandesarea">
+				<h2 class="section_header">sec</h2>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="filterheading">
+								<h3>#{msg.libelle_mes_filleuls}</h3>
+								<p>#{msg.libelle_filleuls_accueil}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<h:form id="formMembres">
+			<section class="mess-commandestable membermobilemtop">
+				<h2 class="section_header">sec</h2>
+				<div class="container">
+					<div class="row customrow">
+						<div class="col-xs-12">
+							<div class="mess-innertablearea">
+								<div class="newbutton mobilenewbuttonajour">
+									<button><h:link  value="#{msg.libelle_ajouter}" outcome="#{filleulsBean.addFilleulView()}" /></button>
+								</div>
+								<table id="messfilleulsid"
+									class="table table-striped table-bordered dt-responsive"
+									cellspacing="0" width="100%">
+									<thead>
+										<tr>
+
+											<th class="status">#{msg.libelle_nom}</th>
+											<th class="payment">#{msg.libelle_prenom}</th>
+											<th class="deliverydate">#{msg.libelle_role}</th>
+											<th class="modified">#{msg.libelle_active_e}</th>
+											<th class="createdby">#{msg.libelle_modifie_le}</th>
+											<th class="blankth"></th>
+											<th class="email none">#{msg.libelle_email}</th>
+											<th class="email none">#{msg.libelle_telephone}</th>
+
+										</tr>
+									</thead>
+
+									<tfoot class="catalougetfootarea messcommandestfarea">
+										<tr>
+
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th></th>
+											<th class="blankth"></th>
+											<th></th>
+											<th></th>
+
+										</tr>
+									</tfoot>
+									<tbody>
+										
+										<ui:repeat var="filleul" value="#{filleulsBean.filleulsList}">
+											<tr>
+												<td>#{filleul.membreNom}</td>
+												<td>#{filleul.membrePrenom}</td>
+												<td>#{filleul.idProfil.profilLibelle}</td>
+												<td class="organyesnooption"><small>#{filleul.isActifStr}</small><i class="#{filleul.isActifStyle}"></i></td>
+												<td>
+													<h:outputText value="#{filleul.dateModification}">
+														<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
+													</h:outputText></td>
+												<td>
+													<h:commandLink action="#{filleulsBean.editFilleul()}" styleClass="fa fa-pencil-square-o">
+														<f:setPropertyActionListener target="#{filleulsBean.idMembre}" value="#{filleul.idMembre}" />
+														<f:setPropertyActionListener target="#{filleulsBean.oldMembreEmail}" value="#{filleul.membreEmail}" />
+													</h:commandLink>
+												</td>
+												<td>#{filleul.membreEmail}</td>
+												<td>#{filleul.membreTel}</td>
+											</tr>
+										</ui:repeat>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </h:body>

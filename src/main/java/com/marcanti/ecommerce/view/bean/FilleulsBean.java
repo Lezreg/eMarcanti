@@ -10,7 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 
@@ -29,7 +29,7 @@ import com.marcanti.ecommerce.utils.Mail;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 @ManagedBean(name = "filleulsBean")
-@RequestScoped
+@SessionScoped
 public class FilleulsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -41,10 +41,10 @@ public class FilleulsBean implements Serializable {
 	
 	private Membre filleul;
 	
-	@ManagedProperty("#{param.idMembre}")
+	//@ManagedProperty("#{param.idMembre}")
 	private Long idMembre;
 	
-	@ManagedProperty("#{param.oldMembreEmail}")
+	//@ManagedProperty("#{param.oldMembreEmail}")
 	private String oldMembreEmail;	
 
 	@ManagedProperty("#{filleulsService}")

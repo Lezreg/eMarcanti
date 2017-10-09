@@ -510,6 +510,7 @@ public class MembreBean implements Serializable {
 		}
 		setIsAdminRendered("false");
 		setIsAddAction("true");
+		setIsEditMembre("true");
 		return "membre";
 	}	
 	
@@ -602,14 +603,16 @@ public class MembreBean implements Serializable {
 		}else{
 			setIsAdminRendered("false");
 		}
-		//on rafraichit la liste des membres
-		MembresBean membresBean =  (MembresBean)ParfumUtils.getSessionObject("membresBean");
-		if(membresBean.getIdOrga().getIdOrga()==0L){
-			membresBean.setMembresList(membreService.getMembreList());
-		}else{
-			membresBean.setMembresList(membreService.getMembreByOrgaList(membresBean.getIdOrga()));
+		if(this.isEditMembre.equals("true")){
+			//on rafraichit la liste des membres
+			MembresBean membresBean =  (MembresBean)ParfumUtils.getSessionObject("membresBean");
+			if(membresBean.getIdOrga().getIdOrga()==0L){
+				membresBean.setMembresList(membreService.getMembreList());
+			}else{
+				membresBean.setMembresList(membreService.getMembreByOrgaList(membresBean.getIdOrga()));
+			}
+			this.departementList = departementService.getDepartementByOrgaList(getIdOrga());
 		}
-		this.departementList = departementService.getDepartementByOrgaList(getIdOrga());
 		return ecran;
 	}	
 	

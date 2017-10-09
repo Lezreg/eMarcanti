@@ -67,7 +67,7 @@
 							<div class="col-xs-12">
 								<div class="mess-innertablearea">
 									<div class="newbutton mobilenewbuttonajour">
-										<button onclick="window.location.href='#{request.contextPath}/pages/private/admin/membre.xhtml';">#{msg.libelle_ajouter}</button>
+										<button><h:link  value="#{msg.libelle_ajouter}" outcome="#{membreBean.addMembreView()}" /></button>
 									</div>
 									
 									<table id="adminlistid"
@@ -122,9 +122,9 @@
 													<td>#{membre.membreNom}</td>
 													<td>#{membre.membrePrenom}</td>
 													<td>#{membre.idProfil.profilLibelle}</td>
-													<td class="organyesnooption"><small>#{membre.isActifStr}</small><i
-														class="#{membre.isActifStyle}"></i></td>
-													<td><h:outputText value="#{membre.dateModification}">
+													<td class="organyesnooption"><small>#{membre.isActifStr}</small><i class="#{membre.isActifStyle}"></i></td>
+													<td>
+														<h:outputText value="#{membre.dateModification}">
 															<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
 														</h:outputText></td>
 													<td>
