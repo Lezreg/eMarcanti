@@ -37,15 +37,13 @@ public class FilleulsBean implements Serializable {
 
 	private List<Membre> filleulsList;
 
-	private List<Membre> filteredFilleulsList;
-	
 	private Membre filleul;
 	
-	//@ManagedProperty("#{param.idMembre}")
 	private Long idMembre;
 	
-	//@ManagedProperty("#{param.oldMembreEmail}")
 	private String oldMembreEmail;	
+	
+	private String titre="";
 
 	@ManagedProperty("#{filleulsService}")
 	private FilleulsServiceAction filleulsService;
@@ -65,8 +63,8 @@ public class FilleulsBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		UserSessionBean userSession = ParfumUtils.getUserSessionBean();
-		Membre membre = new Membre(userSession.getIdMembre());
-		this.filleulsList = filleulsService.getFilleulsList(membre);
+		Membre userConnected = new Membre(userSession.getIdMembre());
+		this.filleulsList = filleulsService.getFilleulsList(userConnected);
 		this.filleul = new Membre(0L);
 		this.filleul.setIdOrga(new Organisation((userSession.getIdOrga())));
 		this.filleul.setIdProfil((new Profil(ReferentielBean.PROFIL_FILLEUL)));
@@ -110,6 +108,14 @@ public class FilleulsBean implements Serializable {
 
 	public void setOldMembreEmail(String oldMembreEmail) {
 		this.oldMembreEmail = oldMembreEmail;
+	}
+	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
 	}
 
 	public Membre getFilleul() {
@@ -160,14 +166,6 @@ public class FilleulsBean implements Serializable {
 		return filleulsList;
 	}
 
-	public List<Membre> getFilteredFilleulsList() {
-		return filteredFilleulsList;
-	}
-
-	public void setFilteredFilleulsList(List<Membre> filteredFilleulsList) {
-		this.filteredFilleulsList = filteredFilleulsList;
-	}
-
 	public String editFilleul() {
 
 		Membre membre = new Membre(getIdMembre());
@@ -176,6 +174,7 @@ public class FilleulsBean implements Serializable {
 		membre.setIdOrga(new Organisation(userSession.getIdOrga()));
 		membre.setIdDepartement(new Departement(userSession.getIdDepartement()));
 		setFilleul(membre);
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_filleul");
 		return "filleul";
 	}
 	
@@ -185,6 +184,7 @@ public class FilleulsBean implements Serializable {
 			this.filleul.setIdOrga(new Organisation((userSessionBean.getIdOrga())));
 			this.filleul.setIdProfil((new Profil(ReferentielBean.PROFIL_FILLEUL)));
 		}
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_filleul");
 		return "filleul";
 	}	
 	
@@ -225,6 +225,7 @@ public class FilleulsBean implements Serializable {
 			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 			    ecran="filleuls";
 			}
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_filleul");
 		}else{
 			if(getMembreEmail().equals(getOldMembreEmail())){
 				filleul.setDateModification(dateToday);
@@ -250,7 +251,11 @@ public class FilleulsBean implements Serializable {
 				    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 				}
 			}
+			this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_filleul");
 		}
+		UserSessionBean userSession = ParfumUtils.getUserSessionBean();
+		Membre userConnected = new Membre(userSession.getIdMembre());
+		this.filleulsList = filleulsService.getFilleulsList(userConnected);
 		return ecran;
 	}	
 	

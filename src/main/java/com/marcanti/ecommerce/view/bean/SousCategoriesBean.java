@@ -27,13 +27,10 @@ public class SousCategoriesBean implements Serializable {
 
 	private List<SousCategorie> sousCategorieList;
 
-	private List<SousCategorie> filteredSousCategorieList;
-	
 	private SousCategorie sousCategorie;
 	
 	private String titre="";
 	
-	//@ManagedProperty("#{param.idSousCategorie}")
 	private Short idSousCategorie;
 	
 	@ManagedProperty("#{sousCategorieService}")
@@ -69,14 +66,6 @@ public class SousCategoriesBean implements Serializable {
 
 	public void setSousCategorieList(List<SousCategorie> sousCategorieList) {
 		this.sousCategorieList = sousCategorieList;
-	}
-
-	public List<SousCategorie> getFilteredSousCategorieList() {
-		return filteredSousCategorieList;
-	}
-
-	public void setFilteredSousCategorieList(List<SousCategorie> filteredSousCategorieList) {
-		this.filteredSousCategorieList = filteredSousCategorieList;
 	}
 
 	public SousCategorie getSousCategorie() {

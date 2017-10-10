@@ -7,7 +7,7 @@ import com.marcanti.ecommerce.model.Membre;
 
 public interface FilleulsServiceAction {
  
-	public List<Membre> getFilleulsList(Membre idMembreParrain);
+	public List<Membre> getFilleulsList(Membre parrain);
 	
 	public Filleul getFilleul(Long idFilleul);
 	

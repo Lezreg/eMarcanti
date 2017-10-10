@@ -58,14 +58,6 @@ public class MembreBean implements Serializable {
 	
 	private String parrainRendered="false";
 	
-	/*private String orgaRendered="true";
-	
-	private String departementRendered="true";
-	
-	private String roleRendered="true";
-	
-	private String isActifRendered="true";*/
-	
 	private String isMembreConnectedAdmin="false";
 	
 	private String isAdminRendered="false";

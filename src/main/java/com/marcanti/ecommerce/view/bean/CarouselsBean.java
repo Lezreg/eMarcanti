@@ -32,12 +32,8 @@ public class CarouselsBean implements Serializable {
 
 	private List<Carousel> carouselList;
 
-	private List<Carousel> filteredCarouselList;
-
 	private Carousel carousel;
 	
-	//public String messageFileSize  = "";
-
 	private UploadedFile uploadedFile;
 	
 	private String oldRangItem;
@@ -93,14 +89,6 @@ public class CarouselsBean implements Serializable {
 
 	public void setCarouselList(List<Carousel> carouselList) {
 		this.carouselList = carouselList;
-	}
-
-	public List<Carousel> getFilteredCarouselList() {
-		return filteredCarouselList;
-	}
-
-	public void setFilteredCarouselList(List<Carousel> filteredCarouselList) {
-		this.filteredCarouselList = filteredCarouselList;
 	}
 
 	public Carousel getCarousel() {

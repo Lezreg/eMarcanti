@@ -29,13 +29,10 @@ public class OrganisationsBean implements Serializable {
 
 	private List<Organisation> organisationList;
 
-	private List<Organisation> filteredOrganisationList;
-	
 	private Organisation organisation;
 	
 	private String titre="";
 	
-	//@ManagedProperty("#{param.idOrga}")
 	private long idOrga;
 	
 	@ManagedProperty("#{organisationService}")
@@ -73,14 +70,6 @@ public class OrganisationsBean implements Serializable {
 
 	public void setOrganisationList(List<Organisation> organisationList) {
 		this.organisationList = organisationList;
-	}
-
-	public List<Organisation> getFilteredOrganisationList() {
-		return filteredOrganisationList;
-	}
-
-	public void setFilteredOrganisationList(List<Organisation> filteredOrganisationList) {
-		this.filteredOrganisationList = filteredOrganisationList;
 	}
 
 	public Organisation getOrganisation() {

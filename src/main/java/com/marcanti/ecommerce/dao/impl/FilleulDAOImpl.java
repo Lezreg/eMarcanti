@@ -39,8 +39,8 @@ public class FilleulDAOImpl extends AbstractGenericDAO<Filleul> implements Fille
 	}
 
 	@Override
-	public List<Membre> getFilleulsList(Membre idMembreParrain) {
-		return em.createNamedQuery("Filleul.getFilleulsList", Membre.class).setParameter("idMembreParrain", idMembreParrain).getResultList();
+	public List<Membre> getFilleulsList(Membre parrain) {
+		return em.createNamedQuery("Filleul.getFilleulsList", Membre.class).setParameter("idMembreParrain", parrain).getResultList();
 	}
 
 	@Override

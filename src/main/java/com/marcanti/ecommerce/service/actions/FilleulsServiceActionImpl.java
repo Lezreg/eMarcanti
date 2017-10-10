@@ -26,8 +26,8 @@ public class FilleulsServiceActionImpl implements FilleulsServiceAction {
 	}
 
 	@Override
-	public List<Membre> getFilleulsList(Membre idMembreParrain) {
-		return filleulDAO.getFilleulsList(idMembreParrain);
+	public List<Membre> getFilleulsList(Membre parrain) {
+		return filleulDAO.getFilleulsList(parrain);
 	}
 
 	@Override

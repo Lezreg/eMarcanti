@@ -5,55 +5,252 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+
 <h:body>
 	<ui:composition template="/template/template.xhtml">
 
 		<ui:define name="content">
+			<div class="breadcrumsrea">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="breadcrumslist">
+								<ul>
+									<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="filleuls.xhtml"><h:outputLabel value="#{msg.libelle_mes_filleuls}" /></h:outputLink></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<h:form id="formFilleul">
-				<h:inputHidden value="#{filleulsBean.filleul.idMembre}"  />
-				<h:inputHidden value="#{filleulsBean.oldMembreEmail}"  />
-				<h:panelGrid columns="2" border="0" cellpadding="10" cellspacing="1">
-					<h:outputLabel value="#{msg.libelle_nom}" />
-					<h:inputText value="#{filleulsBean.filleul.membreNom}" maxlength="60" required="true" requiredMessage="#{msg.nom_obligatoire}" />
-					
-					<h:outputLabel value="#{msg.libelle_prenom}" />
-					<h:inputText value="#{filleulsBean.filleul.membrePrenom}" maxlength="60" required="true" requiredMessage="#{msg.prenom_obligatoire}" />
-					
-					<h:outputLabel value="#{msg.libelle_email}" />
-					<h:inputText value="#{filleulsBean.filleul.membreEmail}" maxlength="120" required="true" requiredMessage="#{msg.email_obligatoire}" />
-					
-					<h:outputLabel value="#{msg.libelle_tel}" />
-					<h:inputText value="#{filleulsBean.filleul.membreTel}" maxlength="20" required="true" requiredMessage="#{msg.tel_obligatoire}" />	
-					
-					<h:outputLabel value="#{msg.libelle_orga}" />
-					<h:selectOneMenu value="#{filleulsBean.filleul.idOrga.idOrga}" disabled="true">
-			   			<f:selectItems value="#{referentielBean.organisationList}" var="c"
-			   			itemLabel="#{c.orgaNom}" itemValue="#{c.idOrga}" />
-			   		</h:selectOneMenu>
-			   		
-					<h:outputLabel value="#{msg.libelle_role}" />
-					<h:selectOneMenu value="#{filleulsBean.filleul.idProfil.idProfil}" disabled="true">
-			   			<f:selectItems value="#{filleulsBean.referentielBean.profilList}" var="c"
-			   			itemLabel="#{c.profilLibelle}" itemValue="#{c.idProfil}" />
-			   		</h:selectOneMenu>			   		
-			   		
-					<h:outputLabel value="#{msg.libelle_cpt_active}" />
-					<h:selectOneRadio value="#{filleulsBean.filleul.isActif}">
-			   			<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
-			   		</h:selectOneRadio>
-			   		
-					<h:outputLabel value="#{msg.libelle_init_passwd}" />
-					<h:selectOneRadio value="#{filleulsBean.filleul.isDefaultPassword}">
-			   			<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
-			   		</h:selectOneRadio>			   		
-			   		
-			   		<h:button type="button" value="#{msg.libelle_retour}" outcome="filleuls"/>
-					<h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{filleulsBean.insertOrUpdateFilleul()}"/>				        
-				</h:panelGrid>
+				<h:inputHidden value="#{filleulsBean.filleul.idMembre}" />
+				<h:inputHidden value="#{filleulsBean.oldMembreEmail}" />
+				<section class="modifyaproductarea">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="modifyproductinner">
+									<div class="modifymaintitle">
+										<h3>#{filleulsBean.titre}</h3>
+									</div>
+									<div>
+										<h:messages errorClass="redclass" infoClass="greenclass" />
+									</div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_nom}" />
+													<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{filleulsBean.filleul.membreNom}"
+														maxlength="60" required="true"
+														requiredMessage="#{msg.nom_obligatoire}" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_prenom}" />
+													<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{filleulsBean.filleul.membrePrenom}"
+													maxlength="60" required="true"
+													requiredMessage="#{msg.prenom_obligatoire}" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_email}" />
+													<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription fordesktopfulwidth">
+												<h:inputText value="#{filleulsBean.filleul.membreEmail}"
+													maxlength="120" required="true"
+													requiredMessage="#{msg.email_obligatoire}" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_tel}" />
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<h:inputText value="#{filleulsBean.filleul.membreTel}"
+													maxlength="20" required="true"
+													requiredMessage="#{msg.tel_obligatoire}" />
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel for="idorga" value="#{msg.libelle_orga}" />
+													<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription oransationadmin">
+												<div class="select">
+													<h:selectOneMenu id="idorga"
+														value="#{filleulsBean.filleul.idOrga.idOrga}"
+														disabled="true">
+														<f:selectItems value="#{referentielBean.organisationList}"
+															var="c" itemLabel="#{c.orgaNom}" itemValue="#{c.idOrga}" />
+													</h:selectOneMenu>
+													<div class="select__arrow"></div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_role}" />
+													<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription oransationadmin">
+												<div class="select">
+													<h:selectOneMenu
+														value="#{filleulsBean.filleul.idProfil.idProfil}" disabled="true">
+														<f:selectItems
+															value="#{filleulsBean.referentielBean.profilList}"
+															var="c" itemLabel="#{c.profilLibelle}"
+															itemValue="#{c.idProfil}" />
+													</h:selectOneMenu>
+													<div class="select__arrow"></div>
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_cpt_active}" />
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+												<div class="maequescheckb checkbox">
+													<h:selectOneRadio value="#{filleulsBean.filleul.isActif}">
+														<f:selectItems
+															value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													<h:outputLabel value="#{msg.libelle_reinitialiser}" />
+													<br />
+													<h:outputLabel value="#{msg.libelle_password}" />
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+
+												<div class="maequescheckb checkbox">
+													<h:selectOneRadio
+														value="#{filleulsBean.filleul.isDefaultPassword}">
+														<f:selectItems
+															value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-12">
+											<div class="newmodiysvecan modifysavecancelbutton">
+												<div class="button-1">
+													<div class="eff-1"></div>
+													<h:link value="#{msg.libelle_annuler}" outcome="filleuls" />
+												</div>
+
+												<div class="button-2">
+													<div class="eff-2"></div>
+													<h:commandLink value="#{msg.libelle_valider}"
+														action="#{filleulsBean.insertOrUpdateFilleul()}" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
 			</h:form>
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>

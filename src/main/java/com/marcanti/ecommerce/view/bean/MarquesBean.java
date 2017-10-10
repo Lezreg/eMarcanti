@@ -27,8 +27,6 @@ public class MarquesBean implements Serializable {
 
 	private List<Marque> marqueList;
 
-	private List<Marque> filteredMarqueList;
-	
 	private Marque marque;
 	
 	private String titre="";
@@ -67,14 +65,6 @@ public class MarquesBean implements Serializable {
 
 	public void setMarqueList(List<Marque> marqueList) {
 		this.marqueList = marqueList;
-	}
-
-	public List<Marque> getFilteredMarqueList() {
-		return filteredMarqueList;
-	}
-
-	public void setFilteredMarqueList(List<Marque> filteredMarqueList) {
-		this.filteredMarqueList = filteredMarqueList;
 	}
 
 	public Marque getMarque() {

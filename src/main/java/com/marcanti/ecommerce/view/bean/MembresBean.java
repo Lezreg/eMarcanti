@@ -30,24 +30,16 @@ public class MembresBean implements Serializable {
 
 	private List<Membre> membresList;
 
-	private List<Membre> filteredMembresList;
-	
 	private List<Organisation> organisationList;
 	
 	private Membre membre;
 	
 	private String orgaDisabled="true";
 	
-	//@ManagedProperty("#{param.action}")
-	//private String action;
-	
-	//@ManagedProperty("#{param.idMembre}")
 	private Long idMembre;
 	
-	//@ManagedProperty("#{param.oldMembreEmail}")
 	private String oldMembreEmail;
 	
-	//@ManagedProperty("#{param.idOrgaSelected}")
 	private Long idOrgaSelected;	
 	
 	@ManagedProperty("#{membreService}")
@@ -231,13 +223,6 @@ public class MembresBean implements Serializable {
 		return membresList;
 	}
 
-	public List<Membre> getFilteredMembresList() {
-		return filteredMembresList;
-	}
-
-	public void setFilteredMembresList(List<Membre> filteredMembresList) {
-		this.filteredMembresList = filteredMembresList;
-	}
 	
 	public String editMembre() {
 

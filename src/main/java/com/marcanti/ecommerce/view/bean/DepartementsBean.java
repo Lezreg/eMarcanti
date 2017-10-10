@@ -29,8 +29,6 @@ public class DepartementsBean implements Serializable {
 
 	private List<Departement> departementList;
 
-	private List<Departement> filteredDepartementList;
-	
 	private List<Organisation> organisationList;
 	
 	private Departement departement;
@@ -105,14 +103,6 @@ public class DepartementsBean implements Serializable {
 
 	public void setDepartementList(List<Departement> departementList) {
 		this.departementList = departementList;
-	}
-
-	public List<Departement> getFilteredDepartementList() {
-		return filteredDepartementList;
-	}
-
-	public void setFilteredDepartementList(List<Departement> filteredDepartementList) {
-		this.filteredDepartementList = filteredDepartementList;
 	}
 
 	public Departement getDepartement() {

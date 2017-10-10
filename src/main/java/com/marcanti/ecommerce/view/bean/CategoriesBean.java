@@ -26,8 +26,6 @@ public class CategoriesBean implements Serializable {
 
 	private List<Categorie> categorieList;
 
-	private List<Categorie> filteredCategorieList;
-	
 	private Categorie categorie;
 	
 	private String titre="";
@@ -66,14 +64,6 @@ public class CategoriesBean implements Serializable {
 
 	public void setCategorieList(List<Categorie> categorieList) {
 		this.categorieList = categorieList;
-	}
-
-	public List<Categorie> getFilteredCategorieList() {
-		return filteredCategorieList;
-	}
-
-	public void setFilteredCategorieList(List<Categorie> filteredCategorieList) {
-		this.filteredCategorieList = filteredCategorieList;
 	}
 
 	public Categorie getCategorie() {
