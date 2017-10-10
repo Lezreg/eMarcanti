@@ -110,6 +110,7 @@ public class CategoriesBean implements Serializable {
 	
 	public String addCategorieView() {
 		logger.info("addCategorieView");
+		this.categorie=new Categorie();
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_categorie");
 		return "categorie";
 

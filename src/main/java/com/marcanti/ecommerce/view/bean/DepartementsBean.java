@@ -171,6 +171,8 @@ public class DepartementsBean implements Serializable {
 	
 	public String addDepartementView() {
 		logger.info("addDepartementView");
+		this.departement=new Departement();
+		this.departement.setIdOrga(new Organisation(0L));
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_dept");
 		return "departement";
 

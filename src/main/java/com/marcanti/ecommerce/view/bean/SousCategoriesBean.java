@@ -122,6 +122,8 @@ public class SousCategoriesBean implements Serializable {
 	
 	public String addSousCategorieView() {
 		logger.info("addSousCategorieView");
+		this.sousCategorie=new SousCategorie();
+		this.sousCategorie.setIdCategorieProduit(new Categorie());
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_ss_categorie");
 		return "sousCategorie";
 

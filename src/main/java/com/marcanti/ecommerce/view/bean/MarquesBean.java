@@ -31,7 +31,6 @@ public class MarquesBean implements Serializable {
 	
 	private String titre="";
 	
-	//@ManagedProperty("#{param.idMarque}")
 	private Short idMarque;
 	
 	@ManagedProperty("#{marqueService}")
@@ -119,6 +118,7 @@ public class MarquesBean implements Serializable {
 	
 	public String addMarqueView() {
 		logger.info("addMarqueView");
+		this.marque=new Marque();
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_marque");
 		return "marque";
 
