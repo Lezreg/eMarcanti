@@ -29,9 +29,9 @@ import com.marcanti.ecommerce.view.bean.UserSessionBean;
 @ViewScoped
 public class Nouveautes {
 
-	private List<Produit> produits;
+	private List<ProduitBean> produits;
 
-	private List<Produit> filteredProduits;
+	private List<ProduitBean> filteredProduits;
 
 	private VCatalogueAvecStock selectedProduit;
 
@@ -98,19 +98,19 @@ public class Nouveautes {
 		basket.addPoduct(produit, 1);
 	}
 
-	public List<Produit> getFilteredProduits() {
+	public List<ProduitBean> getFilteredProduits() {
 		return filteredProduits;
 	}
 
-	public void setFilteredProduits(List<Produit> filteredProduits) {
+	public void setFilteredProduits(List<ProduitBean> filteredProduits) {
 		this.filteredProduits = filteredProduits;
 	}
 
-	public List<Produit> getProduits() {
+	public List<ProduitBean> getProduits() {
 		return produits;
 	}
 
-	public void setProduits(List<Produit> produits) {
+	public void setProduits(List<ProduitBean> produits) {
 		this.produits = produits;
 	}
 

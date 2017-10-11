@@ -119,6 +119,22 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 		return produitDAO.find(idProduit);
 	}
 
+
+	@Override
+	public List<ProduitBean> getProductsByCategorie(Long orgId, String codeCategorie) {
+Organisation organisation = organisationDAO.find(orgId);
+		
+		if(organisation!=null && organisation.getAccesCatalogueComplet())
+		{
+			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getProductsByCategorie(codeCategorie)) ;
+		}
+		else
+		{
+			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedProduitsByCategorie(codeCategorie)) ;
+		}
+	}
+
+	
 	public OrganisationDAO getOrganisationDAO() {
 		return organisationDAO;
 	}
@@ -126,5 +142,4 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	public void setOrganisationDAO(OrganisationDAO organisationDAO) {
 		this.organisationDAO = organisationDAO;
 	}
-
 }

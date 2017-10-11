@@ -39,5 +39,6 @@ public interface ProduitServiceAction {
 
 	public Produit getProduitById(long idProduit);
 
+	public List<ProduitBean> getProductsByCategorie(Long orgId,String codeCategorie);
      
 }

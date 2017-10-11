@@ -12,8 +12,9 @@ public class ProduitConvertor {
 	public static ProduitBean convert(VCatalogueAvecStock catalogue) {
 		ProduitBean produitBean=new ProduitBean();
 		produitBean.setIdProduit(catalogue.getIdProduit());
-		produitBean.setMarqueNom(catalogue.getMarqueNom());
 		produitBean.setProduitPhotoURL(catalogue.getProduitPhotoURL());
+		//marque
+		produitBean.setMarqueNom(catalogue.getMarqueNom());
 		//description
 		produitBean.setProduitDescription(catalogue.getProduitDescription());
 		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
@@ -25,14 +26,17 @@ public class ProduitConvertor {
 		produitBean.setNoteDeTete(catalogue.getNoteDeTete());
 		//prix
 		produitBean.setNotrePrix(catalogue.getNotrePrix());
+		produitBean.setPrixPublic(catalogue.getPrixPublic());
 		return produitBean;
 	}
 	
 	public static ProduitBean convert(VCatalogueRestreintAvecStock catalogue) {
 		ProduitBean produitBean=new ProduitBean();
 		produitBean.setIdProduit(catalogue.getIdProduit());
-		produitBean.setMarqueNom(catalogue.getMarqueNom());
 		produitBean.setProduitPhotoURL(catalogue.getProduitPhotoURL());
+		//marque
+		produitBean.setMarqueNom(catalogue.getMarqueNom());
+		
 		//description
 		produitBean.setProduitDescription(catalogue.getProduitDescription());
 		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
@@ -44,6 +48,8 @@ public class ProduitConvertor {
 		produitBean.setNoteDeTete(catalogue.getNoteDeTete());
 		//prix
 		produitBean.setNotrePrix(catalogue.getNotrePrix());
+		produitBean.setPrixPublic(catalogue.getPrixPublic());
+
 		return produitBean;
 	}
 	

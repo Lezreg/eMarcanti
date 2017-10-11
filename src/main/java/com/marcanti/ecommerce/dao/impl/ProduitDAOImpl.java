@@ -106,4 +106,24 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 				.getResultList();
 		return restrictedNewProducts;
 	}
+
+	@Override
+	public List<VCatalogueAvecStock> getProductsByCategorie(String codeCategorie) {
+		LOGGER.info("----------getProductsByCategorie--------");
+		List<VCatalogueAvecStock> newProducts = em
+				.createQuery("SELECT v FROM VCatalogueAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",
+						VCatalogueAvecStock.class).setParameter("CatCOde", codeCategorie)
+				.getResultList();
+		return newProducts;
+	}
+
+	@Override
+	public List<VCatalogueRestreintAvecStock> getRestrictedProduitsByCategorie(String codeCategorie) {
+		LOGGER.info("----------getRestrictedProduitsByCategorie--------VCatalogueRestreintAvecStock");
+		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em
+				.createQuery("SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",
+						VCatalogueRestreintAvecStock.class).setParameter("CatCOde", codeCategorie)
+				.getResultList();
+		return restrictedNewProducts;
+	}
 }
