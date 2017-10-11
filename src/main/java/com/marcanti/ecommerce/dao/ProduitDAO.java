@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.model.VCatalogueAvecStock;
+import com.marcanti.ecommerce.model.VCatalogueRestreintAvecStock;
 
 public interface ProduitDAO extends GenericDAO<Produit> {
 
@@ -37,6 +38,6 @@ public interface ProduitDAO extends GenericDAO<Produit> {
 	 *  restricted product list
 	 * @return
 	 */
-	List<VCatalogueAvecStock> getRestrictedNewProduit();
+	List<VCatalogueRestreintAvecStock> getRestrictedNewProduit();
 
 }

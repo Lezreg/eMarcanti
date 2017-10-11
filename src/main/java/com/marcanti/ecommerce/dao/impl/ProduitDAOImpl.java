@@ -20,6 +20,7 @@ import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.ProduitDAO;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.model.VCatalogueAvecStock;
+import com.marcanti.ecommerce.model.VCatalogueRestreintAvecStock;
 
 /**
  *
@@ -97,11 +98,11 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 	}
 
 	@Override
-	public List<VCatalogueAvecStock> getRestrictedNewProduit() {
+	public List<VCatalogueRestreintAvecStock> getRestrictedNewProduit() {
 		LOGGER.info("----------getRestrictedNewProduit--------VCatalogueRestreintAvecStock");
-		List<VCatalogueAvecStock> restrictedNewProducts = em
-				.createQuery("SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutNouveaute <= :date AND v.dateFinNouveaute >= :date",
-						VCatalogueAvecStock.class).setParameter("date", new Date())
+		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em
+				.createQuery("SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.dateDebutNouveaute <= :date AND v.dateFinNouveaute >= :date",
+						VCatalogueRestreintAvecStock.class).setParameter("date", new Date())
 				.getResultList();
 		return restrictedNewProducts;
 	}

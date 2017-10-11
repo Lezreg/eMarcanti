@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.marcanti.ecommerce.beans.ProduitBean;
 import com.marcanti.ecommerce.constants.Categories;
 import com.marcanti.ecommerce.dao.MarqueDAO;
 import com.marcanti.ecommerce.dao.OrganisationDAO;
@@ -14,6 +15,7 @@ import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.model.VCatalogueAvecStock;
+import com.marcanti.ecommerce.utils.ProduitConvertor;
 
 @Service("produitServiceAction")
 public class ProduitServiceActionImpl implements ProduitServiceAction {
@@ -98,16 +100,16 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	}
 
 	@Override
-	public List<VCatalogueAvecStock> getNewProducts(Long orgId) {
+	public List<ProduitBean> getNewProducts(Long orgId) {
 		Organisation organisation = organisationDAO.find(orgId);
 		
 		if(organisation!=null && organisation.getAccesCatalogueComplet())
 		{
-			return produitDAO.getNewProducts();
+			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getNewProducts()) ;
 		}
 		else
 		{
-			return produitDAO.getRestrictedNewProduit();
+			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedNewProduit()) ;
 		}
 		
 	}

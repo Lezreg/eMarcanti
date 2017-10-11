@@ -16,6 +16,7 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.marcanti.ecommerce.beans.ProduitBean;
 import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
@@ -34,7 +35,7 @@ public class Nouveautes {
 
 	private VCatalogueAvecStock selectedProduit;
 
-	private List<VCatalogueAvecStock> newProducts;
+	private List<ProduitBean> newProducts;
 
 	public VCatalogueAvecStock getSelectedProduit() {
 		return selectedProduit;
@@ -133,11 +134,11 @@ public class Nouveautes {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Result:", "Item added to basket"));
 	}
 
-	public List<VCatalogueAvecStock> getNewProducts() {
+	public List<ProduitBean> getNewProducts() {
 		return produitServiceAction.getNewProducts(userSessionBean.getIdOrga());
 	}
 
-	public void setNewProducts(List<VCatalogueAvecStock> newProducts) {
+	public void setNewProducts(List<ProduitBean> newProducts) {
 		this.newProducts = newProducts;
 	}
 

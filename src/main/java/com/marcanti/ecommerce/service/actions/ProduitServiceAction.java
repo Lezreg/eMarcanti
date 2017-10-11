@@ -2,6 +2,7 @@ package com.marcanti.ecommerce.service.actions;
 
 import java.util.List;
 
+import com.marcanti.ecommerce.beans.ProduitBean;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.model.VCatalogueAvecStock;
@@ -34,7 +35,7 @@ public interface ProduitServiceAction {
 	
 	public List<Produit> getMiniatures();
 	
-	public List<VCatalogueAvecStock> getNewProducts(Long orgId);
+	public List<ProduitBean> getNewProducts(Long orgId);
 
 	public Produit getProduitById(long idProduit);
 
