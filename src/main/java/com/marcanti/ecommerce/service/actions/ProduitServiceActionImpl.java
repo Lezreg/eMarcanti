@@ -14,7 +14,6 @@ import com.marcanti.ecommerce.dao.ProduitDAO;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Produit;
-import com.marcanti.ecommerce.model.VCatalogueAvecStock;
 import com.marcanti.ecommerce.utils.ProduitConvertor;
 
 @Service("produitServiceAction")
@@ -134,6 +133,16 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedPromoProduit());
 		} else {
 			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getPromoProducts());
+		}
+	}
+
+	@Override
+	public List<ProduitBean> getDecouvProducts(Long orgId) {
+		Organisation organisation = organisationDAO.find(orgId);
+		if (organisation != null && organisation.getAccesCatalogueComplet()) {
+			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedDecouvProduit());
+		} else {
+			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getDecouvProducts());
 		}
 	}
 

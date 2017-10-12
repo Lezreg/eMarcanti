@@ -29,6 +29,11 @@ public class ProduitConvertor {
 		produitBean.setPrixPublic(catalogue.getPrixPublic());
 		// categorie
 		produitBean.setCategorieNom(catalogue.getCategorieNom());
+
+		// decouvrir
+		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
+		produitBean.setTitreADecouvrir(catalogue.getTitreADecouvrir());
+
 		return produitBean;
 	}
 
@@ -53,6 +58,10 @@ public class ProduitConvertor {
 		produitBean.setPrixPublic(catalogue.getPrixPublic());
 		// categorie
 		produitBean.setCategorieNom(catalogue.getCategorieNom());
+
+		// decouvrir
+		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
+		produitBean.setTitreADecouvrir(catalogue.getTitreADecouvrir());
 		return produitBean;
 	}
 

@@ -90,60 +90,72 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 	@Override
 	public List<VCatalogueAvecStock> getNewProducts() {
 		LOGGER.info("----------getNewProducts--------");
-		List<VCatalogueAvecStock> newProducts = em
-				.createQuery("SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutNouveaute <= :date AND v.dateFinNouveaute >= :date",
-						VCatalogueAvecStock.class).setParameter("date", new Date())
-				.getResultList();
+		List<VCatalogueAvecStock> newProducts = em.createQuery(
+				"SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutNouveaute <= :date AND v.dateFinNouveaute >= :date",
+				VCatalogueAvecStock.class).setParameter("date", new Date()).getResultList();
 		return newProducts;
 	}
 
 	@Override
 	public List<VCatalogueRestreintAvecStock> getRestrictedNewProduit() {
 		LOGGER.info("----------getRestrictedNewProduit--------VCatalogueRestreintAvecStock");
-		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em
-				.createQuery("SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.dateDebutNouveaute <= :date AND v.dateFinNouveaute >= :date",
-						VCatalogueRestreintAvecStock.class).setParameter("date", new Date())
-				.getResultList();
+		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em.createQuery(
+				"SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.dateDebutNouveaute <= :date AND v.dateFinNouveaute >= :date",
+				VCatalogueRestreintAvecStock.class).setParameter("date", new Date()).getResultList();
 		return restrictedNewProducts;
 	}
 
 	@Override
 	public List<VCatalogueAvecStock> getProductsByCategorie(String codeCategorie) {
 		LOGGER.info("----------getProductsByCategorie--------");
-		List<VCatalogueAvecStock> newProducts = em
-				.createQuery("SELECT v FROM VCatalogueAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",
-						VCatalogueAvecStock.class).setParameter("CatCOde", codeCategorie)
-				.getResultList();
+		List<VCatalogueAvecStock> newProducts = em.createQuery(
+				"SELECT v FROM VCatalogueAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",
+				VCatalogueAvecStock.class).setParameter("CatCOde", codeCategorie).getResultList();
 		return newProducts;
 	}
 
 	@Override
 	public List<VCatalogueRestreintAvecStock> getRestrictedProduitsByCategorie(String codeCategorie) {
 		LOGGER.info("----------getRestrictedProduitsByCategorie--------VCatalogueRestreintAvecStock");
-		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em
-				.createQuery("SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",
-						VCatalogueRestreintAvecStock.class).setParameter("CatCOde", codeCategorie)
-				.getResultList();
+		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em.createQuery(
+				"SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",
+				VCatalogueRestreintAvecStock.class).setParameter("CatCOde", codeCategorie).getResultList();
 		return restrictedNewProducts;
 	}
 
 	@Override
 	public List<VCatalogueAvecStock> getPromoProducts() {
 		LOGGER.info("----------getPromoProducts--------VCatalogueAvecStock");
-		List<VCatalogueAvecStock> newProducts = em
-				.createQuery("SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutPromo <= :date AND v.dateFinPromo >= :date",
-						VCatalogueAvecStock.class).setParameter("date", new Date())
-				.getResultList();
+		List<VCatalogueAvecStock> newProducts = em.createQuery(
+				"SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutPromo <= :date AND v.dateFinPromo >= :date",
+				VCatalogueAvecStock.class).setParameter("date", new Date()).getResultList();
 		return newProducts;
 	}
 
 	@Override
 	public List<VCatalogueRestreintAvecStock> getRestrictedPromoProduit() {
 		LOGGER.info("----------getRestrictedPromoProduit--------VCatalogueRestreintAvecStock");
-		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em
-				.createQuery("SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.dateDebutPromo <= :date AND v.dateFinPromo >= :date",
-						VCatalogueRestreintAvecStock.class).setParameter("date", new Date())
-				.getResultList();
+		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em.createQuery(
+				"SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.dateDebutPromo <= :date AND v.dateFinPromo >= :date",
+				VCatalogueRestreintAvecStock.class).setParameter("date", new Date()).getResultList();
+		return restrictedNewProducts;
+	}
+
+	@Override
+	public List<VCatalogueAvecStock> getDecouvProducts() {
+		LOGGER.info("----------getDecouvProducts--------VCatalogueAvecStock");
+		List<VCatalogueAvecStock> newProducts = em.createQuery(
+				"SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutADecouvrir <= :date AND v.dateFinADecouvrir >= :date",
+				VCatalogueAvecStock.class).setParameter("date", new Date()).getResultList();
+		return newProducts;
+	}
+
+	@Override
+	public List<VCatalogueRestreintAvecStock> getRestrictedDecouvProduit() {
+		LOGGER.info("----------getRestrictedDecouvProduit--------VCatalogueRestreintAvecStock");
+		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em.createQuery(
+				"SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.dateDebutADecouvrir <= :date AND v.dateFinADecouvrir >= :date",
+				VCatalogueRestreintAvecStock.class).setParameter("date", new Date()).getResultList();
 		return restrictedNewProducts;
 	}
 }

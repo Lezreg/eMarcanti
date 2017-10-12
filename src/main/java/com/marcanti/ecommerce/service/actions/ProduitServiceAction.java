@@ -5,11 +5,9 @@ import java.util.List;
 import com.marcanti.ecommerce.beans.ProduitBean;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
-import com.marcanti.ecommerce.model.VCatalogueAvecStock;
-import com.marcanti.ecommerce.model.VCatalogueRestreintAvecStock;
- 
+
 public interface ProduitServiceAction {
- 
+
 	public void AddProduit(Produit p);
 
 	public List<Produit> listAllProduit();
@@ -25,23 +23,25 @@ public interface ProduitServiceAction {
 	public List<Produit> getParfumEnfant();
 
 	public List<Produit> getTesteurs();
-	
+
 	public List<Produit> getCoffrets();
-	
+
 	public List<Produit> getSoins();
-	
+
 	public List<Produit> getAccessoires();
-	
+
 	public List<Produit> getLots();
-	
+
 	public List<Produit> getMiniatures();
-	
+
 	public List<ProduitBean> getNewProducts(Long orgId);
 
 	public Produit getProduitById(long idProduit);
 
-	public List<ProduitBean> getProductsByCategorie(Long orgId,String codeCategorie);
-	
+	public List<ProduitBean> getProductsByCategorie(Long orgId, String codeCategorie);
+
 	public List<ProduitBean> getPromoProducts(Long orgId);
-     
+
+	public List<ProduitBean> getDecouvProducts(Long orgId);
+
 }

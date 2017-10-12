@@ -176,6 +176,14 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>aDecouvrir</from-outcome>
+			<to-view-id>/pages/private/catalogue/aDecouvrir.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 	<!-- /navigation rules catalogues  -->		
 	
 	<!-- navigation rules commandes  -->		
