@@ -25,7 +25,7 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 
 	@Autowired
 	private MarqueDAO marqueDAO;
-	
+
 	@Autowired
 	private OrganisationDAO organisationDAO;
 
@@ -60,7 +60,6 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 		return produitDAO.findProduitByCategorie(Categories.PARFUM_HOMME.getCode());
 	}
 
-
 	public List<Produit> getParfumFemme() {
 		return produitDAO.findProduitByCategorie(Categories.PARFUM_FEMME.getCode());
 
@@ -71,16 +70,17 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	}
 
 	public List<Produit> getTesteurs() {
-			return produitDAO.findProduitByCategorie(Categories.TESTER.getCode());
+		return produitDAO.findProduitByCategorie(Categories.TESTER.getCode());
 	}
 
 	@Override
 	public List<Produit> getCoffrets() {
-		return produitDAO.findProduitByCategorie(Categories.COFFRET.getCode());	}
+		return produitDAO.findProduitByCategorie(Categories.COFFRET.getCode());
+	}
 
 	@Override
 	public List<Produit> getSoins() {
-		//Miniatures et soins
+		// Miniatures et soins
 		return produitDAO.findProduitByCategorie(Categories.CREME.getCode());
 	}
 
@@ -102,16 +102,13 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	@Override
 	public List<ProduitBean> getNewProducts(Long orgId) {
 		Organisation organisation = organisationDAO.find(orgId);
-		
-		if(organisation!=null && organisation.getAccesCatalogueComplet())
-		{
-			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getNewProducts()) ;
+
+		if (organisation != null && organisation.getAccesCatalogueComplet()) {
+			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getNewProducts());
+		} else {
+			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedNewProduit());
 		}
-		else
-		{
-			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedNewProduit()) ;
-		}
-		
+
 	}
 
 	@Override
@@ -119,22 +116,27 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 		return produitDAO.find(idProduit);
 	}
 
-
 	@Override
 	public List<ProduitBean> getProductsByCategorie(Long orgId, String codeCategorie) {
-Organisation organisation = organisationDAO.find(orgId);
-		
-		if(organisation!=null && organisation.getAccesCatalogueComplet())
-		{
-			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getProductsByCategorie(codeCategorie)) ;
-		}
-		else
-		{
-			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedProduitsByCategorie(codeCategorie)) ;
+		Organisation organisation = organisationDAO.find(orgId);
+		if (organisation != null && organisation.getAccesCatalogueComplet()) {
+			return ProduitConvertor
+					.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedProduitsByCategorie(codeCategorie));
+		} else {
+			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getProductsByCategorie(codeCategorie));
 		}
 	}
 
-	
+	@Override
+	public List<ProduitBean> getPromoProducts(Long orgId) {
+		Organisation organisation = organisationDAO.find(orgId);
+		if (organisation != null && organisation.getAccesCatalogueComplet()) {
+			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedPromoProduit());
+		} else {
+			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getPromoProducts());
+		}
+	}
+
 	public OrganisationDAO getOrganisationDAO() {
 		return organisationDAO;
 	}
@@ -142,4 +144,5 @@ Organisation organisation = organisationDAO.find(orgId);
 	public void setOrganisationDAO(OrganisationDAO organisationDAO) {
 		this.organisationDAO = organisationDAO;
 	}
+
 }

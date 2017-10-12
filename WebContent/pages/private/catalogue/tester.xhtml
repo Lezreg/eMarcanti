@@ -27,7 +27,7 @@
 						<h:outputText value="#{tester.idProduit}" />
 					</p:column>
 
-					<p:column filterBy="#{tester.idMarque.marqueNom}"
+					<p:column filterBy="#{tester.marqueNom}"
 						headerText="Marque" footerText="exact" filterMatchMode="exact">
 						<f:facet name="filter">
 							<p:selectOneMenu onchange="PF('produitsTesterTable').filter()"
@@ -42,7 +42,7 @@
 							url="/images/100X100/#{empty tester.produitPhotoURL ? 'default.jpg' : tester.produitPhotoURL}"
 							width="100" />
 						<!--              <h:outputText value="#{empty produit.produitPhotoURL ? 'default.jpg' : produit.produitPhotoURL}" /> -->
-						<h:outputText value="#{tester.idMarque.marqueNom}" />
+						<h:outputText value="#{tester.marqueNom}" />
 					</p:column>
 
 					<p:column filterBy="#{tester.produitDescription}"

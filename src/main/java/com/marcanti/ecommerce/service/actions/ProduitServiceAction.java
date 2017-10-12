@@ -6,6 +6,7 @@ import com.marcanti.ecommerce.beans.ProduitBean;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.model.VCatalogueAvecStock;
+import com.marcanti.ecommerce.model.VCatalogueRestreintAvecStock;
  
 public interface ProduitServiceAction {
  
@@ -40,5 +41,7 @@ public interface ProduitServiceAction {
 	public Produit getProduitById(long idProduit);
 
 	public List<ProduitBean> getProductsByCategorie(Long orgId,String codeCategorie);
+	
+	public List<ProduitBean> getPromoProducts(Long orgId);
      
 }

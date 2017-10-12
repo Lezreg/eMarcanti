@@ -55,4 +55,16 @@ public interface ProduitDAO extends GenericDAO<Produit> {
 	 */
 	List<VCatalogueRestreintAvecStock> getRestrictedProduitsByCategorie(String codeCategorie);
 
+	
+	/**
+	 * all product list
+	 * @return VCatalogueAvecStock View
+	 */
+	public List<VCatalogueAvecStock> getPromoProducts();
+
+	/**
+	 *  restricted product list
+	 * @return
+	 */
+	List<VCatalogueRestreintAvecStock> getRestrictedPromoProduit();
 }

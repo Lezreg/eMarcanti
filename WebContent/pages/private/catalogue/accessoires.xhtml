@@ -27,7 +27,7 @@
 						<h:outputText value="#{product.idProduit}" />
 					</p:column>
 
-					<p:column filterBy="#{product.idMarque.marqueNom}"
+					<p:column filterBy="#{product.marqueNom}"
 						headerText="Marque" footerText="exact" filterMatchMode="exact">
 						<f:facet name="filter">
 							<p:selectOneMenu onchange="PF('produitsTesterTable').filter()"
@@ -42,7 +42,7 @@
 							url="/images/100X100/#{empty product.produitPhotoURL ? 'default.jpg' : product.produitPhotoURL}"
 							width="100" />
 						<!--              <h:outputText value="#{empty produit.produitPhotoURL ? 'default.jpg' : produit.produitPhotoURL}" /> -->
-						<h:outputText value="#{product.idMarque.marqueNom}" />
+						<h:outputText value="#{product.marqueNom}" />
 					</p:column>
 
 					<p:column filterBy="#{product.produitDescription}"
@@ -56,6 +56,10 @@
 						filterMatchMode="contains">
 						<h:outputText value="#{product.produitDetail}" />
 					</p:column>
+					
+					 <p:column filterBy="#{product.categorieNom}" headerText="Catégorie" footerText="contains" filterMatchMode="contains">
+			            <h:outputText value="#{product.categorieNom}" />
+			        </p:column>
 
 					<p:column filterBy="#{product.prixPublic}" style="width:110px"
 						headerText="Prix constaté" footerText="custom (min)"

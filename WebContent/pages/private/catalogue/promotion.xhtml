@@ -9,8 +9,8 @@
 	<ui:define name="content">
 	<h:body>
 		<h:form id="homme">
-		    <p:dataTable id="dataHomme" var="produit" value="#{PHFilterView.produits}" widgetVar="produitsTable"
-		                 emptyMessage="No produits found with given criteria" filteredValue="#{PHFilterView.filteredProduits}" >
+		    <p:dataTable id="dataHomme" var="produit" value="#{PromFilterView.produits}" widgetVar="produitsTable"
+		                 emptyMessage="No produits found with given criteria" filteredValue="#{PromFilterView.filteredProduits}" >
 		        <f:facet name="header">
 		            <p:outputPanel>
 		<!--                 <h:outputText value="Search all fields:" /> -->
@@ -26,7 +26,7 @@
 		            <f:facet name="filter">
 		                <p:selectOneMenu onchange="PF('produitsTable').filter()" style="width:80%">
 		                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
-		                    <f:selectItems value="#{PHFilterView.brands}" />
+		                    <f:selectItems value="#{PromFilterView.brands}" />
 		                </p:selectOneMenu>
 		            </f:facet>
 		<!--             <p:graphicImage url="/images/100X100/#{produit.produitPhotoURL}" width="100" /> -->
@@ -35,34 +35,34 @@
 		            <h:outputText value="#{produit.marqueNom}" />
 		        </p:column>
 		        
-		        <p:column filterBy="#{produit.produitDescription}" headerText="Description" footerText="contains" filterMatchMode="contains">
+		         <p:column filterBy="#{produit.produitDescription}" headerText="Description" footerText="contains" filterMatchMode="contains">
 		            <h:outputText value="#{produit.produitDescription}" />
+		        </p:column>
+		        
+		         <p:column filterBy="#{produit.categorieNom}" headerText="Catégorie" footerText="contains" filterMatchMode="contains">
+		            <h:outputText value="#{produit.categorieNom}" />
 		        </p:column>
 		        
 		         <p:column filterBy="#{produit.produitDetail}" style="width:150px" headerText="Detail" footerText="contains" filterMatchMode="contains">
 		            <h:outputText value="#{produit.produitDetail}" />
 		        </p:column>
 		        
-				<p:column filterBy="#{produit.categorieNom}" headerText="Catégorie" footerText="contains" filterMatchMode="contains">
-			        <h:outputText value="#{produit.categorieNom}" />
-			    </p:column>
-
-		        <p:column filterBy="#{produit.prixPublic}" style="width:110px" headerText="Prix constaté" footerText="custom (min)" filterFunction="#{PHFilterView.filterByPrice}">
+		        <p:column filterBy="#{produit.prixPublic}" style="width:110px" headerText="Prix constaté" footerText="custom (min)" filterFunction="#{PromFilterView.filterByPrice}">
 		            <h:outputText value="#{produitt.prixPublic}">
 		                <f:convertNumber currencySymbol="€" type="currency"/>
 		            </h:outputText>
 		        </p:column>
 		        
-		  		<p:column filterBy="#{produit.notrePrix}" style="width:110px" headerText="Notre prix" footerText="custom (min)" filterFunction="#{PHFilterView.filterByPrice}">
+		  		<p:column filterBy="#{produit.notrePrix}" style="width:110px" headerText="Notre prix" footerText="custom (min)" filterFunction="#{PromFilterView.filterByPrice}">
 		            <h:outputText value="#{produit.notrePrix}">
 		                <f:convertNumber currencySymbol="€" type="currency"/>
 		            </h:outputText>
 		        </p:column>
 				<p:column style="width:110px">
 					<p:commandButton icon="ui-icon-cart"
-						title="View" action="#{PHFilterView.addToBasket()}">
+						title="View" action="#{PromFilterView.addToBasket()}">
 						<f:setPropertyActionListener value="#{produit}"
-							target="#{PHFilterView.selectedProduit}" />
+							target="#{PromFilterView.selectedProduit}" />
 					</p:commandButton>
 				</p:column>
 		

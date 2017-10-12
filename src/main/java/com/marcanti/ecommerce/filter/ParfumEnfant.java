@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -15,26 +16,24 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.marcanti.ecommerce.beans.ProduitBean;
+import com.marcanti.ecommerce.constants.Categories;
 import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
+import com.marcanti.ecommerce.utils.ParfumUtils;
+import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 @ManagedBean(name = "PEFilterView")
 @ViewScoped
 public class ParfumEnfant {
-	
-	/**
-	 * 
-	 */
-	@SuppressWarnings("unused")
-	private static final long serialVersionUID = -1194480801457255131L;
 
-	private List<Produit> produits;
+	private List<ProduitBean> produits;
 	
-	private List<Produit> filteredProduits;
+	private List<ProduitBean> filteredProduits;
 	
-	private Produit selectedProduit;
+	private ProduitBean selectedProduit;
 
 	@Autowired
 	private ProduitServiceAction produitServiceAction;
@@ -42,6 +41,8 @@ public class ParfumEnfant {
 	@ManagedProperty("#{basketView}")
 	private BasketController basket;
 
+	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
+	
 	public BasketController getBasket() {
 		return basket;
 	}
@@ -50,14 +51,16 @@ public class ParfumEnfant {
 		this.basket = basket;
 	}
 
+	public ProduitServiceAction getService() {
+		return produitServiceAction;
+	}
+
 	@PostConstruct
 	public void init() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		ServletContext servletContext = (ServletContext) externalContext.getContext();
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
-
-		setProduits(produitServiceAction.getParfumEnfant());
 	}
 	
 	public boolean filterByPrice(Object value, Object filter, Locale locale) {
@@ -81,19 +84,25 @@ public class ParfumEnfant {
 		return brands;
 	
 	}
-	public List<Produit> getFilteredProduits() {
+
+	public void addToBasket() {
+		Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
+		basket.addPoduct(produit, 1);
+	}
+
+	public List<ProduitBean> getFilteredProduits() {
 		return filteredProduits;
 	}
 	
-	public void setFilteredProduits(List<Produit> filteredProduits) {
+	public void setFilteredProduits(List<ProduitBean> filteredProduits) {
 		this.filteredProduits = filteredProduits;
 	}
 	
-	public List<Produit> getProduits() {
-		return produits;
+	public List<ProduitBean> getProduits() {
+		return produitServiceAction.getProductsByCategorie(userSessionBean.getIdOrga(), Categories.PARFUM_ENFANT.getCode());
 	}
 	
-	public void setProduits(List<Produit> produits) {
+	public void setProduits(List<ProduitBean> produits) {
 		this.produits = produits;
 	}
 	
@@ -101,16 +110,16 @@ public class ParfumEnfant {
 		this.produitServiceAction = service;
 	}
 
-	
-	public void addToBasket() {
-		basket.addPoduct(selectedProduit, 1);
+	public void addItemToBasket() {
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Result:", "Item added to basket"));
 	}
 
-	public Produit getSelectedProduit() {
+	public ProduitBean getSelectedProduit() {
 		return selectedProduit;
 	}
 
-	public void setSelectedProduit(Produit selectedProduit) {
+	public void setSelectedProduit(ProduitBean selectedProduit) {
 		this.selectedProduit = selectedProduit;
 	}
 

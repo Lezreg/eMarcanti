@@ -22,7 +22,7 @@
 		            <h:outputText value="#{product.idProduit}" />
 		        </p:column>
 		        
-		        <p:column filterBy="#{product.idMarque.marqueNom}" headerText="Marque" footerText="exact" filterMatchMode="exact">
+		        <p:column filterBy="#{product.marqueNom}" headerText="Marque" footerText="exact" filterMatchMode="exact">
 		            <f:facet name="filter">
 		                <p:selectOneMenu onchange="PF('produitsTable').filter()" style="width:80%">
 		                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
@@ -40,6 +40,10 @@
 		         <p:column filterBy="#{product.produitDetail}" style="width:150px" headerText="Detail" footerText="contains" filterMatchMode="contains">
 		            <h:outputText value="#{product.produitDetail}" />
 		        </p:column>
+		        
+		        <p:column filterBy="#{product.categorieNom}" headerText="Catégorie" footerText="contains" filterMatchMode="contains">
+			        <h:outputText value="#{product.categorieNom}" />
+			    </p:column>
 		        
 		        <p:column filterBy="#{product.prixPublic}" style="width:110px" headerText="Prix constaté" footerText="custom (min)" filterFunction="#{NovFilterView.filterByPrice}">
 		            <h:outputText value="#{product.prixPublic}">

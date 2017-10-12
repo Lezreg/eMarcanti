@@ -32,7 +32,7 @@
 						<h:outputText value="#{produitFemme.idProduit}" />
 					</p:column>
 
-					<p:column filterBy="#{produitFemme.idMarque.marqueNom}"
+					<p:column filterBy="#{produitFemme.marqueNom}"
 						headerText="Marque" footerText="exact" filterMatchMode="exact">
 						<f:facet name="filter">
 							<p:selectOneMenu onchange="PF('produitsTable1').filter()"
@@ -46,7 +46,7 @@
 							url="/images/100X100/#{empty produitFemme.produitPhotoURL ? 'default.jpg' : produitFemme.produitPhotoURL}"
 							width="100" />
 						<!--              <h:outputText value="#{empty produit.produitPhotoURL ? 'default.jpg' : produit.produitPhotoURL}" /> -->
-						<h:outputText value="#{produitFemme.idMarque.marqueNom}" />
+						<h:outputText value="#{produitFemme.marqueNom}" />
 					</p:column>
 
 					<p:column filterBy="#{produitFemme.produitDescription}"

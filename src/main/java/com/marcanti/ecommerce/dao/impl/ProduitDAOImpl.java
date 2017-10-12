@@ -126,4 +126,24 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 				.getResultList();
 		return restrictedNewProducts;
 	}
+
+	@Override
+	public List<VCatalogueAvecStock> getPromoProducts() {
+		LOGGER.info("----------getPromoProducts--------VCatalogueAvecStock");
+		List<VCatalogueAvecStock> newProducts = em
+				.createQuery("SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutPromo <= :date AND v.dateFinPromo >= :date",
+						VCatalogueAvecStock.class).setParameter("date", new Date())
+				.getResultList();
+		return newProducts;
+	}
+
+	@Override
+	public List<VCatalogueRestreintAvecStock> getRestrictedPromoProduit() {
+		LOGGER.info("----------getRestrictedPromoProduit--------VCatalogueRestreintAvecStock");
+		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em
+				.createQuery("SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.dateDebutPromo <= :date AND v.dateFinPromo >= :date",
+						VCatalogueRestreintAvecStock.class).setParameter("date", new Date())
+				.getResultList();
+		return restrictedNewProducts;
+	}
 }
