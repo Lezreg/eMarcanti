@@ -13,7 +13,7 @@
     <lifecycle>
 	    <phase-listener id="parfum">com.marcanti.ecommerce.listener.ParfumSecuriteListener</phase-listener>
 	</lifecycle>
-
+	
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>

@@ -1,7 +1,7 @@
 
 // CATALOUGE PAGE CAT TABS AREA
 
-jQuery.noConflict();
+//jQuery.noConflict();
 $(document).ready(function() {
 	
 		

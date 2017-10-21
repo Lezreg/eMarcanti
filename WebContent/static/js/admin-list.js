@@ -1,7 +1,6 @@
 
 // CATALOUGE PAGE CAT TABS AREA
 
-
 $(document).ready(function() {
 	
 		
