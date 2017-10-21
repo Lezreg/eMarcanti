@@ -1,45 +1,168 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+
 <h:body>
 	<ui:composition template="/template/template.xhtml">
-
 		<ui:define name="content">
 			<h:form id="formCarousel">
-				<h:inputHidden value="#{carouselsBean.carousel.idCarousel}"  />
-				<h:panelGrid columns="2" border="0" cellpadding="10" cellspacing="1">
-					<h:outputLabel value="#{msg.libelle_nom_item}" />
-					<h:inputText value="#{carouselsBean.carousel.elementNom}" maxlength="60" required="true" requiredMessage="#{msg.nom_item_obligatoire}" />
-					
-					<h:outputLabel value="#{msg.libelle_image_item}" />
-					<p:fileUpload value="#{carouselsBean.uploadedFile}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{carouselsBean.uploadHandler}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
-					
-					<h:outputLabel value="" />
-					<h:outputLabel value="#{carouselsBean.carousel.elementImageURL}" /> 
+				<h:inputHidden value="#{carouselsBean.carousel.idCarousel}" />
+				<div class="breadcrumsrea">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="breadcrumslist">
+									<ul>
+										<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="carousel.xhtml"><h:outputLabel value="#{msg.libelle_menu_carousel}" /></h:outputLink></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-					<h:outputLabel value="#{msg.libelle_rang_item}" />
-					<h:inputText value="#{carouselsBean.elementRang}"  maxlength="60" required="true" requiredMessage="#{msg.nom_rang_obligatoire}" />
-					
-					<h:outputLabel value="#{msg.libelle_rang_item}" escape="false"/>
-					<h:inputText value="#{carouselsBean.carousel.elementLienURL}" maxlength="512" />
-					
-					<h:outputLabel value="#{msg.libelle_item_visible}" />
-					<h:selectOneRadio value="#{carouselsBean.carousel.isVisible}">
-			   			<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
-			   		</h:selectOneRadio>
-			   		
-			   		<h:button type="button" value="#{msg.libelle_retour}" outcome="carousels"/>
-					<h:commandButton type="submit" value="#{msg.libelle_valider}" action="#{carouselsBean.insertOrUpdateCarousel()}"/>				        
-				</h:panelGrid>
+
+				<section class="modifyaproductarea">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row marginRow">
+							<div class="col-xs-12">
+								<div class="modifyproductinner">
+									<div class="modifymaintitle">
+										<h3>#{carouselsBean.titre}</h3>
+									</div>
+									<div>
+										<h:messages errorClass="redclass" infoClass="greenclass" />
+									</div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													#{msg.libelle_nom_item}<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{carouselsBean.carousel.elementNom}" maxlength="60" required="true" requiredMessage="#{msg.nom_item_obligatoire}" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													#{msg.libelle_image_item} <span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="browse-wrap">
+													<p:fileUpload value="#{carouselsBean.uploadedFile}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{carouselsBean.uploadHandler}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
+												</div>
+												<span class="upload-path"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													#{msg.libelle_rang_item}<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{carouselsBean.elementRang}"  maxlength="60" required="true" requiredMessage="#{msg.nom_rang_obligatoire}" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext carouselsmall">
+												<p>
+													#{msg.libelle_url_du_lien}
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{carouselsBean.carousel.elementLienURL}" maxlength="512" />
+												</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													#{msg.libelle_item_visible}<span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquestext">
+												<div class="maequescheckb checkbox">
+													<h:selectOneRadio value="#{carouselsBean.carousel.isVisible}">
+											   			<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+											   		</h:selectOneRadio>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-12">
+											<div class="newmodiysvecan modifysavecancelbutton">
+												<div class="button-1">
+													<div class="eff-1"></div>
+													<h:link value="#{msg.libelle_annuler}" outcome="carousels" />
+												</div>
+
+												<div class="button-2">
+													<div class="eff-2"></div>
+													<h:commandLink value="#{msg.libelle_valider}" action="#{carouselsBean.insertOrUpdateCarousel()}" />
+												</div>
+											</div>
+										</div>
+
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
 			</h:form>
 		</ui:define>
-
 	</ui:composition>
 </h:body>
 </html>

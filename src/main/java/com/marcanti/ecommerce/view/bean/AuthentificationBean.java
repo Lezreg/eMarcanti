@@ -150,11 +150,11 @@ public class AuthentificationBean implements Serializable {
 				ParfumUtils.setUserSessionBean(userSession);
 				service.updateLastConnectionDate(dateToday, getUsername());
 				if(isDefaultPassword){
-					ecran = "index";
-				}else{
 					HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 					request.setAttribute("email", getUsername());
 					ecran = "new_password";
+				}else{
+					ecran = "index";
 				}
 			} catch (Exception e) {
 				logger.error("ERROR getIsDefaultPassword : ",e);
@@ -239,7 +239,7 @@ public class AuthentificationBean implements Serializable {
 			//mise à jour du champs 'codeVerificationPassword' et du password dans la table membe
 			try {
 				String passwordSHA512 = DigestUtils.sha512Hex(password);
-				service	.updateGeneratedPassword(email,passwordSHA512,0);
+				service	.updateGeneratedPassword(email,passwordSHA512,1);
 			} catch (Exception e) {
 				logger.error("ERROR update Generated password : ",e);
 			} 
@@ -301,7 +301,7 @@ public class AuthentificationBean implements Serializable {
 		
 		try {
 			String passwordSHA512 = DigestUtils.sha512Hex(getPassword());
-			service.updateGeneratedPassword(email, passwordSHA512, 1);
+			service.updateGeneratedPassword(email, passwordSHA512, 0);
 		} catch (Exception e) {
 			logger.error("ERROR update Generated password : ",e);
 		}

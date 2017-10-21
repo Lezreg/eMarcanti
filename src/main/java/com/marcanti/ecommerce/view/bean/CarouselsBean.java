@@ -38,8 +38,9 @@ public class CarouselsBean implements Serializable {
 	
 	private String oldRangItem;
 
-	//@ManagedProperty("#{param.idCarousel}")
 	private Integer idCarousel;
+	
+	private String titre="";
 
 	@ManagedProperty("#{carouselService}")
 	private CarouselServiceAction carouselService;
@@ -115,6 +116,14 @@ public class CarouselsBean implements Serializable {
 	public void setIdCarousel(Integer idCarousel) {
 		this.idCarousel = idCarousel;
 	}
+	
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
 	public CarouselServiceAction getCarouselService() {
 		return carouselService;
@@ -130,13 +139,16 @@ public class CarouselsBean implements Serializable {
 		carousel = carouselService.getCarousel(carousel);
 		setCarousel(carousel);
 		setOldRangItem(String.valueOf(carousel.getElementRang()));
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_item");
 		return "carousel";
 	}
 
 	public String addCarouselView() {
 		logger.info("addCarouselView");
 		this.carousel = new Carousel(0);
+		setOldRangItem("0");
 		this.uploadedFile = null;
+		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_item");
 		return "carousel";
 
 	}
