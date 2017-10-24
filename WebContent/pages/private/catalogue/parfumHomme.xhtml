@@ -59,10 +59,8 @@
 		            </h:outputText>
 		        </p:column>
 				<p:column style="width:110px">
-					<p:commandButton icon="ui-icon-cart"
-						title="View" action="#{PHFilterView.addToBasket()}">
-						<f:setPropertyActionListener value="#{produit}"
-							target="#{PHFilterView.selectedProduit}" />
+					<p:commandButton icon="ui-icon-cart" title="View" action="#{PHFilterView.addToBasket()}">
+						<f:setPropertyActionListener value="#{produit}" target="#{PHFilterView.selectedProduit}" />
 					</p:commandButton>
 				</p:column>
 		

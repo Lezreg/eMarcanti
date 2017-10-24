@@ -66,19 +66,7 @@
 					<ul class="main_ularea nav navbar-nav">
 
 						<c:if test="${USER_SESSION.MENU_CATALOGUE}" scope="session">
-							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle=""><h:outputText value="#{msg.libelle_cat}" /><i class="fa fa-angle-down"></i></a>
-								<ul class="dropdown-menu">
-									<li class="kopie"><h:link value="#{msg.libelle_parfum_homme}" outcome="parfumHomme" /></li>
-									<li><h:link value="#{msg.libelle_parfum_femme}" outcome="parfumFemme" /></li>
-									<li><h:link value="#{msg.libelle_parfum_enfant}" outcome="parfumEnfant" /></li>
-									<li><h:link value="#{msg.libelle_testeur}" outcome="tester" /></li>
-									<li><h:link value="#{msg.libelle_coffret}" outcome="coffret" /></li>
-									<li><h:link value="#{msg.libelle_creme_soin}" outcome="soins" /></li>
-									<li><h:link value="#{msg.libelle_miniatures}" outcome="miniatures" /></li>
-									<li><h:link value="#{msg.libelle_pile_accessoire}" outcome="accessoires" /></li>
-									<li><h:link value="#{msg.libelle_lots}" outcome="lots" /></li>
-								</ul>
-							</li>						
+							<li><h:link value="#{msg.libelle_cat}" outcome="catalogue" /></li>					
 						</c:if>
 						
 						<c:if test="${USER_SESSION.MENU_NOUVEAUTE}" scope="session">

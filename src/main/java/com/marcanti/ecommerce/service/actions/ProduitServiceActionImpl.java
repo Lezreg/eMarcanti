@@ -119,10 +119,9 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	public List<ProduitBean> getProductsByCategorie(Long orgId, String codeCategorie) {
 		Organisation organisation = organisationDAO.find(orgId);
 		if (organisation != null && organisation.getAccesCatalogueComplet()) {
-			return ProduitConvertor
-					.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedProduitsByCategorie(codeCategorie));
-		} else {
 			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getProductsByCategorie(codeCategorie));
+		} else {
+			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedProduitsByCategorie(codeCategorie));
 		}
 	}
 
@@ -130,9 +129,9 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	public List<ProduitBean> getPromoProducts(Long orgId) {
 		Organisation organisation = organisationDAO.find(orgId);
 		if (organisation != null && organisation.getAccesCatalogueComplet()) {
-			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedPromoProduit());
-		} else {
 			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getPromoProducts());
+		} else {
+			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedPromoProduit());
 		}
 	}
 

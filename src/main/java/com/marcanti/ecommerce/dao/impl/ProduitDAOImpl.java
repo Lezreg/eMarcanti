@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.ProduitDAO;
+import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.model.VCatalogueAvecStock;
 import com.marcanti.ecommerce.model.VCatalogueRestreintAvecStock;
@@ -108,19 +109,18 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 	@Override
 	public List<VCatalogueAvecStock> getProductsByCategorie(String codeCategorie) {
 		LOGGER.info("----------getProductsByCategorie--------");
-		List<VCatalogueAvecStock> newProducts = em.createQuery(
-				"SELECT v FROM VCatalogueAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",
-				VCatalogueAvecStock.class).setParameter("CatCOde", codeCategorie).getResultList();
-		return newProducts;
+		//List<VCatalogueAvecStock> newProducts = em.createQuery("SELECT v FROM VCatalogueAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",VCatalogueAvecStock.class).setParameter("CatCOde", codeCategorie).getResultList();
+		//return newProducts;
+		return em.createNamedQuery("VCatalogueAvecStock.findByCategorieCode", VCatalogueAvecStock.class).setParameter("categorieCode", codeCategorie).getResultList();
 	}
 
 	@Override
 	public List<VCatalogueRestreintAvecStock> getRestrictedProduitsByCategorie(String codeCategorie) {
 		LOGGER.info("----------getRestrictedProduitsByCategorie--------VCatalogueRestreintAvecStock");
-		List<VCatalogueRestreintAvecStock> restrictedNewProducts = em.createQuery(
-				"SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",
-				VCatalogueRestreintAvecStock.class).setParameter("CatCOde", codeCategorie).getResultList();
-		return restrictedNewProducts;
+		//List<VCatalogueRestreintAvecStock> restrictedNewProducts = em.createQuery("SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",VCatalogueRestreintAvecStock.class).setParameter("CatCOde", codeCategorie).getResultList();
+		//return restrictedNewProducts;
+		return em.createNamedQuery("VCatalogueRestreintAvecStock.findByCategorieCode", VCatalogueRestreintAvecStock.class).setParameter("categorieCode", codeCategorie).getResultList();
+		
 	}
 
 	@Override
