@@ -43,7 +43,8 @@
 		<beans:property name="packagesToScan" value="com.marcanti.ecommerce.model" />
 		<beans:property name="hibernateProperties">
 			<beans:props>
-				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
+				</beans:prop>
 				<beans:prop key="hibernate.show_sql">true</beans:prop>
 			</beans:props>
 		</beans:property>
@@ -55,13 +56,6 @@
 	<context:component-scan base-package="com.marcanti.ecommerce.filter" />
 	
 
-	<context:component-scan base-package="com.marcanti" />
-	<context:component-scan base-package="com.marcanti.ecommerce.service" />
-	<context:component-scan base-package="com.marcanti.ecommerce.dao" />
-	<context:component-scan base-package="com.marcanti.ecommerce.controller" />
-	
-	<!-- transaction manager for hibernate -->
-	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!-- transaction manager for hibernate -->
@@ -91,10 +85,10 @@
 	<beans:bean id="filleulDAO"
 		class="com.marcanti.ecommerce.dao.impl.FilleulDAOImpl">
 	</beans:bean>
-<!-- 	<beans:bean id="filleulsService" -->
-<!-- 		class="com.marcanti.ecommerce.service.actions.FilleulsServiceActionImpl"> -->
-<!-- 		<beans:property name="filleulDAO" ref="filleulDAO"></beans:property> -->
-<!-- 	</beans:bean>	 -->
+	<beans:bean id="filleulsService"
+		class="com.marcanti.ecommerce.service.actions.impl.FilleulsServiceActionImpl">
+		<beans:property name="filleulDAO" ref="filleulDAO"></beans:property>
+	</beans:bean>	
 	
 	<beans:bean id="membreDAO"
 		class="com.marcanti.ecommerce.dao.impl.MembreDAOImpl">
