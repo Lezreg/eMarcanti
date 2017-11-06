@@ -58,10 +58,8 @@ public class Nouveautes {
 
 	@ManagedProperty("#{basketView}")
 	private BasketController basket;
-	
-	
-	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 
+	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 
 	@PostConstruct
 	public void init() {
@@ -95,7 +93,7 @@ public class Nouveautes {
 
 	public void addToBasket() {
 		Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
-		basket.addPoduct(produit, 1);
+		// basket.addPoduct(produit, 1);
 	}
 
 	public List<ProduitBean> getFilteredProduits() {
@@ -125,6 +123,7 @@ public class Nouveautes {
 	public ProduitServiceAction getService() {
 		return produitServiceAction;
 	}
+
 	public void setService(ProduitServiceAction service) {
 		this.produitServiceAction = service;
 	}

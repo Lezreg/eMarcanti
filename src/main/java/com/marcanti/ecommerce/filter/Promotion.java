@@ -86,7 +86,7 @@ public class Promotion {
 
 	public void addToBasket() {
 		Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
-		basket.addPoduct(produit, 1);
+		// basket.addPoduct(produit, 1);
 	}
 
 	public List<ProduitBean> getFilteredProduits() {

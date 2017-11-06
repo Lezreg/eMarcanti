@@ -15,7 +15,6 @@ import com.marcanti.ecommerce.dao.FilleulDAO;
 import com.marcanti.ecommerce.model.Filleul;
 import com.marcanti.ecommerce.model.Membre;
 
-
 /**
  *
  * @author RK
@@ -24,7 +23,7 @@ public class FilleulDAOImpl extends AbstractGenericDAO<Filleul> implements Fille
 
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	@Override
 	protected EntityManager getEntityManager() {
 		return em;
@@ -40,17 +39,28 @@ public class FilleulDAOImpl extends AbstractGenericDAO<Filleul> implements Fille
 
 	@Override
 	public List<Membre> getFilleulsList(Membre parrain) {
-		return em.createNamedQuery("Filleul.getFilleulsList", Membre.class).setParameter("idMembreParrain", parrain).getResultList();
+		return em.createNamedQuery("Filleul.getFilleulsList", Membre.class).setParameter("idMembreParrain", parrain)
+				.getResultList();
 	}
 
 	@Override
 	public Filleul getFilleul(Long idFilleul) {
-		Filleul filleul=null;
+		Filleul filleul = null;
 		try {
-			filleul = em.createNamedQuery("Filleul.findByIdFilleul", Filleul.class).setParameter("idFilleul", idFilleul).getSingleResult();
+			filleul = em.createNamedQuery("Filleul.findByIdFilleul", Filleul.class).setParameter("idFilleul", idFilleul)
+					.getSingleResult();
 		} catch (Exception e) {
-		} 
+		}
 		return filleul;
 	}
-	
+
+	@Override
+	public List<Long> getFilleulsIdList(Long parrainId) {
+		List<Long> ids = (List<Long>) em
+				.createQuery(
+						"SELECT f.idFilleul FROM Membre m, Filleul f WHERE m.idMembre = f.idFilleul and f.idMembreParrain.idMembre = :idMembreParrain")
+				.setParameter("idMembreParrain", parrainId);
+		return ids;
+	}
+
 }

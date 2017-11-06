@@ -40,7 +40,7 @@ public class ProductFilter implements Serializable {
 
 	@ManagedProperty("#{basketView}")
 	private BasketController basket;
-	
+
 	public BasketController getBasket() {
 		return basket;
 	}
@@ -82,7 +82,7 @@ public class ProductFilter implements Serializable {
 	}
 
 	public void addToBasket() {
-		basket.addPoduct(selectedProduit, 1);
+		// basket.addPoduct(selectedProduit, 1);
 	}
 
 	public List<Produit> getFilteredProduits() {

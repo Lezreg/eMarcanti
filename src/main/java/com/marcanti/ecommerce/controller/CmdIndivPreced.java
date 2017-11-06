@@ -3,11 +3,9 @@ package com.marcanti.ecommerce.controller;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
@@ -20,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.marcanti.ecommerce.exception.ProductNotAvailableException;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Panier;
 import com.marcanti.ecommerce.model.PanierProduit;
@@ -44,14 +41,14 @@ public class CmdIndivPreced implements Serializable {
 	@Autowired
 	@Qualifier("panierActionService")
 	private PanierActionService panierService;
-	
+
 	@Autowired
 	@Qualifier("commandeGroupeeServiceAction")
-	private CommandeGroupeeServiceAction  commandeGroupeeServiceAction;
+	private CommandeGroupeeServiceAction commandeGroupeeServiceAction;
 
 	@Autowired
 	private CommandeIndividuelleServiceAction commandeIndividuelleServiceAction;
-	
+
 	private Panier panierEnCours;
 
 	private List<CommandeIndividuelle> commandes;
@@ -79,8 +76,11 @@ public class CmdIndivPreced implements Serializable {
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
 
-		setPanierProduitList(new ArrayList<PanierProduit>());
-		setCommandes(new ArrayList<CommandeIndividuelle>());
+		// setPanierProduitList(new ArrayList<PanierProduit>());
+		// setCommandes(new ArrayList<CommandeIndividuelle>());
+
+		getCommandes();
+		getPanierProduitList();
 
 	}
 
@@ -89,7 +89,6 @@ public class CmdIndivPreced implements Serializable {
 		init();
 	}
 
-	
 	/**
 	 * 
 	 * @return la liste des panierProduit pour une commande
@@ -109,14 +108,14 @@ public class CmdIndivPreced implements Serializable {
 	 */
 	public List<CommandeIndividuelle> getCommandes() {
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-		
+
 		Long derniereCdeGoupee = commandeGroupeeServiceAction.getIdDerniereCdeGoupee(userSessionBean.getIdOrga());
-		
-		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(), derniereCdeGoupee,
-				isCurrrentCmds);
+
+		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(),
+				derniereCdeGoupee, isCurrrentCmds);
 		if (selectedCmd == null || selectedCmd.isEmpty()) {
-			
-			if (commandes!=null && !commandes.isEmpty()) {
+
+			if (commandes != null && !commandes.isEmpty()) {
 				selectedCmd = commandes.get(0).getIdCdeIndiv().toString();
 			}
 		}
@@ -126,8 +125,6 @@ public class CmdIndivPreced implements Serializable {
 	public void setPanierProduitList(List<PanierProduit> panierProduit) {
 		this.panierProduitList = panierProduit;
 	}
-
-
 
 	public CommandeIndividuelleServiceAction getCommandeIndividuelleServiceAction() {
 		return commandeIndividuelleServiceAction;
@@ -162,7 +159,6 @@ public class CmdIndivPreced implements Serializable {
 		this.panierService = panierService;
 	}
 
-
 	public void setCommandes(List<CommandeIndividuelle> commandes) {
 		this.commandes = commandes;
 	}
@@ -174,6 +170,5 @@ public class CmdIndivPreced implements Serializable {
 	public void setCommandeGroupeeServiceAction(CommandeGroupeeServiceAction commandeGroupeeServiceAction) {
 		this.commandeGroupeeServiceAction = commandeGroupeeServiceAction;
 	}
-
 
 }
