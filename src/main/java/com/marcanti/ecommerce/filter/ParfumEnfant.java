@@ -30,19 +30,19 @@ import com.marcanti.ecommerce.view.bean.UserSessionBean;
 public class ParfumEnfant {
 
 	private List<ProduitBean> produits;
-	
+
 	private List<ProduitBean> filteredProduits;
-	
+
 	private ProduitBean selectedProduit;
 
 	@Autowired
 	private ProduitServiceAction produitServiceAction;
-	
+
 	@ManagedProperty("#{basketView}")
 	private BasketController basket;
 
 	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-	
+
 	public BasketController getBasket() {
 		return basket;
 	}
@@ -62,50 +62,51 @@ public class ParfumEnfant {
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
 	}
-	
+
 	public boolean filterByPrice(Object value, Object filter, Locale locale) {
 		String filterText = (filter == null) ? null : filter.toString().trim();
 		if (filterText == null || filterText.equals("")) {
 			return true;
 		}
-	
+
 		if (value == null) {
 			return false;
 		}
-	
+
 		return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
 	}
-	
+
 	public List<String> getBrands() {
 		List<String> brands = new ArrayList<>();
 		for (Marque m : produitServiceAction.getBrands()) {
 			brands.add(m.getMarqueNom());
 		}
 		return brands;
-	
+
 	}
 
 	public void addToBasket() {
 		Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
-		basket.addPoduct(produit, 1);
+		// basket.addPoduct(produit, 1);
 	}
 
 	public List<ProduitBean> getFilteredProduits() {
 		return filteredProduits;
 	}
-	
+
 	public void setFilteredProduits(List<ProduitBean> filteredProduits) {
 		this.filteredProduits = filteredProduits;
 	}
-	
+
 	public List<ProduitBean> getProduits() {
-		return produitServiceAction.getProductsByCategorie(userSessionBean.getIdOrga(), Categories.PARFUM_ENFANT.getCode());
+		return produitServiceAction.getProductsByCategorie(userSessionBean.getIdOrga(),
+				Categories.PARFUM_ENFANT.getCode());
 	}
-	
+
 	public void setProduits(List<ProduitBean> produits) {
 		this.produits = produits;
 	}
-	
+
 	public void setService(ProduitServiceAction service) {
 		this.produitServiceAction = service;
 	}
@@ -124,4 +125,3 @@ public class ParfumEnfant {
 	}
 
 }
-

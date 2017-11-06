@@ -1,5 +1,7 @@
 package com.marcanti.ecommerce.service.actions.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -9,14 +11,17 @@ import org.springframework.stereotype.Service;
 
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeGroupeeStatusDAO;
+import com.marcanti.ecommerce.dao.FilleulDAO;
+import com.marcanti.ecommerce.dao.MembreDAO;
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
+import com.marcanti.ecommerce.model.Membre;
+import com.marcanti.ecommerce.model.VCdeGroupeeDetail;
 import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 
 @Service("commandeGroupeeServiceAction")
 public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceAction {
-	
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommandeGroupeeServiceActionImpl.class);
 
 	@Autowired
@@ -24,6 +29,12 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 
 	@Autowired
 	private CommandeGroupeeStatusDAO commandeGroupeeStatusDAO;
+
+	@Autowired
+	private FilleulDAO filleulDAO;
+
+	@Autowired
+	private MembreDAO membreDAO;
 
 	@Override
 	public Long getIdDerniereCdeGoupee(Long idOrg) {
@@ -46,7 +57,7 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 	@Override
 	public void saveCmdGroupee(CommandeGroupee commandeGroupee) {
 		if (commandeGroupee != null && commandeGroupee.getIdCdeGroupee() != null) {
-			LOGGER.info("edit commande groupée: id/"+commandeGroupee.getIdCdeGroupee());
+			LOGGER.info("edit commande groupée: id/" + commandeGroupee.getIdCdeGroupee());
 			commandeGroupeeDAO.edit(commandeGroupee);
 		} else {
 			LOGGER.info("create commande groupée");
@@ -65,6 +76,29 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 	@Override
 	public CommandeGroupeeStatus getCommandeGroupeeStatusByCode(String statusCode) {
 		return commandeGroupeeStatusDAO.getCommandeGroupeeStatusByCode(statusCode);
+	}
+
+	@Override
+	public List<VCdeGroupeeDetail> getCommandeGroupeesFilleulsByMembre(Long membreId) {
+		Membre Parrain = membreDAO.find(membreId);
+		List<Membre> idsMembre = filleulDAO.getFilleulsList(Parrain);
+		List<Long> idMembres = new ArrayList<>();
+		for (Membre membre : idsMembre) {
+			idMembres.add(membre.getIdMembre());
+		}
+		List<VCdeGroupeeDetail> cmdGroupeesFilleuls = commandeGroupeeDAO.getCmdGroupeesFilleuls(idMembres);
+		if (cmdGroupeesFilleuls != null && !cmdGroupeesFilleuls.isEmpty()) {
+			cmdGroupeesFilleuls = Collections.emptyList();
+		}
+		return cmdGroupeesFilleuls;
+	}
+
+	public MembreDAO getMembreDAO() {
+		return membreDAO;
+	}
+
+	public void setMembreDAO(MembreDAO membreDAO) {
+		this.membreDAO = membreDAO;
 	}
 
 }

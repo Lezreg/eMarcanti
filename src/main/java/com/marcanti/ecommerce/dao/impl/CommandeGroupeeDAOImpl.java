@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.model.CommandeGroupee;
+import com.marcanti.ecommerce.model.VCdeGroupeeDetail;
 
 /**
  *
@@ -29,76 +30,90 @@ public class CommandeGroupeeDAOImpl extends AbstractGenericDAO<CommandeGroupee> 
 	 * 
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommandeGroupeeDAOImpl.class);
-	
 
 	@PersistenceContext
-    private EntityManager em;
-	
+	private EntityManager em;
+
 	@Override
-	public Long getIdDerniereCdeGoupee(Long idOrg) {
+	public Long getIdDerniereCdeGoupeeALivrer(Long idOrg) {
+		LOGGER.info("-----getIdDerniereCdeGoupee : idOrg =" + idOrg);
 		Query query = em
 				.createQuery(
 						"SELECT max (c.idCdeGroupee) FROM CommandeGroupee c WHERE c.idOrga.idOrga = :idOrga and  c.idStatus.statusCode = :statusCode ")
-				.setParameter("idOrga", idOrg)
-				.setParameter("statusCode", "CDE_GROUPEE_A_LIVRER");
-		
+				.setParameter("idOrga", idOrg).setParameter("statusCode", "CDE_GROUPEE_A_LIVRER");
+
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
-			return null;
+			return 0L;
 		}
 		return (Long) query.getResultList().get(0);
 	}
-	
+
+	@Override
+	public Long getIdDerniereCdeGoupee(Long idOrg) {
+		LOGGER.info("-----getIdDerniereCdeGoupee : idOrg =" + idOrg);
+		Query query = em
+				.createQuery("SELECT max (c.idCdeGroupee) FROM CommandeGroupee c WHERE c.idOrga.idOrga = :idOrga  ")
+				.setParameter("idOrga", idOrg);
+
+		if (query.getResultList() == null || query.getResultList().isEmpty()) {
+			return 0L;
+		}
+		return (Long) query.getResultList().get(0);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CommandeGroupee> getCmdGroupeesByOrg(Long idOrg) {
-		Query query = em
-				.createQuery(
-						"SELECT c FROM CommandeGroupee c WHERE c.idOrga.idOrga = :idOrga")
+		LOGGER.info("-----getCmdGroupeesByOrg : idOrg =" + idOrg);
+		Query query = em.createQuery("SELECT c FROM CommandeGroupee c WHERE c.idOrga.idOrga = :idOrga")
 				.setParameter("idOrga", idOrg);
 		return (List<CommandeGroupee>) query.getResultList();
 	}
-	
-	
-    public CommandeGroupeeDAOImpl() {
-        super(CommandeGroupee.class);
-    }
 
-    public void create(CommandeGroupee entity) {
-        super.create(entity);
-    }
+	@Override
+	public List<VCdeGroupeeDetail> getCmdGroupeesFilleuls(List<Long> idsMembre) {
+		LOGGER.info("----------getCmdGroupeesFilleuls --------");
+		List<VCdeGroupeeDetail> newProducts = em
+				.createQuery("SELECT v FROM VCdeGroupeeDetail v WHERE v.idMembre IN (:ids)", VCdeGroupeeDetail.class)
+				.setParameter("ids", idsMembre).getResultList();
+		return newProducts;
+	}
+
+	public CommandeGroupeeDAOImpl() {
+		super(CommandeGroupee.class);
+	}
+
+	public void create(CommandeGroupee entity) {
+		super.create(entity);
+	}
 
 	public void edit(Long id, CommandeGroupee entity) {
-        super.edit(entity);
-    }
+		super.edit(entity);
+	}
 
 	public void remove(Long id) {
-        super.remove(super.find(id));
-    }
+		super.remove(super.find(id));
+	}
 
 	public CommandeGroupee find(Long id) {
-        return super.find(id);
-    }
+		return super.find(id);
+	}
 
-    public List<CommandeGroupee> findAll() {
-        return super.findAll();
-    }
+	public List<CommandeGroupee> findAll() {
+		return super.findAll();
+	}
 
 	public List<CommandeGroupee> findRange(Integer from, Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
+		return super.findRange(new int[] { from, to });
+	}
 
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
+	public String countREST() {
+		return String.valueOf(super.count());
+	}
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
-
-	
-
-	
-    
 }

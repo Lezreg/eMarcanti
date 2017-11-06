@@ -191,7 +191,6 @@
 			<to-view-id>/pages/private/catalogue/aDecouvrir.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
 	<!-- /navigation rules catalogues  -->		
 	
 	<!-- navigation rules commandes  -->		
@@ -199,7 +198,7 @@
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>commandes_pre</from-outcome>
-			<to-view-id>/pages/private/panier/panier.xhtml</to-view-id>
+			<to-view-id>/pages/private/panier/cmdIndivPrec.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
@@ -208,6 +207,14 @@
 		<navigation-case>
 			<from-outcome>commandes_enCours</from-outcome>
 			<to-view-id>/pages/private/panier/panier.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>commandes_filleuls</from-outcome>
+			<to-view-id>/pages/private/commandes/cmdFilleuls.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	

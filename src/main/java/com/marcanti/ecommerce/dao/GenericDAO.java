@@ -3,8 +3,7 @@ package com.marcanti.ecommerce.dao;
 import java.util.List;
 
 public interface GenericDAO<T> {
-	
-	
+
 	void create(T entity);
 
 	T edit(T entity);
@@ -18,5 +17,5 @@ public interface GenericDAO<T> {
 	List<T> findRange(int[] range);
 
 	int count();
-	
+
 }

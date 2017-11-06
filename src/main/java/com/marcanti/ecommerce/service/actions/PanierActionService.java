@@ -2,6 +2,8 @@ package com.marcanti.ecommerce.service.actions;
 
 import java.util.List;
 
+import com.marcanti.ecommerce.exception.CommandeGroupeeNotFoundException;
+import com.marcanti.ecommerce.exception.CommandeGroupeeValidatedExeception;
 import com.marcanti.ecommerce.exception.ProductNotAvailableException;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Membre;
@@ -12,7 +14,8 @@ import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 public interface PanierActionService {
 
-	Panier addProduct(Produit produit, Long idMembre, Long idOrg);
+	Panier addProduct(Produit produit, UserSessionBean userSessionBean)
+			throws CommandeGroupeeNotFoundException, CommandeGroupeeValidatedExeception;
 
 	Panier create(Panier panier);
 
@@ -22,10 +25,10 @@ public interface PanierActionService {
 
 	List<PanierProduit> getProduitsByCmdIndiv(Long idCmdIndiv);
 
-	List<PanierProduit> recalculer(List<PanierProduit> panierProduitList) throws ProductNotAvailableException;
+	List<PanierProduit> recalculer(List<PanierProduit> panierProduitList, UserSessionBean userSessionBean)
+			throws ProductNotAvailableException;
 
 	void confirmerCommandeIndiv(CommandeIndividuelle commandeIndividuelle, List<PanierProduit> panierProduitList,
-			UserSessionBean userSessionBean)
-			throws ProductNotAvailableException;
+			UserSessionBean userSessionBean) throws ProductNotAvailableException;
 
 }

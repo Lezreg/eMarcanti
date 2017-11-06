@@ -1,0 +1,18 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+	<h:body>
+		<h:form id="cmdId_t">
+			<h:outputText id="cmdencours1" value="Ma commande en cours ..."/>
+			<h:outputText id="cmdencours2" value="Impossible d'ajouter le produit. La commande groupée n'a pas encore débuté." />	  
+			<h:outputText id="cmdencours3" value="Contactez votre correspondant au sein de votre organisation." />
+		</h:form>	   
+	</h:body>
+</ui:define>
+</ui:composition>

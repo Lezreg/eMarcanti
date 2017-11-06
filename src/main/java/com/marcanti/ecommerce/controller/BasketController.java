@@ -3,7 +3,6 @@ package com.marcanti.ecommerce.controller;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.marcanti.ecommerce.exception.CommandeGroupeeNotFoundException;
+import com.marcanti.ecommerce.exception.CommandeGroupeeValidatedExeception;
 import com.marcanti.ecommerce.exception.ProductNotAvailableException;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Panier;
@@ -28,6 +29,7 @@ import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 import com.marcanti.ecommerce.service.actions.CommandeIndividuelleServiceAction;
 import com.marcanti.ecommerce.service.actions.PanierActionService;
+import com.marcanti.ecommerce.utils.ParametersChecker;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
@@ -45,14 +47,14 @@ public class BasketController implements Serializable {
 	@Autowired
 	@Qualifier("panierActionService")
 	private PanierActionService panierService;
-	
+
 	@Autowired
 	@Qualifier("commandeGroupeeServiceAction")
-	private CommandeGroupeeServiceAction  commandeGroupeeServiceAction;
+	private CommandeGroupeeServiceAction commandeGroupeeServiceAction;
 
 	@Autowired
 	private CommandeIndividuelleServiceAction commandeIndividuelleServiceAction;
-	
+
 	private Panier panierEnCours;
 
 	private List<CommandeIndividuelle> commandes;
@@ -62,6 +64,8 @@ public class BasketController implements Serializable {
 	private CommandeIndividuelle commandeIndividuelle;
 
 	private boolean isCurrrentCmds = true;
+
+	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 
 	public Panier getPanierEnCours() {
 		return panierEnCours;
@@ -80,27 +84,27 @@ public class BasketController implements Serializable {
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
 
-		// FIXME load panier produit
-		// if commande groupee not exist then send message ("Impossible
-		// d'ajouter des produits "page 26)
-
 		// by default last commandeInd will be selected
-		setPanierProduitList(new ArrayList<PanierProduit>());
-		setCommandes(new ArrayList<CommandeIndividuelle>());
+		// setPanierProduitList(new ArrayList<PanierProduit>());
+		// setCommandes(new ArrayList<CommandeIndividuelle>());
+		getCommandes();
+		getPanierProduitList();
 
 	}
 
-	public void addPoduct(Produit produit, int quantite) {
+	public String addPoduct(Produit produit, int quantite)
+			throws CommandeGroupeeNotFoundException, CommandeGroupeeValidatedExeception {
+		ParametersChecker.checkParameter("produit is null ", produit);
+		LOGGER.debug(produit.toString());
 
-		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-		if (produit == null)
-			return;
-		// FIXME not support quantity
-		LOGGER.info(produit.toString());
-		// TODO return panier after update
-		panierEnCours = panierService.addProduct(produit, userSessionBean.getIdMembre(), userSessionBean.getIdOrga());
+		if (produit.getQteEnStock() < 1) {
+			return "rupture";
+		}
+
+		panierEnCours = panierService.addProduct(produit, userSessionBean);
 		// panierService
 		setPanierProduitList(panierService.getProduitsByPAnier(panierEnCours));
+		return "";
 	}
 
 	public String redirectCurrentCmd() {
@@ -123,16 +127,18 @@ public class BasketController implements Serializable {
 	 */
 	public void reCalculer() {
 
+		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
+
 		try {
-			this.panierProduitList = panierService.recalculer(panierProduitList);
+			this.panierProduitList = panierService.recalculer(panierProduitList, userSessionBean);
 
 		} catch (ProductNotAvailableException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.info(e.getMessage());
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, e.getMessage(),
 					"! Mettez à jour le panier");
 			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
 		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.info(e.getMessage());
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Problème Technique : ",
 					" Contactez votre administrateur");
 			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
@@ -174,14 +180,14 @@ public class BasketController implements Serializable {
 	 */
 	public List<CommandeIndividuelle> getCommandes() {
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-		
+
 		Long derniereCdeGoupee = commandeGroupeeServiceAction.getIdDerniereCdeGoupee(userSessionBean.getIdOrga());
-		
-		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(), derniereCdeGoupee,
-				isCurrrentCmds);
+
+		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(),
+				derniereCdeGoupee, isCurrrentCmds);
 		if (selectedCmd == null || selectedCmd.isEmpty()) {
-			
-			if (commandes!=null && !commandes.isEmpty()) {
+
+			if (commandes != null && !commandes.isEmpty()) {
 				selectedCmd = commandes.get(0).getIdCdeIndiv().toString();
 			}
 		}
@@ -191,8 +197,6 @@ public class BasketController implements Serializable {
 	public void setPanierProduitList(List<PanierProduit> panierProduit) {
 		this.panierProduitList = panierProduit;
 	}
-
-
 
 	public CommandeIndividuelleServiceAction getCommandeIndividuelleServiceAction() {
 		return commandeIndividuelleServiceAction;
@@ -227,7 +231,6 @@ public class BasketController implements Serializable {
 		this.panierService = panierService;
 	}
 
-
 	public void setCommandes(List<CommandeIndividuelle> commandes) {
 		this.commandes = commandes;
 	}
@@ -239,6 +242,5 @@ public class BasketController implements Serializable {
 	public void setCommandeGroupeeServiceAction(CommandeGroupeeServiceAction commandeGroupeeServiceAction) {
 		this.commandeGroupeeServiceAction = commandeGroupeeServiceAction;
 	}
-
 
 }
