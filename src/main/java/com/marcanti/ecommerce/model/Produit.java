@@ -84,6 +84,10 @@ public class Produit implements Serializable {
     private short qteEnStock;
     @Size(max = 512)
     private String produitPhotoURL;
+    @Size(max = 512)
+    private String produitPhotoTailleMediumURL;
+    @Size(max = 512)
+    private String produitPhotoTailleLargeURL;
     @Temporal(TemporalType.DATE)
     private Date dateDebutPromo;
     @Temporal(TemporalType.DATE)
@@ -110,6 +114,14 @@ public class Produit implements Serializable {
     private String descriptionADecouvrir;
     @Size(max = 45)
     private String motCleADecouvrir;
+    private boolean isBestSellerHomme;
+    private boolean isBestSellerFemme;
+    private boolean isPetitPrix;
+    private boolean isNouveauteSurHomePage;
+    private boolean isPromoSurHomePage;
+    private boolean isADecouvrirSurHomePage;
+    @Size(max = 512)
+    private String produitVideoURL;    
     @Size(max = 20)
     private String codeEAN;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produit")
@@ -197,8 +209,31 @@ public class Produit implements Serializable {
     public void setProduitPhotoURL(String produitPhotoURL) {
         this.produitPhotoURL = produitPhotoURL;
     }
+    
 
-    public Date getDateDebutPromo() {
+    public String getProduitPhotoTailleMediumURL() {
+    	if (produitPhotoTailleMediumURL == null) {
+			return "";
+		}
+		return produitPhotoTailleMediumURL;
+	}
+
+	public void setProduitPhotoTailleMediumURL(String produitPhotoTailleMediumURL) {
+		this.produitPhotoTailleMediumURL = produitPhotoTailleMediumURL;
+	}
+
+	public String getProduitPhotoTailleLargeURL() {
+		if (produitPhotoTailleLargeURL == null) {
+			return "";
+		}
+		return produitPhotoTailleLargeURL;
+	}
+
+	public void setProduitPhotoTailleLargeURL(String produitPhotoTailleLargeURL) {
+		this.produitPhotoTailleLargeURL = produitPhotoTailleLargeURL;
+	}
+
+	public Date getDateDebutPromo() {
         return dateDebutPromo;
     }
 
@@ -301,8 +336,64 @@ public class Produit implements Serializable {
     public void setMotCleADecouvrir(String motCleADecouvrir) {
         this.motCleADecouvrir = motCleADecouvrir;
     }
+    
+	public boolean isBestSellerHomme() {
+		return isBestSellerHomme;
+	}
 
-    public String getCodeEAN() {
+	public void setBestSellerHomme(boolean isBestSellerHomme) {
+		this.isBestSellerHomme = isBestSellerHomme;
+	}
+
+	public boolean isBestSellerFemme() {
+		return isBestSellerFemme;
+	}
+
+	public void setBestSellerFemme(boolean isBestSellerFemme) {
+		this.isBestSellerFemme = isBestSellerFemme;
+	}
+
+	public boolean isPetitPrix() {
+		return isPetitPrix;
+	}
+
+	public void setPetitPrix(boolean isPetitPrix) {
+		this.isPetitPrix = isPetitPrix;
+	}
+
+	public boolean isNouveauteSurHomePage() {
+		return isNouveauteSurHomePage;
+	}
+
+	public void setNouveauteSurHomePage(boolean isNouveauteSurHomePage) {
+		this.isNouveauteSurHomePage = isNouveauteSurHomePage;
+	}
+
+	public boolean isPromoSurHomePage() {
+		return isPromoSurHomePage;
+	}
+
+	public void setPromoSurHomePage(boolean isPromoSurHomePage) {
+		this.isPromoSurHomePage = isPromoSurHomePage;
+	}
+
+	public boolean isADecouvrirSurHomePage() {
+		return isADecouvrirSurHomePage;
+	}
+
+	public void setADecouvrirSurHomePage(boolean isADecouvrirSurHomePage) {
+		this.isADecouvrirSurHomePage = isADecouvrirSurHomePage;
+	}
+	
+	public String getProduitVideoURL() {
+		return produitVideoURL;
+	}
+
+	public void setProduitVideoURL(String produitVideoURL) {
+		this.produitVideoURL = produitVideoURL;
+	}
+
+	public String getCodeEAN() {
         return codeEAN;
     }
 

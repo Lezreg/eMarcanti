@@ -1,4 +1,4 @@
-package com.marcanti.ecommerce.service.actions;
+package com.marcanti.ecommerce.service.actions.impl;
 
 import java.util.List;
 
@@ -14,9 +14,10 @@ import com.marcanti.ecommerce.dao.ProduitDAO;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Produit;
+import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 import com.marcanti.ecommerce.utils.ProduitConvertor;
 
-@Service("produitServiceAction")
+@Service("produitService")
 public class ProduitServiceActionImpl implements ProduitServiceAction {
 
 	@Autowired
@@ -27,6 +28,18 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 
 	@Autowired
 	private OrganisationDAO organisationDAO;
+	
+	public MarqueDAO getMarqueDAO() {
+		return marqueDAO;
+	}
+
+	public void setMarqueDAO(MarqueDAO marqueDAO) {
+		this.marqueDAO = marqueDAO;
+	}
+
+	public ProduitDAO getProduitDAO() {
+		return produitDAO;
+	}
 
 	@Override
 	@Transactional
@@ -151,6 +164,23 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 
 	public void setOrganisationDAO(OrganisationDAO organisationDAO) {
 		this.organisationDAO = organisationDAO;
+	}
+
+	@Override
+	public Produit getProduit(Long idProduit) {
+		return produitDAO.getProduit(idProduit);
+	}
+
+	@Override
+	public void updateProduit(Produit produit) {
+		produitDAO.updateProduit(produit);
+		
+	}
+
+	@Override
+	public void insertProduit(Produit produit) {
+		produitDAO.insertProduit(produit);
+		
 	}
 
 }

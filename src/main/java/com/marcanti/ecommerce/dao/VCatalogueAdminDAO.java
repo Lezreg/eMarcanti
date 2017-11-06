@@ -6,7 +6,7 @@ import com.marcanti.ecommerce.model.VCatalogueAdmin;
 
 public interface VCatalogueAdminDAO {
 	
-	public List<VCatalogueAdmin> getCategorieList();
+	public List<VCatalogueAdmin> getCatalogueList();
 	
 
 }

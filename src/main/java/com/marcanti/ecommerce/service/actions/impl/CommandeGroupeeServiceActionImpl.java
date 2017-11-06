@@ -1,4 +1,4 @@
-package com.marcanti.ecommerce.service.actions;
+package com.marcanti.ecommerce.service.actions.impl;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeGroupeeStatusDAO;
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
+import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 
 @Service("commandeGroupeeServiceAction")
 public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceAction {

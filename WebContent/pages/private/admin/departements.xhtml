@@ -48,9 +48,13 @@
 					<div class="row customrow">
 						<div class="col-xs-12">
 							<div class="mess-innertablearea">
-								<div class="newbutton sousbuttonmobile">
-									<button><h:link value="#{msg.libelle_ajouter}" outcome="#{departementsBean.addDepartementView()}" /></button>
+								<div class="newbutton mobilenewbuttonajour adlistajourbuttonpos">
+									<div class="button-2">
+										<div class="eff-2"></div>
+										<h:link styleClass="adminajourlistbutton"  value="#{msg.libelle_ajouter}" outcome="#{departementsBean.addDepartementView()}" />
+									 </div>
 								</div>
+																	
 								<table id="departmentlistid" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
 									<thead>
 										<tr>

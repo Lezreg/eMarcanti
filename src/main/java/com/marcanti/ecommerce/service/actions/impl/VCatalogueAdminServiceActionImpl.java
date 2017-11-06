@@ -29,7 +29,7 @@ public class VCatalogueAdminServiceActionImpl implements VCatalogueAdminServiceA
 
 	@Override
 	public List<VCatalogueAdmin> getCatalogueList() {
-		return catalogueDAO.getCategorieList();
+		return catalogueDAO.getCatalogueList();
 	}
 
 

@@ -80,28 +80,11 @@
 
 	<!-- list of beans -->
 
-<!-- 	<beans:bean id="produitService" -->
-<!-- 		class="com.marcanti.ecommerce.service.ProduitServiceActionImpl"> -->
-<!-- 		<beans:property name="produitDAO" ref="produitDAOImpl" /> -->
-<!-- 	</beans:bean> -->
-
-<!-- 	<beans:bean id="panierService" -->
-<!-- 		class="com.marcanti.ecommerce.service.PanierServiceActionImpl"> -->
-<!-- 		<beans:property name="panierDao" ref="panierDAOImpl" /> -->
-<!-- 	</beans:bean> -->
-<!-- 	<beans:bean id="produitDAO" -->
-<!-- 		class="com.marcanti.ecommerce.dao.impl.ProduitDAOImpl"> -->
-<!-- 	</beans:bean> -->
-<!-- 	<beans:bean id="produitService" -->
-<!-- 		class="com.marcanti.ecommerce.service.actions.impl.ProduitServiceActionImpl"> -->
-<!-- 		<beans:property name="produitDAO" ref="produitDAO"></beans:property> -->
-<!-- 	</beans:bean> -->
-	
 	<beans:bean id="authentificationDAO"
 		class="com.marcanti.ecommerce.dao.impl.AuthentificationDAOImpl">
 	</beans:bean>
 	<beans:bean id="authentificationService"
-		class="com.marcanti.ecommerce.service.actions.AuthentificationServiceActionImpl">
+		class="com.marcanti.ecommerce.service.actions.impl.AuthentificationServiceActionImpl">
 		<beans:property name="authentificationDAO" ref="authentificationDAO"></beans:property>
 	</beans:bean>	
 	
@@ -117,7 +100,7 @@
 		class="com.marcanti.ecommerce.dao.impl.MembreDAOImpl">
 	</beans:bean>	
 	<beans:bean id="membreService"
-		class="com.marcanti.ecommerce.service.actions.MembreServiceActionImpl">
+		class="com.marcanti.ecommerce.service.actions.impl.MembreServiceActionImpl">
 		<beans:property name="membreDAO" ref="membreDAO"></beans:property>
 	</beans:bean>	
 	
@@ -188,6 +171,17 @@
 	<beans:bean id="catalogueService"
 		class="com.marcanti.ecommerce.service.actions.impl.VCatalogueAdminServiceActionImpl">
 		<beans:property name="catalogueDAO" ref="catalogueDAO"></beans:property>
+	</beans:bean>	
+	
+	<beans:bean id="produitDAO"
+		class="com.marcanti.ecommerce.dao.impl.ProduitDAOImpl">
+	</beans:bean>	
+	
+	<beans:bean id="produitService"
+		class="com.marcanti.ecommerce.service.actions.impl.ProduitServiceActionImpl">
+		<beans:property name="produitDAO" ref="produitDAO" />
+		<beans:property name="marqueDAO" ref="marqueDAO" />
+		<beans:property name="organisationDAO" ref="organisationDAO" />
 	</beans:bean>	
 
 </beans:beans>

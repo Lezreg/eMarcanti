@@ -221,7 +221,7 @@ padding:15px 0 15px;
 	text-align: right;
 }
 
-.searchbox p input {
+.searchbox form input {
 	border: 1px solid #fc8440;
 	text-align: Center;
 	padding: 11px 20px;
@@ -229,7 +229,7 @@ padding:15px 0 15px;
 	width:68%;
 }
 
-.searchbox p button {
+.searchbox form button {
 	background: #fc8440;
 	color: #fff;
 	padding: 12px;
@@ -237,9 +237,9 @@ padding:15px 0 15px;
 	border: none;
 }
 
-.searchbox p button i {}
+.searchbox form button i {}
 
-.searchbox p input[placeholder] {
+.searchbox form input[placeholder] {
 	color: #fc8440;
 }
 
@@ -2182,6 +2182,8 @@ table.dataTable thead .sorting::after {
 }
 
 
+#dashbaordid_filter label input,
+#reportingoneid_filter label input,
 #messfilleulsid_filter label input,
 #gestionid_filter label input,
 #departmentlistid_filter label input,
@@ -2483,6 +2485,8 @@ span.upload-path {
 	
 }
 
+#datepicker-example37,
+#datepicker-example36,
 #datepicker-example30,
 #datepicker-example31,
 #datepicker-example32,
@@ -4071,6 +4075,7 @@ color: #222;
 	border:1px solid #ddd;
 	padding: 20px 10px!important;
 	text-align: center;
+	vertical-align: middle!important;
 }
 
 .bilanredtotal > span {
@@ -4084,6 +4089,15 @@ color: #222;
   color: #fff;
   padding: 10px 60px;
 }
+
+
+
+.stockareafirst .alltableswithoutsecondrow{
+	height: 100px;
+	
+}
+
+
 
 .firstthreecolumn {
   margin-top: 38px!important;
@@ -4210,6 +4224,7 @@ padding-left: 10px;
 
 .commanderbutton:hover{
 	color:#fff;
+	background:#E67935;
 }
 
 
@@ -4285,7 +4300,7 @@ line-height: 25px;
 }
 .{}
 .monemeditbutton{
-background: #fff none repeat scroll 0 0;
+background: #ddd none repeat scroll 0 0;
 border: medium none;
 color: #222;
 padding: 3px 10px 5px;
@@ -4477,18 +4492,229 @@ text-align: left;
 .inputcommandarea{}
 .inputcommandarea input {
   border: medium none;
-  text-align: right;
-  width: 70%;
+  text-align: center;
+  width: 30%;
+}
+
+
+
+
+.emailmessagelogo{}
+.emaillogomessageinner{}
+.emaillogomessageinner a img{
+	margin: 10px auto;
+width: 40%;
+}
+
+.emailmessagecontentinner {
+  padding: 30px 0;
+}
+.emailmessagecontentinner{}
+.emailmessagecontentinner p{}
+.emailmessagecontentinner ul{
+	text-align: left;
+	list-style: disc;
+	margin-bottom: 20px;
+}
+.emailmessagecontentinner ul li{
+	display: block;
+	margin:5px 0px;
+}
+
+
+/*
+
+=============================================
+	REPORTING ONE CSS STYLING
+=============================================
+*/
+
+.reportingbuttonone{}
+.reportingbuttonone button{
+	width:auto;
+	margin-right:8px;
 }
 .{}
 .{}
-.{}
-.{}
-.{}
-.{}
-.{}
-.{}
-.{}
+.adlistajourbuttonpos {
+	position: absolute;
+	top: 38px;
+}
+
+.adminajourlistbutton{
+  background: #fc8440 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 0px;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Lato",sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+
+.quanlityavilablclass input{
+	width: 40%;
+height: 50px;
+padding: 5px;
+line-height: 50px;
+	text-align: center;
+}
+
+
+.adlistajourbuttonpos .button-2 {
+	width: 100px;
+	height: 40px;
+}
+.adminajourlistbutton {
+	line-height: 36px!important;
+}
+
+
+.dashbaordarea{
+	padding: 50px 0px;
+}
+
+
+
+
+.dashbaordarea table tr td,
+.dashbaordarea table tr th{
+	border-right:1px solid #f7f7f7!important;
+	padding:20px 15px!important;
+}
+
+
+.dashbaordarea table tr td.allbroderleft,
+.dashbaordarea table tr th.allbroderleft{
+	border-left:1px solid #f7f7f7!important;
+}
+
+
+.dashbaordarea table tr td.borderlessth,
+.dashbaordarea table tr th.borderlessth{
+	border:none!important;
+}
+
+
+.bilanspan span {
+	
+	color: #fff;
+	padding: 10px 25px;
+	display: block;
+}
+.bilanredbg{
+	background: #ff2727;
+}
+
+.bilangreebbg{
+	background: #01e859;
+}
+
+
+
+
+#orangebg {
+	background: #fc8440 !important;
+	color: #fff;
+	padding: 20px 25px !important;
+}
+
+.dataTables_scroll {
+	clear: both;
+	border-right: 1px solid;
+	border-bottom: 1px solid black;
+}
+
+.dataTables_scrollHeadInner {
+	background: #fc8440!important;
+	background-clip: padding-box;
+	border-top: 1px solid !important;
+	border-bottom: 1px solid !important;
+}
+
+th.emptySpace, td.emptySpace {
+	background-color: white !important;
+	border-bottom:none !important;
+	border-top: none !important;
+}
+
+.table th, .table td  {
+	border-left: 1px solid;
+	border-top: none;
+}
+
+tr.even td {
+  background: #fff none repeat scroll 0 0;
+}
+
+
+#dashbaordid_wrapper table.dataTable {
+	clear: both;
+	margin-bottom: 0px !important;
+	max-width: none !important;
+	border-collapse: none !important;
+	border:none!important;
+}
+
+
+
+
+
+
+.dashbaordarea table.dataTable thead .borderlessth::after {
+	opacity: 0;
+	content: ""!important;
+}
+
+
+#dashbaordid{
+	margin-top:10px!important;
+}
+
+
+.topheaderdashboard{}
+.topheaderdashboard th{
+	color:#444444;
+	font-size:24px;
+	background: #fff!important;
+}
+
+#dashboartoptitle,
+#dashboartoptitle th{
+	background: #fff!important;
+	border:none!important;
+}
+
+#dashbaordid_info{
+	width:50%;
+	float:left;
+	padding-top:15px;
+}
+#dashbaordid_paginate{
+	float:left;
+	width:50%;
+}
+
+.dashbaordarea table.dataTable thead .nameoforder::after {
+	content: "\f15d";
+	font-family: 'FontAwesome';
+	color: #ddd;
+	font-weight: 400;
+	opacity: 1;
+}
+.dashbaordarea table.dataTable thead .nameoforder.sorting_desc::after {
+	content: "\f15e";
+	font-family: 'FontAwesome';
+	color: #ddd;
+	opacity: 1;
+	font-weight: 400;
+}
+
+
+
 
 /**************************************************
 		FOOTER AREA

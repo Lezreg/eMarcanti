@@ -139,6 +139,9 @@
 									<c:if test="${USER_SESSION.MENU_ADMIN_CAROUSEL}" scope="session">
 										<li><h:link value="#{msg.libelle_menu_carousel}" outcome="carousels" /></li>
 									</c:if>
+									<c:if test="${USER_SESSION.MENU_ADMIN_CATALOGUE}" scope="session">
+										<li><h:link value="#{msg.libelle_cat}" outcome="produits" /></li>
+									</c:if>									
 								</ul>
 							</li>
 						</c:if>

@@ -84,4 +84,22 @@ public interface ProduitDAO extends GenericDAO<Produit> {
 	 * @return
 	 */
 	List<VCatalogueRestreintAvecStock> getRestrictedDecouvProduit();
+	
+	/**
+	 * 
+	 * @return un produit
+	 */
+	Produit getProduit(Long idProduit);
+	
+	/**
+	 * 
+	 * update un produit
+	 */
+	public void updateProduit(Produit produit);
+	
+	/**
+	 * 
+	 * ajoute un produit
+	 */
+	public void insertProduit(Produit produit);
 }

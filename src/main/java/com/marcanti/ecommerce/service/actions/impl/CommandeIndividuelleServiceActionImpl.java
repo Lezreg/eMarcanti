@@ -1,4 +1,4 @@
-package com.marcanti.ecommerce.service.actions;
+package com.marcanti.ecommerce.service.actions.impl;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
+import com.marcanti.ecommerce.service.actions.CommandeIndividuelleServiceAction;
 
 @Transactional
 @Service("commandeIndividuelleServiceAction")

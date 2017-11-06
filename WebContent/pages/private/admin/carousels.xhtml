@@ -46,12 +46,14 @@
 						<div class="row customrow">
 							<div class="col-xs-12">
 								<div class="mess-innertablearea">
-									<div class="newbutton ajouterbutton deptorgabutton carouselbutton">
-										<button><h:link value="#{msg.libelle_ajouter}" outcome="#{carouselsBean.addCarouselView()}" /></button>
+									<div class="newbutton mobilenewbuttonajour adlistajourbuttonpos">
+										<div class="button-2">
+											<div class="eff-2"></div>
+											<h:link styleClass="adminajourlistbutton"  value="#{msg.libelle_ajouter}" outcome="#{carouselsBean.addCarouselView()}" />
+										 </div>
 									</div>
-									<table id="carouselid"
-										class="table table-striped table-bordered dt-responsive"
-										cellspacing="0" width="100%">
+																		
+									<table id="carouselid" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
 										<thead>
 											<tr>
 												<th class="nameoforder"><h:outputLabel value="#{msg.libelle_nom_item}" /></th>

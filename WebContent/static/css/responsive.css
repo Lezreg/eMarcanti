@@ -1024,7 +1024,50 @@ margin-top:5px;
   top: 20%;
   width: 50%;
 }		
+
+.reportingonemobilmar{
+	margin-bottom: 40px;
+}
+
+.reportingmainarea{
+	margin-top:10px;
+}
 	
+	
+.reportingtext{
+	margin: 40px auto 0px;
+}	
+	
+	
+.adlistajourbuttonpos .button-2{
+	margin:0px auto;
+	text-align: center;
+
+}	
+.adlistajourbuttonpos .button-2 a{
+
+}	
+	
+	
+.firstthreecolumn{
+	overflow: auto!important;
+}	
+	
+	
+.dashbaordarea{
+	margin-top:20px!important;
+	padding-top:0px!important;
+}	
+	
+.dashboardtitle{
+	margin-bottom: 80px!important;
+}	
+	
+.quanlityavilablclass input {
+	width: 80%;
+	height: 50px;
+}	
+
 	
 }
 

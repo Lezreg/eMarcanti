@@ -1,4 +1,4 @@
-package com.marcanti.ecommerce.service.actions;
+package com.marcanti.ecommerce.service.actions.impl;
 
 import java.util.List;
 

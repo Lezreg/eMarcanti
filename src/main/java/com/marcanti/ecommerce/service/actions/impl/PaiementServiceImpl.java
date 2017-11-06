@@ -1,4 +1,4 @@
-package com.marcanti.ecommerce.service.actions;
+package com.marcanti.ecommerce.service.actions.impl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +17,7 @@ import com.marcanti.ecommerce.dao.PanierProduitDAO;
 import com.marcanti.ecommerce.dao.TransactionPaiementDAO;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.TransactionPaiement;
+import com.marcanti.ecommerce.service.actions.PaiementService;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 @Service("paiementService")

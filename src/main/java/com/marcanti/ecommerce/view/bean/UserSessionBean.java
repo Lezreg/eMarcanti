@@ -64,6 +64,7 @@ public class UserSessionBean implements Serializable {
     private String MENU_ADMIN_CATEG="false";
     private String MENU_ADMIN_SS_CATEG="false";
     private String MENU_ADMIN_CAROUSEL="false";
+    private String MENU_ADMIN_CATALOGUE="false";
     private String MENU_REPORTING="false";
     
     //private Long idOrgaSelected;
@@ -312,6 +313,14 @@ public class UserSessionBean implements Serializable {
 	public void setMENU_ADMIN_CAROUSEL(String mENU_ADMIN_CAROUSEL) {
 		MENU_ADMIN_CAROUSEL = mENU_ADMIN_CAROUSEL;
 	}
+	
+	public String getMENU_ADMIN_CATALOGUE() {
+		return MENU_ADMIN_CATALOGUE;
+	}
+
+	public void setMENU_ADMIN_CATALOGUE(String mENU_ADMIN_CATALOGUE) {
+		MENU_ADMIN_CATALOGUE = mENU_ADMIN_CATALOGUE;
+	}
 
 	public String getMENU_REPORTING() {
 		return MENU_REPORTING;
@@ -401,7 +410,8 @@ public class UserSessionBean implements Serializable {
 		    MENU_ADMIN_MARQUE="true";
 		    MENU_ADMIN_CATEG="true";
 		    MENU_ADMIN_SS_CATEG="true";
-		    MENU_ADMIN_CAROUSEL="true";		    
+		    MENU_ADMIN_CAROUSEL="true";
+		    MENU_ADMIN_CATALOGUE="true";
 		    MENU_REPORTING="true";			
 		}
 	}	

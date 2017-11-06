@@ -5,14 +5,10 @@
  */
 package com.marcanti.ecommerce.dao.impl;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -28,9 +24,7 @@ import org.springframework.stereotype.Repository;
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.VCatalogueAdminDAO;
 import com.marcanti.ecommerce.model.Categorie;
-import com.marcanti.ecommerce.model.SousCategorie;
 import com.marcanti.ecommerce.model.VCatalogueAdmin;
-import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 /**
  *
@@ -99,7 +93,7 @@ public class VCatalogueAdminDAOImpl extends AbstractGenericDAO<Categorie> implem
         return em;
     }
 
-	@Override
+	/*@Override
 	public List<VCatalogueAdmin> getCategorieList() {
 		
 		List<VCatalogueAdmin> listCatalogue = new ArrayList<VCatalogueAdmin>();
@@ -117,9 +111,12 @@ public class VCatalogueAdminDAOImpl extends AbstractGenericDAO<Categorie> implem
 			listCatalogue.add(catalogue);
 		}
 		return listCatalogue;
+	}*/
+
+	@Override
+	public List<VCatalogueAdmin> getCatalogueList() {
+		return em.createNamedQuery("VCatalogueAdmin.findAll", VCatalogueAdmin.class).getResultList();
 	}
-
-
 
     
 }

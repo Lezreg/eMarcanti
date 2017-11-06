@@ -6,14 +6,14 @@ $(document).ready(function() {
 	
 		
 	 // Setup - add a text input to each footer cell
-    $('#adminlistid tfoot th').each( function () {
+    $('#reportingoneid tfoot th').each( function () {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Filtrer '+title+'" />' );
     } );
 	
 	// DataTable
 
-	var table = $('#adminlistid').DataTable({
+	var table = $('#reportingoneid').DataTable({
 		dom: 'lBfrtip',
 		/*buttons: [
 			 { extend: 'excel', text: 'Export to Excel' }

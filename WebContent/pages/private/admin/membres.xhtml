@@ -66,13 +66,14 @@
 						<div class="row customrow">
 							<div class="col-xs-12">
 								<div class="mess-innertablearea">
-									<div class="newbutton mobilenewbuttonajour">
-										<button><h:link  value="#{msg.libelle_ajouter}" outcome="#{membreBean.addMembreView()}" /></button>
-									</div>
+									<div class="newbutton mobilenewbuttonajour adlistajourbuttonpos">
+										<div class="button-2">
+											<div class="eff-2"></div>
+											<h:link styleClass="adminajourlistbutton"  value="#{msg.libelle_ajouter}" outcome="#{membreBean.addMembreView()}" />
+										 </div>
+									</div>									
 									
-									<table id="adminlistid"
-										class="table table-striped table-bordered dt-responsive"
-										cellspacing="0" width="100%">
+									<table id="adminlistid" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
 										<thead>
 											<tr>
 												<th class="nameoforder"><h:outputLabel

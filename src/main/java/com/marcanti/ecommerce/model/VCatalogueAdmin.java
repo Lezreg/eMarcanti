@@ -9,22 +9,34 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.annotation.concurrent.Immutable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.marcanti.ecommerce.constants.Categories;
 
 /**
  *
  * @author admin
  */
+
+@Entity
+@Immutable
+@Table(name = "v_catalogue_admin")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "VCatalogueAdmin.findAll", query = "SELECT v FROM v_catalogue_admin v")
+    @NamedQuery(name = "VCatalogueAdmin.findAll", query = "SELECT v FROM VCatalogueAdmin v")
     , @NamedQuery(name = "VCatalogueAdmin.findByProduitPhotoURL", query = "SELECT v FROM VCatalogueAdmin v WHERE v.produitPhotoURL = :produitPhotoURL")
     , @NamedQuery(name = "VCatalogueAdmin.findByMarqueNom", query = "SELECT v FROM VCatalogueAdmin v WHERE v.marqueNom = :marqueNom")
     , @NamedQuery(name = "VCatalogueAdmin.findByProduitDescription", query = "SELECT v FROM VCatalogueAdmin v WHERE v.produitDescription = :produitDescription")
@@ -54,6 +66,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "VCatalogueAdmin.findByDateFinADecouvrir", query = "SELECT v FROM VCatalogueAdmin v WHERE v.dateFinADecouvrir = :dateFinADecouvrir")
     , @NamedQuery(name = "VCatalogueAdmin.findByDateDebutPromo", query = "SELECT v FROM VCatalogueAdmin v WHERE v.dateDebutPromo = :dateDebutPromo")
     , @NamedQuery(name = "VCatalogueAdmin.findByDateFinPromo", query = "SELECT v FROM VCatalogueAdmin v WHERE v.dateFinPromo = :dateFinPromo")})
+
+
 public class VCatalogueAdmin implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -88,6 +102,8 @@ public class VCatalogueAdmin implements Serializable {
     private String categorieCode;
     @Basic(optional = false)
     @NotNull
+    @Id
+    @Column(name = "idProduit", updatable = false, nullable = false)
     private long idProduit;
     @Basic(optional = false)
     @NotNull
@@ -132,6 +148,25 @@ public class VCatalogueAdmin implements Serializable {
     private Date dateDebutPromo;
     @Temporal(TemporalType.DATE)
     private Date dateFinPromo;
+    
+    private boolean isBestSellerHomme;
+    private boolean isBestSellerFemme;
+    private boolean isPetitPrix;
+    private boolean isNouveauteSurHomePage;
+    private boolean isPromoSurHomePage;
+    private boolean isADecouvrirSurHomePage;
+
+    @Transient
+    private String categorieNomCss;
+    
+    @Transient
+    private String categorieCodeCss;
+    
+    @Transient
+    private String isNouveauteSurHomePageCss;   
+    
+    @Transient
+    private String isPromoSurHomePageCss;    
 
     public VCatalogueAdmin() {
     }
@@ -367,5 +402,135 @@ public class VCatalogueAdmin implements Serializable {
     public void setDateFinPromo(Date dateFinPromo) {
         this.dateFinPromo = dateFinPromo;
     }
+
+	public String getCategorieNomCss() {
+		if(categorieCode.equals(Categories.PARFUM_HOMME.getCode())){
+			categorieNomCss="Perfume Homme";
+		}else if(categorieCode.equals(Categories.PARFUM_FEMME.getCode())){
+			categorieNomCss="Perfume Femme";
+		}else if(categorieCode.equals(Categories.PARFUM_ENFANT.getCode())){
+			categorieNomCss="Perfume Enfant";
+		}else if(categorieCode.equals(Categories.TESTER.getCode())){
+			categorieNomCss="Testeur";
+		}else if(categorieCode.equals(Categories.COFFRET.getCode())){
+			categorieNomCss="Coffret";
+		}else if(categorieCode.equals(Categories.CREME.getCode())){
+			categorieNomCss="Crêmes et Soins";
+		}else if(categorieCode.equals(Categories.MINIATURE.getCode())){
+			categorieNomCss="Miniatures";
+		}else if(categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())){
+			categorieNomCss="piles &#38; Accessories";
+		}else if(categorieCode.equals(Categories.LOTS.getCode())){
+			categorieNomCss="Lots à Saisir";
+		}
+				
+		return categorieNomCss;
+	}
+
+	public void setCategorieNomCss(String categorieNomCss) {
+		this.categorieNomCss = categorieNomCss;
+	}
+	
+	public String getCategorieCodeCss() {
+		if(categorieCode.equals(Categories.PARFUM_HOMME.getCode())){
+			categorieCodeCss="phomme2";
+		}else if(categorieCode.equals(Categories.PARFUM_FEMME.getCode())){
+			categorieCodeCss="pfemme";
+		}else if(categorieCode.equals(Categories.PARFUM_ENFANT.getCode())){
+			categorieCodeCss="penfant";
+		}else if(categorieCode.equals(Categories.TESTER.getCode())){
+			categorieCodeCss="testeur";
+		}else if(categorieCode.equals(Categories.COFFRET.getCode())){
+			categorieCodeCss="coffret";
+		}else if(categorieCode.equals(Categories.CREME.getCode())){
+			categorieCodeCss="etsoins";
+		}else if(categorieCode.equals(Categories.MINIATURE.getCode())){
+			categorieCodeCss="miniatures";
+		}else if(categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())){
+			categorieCodeCss="piles";
+		}else if(categorieCode.equals(Categories.LOTS.getCode())){
+			categorieCodeCss="saisir";
+		}
+				
+		return categorieCodeCss;
+	}
+
+	public void setCategorieCodeCss(String categorieCodeCss) {
+		this.categorieCodeCss = categorieCodeCss;
+	}
+
+	public void setFullAccess(boolean isFullAccess) {
+		this.isFullAccess = isFullAccess;
+	}
+
+	public boolean isBestSellerHomme() {
+		return isBestSellerHomme;
+	}
+
+	public void setBestSellerHomme(boolean isBestSellerHomme) {
+		this.isBestSellerHomme = isBestSellerHomme;
+	}
+
+	public boolean isBestSellerFemme() {
+		return isBestSellerFemme;
+	}
+
+	public void setBestSellerFemme(boolean isBestSellerFemme) {
+		this.isBestSellerFemme = isBestSellerFemme;
+	}
+
+	public boolean isPetitPrix() {
+		return isPetitPrix;
+	}
+
+	public void setPetitPrix(boolean isPetitPrix) {
+		this.isPetitPrix = isPetitPrix;
+	}
+
+	public boolean isNouveauteSurHomePage() {
+		return isNouveauteSurHomePage;
+	}
+
+	public void setNouveauteSurHomePage(boolean isNouveauteSurHomePage) {
+		this.isNouveauteSurHomePage = isNouveauteSurHomePage;
+	}
+
+	public boolean isPromoSurHomePage() {
+		return isPromoSurHomePage;
+	}
+
+	public void setPromoSurHomePage(boolean isPromoSurHomePage) {
+		this.isPromoSurHomePage = isPromoSurHomePage;
+	}
+
+	public boolean isADecouvrirSurHomePage() {
+		return isADecouvrirSurHomePage;
+	}
+
+	public void setADecouvrirSurHomePage(boolean isADecouvrirSurHomePage) {
+		this.isADecouvrirSurHomePage = isADecouvrirSurHomePage;
+	}
+
+	public String getIsNouveauteSurHomePageCss() {
+		if(isNouveauteSurHomePage) isNouveauteSurHomePageCss="catalougenew";
+		else isNouveauteSurHomePageCss="";
+		return isNouveauteSurHomePageCss;
+	}
+
+	public void setIsNouveauteSurHomePageCss(String isNouveauteSurHomePageCss) {
+		this.isNouveauteSurHomePageCss = isNouveauteSurHomePageCss;
+	}
+
+	public String getIsPromoSurHomePageCss() {
+		if(isPromoSurHomePage) isPromoSurHomePageCss="catalougepromo";
+		else isPromoSurHomePageCss="";
+		return isPromoSurHomePageCss;
+	}
+
+	public void setIsPromoSurHomePageCss(String isPromoSurHomePageCss) {
+		this.isPromoSurHomePageCss = isPromoSurHomePageCss;
+	}
     
+	
+	
 }

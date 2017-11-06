@@ -50,8 +50,8 @@ public class OrganisationServiceActionImpl implements OrganisationServiceAction 
 
 	@Override
 	public Organisation getOrganisationById(Long orgId) {
-		// TODO Auto-generated method stub
-		return null;
+		return organisationDAO.find(orgId);
 	}
+	
 	
 }

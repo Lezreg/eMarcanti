@@ -1,4 +1,4 @@
-package com.marcanti.ecommerce.service.actions;
+package com.marcanti.ecommerce.service.actions.impl;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -27,6 +27,7 @@ import com.marcanti.ecommerce.model.Panier;
 import com.marcanti.ecommerce.model.PanierProduit;
 import com.marcanti.ecommerce.model.PanierProduitPK;
 import com.marcanti.ecommerce.model.Produit;
+import com.marcanti.ecommerce.service.actions.PanierActionService;
 import com.marcanti.ecommerce.utils.BigDecimalUtils;
 import com.marcanti.ecommerce.utils.ParametersChecker;
 import com.marcanti.ecommerce.utils.ShortUtils;
