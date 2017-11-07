@@ -57,11 +57,11 @@
 		            </h:outputText>
 		        </p:column>
 				<p:column style="width:110px">
-					<p:commandButton icon="ui-icon-cart"
+					<h:commandButton icon="ui-icon-cart"
 						title="View" action="#{NovFilterView.addToBasket()}">
 						<f:setPropertyActionListener value="#{product}"
 							target="#{NovFilterView.selectedProduit}" />
-					</p:commandButton>
+					</h:commandButton>
 				</p:column>
 		
 		    </p:dataTable>

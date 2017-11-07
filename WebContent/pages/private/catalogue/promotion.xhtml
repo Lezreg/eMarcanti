@@ -59,11 +59,11 @@
 		            </h:outputText>
 		        </p:column>
 				<p:column style="width:110px">
-					<p:commandButton icon="ui-icon-cart"
+					<h:commandButton icon="ui-icon-cart"
 						title="View" action="#{PromFilterView.addToBasket()}">
 						<f:setPropertyActionListener value="#{produit}"
 							target="#{PromFilterView.selectedProduit}" />
-					</p:commandButton>
+					</h:commandButton>
 				</p:column>
 		
 		    </p:dataTable>

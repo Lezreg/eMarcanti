@@ -59,11 +59,11 @@
 		            </h:outputText>
 		        </p:column>
 				<p:column style="width:110px">
-					<p:commandButton icon="ui-icon-cart"
+					<h:commandButton icon="ui-icon-cart"
 						title="View" action="#{DecouvFilterView.addToBasket()}">
 						<f:setPropertyActionListener value="#{produit}"
 							target="#{DecouvFilterView.selectedProduit}" />
-					</p:commandButton>
+					</h:commandButton>
 				</p:column>
 		
 		    </p:dataTable>
