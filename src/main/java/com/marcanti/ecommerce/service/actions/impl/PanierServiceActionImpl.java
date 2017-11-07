@@ -100,8 +100,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 				// update panier
 				panierEnCours = panierProduit.getPanier();
 				updatePanier(produit, panierEnCours);
-				// update commande individuelle
-				updateCommandeIndividuelle(userSessionBean, commandeIndividuel, panierEnCours);
+
 			} else {
 				// si le produit n'est pas encore ajouté , alors on cree un
 				// objet panierproduit
@@ -111,6 +110,8 @@ public class PanierServiceActionImpl implements PanierActionService {
 				// update panier (quantite et Montant)
 				updatePanier(produit, panierEnCours);
 			}
+			// update commande individuelle
+			updateCommandeIndividuelle(userSessionBean, commandeIndividuel, panierEnCours);
 		} else {
 			// create panier
 			panierEnCours = create(getNewPanier(produit, membre));
