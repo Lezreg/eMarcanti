@@ -5,7 +5,6 @@
  */
 package com.marcanti.ecommerce.dao.impl;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,44 +34,44 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommandeIndividuelleDAOImpl.class);
 
 	@PersistenceContext
-    private EntityManager em;
+	private EntityManager em;
 
-    public CommandeIndividuelleDAOImpl() {
-        super(CommandeIndividuelle.class);
-    }
+	public CommandeIndividuelleDAOImpl() {
+		super(CommandeIndividuelle.class);
+	}
 
-    public void create(CommandeIndividuelle entity) {
-        super.create(entity);
-    }
+	public void create(CommandeIndividuelle entity) {
+		super.create(entity);
+	}
 
 	public void edit(Long id, CommandeIndividuelle entity) {
-        super.edit(entity);
-    }
+		super.edit(entity);
+	}
 
 	public void remove(Long id) {
-        super.remove(super.find(id));
-    }
+		super.remove(super.find(id));
+	}
 
 	public CommandeIndividuelle find(Long id) {
-        return super.find(id);
-    }
+		return super.find(id);
+	}
 
-    public List<CommandeIndividuelle> findAll() {
-        return super.findAll();
-    }
+	public List<CommandeIndividuelle> findAll() {
+		return super.findAll();
+	}
 
 	public List<CommandeIndividuelle> findRange(Integer from, Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
+		return super.findRange(new int[] { from, to });
+	}
 
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
+	public String countREST() {
+		return String.valueOf(super.count());
+	}
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
 	@Override
 	public boolean verifyExistingCommandeIndividuelle(Membre membre, CommandeGroupee commandeGroupee) {
@@ -104,17 +103,15 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 		}
 		return (CommandeIndividuelle) query.getResultList().get(0);
 	}
-    
+
 	@Override
-	public List<CommandeIndividuelle> getCommandeIndivListByMembreAndCmdGroupe(Long idMembre,
-			Long idCdeGroupee) {
+	public List<CommandeIndividuelle> getCommandeIndivListByMembreAndCmdGroupe(Long idMembre, Long idCdeGroupee) {
 		Query query = em
 				.createQuery(
 						"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.idStatus.statusCode != :statusCode) order by date(dateCreation) desc")
-				.setParameter("idMembre", idMembre)
-				.setParameter("idCdeGroupee", idCdeGroupee)
+				.setParameter("idMembre", idMembre).setParameter("idCdeGroupee", idCdeGroupee)
 				.setParameter("statusCode", CommandeIndividuelleStatusEnum.CDE_INDIVID_LIVREE.getCode());
-		
+
 		LOGGER.info(query.toString());
 
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {

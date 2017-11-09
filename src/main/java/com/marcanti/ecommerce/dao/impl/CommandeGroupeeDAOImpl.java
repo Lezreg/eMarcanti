@@ -5,6 +5,7 @@
  */
 package com.marcanti.ecommerce.dao.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -73,6 +74,11 @@ public class CommandeGroupeeDAOImpl extends AbstractGenericDAO<CommandeGroupee> 
 	@Override
 	public List<VCdeGroupeeDetail> getCmdGroupeesFilleuls(List<Long> idsMembre) {
 		LOGGER.info("----------getCmdGroupeesFilleuls --------");
+
+		if (idsMembre == null || idsMembre.isEmpty()) {
+			LOGGER.info("idsMembre is null or is empty");
+			return Collections.emptyList();
+		}
 		List<VCdeGroupeeDetail> newProducts = em
 				.createQuery("SELECT v FROM VCdeGroupeeDetail v WHERE v.idMembre IN (:ids)", VCdeGroupeeDetail.class)
 				.setParameter("ids", idsMembre).getResultList();

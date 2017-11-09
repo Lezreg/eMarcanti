@@ -10,6 +10,8 @@ public interface GenericDAO<T> {
 
 	void remove(T entity);
 
+	void removeById(Object id);
+
 	T find(Object id);
 
 	List<T> findAll();

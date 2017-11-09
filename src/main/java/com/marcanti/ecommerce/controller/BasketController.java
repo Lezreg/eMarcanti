@@ -146,7 +146,7 @@ public class BasketController implements Serializable {
 	}
 
 	/**
-	 * Confimer une commande
+	 * Confirmer une commande
 	 */
 	public void confirmerCommandeIndiv() {
 		try {
@@ -163,7 +163,7 @@ public class BasketController implements Serializable {
 
 	/**
 	 * 
-	 * @return la liste des panierProduit pour une commande
+	 * @return la liste des panierProduits pour une commande
 	 */
 	public List<PanierProduit> getPanierProduitList() {
 		if (selectedCmd != null) {

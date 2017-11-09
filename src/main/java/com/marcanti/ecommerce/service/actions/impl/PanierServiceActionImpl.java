@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.marcanti.ecommerce.constants.CommandeGroupeeStatus;
 import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
-import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleStatusDAO;
@@ -43,7 +42,7 @@ import com.marcanti.ecommerce.view.bean.UserSessionBean;
 @Transactional
 public class PanierServiceActionImpl implements PanierActionService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(BasketController.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(PanierServiceActionImpl.class);
 
 	@Autowired
 	private PanierDAO panierDao;
@@ -80,6 +79,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 					"Commande groupee avec statut à livrer n'existe pas pour l organisation: "
 							+ userSessionBean.getIdOrga());
 		}
+		// FIXME search directly last commande
 		CommandeGroupee currentCmdGroupee = commandeGroupeeDAO.find(cmdgroupeeId);
 		String statusCode = currentCmdGroupee.getIdStatus().getStatusCode();
 		if (!CommandeGroupeeStatus.CDE_GROUPEE_CONFIRMEE.getCode().equals(statusCode)
@@ -89,19 +89,24 @@ public class PanierServiceActionImpl implements PanierActionService {
 		}
 		Membre membre = membreDAO.find(userSessionBean.getIdMembre());
 		// verifier si panier existe deja (commande indiv)
+		// FIXME verifer le statut de commande indiv
 		CommandeIndividuelle commandeIndividuel = commandeIndividuelleDAO
 				.getCommandeIndividuellByMembreAndCmdGroupe(membre, currentCmdGroupee);
 		if (commandeIndividuel != null) {
+			LOGGER.info("commandeIndividuel exist id: " + cmdgroupeeId);
 			PanierProduit panierProduit = panierProduitDAO.getPanierProduitByPanierAndProduit(
 					commandeIndividuel.getIdPanier().getIdPanier(), produit.getIdProduit());
 			if (panierProduit != null) {
+				LOGGER.info("panierProduit exist qte before : " + panierProduit.getQteSouhaitee());
 				panierProduit.setQteSouhaitee(ShortUtils.incrementShort(panierProduit.getQteSouhaitee()));
 				panierProduitDAO.edit(panierProduit);
 				// update panier
 				panierEnCours = panierProduit.getPanier();
 				updatePanier(produit, panierEnCours);
+				LOGGER.info("panierProduit exist qte after : " + panierProduit.getQteSouhaitee());
 
 			} else {
+				LOGGER.info("panierProduit not exist");
 				// si le produit n'est pas encore ajouté , alors on cree un
 				// objet panierproduit
 				panierEnCours = commandeIndividuel.getIdPanier();
@@ -113,6 +118,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 			// update commande individuelle
 			updateCommandeIndividuelle(userSessionBean, commandeIndividuel, panierEnCours);
 		} else {
+			LOGGER.info("commandeIndividuel not exist id");
 			// create panier
 			panierEnCours = create(getNewPanier(produit, membre));
 			// create panierproduit
@@ -132,8 +138,8 @@ public class PanierServiceActionImpl implements PanierActionService {
 	@Override
 	public List<PanierProduit> recalculer(List<PanierProduit> panierProduitList, UserSessionBean userSessionBean)
 			throws ProductNotAvailableException {
-		BigDecimal totalPanier = BigDecimal.ZERO;
 		Panier panier = null;
+		BigDecimal totalPanier = BigDecimal.ZERO;
 		Short panierNbreProduit = ShortUtils.DEFAULT;
 		for (PanierProduit panierProduit : panierProduitList) {
 			if (panierProduit != null) {
@@ -143,7 +149,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 				// id qte zero then delete panierProduit
 				short qteSouhaitee = panierProduit.getQteSouhaitee();
 				if (qteSouhaitee == 0) {
-					panierProduitDAO.remove(panierProduit);
+					panierProduitDAO.removeById(panierProduit.getPanierProduitPK());
 					continue;
 				}
 				checkPanierProduit(panierProduit, qteSouhaitee, userSessionBean);
