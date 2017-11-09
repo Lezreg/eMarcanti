@@ -22,6 +22,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -34,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author admin
  */
 @Entity
+@Table(name="produit")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Produit.findAll", query = "SELECT p FROM Produit p")

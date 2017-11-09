@@ -13,8 +13,11 @@ import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.marcanti.ecommerce.model.Categorie;
+import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.model.VCatalogueAdmin;
+import com.marcanti.ecommerce.service.actions.MarqueServiceAction;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 import com.marcanti.ecommerce.service.actions.VCatalogueAdminServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
@@ -27,6 +30,10 @@ public class CatalogueAdminBean implements Serializable {
 	private final static Logger logger = LoggerFactory.getLogger(CatalogueAdminBean.class);
 
 	private List<VCatalogueAdmin> catalogueList;
+	
+	private List<Marque> marqueList;
+	
+	private List<Categorie> categorieList;
 
 	private VCatalogueAdmin catalogue;
 	
@@ -40,6 +47,9 @@ public class CatalogueAdminBean implements Serializable {
 	@ManagedProperty("#{catalogueService}")
 	private VCatalogueAdminServiceAction catalogueService;
 	
+	@ManagedProperty("#{marqueService}")
+	private MarqueServiceAction marqueService;
+	
 	@ManagedProperty("#{produitService}")
 	private ProduitServiceAction produitService;	
 	
@@ -49,7 +59,7 @@ public class CatalogueAdminBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		this.catalogueList = catalogueService.getCatalogueList();
-		System.out.println("size : " + catalogueList.size());
+		this.marqueList = marqueService.getMarqueList();
 	}
 
 	public List<VCatalogueAdmin> getCatalogueList() {

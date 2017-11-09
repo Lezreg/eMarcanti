@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author admin
  */
 @Entity
+@Table(name="organisation")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "Organisation.findAll", query = "SELECT o FROM Organisation o ORDER BY o.orgaNom asc"),
