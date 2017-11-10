@@ -16,9 +16,12 @@ import org.slf4j.LoggerFactory;
 import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
+import com.marcanti.ecommerce.model.SousCategorie;
 import com.marcanti.ecommerce.model.VCatalogueAdmin;
+import com.marcanti.ecommerce.service.actions.CategorieServiceAction;
 import com.marcanti.ecommerce.service.actions.MarqueServiceAction;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
+import com.marcanti.ecommerce.service.actions.SousCategorieServiceAction;
 import com.marcanti.ecommerce.service.actions.VCatalogueAdminServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
@@ -34,6 +37,8 @@ public class CatalogueAdminBean implements Serializable {
 	private List<Marque> marqueList;
 	
 	private List<Categorie> categorieList;
+	
+	private List<SousCategorie> sousCategorieList;	
 
 	private VCatalogueAdmin catalogue;
 	
@@ -43,12 +48,17 @@ public class CatalogueAdminBean implements Serializable {
 	
 	private Long idProduit;	
 	
-	
 	@ManagedProperty("#{catalogueService}")
 	private VCatalogueAdminServiceAction catalogueService;
 	
 	@ManagedProperty("#{marqueService}")
 	private MarqueServiceAction marqueService;
+	
+	@ManagedProperty("#{categorieService}")
+	private CategorieServiceAction categorieService;	
+	
+	@ManagedProperty("#{sousCategorieService}")
+	private SousCategorieServiceAction sousCategorieService;	
 	
 	@ManagedProperty("#{produitService}")
 	private ProduitServiceAction produitService;	
@@ -60,6 +70,8 @@ public class CatalogueAdminBean implements Serializable {
 	public void init() {
 		this.catalogueList = catalogueService.getCatalogueList();
 		this.marqueList = marqueService.getMarqueList();
+		this.categorieList = categorieService.getCategorieList();
+		this.sousCategorieList = sousCategorieService.getSousCategorieList();
 	}
 
 	public List<VCatalogueAdmin> getCatalogueList() {
@@ -116,6 +128,54 @@ public class CatalogueAdminBean implements Serializable {
 
 	public void setProduitService(ProduitServiceAction produitService) {
 		this.produitService = produitService;
+	}
+	
+	public List<Marque> getMarqueList() {
+		return marqueList;
+	}
+
+	public void setMarqueList(List<Marque> marqueList) {
+		this.marqueList = marqueList;
+	}
+
+	public List<Categorie> getCategorieList() {
+		return categorieList;
+	}
+
+	public void setCategorieList(List<Categorie> categorieList) {
+		this.categorieList = categorieList;
+	}
+
+	public List<SousCategorie> getSousCategorieList() {
+		return sousCategorieList;
+	}
+
+	public void setSousCategorieList(List<SousCategorie> sousCategorieList) {
+		this.sousCategorieList = sousCategorieList;
+	}
+
+	public MarqueServiceAction getMarqueService() {
+		return marqueService;
+	}
+
+	public void setMarqueService(MarqueServiceAction marqueService) {
+		this.marqueService = marqueService;
+	}
+
+	public CategorieServiceAction getCategorieService() {
+		return categorieService;
+	}
+
+	public void setCategorieService(CategorieServiceAction categorieService) {
+		this.categorieService = categorieService;
+	}
+
+	public SousCategorieServiceAction getSousCategorieService() {
+		return sousCategorieService;
+	}
+
+	public void setSousCategorieService(SousCategorieServiceAction sousCategorieService) {
+		this.sousCategorieService = sousCategorieService;
 	}
 
 	public String editProduit() {

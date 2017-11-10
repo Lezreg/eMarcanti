@@ -39,18 +39,16 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													marque<span>*</span>
+													#{msg.libelle_marque}<span>*</span>
 												</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="select">
-													<select>
-														<option>Hugo Boss</option>
-														<option>Salvatore Ferragamo</option>
-														<option>Hugo Boss</option>
-													</select>
+													<h:selectOneMenu id="idMarque" value="#{catalogueAdminBean.produit.idMarque}">
+														<f:selectItems value="#{catalogueAdminBean.marqueList}" var="c" itemLabel="#{c.marqueNom}" itemValue="#{c.idMarque}" />
+													</h:selectOneMenu>
 													<div class="select__arrow"></div>
 												</div>
 
@@ -64,13 +62,15 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Description<span>*</span>
+													#{msg.libelle_desc}<span>*</span>
 												</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<textarea class="form-control" rows="1"></textarea>
+												<h:inputText value="#{catalogueAdminBean.produit.produitDescription}"
+													maxlength="400" required="true"
+													requiredMessage="#{msg.description_obligatoire}" />
 											</div>
 										</div>
 									</div>
@@ -81,21 +81,18 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Catégorie<span>*</span>
+													#{msg.libelle_categorie}<span>*</span>
 												</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="select">
-													<select>
-														<option>Perfum Home</option>
-														<option>Perfum Enfant</option>
-														<option>Perfum Enfant two</option>
-													</select>
+													<h:selectOneMenu id="idCategorie" value="#{catalogueAdminBean.produit.idCategorie}">
+														<f:selectItems value="#{catalogueAdminBean.categorieList}" var="c" itemLabel="#{c.categorieNom}" itemValue="#{c.idCategorie}" />
+													</h:selectOneMenu>
 													<div class="select__arrow"></div>
 												</div>
-
 											</div>
 										</div>
 									</div>
@@ -106,21 +103,18 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Sous-catégorie<span>*</span>
+													#{msg.libelle_ss_categorie}<span>*</span>
 												</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="select">
-													<select>
-														<option>Homme</option>
-														<option>Homme1</option>
-														<option>Homme two</option>
-													</select>
+													<h:selectOneMenu id="idSousCategorie" value="#{catalogueAdminBean.produit.idSousCategorie}">
+														<f:selectItems value="#{catalogueAdminBean.sousCategorieList}" var="c" itemLabel="#{c.sousCategorieNom}" itemValue="#{c.idSousCategorie}" />
+													</h:selectOneMenu>
 													<div class="select__arrow"></div>
 												</div>
-
 											</div>
 										</div>
 									</div>
