@@ -69,8 +69,8 @@ public class AuthentificationDAOImpl extends AbstractGenericDAO<Membre> implemen
 	}
 
 	@Override
-	public void updateGeneratedPassword(String email, String password, int isDefaultPassword) {
-		Query query = em.createNativeQuery("update membre set password=?, isDefaultPassword=? where membreEmail=? ").setParameter(1, password).setParameter(2, isDefaultPassword).setParameter(3, email);
+	public void updateGeneratedPassword(String email, String password, int isDefaultPassword, Date toDay) {
+		Query query = em.createNativeQuery("update membre set password=?, isDefaultPassword=?, dateDerniereConnexion=? where membreEmail=? ").setParameter(1, password).setParameter(2, isDefaultPassword).setParameter(3, toDay).setParameter(4, email);
 		query.executeUpdate();
 		
 	}

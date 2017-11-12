@@ -222,6 +222,8 @@ public class AuthentificationBean implements Serializable {
 		String msg = null;
 		boolean resu = false;
 		boolean isOK = false;
+		Calendar calendar = Calendar.getInstance();
+		Date dateToday =  calendar.getTime();
 		
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String email = (String)request.getAttribute("email");
@@ -239,7 +241,7 @@ public class AuthentificationBean implements Serializable {
 			//mise à jour du champs 'codeVerificationPassword' et du password dans la table membe
 			try {
 				String passwordSHA512 = DigestUtils.sha512Hex(password);
-				service	.updateGeneratedPassword(email,passwordSHA512,1);
+				service.updateGeneratedPassword(email,passwordSHA512,1,dateToday);
 			} catch (Exception e) {
 				logger.error("ERROR update Generated password : ",e);
 			} 
@@ -275,6 +277,8 @@ public class AuthentificationBean implements Serializable {
 		FacesMessage facesMessage = new FacesMessage();
 		String msg = null;
 		boolean resu = false;
+		Calendar calendar = Calendar.getInstance();
+		Date dateToday =  calendar.getTime();
 		
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String email = (String)request.getAttribute("email");
@@ -301,7 +305,7 @@ public class AuthentificationBean implements Serializable {
 		
 		try {
 			String passwordSHA512 = DigestUtils.sha512Hex(getPassword());
-			service.updateGeneratedPassword(email, passwordSHA512, 0);
+			service.updateGeneratedPassword(email, passwordSHA512, 0, dateToday);
 		} catch (Exception e) {
 			logger.error("ERROR update Generated password : ",e);
 		}

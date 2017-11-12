@@ -125,14 +125,15 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Notre Prix(€)<span>*</span>
+													#{msg.libelle_notre_prix}(€)<span>*</span>
 												</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription notthreeretextarea">
-												<textarea class="form-control" rows="1"
-													style="font-weight: 600;">30,6€</textarea>
+												<h:inputText value="#{catalogueAdminBean.produit.notrePrix}"
+													maxlength="10" required="true"
+													requiredMessage="#{msg.notre_prix_obligatoire}" />
 											</div>
 										</div>
 									</div>
@@ -143,7 +144,7 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Prix Public Constaté(€)<span>*</span>
+													#{msg.libelle_prix_public_constate}(€)<span>*</span>
 												</p>
 											</div>
 										</div>
@@ -160,7 +161,7 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Quantité en stock(€)<span>*</span>
+													#{msg.libelle_quantite_stock}(€)<span>*</span>
 												</p>
 											</div>
 										</div>
@@ -177,13 +178,13 @@
 										<div class="paddingless col-sm-4">
 
 											<div class="marquestext">
-												<p>Photo catalogue</p>
+												<p>#{msg.libelle_photo_catalogue}</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-4">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<div class="title">Upload</div>
+													<div class="title">#{msg.libelle_upload}</div>
 													<input type="file" name="upload" class="upload" title="Choose a file to upload"/>
 												</div>
 												<span class="upload-path"></span>
@@ -197,13 +198,13 @@
 										<div class="paddingless col-sm-4">
 
 											<div class="marquestext">
-												<p>Photo Moyenne</p>
+												<p>#{msg.libelle_photo_moyenne}</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-4">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<div class="title">Upload</div>
+													<div class="title">#{msg.libelle_upload}</div>
 													<input type="file" name="uploadtwo" class="uploadtwo" title="Choose a file to upload"/>
 												</div>
 												<span class="upload-pathtwo"></span>
@@ -216,7 +217,7 @@
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<p>Description</p>
+												<p>#{msg.libelle_desc}</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -231,7 +232,7 @@
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<p>Code EAN</p>
+												<p>#{msg.libelle_code_EAN}</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -246,7 +247,7 @@
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<p>Famille Olfactive</p>
+												<p>#{msg.libelle_famille_olfactive}</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -262,8 +263,8 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Note de tête <br/>
-													<small>( séparateur est le ; )</small>
+													#{msg.libelle_note_tete} <br/>
+													<small>( #{msg.libelle_separateur_le} ; )</small>
 												</p>
 											</div>
 										</div>
@@ -280,8 +281,8 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Note de coeur <br/>
-													<small>( séparateur est le ; )</small>
+													#{msg.libelle_note_coeur} <br/>
+													<small>( #{msg.libelle_separateur_le} ; )</small>
 												</p>
 											</div>
 										</div>
@@ -298,8 +299,8 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Note de fond <br/>
-													<small>( séparateur est le ; )</small>
+													#{msg.libelle_note_fond} <br/>
+													<small>( #{msg.libelle_separateur_le} ; )</small>
 												</p>
 											</div>
 										</div>
@@ -316,7 +317,7 @@
 
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<strong> Best Seller Homme sur Home Page</strong>
+												<strong>#{msg.libelle_best_seller_h}</strong>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -339,7 +340,7 @@
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<strong> Best Seller Femme sur Home Page</strong>
+												<strong>#{msg.libelle_best_seller_f}</strong>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -350,7 +351,6 @@
 														autocomplete="off">
 														<div class="handle"></div>
 													</button>
-
 												</div>
 											</div>
 										</div>
@@ -363,7 +363,7 @@
 
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<strong>Petit Prix sur Home Page</strong>
+												<strong>#{msg.libelle_petit_prix}</strong>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -385,7 +385,7 @@
 										<div class="paddingless col-sm-12">
 											<div class="marquestext">
 												<p>
-													<strong>Produit en Promo</strong>
+													<strong>#{msg.libelle_produit_promo}</strong>
 												</p>
 											</div>
 										</div>
@@ -396,7 +396,7 @@
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<p>Apparait sur Home page</p>
+												<p>#{msg.libelle_apparait_hp}</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -418,14 +418,14 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													Date début<input id="datepicker-example30" type="text"/>
+													#{msg.libelle_date_debut}<input id="datepicker-example30" type="text"/>
 												</div>
 											</div>
 										</div>
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquedescription">
 												<div class="form-group">
-													Date de fin<input id="datepicker-example31" type="text"/>
+													#{msg.libelle_date_fin}<input id="datepicker-example31" type="text"/>
 												</div>
 											</div>
 										</div>
@@ -437,7 +437,7 @@
 										<div class="paddingless col-sm-12">
 											<div class="marquestext">
 												<p>
-													<strong>Produit Nouveau</strong>
+													<strong>#{msg.libelle_produit_nouveau}</strong>
 												</p>
 											</div>
 										</div>
@@ -448,7 +448,7 @@
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<p>Apparait sur Home page</p>
+												<p>#{msg.libelle_apparait_hp}</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -472,14 +472,14 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													Date début<input id="datepicker-example32" type="text"/>
+													#{msg.libelle_date_debut}<input id="datepicker-example32" type="text"/>
 												</div>
 											</div>
 										</div>
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquedescription">
 												<div class="form-group">
-													Date de fin<input id="datepicker-example33" type="text"/>
+													#{msg.libelle_date_fin}<input id="datepicker-example33" type="text"/>
 												</div>
 											</div>
 										</div>
@@ -491,7 +491,7 @@
 										<div class="paddingless col-sm-12">
 											<div class="marquestext">
 												<p style="text-transform: inherit;">
-													<strong>Produits à Decouvrir</strong>
+													<strong>#{msg.libelle_produit_decouvrir}</strong>
 												</p>
 											</div>
 										</div>
@@ -502,7 +502,7 @@
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<p>Apparait sur Home page</p>
+												<p>#{msg.libelle_apparait_hp}</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -527,14 +527,14 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													Date début<input id="datepicker-example34" type="text"/>
+													#{msg.libelle_date_debut}<input id="datepicker-example34" type="text"/>
 												</div>
 											</div>
 										</div>
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquedescription">
 												<div class="form-group">
-													Date de fin<input id="datepicker-example35" type="text"/>
+													#{msg.libelle_date_fin}<input id="datepicker-example35" type="text"/>
 												</div>
 											</div>
 										</div>
@@ -545,7 +545,7 @@
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<p>Titre</p>
+												<p>#{msg.libelle_titre}</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -560,7 +560,7 @@
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
-												<p>Description</p>
+												<p>#{msg.libelle_desc}</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -576,8 +576,8 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Mot Clé<br />
-													<small>(associé à la recherche)</small>
+													#{msg.libelle_mot_cle}<br />
+													<small>(#{msg.libelle_associe_recherche})</small>
 												</p>
 											</div>
 										</div>
@@ -594,15 +594,15 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													Photo<br />
-													<small>(A découvrir)</small>
+													#{msg.libelle_photo}<br />
+													<small>(#{msg.libelle_a_decouvrir})</small>
 												</p>
 											</div>
 										</div>
 										<div class="paddingless col-sm-4">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<div class="title">Upload</div>
+													<div class="title">#{msg.libelle_upload}</div>
 													<input type="file" name="uploadthree" class="uploadthree" title="Choose a file to upload"/>
 												</div>
 												<span class="upload-paththree"></span>

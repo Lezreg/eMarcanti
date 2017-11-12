@@ -44,8 +44,8 @@ public class AuthentificationServiceActionImpl implements AuthentificationServic
 	}
 
 	@Override
-	public void updateGeneratedPassword(String email, String password, int isDefaultPassword) {
-		authentificationDAO.updateGeneratedPassword(email,password,isDefaultPassword);
+	public void updateGeneratedPassword(String email, String password, int isDefaultPassword, Date toDay) {
+		authentificationDAO.updateGeneratedPassword(email,password,isDefaultPassword,toDay);
 		
 	}
 

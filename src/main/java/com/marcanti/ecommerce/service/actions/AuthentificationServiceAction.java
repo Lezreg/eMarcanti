@@ -14,7 +14,7 @@ public interface AuthentificationServiceAction {
 	
 	public void updateCode(String email, int code);
 	
-	public void updateGeneratedPassword(String email, String password, int isDefaultPassword);
+	public void updateGeneratedPassword(String email, String password, int isDefaultPassword, Date toDay);
 	
 	public boolean codeExist(String email, String code);
 	
