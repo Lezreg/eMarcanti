@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.marcanti.ecommerce.model.Carousel;
 import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
@@ -72,6 +73,10 @@ public class CatalogueAdminBean implements Serializable {
 		this.marqueList = marqueService.getMarqueList();
 		this.categorieList = categorieService.getCategorieList();
 		this.sousCategorieList = sousCategorieService.getSousCategorieList();
+		this.produit = new Produit();
+		this.produit.setIdMarque(new Marque((short)0));
+		this.produit.setIdCategorie(new Categorie((short)0));
+		this.produit.setIdSousCategorie(new SousCategorie((short)0));
 	}
 
 	public List<VCatalogueAdmin> getCatalogueList() {
@@ -176,6 +181,17 @@ public class CatalogueAdminBean implements Serializable {
 
 	public void setSousCategorieService(SousCategorieServiceAction sousCategorieService) {
 		this.sousCategorieService = sousCategorieService;
+	}
+	
+	public String getQteEnStock() {
+		if(String.valueOf(this.produit.getQteEnStock()).equals("0")){
+			return "";
+		}else
+			return String.valueOf(this.produit.getQteEnStock());
+	}
+
+	public void setQteEnStock(String qteEnStock) {
+		this.produit.setQteEnStock(Short.valueOf(qteEnStock));
 	}
 
 	public String editProduit() {

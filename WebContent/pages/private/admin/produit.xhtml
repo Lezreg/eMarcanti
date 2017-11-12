@@ -34,6 +34,9 @@
 									<div class="modifymaintitle">
 										<h3>#{catalogueAdminBean.titre}</h3>
 									</div>
+									<div>
+										<h:messages errorClass="redclass" infoClass="greenclass" />
+									</div>
 
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-4">
@@ -46,7 +49,7 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="select">
-													<h:selectOneMenu id="idMarque" value="#{catalogueAdminBean.produit.idMarque}">
+													<h:selectOneMenu value="#{catalogueAdminBean.produit.idMarque.idMarque}" required="true">
 														<f:selectItems value="#{catalogueAdminBean.marqueList}" var="c" itemLabel="#{c.marqueNom}" itemValue="#{c.idMarque}" />
 													</h:selectOneMenu>
 													<div class="select__arrow"></div>
@@ -88,7 +91,7 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="select">
-													<h:selectOneMenu id="idCategorie" value="#{catalogueAdminBean.produit.idCategorie}">
+													<h:selectOneMenu id="idCategorie" value="#{catalogueAdminBean.produit.idCategorie.idCategorie}">
 														<f:selectItems value="#{catalogueAdminBean.categorieList}" var="c" itemLabel="#{c.categorieNom}" itemValue="#{c.idCategorie}" />
 													</h:selectOneMenu>
 													<div class="select__arrow"></div>
@@ -110,7 +113,7 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="select">
-													<h:selectOneMenu id="idSousCategorie" value="#{catalogueAdminBean.produit.idSousCategorie}">
+													<h:selectOneMenu id="idSousCategorie" value="#{catalogueAdminBean.produit.idSousCategorie.idSousCategorie}">
 														<f:selectItems value="#{catalogueAdminBean.sousCategorieList}" var="c" itemLabel="#{c.sousCategorieNom}" itemValue="#{c.idSousCategorie}" />
 													</h:selectOneMenu>
 													<div class="select__arrow"></div>
@@ -150,7 +153,9 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription notthreeretextarea">
-												<textarea class="form-control" rows="1">40,6€</textarea>
+												<h:inputText value="#{catalogueAdminBean.produit.prixPublic}"
+													maxlength="10" required="true"
+													requiredMessage="#{msg.prix_public_constate_obligatoire}" />
 											</div>
 										</div>
 									</div>
@@ -167,7 +172,9 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription notthreeretextarea">
-												<textarea class="form-control" rows="1">5</textarea>
+												<h:inputText value="#{catalogueAdminBean.qteEnStock}"
+													maxlength="6" required="true"
+													requiredMessage="#{msg.qte_stock_obligatoire}" />
 											</div>
 										</div>
 									</div>
