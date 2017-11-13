@@ -186,7 +186,6 @@ public class BasketController implements Serializable {
 		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(),
 				derniereCdeGoupee, isCurrrentCmds);
 		if (selectedCmd == null || selectedCmd.isEmpty()) {
-
 			if (commandes != null && !commandes.isEmpty()) {
 				selectedCmd = commandes.get(0).getIdCdeIndiv().toString();
 			}

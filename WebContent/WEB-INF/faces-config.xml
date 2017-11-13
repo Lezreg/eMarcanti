@@ -235,6 +235,22 @@
 			<from-outcome>cmdGroupees</from-outcome>
 			<to-view-id>/pages/private/cmdGroupees.xhtml</to-view-id>
 		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>cmdGroupeesPrec</from-outcome>
+			<to-view-id>/pages/private/commandes/cmdGroupeesPrec.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>reductions</from-outcome>
+			<to-view-id>/pages/private/commandes/reductions.xhtml</to-view-id>
+		</navigation-case>
 	</navigation-rule>	
 	
 	<navigation-rule>

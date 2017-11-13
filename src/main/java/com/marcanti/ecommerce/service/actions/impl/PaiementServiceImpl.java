@@ -10,11 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
 import com.marcanti.ecommerce.constants.StatutTransactionFournissPaiement;
+import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleStatusDAO;
 import com.marcanti.ecommerce.dao.PanierDAO;
 import com.marcanti.ecommerce.dao.PanierProduitDAO;
 import com.marcanti.ecommerce.dao.TransactionPaiementDAO;
+import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.TransactionPaiement;
 import com.marcanti.ecommerce.service.actions.PaiementService;
@@ -34,6 +36,8 @@ public class PaiementServiceImpl implements PaiementService {
 	private TransactionPaiementDAO transactionPaiementDAO;
 	@Autowired
 	private CommandeIndividuelleStatusDAO commandeIndividuelleStatusDAO;
+	@Autowired
+	private CommandeGroupeeDAO commandeGroupeeDAO;
 
 	@Override
 	public void payerCommande(CommandeIndividuelle commandeIndividuelle, TransactionPaiement transactionPaiement,
@@ -53,14 +57,13 @@ public class PaiementServiceImpl implements PaiementService {
 	private void createTransactionPaiement(CommandeIndividuelle commandeIndividuelle,
 			TransactionPaiement transactionPaiement, UserSessionBean userSessionBean) {
 		transactionPaiement.setDatePaiement(new Date());
-		transactionPaiement.setIdTransactionFournissPaiement("TODO MOCK web service");
+		String digitsCB = transactionPaiement.getQuatreDerniersDigitsCB();
+		transactionPaiement.setQuatreDerniersDigitsCB(digitsCB.substring(digitsCB.length() - 4));
+		transactionPaiement.setIdTransactionFournissPaiement("MOCK web service");
 		transactionPaiement.setMontantPaiement(commandeIndividuelle.getTotalAPayer());
-		// FIXME add cdeGroupeeNom
-		transactionPaiement.setIdTransactionPaiement(generateTransactionId(userSessionBean));
-		transactionPaiement
-				.setStatutTransactionFournissPaiement(
-						StatutTransactionFournissPaiement.TRANSACTION_CONFIRMEE.getCode());
-
+		transactionPaiement.setIdTransactionPaiement(generateTransactionId(userSessionBean, commandeIndividuelle));
+		transactionPaiement.setStatutTransactionFournissPaiement(
+				StatutTransactionFournissPaiement.TRANSACTION_CONFIRMEE.getCode());
 		transactionPaiementDAO.create(transactionPaiement);
 	}
 
@@ -68,7 +71,7 @@ public class PaiementServiceImpl implements PaiementService {
 			TransactionPaiement transactionPaiement, UserSessionBean userSessionBean) {
 		commandeIndividuelle.setNomModifieur(userSessionBean.getMembreNom());
 		commandeIndividuelle.setPrenomModifieur(userSessionBean.getMembreNom());
-		
+
 		commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO
 				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatusEnum.CDE_INDIVID_PAYEE.getCode()));
 		commandeIndividuelle.setIdTransactionPaiement(transactionPaiement);
@@ -77,9 +80,9 @@ public class PaiementServiceImpl implements PaiementService {
 		commandeIndividuelleDAO.edit(commandeIndividuelle);
 	}
 
-	private String generateTransactionId(UserSessionBean userSessionBean) {
-		// FIXME add cdeGroupeeNom
-		return "TODO_cdeGroupeeNom_" + userSessionBean.getMembreNom() + "_"
+	private String generateTransactionId(UserSessionBean userSessionBean, CommandeIndividuelle commandeIndividuelle) {
+		CommandeGroupee CdeGroupee = commandeGroupeeDAO.find(commandeIndividuelle.getIdCdeGroupee().getIdCdeGroupee());
+		return CdeGroupee.getCdeGroupeeNom() + "_" + userSessionBean.getMembreNom() + "_"
 				+ userSessionBean.getMembrePrenom() + "_" + sysDate();
 	}
 
@@ -121,6 +124,12 @@ public class PaiementServiceImpl implements PaiementService {
 		this.transactionPaiementDAO = transactionPaiementDAO;
 	}
 
+	public CommandeGroupeeDAO getCommandeGroupeeDAO() {
+		return commandeGroupeeDAO;
+	}
 
+	public void setCommandeGroupeeDAO(CommandeGroupeeDAO commandeGroupeeDAO) {
+		this.commandeGroupeeDAO = commandeGroupeeDAO;
+	}
 
 }

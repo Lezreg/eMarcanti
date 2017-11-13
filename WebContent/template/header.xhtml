@@ -106,10 +106,10 @@
 										<li class="kopie"><h:link value="#{msg.libelle_recap_cours}" outcome="cmdGroupees" /></li>
 									</c:if>
 									<c:if test="${USER_SESSION.MENU_COMMANDES_GRP_RP}" scope="session">
-										<li><h:link value="#{msg.libelle_recap_pre}" outcome="organisations" /></li>
+										<li><h:link value="#{msg.libelle_recap_pre}" outcome="cmdGroupeesPrec" /></li>
 									</c:if>										
 									<c:if test="${USER_SESSION.MENU_COMMANDES_GRP_REDUC}" scope="session">
-										<li><h:link value="#{msg.libelle_reduction}" outcome="organisations" /></li>
+										<li><h:link value="#{msg.libelle_reduction}" outcome="reductions" /></li>
 									</c:if>
 								</ul>
 							</li>

@@ -62,8 +62,8 @@ public class PanierServiceActionImpl implements PanierActionService {
 	private OrganisationDAO organisationDAO;
 
 	@Override
-	public Panier create(Panier panier) {
-		return panierDao.edit(panier);
+	public void createPanier(Panier panier) {
+		panierDao.create(panier);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)
@@ -120,7 +120,8 @@ public class PanierServiceActionImpl implements PanierActionService {
 		} else {
 			LOGGER.info("commandeIndividuel not exist id");
 			// create panier
-			panierEnCours = create(getNewPanier(produit, membre));
+			panierEnCours = getNewPanier(produit, membre);
+			createPanier(panierEnCours);
 			// create panierproduit
 			PanierProduit panierProduit = getNewPanierProduit(panierEnCours, produit);
 			panierProduitDAO.create(panierProduit);

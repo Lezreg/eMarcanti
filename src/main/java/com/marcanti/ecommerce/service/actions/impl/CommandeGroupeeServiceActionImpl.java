@@ -17,6 +17,7 @@ import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
 import com.marcanti.ecommerce.model.Membre;
 import com.marcanti.ecommerce.model.VCdeGroupeeDetail;
+import com.marcanti.ecommerce.model.VReduction;
 import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 
 @Service("commandeGroupeeServiceAction")
@@ -91,6 +92,16 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 			cmdGroupeesFilleuls = Collections.emptyList();
 		}
 		return cmdGroupeesFilleuls;
+	}
+
+	@Override
+	public List<CommandeGroupee> getCmdGroupeesByOrganisation(Long idOrg, boolean isEnCours) {
+		return commandeGroupeeDAO.getCmdGroupeesByOrganisation(idOrg, isEnCours);
+	}
+
+	@Override
+	public List<VReduction> getAllReductions() {
+		return commandeGroupeeDAO.getAllReductions();
 	}
 
 	public MembreDAO getMembreDAO() {

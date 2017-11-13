@@ -1,7 +1,6 @@
 package com.marcanti.ecommerce.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -20,7 +19,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.constants.CommandeGroupeeStatus;
 import com.marcanti.ecommerce.model.CommandeGroupee;
-import com.marcanti.ecommerce.model.CommandeIndividuelleStatus;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 import com.marcanti.ecommerce.service.actions.OrganisationServiceAction;
@@ -48,6 +46,8 @@ public class CommandeGroupeeController implements Serializable {
 
 	private List<CommandeGroupee> cmdGroupees;
 
+	private List<CommandeGroupee> cmdGroupeesPrec;
+
 	private List<CommandeGroupee> cmdGroupeesFiltred;
 
 	private UserSessionBean userSessionBean;
@@ -74,7 +74,7 @@ public class CommandeGroupeeController implements Serializable {
 	public String saveCmdGroupee() {
 		LOGGER.info("********************save and update methode ******************************");
 		Date date = new Date();
-		//create new commande
+		// create new commande
 		if (commandeGroupee != null && commandeGroupee.getIdCdeGroupee() == null) {
 			String monthName = DateUtils.getMonthName(DateUtils.getMonth(date), Locale.FRANCE);
 			commandeGroupee.setCdeGroupeeNom(organisation.getOrgaAlias() + "_" + DateUtils.getYear(date) + "_"
@@ -88,7 +88,7 @@ public class CommandeGroupeeController implements Serializable {
 			com.marcanti.ecommerce.model.CommandeGroupeeStatus commandeGroupeeStatus = commandeGroupeeServiceAction
 					.getCommandeGroupeeStatusByCode(CommandeGroupeeStatus.CDE_GROUPEE_A_LIVRER.getCode());
 			commandeGroupee.setIdStatus(commandeGroupeeStatus);
-			//update exist command
+			// update exist command
 		} else {
 			commandeGroupee.setDateModification(date);
 			commandeGroupee.setNomModifieur(userSessionBean.getMembreNom().toUpperCase());
@@ -120,8 +120,11 @@ public class CommandeGroupeeController implements Serializable {
 	}
 
 	public List<CommandeGroupee> getCmdGroupees() {
-		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-		return commandeGroupeeServiceAction.getCmdGroupeesByOrg(userSessionBean.getIdOrga());
+		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(userSessionBean.getIdOrga(), false);
+	}
+
+	public List<CommandeGroupee> getCmdGroupeesPrec() {
+		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(userSessionBean.getIdOrga(), true);
 	}
 
 	public void setCmdGroupees(List<CommandeGroupee> cmdGroupees) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.VCdeGroupeeDetail;
+import com.marcanti.ecommerce.model.VReduction;
 
 public interface CommandeGroupeeDAO extends GenericDAO<CommandeGroupee> {
 
@@ -14,5 +15,9 @@ public interface CommandeGroupeeDAO extends GenericDAO<CommandeGroupee> {
 	Long getIdDerniereCdeGoupeeALivrer(Long idOrg);
 
 	List<VCdeGroupeeDetail> getCmdGroupeesFilleuls(List<Long> idsMembre);
+
+	List<CommandeGroupee> getCmdGroupeesByOrganisation(Long idOrg, boolean isEncours);
+
+	List<VReduction> getAllReductions();
 
 }

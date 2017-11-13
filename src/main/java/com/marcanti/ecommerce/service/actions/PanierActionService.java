@@ -17,7 +17,7 @@ public interface PanierActionService {
 	Panier addProduct(Produit produit, UserSessionBean userSessionBean)
 			throws CommandeGroupeeNotFoundException, CommandeGroupeeValidatedExeception;
 
-	Panier create(Panier panier);
+	void createPanier(Panier panier);
 
 	boolean isExistingCommandeGroupee(Membre utilisateur);
 

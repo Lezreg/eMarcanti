@@ -20,6 +20,7 @@ import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.VCdeGroupeeDetail;
+import com.marcanti.ecommerce.model.VReduction;
 
 /**
  *
@@ -79,10 +80,28 @@ public class CommandeGroupeeDAOImpl extends AbstractGenericDAO<CommandeGroupee> 
 			LOGGER.info("idsMembre is null or is empty");
 			return Collections.emptyList();
 		}
-		List<VCdeGroupeeDetail> newProducts = em
+		List<VCdeGroupeeDetail> cmdGroupees = em
 				.createQuery("SELECT v FROM VCdeGroupeeDetail v WHERE v.idMembre IN (:ids)", VCdeGroupeeDetail.class)
 				.setParameter("ids", idsMembre).getResultList();
-		return newProducts;
+		return cmdGroupees;
+	}
+
+	@Override
+	public List<CommandeGroupee> getCmdGroupeesByOrganisation(Long idOrg, boolean isEncours) {
+		LOGGER.info("-----getCmdGroupeesByOrganisation : idOrg =" + idOrg + " isEncours :" + isEncours);
+		List<CommandeGroupee> cmdGroupees = em
+				.createQuery(
+						"SELECT v FROM CommandeGroupee v WHERE v.idOrga.idOrga = :idOrga and v.isEnCours = :isEnCours",
+						CommandeGroupee.class)
+				.setParameter("idOrga", idOrg).setParameter("isEnCours", isEncours).getResultList();
+		return cmdGroupees;
+	}
+
+	@Override
+	public List<VReduction> getAllReductions() {
+		LOGGER.info("-----getReductions");
+		List<VReduction> reductions = em.createQuery("SELECT v FROM VReduction v", VReduction.class).getResultList();
+		return reductions;
 	}
 
 	public CommandeGroupeeDAOImpl() {

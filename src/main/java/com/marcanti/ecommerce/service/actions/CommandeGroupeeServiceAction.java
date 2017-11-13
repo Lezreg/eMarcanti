@@ -5,6 +5,7 @@ import java.util.List;
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
 import com.marcanti.ecommerce.model.VCdeGroupeeDetail;
+import com.marcanti.ecommerce.model.VReduction;
 
 public interface CommandeGroupeeServiceAction {
 
@@ -17,4 +18,8 @@ public interface CommandeGroupeeServiceAction {
 	CommandeGroupeeStatus getCommandeGroupeeStatusByCode(String statusCode);
 
 	List<VCdeGroupeeDetail> getCommandeGroupeesFilleulsByMembre(Long membreId);
+
+	List<CommandeGroupee> getCmdGroupeesByOrganisation(Long idOrg, boolean isEnCours);
+
+	List<VReduction> getAllReductions();
 }

@@ -66,14 +66,14 @@ public class CarteController implements Serializable {
 				.autowireBean(this);
 
 		transactionPaiement = new TransactionPaiement();
+		// transactionPaiement.setMontantPaiement(getCmdIndivEnCours().getTotalAPayer());
 	}
 
 	/**
 	 * Payer la commande Indiv <br>
 	 * c'est une transaction bancaire pour payer une commande
 	 */
-	public void payerCommande()
-	{
+	public void payerCommande() {
 
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 

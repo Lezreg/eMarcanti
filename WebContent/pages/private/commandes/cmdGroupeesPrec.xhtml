@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="cmdForm">
+			<div style="overflow-x:auto;">	
+				<br />
+				<br />
+				<p:outputLabel for="ttp" value="Organisation : " />
+				<h:outputText id="ttp" value="#{cmdGroupeeView.organisation.orgaNom}" title="Organisation" />
+				<br />
+				<br />
+				<br />
+				<br />
+				<p:dataTable id="cmdGrList" var="cmdGr" value="#{cmdGroupeeView.cmdGroupeesPrec}" widgetVar="cmdGr1"
+						emptyMessage="No commands found with given criteria"  filteredValue="#{cmdGroupeeView.cmdGroupeesFiltred}">
+
+					<p:column style="width:50px">
+						<h:outputText value="#{cmdGr.cdeGroupeeNom}" />
+					</p:column>	
+					
+					<p:column filterBy="#{cmdGr.cdeGroupeeNom}"
+						headerText="Nom commande" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{cmdGr.cdeGroupeeNom}" />
+					</p:column>
+					
+					<p:column filterBy="#{cmdGr.cdeGroupeeNom}"
+						headerText="Date de création" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{cmdGr.dateCreation}" />
+					</p:column>	
+					
+					<p:column filterBy="#{cmdGr.nomCreateur}"
+						headerText="Créer par" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{cmdGr.nomCreateur}" />
+					</p:column>		
+	
+					<p:column filterBy="#{cmdGr.idStatus.statusLibelle}"
+						headerText="Statut" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{cmdGr.idStatus.statusLibelle}" />
+					</p:column>
+					
+					<p:column filterBy="#{cmdGr.dateLivraisonReelle}"
+						headerText="Date de livraison" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{cmdGr.dateLivraisonReelle}" />
+					</p:column>	
+					
+					<p:column filterBy="#{cmdGr.dateModification}"
+						headerText="Modifié le" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{cmdGr.dateModification}" />
+					</p:column>
+					
+					 <p:column style="width:32px;text-align: center">
+			             <h:commandButton value="View" action="createCmd"  title="View">
+			                <f:setPropertyActionListener value="#{cmdGr}" target="#{cmdGroupeeView.commandeGroupee}" />
+			            </h:commandButton>
+			        </p:column>
+				</p:dataTable>	
+			</div>
+		</h:form>
+	
+	
+	</ui:define>
+</ui:composition>
