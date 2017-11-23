@@ -108,18 +108,29 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 	@Override
 	public List<VCatalogueAvecStock> getProductsByCategorie(String codeCategorie) {
 		LOGGER.info("----------getProductsByCategorie--------");
-		//List<VCatalogueAvecStock> newProducts = em.createQuery("SELECT v FROM VCatalogueAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",VCatalogueAvecStock.class).setParameter("CatCOde", codeCategorie).getResultList();
-		//return newProducts;
-		return em.createNamedQuery("VCatalogueAvecStock.findByCategorieCode", VCatalogueAvecStock.class).setParameter("categorieCode", codeCategorie).getResultList();
+		// List<VCatalogueAvecStock> newProducts = em.createQuery("SELECT v FROM
+		// VCatalogueAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode =
+		// :CatCOde",VCatalogueAvecStock.class).setParameter("CatCOde",
+		// codeCategorie).getResultList();
+		// return newProducts;
+		return em.createNamedQuery("VCatalogueAvecStock.findByCategorieCode", VCatalogueAvecStock.class)
+				.setParameter("categorieCode", codeCategorie).getResultList();
 	}
 
 	@Override
 	public List<VCatalogueRestreintAvecStock> getRestrictedProduitsByCategorie(String codeCategorie) {
 		LOGGER.info("----------getRestrictedProduitsByCategorie--------VCatalogueRestreintAvecStock");
-		//List<VCatalogueRestreintAvecStock> restrictedNewProducts = em.createQuery("SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.qteEnStock > 0 AND v.categorieCode = :CatCOde",VCatalogueRestreintAvecStock.class).setParameter("CatCOde", codeCategorie).getResultList();
-		//return restrictedNewProducts;
-		return em.createNamedQuery("VCatalogueRestreintAvecStock.findByCategorieCode", VCatalogueRestreintAvecStock.class).setParameter("categorieCode", codeCategorie).getResultList();
-		
+		// List<VCatalogueRestreintAvecStock> restrictedNewProducts =
+		// em.createQuery("SELECT v FROM VCatalogueRestreintAvecStock v WHERE
+		// v.qteEnStock > 0 AND v.categorieCode =
+		// :CatCOde",VCatalogueRestreintAvecStock.class).setParameter("CatCOde",
+		// codeCategorie).getResultList();
+		// return restrictedNewProducts;
+		return em
+				.createNamedQuery("VCatalogueRestreintAvecStock.findByCategorieCode",
+						VCatalogueRestreintAvecStock.class)
+				.setParameter("categorieCode", codeCategorie).getResultList();
+
 	}
 
 	@Override
@@ -160,119 +171,96 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 
 	@Override
 	public Produit getProduit(Long idProduit) {
-		return em.createNamedQuery("Produit.findByIdProduit", Produit.class).setParameter("idProduit", idProduit).getSingleResult();
+		return em.createNamedQuery("Produit.findByIdProduit", Produit.class).setParameter("idProduit", idProduit)
+				.getSingleResult();
 	}
 
 	@Override
 	public void updateProduit(Produit produit) {
-		Query query = em.createNativeQuery("UPDATE produit SET idMarque=?, "
-				+ "idCategorie=? "
-				+ "idSousCategorie=? "
-				+ "produitDescription=? "
-				+ "produitDetail=? "
-				+ "notrePrix=? "
-				+ "prixPublic=? "
-				+ "qteEnStock=? "
-				+ "produitPhotoURL=? "
-				+ "produitPhotoTailleMediumURL=? "
-				+ "produitPhotoTailleLargeURL=? "
-				+ "dateDebutPromo=? "
-				+ "dateFinPromo=? "
-				+ "dateDebutNouveaute=? "
-				+ "dateFinNouveaute=? "
-				+ "dateDebutADecouvrir=? "
-				+ "dateFinADecouvrir=? "
-				+ "titreADecouvrir=? "
-				+ "noteDeTete=? "
-				+ "noteDeCoeur=? "
-				+ "noteDeFond=? "
-				+ "familleOlfactive=? "
-				+ "descriptionADecouvrir=? "
-				+ "motCleADecouvrir=? "
-				+ "codeEAN=? "
-				+ "isBestSellerHomme=? "
-				+ "isBestSellerFemme=? "
-				+ "isPetitPrix=? "
-				+ "isNouveauteSurHomePage=? "
-				+ "isPromoSurHomePage=? "
-				+ "isADecouvrirSurHomePage=? "
-				+ "produitVideoURL=? "
-				+ "WHERE idProduit=?")
-				.setParameter(1, produit.getIdMarque())
-				.setParameter(2, produit.getIdCategorie().getIdCategorie())
+		Query query = em
+				.createNativeQuery("UPDATE produit SET idMarque=?, " + "idCategorie=? " + "idSousCategorie=? "
+						+ "produitDescription=? " + "produitDetail=? " + "notrePrix=? " + "prixPublic=? "
+						+ "qteEnStock=? " + "produitPhotoURL=? " + "produitPhotoTailleMediumURL=? "
+						+ "produitPhotoTailleLargeURL=? " + "dateDebutPromo=? " + "dateFinPromo=? "
+						+ "dateDebutNouveaute=? " + "dateFinNouveaute=? " + "dateDebutADecouvrir=? "
+						+ "dateFinADecouvrir=? " + "titreADecouvrir=? " + "noteDeTete=? " + "noteDeCoeur=? "
+						+ "noteDeFond=? " + "familleOlfactive=? " + "descriptionADecouvrir=? " + "motCleADecouvrir=? "
+						+ "codeEAN=? " + "isBestSellerHomme=? " + "isBestSellerFemme=? " + "isPetitPrix=? "
+						+ "isNouveauteSurHomePage=? " + "isPromoSurHomePage=? " + "isADecouvrirSurHomePage=? "
+						+ "produitVideoURL=? " + "WHERE idProduit=?")
+				.setParameter(1, produit.getIdMarque()).setParameter(2, produit.getIdCategorie().getIdCategorie())
 				.setParameter(3, produit.getIdSousCategorie().getIdSousCategorie())
-				.setParameter(4, produit.getProduitDescription())
-				.setParameter(5, produit.getProduitDetail())
-				.setParameter(6, produit.getNotrePrix())
-				.setParameter(7, produit.getPrixPublic())
-				.setParameter(8, produit.getQteEnStock())
-				.setParameter(9, produit.getProduitPhotoURL())
+				.setParameter(4, produit.getProduitDescription()).setParameter(5, produit.getProduitDetail())
+				.setParameter(6, produit.getNotrePrix()).setParameter(7, produit.getPrixPublic())
+				.setParameter(8, produit.getQteEnStock()).setParameter(9, produit.getProduitPhotoURL())
 				.setParameter(10, produit.getProduitPhotoTailleMediumURL())
-				.setParameter(11, produit.getProduitPhotoTailleLargeURL())
-				.setParameter(12, produit.getDateDebutPromo())
-				.setParameter(13, produit.getDateFinPromo())
-				.setParameter(14, produit.getDateDebutNouveaute())
-				.setParameter(15, produit.getDateFinNouveaute())
-				.setParameter(16, produit.getDateDebutADecouvrir())
-				.setParameter(17, produit.getDateFinADecouvrir())
-				.setParameter(18, produit.getTitreADecouvrir())
-				.setParameter(19, produit.getNoteDeTete())
-				.setParameter(20, produit.getNoteDeCoeur())
-				.setParameter(21, produit.getNoteDeFond())
-				.setParameter(22, produit.getFamilleOlfactive())
-				.setParameter(23, produit.getDescriptionADecouvrir())
-				.setParameter(24, produit.getMotCleADecouvrir())
-				.setParameter(25, produit.getCodeEAN())
-				.setParameter(26, produit.isBestSellerHomme())
-				.setParameter(27, produit.isBestSellerFemme())
-				.setParameter(28, produit.isPetitPrix())
-				.setParameter(29, produit.isNouveauteSurHomePage())
-				.setParameter(30, produit.isPromoSurHomePage())
-				.setParameter(31, produit.isADecouvrirSurHomePage())
-				.setParameter(32, produit.getProduitVideoURL())
+				.setParameter(11, produit.getProduitPhotoTailleLargeURL()).setParameter(12, produit.getDateDebutPromo())
+				.setParameter(13, produit.getDateFinPromo()).setParameter(14, produit.getDateDebutNouveaute())
+				.setParameter(15, produit.getDateFinNouveaute()).setParameter(16, produit.getDateDebutADecouvrir())
+				.setParameter(17, produit.getDateFinADecouvrir()).setParameter(18, produit.getTitreADecouvrir())
+				.setParameter(19, produit.getNoteDeTete()).setParameter(20, produit.getNoteDeCoeur())
+				.setParameter(21, produit.getNoteDeFond()).setParameter(22, produit.getFamilleOlfactive())
+				.setParameter(23, produit.getDescriptionADecouvrir()).setParameter(24, produit.getMotCleADecouvrir())
+				.setParameter(25, produit.getCodeEAN()).setParameter(26, produit.isBestSellerHomme())
+				.setParameter(27, produit.isBestSellerFemme()).setParameter(28, produit.isPetitPrix())
+				.setParameter(29, produit.isNouveauteSurHomePage()).setParameter(30, produit.isPromoSurHomePage())
+				.setParameter(31, produit.isADecouvrirSurHomePage()).setParameter(32, produit.getProduitVideoURL())
 				.setParameter(33, produit.getIdProduit());
 		query.executeUpdate();
-		//em.persist(sousCategorie);
-		
+		// em.persist(sousCategorie);
+
 	}
 
 	@Override
 	public void insertProduit(Produit produit) {
-		Query query = em.createNativeQuery("INSERT INTO produit (idMarque,idCategorie,idSousCategorie,produitDescription,produitDetail,notrePrix,prixPublic,qteEnStock,produitPhotoURL,produitPhotoTailleMediumURL,produitPhotoTailleLargeURL,dateDebutPromo,dateFinPromo,dateDebutNouveaute,dateFinNouveaute,dateDebutADecouvrir,dateFinADecouvrir,titreADecouvrir,noteDeTete,noteDeCoeur,noteDeFond,familleOlfactive,descriptionADecouvrir,motCleADecouvrir,codeEAN,isBestSellerHomme,isBestSellerFemme,isPetitPrix,isNouveauteSurHomePage,isPromoSurHomePage,isADecouvrirSurHomePage,produitVideoURL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
-				.setParameter(1, produit.getIdMarque())
-				.setParameter(2, produit.getIdCategorie().getIdCategorie())
+		Query query = em
+				.createNativeQuery(
+						"INSERT INTO produit (idMarque,idCategorie,idSousCategorie,produitDescription,produitDetail,notrePrix,prixPublic,qteEnStock,produitPhotoURL,produitPhotoTailleMediumURL,produitPhotoTailleLargeURL,dateDebutPromo,dateFinPromo,dateDebutNouveaute,dateFinNouveaute,dateDebutADecouvrir,dateFinADecouvrir,titreADecouvrir,noteDeTete,noteDeCoeur,noteDeFond,familleOlfactive,descriptionADecouvrir,motCleADecouvrir,codeEAN,isBestSellerHomme,isBestSellerFemme,isPetitPrix,isNouveauteSurHomePage,isPromoSurHomePage,isADecouvrirSurHomePage,produitVideoURL) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
+				.setParameter(1, produit.getIdMarque()).setParameter(2, produit.getIdCategorie().getIdCategorie())
 				.setParameter(3, produit.getIdSousCategorie().getIdSousCategorie())
-				.setParameter(4, produit.getProduitDescription())
-				.setParameter(5, produit.getProduitDetail())
-				.setParameter(6, produit.getNotrePrix())
-				.setParameter(7, produit.getPrixPublic())
-				.setParameter(8, produit.getQteEnStock())
-				.setParameter(9, produit.getProduitPhotoURL())
+				.setParameter(4, produit.getProduitDescription()).setParameter(5, produit.getProduitDetail())
+				.setParameter(6, produit.getNotrePrix()).setParameter(7, produit.getPrixPublic())
+				.setParameter(8, produit.getQteEnStock()).setParameter(9, produit.getProduitPhotoURL())
 				.setParameter(10, produit.getProduitPhotoTailleMediumURL())
-				.setParameter(11, produit.getProduitPhotoTailleLargeURL())
-				.setParameter(12, produit.getDateDebutPromo())
-				.setParameter(13, produit.getDateFinPromo())
-				.setParameter(14, produit.getDateDebutNouveaute())
-				.setParameter(15, produit.getDateFinNouveaute())
-				.setParameter(16, produit.getDateDebutADecouvrir())
-				.setParameter(17, produit.getDateFinADecouvrir())
-				.setParameter(18, produit.getTitreADecouvrir())
-				.setParameter(19, produit.getNoteDeTete())
-				.setParameter(20, produit.getNoteDeCoeur())
-				.setParameter(21, produit.getNoteDeFond())
-				.setParameter(22, produit.getFamilleOlfactive())
-				.setParameter(23, produit.getDescriptionADecouvrir())
-				.setParameter(24, produit.getMotCleADecouvrir())
-				.setParameter(25, produit.getCodeEAN())
-				.setParameter(26, produit.isBestSellerHomme())
-				.setParameter(27, produit.isBestSellerFemme())
-				.setParameter(28, produit.isPetitPrix())
-				.setParameter(29, produit.isNouveauteSurHomePage())
-				.setParameter(30, produit.isPromoSurHomePage())
-				.setParameter(31, produit.isADecouvrirSurHomePage())
-				.setParameter(32, produit.getProduitVideoURL());
+				.setParameter(11, produit.getProduitPhotoTailleLargeURL()).setParameter(12, produit.getDateDebutPromo())
+				.setParameter(13, produit.getDateFinPromo()).setParameter(14, produit.getDateDebutNouveaute())
+				.setParameter(15, produit.getDateFinNouveaute()).setParameter(16, produit.getDateDebutADecouvrir())
+				.setParameter(17, produit.getDateFinADecouvrir()).setParameter(18, produit.getTitreADecouvrir())
+				.setParameter(19, produit.getNoteDeTete()).setParameter(20, produit.getNoteDeCoeur())
+				.setParameter(21, produit.getNoteDeFond()).setParameter(22, produit.getFamilleOlfactive())
+				.setParameter(23, produit.getDescriptionADecouvrir()).setParameter(24, produit.getMotCleADecouvrir())
+				.setParameter(25, produit.getCodeEAN()).setParameter(26, produit.isBestSellerHomme())
+				.setParameter(27, produit.isBestSellerFemme()).setParameter(28, produit.isPetitPrix())
+				.setParameter(29, produit.isNouveauteSurHomePage()).setParameter(30, produit.isPromoSurHomePage())
+				.setParameter(31, produit.isADecouvrirSurHomePage()).setParameter(32, produit.getProduitVideoURL());
 		query.executeUpdate();
-		//em.persist(sousCategorie);
-		
+		// em.persist(sousCategorie);
+
+	}
+
+	@Override
+	public List<VCatalogueRestreintAvecStock> searchRestrictedProduct(String searchChar) {
+		LOGGER.info("----------searchRestrictedProduct--------VCatalogueRestreintAvecStock");
+		List<VCatalogueRestreintAvecStock> restrictedProducts = em
+				.createQuery(
+						"SELECT v FROM VCatalogueRestreintAvecStock v WHERE v.produitDescription Like :searchChar"
+								+ " OR v.marqueNom Like :searchChar" + " OR v.produitDetail Like :searchChar"
+								+ " OR v.noteDeTete Like :searchChar" + " OR v.noteDeCoeur Like :searchChar"
+								+ " OR v.noteDeFond Like :searchChar" + " OR v.familleOlfactive Like :searchChar",
+						VCatalogueRestreintAvecStock.class)
+				.setParameter("searchChar", '%' + searchChar + '%').getResultList();
+		return restrictedProducts;
+	}
+
+	@Override
+	public List<VCatalogueAvecStock> searchProduct(String searchChar) {
+		LOGGER.info("----------searchRestrictedProduct--------VCatalogueRestreintAvecStock");
+		List<VCatalogueAvecStock> restrictedProducts = em.createQuery(
+				"SELECT v FROM VCatalogueAvecStock v WHERE v.produitDescription Like :searchChar"
+						+ " OR v.marqueNom Like :searchChar" + " OR v.produitDetail Like :searchChar"
+						+ " OR v.noteDeTete Like :searchChar" + " OR v.noteDeCoeur Like :searchChar"
+						+ " OR v.noteDeFond Like :searchChar" + " OR v.familleOlfactive Like :searchChar",
+				VCatalogueAvecStock.class).setParameter("searchChar", '%' + searchChar + '%').getResultList();
+		return restrictedProducts;
 	}
 }

@@ -182,14 +182,21 @@ public class BasketController implements Serializable {
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 
 		Long derniereCdeGoupee = commandeGroupeeServiceAction.getIdDerniereCdeGoupee(userSessionBean.getIdOrga());
+		LOGGER.info(derniereCdeGoupee.toString());
+
+		LOGGER.info(userSessionBean.getIdMembre().toString());
 
 		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(),
 				derniereCdeGoupee, isCurrrentCmds);
 		if (selectedCmd == null || selectedCmd.isEmpty()) {
 			if (commandes != null && !commandes.isEmpty()) {
-				selectedCmd = commandes.get(0).getIdCdeIndiv().toString();
+				CommandeIndividuelle commandeIndividuelle2 = commandes.get(0);
+				panierEnCours = commandeIndividuelle2.getIdPanier();
+				selectedCmd = commandeIndividuelle2.getIdCdeIndiv().toString();
 			}
 		}
+
+		LOGGER.info(selectedCmd);
 		return commandes;
 	}
 

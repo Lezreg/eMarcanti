@@ -14,6 +14,8 @@ import com.marcanti.ecommerce.dao.ProduitDAO;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Produit;
+import com.marcanti.ecommerce.model.VCatalogueAvecStock;
+import com.marcanti.ecommerce.model.VCatalogueRestreintAvecStock;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 import com.marcanti.ecommerce.utils.ProduitConvertor;
 
@@ -28,7 +30,7 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 
 	@Autowired
 	private OrganisationDAO organisationDAO;
-	
+
 	public MarqueDAO getMarqueDAO() {
 		return marqueDAO;
 	}
@@ -134,7 +136,8 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 		if (organisation != null && organisation.getAccesCatalogueComplet()) {
 			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getProductsByCategorie(codeCategorie));
 		} else {
-			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedProduitsByCategorie(codeCategorie));
+			return ProduitConvertor
+					.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedProduitsByCategorie(codeCategorie));
 		}
 	}
 
@@ -158,6 +161,18 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 		}
 	}
 
+	/**
+	 * 
+	 * Acceuil page index
+	 * 
+	 */
+
+	/**
+	 * 
+	 * Acceuil page index
+	 * 
+	 */
+
 	public OrganisationDAO getOrganisationDAO() {
 		return organisationDAO;
 	}
@@ -174,13 +189,30 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	@Override
 	public void updateProduit(Produit produit) {
 		produitDAO.updateProduit(produit);
-		
+
 	}
 
 	@Override
 	public void insertProduit(Produit produit) {
 		produitDAO.insertProduit(produit);
-		
+
+	}
+
+	@Override
+	public List<ProduitBean> searchProduct(String searchChar) {
+
+		List<VCatalogueRestreintAvecStock> searchRestrictedProduct = produitDAO.searchRestrictedProduct(searchChar);
+		List<VCatalogueAvecStock> searchProduct = produitDAO.searchProduct(searchChar);
+
+		List<ProduitBean> productRestrientAvecStock = ProduitConvertor
+				.convertVCatalogueRestreintAvecStock(searchRestrictedProduct);
+
+		List<ProduitBean> productAvecStock = ProduitConvertor.convertVCatalogueAvecStock(searchProduct);
+
+		if (productRestrientAvecStock != null && productRestrientAvecStock.isEmpty()) {
+			productAvecStock.addAll(productRestrientAvecStock);
+		}
+		return productAvecStock;
 	}
 
 }

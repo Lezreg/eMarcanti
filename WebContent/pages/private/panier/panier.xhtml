@@ -1,106 +1,383 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	template="/template/template.xhtml">
-	<ui:define name="metadata">
-	</ui:define>
-	<ui:define name="content">
-		<h:form id="panierId">
-		
-			<h:selectOneMenu id="cmdIdiv" value="#{basketView.selectedCmd}" required="true" label="choisir une commande"
-			    style="width: 200px" sortBy="#{panierProduit.qteSouhaitee}">
-			    <f:selectItems value="#{basketView.commandes}" var="order" itemLabel="#{order.cdeIndivNom}" itemValue="#{order.idCdeIndiv}" />
-			    <p:ajax  update="panierProduitTable ttp" />
-			</h:selectOneMenu>
-			<br/>
-			
-			<p:growl id="growl" for="qte" showDetail="true" sticky="true" /> 
-			
-			<table style="border-spacing: 25px;">
-				  	<tr>
-				  		<td align="left">
-				  			<h:outputText value="Dernière Modification " />
-				  		</td>
-				  		<td align="left" class="textInfo">
-				  			<h:outputText id="modifId" style="color : rgb(108, 107, 98);" value="#{basketView.commandeIndividuelle.dateModification} par #{basketView.commandeIndividuelle.prenomModifieur} #{basketView.commandeIndividuelle.nomModifieur}" />
-				  		</td>
-				  		
-				  		<td align="right">
-				  			<h:outputText value="Etat: " />
-				  		</td>
-				  		<td align="right">
-				  			<h:outputText id="statutid" style="color : rgb(48, 186, 50);margin-left:-4px;" value="#{basketView.commandeIndividuelle.idStatus.statusLibelle}" />
-				  		</td>
-				  	</tr>
-				  	
-			</table>
-			
-			<p:dataTable id="panierProduitTable" var="panierProduit" value="#{basketView.panierProduitList}" emptyMessage="Aucune commande en cours !" liveResize="true">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-				<p:column headerText="Marque">
-					<p:graphicImage
-						url="/images/100X100/#{empty panierProduit.produit.produitPhotoURL ? 'default.jpg' : panierProduit.produit.produitPhotoURL}"
-						width="100" />
-					<h:outputText value="#{produitAdded.idMarque.marqueNom}" />
-				</p:column>
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="metadata">
+		</ui:define>
+		<ui:define name="content">
+			<h:form id="formCatalogue">
+			<!-- fil d'arian  -->
+				<div class="breadcrumsrea">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="breadcrumslist">
+									<ul>
+										<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="catalogue.xhtml"><h:outputLabel value="#{msg.libelle_cat}" /></h:outputLink></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
+				<!-- Modal -->
+				<div class="messftopmodal modal fade" id="cindinotconpopu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="messmodaldia modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">times;</span></button>
+				       
+				      </div>
+				      <div class="modal-body">
+				        	<div class="row">
+									<div class="col-xs-12">
+										<div class="comandomodifyarea modifyproductinner">
+										
+											<div class="modifymaintitle">
+												<h3>Détail de l'erreur</h3>
+											</div>
+											
+											<div class="marqueinfo admindetailsopuptext marginRow">
+												
+												<p class="last">C'était la première soirée <br/>Du mois d'avril.<br/></p>
+											</div><!--end inner div-->
+											
+												
+											</div><!--end inner div-->
+											<div class="clearfix"></div>
+										</div><!--end main inner div-->
+									</div>
+						
+								</div><!--end row-->
+				      </div><!--end modal body-->
+				     
+				    </div>
+				
+				</div>
+				 
+				 <!-- modal-->
+				 
+				 
+				 <!-- start mess commandes area-->
+		<section class="messcomandesarea">
+			<h2 class="section_header">sec</h2>
+			<div class="container">
+				<!--<div class="row">
+					<div class="col-xs-12">
+						
+						<div class="messtoplinkarrow">
+							<ul>
+								<li><a class="recapencours" href=""><i class="fa fa-angle-left"></i>Commande Encours</a></li>
+								<li><a class="recaprecordes" href="">Commande Precordtes<i class="fa fa-angle-right"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div> -->
+				
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="purchaseordertextitle filterheading">
+							<h3>Ma commande en cours</h3>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				<div class="row">
+					<div class="col-xs-12">
+						
+						<div class="filterbytitle">
+							
+							<p>Choisir une commande</p>
+						</div>
+						<div class="messcommedsfilter filterbyarea indicommanfilter">
+							<div class="select">
+								<h:selectOneMenu id="cmdIdiv" value="#{basketView.selectedCmd}" required="true">
+								    <f:selectItems value="#{basketView.commandes}" var="order" itemLabel="#{order.cdeIndivNom}" itemValue="#{order.idCdeIndiv}" />
+								    <p:ajax  update="formCatalogue" />
+								</h:selectOneMenu>
+							  <div class="select__arrow"></div>
+							</div>
 
-				<p:column headerText="Description">
-					<h:outputText value="#{panierProduit.produit.produitDescription}" />
-				</p:column>
+
+							
+						</div>
+						
+					</div>
+				</div><!--end row-->
 				
-				<p:column style="width:110px" headerText="Notre prix" footerText="">
-					<h:outputText value="#{panierProduit.produit.notrePrix}">
-						<f:convertNumber currencySymbol="€" type="currency" />
-					</h:outputText>
-				</p:column>
+				<div class="row marginRow">
+					<div class="col-xs-12">
+						<div class="warningallert filterheading progressbartitle">
+							<h3>Statut de la commande</h3>
+							<div class="messProgressBararea">
+								<ul>
+									<li>
+										<img src="img/commandes/notconfnew.png" class="img-responsive" alt="notconfirm"/>
+										<div class="innerlistone">
+											<p><i class="fa fa-exclamation-triangle"></i>Non confirmée</p>
+										</div>
+									</li>
+									
+									<li class="smallerpbar">
+										<img src="img/general.png" class="img-responsive" alt="confirm"/>
+										<div class="individualStatus innerlistone">
+											<p>Confirmée</p>
+										</div>
+									</li>
+									
+									<li class="smallerpbar">
+										<img src="img/general.png" class="img-responsive" alt="livraisendemandee"/>
+										<div class="individualStatus innerlistone">
+											<p>Livraison demandée</p>
+										</div>
+									</li>
+									
+									<li class="smallerpbar marginlesstablet">
+										<img src="img/general.png" class="img-responsive" alt="livree"/>
+										<div class="individualStatus innerlistone">
+											<p>Livrée</p>
+										</div>
+									</li>
+									
+									<li class="smallerpbar">
+										<img src="img/general.png" class="img-responsive" alt="livree"/>
+										<div class="individualStatus innerlistone">
+											<p>Annulée</p>
+										</div>
+									</li>
+									
+									
+								</ul>
+								
+							
+								
+								
+							</div>
+							
+						</div>
+					</div>
+				</div><!--end row-->
 				
-				<p:column headerText="Qté">
-					<h:inputText id="qte" value="#{panierProduit.qteSouhaitee}" />
-					<p:outputLabel for="qte"/> 
-				</p:column>
 				
-				<p:column headerText="Sous Total">
-					<h:outputText value="#{panierProduit.sousTotal}">
-						<f:convertNumber currencySymbol="€" type="currency" />
-					</h:outputText>
-				</p:column>
+				<div class="row marginRow unpaidarea">
+					<div class="col-sm-8">
+						<div class="warningmessageadminlist">
+								<p class="redclass"><i class="fa fa-warning"></i>Une erreur technique est survenue … <a href=""  data-toggle="modal" data-target="#cindinotconpopu">Détail</a></p>
+						</div>
+						<div class="updatecartcheck">
+							<p><i class="fa fa-exclamation-triangle"></i> Mettez à jour votre panier !</p>
+							<p><i class="fa fa-exclamation-triangle"></i> Veuillez confirmer la commande, afin que les produits vous soient réservés !</p>
+							<span><strong>Last Update:</strong> 01/01/2016 - 16h20 by <em>Jean Duran</em></span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="unpaidbutton">
+							<button><i class="fa fa-times-circle"></i>Non payée</button>
+						</div>
+					</div>
+				</div>
 				
-			</p:dataTable>
-			
-				<table>
-				  	<tr>
-				  		<td align="left">
-							<h:commandButton value="Recalculer" id="calculButton" update="panierProduitTable" action="#{basketView.reCalculer}" styleClass="ui-priority-primary" />
-				  		</td>
-				  	</tr>
-				  	<tr>
-				  		<td align="left">
-				  			<h:outputText value="Total à payer : " />
-				  		</td>
-				  		<td align="left">
-							<h:outputText id="ttp" value="#{basketView.commandeIndividuelle.totalAPayer}" title="Total à payer" >
-								<f:convertNumber currencySymbol="€" type="currency" />
-							</h:outputText>
-				  		</td>
-				  	</tr>
-				  	<tr>
-				  		<td align="right">
-				  			<h:commandButton value="Confirmer" id="confirmButton" update="panierProduitTable" action="#{basketView.confirmerCommandeIndiv}" styleClass="ui-priority-primary"/>
-				  		</td>
-				  	</tr>
-				  	<tr>
-				  		<td align="right">
-<!-- 				  		<c:if test="#{not empty commandeIndividuelle}"> -->
-				  			<h:commandButton value="Payer" id="pButton" action="payer" styleClass="ui-priority-primary" />
-<!-- 				  		</c:if> -->
-				  		</td>
-				  	</tr>
-				</table>
+				
+			</div><!--end cont-->
+		</section>
+		<!--end sec-->
 		
-		</h:form>
+		
+		<section class="mess-commandestable">
+			<h2 class="section_header">sec</h2>
+			<div class="container">
+				<div class="row customrow">
+					<div class="col-xs-12">
+						<div class="mess-innertablearea individualtabletop">
+							
+							<table id="individualtableid" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th class="nameoforder">Marque</th>
+										<th class="creationdate">Description</th>
+										<th class="status">Prix Unitaire</th>
+										<th class="payment quantityinsta">Qte</th>
+										<th class="deliverydate">Sous-Total</th>
+										
+									</tr>
+								</thead>
+								
+								<tbody class="individulaallrow">
+									<ui:repeat var="produit" value="#{basketView.panierProduitList}">
+												<tr>
+														<td class="individualtablerow">
+																	<p>
+																		<img src="img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.produit.idMarque.marqueNom}</span>
+																	</p>
+														</td>
+														<td class="catgeneraltd">#{produit.produit.produitDescription}</td>
+														<td class="inputcommandarea"><input id="box1" type="text" value="#{produit.produit.notrePrix}" readonly="readonly"/>€</td>
+														<td class="quantityformarea quanlityavilablclass"><input id="box2" type="number" oninput="calculate()" min="0" value="#{produit.qteSouhaitee}"/> <span class="quantityamountspan"> quantity available #{produit.produit.qteEnStock}</span></td>
+														<td class="inputcommandarea"><input id="result" value="#{produit.sousTotal}"/>€</td>
+												</tr>
+									</ui:repeat>
+								
+									
+								</tbody>
+							</table>
+						</div><!--end-->
+					</div>
+				</div><!--end row-->
 			
-	</ui:define>
-</ui:composition>
+			</div><!--end cont.-->
+		</section><!--end sec-->
+		
+		
+		
+		<section class="comandeindialstatusarea">
+			<h2 class="section_header">sect</h2>
+			<div class="container">
+				
+				<div class="row ">
+					<div class="col-xs-12 paddingrightless">
+						<div class="sauvegarderbutton">
+							<a class="samewidthnotcon" href="commande-individuelle-sauvegarde.html">Sauvegarder </a>
+						</div>
+					</div>
+				</div>
+				
+				<div class="individualrowareatotal row marginRow">
+					<div class="col-sm-12">
+						<div class="innerinditotal">
+						
+							<ul>
+								<li><p>Sous Total<span>#{basketView.panierEnCours.panierMontant} €</span></p></li>
+								<li><p>Reduction<span>#{basketView.commandeIndividuelle.reduction} €</span></p></li>
+								<li class="totalcostindi"><p>Total<span>#{basketView.commandeIndividuelle.totalAPayer} €</span></p></li>
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+				
+				
+				<div class="row marginRow">
+					<div class="col-xs-12 paddingrightless">
+						<div class="sauvegarderbutton confirmbutton">
+							<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_confirmer}" action="#{basketView.confirmerCommandeIndiv}" />
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="row marginRow">
+					<div class="col-xs-12 paddingrightless">
+						<div class="sauvegarderbutton commandbutton">
+							<a href="" class="othermeanbutotn" data-toggle="modal" data-target="#moyenbutton">Autre Moyen de paiement</a>
+							<a class="samewidthnotcon" href="commande-individuelle-paid.html">Payer</a>
+						</div>
+					</div>
+				</div>
+				
+				<!-- modal-->
+				
+					<!-- Modal -->
+					<div class="modal fade" id="moyenbutton" tabindex="-1" role="dialog" aria-labelledby="moyenbutton">
+					  <div class="moyenbodyareatotal modal-dialog" role="document">
+						<div class="moyencontenmodal modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">times</span></button>
+							<h4 class="modal-title" id="moyenbutton">Renseigner un autre moyen de paiement</h4>
+						  </div>
+						  <div class="moyenbodyarea modal-body">
+						  
+						  		<div class="marqueinfo marginRow">
+								<div class="paddingless col-sm-4">
+									<div class="marquestext">
+										<p>Nom de la commande</p>
+									</div>
+								</div>
+								<div class="paddingless col-sm-8">
+									<div class="comindiconinput marquedescription admininput">
+										<input name="crele" placeholder="commande-individual_2017-01-10" required="" type="text"/>
+									</div>
+								</div>
+							</div>
+							
+							<div class="clearfix"></div>
+							
+								<div class="marqueinfo marginRow">
+									<div class="paddingless col-sm-4">
+										<div class="marquestext">
+											<p>Commentaire</p>
+										</div>
+									</div>
+									<div class="paddingless col-sm-8">
+										<div class="marquedescription">
+											<div class="marquedescription">
+											<textarea class="form-control" rows="1"></textarea>
+										</div>
+
+										</div>
+									</div>
+								</div><!--end inner div-->
+						  </div>
+						  <div class="custommodalfooter modal-footer">
+							<div class="newmodiysvecan">
+								 <div class="button-1">
+									<div class="eff-1"></div>
+									<a href="" data-dismiss="modal"> Annuler </a>
+								  </div>
+
+								  <div class="button-2">
+									<div class="eff-2"></div>
+										<a href=""> Valider </a>
+								  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+					</div>
+				<!-- modal-->
+				
+			</div>
+		</section>
+
+
+
+
+			</h:form>
+			
+			<script>
+				function calculate() {
+					var myBox1 = document.getElementById('box1').value;	
+					var myBox2 = document.getElementById('box2').value;
+					var result = document.getElementById('result');	
+					var myResult = myBox1 * myBox2;
+					result.value = myResult;
+
+				}
+			
+				function calculatetwo() {
+					var myBox1 = document.getElementById('box3').value;	
+					var myBox2 = document.getElementById('box4').value;
+					var result = document.getElementById('resulttwo');	
+					var myResult = myBox1 * myBox2;
+					result.value = myResult;
+
+
+				}
+			
+		</script>		
+		</ui:define>
+		<ui:define name="footer">
+			<ui:include src="/template/footer2.xhtml" />
+		</ui:define>		
+	</ui:composition>
+	
+</h:body>
+</html>

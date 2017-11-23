@@ -56,13 +56,11 @@
 		                <f:convertNumber currencySymbol="€" type="currency"/>
 		            </h:outputText>
 		        </p:column>
-				<p:column style="width:110px">
-					<h:commandButton icon="ui-icon-cart"
-						title="View" action="#{NovFilterView.addToBasket()}">
-						<f:setPropertyActionListener value="#{product}"
-							target="#{NovFilterView.selectedProduit}" />
+				<h:column style="width:110px">
+					<h:commandButton icon="ui-icon-cart" title="View" action="#{NovFilterView.addToBasket()}">
+						<f:setPropertyActionListener value="#{product}" target="#{NovFilterView.selectedProduit}" />
 					</h:commandButton>
-				</p:column>
+				</h:column>
 		
 		    </p:dataTable>
 		</h:form>

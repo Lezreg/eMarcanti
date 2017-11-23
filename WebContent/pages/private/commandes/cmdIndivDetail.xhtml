@@ -1,0 +1,103 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="cmdDetailForm">
+			<div style="overflow-x:auto;">	
+				
+				<table style="border-spacing: 25px;background-color: #f2f2f2;width: 70%;">
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Nom de commande :" />
+					  		</td>
+					  		<td align="left" class="textInfo">
+					  			<h:outputText id="cdCommId" value="#{reductionView.cmdIndivDetail.cdeIndivNom}" />
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Nom modifieur :" />
+					  		</td>
+					  		<td align="left" class="textInfo">
+					  			<h:outputText id="ttp" value="#{reductionView.cmdIndivDetail.nomModifieur}" title="Organisation" />
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Etat :" />
+					  		</td>
+					  		<td align="left">
+					  			<h:outputText id="beneId" style="color : rgb(48, 186, 50);" value="#{reductionView.cmdIndivDetail.}" />
+					  		</td>
+					  	</tr>
+					  
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Date création :" />
+					  		</td>
+					  		<td align="left">
+        							<p:calendar id="dLP" value="#{reductionView.cmdIndivDetail.dateCreation}" pattern="dd-MM-yyyy" mask="true" />
+<!-- 					  			<h:inputText id="dateLIpD" value="#{cmdGroupeeView.commandeGroupee.dateLivraisonPrevue}"/> -->
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Date modification :" />
+					  		</td>
+					  		<td align="left">
+					  		<p:calendar id="mask" value="#{reductionView.cmdIndivDetail.dateModification}" pattern="dd-MM-yyyy" mask="true" />
+<!-- 					  			<h:inputText id="dateLRID" value="#{cmdGroupeeView.commandeGroupee.dateLivraisonReelle}"/> -->
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Réduction :" />
+					  		</td>
+					  		<td align="left">
+								<h:inputText id="codeId" value="#{reductionView.cmdIndivDetail.reduction}" />
+					  		</td>
+					  	</tr>
+					  	
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Total à payer :" />
+					  		</td>
+					  		<td align="left">
+								<h:outputText id="suiId" value="#{reductionView.cmdIndivDetail.totalAPayer}" />
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Nom commande groupée :" />
+					  		</td>
+					  		<td align="left">
+								<h:outputText id="transid" value="#{reductionView.cmdIndivDetail.idCdeGroupee.cdeGroupeeNom}" />
+					  		</td>
+					  	</tr>
+					  	<tr>
+					  		<td align="left">
+					  			<h:outputText value="Nom transporteur :" />
+					  		</td>
+					  		<td align="left">
+					  			<h:outputText id="payId" style="color : rgb(48, 186, 50);" value="#{reductionView.cmdIndivDetail.nomTransporteur}" />
+					  		</td>
+					  	</tr>
+					  	
+<!-- 					  	<tr align="left"> -->
+<!-- 					  		<td colspan="2" align="left"> -->
+<!-- 					  			<h:commandButton value="Enregistrer" id="enrgId" action="#{cmdGroupeeView.saveCmdGroupee}"/> -->
+<!-- 					  		</td> -->
+<!-- 					  	</tr> -->
+				</table>
+					
+			</div>
+		</h:form>
+	
+	
+	</ui:define>
+</ui:composition>

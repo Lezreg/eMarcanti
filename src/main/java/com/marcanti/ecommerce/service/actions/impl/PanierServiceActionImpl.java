@@ -135,7 +135,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED)
+	@Transactional
 	@Override
 	public List<PanierProduit> recalculer(List<PanierProduit> panierProduitList, UserSessionBean userSessionBean)
 			throws ProductNotAvailableException {
@@ -150,6 +150,8 @@ public class PanierServiceActionImpl implements PanierActionService {
 				// id qte zero then delete panierProduit
 				short qteSouhaitee = panierProduit.getQteSouhaitee();
 				if (qteSouhaitee == 0) {
+					LOGGER.info("Produit supprimé qte souhaité 0 :"
+							+ panierProduit.getProduit().getIdMarque().getMarqueNom());
 					panierProduitDAO.removeById(panierProduit.getPanierProduitPK());
 					continue;
 				}

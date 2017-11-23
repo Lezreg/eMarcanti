@@ -256,6 +256,14 @@
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
+			<from-outcome>cmdIndivDetail</from-outcome>
+			<to-view-id>/pages/private/commandes/cmdIndivDetail.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
 			<from-outcome>createCmd</from-outcome>
 			<to-view-id>/pages/private/cmdGroupeeDetail.xhtml</to-view-id>
 		</navigation-case>

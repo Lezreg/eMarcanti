@@ -43,11 +43,13 @@ public interface ProduitServiceAction {
 	public List<ProduitBean> getPromoProducts(Long orgId);
 
 	public List<ProduitBean> getDecouvProducts(Long orgId);
-	
+
 	Produit getProduit(Long idProduit);
-	
+
 	public void updateProduit(Produit produit);
-	
+
 	public void insertProduit(Produit produit);
+
+	public List<ProduitBean> searchProduct(String searchChar);
 
 }
