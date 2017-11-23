@@ -106,9 +106,6 @@
 								</h:selectOneMenu>
 							  <div class="select__arrow"></div>
 							</div>
-
-
-							
 						</div>
 						
 					</div>
@@ -154,13 +151,7 @@
 											<p>Annulée</p>
 										</div>
 									</li>
-									
-									
 								</ul>
-								
-							
-								
-								
 							</div>
 							
 						</div>
@@ -236,8 +227,6 @@
 			</div><!--end cont.-->
 		</section><!--end sec-->
 		
-		
-		
 		<section class="comandeindialstatusarea">
 			<h2 class="section_header">sect</h2>
 			<div class="container">
@@ -264,7 +253,6 @@
 					
 				</div>
 				
-				
 				<div class="row marginRow">
 					<div class="col-xs-12 paddingrightless">
 						<div class="sauvegarderbutton confirmbutton">
@@ -278,7 +266,7 @@
 					<div class="col-xs-12 paddingrightless">
 						<div class="sauvegarderbutton commandbutton">
 							<a href="" class="othermeanbutotn" data-toggle="modal" data-target="#moyenbutton">Autre Moyen de paiement</a>
-							<a class="samewidthnotcon" href="commande-individuelle-paid.html">Payer</a>
+							<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_payer}" action="payer"/>
 						</div>
 					</div>
 				</div>
@@ -347,10 +335,7 @@
 			</div>
 		</section>
 
-
-
-
-			</h:form>
+	</h:form>
 			
 			<script>
 				function calculate() {
