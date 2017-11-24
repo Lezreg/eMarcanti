@@ -133,7 +133,7 @@
 									</li>
 									
 									<li class="smallerpbar">
-										<img src="/static/img/general.png" class="img-responsive" alt="livraisendemandee"></img>
+										<h:graphicImage src="/static/img/general.png" class="img-responsive" alt="livraisendemandee"/>
 										<div class="individualStatus innerlistone">
 											<p>Livraison demandée</p>
 										</div>
@@ -166,9 +166,10 @@
 								<p class="redclass"><i class="fa fa-warning"></i>Une erreur technique est survenue … <a href=""  data-toggle="modal" data-target="#cindinotconpopu">Détail</a></p>
 						</div>
 						<div class="updatecartcheck">
+							<h:message for="box2" errorClass="errorMessage" /> <!-- Message for username -->
 							<p><i class="fa fa-exclamation-triangle"></i> Mettez à jour votre panier !</p>
 							<p><i class="fa fa-exclamation-triangle"></i> Veuillez confirmer la commande, afin que les produits vous soient réservés !</p>
-							<span><strong>Last Update:</strong> 01/01/2016 - 16h20 by <em>Jean Duran</em></span>
+							<span><strong>Last Update:</strong> #{basketView.commandeIndividuelle.dateModification} by <em>#{basketView.commandeIndividuelle.prenomModifieur} #{basketView.commandeIndividuelle.nomModifieur}</em></span>
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -214,6 +215,7 @@
 														<td class="catgeneraltd">#{produit.produit.produitDescription}</td>
 														<td class="inputcommandarea"><input id="box1" type="text" value="#{produit.produit.notrePrix}" readonly="readonly"/>€</td>
 														<td class="quantityformarea quanlityavilablclass"><input id="box2" type="number" oninput="calculate()" min="0" value="#{produit.qteSouhaitee}"/> <span class="quantityamountspan"> quantity available #{produit.produit.qteEnStock}</span></td>
+														<h:outputLabel for="box2"/>
 														<td class="inputcommandarea"><input id="result" value="#{produit.sousTotal}"/>€</td>
 												</tr>
 									</ui:repeat>
@@ -235,7 +237,7 @@
 				<div class="row ">
 					<div class="col-xs-12 paddingrightless">
 						<div class="sauvegarderbutton">
-							<a class="samewidthnotcon" href="commande-individuelle-sauvegarde.html">Sauvegarder </a>
+							<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_sauvegarder}" action="#{basketView.reCalculer}" />
 						</div>
 					</div>
 				</div>
@@ -342,6 +344,7 @@
 				function calculate() {
 					var myBox1 = document.getElementById('box1').value;	
 					var myBox2 = document.getElementById('box2').value;
+					alert(myBox2);
 					var result = document.getElementById('result');	
 					var myResult = myBox1 * myBox2;
 					result.value = myResult;
