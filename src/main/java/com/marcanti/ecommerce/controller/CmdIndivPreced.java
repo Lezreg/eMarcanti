@@ -21,6 +21,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Panier;
 import com.marcanti.ecommerce.model.PanierProduit;
+import com.marcanti.ecommerce.model.TransactionPaiement;
 import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 import com.marcanti.ecommerce.service.actions.CommandeIndividuelleServiceAction;
 import com.marcanti.ecommerce.service.actions.PanierActionService;
@@ -59,6 +60,8 @@ public class CmdIndivPreced implements Serializable {
 
 	private boolean isCurrrentCmds = false;
 
+	private TransactionPaiement transactionPaiement;
+
 	public Panier getPanierEnCours() {
 		return panierEnCours;
 	}
@@ -76,9 +79,7 @@ public class CmdIndivPreced implements Serializable {
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
 
-		// setPanierProduitList(new ArrayList<PanierProduit>());
-		// setCommandes(new ArrayList<CommandeIndividuelle>());
-
+		setTransactionPaiement(new TransactionPaiement());
 		getCommandes();
 		getPanierProduitList();
 
@@ -97,6 +98,7 @@ public class CmdIndivPreced implements Serializable {
 		if (selectedCmd != null) {
 			this.commandeIndividuelle = commandeIndividuelleServiceAction
 					.getCommandeIndividuelleById(new Long(selectedCmd));
+			setTransactionPaiement(commandeIndividuelle.getIdTransactionPaiement());
 			panierProduitList = panierService.getProduitsByCmdIndiv(new Long(selectedCmd));
 		}
 		return panierProduitList;
@@ -169,6 +171,14 @@ public class CmdIndivPreced implements Serializable {
 
 	public void setCommandeGroupeeServiceAction(CommandeGroupeeServiceAction commandeGroupeeServiceAction) {
 		this.commandeGroupeeServiceAction = commandeGroupeeServiceAction;
+	}
+
+	public TransactionPaiement getTransactionPaiement() {
+		return transactionPaiement;
+	}
+
+	public void setTransactionPaiement(TransactionPaiement transactionPaiement) {
+		this.transactionPaiement = transactionPaiement;
 	}
 
 }

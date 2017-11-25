@@ -105,46 +105,41 @@
 							<div class="messProgressBararea">
 								<ul>
 									<li>
-										<img src="img/commandes/blackwhite.png" class="img-responsive" alt="notconfirm"/>
+										<h:graphicImage value="/static/img/commandes/blackwhite.png" styleClass="img-responsive" alt="notconfirm" />
 										<div class="individualStatus innerlistone">
 											<p><i class="fa fa-exclamation-triangle"></i>Non confirmée</p>
 										</div>
 									</li>
 									
 									<li class="smallerpbar">
-										<img src="img/general.png" class="img-responsive" alt="confirm"/>
+										<h:graphicImage value="/static/img/general.png" styleClass="img-responsive" alt="confirm" />
 										<div class="individualStatus innerlistone">
 											<p>Confirmée</p>
 										</div>
 									</li>
 									
 									<li class="smallerpbar">
-										<img src="img/general.png" class="img-responsive" alt="livraisendemandee"/>
+										<h:graphicImage value="/static/img/general.png" styleClass="img-responsive" alt="livraisendemandee" />
 										<div class="individualStatus innerlistone">
 											<p>Livraison demandée</p>
 										</div>
 									</li>
 									
 									<li class="smallerpbar marginlesstablet">
-										<img src="img/commandes/livree.png" class="img-responsive" alt="livree"/>
+										<h:graphicImage value="/static/img/commandes/livree.png" styleClass="img-responsive" alt="livree" />
 										<div class="individualStatus innerlistone">
 											<p style="color:#fff!important;">Livrée</p>
 										</div>
 									</li>
 									
 									<li class="smallerpbar">
-										<img src="img/general.png" class="img-responsive" alt="livree"/>
+										<h:graphicImage value="/static/img/general.png" styleClass="img-responsive" alt="Annulee" />
 										<div class="individualStatus innerlistone">
 											<p>Annulée</p>
 										</div>
 									</li>
-									
-									
 								</ul>
-								
-								
 							</div>
-							
 						</div>
 					</div>
 				</div><!--end row-->
@@ -296,7 +291,7 @@
 			</div>
 		</section>
 		
-		
+		<c:if test="${USER_SESSION.MENU_ADMIN_MBR}" scope="session">
 		<section class="seemoreaccordionarea">
 		<div class="container">
 		
@@ -304,10 +299,10 @@
 					<div class="col-xs-12">
 						<div class="seemoreoptionsbutton">
 							<ul>
-								<li>Payment</li>
-								<li>€230</li>
-								<li>30/10/2017</li>
-								<li class="redclass">KO</li>
+								<li>#{msg.libelle_paiement}</li>
+								<li>#{cmdIndivPrec.transactionPaiement.montantPaiement} €</li>
+								<li>#{cmdIndivPrec.transactionPaiement.datePaiement}</li>
+								<li class="redclass">#{cmdIndivPrec.transactionPaiement.statutTransactionFournissPaiement} </li>
 							</ul>
 						</div>
 					</div>
@@ -326,53 +321,53 @@
 									<div class="table-responsive">
 									  <table class="table">
 											<tr>
-												<td>ID Transaction</td>
-												<td>5463</td>
+												<td>#{msg.libelle_id_Transaction}</td>
+												<td>#{cmdIndivPrec.transactionPaiement.idTransactionPaiement}</td>
 											</tr>
 											
 											<tr>
-												<td>Name of CB</td>
-												<td>Duran</td>
+												<td>#{msg.libelle_nom} CB</td>
+												<td>#{cmdIndivPrec.transactionPaiement.nomSurCB}</td>
 											</tr>
 											
 											<tr>
-												<td>First name of CB</td>
-												<td>John</td>
+												<td>#{msg.libelle_prenom} CB</td>
+												<td>#{cmdIndivPrec.transactionPaiement.prenomSurCB}</td>
 											</tr>
 											
 											<tr>
-												<td>Type of CB</td>
-												<td>Visa</td>
+												<td>#{msg.type} CB</td>
+												<td>#{cmdIndivPrec.transactionPaiement.typeCB}</td>
 											</tr>
 											
 											<tr>
-												<td>Date Expiration of CB</td>
-												<td>30/10/2018</td>
+												<td>#{msg.libelle_Date_Expiration} CB</td>
+												<td>#{cmdIndivPrec.transactionPaiement.dateExpirationCB}</td>
 											</tr>
 											
 											<tr>
-												<td>Last 4 Digits</td>
-												<td>1234</td>
+												<td>#{msg.libelle_4_derniers_digits} CB</td>
+												<td>#{cmdIndivPrec.transactionPaiement.quatreDerniersDigitsCB}</td>
 											</tr>
 											
 											<tr>
-												<td>Date of payment</td>
-												<td>30/10/2018 - 16:45</td>
+												<td>#{msg.libelle_date_paiement}</td>
+												<td>#{cmdIndivPrec.transactionPaiement.datePaiement}</td>
 											</tr>
 											
 											<tr>
-												<td>ID transaction fournisers</td>
-												<td>xy12345</td>
+												<td>#{msg.libelle_transaction_paiement}</td>
+												<td>#{cmdIndivPrec.transactionPaiement.idTransactionFournissPaiement}</td>
 											</tr>
 											
 											<tr>
-												<td>Amount Paid</td>
-												<td>€230</td>
+												<td>#{msg.libelle_montant_paiement}</td>
+												<td>#{cmdIndivPrec.transactionPaiement.montantPaiement} €</td>
 											</tr>
 											
 											<tr>
-												<td>Email Paypal</td>
-												<td>john.duran@hotmail.com</td>
+												<td>#{msg.libelle_Email_Paypal}</td>
+												<td>#{cmdIndivPrec.transactionPaiement.emailPaypal}</td>
 											</tr>
 											
 									  </table>
@@ -388,7 +383,7 @@
 		</div>
 
 		</section>	
-
+	</c:if>
 	</h:form>
 			
 		<script>

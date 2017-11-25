@@ -117,13 +117,11 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 		return (List<CommandeIndividuelle>) query.getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<CommandeIndividuelle> getCommandeIndivLivreListByMembre(Long idMembre) {
 		Query query = em.createQuery(
-				"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.idStatus.statusCode = :statusCode) order by date(dateCreation) desc")
-				.setParameter("idMembre", idMembre)
-				.setParameter("statusCode", CommandeIndividuelleStatusEnum.CDE_INDIVID_LIVREE.getCode());
+				"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.isPaiementEffectue = :isPaiementEffectue) order by date(dateCreation) desc")
+				.setParameter("idMembre", idMembre).setParameter("isPaiementEffectue", Boolean.TRUE);
 
 		LOGGER.info(query.toString());
 
