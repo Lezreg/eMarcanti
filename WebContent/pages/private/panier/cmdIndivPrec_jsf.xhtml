@@ -1,0 +1,83 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<h:form id="panierId">
+		
+			<h:selectOneMenu id="cmdIdiv" value="#{cmdIndivPrec.selectedCmd}" required="true" label="choisir une commande"
+			    style="width: 200px" sortBy="#{panierProduit.qteSouhaitee}">
+			    <f:selectItems value="#{cmdIndivPrec.commandes}" var="order" itemLabel="#{order.cdeIndivNom}" itemValue="#{order.idCdeIndiv}" />
+			    <p:ajax  update="panierProduitTable ttp" />
+			</h:selectOneMenu>
+			<br/>
+			
+			<p:growl id="growl" for="qte" showDetail="true" sticky="true" /> 
+			
+			<table style="border-spacing: 25px;">
+				  	<tr>
+				  		<td align="left">
+				  			<h:outputText value="Dernière Modification " />
+				  		</td>
+				  		<td align="left" class="textInfo">
+				  			<h:outputText id="modifId" style="color : rgb(108, 107, 98);" value="#{cmdIndivPrec.commandeIndividuelle.dateModification} par #{cmdIndivPrec.commandeIndividuelle.prenomModifieur} #{cmdIndivPrec.commandeIndividuelle.nomModifieur}" />
+				  		</td>
+				  		
+				  		<td align="right">
+				  			<h:outputText value="Etat: " />
+				  		</td>
+				  		<td align="right">
+				  			<h:outputText id="statutid" style="color : rgb(48, 186, 50);margin-left:-4px;" value="#{cmdIndivPrec.commandeIndividuelle.idStatus.statusLibelle}" />
+				  		</td>
+				  	</tr>
+				  	
+			</table>
+			
+			<p:dataTable id="panierProduitTable" var="panierProduit" value="#{cmdIndivPrec.panierProduitList}" emptyMessage="Aucune commande en cours !" liveResize="true">
+
+				<p:column headerText="Marque">
+					<p:graphicImage
+						url="/images/100X100/#{empty panierProduit.produit.produitPhotoURL ? 'default.jpg' : panierProduit.produit.produitPhotoURL}"
+						width="100" />
+					<h:outputText value="#{produitAdded.idMarque.marqueNom}" />
+				</p:column>
+
+				<p:column headerText="Description">
+					<h:outputText value="#{panierProduit.produit.produitDescription}" />
+				</p:column>
+				
+				<p:column style="width:110px" headerText="Notre prix" footerText="">
+					<h:outputText value="#{panierProduit.produit.notrePrix}">
+						<f:convertNumber currencySymbol="€" type="currency" />
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Qté">
+					<h:inputText id="qte" value="#{panierProduit.qteSouhaitee}" />
+					<p:outputLabel for="qte"/> 
+				</p:column>
+				
+				<p:column headerText="Sous Total">
+					<h:outputText value="#{panierProduit.sousTotal}">
+						<f:convertNumber currencySymbol="€" type="currency" />
+					</h:outputText>
+				</p:column>
+				
+			</p:dataTable>
+			
+			<br />
+			<br />
+			<br />
+			<h:outputText value="Total : " />
+			<h:outputText id="ttp" value="#{cmdIndivPrec.commandeIndividuelle.totalAPayer}" title="Total à payer" >
+				<f:convertNumber currencySymbol="€" type="currency" />
+			</h:outputText>
+		
+		</h:form>
+			
+	</ui:define>
+</ui:composition>

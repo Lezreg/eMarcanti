@@ -75,9 +75,8 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 
 	@Override
 	public boolean verifyExistingCommandeIndividuelle(Membre membre, CommandeGroupee commandeGroupee) {
-		Query query = em
-				.createQuery(
-						"SELECT c FROM CommandeIndividuelle c WHERE c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee")
+		Query query = em.createQuery(
+				"SELECT c FROM CommandeIndividuelle c WHERE c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee")
 				.setParameter("idMembre", membre.getIdMembre())
 				.setParameter("idCdeGroupee", commandeGroupee.getIdCdeGroupee()).setMaxResults(1);
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
@@ -89,9 +88,8 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 	@Override
 	public CommandeIndividuelle getCommandeIndividuellByMembreAndCmdGroupe(Membre membre,
 			CommandeGroupee commandeGroupee) {
-		Query query = em
-				.createQuery(
-						"SELECT c FROM CommandeIndividuelle c WHERE c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.isPaiementEffectue = :isPaiementEffectue")
+		Query query = em.createQuery(
+				"SELECT c FROM CommandeIndividuelle c WHERE c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.isPaiementEffectue = :isPaiementEffectue")
 				.setParameter("idMembre", membre.getIdMembre())
 				.setParameter("idCdeGroupee", commandeGroupee.getIdCdeGroupee())
 				.setParameter("isPaiementEffectue", Boolean.FALSE);
@@ -106,9 +104,8 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 
 	@Override
 	public List<CommandeIndividuelle> getCommandeIndivListByMembreAndCmdGroupe(Long idMembre, Long idCdeGroupee) {
-		Query query = em
-				.createQuery(
-						"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.idStatus.statusCode != :statusCode) order by date(dateCreation) desc")
+		Query query = em.createQuery(
+				"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.idStatus.statusCode != :statusCode) order by date(dateCreation) desc")
 				.setParameter("idMembre", idMembre).setParameter("idCdeGroupee", idCdeGroupee)
 				.setParameter("statusCode", CommandeIndividuelleStatusEnum.CDE_INDIVID_LIVREE.getCode());
 
@@ -120,11 +117,11 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 		return (List<CommandeIndividuelle>) query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CommandeIndividuelle> getCommandeIndivLivreListByMembre(Long idMembre) {
-		Query query = em
-				.createQuery(
-						"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.idStatus.statusCode = :statusCode) order by date(dateCreation) desc")
+		Query query = em.createQuery(
+				"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.idStatus.statusCode = :statusCode) order by date(dateCreation) desc")
 				.setParameter("idMembre", idMembre)
 				.setParameter("statusCode", CommandeIndividuelleStatusEnum.CDE_INDIVID_LIVREE.getCode());
 
