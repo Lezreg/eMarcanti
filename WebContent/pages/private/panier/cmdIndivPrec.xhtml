@@ -148,7 +148,7 @@
 				<div class="row marginRow unpaidarea">
 					<div class="col-sm-8">
 						<div class="updatecartcheck">
-							<span><strong>Last Update:</strong> #{cmdIndivPrec.commandeIndividuelle.dateModification} by <em>#{cmdIndivPrec.commandeIndividuelle.prenomModifieur} #{cmdIndivPrec.commandeIndividuelle.nomModifieur}</em></span>
+							<span><strong>#{msg.libelle_dernier_maj}</strong> #{cmdIndivPrec.commandeIndividuelle.dateModification} par <em>#{cmdIndivPrec.commandeIndividuelle.prenomModifieur} #{cmdIndivPrec.commandeIndividuelle.nomModifieur}</em></span>
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -336,7 +336,7 @@
 											</tr>
 											
 											<tr>
-												<td>#{msg.type} CB</td>
+												<td>#{msg.libelle_type} CB</td>
 												<td>#{cmdIndivPrec.transactionPaiement.typeCB}</td>
 											</tr>
 											

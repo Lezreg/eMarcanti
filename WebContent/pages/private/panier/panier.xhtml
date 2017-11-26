@@ -32,7 +32,7 @@
 				  <div class="messmodaldia modal-dialog" role="document">
 				    <div class="modal-content">
 				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">times;</span></button>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">times</span></button>
 				       
 				      </div>
 				      <div class="modal-body">
@@ -163,13 +163,13 @@
 				<div class="row marginRow unpaidarea">
 					<div class="col-sm-8">
 						<div class="warningmessageadminlist">
-								<p class="redclass"><i class="fa fa-warning"></i>Une erreur technique est survenue … <a href=""  data-toggle="modal" data-target="#cindinotconpopu">Détail</a></p>
+<!-- 								<p class="redclass"><i class="fa fa-warning"></i>Une erreur technique est survenue … <a href=""  data-toggle="modal" data-target="#cindinotconpopu">Détail</a></p> -->
 						</div>
 						<div class="updatecartcheck">
-							<h:message for="box2" errorClass="errorMessage" /> <!-- Message for username -->
-							<p><i class="fa fa-exclamation-triangle"></i> Mettez à jour votre panier !</p>
-							<p><i class="fa fa-exclamation-triangle"></i> Veuillez confirmer la commande, afin que les produits vous soient réservés !</p>
-							<span><strong>Last Update:</strong> #{basketView.commandeIndividuelle.dateModification} by <em>#{basketView.commandeIndividuelle.prenomModifieur} #{basketView.commandeIndividuelle.nomModifieur}</em></span>
+<!-- 							<h:message for="box2" errorClass="errorMessage" /> Message for username -->
+<!-- 							<p><i class="fa fa-exclamation-triangle"></i> Mettez à jour votre panier !</p> -->
+<!-- 							<p><i class="fa fa-exclamation-triangle"></i> Veuillez confirmer la commande, afin que les produits vous soient réservés !</p> -->
+							<span><strong>#{msg.libelle_dernier_maj}</strong> #{basketView.commandeIndividuelle.dateModification} par <em>#{basketView.commandeIndividuelle.prenomModifieur} #{basketView.commandeIndividuelle.nomModifieur}</em></span>
 						</div>
 					</div>
 					<div class="col-sm-4">
@@ -213,8 +213,8 @@
 																	</p>
 														</td>
 														<td class="catgeneraltd">#{produit.produit.produitDescription}</td>
-														<td class="inputcommandarea"><input id="box1" type="text" value="#{produit.produit.notrePrix}" readonly="readonly"/>€</td>
-														<td class="quantityformarea quanlityavilablclass"><input id="box2" type="number" oninput="calculate()" min="0" value="#{produit.qteSouhaitee}"/> <span class="quantityamountspan"> quantity available #{produit.produit.qteEnStock}</span></td>
+														<td class="inputcommandarea"><input id="box1" value="#{produit.produit.notrePrix}"/>€</td>
+														<td class="quantityformarea quanlityavilablclass"><h:inputText id="box2" value="#{produit.qteSouhaitee}" type="number" oninput="calculate()" min="0" /> <span class="quantityamountspan"> #{msg.libelle_qte_disponible} #{produit.produit.qteEnStock}</span></td>
 														<h:outputLabel for="box2"/>
 														<td class="inputcommandarea"><input id="result" value="#{produit.sousTotal}"/>€</td>
 												</tr>
@@ -344,7 +344,6 @@
 				function calculate() {
 					var myBox1 = document.getElementById('box1').value;	
 					var myBox2 = document.getElementById('box2').value;
-					alert(myBox2);
 					var result = document.getElementById('result');	
 					var myResult = myBox1 * myBox2;
 					result.value = myResult;

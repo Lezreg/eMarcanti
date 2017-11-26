@@ -67,14 +67,6 @@ public class BasketController implements Serializable {
 
 	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 
-	public Panier getPanierEnCours() {
-		return panierEnCours;
-	}
-
-	public void setPanierEnCours(Panier panierEnCours) {
-		this.panierEnCours = panierEnCours;
-	}
-
 	private List<PanierProduit> panierProduitList;
 
 	@PostConstruct
@@ -84,9 +76,6 @@ public class BasketController implements Serializable {
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
 
-		// by default last commandeInd will be selected
-		// setPanierProduitList(new ArrayList<PanierProduit>());
-		// setCommandes(new ArrayList<CommandeIndividuelle>());
 		getCommandes();
 		getPanierProduitList();
 
@@ -188,16 +177,25 @@ public class BasketController implements Serializable {
 
 		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(),
 				derniereCdeGoupee, isCurrrentCmds);
+
 		if (selectedCmd == null || selectedCmd.isEmpty()) {
 			if (commandes != null && !commandes.isEmpty()) {
 				CommandeIndividuelle commandeIndividuelle2 = commandes.get(0);
-				panierEnCours = commandeIndividuelle2.getIdPanier();
 				selectedCmd = commandeIndividuelle2.getIdCdeIndiv().toString();
 			}
 		}
 
 		LOGGER.info(selectedCmd);
 		return commandes;
+	}
+
+	public Panier getPanierEnCours() {
+		panierEnCours = commandeIndividuelle.getIdPanier();
+		return panierEnCours;
+	}
+
+	public void setPanierEnCours(Panier panierEnCours) {
+		this.panierEnCours = panierEnCours;
 	}
 
 	public void setPanierProduitList(List<PanierProduit> panierProduit) {

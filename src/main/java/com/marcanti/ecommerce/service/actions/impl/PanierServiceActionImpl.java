@@ -140,6 +140,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 	public List<PanierProduit> recalculer(List<PanierProduit> panierProduitList, UserSessionBean userSessionBean)
 			throws ProductNotAvailableException {
 		Panier panier = null;
+		CommandeIndividuelle commandeIndividuel = null;
 		BigDecimal totalPanier = BigDecimal.ZERO;
 		Short panierNbreProduit = ShortUtils.DEFAULT;
 		for (PanierProduit panierProduit : panierProduitList) {
@@ -147,28 +148,36 @@ public class PanierServiceActionImpl implements PanierActionService {
 				if (panier == null) {
 					panier = panierProduit.getPanier();
 				}
+
+				if (commandeIndividuel == null) {
+					commandeIndividuel = commandeIndividuelleDAO.find(panier.getCommandeIndividuelle().getIdCdeIndiv());
+				}
 				// id qte zero then delete panierProduit
 				short qteSouhaitee = panierProduit.getQteSouhaitee();
 				if (qteSouhaitee == 0) {
 					LOGGER.info("Produit supprimé qte souhaité 0 :"
 							+ panierProduit.getProduit().getIdMarque().getMarqueNom());
 					panierProduitDAO.removeById(panierProduit.getPanierProduitPK());
+
+					if (commandeIndividuel != null && commandeIndividuel.getIdPanier() != null
+							&& commandeIndividuel.getIdPanier().getPanierProduitCollection() != null) {
+						commandeIndividuel.getIdPanier().getPanierProduitCollection().remove(panierProduit);
+					}
+					commandeIndividuelleDAO.edit(commandeIndividuel);
 					continue;
 				}
 				checkPanierProduit(panierProduit, qteSouhaitee, userSessionBean);
 				panierProduitDAO.edit(panierProduit);
 				// sous total panier produit
 				BigDecimal notrePrix = panierProduit.getProduit().getNotrePrix();
-				short qteSouhaite = panierProduit.getQteSouhaitee();
 				// total panier
-				totalPanier = totalPanier.add(notrePrix.multiply(new BigDecimal(qteSouhaite)));
+				totalPanier = totalPanier.add(notrePrix.multiply(new BigDecimal(qteSouhaitee)));
 				panierNbreProduit = ShortUtils.sum2Short(panierNbreProduit, qteSouhaitee);
 			}
 		}
 		// update montant panier
 		panier = updateMontantNbreProduit(totalPanier, panier, panierNbreProduit);
-		CommandeIndividuelle commandeIndividuel = commandeIndividuelleDAO
-				.find(panier.getCommandeIndividuelle().getIdCdeIndiv());
+
 		// TODO commandeIndividuelle.setReduction(reduction);
 		// update commande individuelle
 		CommandeIndividuelle cmdIndiv = updateCommandeIndividuelle(userSessionBean, commandeIndividuel, panier);
@@ -197,10 +206,9 @@ public class PanierServiceActionImpl implements PanierActionService {
 	}
 
 	private Panier updateMontantNbreProduit(BigDecimal totalPanier, Panier panier, Short panierNbreProduit) {
-		panier.setPanierMontant(totalPanier);
 		LOGGER.info("------------------ panierNbreProduit :" + panierNbreProduit);
 		panier.setPanierNbreProduit(panierNbreProduit);
-		// TODO Total à payer montantTotal - reduction
+		panier.setPanierMontant(totalPanier);
 		panier = panierDao.edit(panier);
 		return panier;
 	}
@@ -274,7 +282,15 @@ public class PanierServiceActionImpl implements PanierActionService {
 		// nom et prenom modifieur
 		commandeIndividuel.setNomModifieur(userSessionBean.getMembreNom());
 		commandeIndividuel.setPrenomModifieur(userSessionBean.getMembrePrenom());
-		commandeIndividuel.setTotalAPayer(panierEnCours.getPanierMontant());
+		if (commandeIndividuel.getReduction() == null) {
+			// TODO reduction
+			commandeIndividuel.setReduction(new BigDecimal(0));
+		}
+		BigDecimal total = panierEnCours.getPanierMontant().subtract(commandeIndividuel.getReduction());
+		if (total.compareTo(BigDecimal.ZERO) < 0) {
+			total = BigDecimal.ZERO;
+		}
+		commandeIndividuel.setTotalAPayer(total);
 		// update
 		commandeIndividuelleDAO.edit(commandeIndividuel);
 		return commandeIndividuel;
