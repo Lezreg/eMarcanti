@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 import com.marcanti.ecommerce.utils.Mail;
+import com.marcanti.ecommerce.utils.MailHtml;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 
@@ -196,7 +197,7 @@ public class AuthentificationBean implements Serializable {
 			try {
 				logger.info("send mail with generated code : " + code);
 				Mail.send(getUsername(), ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.code.verification"),String.valueOf(code)));
-			} catch (MessagingException e) {
+			} catch (Exception e) {
 				logger.error("ERROR send mail with generated code : ",e);
 			}
 			

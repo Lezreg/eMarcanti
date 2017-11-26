@@ -177,38 +177,75 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 
 	@Override
 	public void updateProduit(Produit produit) {
-		Query query = em
-				.createNativeQuery("UPDATE produit SET idMarque=?, " + "idCategorie=? " + "idSousCategorie=? "
-						+ "produitDescription=? " + "produitDetail=? " + "notrePrix=? " + "prixPublic=? "
-						+ "qteEnStock=? " + "produitPhotoURL=? " + "produitPhotoTailleMediumURL=? "
-						+ "produitPhotoTailleLargeURL=? " + "dateDebutPromo=? " + "dateFinPromo=? "
-						+ "dateDebutNouveaute=? " + "dateFinNouveaute=? " + "dateDebutADecouvrir=? "
-						+ "dateFinADecouvrir=? " + "titreADecouvrir=? " + "noteDeTete=? " + "noteDeCoeur=? "
-						+ "noteDeFond=? " + "familleOlfactive=? " + "descriptionADecouvrir=? " + "motCleADecouvrir=? "
-						+ "codeEAN=? " + "isBestSellerHomme=? " + "isBestSellerFemme=? " + "isPetitPrix=? "
-						+ "isNouveauteSurHomePage=? " + "isPromoSurHomePage=? " + "isADecouvrirSurHomePage=? "
-						+ "produitVideoURL=? " + "WHERE idProduit=?")
-				.setParameter(1, produit.getIdMarque()).setParameter(2, produit.getIdCategorie().getIdCategorie())
+		Query query = em.createNativeQuery("UPDATE produit SET idMarque=?, "
+				+ "idCategorie=?, "
+				+ "idSousCategorie=?, "
+				+ "produitDescription=?, "
+				+ "produitDetail=?, "
+				+ "notrePrix=?, "
+				+ "prixPublic=?, "
+				+ "qteEnStock=?, "
+				+ "produitPhotoURL=?, "
+				+ "produitPhotoTailleMediumURL=?, "
+				+ "produitPhotoTailleLargeURL=?, "
+				+ "dateDebutPromo=?, "
+				+ "dateFinPromo=?, "
+				+ "dateDebutNouveaute=?, "
+				+ "dateFinNouveaute=?, "
+				+ "dateDebutADecouvrir=?, "
+				+ "dateFinADecouvrir=?, "
+				+ "titreADecouvrir=?, "
+				+ "noteDeTete=?, "
+				+ "noteDeCoeur=?, "
+				+ "noteDeFond=?, "
+				+ "familleOlfactive=?, "
+				+ "descriptionADecouvrir=?, "
+				+ "motCleADecouvrir=?, "
+				+ "codeEAN=?, "
+				+ "isBestSellerHomme=?, "
+				+ "isBestSellerFemme=?, "
+				+ "isPetitPrix=?, "
+				+ "isNouveauteSurHomePage=?, "
+				+ "isPromoSurHomePage=?, "
+				+ "isADecouvrirSurHomePage=?, "
+				+ "produitVideoURL=? "
+				+ "WHERE idProduit=?")
+				.setParameter(1, produit.getIdMarque())
+				.setParameter(2, produit.getIdCategorie().getIdCategorie())
 				.setParameter(3, produit.getIdSousCategorie().getIdSousCategorie())
-				.setParameter(4, produit.getProduitDescription()).setParameter(5, produit.getProduitDetail())
-				.setParameter(6, produit.getNotrePrix()).setParameter(7, produit.getPrixPublic())
-				.setParameter(8, produit.getQteEnStock()).setParameter(9, produit.getProduitPhotoURL())
+				.setParameter(4, produit.getProduitDescription())
+				.setParameter(5, produit.getProduitDetail())
+				.setParameter(6, produit.getNotrePrix())
+				.setParameter(7, produit.getPrixPublic())
+				.setParameter(8, produit.getQteEnStock())
+				.setParameter(9, produit.getProduitPhotoURL())
 				.setParameter(10, produit.getProduitPhotoTailleMediumURL())
-				.setParameter(11, produit.getProduitPhotoTailleLargeURL()).setParameter(12, produit.getDateDebutPromo())
-				.setParameter(13, produit.getDateFinPromo()).setParameter(14, produit.getDateDebutNouveaute())
-				.setParameter(15, produit.getDateFinNouveaute()).setParameter(16, produit.getDateDebutADecouvrir())
-				.setParameter(17, produit.getDateFinADecouvrir()).setParameter(18, produit.getTitreADecouvrir())
-				.setParameter(19, produit.getNoteDeTete()).setParameter(20, produit.getNoteDeCoeur())
-				.setParameter(21, produit.getNoteDeFond()).setParameter(22, produit.getFamilleOlfactive())
-				.setParameter(23, produit.getDescriptionADecouvrir()).setParameter(24, produit.getMotCleADecouvrir())
-				.setParameter(25, produit.getCodeEAN()).setParameter(26, produit.isBestSellerHomme())
-				.setParameter(27, produit.isBestSellerFemme()).setParameter(28, produit.isPetitPrix())
-				.setParameter(29, produit.isNouveauteSurHomePage()).setParameter(30, produit.isPromoSurHomePage())
-				.setParameter(31, produit.isADecouvrirSurHomePage()).setParameter(32, produit.getProduitVideoURL())
+				.setParameter(11, produit.getProduitPhotoTailleLargeURL())
+				.setParameter(12, produit.getDateDebutPromo())
+				.setParameter(13, produit.getDateFinPromo())
+				.setParameter(14, produit.getDateDebutNouveaute())
+				.setParameter(15, produit.getDateFinNouveaute())
+				.setParameter(16, produit.getDateDebutADecouvrir())
+				.setParameter(17, produit.getDateFinADecouvrir())
+				.setParameter(18, produit.getTitreADecouvrir())
+				.setParameter(19, produit.getNoteDeTete())
+				.setParameter(20, produit.getNoteDeCoeur())
+				.setParameter(21, produit.getNoteDeFond())
+				.setParameter(22, produit.getFamilleOlfactive())
+				.setParameter(23, produit.getDescriptionADecouvrir())
+				.setParameter(24, produit.getMotCleADecouvrir())
+				.setParameter(25, produit.getCodeEAN())
+				.setParameter(26, produit.isBestSellerHomme())
+				.setParameter(27, produit.isBestSellerFemme())
+				.setParameter(28, produit.isPetitPrix())
+				.setParameter(29, produit.isNouveauteSurHomePage())
+				.setParameter(30, produit.isPromoSurHomePage())
+				.setParameter(31, produit.isADecouvrirSurHomePage())
+				.setParameter(32, produit.getProduitVideoURL())
 				.setParameter(33, produit.getIdProduit());
 		query.executeUpdate();
-		// em.persist(sousCategorie);
-
+		//em.persist(sousCategorie);
+		
 	}
 
 	@Override

@@ -1,5 +1,8 @@
 package com.marcanti.ecommerce.view.bean;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,10 +13,11 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.marcanti.ecommerce.model.Carousel;
 import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
@@ -49,6 +53,12 @@ public class CatalogueAdminBean implements Serializable {
 	
 	private Long idProduit;	
 	
+	private UploadedFile uploadedPhotoCatalogue;
+	
+	private UploadedFile uploadedPhotoMoyenne;
+	
+	private UploadedFile uploadedPhoto;
+	
 	@ManagedProperty("#{catalogueService}")
 	private VCatalogueAdminServiceAction catalogueService;
 	
@@ -62,7 +72,10 @@ public class CatalogueAdminBean implements Serializable {
 	private SousCategorieServiceAction sousCategorieService;	
 	
 	@ManagedProperty("#{produitService}")
-	private ProduitServiceAction produitService;	
+	private ProduitServiceAction produitService;
+	
+	@ManagedProperty("#{referentielBean}")
+	private ReferentielBean referentielBean;	
 	
 	public CatalogueAdminBean() {
 	}
@@ -73,10 +86,6 @@ public class CatalogueAdminBean implements Serializable {
 		this.marqueList = marqueService.getMarqueList();
 		this.categorieList = categorieService.getCategorieList();
 		this.sousCategorieList = sousCategorieService.getSousCategorieList();
-		this.produit = new Produit();
-		this.produit.setIdMarque(new Marque((short)0));
-		this.produit.setIdCategorie(new Categorie((short)0));
-		this.produit.setIdSousCategorie(new SousCategorie((short)0));
 	}
 
 	public List<VCatalogueAdmin> getCatalogueList() {
@@ -193,6 +202,38 @@ public class CatalogueAdminBean implements Serializable {
 	public void setQteEnStock(String qteEnStock) {
 		this.produit.setQteEnStock(Short.valueOf(qteEnStock));
 	}
+	
+	public UploadedFile getUploadedPhotoCatalogue() {
+		return uploadedPhotoCatalogue;
+	}
+
+	public void setUploadedPhotoCatalogue(UploadedFile uploadedPhotoCatalogue) {
+		this.uploadedPhotoCatalogue = uploadedPhotoCatalogue;
+	}
+	
+	public UploadedFile getUploadedPhotoMoyenne() {
+		return uploadedPhotoMoyenne;
+	}
+
+	public void setUploadedPhotoMoyenne(UploadedFile uploadedPhotoMoyenne) {
+		this.uploadedPhotoMoyenne = uploadedPhotoMoyenne;
+	}
+	
+	public UploadedFile getUploadedPhoto() {
+		return uploadedPhoto;
+	}
+
+	public void setUploadedPhoto(UploadedFile uploadedPhoto) {
+		this.uploadedPhoto = uploadedPhoto;
+	}
+
+	public ReferentielBean getReferentielBean() {
+		return referentielBean;
+	}
+
+	public void setReferentielBean(ReferentielBean referentielBean) {
+		this.referentielBean = referentielBean;
+	}
 
 	public String editProduit() {
 
@@ -205,7 +246,11 @@ public class CatalogueAdminBean implements Serializable {
 	
 	public String addProduitView() {
 		logger.info("addProduitView");
-		this.produit=new Produit();
+		this.produit = new Produit();
+		this.produit.setIdMarque(new Marque((short)0));
+		this.produit.setIdCategorie(new Categorie((short)0));
+		this.produit.setIdSousCategorie(new SousCategorie((short)0));
+		this.uploadedPhotoCatalogue = null;
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_produit");
 		return "produit";
 
@@ -223,14 +268,14 @@ public class CatalogueAdminBean implements Serializable {
 		if(this.produit.getIdProduit()==null || this.produit.getIdProduit()==0L){
 				
 			produitService.insertProduit(this.produit);
-			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.ss_categorie");
+			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.produit");
 			this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_produit");
-		    ecran="sousCategories";
+		    ecran="produits";
 		    
 		}else{
 				
 			produitService.updateProduit(this.produit);
-			msg = ParfumUtils.getBundleApplication().getString("message.modif.ss_categorie");
+			msg = ParfumUtils.getBundleApplication().getString("message.modif.produit");
 			this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_produit");
 		}
 		//on rafraichit la liste des sous-categories
@@ -240,5 +285,80 @@ public class CatalogueAdminBean implements Serializable {
 	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);		
 		return ecran;
 	}	
+	
+	public void uploadHandlerPhotoCatalogue(FileUploadEvent ev) {
+
+		FileOutputStream fileOuputStream=null;
+		this.uploadedPhotoCatalogue = ev.getFile();
+		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedPhotoCatalogue.getFileName());
+		File fileDest = new File(referentielBean.getUploadFolderPath()+File.separator+photoCatalogue);
+		this.produit.setProduitPhotoTailleLargeURL(photoCatalogue);
+		byte[] content = uploadedPhotoCatalogue.getContents();
+		try {
+			fileOuputStream = new FileOutputStream(fileDest);
+			fileOuputStream.write(content);
+			fileOuputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(fileOuputStream!=null) {
+				try {
+					fileOuputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public void uploadHandlerPhotoMoyenne(FileUploadEvent ev) {
+
+		FileOutputStream fileOuputStream=null;
+		this.uploadedPhotoMoyenne = ev.getFile();
+		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedPhotoMoyenne.getFileName());
+		File fileDest = new File(referentielBean.getUploadFolderPath()+File.separator+photoCatalogue);
+		this.produit.setProduitPhotoTailleMediumURL(photoCatalogue);
+		byte[] content = uploadedPhotoMoyenne.getContents();
+		try {
+			fileOuputStream = new FileOutputStream(fileDest);
+			fileOuputStream.write(content);
+			fileOuputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(fileOuputStream!=null) {
+				try {
+					fileOuputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}	
+	
+	public void uploadHandlerPhoto(FileUploadEvent ev) {
+
+		FileOutputStream fileOuputStream=null;
+		this.uploadedPhoto = ev.getFile();
+		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedPhoto.getFileName());
+		File fileDest = new File(referentielBean.getUploadFolderPath()+File.separator+photoCatalogue);
+		this.produit.setProduitPhotoURL(photoCatalogue);
+		byte[] content = uploadedPhoto.getContents();
+		try {
+			fileOuputStream = new FileOutputStream(fileDest);
+			fileOuputStream.write(content);
+			fileOuputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(fileOuputStream!=null) {
+				try {
+					fileOuputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 
 }

@@ -68,6 +68,8 @@ public class ReferentielBean implements Serializable {
 	
 	public String uploadFileSize;
 	
+	private static String mailFolderPath;
+	
 	public Map<String,Object> radioButtonOuiNon;
 	{
 		radioButtonOuiNon = new LinkedHashMap<String,Object>();
@@ -183,7 +185,7 @@ public class ReferentielBean implements Serializable {
 	public void setUploadFolderPath(String uploadFolderPath) {
 		this.uploadFolderPath = uploadFolderPath;
 	}
-
+	
 	public String getUploadFileExt() {
 		return uploadFileExt;
 	}
@@ -198,6 +200,14 @@ public class ReferentielBean implements Serializable {
 
 	public void setUploadFileSize(String uploadFileSize) {
 		this.uploadFileSize = uploadFileSize;
+	}
+	
+	public static String getMailFolderPath() {
+		return mailFolderPath;
+	}
+
+	public static void setMailFolderPath(String mailFolderPath) {
+		ReferentielBean.mailFolderPath = mailFolderPath;
 	}
 
 	public void getPropertiesConfig() {
@@ -230,6 +240,7 @@ public class ReferentielBean implements Serializable {
 			uploadFolderPath=prop.getProperty("upload.folder.path");
 			uploadFileExt=prop.getProperty("upload.file.ext");
 			uploadFileSize=prop.getProperty("upload.file.size");
+			mailFolderPath=prop.getProperty("mail.folder.path");
 			
 		} catch (Exception e) {
 			logger.error("ERROR loading conf file : " + confFilePath,e);

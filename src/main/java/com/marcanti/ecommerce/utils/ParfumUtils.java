@@ -1,6 +1,11 @@
 package com.marcanti.ecommerce.utils;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -184,6 +189,20 @@ public class ParfumUtils {
 		}
 		return nameFile;
 	}	
+	
+	
+	public static void replace(String oldstring, String newstring, File in, File out) throws IOException {
+		BufferedReader reader = new BufferedReader(new FileReader(in));
+		PrintWriter writer = new PrintWriter(new FileWriter(out));
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			writer.println(line.replaceAll(oldstring,newstring));
+		}
+		reader.close();
+		writer.close();
+		reader=null;
+		writer=null;
+	}
 
 	public static void main(String[] args) {
 		//System.out.println(ParfumUtils.checkPasswordFormat("A1ERTYuI"));

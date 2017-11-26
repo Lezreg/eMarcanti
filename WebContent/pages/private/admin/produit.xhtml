@@ -8,7 +8,7 @@
 <h:body>
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="content">
-			<h:form id="formCarousel">
+			<h:form id="formProduit">
 				<h:inputHidden value="#{catalogueAdminBean.idProduit}" />
 				<div class="breadcrumsrea">
 					<div class="container">
@@ -49,12 +49,11 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="select">
-													<h:selectOneMenu value="#{catalogueAdminBean.produit.idMarque.idMarque}" required="true">
+													<h:selectOneMenu value="#{catalogueAdminBean.produit.idMarque.idMarque}">
 														<f:selectItems value="#{catalogueAdminBean.marqueList}" var="c" itemLabel="#{c.marqueNom}" itemValue="#{c.idMarque}" />
 													</h:selectOneMenu>
 													<div class="select__arrow"></div>
 												</div>
-
 											</div>
 										</div>
 									</div>
@@ -188,11 +187,10 @@
 												<p>#{msg.libelle_photo_catalogue}</p>
 											</div>
 										</div>
-										<div class="paddingless col-sm-4">
+										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<div class="title">#{msg.libelle_upload}</div>
-													<input type="file" name="upload" class="upload" title="Choose a file to upload"/>
+													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoCatalogue}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoCatalogue}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
 												</div>
 												<span class="upload-path"></span>
 											</div>
@@ -208,11 +206,10 @@
 												<p>#{msg.libelle_photo_moyenne}</p>
 											</div>
 										</div>
-										<div class="paddingless col-sm-4">
+										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<div class="title">#{msg.libelle_upload}</div>
-													<input type="file" name="uploadtwo" class="uploadtwo" title="Choose a file to upload"/>
+													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoMoyenne}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoMoyenne}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
 												</div>
 												<span class="upload-pathtwo"></span>
 											</div>
@@ -229,7 +226,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription maindescriptiontext">
-												<textarea class="form-control" rows="4"></textarea>
+												<h:inputTextarea styleClass="form-control" value="#{catalogueAdminBean.produit.produitDetail}" rows="3" />
 											</div>
 										</div>
 									</div>
@@ -244,7 +241,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<textarea class="form-control" rows="1"></textarea>
+												<h:inputText value="#{catalogueAdminBean.produit.codeEAN}" maxlength="20" />
 											</div>
 										</div>
 									</div>
@@ -259,7 +256,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<textarea class="form-control" rows="1"></textarea>
+												<h:inputText value="#{catalogueAdminBean.produit.familleOlfactive}" maxlength="45" />
 											</div>
 										</div>
 									</div>
@@ -277,7 +274,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<textarea class="form-control" rows="1"></textarea>
+												<h:inputText value="#{catalogueAdminBean.produit.noteDeTete}" maxlength="80" />
 											</div>
 										</div>
 									</div>
@@ -295,7 +292,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<textarea class="form-control" rows="1"></textarea>
+												<h:inputText value="#{catalogueAdminBean.produit.noteDeCoeur}" maxlength="80" />
 											</div>
 										</div>
 									</div>
@@ -313,7 +310,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<textarea class="form-control" rows="1"></textarea>
+												<h:inputText value="#{catalogueAdminBean.produit.noteDeFond}" maxlength="80" />
 											</div>
 										</div>
 									</div>
@@ -330,12 +327,9 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquestext">
 												<div class="maequescheckb checkbox">
-													<button type="button" class="btn btn-lg btn-toggle"
-														data-toggle="button" aria-pressed="true"
-														autocomplete="off">
-														<div class="handle"></div>
-													</button>
-
+													<h:selectOneRadio value="#{catalogueAdminBean.produit.bestSellerHomme}">
+														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>
 												</div>
 											</div>
 										</div>
@@ -353,11 +347,9 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquestext">
 												<div class="maequescheckb checkbox">
-													<button type="button" class="btn btn-lg btn-toggle"
-														data-toggle="button" aria-pressed="true"
-														autocomplete="off">
-														<div class="handle"></div>
-													</button>
+													<h:selectOneRadio value="#{catalogueAdminBean.produit.bestSellerFemme}">
+														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>
 												</div>
 											</div>
 										</div>
@@ -376,11 +368,9 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquestext">
 												<div class="maequescheckb checkbox">
-													<button type="button" class="btn btn-lg btn-toggle"
-														data-toggle="button" aria-pressed="true"
-														autocomplete="off">
-														<div class="handle"></div>
-													</button>
+													<h:selectOneRadio value="#{catalogueAdminBean.produit.petitPrix}">
+														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>
 												</div>
 											</div>
 										</div>
@@ -409,11 +399,9 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquestext">
 												<div class="maequescheckb checkbox">
-													<button type="button" class="btn btn-lg btn-toggle"
-														data-toggle="button" aria-pressed="true"
-														autocomplete="off">
-														<div class="handle"></div>
-													</button>
+													<h:selectOneRadio value="#{catalogueAdminBean.produit.promoSurHomePage}">
+														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>
 												</div>
 											</div>
 										</div>
@@ -425,14 +413,18 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													#{msg.libelle_date_debut}<input id="datepicker-example30" type="text"/>
+													#{msg.libelle_date_debut}<h:inputText id="datepicker-example30" value="#{catalogueAdminBean.produit.dateDebutPromo}" validatorMessage="le format de la date est dd/MM/yyyy" maxlength="10">
+														<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris"  />
+													</h:inputText>
 												</div>
 											</div>
 										</div>
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquedescription">
 												<div class="form-group">
-													#{msg.libelle_date_fin}<input id="datepicker-example31" type="text"/>
+													#{msg.libelle_date_fin}<h:inputText id="datepicker-example31" value="#{catalogueAdminBean.produit.dateFinPromo}" validatorMessage="le format de la date est dd/MM/yyyy" maxlength="10">
+														<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
+													</h:inputText>
 												</div>
 											</div>
 										</div>
@@ -462,12 +454,9 @@
 											<div class="marquestext">
 
 												<div class="maequescheckb checkbox">
-
-													<button type="button" class="btn btn-lg btn-toggle"
-														data-toggle="button" aria-pressed="true"
-														autocomplete="off">
-														<div class="handle"></div>
-													</button>
+													<h:selectOneRadio value="#{catalogueAdminBean.produit.nouveauteSurHomePage}">
+														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>
 												</div>
 											</div>
 										</div>
@@ -479,14 +468,18 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													#{msg.libelle_date_debut}<input id="datepicker-example32" type="text"/>
+													#{msg.libelle_date_debut}<h:inputText id="datepicker-example32" value="#{catalogueAdminBean.produit.dateDebutNouveaute}" maxlength="10">
+														<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
+													</h:inputText>
 												</div>
 											</div>
 										</div>
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquedescription">
 												<div class="form-group">
-													#{msg.libelle_date_fin}<input id="datepicker-example33" type="text"/>
+													#{msg.libelle_date_fin}<h:inputText id="datepicker-example33" value="#{catalogueAdminBean.produit.dateFinNouveaute}" maxlength="10">
+														<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
+													</h:inputText>
 												</div>
 											</div>
 										</div>
@@ -514,15 +507,10 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquestext">
-
 												<div class="maequescheckb checkbox">
-
-													<button type="button" class="btn btn-lg btn-toggle"
-														data-toggle="button" aria-pressed="true"
-														autocomplete="off">
-														<div class="handle"></div>
-													</button>
-
+													<h:selectOneRadio value="#{catalogueAdminBean.produit.ADecouvrirSurHomePage}">
+														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+													</h:selectOneRadio>
 												</div>
 											</div>
 										</div>
@@ -534,14 +522,18 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													#{msg.libelle_date_debut}<input id="datepicker-example34" type="text"/>
+													#{msg.libelle_date_debut}<h:inputText id="datepicker-example34" value="#{catalogueAdminBean.produit.dateDebutADecouvrir}" maxlength="10">
+														<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
+													</h:inputText>
 												</div>
 											</div>
 										</div>
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquedescription">
 												<div class="form-group">
-													#{msg.libelle_date_fin}<input id="datepicker-example35" type="text"/>
+													#{msg.libelle_date_fin}<h:inputText id="datepicker-example35" value="#{catalogueAdminBean.produit.dateDebutADecouvrir}" maxlength="10">
+														<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
+													</h:inputText>
 												</div>
 											</div>
 										</div>
@@ -557,7 +549,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<textarea class="form-control" rows="1"></textarea>
+												<h:inputText value="#{catalogueAdminBean.produit.titreADecouvrir}" maxlength="80" />
 											</div>
 										</div>
 									</div>
@@ -572,7 +564,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription maindescriptiontext">
-												<textarea class="form-control" rows="3"></textarea>
+												<h:inputTextarea styleClass="form-control" value="#{catalogueAdminBean.produit.descriptionADecouvrir}" rows="3" />
 											</div>
 										</div>
 									</div>
@@ -590,7 +582,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<textarea class="form-control" rows="1"></textarea>
+												<h:inputText value="#{catalogueAdminBean.produit.motCleADecouvrir}" maxlength="80" />
 											</div>
 										</div>
 									</div>
@@ -606,11 +598,10 @@
 												</p>
 											</div>
 										</div>
-										<div class="paddingless col-sm-4">
+										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<div class="title">#{msg.libelle_upload}</div>
-													<input type="file" name="uploadthree" class="uploadthree" title="Choose a file to upload"/>
+													<p:fileUpload value="#{catalogueAdminBean.uploadedPhoto}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhoto}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
 												</div>
 												<span class="upload-paththree"></span>
 											</div>
@@ -644,6 +635,9 @@
 				</section>
 			</h:form>
 		</ui:define>
+		<ui:define name="footer">
+			<ui:include src="/template/footer1.xhtml" />
+		</ui:define>		
 	</ui:composition>
 </h:body>
 </html>

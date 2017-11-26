@@ -45,7 +45,9 @@ public class Mail {
 		message.setSubject(topic);
 
 		// Now set the actual message
-		message.setText(textMessage);
+		//message.setText(textMessage);
+		
+		message.setContent(textMessage, "text/html");
 
 		// Send message
 		Transport.send(message);

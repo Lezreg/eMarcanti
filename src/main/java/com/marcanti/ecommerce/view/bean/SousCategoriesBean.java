@@ -46,8 +46,7 @@ public class SousCategoriesBean implements Serializable {
 	public void init() {
 		this.sousCategorieList = sousCategorieService.getSousCategorieList();
 		this.sousCategorie = new SousCategorie((short)0);
-		Categorie categorie = new Categorie((short)0);
-		this.sousCategorie.setIdCategorieProduit(categorie);
+		this.sousCategorie.setIdCategorieProduit(new Categorie((short)0));
 	}
 
 	
@@ -122,8 +121,8 @@ public class SousCategoriesBean implements Serializable {
 	
 	public String addSousCategorieView() {
 		logger.info("addSousCategorieView");
-		this.sousCategorie=new SousCategorie();
-		this.sousCategorie.setIdCategorieProduit(new Categorie());
+		this.sousCategorie = new SousCategorie((short)0);
+		this.sousCategorie.setIdCategorieProduit(new Categorie((short)0));
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_ss_categorie");
 		return "sousCategorie";
 
