@@ -190,7 +190,7 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoCatalogue}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoCatalogue}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
+													<p:fileUpload value="#{catalogueAdminBean.uploadedPhoto}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhoto}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
 												</div>
 												<span class="upload-path"></span>
 											</div>
@@ -601,7 +601,7 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<p:fileUpload value="#{catalogueAdminBean.uploadedPhoto}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhoto}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
+													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoLarge}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoLarge}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
 												</div>
 												<span class="upload-paththree"></span>
 											</div>

@@ -53,11 +53,11 @@ public class CatalogueAdminBean implements Serializable {
 	
 	private Long idProduit;	
 	
-	private UploadedFile uploadedPhotoCatalogue;
+	private UploadedFile uploadedPhoto;
 	
 	private UploadedFile uploadedPhotoMoyenne;
 	
-	private UploadedFile uploadedPhoto;
+	private UploadedFile uploadedPhotoLarge;
 	
 	@ManagedProperty("#{catalogueService}")
 	private VCatalogueAdminServiceAction catalogueService;
@@ -203,14 +203,15 @@ public class CatalogueAdminBean implements Serializable {
 		this.produit.setQteEnStock(Short.valueOf(qteEnStock));
 	}
 	
-	public UploadedFile getUploadedPhotoCatalogue() {
-		return uploadedPhotoCatalogue;
+
+	public UploadedFile getUploadedPhoto() {
+		return uploadedPhoto;
 	}
 
-	public void setUploadedPhotoCatalogue(UploadedFile uploadedPhotoCatalogue) {
-		this.uploadedPhotoCatalogue = uploadedPhotoCatalogue;
+	public void setUploadedPhoto(UploadedFile uploadedPhoto) {
+		this.uploadedPhoto = uploadedPhoto;
 	}
-	
+
 	public UploadedFile getUploadedPhotoMoyenne() {
 		return uploadedPhotoMoyenne;
 	}
@@ -218,13 +219,13 @@ public class CatalogueAdminBean implements Serializable {
 	public void setUploadedPhotoMoyenne(UploadedFile uploadedPhotoMoyenne) {
 		this.uploadedPhotoMoyenne = uploadedPhotoMoyenne;
 	}
-	
-	public UploadedFile getUploadedPhoto() {
-		return uploadedPhoto;
+
+	public UploadedFile getUploadedPhotoLarge() {
+		return uploadedPhotoLarge;
 	}
 
-	public void setUploadedPhoto(UploadedFile uploadedPhoto) {
-		this.uploadedPhoto = uploadedPhoto;
+	public void setUploadedPhotoLarge(UploadedFile uploadedPhotoLarge) {
+		this.uploadedPhotoLarge = uploadedPhotoLarge;
 	}
 
 	public ReferentielBean getReferentielBean() {
@@ -250,7 +251,7 @@ public class CatalogueAdminBean implements Serializable {
 		this.produit.setIdMarque(new Marque((short)0));
 		this.produit.setIdCategorie(new Categorie((short)0));
 		this.produit.setIdSousCategorie(new SousCategorie((short)0));
-		this.uploadedPhotoCatalogue = null;
+		this.uploadedPhoto = null;
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_produit");
 		return "produit";
 
@@ -286,14 +287,14 @@ public class CatalogueAdminBean implements Serializable {
 		return ecran;
 	}	
 	
-	public void uploadHandlerPhotoCatalogue(FileUploadEvent ev) {
+	public void uploadHandlerPhoto(FileUploadEvent ev) {
 
 		FileOutputStream fileOuputStream=null;
-		this.uploadedPhotoCatalogue = ev.getFile();
-		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedPhotoCatalogue.getFileName());
+		this.uploadedPhoto = ev.getFile();
+		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedPhoto.getFileName());
 		File fileDest = new File(referentielBean.getUploadFolderPath()+File.separator+photoCatalogue);
-		this.produit.setProduitPhotoTailleLargeURL(photoCatalogue);
-		byte[] content = uploadedPhotoCatalogue.getContents();
+		this.produit.setProduitPhotoURL(photoCatalogue);
+		byte[] content = uploadedPhoto.getContents();
 		try {
 			fileOuputStream = new FileOutputStream(fileDest);
 			fileOuputStream.write(content);
@@ -336,14 +337,14 @@ public class CatalogueAdminBean implements Serializable {
 		}
 	}	
 	
-	public void uploadHandlerPhoto(FileUploadEvent ev) {
+	public void uploadHandlerPhotoLarge(FileUploadEvent ev) {
 
 		FileOutputStream fileOuputStream=null;
-		this.uploadedPhoto = ev.getFile();
-		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedPhoto.getFileName());
+		this.uploadedPhotoLarge = ev.getFile();
+		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedPhotoLarge.getFileName());
 		File fileDest = new File(referentielBean.getUploadFolderPath()+File.separator+photoCatalogue);
-		this.produit.setProduitPhotoURL(photoCatalogue);
-		byte[] content = uploadedPhoto.getContents();
+		this.produit.setProduitPhotoTailleLargeURL(photoCatalogue);
+		byte[] content = uploadedPhotoLarge.getContents();
 		try {
 			fileOuputStream = new FileOutputStream(fileDest);
 			fileOuputStream.write(content);

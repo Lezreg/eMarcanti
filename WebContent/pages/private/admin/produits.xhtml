@@ -88,7 +88,12 @@
 															<tr type="#{produit.categorieCodeCss}" class="catainnertrow">
 																<td class="#{produit.isNouveauteSurHomePageCss} #{produit.isPromoSurHomePageCss} catalougeimagename">
 																	<p>
-																		<img src="img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
+																		<ui:fragment rendered="#{empty produit.produitPhotoURL}"><br/>
+																			<img src="#{request.contextPath}/static/img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
+																		</ui:fragment>
+																		<ui:fragment rendered="#{!empty produit.produitPhotoURL}"><br/>
+																			<img src="#{request.contextPath}/upload/#{produit.produitPhotoURL}" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
+																		</ui:fragment>																		
 																	</p>
 																</td>
 																<td class="catgeneraltd">#{produit.produitDescription}</td>
