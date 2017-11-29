@@ -88,7 +88,7 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 			idMembres.add(membre.getIdMembre());
 		}
 		List<VCdeGroupeeDetail> cmdGroupeesFilleuls = commandeGroupeeDAO.getCmdGroupeesFilleuls(idMembres);
-		if (cmdGroupeesFilleuls != null && !cmdGroupeesFilleuls.isEmpty()) {
+		if (cmdGroupeesFilleuls == null) {
 			cmdGroupeesFilleuls = Collections.emptyList();
 		}
 		return cmdGroupeesFilleuls;
