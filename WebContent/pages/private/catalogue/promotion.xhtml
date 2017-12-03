@@ -154,7 +154,7 @@
 <!-- 							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1"><h:graphicImage value="/static/img/whitecart.png" class="img-responsive"/>Add to Cart</button> -->
 							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1">
 								<h:commandLink action="#{PromFilterView.addToBasket()}"> 
-									<f:setPropertyActionListener value="#{product}" target="#{NovFilterView.selectedProduit}" />
+									<f:setPropertyActionListener value="#{product}" target="#{PromFilterView.selectedProduit}" />
 									<h:graphicImage value="/static/img/whitecart.png" styleClass="img-responsive" />Ajouter au panier
 								</h:commandLink>
 							</button>

@@ -91,13 +91,16 @@ public class ADecouvrir {
 	}
 
 	public String addToBasket() {
-		Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
 		try {
+			Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
 			basket.addPoduct(produit, 1);
 		} catch (CommandeGroupeeNotFoundException e) {
 			LOGGER.info(e.getMessage());
 			return "/pages/private/errors/cmdNotFoundError.xhtml?faces-redirect=true";
 		} catch (CommandeGroupeeValidatedExeception e) {
+			LOGGER.info(e.getMessage());
+			return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
+		} catch (Exception e) {
 			LOGGER.info(e.getMessage());
 			return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
 		}
