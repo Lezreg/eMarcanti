@@ -1,73 +1,242 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core"
-	template="/template/template.xhtml">
-	<ui:define name="metadata">
-	</ui:define>
-	<ui:define name="content">
-	<h:body>
-		<h:form id="homme">
-		    <p:dataTable id="dataHomme" var="produit" value="#{PromFilterView.produits}" widgetVar="produitsTable"
-		                 emptyMessage="No produits found with given criteria" filteredValue="#{PromFilterView.filteredProduits}" >
-		        <f:facet name="header">
-		            <p:outputPanel>
-		<!--                 <h:outputText value="Search all fields:" /> -->
-		                <p:inputText id="globalFilter" onkeyup="PF('produitsTable').filter()" style="text-align=right" placeholder="Rechercher"/>
-		            </p:outputPanel>
-		        </f:facet>
-		        
-		  		<p:column style="width:50px">
-		            <h:outputText value="#{produit.idProduit}" />
-		        </p:column>
-		        
-		        <p:column filterBy="#{produit.marqueNom}" headerText="Marque" footerText="exact" filterMatchMode="exact">
-		            <f:facet name="filter">
-		                <p:selectOneMenu onchange="PF('produitsTable').filter()" style="width:80%">
-		                    <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />
-		                    <f:selectItems value="#{PromFilterView.brands}" />
-		                </p:selectOneMenu>
-		            </f:facet>
-		<!--             <p:graphicImage url="/images/100X100/#{produit.produitPhotoURL}" width="100" /> -->
-		            <p:graphicImage url="/images/100X100/#{empty produit.produitPhotoURL ? 'default.jpg' : produit.produitPhotoURL}" width="100" />
-		<!--              <h:outputText value="#{empty produit.produitPhotoURL ? 'default.jpg' : produit.produitPhotoURL}" /> -->
-		            <h:outputText value="#{produit.marqueNom}" />
-		        </p:column>
-		        
-		         <p:column filterBy="#{produit.produitDescription}" headerText="Description" footerText="contains" filterMatchMode="contains">
-		            <h:outputText value="#{produit.produitDescription}" />
-		        </p:column>
-		        
-		         <p:column filterBy="#{produit.categorieNom}" headerText="Catégorie" footerText="contains" filterMatchMode="contains">
-		            <h:outputText value="#{produit.categorieNom}" />
-		        </p:column>
-		        
-		         <p:column filterBy="#{produit.produitDetail}" style="width:150px" headerText="Detail" footerText="contains" filterMatchMode="contains">
-		            <h:outputText value="#{produit.produitDetail}" />
-		        </p:column>
-		        
-		        <p:column filterBy="#{produit.prixPublic}" style="width:110px" headerText="Prix constaté" footerText="custom (min)" filterFunction="#{PromFilterView.filterByPrice}">
-		            <h:outputText value="#{produitt.prixPublic}">
-		                <f:convertNumber currencySymbol="€" type="currency"/>
-		            </h:outputText>
-		        </p:column>
-		        
-		  		<p:column filterBy="#{produit.notrePrix}" style="width:110px" headerText="Notre prix" footerText="custom (min)" filterFunction="#{PromFilterView.filterByPrice}">
-		            <h:outputText value="#{produit.notrePrix}">
-		                <f:convertNumber currencySymbol="€" type="currency"/>
-		            </h:outputText>
-		        </p:column>
-				<p:column style="width:110px">
-					<h:commandButton icon="ui-icon-cart"
-						title="View" action="#{PromFilterView.addToBasket()}">
-						<f:setPropertyActionListener value="#{produit}"
-							target="#{PromFilterView.selectedProduit}" />
-					</h:commandButton>
-				</p:column>
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+		<ui:define name="metadata">
+		</ui:define>
+		<ui:define name="content">
+		<h:form id="formPromos">
+		<div class="breadcrumsrea">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="breadcrumslist">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<li class="current_item"><a href="nouveautes.html">Nouveautés</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--end breadcrumsrea-->
 		
-		    </p:dataTable>
+					
+						<!-- Modal -->
+		<div class="messftopmodal modal fade" id="nouvepopusstes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="messmodaldia modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+		       
+		      </div>
+		      <div class="modal-body">
+		        	<div class="row">
+							<div class="col-xs-12">
+								<div class="comandomodifyarea modifyproductinner">
+								
+									<div class="modifymaintitle">
+										<h3>Détail de l'erreur</h3>
+									</div>
+									
+									<div class="marqueinfo admindetailsopuptext marginRow">
+										
+										<p class="last">C'était la première soirée <br/>Du mois d'avril.<br/>Je m'en souviens, mon adorée. <br/>T'en souvient-il ?<br/><br/>Nous errions dans la ville immense, <br/>Tous deux, sans bruit,<br/>A l'heure où le repos commence <br/>Avec la nuit !<br/><br/>Heure calme, charmante, austère, <br/>Où le soir naît !<br/>Dans cet ineffable mystère <br/>Tout rayonnait,<br/><br/>Tout ! l'amour dans tes yeux sans voile, <br/>Fiers, ingénus !<br/>Aux vitres mainte pauvre étoile, <br/>Au ciel Vénus !<br/><br/>Notre-Dame, parmi les dômes <br/>Des vieux faubourgs,<br/>Dressait comme deux grands fantômes <br/>Ses grandes tours.<br/><br/>La Seine, découpant les ombres <br/>En angles noirs,<br/>Faisait luire sous les ponts sombres <br/>De clairs miroirs.<br/><br/>L'oeil voyait sur la plage amie <br/>Briller ses eaux <br/>Comme une couleuvre endormie <br/>Dans les roseaux.<br/><br/>Et les passants, le long des grèves <br/>Où l'onde fuit,<br/>Étaient vagues comme les rêves <br/>Qu'on a la nuit !<br/><br/>Je te disais : - " Clartés bénies, <br/>Bruits lents et doux, <br/>Dieu met toutes les harmonies <br/>Autour de nous !<br/><br/>Aube qui luit, soir qui flamboie, <br/>Tout a son tour ;<br/>Et j'ai l'âme pleine de joie, <br/>Ô mon amour !<br/><br/>Que m'importe que la nuit tombe,<br/>Et rende, Ô Dieu ! <br/>Semblable au plafond d'une tombe<br/>Le beau ciel bleu !<br/><br/>Que m'importe que Paris dorme,<br/>Ivre d'oubli,<br/>Dans la brume épaisse et sans forme <br/>Enseveli !<br/><br/>Que m'importe, aux heures nocturnes <br/>Où nous errons,<br/>Les ombres qui versent leurs urnes <br/>Sur tous les fronts,<br/><br/>Et, noyant de leurs plis funèbres <br/>L'âme et le corps, <br/>Font les vivants dans les ténèbres <br/>Pareils aux morts !<br/><br/>Moi, lorsque tout subit l'empire <br/>Du noir sommeil,<br/>J'ai ton regard, j'ai ton sourire, <br/>J'ai le soleil ! "<br/><br/>Je te parlais, ma bien-aimée ; <br/>Ô doux instants ! <br/>Ta main pressait ma main charmée. <br/>Puis, bien longtemps,<br/><br/>Nous nous regardions pleins de flamme, <br/>Silencieux,<br/>Et l'âme répondait à l'âme, <br/>Les yeux aux yeux !<br/><br/>Sous tes cils une larme obscure <br/>Brillait parfois ;<br/>Puis ta voix parlait, tendre et pure, <br/>Après ma voix,<br/><br/>Comme on entend dans la coupole <br/>Un double écho ;<br/>Comme après un oiseau s'envole <br/>Un autre oiseau.<br/><br/>Tu disais : " Je suis calme et fière, <br/>Je t'aime ! oui ! "<br/>Et je rêvais à ta lumière <br/>Tout ébloui !<br/><br/>Oh ! ce fut une heure sacrée, <br/>T'en souvient-il ?<br/>Que cette première soirée <br/>Du mois d'avril !<br/><br/>Tout en disant toutes les choses, <br/>Tous les discours<br/>Qu'on dit dans la saison des roses <br/>Et des amours,<br/><br/>Nous allions, contemplant dans l'onde <br/>Et dans l'azur<br/>Cette lune qui jette au monde <br/>Son rayon pur,<br/><br/>Et qui, d'en haut, sereine comme <br/>Un front dormant,<br/>Regarde le bonheur de l'homme <br/>Si doucement ! [...]</p>
+									</div><!--end inner div-->
+									
+										
+									</div><!--end inner div-->
+									<div class="clearfix"></div>
+								</div><!--end main inner div-->
+							</div>
+							
+				
+						</div><!--end row-->
+		      </div><!--end modal body-->
+		     
+		    </div>
+		
+		</div>
+		 
+		 <!-- modal-->	
+		
+		<!-- start nouveautes area-->
+		<section class="nouveautesarea">
+			<h2 class="section_header">sec</h2>
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="filterheading">
+							<h3><span>#{PromFilterView.produits.size()} résultats</span> </h3>
+							<div class="warningmessageadminlist">
+<!-- 								<p class="redclass"><i class="fa fa-warning"></i>Une erreur technique est survenue … <a href=""  data-toggle="modal" data-target="#nouvepopusstes">Détail</a></p> -->
+							</div>
+						</div>
+						
+						
+						<div class="filterbytitle">
+							<h3>Affiner par </h3>
+						</div>
+						<div class="filterbyarea">
+							<div class="select">
+								<h:selectOneMenu id="brandid" value="#{PromFilterView.selectedBrandName}" required="false">
+									<f:selectItem id="defaultBrandId"  itemLabel="Marque" itemValue=""/>
+								    <f:selectItems value="#{PromFilterView.brands}" var="brand" itemLabel="#{brand.marqueNom}" itemValue="#{brand.marqueNom}" />
+								    <p:ajax  update="formPromos" />
+								</h:selectOneMenu>
+							  <div class="select__arrow"></div>
+							</div>
+
+
+							<div class="select">
+									<h:selectOneMenu id="catId" value="#{PromFilterView.selectedCategorieName}" required="false">
+										<f:selectItem id="defaultCategorieId"  itemLabel="Catégorie" itemValue=""/>
+									    <f:selectItems value="#{PromFilterView.categories}" var="cat" itemLabel="#{cat.categorieNom}" itemValue="#{cat.categorieNom}" />
+									    <p:ajax  update="formPromos" />
+									</h:selectOneMenu>
+							  <div class="select__arrow"></div>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div><!--end row-->
+				
+				
+			</div><!--end cont-->
+		</section>
+		<!--end sec-->
+		
+		
+		<section class="nouveautes_filteringarea">
+			<h2 class="section_header">sec</h2>
+			<div class="container">
+				<div class="row customrow">
+				<table id="produitsTable">
+					<ui:repeat var="product" value="#{PromFilterView.produits}">
+					<div class="col-sm-6 col-md-3">
+						<div class="single_nouveProduct">
+							<h5>#{product.marqueNom}</h5>
+							<div class="singleProductareass">
+								
+								<figure>
+									<h:graphicImage value="/static/img/nouve/nouve1.jpg" class="productimage img-responsive" alt="perfume"></h:graphicImage>
+								</figure>
+							
+							
+								 <div class="overlayitem">
+									<div class="text">
+										<h5>#{product.marqueNom}</h5>
+										<h4>#{product.familleOlfactive}</h4>
+										<p><strong>Notes de tête</strong></p>
+										<p>#{product.noteDeTete}</p>
+										<p><strong>Notes de coeur</strong></p>
+										<p>#{product.noteDeCoeur}</p>
+										<p><strong>Notes de fond</strong></p>
+										<p>#{product.noteDeFond}</p>
+										
+										<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
+										<p class="blackparagraph">#{product.produitDescription}</p>
+
+									</div>
+								 </div>
+							</div><!--singleProductareass-->
+							
+							
+							<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
+							<p>#{product.produitDetail}</p>
+<!-- 							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1"><h:graphicImage value="/static/img/whitecart.png" class="img-responsive"/>Add to Cart</button> -->
+							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1">
+								<h:commandLink action="#{PromFilterView.addToBasket()}"> 
+									<f:setPropertyActionListener value="#{product}" target="#{NovFilterView.selectedProduit}" />
+									<h:graphicImage value="/static/img/whitecart.png" styleClass="img-responsive" />Ajouter au panier
+								</h:commandLink>
+							</button>
+							
+<!-- 							<h:commandButton icon="ui-icon-cart" title="View" action="#{NovFilterView.addToBasket()}"> -->
+<!-- 								<f:setPropertyActionListener value="#{product}" target="#{NovFilterView.selectedProduit}" /> -->
+<!-- 							</h:commandButton> -->
+							
+							
+							<!-- start modal one-->
+							<div class="modal fade" id="nouve1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close buttonclose" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+
+
+										</div>
+										<div class="modal-body">
+
+											 <div class="bigpopupimage">
+												<h:graphicImage value="/static/img/Popupimage.png" class="img-responsive" alt="image"/>
+											</div>
+
+											 <div class="popupdetals sucessfulpopup modalbodyright">
+												<h2><h:graphicImage value="/static/img/Popupsuccesful.png" class="img-responsive" alt="error"/> The Product Was Successfully added</h2>
+												<p class="popupdescription">1 #{product.produitDescription}</p>
+												<div class="popbothbutton">
+													<button class="continuebutton">continue</button>
+													<button class="finishbutton">Finish Order</button>
+												</div>
+											 </div><!---end-->
+
+										</div>
+
+									</div>
+									<!-- /.modal-content -->
+								</div>
+								<!-- /.modal-dialog -->
+							</div>
+							<!-- /end .modal -->
+						</div>
+						
+					</div><!--end col-->
+					
+			</ui:repeat>
+			</table>
+			</div>
+			</div>
+			</section>		
+					
+			<section class="nouveautes_pagination">
+				<h2 class="section_header">sec</h2>
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="showingentries">
+<!-- 								<p>Showing 1 to 100 of 250 Entries</p> -->
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="nouve_pagination">
+<!-- 								<ul class="pagination"> -->
+								
+<!-- 									<li><a href="#"><i class="fa fa-angle-left"></i></a></li> -->
+<!-- 									<li class="active"><a href="#">1</a></li> -->
+<!-- 									<li class=""><a href="#">2</a></li> -->
+<!-- 									<li class=""><a href="#">3</a></li> -->
+<!-- 									<li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
+<!-- 								</ul> -->
+							</div>
+						</div>
+					</div><!--end row-->
+				</div><!--end cont.-->
+			</section><!--end sec-->
+		
 		</h:form>
-	</h:body>
-</ui:define>
-</ui:composition>
+		</ui:define>
+		<ui:define name="footer">
+			<ui:include src="/template/footer2.xhtml" />
+		</ui:define>		
+	</ui:composition>
+	
+</h:body>
+</html>

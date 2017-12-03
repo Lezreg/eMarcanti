@@ -86,6 +86,7 @@
 						<div class="filterbyarea">
 							<div class="select">
 								<h:selectOneMenu id="brandid" value="#{NovFilterView.selectedBrand}" required="false">
+									<f:selectItem id="defaultBrandId"  itemLabel="Marque" itemValue=""/>
 								    <f:selectItems value="#{NovFilterView.brands}" var="brand" itemLabel="#{brand.marqueNom}" itemValue="#{brand.marqueNom}" />
 								    <p:ajax  update="formNoveautes" />
 								</h:selectOneMenu>
@@ -95,6 +96,7 @@
 
 							<div class="select">
 									<h:selectOneMenu id="catId" value="#{NovFilterView.selectedCategorieName}" required="false">
+										<f:selectItem id="defaultCategorieId"  itemLabel="Catégorie" itemValue=""/>
 									    <f:selectItems value="#{NovFilterView.categories}" var="cat" itemLabel="#{cat.categorieNom}" itemValue="#{cat.categorieNom}" />
 									    <p:ajax  update="formNoveautes" />
 									</h:selectOneMenu>

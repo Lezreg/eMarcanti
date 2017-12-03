@@ -1,14 +1,14 @@
 package com.marcanti.ecommerce.filter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -22,14 +22,16 @@ import com.marcanti.ecommerce.beans.ProduitBean;
 import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.exception.CommandeGroupeeNotFoundException;
 import com.marcanti.ecommerce.exception.CommandeGroupeeValidatedExeception;
+import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
+import com.marcanti.ecommerce.service.actions.CategorieServiceAction;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 @ManagedBean(name = "PromFilterView")
-@ViewScoped
+@SessionScoped
 public class Promotion {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Promotion.class);
@@ -40,8 +42,19 @@ public class Promotion {
 
 	private ProduitBean selectedProduit;
 
+	private List<Marque> brands;
+
+	private String selectedBrandName;
+
+	List<Categorie> categories;
+
+	private String selectedCategorieName;
+
 	@Autowired
 	private ProduitServiceAction produitServiceAction;
+
+	@Autowired
+	private CategorieServiceAction categorieServiceAction;
 
 	@ManagedProperty("#{basketView}")
 	private BasketController basket;
@@ -68,26 +81,11 @@ public class Promotion {
 				.autowireBean(this);
 	}
 
-	public boolean filterByPrice(Object value, Object filter, Locale locale) {
-		String filterText = (filter == null) ? null : filter.toString().trim();
-		if (filterText == null || filterText.equals("")) {
-			return true;
-		}
-
-		if (value == null) {
-			return false;
-		}
-
-		return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
-	}
-
-	public List<String> getBrands() {
-		List<String> brands = new ArrayList<>();
-		for (Marque m : produitServiceAction.getBrands()) {
-			brands.add(m.getMarqueNom());
+	public List<Marque> getBrands() {
+		if (brands == null) {
+			brands = produitServiceAction.getBrands();
 		}
 		return brands;
-
 	}
 
 	public String addToBasket() {
@@ -113,7 +111,47 @@ public class Promotion {
 	}
 
 	public List<ProduitBean> getProduits() {
-		return produitServiceAction.getPromoProducts(userSessionBean.getIdOrga());
+		List<ProduitBean> filtredProducts = new ArrayList<>();
+		// if (newProducts == null || newProducts.isEmpty()) {
+		produits = produitServiceAction.getPromoProducts(userSessionBean.getIdOrga());
+		// }
+		if ((selectedBrandName == null || selectedBrandName.isEmpty())
+				&& (selectedCategorieName == null || selectedCategorieName.isEmpty())) {
+			return produits;
+		}
+
+		if (selectedBrandName != null && !selectedBrandName.isEmpty()) {
+
+			for (ProduitBean produitBean : produits) {
+
+				if (selectedBrandName.equals(produitBean.getMarqueNom())) {
+					filtredProducts.add(produitBean);
+				}
+			}
+		} else {
+			filtredProducts.addAll(produits);
+		}
+
+		if (selectedCategorieName != null && !selectedCategorieName.isEmpty()) {
+			for (Iterator<ProduitBean> iterator = filtredProducts.iterator(); iterator.hasNext();) {
+				ProduitBean next = iterator.next();
+				if (!selectedCategorieName.equals(next.getCategorieNom())) {
+					iterator.remove();
+				}
+			}
+		}
+		return filtredProducts;
+	}
+
+	public List<Categorie> getCategories() {
+		if (categories == null) {
+			categories = categorieServiceAction.getCategorieList();
+		}
+		return categories;
+	}
+
+	public void setCategories(List<Categorie> categories) {
+		this.categories = categories;
 	}
 
 	public void setProduits(List<ProduitBean> produits) {
@@ -135,5 +173,41 @@ public class Promotion {
 
 	public void setSelectedProduit(ProduitBean selectedProduit) {
 		this.selectedProduit = selectedProduit;
+	}
+
+	public String getSelectedBrandName() {
+		return selectedBrandName;
+	}
+
+	public void setSelectedBrandName(String selectedBrandName) {
+		this.selectedBrandName = selectedBrandName;
+	}
+
+	public String getSelectedCategorieName() {
+		return selectedCategorieName;
+	}
+
+	public void setSelectedCategorieName(String selectedCategorieName) {
+		this.selectedCategorieName = selectedCategorieName;
+	}
+
+	public ProduitServiceAction getProduitServiceAction() {
+		return produitServiceAction;
+	}
+
+	public void setProduitServiceAction(ProduitServiceAction produitServiceAction) {
+		this.produitServiceAction = produitServiceAction;
+	}
+
+	public CategorieServiceAction getCategorieServiceAction() {
+		return categorieServiceAction;
+	}
+
+	public void setCategorieServiceAction(CategorieServiceAction categorieServiceAction) {
+		this.categorieServiceAction = categorieServiceAction;
+	}
+
+	public void setBrands(List<Marque> brands) {
+		this.brands = brands;
 	}
 }

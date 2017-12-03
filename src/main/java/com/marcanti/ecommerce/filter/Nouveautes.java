@@ -3,7 +3,6 @@ package com.marcanti.ecommerce.filter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -72,21 +71,11 @@ public class Nouveautes {
 		getBrands();
 	}
 
-	public boolean filterByPrice(Object value, Object filter, Locale locale) {
-		String filterText = (filter == null) ? null : filter.toString().trim();
-		if (filterText == null || filterText.equals("")) {
-			return true;
-		}
-
-		if (value == null) {
-			return false;
-		}
-
-		return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
-	}
-
 	public List<Marque> getBrands() {
-		return produitServiceAction.getBrands();
+		if (brands == null) {
+			brands = produitServiceAction.getBrands();
+		}
+		return brands;
 	}
 
 	public String addToBasket() {
@@ -223,7 +212,10 @@ public class Nouveautes {
 	}
 
 	public List<Categorie> getCategories() {
-		return categorieServiceAction.getCategorieList();
+		if (categories == null) {
+			categories = categorieServiceAction.getCategorieList();
+		}
+		return categories;
 	}
 
 	public void setCategories(List<Categorie> categories) {
