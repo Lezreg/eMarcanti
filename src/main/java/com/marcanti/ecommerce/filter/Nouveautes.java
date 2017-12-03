@@ -1,6 +1,7 @@
 package com.marcanti.ecommerce.filter;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,9 +23,10 @@ import com.marcanti.ecommerce.beans.ProduitBean;
 import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.exception.CommandeGroupeeNotFoundException;
 import com.marcanti.ecommerce.exception.CommandeGroupeeValidatedExeception;
+import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
-import com.marcanti.ecommerce.model.VCatalogueAvecStock;
+import com.marcanti.ecommerce.service.actions.CategorieServiceAction;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
@@ -39,28 +41,22 @@ public class Nouveautes {
 
 	private List<ProduitBean> filteredProduits;
 
-	private VCatalogueAvecStock selectedProduit;
+	private ProduitBean selectedProduit;
 
 	private List<ProduitBean> newProducts;
 
-	public VCatalogueAvecStock getSelectedProduit() {
-		return selectedProduit;
-	}
+	private List<Marque> brands;
 
-	public void setSelectedProduit(VCatalogueAvecStock selectedProduit) {
-		this.selectedProduit = selectedProduit;
-	}
+	private String selectedBrandName;
 
-	public ProduitServiceAction getProduitServiceAction() {
-		return produitServiceAction;
-	}
+	List<Categorie> categories;
 
-	public void setProduitServiceAction(ProduitServiceAction produitServiceAction) {
-		this.produitServiceAction = produitServiceAction;
-	}
+	private String selectedCategorieName;
 
 	@Autowired
 	private ProduitServiceAction produitServiceAction;
+	@Autowired
+	private CategorieServiceAction categorieServiceAction;
 
 	@ManagedProperty("#{basketView}")
 	private BasketController basket;
@@ -73,6 +69,7 @@ public class Nouveautes {
 		ServletContext servletContext = (ServletContext) externalContext.getContext();
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
+		getBrands();
 	}
 
 	public boolean filterByPrice(Object value, Object filter, Locale locale) {
@@ -88,23 +85,22 @@ public class Nouveautes {
 		return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
 	}
 
-	public List<String> getBrands() {
-		List<String> brands = new ArrayList<>();
-		for (Marque m : produitServiceAction.getBrands()) {
-			brands.add(m.getMarqueNom());
-		}
-		return brands;
-
+	public List<Marque> getBrands() {
+		return produitServiceAction.getBrands();
 	}
 
 	public String addToBasket() {
-		Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
+
 		try {
+			Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
 			basket.addPoduct(produit, 1);
 		} catch (CommandeGroupeeNotFoundException e) {
 			LOGGER.info(e.getMessage());
 			return "/pages/private/errors/cmdNotFoundError.xhtml?faces-redirect=true";
 		} catch (CommandeGroupeeValidatedExeception e) {
+			LOGGER.info(e.getMessage());
+			return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
+		} catch (Exception e) {
 			LOGGER.info(e.getMessage());
 			return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
 		}
@@ -149,11 +145,89 @@ public class Nouveautes {
 	}
 
 	public List<ProduitBean> getNewProducts() {
-		return produitServiceAction.getNewProducts(userSessionBean.getIdOrga());
+
+		List<ProduitBean> filtredProducts = new ArrayList<>();
+		// if (newProducts == null || newProducts.isEmpty()) {
+		newProducts = produitServiceAction.getNewProducts(userSessionBean.getIdOrga());
+		// }
+		if ((selectedBrandName == null || selectedBrandName.isEmpty())
+				&& (selectedCategorieName == null || selectedCategorieName.isEmpty())) {
+			return newProducts;
+		}
+
+		if (selectedBrandName != null && !selectedBrandName.isEmpty()) {
+
+			for (ProduitBean produitBean : newProducts) {
+
+				if (selectedBrandName.equals(produitBean.getMarqueNom())) {
+					filtredProducts.add(produitBean);
+				}
+			}
+		} else {
+			filtredProducts.addAll(newProducts);
+		}
+
+		if (selectedCategorieName != null && !selectedCategorieName.isEmpty()) {
+			for (Iterator<ProduitBean> iterator = filtredProducts.iterator(); iterator.hasNext();) {
+				ProduitBean next = iterator.next();
+				if (!selectedCategorieName.equals(next.getCategorieNom())) {
+					iterator.remove();
+				}
+			}
+		}
+		return filtredProducts;
 	}
 
 	public void setNewProducts(List<ProduitBean> newProducts) {
 		this.newProducts = newProducts;
+	}
+
+	public ProduitServiceAction getProduitServiceAction() {
+		return produitServiceAction;
+	}
+
+	public void setProduitServiceAction(ProduitServiceAction produitServiceAction) {
+		this.produitServiceAction = produitServiceAction;
+	}
+
+	public ProduitBean getSelectedProduit() {
+		return selectedProduit;
+	}
+
+	public void setSelectedProduit(ProduitBean selectedProduit) {
+		this.selectedProduit = selectedProduit;
+	}
+
+	public String getSelectedBrand() {
+		return selectedBrandName;
+	}
+
+	public void setSelectedBrand(String selectedBrand) {
+		this.selectedBrandName = selectedBrand;
+	}
+
+	public CategorieServiceAction getCategorieServiceAction() {
+		return categorieServiceAction;
+	}
+
+	public void setCategorieServiceAction(CategorieServiceAction categorieServiceAction) {
+		this.categorieServiceAction = categorieServiceAction;
+	}
+
+	public String getSelectedCategorieName() {
+		return selectedCategorieName;
+	}
+
+	public void setSelectedCategorieName(String selectedCategorie) {
+		this.selectedCategorieName = selectedCategorie;
+	}
+
+	public List<Categorie> getCategories() {
+		return categorieServiceAction.getCategorieList();
+	}
+
+	public void setCategories(List<Categorie> categories) {
+		this.categories = categories;
 	}
 
 }

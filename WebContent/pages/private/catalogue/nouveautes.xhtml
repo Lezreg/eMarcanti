@@ -73,35 +73,31 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="filterheading">
-							<h3><span>12 résultats</span> pour votre recherche "Chance Chanel"</h3>
+							<h3><span>#{NovFilterView.newProducts.size()} résultats</span> </h3>
 							<div class="warningmessageadminlist">
-								<p class="redclass"><i class="fa fa-warning"></i>Une erreur technique est survenue … <a href=""  data-toggle="modal" data-target="#nouvepopusstes">Détail</a></p>
+<!-- 								<p class="redclass"><i class="fa fa-warning"></i>Une erreur technique est survenue … <a href=""  data-toggle="modal" data-target="#nouvepopusstes">Détail</a></p> -->
 							</div>
 						</div>
 						
 						
 						<div class="filterbytitle">
-							<h3>Filter by</h3>
+							<h3>Affiner par </h3>
 						</div>
 						<div class="filterbyarea">
 							<div class="select">
-							  <select>
-								<option>Brand</option>
-								<option>Salvatore Ferragamo</option>
-								<option>Giorgio Beverlys Hills</option>
-							  </select>
+								<h:selectOneMenu id="brandid" value="#{NovFilterView.selectedBrand}" required="false">
+								    <f:selectItems value="#{NovFilterView.brands}" var="brand" itemLabel="#{brand.marqueNom}" itemValue="#{brand.marqueNom}" />
+								    <p:ajax  update="formNoveautes" />
+								</h:selectOneMenu>
 							  <div class="select__arrow"></div>
 							</div>
 
 
 							<div class="select">
-							  <select>
-								<option>Category</option>
-								<option>Parfum Homme</option>
-								<option>Crêmes et Soins</option>
-								<option>Piles Accessoires</option>
-								
-							  </select>
+									<h:selectOneMenu id="catId" value="#{NovFilterView.selectedCategorieName}" required="false">
+									    <f:selectItems value="#{NovFilterView.categories}" var="cat" itemLabel="#{cat.categorieNom}" itemValue="#{cat.categorieNom}" />
+									    <p:ajax  update="formNoveautes" />
+									</h:selectOneMenu>
 							  <div class="select__arrow"></div>
 							</div>
 							
@@ -120,7 +116,7 @@
 			<h2 class="section_header">sec</h2>
 			<div class="container">
 				<div class="row customrow">
-				<table>
+				<table id="produitsTable">
 					<ui:repeat var="product" value="#{NovFilterView.newProducts}">
 					<div class="col-sm-6 col-md-3">
 						<div class="single_nouveProduct">
@@ -153,7 +149,18 @@
 							
 							<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
 							<p>#{product.produitDetail}</p>
-							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1"><h:graphicImage value="/static/img/whitecart.png" class="img-responsive"/>Add to Cart</button>
+<!-- 							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1"><h:graphicImage value="/static/img/whitecart.png" class="img-responsive"/>Add to Cart</button> -->
+							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1">
+								<h:commandLink action="#{NovFilterView.addToBasket()}"> 
+									<f:setPropertyActionListener value="#{product}" target="#{NovFilterView.selectedProduit}" />
+									<h:graphicImage value="/static/img/whitecart.png" styleClass="img-responsive" />Ajouter au panier
+								</h:commandLink>
+							</button>
+							
+<!-- 							<h:commandButton icon="ui-icon-cart" title="View" action="#{NovFilterView.addToBasket()}"> -->
+<!-- 								<f:setPropertyActionListener value="#{product}" target="#{NovFilterView.selectedProduit}" /> -->
+<!-- 							</h:commandButton> -->
+							
 							
 							<!-- start modal one-->
 							<div class="modal fade" id="nouve1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -203,19 +210,19 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="showingentries">
-								<p>Showing 1 to 100 of 250 Entries</p>
+<!-- 								<p>Showing 1 to 100 of 250 Entries</p> -->
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="nouve_pagination">
-								<ul class="pagination">
+<!-- 								<ul class="pagination"> -->
 								
-									<li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-									<li class="active"><a href="#">1</a></li>
-									<li class=""><a href="#">2</a></li>
-									<li class=""><a href="#">3</a></li>
-									<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-								</ul>
+<!-- 									<li><a href="#"><i class="fa fa-angle-left"></i></a></li> -->
+<!-- 									<li class="active"><a href="#">1</a></li> -->
+<!-- 									<li class=""><a href="#">2</a></li> -->
+<!-- 									<li class=""><a href="#">3</a></li> -->
+<!-- 									<li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
+<!-- 								</ul> -->
 							</div>
 						</div>
 					</div><!--end row-->
