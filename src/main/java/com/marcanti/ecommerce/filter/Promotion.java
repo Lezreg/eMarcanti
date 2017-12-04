@@ -88,21 +88,21 @@ public class Promotion {
 		return brands;
 	}
 
-	public String addToBasket() {
+	public void addToBasket() {
 		try {
 			Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
 			basket.addPoduct(produit, 1);
 		} catch (CommandeGroupeeNotFoundException e) {
 			LOGGER.info(e.getMessage());
-			return "/pages/private/errors/cmdNotFoundError.xhtml?faces-redirect=true";
+			// return "/pages/private/errors/cmdNotFoundError.xhtml?faces-redirect=true";
 		} catch (CommandeGroupeeValidatedExeception e) {
 			LOGGER.info(e.getMessage());
-			return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
+			// return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
 		} catch (Exception e) {
 			LOGGER.info(e.getMessage());
-			return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
+			// return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
 		}
-		return null;
+		// return null;
 	}
 
 	public List<ProduitBean> getFilteredProduits() {

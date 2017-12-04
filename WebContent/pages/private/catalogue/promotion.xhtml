@@ -153,15 +153,11 @@
 							<p>#{product.produitDetail}</p>
 <!-- 							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1"><h:graphicImage value="/static/img/whitecart.png" class="img-responsive"/>Add to Cart</button> -->
 							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1">
-								<h:commandLink action="#{PromFilterView.addToBasket()}"> 
+								<h:commandLink action="#{PromFilterView.addToBasket()}" onsuccess="initDialog(); return false;"> 
 									<f:setPropertyActionListener value="#{product}" target="#{PromFilterView.selectedProduit}" />
 									<h:graphicImage value="/static/img/whitecart.png" styleClass="img-responsive" />Ajouter au panier
 								</h:commandLink>
 							</button>
-							
-<!-- 							<h:commandButton icon="ui-icon-cart" title="View" action="#{NovFilterView.addToBasket()}"> -->
-<!-- 								<f:setPropertyActionListener value="#{product}" target="#{NovFilterView.selectedProduit}" /> -->
-<!-- 							</h:commandButton> -->
 							
 							
 							<!-- start modal one-->
@@ -230,6 +226,23 @@
 					</div><!--end row-->
 				</div><!--end cont.-->
 			</section><!--end sec-->
+			
+			
+			<script type="text/javascript">
+
+			function initDialog() {
+				 $("#nouve1").dialog({
+				     modal: true,
+				     buttons: {
+				            Close: function () {
+				                $(this).dialog("close");
+				            }
+				     },
+				 });
+				}
+
+
+			</script>
 		
 		</h:form>
 		</ui:define>

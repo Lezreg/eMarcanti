@@ -89,7 +89,7 @@
 						<div class="productrightinfo">
 							<div class="productrinfotitle">
 								<h2>#{product.marqueNom}</h2>
-								<span>#{product.produitDescription}</span>
+								<span>#{product.titreADecouvrir}</span>
 							</div>
 						</div><!--end -->
 						
@@ -131,23 +131,26 @@
 							<h3>Produits associés </h3>
 							
 							<ul>
-								<li>
-									<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb" />
-									<span class="productlistitle">Mauboussin Pour Femme (pyramide) 100ml EDP 100ml Vapo</span><span class="productpricelist"> 30€</span>
-									<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button>
-								</li>
-								
-								<li>
-									<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb"/>
-									<span class="productlistitle">Mauboussin Pour Femme (pyramide) 100ml EDP 100ml Vapo</span><span class="productpricelist"> 40€</span>
-									<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button>
-								</li>
-								
-								<li>
-									<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb"/>
-									<span class="productlistitle">Mauboussin Pour Femme (pyramide) 100ml EDP 100ml Vapo</span><span class="productpricelist"> 50€</span>
-									<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button>
-								</li>
+								<!-- start produit a decouvrir -->	
+								<ui:repeat var="productAsso" value="#{product.produitsAssocies}">
+									<li>
+										<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb" />
+										<span class="productlistitle">#{productAsso.produitDescription}</span><span class="productpricelist">#{productAsso.notrePrix}€</span>
+										<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button>
+									</li>
+									
+									<li>
+										<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb"/>
+										<span class="productlistitle">#{productAsso.produitDescription}</span><span class="productpricelist">#{productAsso.notrePrix}€</span>
+										<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button>
+									</li>
+									
+									<li>
+										<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb"/>
+										<span class="productlistitle">#{productAsso.produitDescription}</span><span class="productpricelist">#{productAsso.notrePrix}€</span>
+										<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button>
+									</li>
+								</ui:repeat>
 							</ul>
 						</div>
 						
@@ -178,7 +181,7 @@
 							<div role="tabpanel" class="tab-pane active" id="description">
 								<div class="col-sm-12">
 									<div class="produtdescleftside">
-										<h2>#{product.produitDescription}</h2>
+										<h2>#{product.descriptionADecouvrir}</h2>
 <!-- 										<p> -->
 <!-- 											Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and -->
 <!-- 										</p> -->

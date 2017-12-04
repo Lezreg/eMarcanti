@@ -116,4 +116,12 @@ public interface ProduitDAO extends GenericDAO<Produit> {
 	 * @return
 	 */
 	List<VCatalogueAvecStock> searchProduct(String searchChar);
+
+	/**
+	 * 
+	 * @param idProduit
+	 * @return
+	 */
+	List<Produit> getAssassociatedProductsToDiscover(Long idProduit);
+
 }

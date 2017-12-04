@@ -153,12 +153,20 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 
 	@Override
 	public List<ProduitBean> getDecouvProducts(Long orgId) {
+		List<ProduitBean> produitBeans = null;
 		Organisation organisation = organisationDAO.find(orgId);
 		if (organisation != null && organisation.getAccesCatalogueComplet()) {
-			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedDecouvProduit());
+			produitBeans = ProduitConvertor
+					.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedDecouvProduit());
 		} else {
-			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getDecouvProducts());
+			produitBeans = ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getDecouvProducts());
 		}
+
+		for (ProduitBean produitBean : produitBeans) {
+			produitBean.setProduitsAssocies(produitDAO.getAssassociatedProductsToDiscover(produitBean.getIdProduit()));
+		}
+
+		return produitBeans;
 	}
 
 	/**
