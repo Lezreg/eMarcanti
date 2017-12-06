@@ -37,8 +37,7 @@
 						</div>
 					
 					</div>
-				</div>
-
+			</div>
 		</div>
 		
 		
@@ -129,33 +128,23 @@
 						
 						<div class="relatedpromoispagearea">
 							<h3>Produits associés </h3>
-							
-							<ul>
-								<!-- start produit a decouvrir -->	
-								<ui:repeat var="productAsso" value="#{product.produitsAssocies}">
-									<li>
-										<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb" />
-										<span class="productlistitle">#{productAsso.produitDescription}</span><span class="productpricelist">#{productAsso.notrePrix}€</span>
-										<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button>
-									</li>
-									
-									<li>
-										<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb"/>
-										<span class="productlistitle">#{productAsso.produitDescription}</span><span class="productpricelist">#{productAsso.notrePrix}€</span>
-										<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button>
-									</li>
-									
-									<li>
-										<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb"/>
-										<span class="productlistitle">#{productAsso.produitDescription}</span><span class="productpricelist">#{productAsso.notrePrix}€</span>
-										<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button>
-									</li>
-								</ui:repeat>
-							</ul>
+								<ul>
+									<!-- start produit a decouvrir -->	
+									<ui:repeat var="productAsso" value="#{product.produitsAssocies}">
+										<li>
+											<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb" />
+											<span class="productlistitle">#{productAsso.produitDescription}</span><span class="productpricelist">#{productAsso.notrePrix}€</span>
+	<!-- 										<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button> -->
+											<button>
+												<h:commandLink action="#{DecouvFilterView.addToBasket()}"> 
+													<f:setPropertyActionListener value="#{productAsso}" target="#{DecouvFilterView.selectedProduit}" />
+													<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />
+												</h:commandLink>
+											</button>
+										</li>
+									</ui:repeat>
+								</ul>
 						</div>
-						
-						
-						
 					</div>
 				</div>
 			</div>
@@ -298,11 +287,9 @@
 			</div>
 		</section>
 		<!--end sec-->
-		
-		
+
 		</ui:repeat>
 		<!-- end produit a decouvrir -->	
-		
 		</h:form>
 		</ui:define>
 		<ui:define name="footer">

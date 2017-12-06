@@ -38,7 +38,7 @@ public class ADecouvrir {
 
 	private List<ProduitBean> filteredProduits;
 
-	private ProduitBean selectedProduit;
+	private Produit selectedProduit;
 
 	@Autowired
 	private ProduitServiceAction produitServiceAction;
@@ -47,18 +47,6 @@ public class ADecouvrir {
 	private BasketController basket;
 
 	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-
-	public BasketController getBasket() {
-		return basket;
-	}
-
-	public void setBasket(BasketController basket) {
-		this.basket = basket;
-	}
-
-	public ProduitServiceAction getService() {
-		return produitServiceAction;
-	}
 
 	@PostConstruct
 	public void init() {
@@ -132,12 +120,24 @@ public class ADecouvrir {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Result:", "Item added to basket"));
 	}
 
-	public ProduitBean getSelectedProduit() {
+	public Produit getSelectedProduit() {
 		return selectedProduit;
 	}
 
-	public void setSelectedProduit(ProduitBean selectedProduit) {
+	public void setSelectedProduit(Produit selectedProduit) {
 		this.selectedProduit = selectedProduit;
+	}
+
+	public BasketController getBasket() {
+		return basket;
+	}
+
+	public void setBasket(BasketController basket) {
+		this.basket = basket;
+	}
+
+	public ProduitServiceAction getService() {
+		return produitServiceAction;
 	}
 
 }

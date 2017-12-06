@@ -253,13 +253,14 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 		return restrictedProducts;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Produit> getAssassociatedProductsToDiscover(Long idProduit) {
 		LOGGER.info("----------getAssassociatedProductsToDiscover--------id:" + idProduit);
 
-		Query query = em.createQuery(
-				"SELECT p FROM Produit p WHERE p.produitDescription LIKE CONCAT('%', (SELECT p.motCleADecouvrir FROM Produit p WHERE p.idProduit = :idProduit), '%')")
-				.setParameter("idProduit", idProduit);
+		Query query = em.createQuery("SELECT p FROM Produit p WHERE "
+				+ "p.produitDescription LIKE CONCAT('%', (SELECT p.motCleADecouvrir FROM Produit p WHERE p.idProduit = :idProduit), '%') "
+				+ "AND  p.qteEnStock > 0 ").setParameter("idProduit", idProduit);
 		if (query.getResultList() == null) {
 			return Collections.<Produit>emptyList();
 		}
