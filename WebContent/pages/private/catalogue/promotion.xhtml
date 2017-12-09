@@ -11,6 +11,7 @@
 		</ui:define>
 		<ui:define name="content">
 		<h:form id="formPromos">
+		
 		<div class="breadcrumsrea">
 			<div class="container">
 				<div class="row">
@@ -102,12 +103,9 @@
 									</h:selectOneMenu>
 							  <div class="select__arrow"></div>
 							</div>
-							
 						</div>
-						
 					</div>
 				</div><!--end row-->
-				
 				
 			</div><!--end cont-->
 		</section>
@@ -118,86 +116,84 @@
 			<h2 class="section_header">sec</h2>
 			<div class="container">
 				<div class="row customrow">
-				<table id="produitsTable">
-					<ui:repeat var="product" value="#{PromFilterView.produits}">
-					<div class="col-sm-6 col-md-3">
-						<div class="single_nouveProduct">
-							<h5>#{product.marqueNom}</h5>
-							<div class="singleProductareass">
+					<table id="produitsTable">
+						<ui:repeat var="product" value="#{PromFilterView.produits}">
+						<div class="col-sm-6 col-md-3">
+							<div class="single_nouveProduct">
+								<h5>#{product.marqueNom}</h5>
+								<div class="singleProductareass">
+									
+									<figure>
+										<h:graphicImage value="/static/img/nouve/nouve1.jpg" class="productimage img-responsive" alt="perfume"></h:graphicImage>
+									</figure>
 								
-								<figure>
-									<h:graphicImage value="/static/img/nouve/nouve1.jpg" class="productimage img-responsive" alt="perfume"></h:graphicImage>
-								</figure>
-							
-							
-								 <div class="overlayitem">
-									<div class="text">
-										<h5>#{product.marqueNom}</h5>
-										<h4>#{product.familleOlfactive}</h4>
-										<p><strong>Notes de tête</strong></p>
-										<p>#{product.noteDeTete}</p>
-										<p><strong>Notes de coeur</strong></p>
-										<p>#{product.noteDeCoeur}</p>
-										<p><strong>Notes de fond</strong></p>
-										<p>#{product.noteDeFond}</p>
-										
-										<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-										<p class="blackparagraph">#{product.produitDescription}</p>
-
-									</div>
-								 </div>
-							</div><!--singleProductareass-->
-							
-							
-							<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-							<p>#{product.produitDetail}</p>
-<!-- 							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1"><h:graphicImage value="/static/img/whitecart.png" class="img-responsive"/>Add to Cart</button> -->
-							<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1" onclick="return false;">
-								<h:commandLink action="#{PromFilterView.addToBasket()}"> 
-									<f:setPropertyActionListener value="#{product}" target="#{PromFilterView.selectedProduit}" />
-									<h:graphicImage value="/static/img/whitecart.png" styleClass="img-responsive" />Ajouter au panier
-								</h:commandLink>
-							</button>
-							
-							
-							<!-- start modal one-->
-							<div class="modal fade" id="nouve1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close buttonclose" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
-
-
+								
+									 <div class="overlayitem">
+										<div class="text">
+											<h5>#{product.marqueNom}</h5>
+											<h4>#{product.familleOlfactive}</h4>
+											<p><strong>Notes de tête</strong></p>
+											<p>#{product.noteDeTete}</p>
+											<p><strong>Notes de coeur</strong></p>
+											<p>#{product.noteDeCoeur}</p>
+											<p><strong>Notes de fond</strong></p>
+											<p>#{product.noteDeFond}</p>
+											
+											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
+											<p class="blackparagraph">#{product.produitDescription}</p>
+	
 										</div>
-										<div class="modal-body">
-
-											 <div class="bigpopupimage">
-												<h:graphicImage value="/static/img/Popupimage.png" class="img-responsive" alt="image"/>
+									 </div>
+								</div><!--singleProductareass-->
+								
+								
+								<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
+								<p>#{product.produitDetail}</p>
+								
+								<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1" onclick="return false;">
+									<h:commandLink action="#{PromFilterView.addToBasket()}"> 
+										<f:setPropertyActionListener value="#{product}" target="#{PromFilterView.selectedProduit}" />
+										<h:graphicImage value="/static/img/whitecart.png" styleClass="img-responsive" />Ajouter au panier
+									</h:commandLink>
+								</button>
+								
+								<!-- start modal one-->
+								<div class="modal fade" id="nouve1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close buttonclose" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 											</div>
-
-											 <div class="popupdetals sucessfulpopup modalbodyright">
-												<h2><h:graphicImage value="/static/img/Popupsuccesful.png" class="img-responsive" alt="error"/> The Product Was Successfully added</h2>
-												<p class="popupdescription">1 #{product.produitDescription}</p>
-												<div class="popbothbutton">
-													<button class="continuebutton">continue</button>
-													<button class="finishbutton">Finish Order</button>
+											
+											<div class="modal-body">
+											
+												 <div class="bigpopupimage">
+													<h:graphicImage value="/static/img/Popupimage.png" class="img-responsive" alt="image"/>
 												</div>
-											 </div><!---end-->
-
+	
+												 <div class="popupdetals sucessfulpopup modalbodyright">
+													<h2><h:graphicImage value="/static/img/Popupsuccesful.png" class="img-responsive" alt="error"/> The Product Was Successfully added</h2>
+													<p class="popupdescription">1 #{product.produitDescription}</p>
+													<div class="popbothbutton">
+														<button class="continuebutton">continue</button>
+														<button class="finishbutton">Finish Order</button>
+													</div>
+												 </div><!---end-->
+	
+											</div>
+	
 										</div>
-
+										<!-- /.modal-content -->
 									</div>
-									<!-- /.modal-content -->
+									<!-- /.modal-dialog -->
 								</div>
-								<!-- /.modal-dialog -->
+								<!-- /end .modal -->
 							</div>
-							<!-- /end .modal -->
-						</div>
+							
+						</div><!--end col-->
 						
-					</div><!--end col-->
-					
-			</ui:repeat>
-			</table>
+					</ui:repeat>
+				</table>
 			</div>
 			</div>
 			</section>		

@@ -1,0 +1,65 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+		<h:body>
+			<h:form id="coffretFormId">
+				<p:dataTable var="cmd" value="#{CmdsFilleulsView.cmdeGroupees}" widgetVar="produitsTesterTable" emptyMessage="No produits found with given criteria"
+					filteredValue="#{CmdsFilleulsView.filteredCdeGroupees}">
+					<f:facet name="header">
+						<p:outputPanel>
+							<!-- <h:outputText value="Search all fields:" /> -->
+							<p:inputText id="globalFilter" 	onkeyup="PF('produitsTesterTable').filter()" style="text-align=right" placeholder="Rechercher" />
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column style="width:50px">
+						<h:outputText value="#{cmd.idProduit}" />
+					</p:column>
+
+					<p:column filterBy="#{cmd.departementNom}" headerText="Marque" footerText="exact" filterMatchMode="exact">
+						<h:outputText value="#{cmd.departementNom}" />
+					</p:column>
+
+					<p:column filterBy="#{cmd.membreTel}" headerText="Description" footerText="contains" filterMatchMode="contains">
+						<h:outputText value="#{cmd.membreTel}" />
+					</p:column>
+
+					<p:column filterBy="#{cmd.membreNom}" style="width:150px" headerText="Detail" footerText="contains" filterMatchMode="contains">
+						<h:outputText value="#{cmd.membreNom}" />
+					</p:column>
+					
+					<p:column filterBy="#{cmd.membrePrenom}" style="width:150px" headerText="Detail" footerText="contains" filterMatchMode="contains">
+						<h:outputText value="#{cmd.membrePrenom}" />
+					</p:column>
+
+					<p:column filterBy="#{cmd.cdeIndivMontant}" style="width:110px" headerText="Prix constaté" footerText="custom (min)" filterFunction="#{CmdsFilleulsView.filterByPrice}">
+						<h:outputText value="#{cmd.cdeIndivMontant}">
+							<f:convertNumber currencySymbol="€" type="currency" />
+						</h:outputText>
+					</p:column>
+
+					<p:column filterBy="#{cmd.montantAPayer}" style="width:110px" headerText="Notre prix" footerText="custom (min)"	filterFunction="#{CmdsFilleulsView.filterByPrice}">
+						<h:outputText value="#{cmd.montantAPayer}">
+							<f:convertNumber currencySymbol="€" type="currency" />
+						</h:outputText>
+					</p:column>
+					
+					<p:column filterBy="#{cmd.cdeIndivStatusCode}" style="width:150px" headerText="Detail" footerText="contains" filterMatchMode="contains">
+						<h:outputText value="#{cmd.cdeIndivStatusCode}" />
+					</p:column>
+					
+					<p:column filterBy="#{cmd.isPaiementEffectue}" style="width:150px" headerText="Detail" footerText="contains" filterMatchMode="contains">
+						<h:outputText value="#{cmd.isPaiementEffectue}" />
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>

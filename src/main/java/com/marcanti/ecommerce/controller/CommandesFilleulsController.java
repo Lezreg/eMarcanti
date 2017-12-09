@@ -10,6 +10,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -22,16 +24,18 @@ import com.marcanti.ecommerce.view.bean.UserSessionBean;
 @ViewScoped
 public class CommandesFilleulsController {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(CommandesFilleulsController.class);
+
 	private List<VCdeGroupeeDetail> cmdeGroupees;
 
 	private List<VCdeGroupeeDetail> filteredCdeGroupees;
 
 	private VCdeGroupeeDetail selectedCdeGroupee;
 
-	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-
 	@Autowired
 	private CommandeGroupeeServiceAction commandeGroupeeServiceAction;
+
+	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 
 	@PostConstruct
 	public void init() {
@@ -54,12 +58,10 @@ public class CommandesFilleulsController {
 		return ((Comparable) value).compareTo(Integer.valueOf(filterText)) > 0;
 	}
 
-	public List<VCdeGroupeeDetail> getCdeGroupees() {
-		return commandeGroupeeServiceAction.getCommandeGroupeesFilleulsByMembre(userSessionBean.getIdMembre());
-	}
-
-	public void setCdeGroupees(List<VCdeGroupeeDetail> cdeGroupees) {
-		setCmdeGroupees(cdeGroupees);
+	public String showCmdDetails() {
+		LOGGER.info("selectedCdeGroupee:" + selectedCdeGroupee);
+		// TODO NAVIGATE RULES
+		return null;
 	}
 
 	public List<VCdeGroupeeDetail> getFilteredCdeGroupees() {

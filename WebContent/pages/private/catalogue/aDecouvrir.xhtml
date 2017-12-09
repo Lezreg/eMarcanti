@@ -124,11 +124,10 @@
 							</div>
 						</div><!--end -->
 						
-						
-						
 						<div class="relatedpromoispagearea">
 							<h3>Produits associés </h3>
 								<ul>
+									<h:form id="formProductAsso">
 									<!-- start produit a decouvrir -->	
 									<ui:repeat var="productAsso" value="#{product.produitsAssocies}">
 										<li>
@@ -143,6 +142,7 @@
 											</button>
 										</li>
 									</ui:repeat>
+									</h:form>
 								</ul>
 						</div>
 					</div>
@@ -150,7 +150,6 @@
 			</div>
 		</section>
 		<!--end sec-->
-		
 		
 		<section class="product_decotabarea">
 			<h2 class="section_header">sec</h2>
@@ -164,7 +163,6 @@
 								<li role="presentation"><a href="#reviews" aria-controls="profile" role="tab" data-toggle="tab">Avis</a></li>
 								<li role="presentation"><a href="#writereview" aria-controls="messages" role="tab" data-toggle="tab">Laisser un avis </a></li>
 							  </ul>
-
 						  <!-- Tab panes -->
 						  <div class="tab-content">
 							<div role="tabpanel" class="tab-pane active" id="description">
@@ -249,9 +247,7 @@
 											Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
 										</p>
 									</div><!--end-->
-									
 								</div>
-								
 							</div><!--end-->
 							<div role="tabpanel" class="tab-pane" id="writereview">
 								<div class="col-sm-6">
@@ -287,7 +283,6 @@
 			</div>
 		</section>
 		<!--end sec-->
-
 		</ui:repeat>
 		<!-- end produit a decouvrir -->	
 		</h:form>
