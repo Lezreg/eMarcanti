@@ -63,7 +63,7 @@ public class MailHtml {
 
         // second part (the image)
         MimeBodyPart imagePart = new MimeBodyPart();
-        DataSource fds = new FileDataSource(ReferentielBean.getMailFolderPath()+File.separator+"logo_big.jpg");
+        DataSource fds = new FileDataSource(ReferentielBean.getMailFolderPath()+File.separator+"parfumelogo-message.jpg");
         imagePart.setDataHandler(new DataHandler(fds));
         //imagePart.setHeader("Content-ID", "<image1>");
         imagePart.setContentID("<image1>");

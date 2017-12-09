@@ -63,7 +63,7 @@
 			<to-view-id>/pages/private/message.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
-<navigation-rule>
+	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
 			<from-outcome>filleuls</from-outcome>
@@ -378,6 +378,13 @@
 		<navigation-case>
 			<from-outcome>produit</from-outcome>
 			<to-view-id>/pages/private/admin/produit.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>reporting1</from-outcome>
+			<to-view-id>/pages/private/reporting/reporting1.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	

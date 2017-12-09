@@ -1,8 +1,8 @@
 package com.marcanti.ecommerce.service.actions;
 
 import java.util.List;
-
 import com.marcanti.ecommerce.model.Categorie;
+import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
 
@@ -15,4 +15,6 @@ public interface ReferentielServiceAction {
     public String getDefaultPassword();
     
     public List<Categorie> getCategorieList();
+    
+    public List<CommandeGroupeeStatus> getCommandeGroupeeStatusList();
 }

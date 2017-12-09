@@ -16,8 +16,6 @@ public class VCatalogueAdminServiceActionImpl implements VCatalogueAdminServiceA
 	private VCatalogueAdminDAO catalogueDAO;	
  
 
-
-
 	public VCatalogueAdminDAO getCatalogueDAO() {
 		return catalogueDAO;
 	}

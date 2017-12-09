@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcanti.ecommerce.dao.CategorieDAO;
+import com.marcanti.ecommerce.dao.CommandeGroupeeStatusDAO;
 import com.marcanti.ecommerce.dao.OrganisationDAO;
 import com.marcanti.ecommerce.dao.ParamDAO;
 import com.marcanti.ecommerce.dao.ProfilDAO;
 import com.marcanti.ecommerce.model.Categorie;
+import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
 import com.marcanti.ecommerce.service.actions.ReferentielServiceAction;
@@ -30,6 +32,9 @@ public class ReferentielServiceActionImpl implements ReferentielServiceAction {
 	
 	@Autowired
 	private CategorieDAO categorieDAO;	
+	
+	@Autowired
+	private CommandeGroupeeStatusDAO commandeGroupeeStatusDAO;
 	
 	
 	public List<Organisation> getOrganisationList() {
@@ -78,6 +83,11 @@ public class ReferentielServiceActionImpl implements ReferentielServiceAction {
 
 	public void setCategorieDAO(CategorieDAO categorieDAO) {
 		this.categorieDAO = categorieDAO;
+	}
+
+	@Override
+	public List<CommandeGroupeeStatus> getCommandeGroupeeStatusList() {
+		return this.commandeGroupeeStatusDAO.findAll();
 	}
 
 	

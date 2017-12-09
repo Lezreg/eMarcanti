@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.model.Categorie;
+import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Profil;
 import com.marcanti.ecommerce.service.actions.ReferentielServiceAction;
@@ -47,6 +48,8 @@ public class ReferentielBean implements Serializable {
 	private List<Organisation> organisationList;
 	
 	private List<Profil> profilList;
+	
+	private List<CommandeGroupeeStatus> commandeGroupeeStatusList;
 	
 	private static List<Profil> memberRoleList;
 	
@@ -77,6 +80,14 @@ public class ReferentielBean implements Serializable {
 		radioButtonOuiNon.put(ParfumUtils.getBundleLibelle().getString("libelle_non"), "false");
 	}
 	
+	public Map<String,Object> radioButtonOuiNonInd;
+	{
+		radioButtonOuiNonInd = new LinkedHashMap<String,Object>();
+		radioButtonOuiNonInd.put(ParfumUtils.getBundleLibelle().getString("libelle_oui"), "1"); //label, value
+		radioButtonOuiNonInd.put(ParfumUtils.getBundleLibelle().getString("libelle_non"), "0");
+		radioButtonOuiNonInd.put(ParfumUtils.getBundleLibelle().getString("libelle_indif"), "2");
+	}	
+	
 	private List<Categorie> categorieList;
 
 	@ManagedProperty("#{referentielService}")
@@ -90,6 +101,15 @@ public class ReferentielBean implements Serializable {
 		this.profilList = profilList;
 	}
 	
+	
+	public List<CommandeGroupeeStatus> getCommandeGroupeeStatusList() {
+		return commandeGroupeeStatusList;
+	}
+
+	public void setCommandeGroupeeStatusList(List<CommandeGroupeeStatus> commandeGroupeeStatusList) {
+		this.commandeGroupeeStatusList = commandeGroupeeStatusList;
+	}
+
 	public static List<Profil> getMemberRoleList() {
 		return memberRoleList;
 	}
@@ -154,6 +174,14 @@ public class ReferentielBean implements Serializable {
 		this.radioButtonOuiNon = radioButtonOuiNon;
 	}
 	
+	public Map<String, Object> getRadioButtonOuiNonInd() {
+		return radioButtonOuiNonInd;
+	}
+
+	public void setRadioButtonOuiNonInd(Map<String, Object> radioButtonOuiNonInd) {
+		this.radioButtonOuiNonInd = radioButtonOuiNonInd;
+	}
+
 	public static String getSmtpHost() {
 		return smtpHost;
 	}
@@ -256,6 +284,7 @@ public class ReferentielBean implements Serializable {
 		this.profilList = referentielService.getProfilList();
 		this.defaultPassword = referentielService.getDefaultPassword();
 		this.categorieList = referentielService.getCategorieList();
+		this.commandeGroupeeStatusList = referentielService.getCommandeGroupeeStatusList();
 		getPropertiesConfig();
 		this.memberRoleList = new ArrayList<Profil>();
 		this.memberRoleList.add(new Profil(PROFIL_FILLEUL,PROFIL_FILLEUL_NAME,""));

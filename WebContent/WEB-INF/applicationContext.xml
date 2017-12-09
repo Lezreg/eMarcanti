@@ -177,5 +177,13 @@
 		<beans:property name="marqueDAO" ref="marqueDAO" />
 		<beans:property name="organisationDAO" ref="organisationDAO" />
 	</beans:bean>	
+	
+	<beans:bean id="reportingCdeGroupeeDAO"
+		class="com.marcanti.ecommerce.dao.impl.VReportingCdeGroupeeDAOImpl">
+	</beans:bean>	
+	<beans:bean id="reportingCdeGroupeeService"
+		class="com.marcanti.ecommerce.service.actions.impl.VReportingCdeGroupeeServiceActionImpl">
+		<beans:property name="reportingCdeGroupeeDAO" ref="reportingCdeGroupeeDAO"></beans:property>
+	</beans:bean>	
 
 </beans:beans>
