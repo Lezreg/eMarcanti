@@ -54,6 +54,10 @@ public class CommandeGroupeeController implements Serializable {
 
 	private Organisation organisation;
 
+	private Long organisationId;
+
+	private List<Organisation> organisations;
+
 	@PostConstruct
 	private void init() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -153,5 +157,21 @@ public class CommandeGroupeeController implements Serializable {
 
 	public void setOrganisation(Organisation organisation) {
 		this.organisation = organisation;
+	}
+
+	public List<Organisation> getOrganisations() {
+		return organisationServiceAction.getOrganisationList();
+	}
+
+	public void setOrganisations(List<Organisation> organisations) {
+		this.organisations = organisations;
+	}
+
+	public Long getOrganisationId() {
+		return organisationId;
+	}
+
+	public void setOrganisationId(Long organisationId) {
+		this.organisationId = organisationId;
 	}
 }
