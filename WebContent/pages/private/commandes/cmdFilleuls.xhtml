@@ -6,6 +6,7 @@
 <h:body>
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="content">
+		
 		<div class="breadcrumsrea">
 			<div class="container">
 				<div class="row">
@@ -20,7 +21,7 @@
 			</div>
 		</div>
 		<!--end breadcrumsrea-->
-			<h:form id="formMembres">
+			<h:form id="formCmdFil">
 			
 				<!-- start mess commandes area-->
 				<section class="messcomandesarea">
@@ -80,6 +81,7 @@
 										
 										<tfoot class="catalougetfootarea messcommandestfarea">
 											<tr>
+											
 												<th></th>
 												<th></th>
 												<th></th>
@@ -119,12 +121,8 @@
 					
 					</div><!--end cont.-->
 				</section><!--end sec-->
-			
 			</h:form>
 		</ui:define>
-		<ui:define name="footer">
-			<ui:include src="/template/footer2.xhtml" />
-		</ui:define>		
 	</ui:composition>
 </h:body>
 </html>
