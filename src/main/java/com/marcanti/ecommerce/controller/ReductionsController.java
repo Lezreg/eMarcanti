@@ -66,6 +66,7 @@ public class ReductionsController implements Serializable {
 
 	public void valider() {
 		LOGGER.info("----------------------------------valider");
+		// TODO
 	}
 
 	public CommandeGroupeeServiceAction getCommandeGroupeeServiceAction() {

@@ -124,11 +124,23 @@ public class CommandeGroupeeController implements Serializable {
 	}
 
 	public List<CommandeGroupee> getCmdGroupees() {
-		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(userSessionBean.getIdOrga(), false);
+		// default value (pour selected by Admin)
+		Long idOrga = organisationId;
+		// else organisation of current user
+		if (idOrga == null || idOrga == 0) {
+			idOrga = userSessionBean.getIdOrga();
+		}
+		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(idOrga, true);
 	}
 
 	public List<CommandeGroupee> getCmdGroupeesPrec() {
-		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(userSessionBean.getIdOrga(), true);
+		// default value (pour selected by Admin)
+		Long idOrga = organisationId;
+		// else organisation of current user
+		if (idOrga == null || idOrga == 0) {
+			idOrga = userSessionBean.getIdOrga();
+		}
+		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(idOrga, false);
 	}
 
 	public void setCmdGroupees(List<CommandeGroupee> cmdGroupees) {

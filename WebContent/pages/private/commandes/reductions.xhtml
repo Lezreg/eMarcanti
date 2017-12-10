@@ -1,87 +1,127 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core"
-	template="/template/template.xhtml">
-	<ui:define name="metadata">
-	</ui:define>
-	<ui:define name="content">
-	<h:body>
-		<h:form id="cmdForm">
-			<div style="overflow-x:auto;">	
-				<br />
-				<br />
-				<h:outputText id="idRedText" value="Gestion des réductions" />
-				<br />
-				<br />
-				<br />
-				<br />
-				<p:dataTable id="reductionList" var="red" value="#{reductionView.reductions}" widgetVar="red1"
-						emptyMessage="No reductions found"  filteredValue="#{reductionView.reductionsFiltred}">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-					<p:column filterBy="#{red.membreNom}"
-						headerText="Nom membre" footerText="contains"
-						filterMatchMode="contains">
-						<h:outputText value="#{red.membreNom}" />
-					</p:column>
-					
-					<p:column filterBy="#{red.cdeIndivNom}"
-						headerText="Nom cde individuelle" footerText="contains"
-						filterMatchMode="contains">
-						<h:outputText value="#{red.cdeIndivNom}" />
-					</p:column>	
-					
-					<p:column filterBy="#{red.cdeGroupeeNom}"
-						headerText="Nom cde groupée" footerText="contains"
-						filterMatchMode="contains">
-						<h:outputText value="#{red.cdeGroupeeNom}" />
-					</p:column>	
-					
-					<p:column filterBy="#{red.cdeGoupeeEtat}"
-						headerText="Etat cde groupées" footerText="contains"
-						filterMatchMode="contains">
-						<h:outputText value="#{red.cdeGoupeeEtat}" />
-					</p:column>		
-	
-					<p:column filterBy="#{red.cdeGroupeeMontantTotal}"
-						headerText="Montant Total cde groupée" footerText="contains"
-						filterMatchMode="contains">
-						<h:outputText value="#{red.cdeGroupeeMontantTotal}" />
-					</p:column>
-					
-					<p:column filterBy="#{red.cdeIndivMontant}"
-						headerText="Montant cde Individuelle" footerText="contains"
-						filterMatchMode="contains">
-						<h:outputText value="#{red.cdeIndivMontant}" />
-					</p:column>	
-					
-					<p:column filterBy="#{red.reduction}" headerText="Réduction accordée" footerText="contains" filterMatchMode="contains" style="width:50px">
-						<h:inputText value="#{red.reduction}" >
-							<f:convertNumber pattern="#00" />
-						</h:inputText>
-					</p:column>
-					
-					<p:column filterBy="#{red.cdeIndivMontant}"	headerText="Montant cde Individuelle" footerText="contains" filterMatchMode="contains">
-						<h:outputText value="#{red.cdeIndivMontant}" />
-					</p:column>	
-					
-					 <p:column style="width:32px;text-align: center">
-			             <h:commandButton value="Valider" action="#{reductionView.valider()}"  title="Valider">
-			                <f:setPropertyActionListener value="#{red}" target="#{reductionView.reductionSelected}" />
-			            </h:commandButton>
-			        </p:column>
-			        
-			         <p:column style="width:32px;text-align: center">
-			             <h:commandButton value="View" action="cmdIndivDetail"  title="View">
-			                <f:setPropertyActionListener value="#{red}" target="#{reductionView.reductionSelected}" />
-			            </h:commandButton>
-			        </p:column>
-			        
-				</p:dataTable>	
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<ui:define name="content">
+		
+			<div class="breadcrumsrea">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="breadcrumslist">
+								<ul>
+									<li><a href="index.html">Home</a></li> /
+									<li class="current_item"><a href="gestion_reductions.html">Gestion Des Réductions</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-		</h:form>
+		<!--end breadcrumsrea-->
+		
+		<!-- start mess commandes area-->
+			<section class="messcomandesarea">
+				<h2 class="section_header">sec</h2>
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="filterheading">
+								<h3>Gestion des réductions</h3>
+							</div>
+							
+						</div>
+					</div><!--end row-->
 	
-	</h:body>
-	</ui:define>
-</ui:composition>
+					
+				</div><!--end cont-->
+			</section>
+		<!--end sec-->
+		<h:form id="formReductions">
+			<section class="mess-commandestable organizationmobilesec">
+			<h2 class="section_header">sec</h2>
+			<div class="container">
+				<div class="row customrow">
+					<div class="col-xs-12">
+						<div class="mess-innertablearea">
+							
+							<table id="gestionid" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th class="nameoforder">Nom membre</th>
+										<th class="creationdate">Nom cde groupée </th>
+										<th class="status">Etat cde groupée</th>
+										<th class="deliverydate"> Montant  cde groupée</th>
+										<th class="createdby">Montant cde individuelle</th>
+										<th class="createdby">Réduction accordée</th>
+										<th class="createdby">Cde indiv. payée ?</th>
+										<th class="createdby none">Nom cde individuelle</th>
+										<th class="blankth"></th>                                                     
+										<th class="blankth"></th>                                                     
+                                                                                                                             
+
+									</tr>
+								</thead>
+								
+								<tfoot class="catalougetfootarea messcommandestfarea">
+									<tr>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th></th>
+										<th class="blankth"></th>
+										<th class="blankth"></th>
+										
+									</tr>
+								</tfoot>
+								<tbody>
+									<ui:repeat var="red" value="#{reductionView.reductions}">
+										<tr>
+											<td>#{red.membreNom}</td>
+											<td>#{red.cdeIndivNom}</td>
+											<td class="redclass">#{red.cdeGoupeeEtat}</td>
+											<td>#{red.cdeGroupeeMontantTotal}€</td>
+											<td>#{red.cdeIndivMontant}€</td>
+											<td><span class="borderedamount">#{red.reduction}</span></td>
+											<td class="organyesnooption"><small>#{red.cdeIndivStatusCode eq 'CDE_INDIVID_PAYEE' ? 'y' : 'n'}</small><i class="#{red.cdeIndivStatusCode eq 'CDE_INDIVID_PAYEE' ? 'greenclass fa fa-check' : 'redclass fa fa-times'}"></i></td>
+											<td>#{red.cdeIndivNom}</td>
+											<td>
+												<h:commandLink  styleClass="fa fa-eye">
+													<f:setPropertyActionListener target="#{reductionView.reductionSelected}" value="#{red}" />
+												</h:commandLink>
+											</td>
+											<td>
+												<a>
+													<h:commandLink action="#{reductionView.valider()}" styleClass="validerbutton" value="Valider">
+														<f:setPropertyActionListener target="#{reductionView.reductionSelected}" value="#{red}" />
+													</h:commandLink>
+												</a>
+											</td>
+										</tr>
+									</ui:repeat>
+								</tbody>
+							</table>
+						</div><!--end-->
+					</div>
+				</div><!--end row-->
+			
+			</div><!--end cont.-->
+		</section><!--end sec-->
+		</h:form>
+		</ui:define>
+		
+		<ui:define name="script">
+			<ui:include src="/scripts/reductionsScripts.xhtml" />
+		</ui:define>
+
+	</ui:composition>
+</h:body>
+</html>		

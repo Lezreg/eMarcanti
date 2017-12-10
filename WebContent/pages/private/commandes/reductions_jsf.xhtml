@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/template/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+	<ui:define name="content">
+	<h:body>
+		<h:form id="cmdForm">
+			<div style="overflow-x:auto;">	
+				<br />
+				<br />
+				<h:outputText id="idRedText" value="Gestion des réductions" />
+				<br />
+				<br />
+				<br />
+				<br />
+				<p:dataTable id="reductionList" var="red" value="#{reductionView.reductions}" widgetVar="red1"
+						emptyMessage="No reductions found"  filteredValue="#{reductionView.reductionsFiltred}">
+
+					<p:column filterBy="#{red.membreNom}"
+						headerText="Nom membre" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{red.membreNom}" />
+					</p:column>
+					
+					<p:column filterBy="#{red.cdeIndivNom}"
+						headerText="Nom cde individuelle" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{red.cdeIndivNom}" />
+					</p:column>	
+					
+					<p:column filterBy="#{red.cdeGroupeeNom}"
+						headerText="Nom cde groupée" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{red.cdeGroupeeNom}" />
+					</p:column>	
+					
+					<p:column filterBy="#{red.cdeGoupeeEtat}"
+						headerText="Etat cde groupées" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{red.cdeGoupeeEtat}" />
+					</p:column>		
+	
+					<p:column filterBy="#{red.cdeGroupeeMontantTotal}"
+						headerText="Montant Total cde groupée" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{red.cdeGroupeeMontantTotal}" />
+					</p:column>
+					
+					<p:column filterBy="#{red.cdeIndivMontant}"
+						headerText="Montant cde Individuelle" footerText="contains"
+						filterMatchMode="contains">
+						<h:outputText value="#{red.cdeIndivMontant}" />
+					</p:column>	
+					
+					<p:column filterBy="#{red.reduction}" headerText="Réduction accordée" footerText="contains" filterMatchMode="contains" style="width:50px">
+						<h:inputText value="#{red.reduction}" >
+							<f:convertNumber pattern="#00" />
+						</h:inputText>
+					</p:column>
+					
+					<p:column filterBy="#{red.cdeIndivMontant}"	headerText="Montant cde Individuelle" footerText="contains" filterMatchMode="contains">
+						<h:outputText value="#{red.cdeIndivMontant}" />
+					</p:column>	
+					
+					 <p:column style="width:32px;text-align: center">
+			             <h:commandButton value="Valider" action="#{reductionView.valider()}"  title="Valider">
+			                <f:setPropertyActionListener value="#{red}" target="#{reductionView.reductionSelected}" />
+			            </h:commandButton>
+			        </p:column>
+			        
+			         <p:column style="width:32px;text-align: center">
+			             <h:commandButton value="View" action="cmdIndivDetail"  title="View">
+			                <f:setPropertyActionListener value="#{red}" target="#{reductionView.reductionSelected}" />
+			            </h:commandButton>
+			        </p:column>
+			        
+				</p:dataTable>	
+			</div>
+		</h:form>
+	
+	</h:body>
+	</ui:define>
+</ui:composition>
