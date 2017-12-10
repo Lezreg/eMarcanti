@@ -159,7 +159,7 @@
 											</td>
 											<td>#{cmdGr.prenomCreateur} #{cmdGr.nomCreateur}</td>
 											<td class="greenclass">#{cmdGr.idStatus.statusLibelle}</td>
-											<td class="organyesnooption"><small>y</small><i class="fa fa-check-square-o" title="Y"></i></td>
+											<td class="organyesnooption"><small>#{cmdGr.isPaiementEffectue ? 'y' : 'n'}</small><i class="#{cmdGr.isPaiementEffectue ? 'fa fa-check-square-o' : 'fa fa-times'}" title="N"></i></td>
 											<td>
 												<h:outputText value="#{cmdGr.dateLivraisonPrevue}">
 													<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
