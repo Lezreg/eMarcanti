@@ -10,7 +10,11 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 
+import javax.annotation.concurrent.Immutable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -26,6 +30,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author admin
  */
 
+@Entity
+@Immutable
 @Table(name = "v_reporting_cde_groupee")
 @XmlRootElement
 @NamedQueries({
@@ -44,11 +50,15 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "VReportingCdeGroupee.findByDateLivraisonPrevue", query = "SELECT v FROM VReportingCdeGroupee v WHERE v.dateLivraisonPrevue = :dateLivraisonPrevue")
     , @NamedQuery(name = "VReportingCdeGroupee.findByDateLivraisonReelle", query = "SELECT v FROM VReportingCdeGroupee v WHERE v.dateLivraisonReelle = :dateLivraisonReelle")
     , @NamedQuery(name = "VReportingCdeGroupee.findByIdStatus", query = "SELECT v FROM VReportingCdeGroupee v WHERE v.idStatus = :idStatus")})
+
 public class VReportingCdeGroupee implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Basic(optional = false)
     @NotNull
+    @Id
+    @Column(name = "idCdeGroupee", updatable = false, nullable = false)
     private long idCdeGroupee;
     @Basic(optional = false)
     @NotNull
@@ -65,6 +75,8 @@ public class VReportingCdeGroupee implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     private BigDecimal cdeGroupeeMontantTotal;
     private BigDecimal montantPaye;
+    @Transient
+    private BigDecimal restePaye;
     @Basic(optional = false)
     @NotNull
     private long nbCdeIndiv;
@@ -134,8 +146,16 @@ public class VReportingCdeGroupee implements Serializable {
     public void setMontantPaye(BigDecimal montantPaye) {
         this.montantPaye = montantPaye;
     }
+    
+    public BigDecimal getRestePaye() {
+		return this.cdeGroupeeMontantTotal.subtract(this.montantPaye);
+	}
 
-    public long getNbCdeIndiv() {
+	public void setRestePaye(BigDecimal restePaye) {
+		this.restePaye = restePaye;
+	}
+
+	public long getNbCdeIndiv() {
         return nbCdeIndiv;
     }
 
@@ -165,6 +185,16 @@ public class VReportingCdeGroupee implements Serializable {
 
     public void setIsPaiementEffectue(boolean isPaiementEffectue) {
         this.isPaiementEffectue = isPaiementEffectue;
+    }
+    
+    public String getIsPaiementEffectueStr() {
+    	if (isPaiementEffectue) return "y";
+    	else return "n";
+    }    
+    
+    public String getIsPaiementEffectueStyle() {
+    	if (isPaiementEffectue) return "greenclass fa fa-check";
+    	else return "redclass fa fa-times";
     }
 
     public Date getDateModification() {

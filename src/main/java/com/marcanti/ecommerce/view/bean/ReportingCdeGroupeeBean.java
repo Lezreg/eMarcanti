@@ -102,8 +102,8 @@ public class ReportingCdeGroupeeBean implements Serializable {
 	}
 
 	public String editCdeGroupee() {
-
-		return "produit";
+		this.reportingCdeGroupeeList = reportingCdeGroupeeService.getReportingCdeGroupeeList();
+		return "reporting1";
 
 	}
 	

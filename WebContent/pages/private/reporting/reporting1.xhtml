@@ -148,61 +148,43 @@
 										</tfoot>
 
 										<tbody>
-											<tr>
-												<td>FOOT_01JANV2017</td>
-												<td>Non confirmé</td>
-												<td>1000€</td>
-												<td>10</td>
-												<td>5</td>
-												<td>500€</td>
-												<td>500€</td>
-												<td>01/01/2017</td>
-												<td>01/01/2017</td>
-												<td class="organyesnooption"><small>y</small><i
-													class="greenclass fa fa-check"></i></td>
-												<td>01/01/2017</td>
-												<td>01/01/2017</td>
-												<td><a href=""><i class="fa fa-pencil-square-o"></i></a></td>
-												<td><a href=""><i class="fa fa-eye"></i></a></td>
-
-											</tr>
-
-											<tr>
-												<td>FOOT_10DEC2016</td>
-												<td>Livré</td>
-												<td>1200€</td>
-												<td>12</td>
-												<td>6</td>
-												<td>600€</td>
-												<td>600€</td>
-												<td>01/01/2017</td>
-												<td>01/01/2017</td>
-												<td class="organyesnooption"><small>y</small><i
-													class="greenclass fa fa-check"></i></td>
-												<td>01/01/2017</td>
-												<td>01/01/2017</td>
-												<td><a href=""><i class="fa fa-pencil-square-o"></i></a></td>
-												<td><a href=""><i class="fa fa-eye"></i></a></td>
-
-											</tr>
-
-											<tr>
-												<td>FOOT_10DEC2016</td>
-												<td>Livré</td>
-												<td>1400€</td>
-												<td>14</td>
-												<td>7</td>
-												<td>700€</td>
-												<td>700€</td>
-												<td>01/01/2017</td>
-												<td>01/01/2017</td>
-												<td class="organyesnooption"><small>y</small><i
-													class="greenclass fa fa-check"></i></td>
-												<td>01/01/2017</td>
-												<td>01/01/2017</td>
-												<td><a href=""><i class="fa fa-pencil-square-o"></i></a></td>
-												<td><a href=""><i class="fa fa-eye"></i></a></td>
-											</tr>
+											
+											<ui:repeat var="reportingCdeGroupee" value="#{reportingCdeGroupeeBean.reportingCdeGroupeeList}">
+												<tr>
+													<td>#{reportingCdeGroupee.cdeGroupeeNom}</td>
+													<td>#{reportingCdeGroupee.cdeGoupeeEtat}</td>
+													<td>#{reportingCdeGroupee.cdeGroupeeMontantTotal}€</td>
+													<td>#{reportingCdeGroupee.nbCdeIndiv}</td>
+													<td>#{reportingCdeGroupee.nbCdeIndivPayees}</td>
+													<td>#{reportingCdeGroupee.montantPaye}€</td>
+													<td>#{reportingCdeGroupee.restePaye}€</td>
+													<td>
+														<h:outputText value="#{reportingCdeGroupee.dateLivraisonPrevue}">
+															<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+														</h:outputText>
+													</td>
+													<td>
+														<h:outputText value="#{reportingCdeGroupee.dateLivraisonReelle}">
+															<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+														</h:outputText>													
+													</td>
+													<td class="organyesnooption"><small>#{reportingCdeGroupee.isPaiementEffectueStr}</small><i class="#{reportingCdeGroupee.isPaiementEffectueStyle}"></i></td>
+													<td>
+														<h:outputText value="#{reportingCdeGroupee.dateModification}">
+															<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+														</h:outputText>													
+													</td>
+													<td>
+														<h:outputText value="#{reportingCdeGroupee.dateCreation}">
+															<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+														</h:outputText>													
+													</td>
+													<td><a href=""><i class="fa fa-pencil-square-o"></i></a></td>
+													<td><a href=""><i class="fa fa-eye"></i></a></td>
+	
+												</tr>
+											</ui:repeat>
+											
 										</tbody>
 									</table>
 								</div>
