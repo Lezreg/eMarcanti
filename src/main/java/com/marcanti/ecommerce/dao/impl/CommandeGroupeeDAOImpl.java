@@ -86,6 +86,21 @@ public class CommandeGroupeeDAOImpl extends AbstractGenericDAO<CommandeGroupee> 
 	}
 
 	@Override
+	public List<VCdeGroupeeDetail> getCmdGroupeesFilleulsByStatus(List<Long> idsMembre, String status) {
+		LOGGER.info("----------getCmdGroupeesFilleuls --------");
+
+		if (idsMembre == null || idsMembre.isEmpty()) {
+			LOGGER.info("idsMembre is null or is empty");
+			return Collections.emptyList();
+		}
+		List<VCdeGroupeeDetail> cmdGroupees = em.createQuery(
+				"SELECT v FROM VCdeGroupeeDetail v WHERE v.idMembre IN (:ids) AND v.cdeIndivStatusCode = :statusCode",
+				VCdeGroupeeDetail.class).setParameter("ids", idsMembre).setParameter("statusCode", status)
+				.getResultList();
+		return cmdGroupees;
+	}
+
+	@Override
 	public List<CommandeGroupee> getCmdGroupeesByOrganisation(Long idOrg, boolean isEncours) {
 		LOGGER.info("-----getCmdGroupeesByOrganisation : idOrg =" + idOrg + " isEncours :" + isEncours);
 		List<CommandeGroupee> cmdGroupees = em

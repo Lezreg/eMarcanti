@@ -4,7 +4,6 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
-
 <h:body>
 	<ui:composition template="/template/template.xhtml">
 
@@ -169,23 +168,20 @@
 												<tr>
 													<td><strong>#{cmdGr.cdeGroupeeNom}</strong></td>
 													<td><h:outputText value="#{cmdGr.dateCreation}">
-															<f:convertDateTime pattern="dd/MM/yyyy"
-																timeZone="Europe/Paris" />
+															<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 														</h:outputText></td>
 													<td>#{cmdGr.prenomCreateur} #{cmdGr.nomCreateur}</td>
 													<td class="greenclass">#{cmdGr.idStatus.statusLibelle}</td>
 													<td class="organyesnooption"><small>#{cmdGr.isPaiementEffectue ? 'y' : 'n'}</small><i class="#{cmdGr.isPaiementEffectue ? 'fa fa-check-square-o' : 'fa fa-times'}" title="Y"></i></td>
 													<td><h:outputText value="#{cmdGr.dateLivraisonPrevue}">
-															<f:convertDateTime pattern="dd/MM/yyyy"
-																timeZone="Europe/Paris" />
+															<f:convertDateTime pattern="dd/MM/yyyy"	timeZone="Europe/Paris" />
 														</h:outputText></td>
 													<td><a href="commandes_groupees_modify.html"><i
 															class="fa fa-pencil-square-o"></i></a></td>
 													<td><a href="commandes_groupees_confirmer.html"><i
 															class="fa fa-eye"></i></a></td>
 													<td><h:outputText value="#{cmdGr.dateModification}">
-															<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-																timeZone="Europe/Paris" />
+															<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
 														</h:outputText></td>
 													<td>#{cmdGr.prenomModifieur} #{cmdGr.nomModifieur}</td>
 												</tr>

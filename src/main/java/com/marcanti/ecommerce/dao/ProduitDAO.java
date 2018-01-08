@@ -124,4 +124,8 @@ public interface ProduitDAO extends GenericDAO<Produit> {
 	 */
 	List<Produit> getAssassociatedProductsToDiscover(Long idProduit);
 
+	List<VCatalogueAvecStock> getAllProducts();
+
+	List<VCatalogueRestreintAvecStock> getRestrictedAllProduits();
+
 }

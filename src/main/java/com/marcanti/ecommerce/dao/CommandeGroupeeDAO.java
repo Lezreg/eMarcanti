@@ -20,4 +20,6 @@ public interface CommandeGroupeeDAO extends GenericDAO<CommandeGroupee> {
 
 	List<VReduction> getAllReductions();
 
+	List<VCdeGroupeeDetail> getCmdGroupeesFilleulsByStatus(List<Long> idsMembre, String status);
+
 }

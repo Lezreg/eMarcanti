@@ -35,8 +35,8 @@
 								
 								<div class="messtoplinkarrow">
 									<ul>
-										<li class="currentmenu"><a class="recapencours" href="parrainage-leurcommandes-encours-three.html"><i class="fa fa-angle-left"></i>Commandes en cours</a></li>
-										<li><a style="" class="recaprecordestwo" href="cmdFilleulsPrec.xhtml">Commandes précédentes<i class="fa fa-angle-right"></i></a></li>
+										<li><a style="background:#f7f7f7;color:#333;" class="recapencours" href="cmdFilleuls.xhtml"><i class="fa fa-angle-left"></i>Commandes en cours</a></li>
+										<li class="currentmenu"><a class="recaprecordestwo" href="cmdFilleulsPrec.xhtml">Commandes précédentes<i class="fa fa-angle-right"></i></a></li>
 									</ul>
 								</div>
 							
@@ -95,7 +95,7 @@
 											</tr>
 										</tfoot>
 										<tbody>
-											<ui:repeat var="cmd" value="#{CmdsFilleulsView.cmdeGroupees}">
+											<ui:repeat var="cmd" value="#{CmdsFilleulsView.cmdeGroupeesPrec}">
 												<tr>
 													<td><strong>#{cmd.cdeIndivNom}</strong></td>
 													<td>

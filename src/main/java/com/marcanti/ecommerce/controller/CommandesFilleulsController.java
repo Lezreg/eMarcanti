@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
 import com.marcanti.ecommerce.model.VCdeGroupeeDetail;
 import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
@@ -27,6 +28,8 @@ public class CommandesFilleulsController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommandesFilleulsController.class);
 
 	private List<VCdeGroupeeDetail> cmdeGroupees;
+
+	private List<VCdeGroupeeDetail> cmdeGroupeesPrec;
 
 	private List<VCdeGroupeeDetail> filteredCdeGroupees;
 
@@ -94,6 +97,15 @@ public class CommandesFilleulsController {
 
 	public void setCmdeGroupees(List<VCdeGroupeeDetail> cmdeGroupees) {
 		this.cmdeGroupees = cmdeGroupees;
+	}
+
+	public List<VCdeGroupeeDetail> getCmdeGroupeesPrec() {
+		return commandeGroupeeServiceAction.getCmdGroupeesFilleulsByStatus(userSessionBean.getIdMembre(),
+				CommandeIndividuelleStatusEnum.CDE_INDIVID_LIVREE.getCode());
+	}
+
+	public void setCmdeGroupeesPrec(List<VCdeGroupeeDetail> cmdeGroupeesPrec) {
+		this.cmdeGroupeesPrec = cmdeGroupeesPrec;
 	}
 
 }

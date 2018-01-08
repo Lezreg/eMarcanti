@@ -142,6 +142,16 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	}
 
 	@Override
+	public List<ProduitBean> getAllProducts(Long orgId) {
+		Organisation organisation = organisationDAO.find(orgId);
+		if (organisation != null && organisation.getAccesCatalogueComplet()) {
+			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getAllProducts());
+		} else {
+			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedAllProduits());
+		}
+	}
+
+	@Override
 	public List<ProduitBean> getPromoProducts(Long orgId) {
 		Organisation organisation = organisationDAO.find(orgId);
 		if (organisation != null && organisation.getAccesCatalogueComplet()) {

@@ -81,13 +81,29 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 
 	@Override
 	public List<VCdeGroupeeDetail> getCommandeGroupeesFilleulsByMembre(Long membreId) {
+		List<Long> idMembres = getFilleulsById(membreId);
+		List<VCdeGroupeeDetail> cmdGroupeesFilleuls = commandeGroupeeDAO.getCmdGroupeesFilleuls(idMembres);
+		if (cmdGroupeesFilleuls == null) {
+			cmdGroupeesFilleuls = Collections.emptyList();
+		}
+		return cmdGroupeesFilleuls;
+	}
+
+	private List<Long> getFilleulsById(Long membreId) {
 		Membre Parrain = membreDAO.find(membreId);
 		List<Membre> idsMembre = filleulDAO.getFilleulsList(Parrain);
 		List<Long> idMembres = new ArrayList<>();
 		for (Membre membre : idsMembre) {
 			idMembres.add(membre.getIdMembre());
 		}
-		List<VCdeGroupeeDetail> cmdGroupeesFilleuls = commandeGroupeeDAO.getCmdGroupeesFilleuls(idMembres);
+		return idMembres;
+	}
+
+	@Override
+	public List<VCdeGroupeeDetail> getCmdGroupeesFilleulsByStatus(Long membreId, String status) {
+		List<Long> idMembres = getFilleulsById(membreId);
+		List<VCdeGroupeeDetail> cmdGroupeesFilleuls = commandeGroupeeDAO.getCmdGroupeesFilleulsByStatus(idMembres,
+				status);
 		if (cmdGroupeesFilleuls == null) {
 			cmdGroupeesFilleuls = Collections.emptyList();
 		}

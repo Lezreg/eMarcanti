@@ -114,6 +114,20 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 	}
 
 	@Override
+	public List<VCatalogueAvecStock> getAllProducts() {
+		LOGGER.info("----------get All Products--------");
+		return em.createNamedQuery("VCatalogueAvecStock.findAll", VCatalogueAvecStock.class).getResultList();
+	}
+
+	@Override
+	public List<VCatalogueRestreintAvecStock> getRestrictedAllProduits() {
+		LOGGER.info("----------getRestrictedProduits--------VCatalogueRestreintAvecStock");
+		return em.createNamedQuery("VCatalogueRestreintAvecStock.findAll", VCatalogueRestreintAvecStock.class)
+				.getResultList();
+
+	}
+
+	@Override
 	public List<VCatalogueRestreintAvecStock> getRestrictedProduitsByCategorie(String codeCategorie) {
 		LOGGER.info("----------getRestrictedProduitsByCategorie--------VCatalogueRestreintAvecStock");
 		return em
