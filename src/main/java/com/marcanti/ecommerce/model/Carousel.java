@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -57,7 +58,29 @@ public class Carousel implements Serializable {
     @Basic(optional = false)
     @NotNull
     private boolean isVisible;
-
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 120)
+    private String produitMarque;   
+    @Transient
+    private Short idMarque;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    private String produitPrix;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String produitNom; 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String produitSousTitre;  
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String boutonLibelle;    
+    
     public Carousel() {
     }
 
@@ -65,12 +88,17 @@ public class Carousel implements Serializable {
         this.idCarousel = idCarousel;
     }
 
-    public Carousel(Integer idCarousel, String elementNom, String elementImageURL, short elementRang, boolean isVisible) {
+    public Carousel(Integer idCarousel, String elementNom, String elementImageURL, short elementRang, boolean isVisible, String produitMarque, String produitPrix, String produitNom, String produitSousTitre, String boutonLibelle) {
         this.idCarousel = idCarousel;
         this.elementNom = elementNom;
         this.elementImageURL = elementImageURL;
         this.elementRang = elementRang;
         this.isVisible = isVisible;
+        this.produitMarque = produitMarque;
+        this.produitPrix = produitPrix;
+        this.produitNom = produitNom;
+        this.produitSousTitre = produitSousTitre;
+        this.boutonLibelle = boutonLibelle;
     }
 
     public Integer getIdCarousel() {
@@ -129,9 +157,57 @@ public class Carousel implements Serializable {
     public String getIsVisibleStyle() {
     	if (isVisible) return "greenclass fa fa-check";
     	else return "redclass fa fa-times";
-    }    
+    }   
+    
+    public String getProduitMarque() {
+		return produitMarque;
+	}
 
-    @Override
+	public void setProduitMarque(String produitMarque) {
+		this.produitMarque = produitMarque;
+	}
+	
+	public Short getIdMarque() {
+		return idMarque;
+	}
+
+	public void setIdMarque(Short idMarque) {
+		this.idMarque = idMarque;
+	}
+
+	public String getProduitPrix() {
+		return produitPrix;
+	}
+
+	public void setProduitPrix(String produitPrix) {
+		this.produitPrix = produitPrix;
+	}
+
+	public String getProduitNom() {
+		return produitNom;
+	}
+
+	public void setProduitNom(String produitNom) {
+		this.produitNom = produitNom;
+	}
+
+	public String getProduitSousTitre() {
+		return produitSousTitre;
+	}
+
+	public void setProduitSousTitre(String produitSousTitre) {
+		this.produitSousTitre = produitSousTitre;
+	}
+
+	public String getBoutonLibelle() {
+		return boutonLibelle;
+	}
+
+	public void setBoutonLibelle(String boutonLibelle) {
+		this.boutonLibelle = boutonLibelle;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 0;
         hash += (idCarousel != null ? idCarousel.hashCode() : 0);

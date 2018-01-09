@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
 import com.marcanti.ecommerce.utils.Mail;
-import com.marcanti.ecommerce.utils.MailHtml;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 

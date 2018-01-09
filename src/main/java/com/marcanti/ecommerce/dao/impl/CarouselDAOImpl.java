@@ -80,12 +80,18 @@ public class CarouselDAOImpl extends AbstractGenericDAO<Carousel> implements Car
 
 	@Override
 	public void insertCarousel(Carousel carousel) {
-		Query query = em.createNativeQuery("INSERT INTO carousel (elementNom, elementImageURL, elementLienURL, elementRang, isVisible) VALUES (?,?,?,?,?)")
+		String produitMarque = (String)em.createNamedQuery("select marqueNom from marque where idMarque=? ").setParameter("idMarque", carousel.getIdMarque()).getSingleResult();
+		Query query = em.createNativeQuery("INSERT INTO carousel (elementNom, elementImageURL, elementLienURL, elementRang, isVisible, produitMarque, produitPrix, produitNom, produitSousTitre, boutonLibelle) VALUES (?,?,?,?,?,?,?,?,?,?)")
 				.setParameter(1, carousel.getElementNom())
 				.setParameter(2, carousel.getElementImageURL())
 				.setParameter(3, carousel.getElementLienURL())
 				.setParameter(4, carousel.getElementRang())
-				.setParameter(5, carousel.getIsVisible());
+				.setParameter(5, carousel.getIsVisible())
+				.setParameter(6, produitMarque)
+				.setParameter(7, carousel.getProduitPrix())
+				.setParameter(8, carousel.getProduitNom())
+				.setParameter(9, carousel.getProduitSousTitre())
+				.setParameter(10, carousel.getBoutonLibelle());
 		query.executeUpdate();
 		//em.persist(carousel);
 		

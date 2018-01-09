@@ -41,7 +41,7 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													#{msg.libelle_nom_item}<span>*</span>
+													#{msg.libelle_nom_item} <span>*</span>
 												</p>
 											</div>
 										</div>
@@ -50,7 +50,6 @@
 												<div class="marquedescription">
 													<h:inputText value="#{carouselsBean.carousel.elementNom}" maxlength="60" required="true" requiredMessage="#{msg.nom_item_obligatoire}" />
 												</div>
-
 											</div>
 										</div>
 									</div>
@@ -81,7 +80,7 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													#{msg.libelle_rang_item}<span>*</span>
+													#{msg.libelle_rang_item} <span>*</span>
 												</p>
 											</div>
 										</div>
@@ -90,7 +89,6 @@
 												<div class="marquedescription">
 													<h:inputText value="#{carouselsBean.elementRang}"  maxlength="60" required="true" requiredMessage="#{msg.nom_rang_obligatoire}" />
 												</div>
-
 											</div>
 										</div>
 									</div>
@@ -110,10 +108,107 @@
 												<div class="marquedescription">
 													<h:inputText value="#{carouselsBean.carousel.elementLienURL}" maxlength="512" />
 												</div>
-
 											</div>
 										</div>
 									</div>
+									
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext carouselsmall">
+												<p>
+													#{msg.libelle_marque_prod} <span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="select">
+													<h:selectOneMenu value="#{carouselsBean.carousel.idMarque}">
+														<f:selectItems value="#{carouselsBean.marqueList}" var="c" itemLabel="#{c.marqueNom}" itemValue="#{c.idMarque}" />
+													</h:selectOneMenu>
+													<div class="select__arrow"></div>
+												</div>
+											</div>
+										</div>
+									</div>	
+									
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext carouselsmall">
+												<p>
+													#{msg.libelle_prix_prod} <span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{carouselsBean.carousel.produitPrix}" maxlength="10" required="true" requiredMessage="#{msg.prix_prod_obligatoire}" />
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext carouselsmall">
+												<p>
+													#{msg.libelle_nom_prod} <span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{carouselsBean.carousel.produitNom}" maxlength="45" required="true" requiredMessage="#{msg.nom_prod_obligatoire}" />
+												</div>
+											</div>
+										</div>
+									</div>	
+									
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext carouselsmall">
+												<p>
+													#{msg.libelle_ss_titre_prod} <span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{carouselsBean.carousel.produitSousTitre}" maxlength="45" required="true" requiredMessage="#{msg.ss_titre_prod_obligatoire}" />
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="clearfix"></div>
+
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext carouselsmall">
+												<p>
+													#{msg.libelle_libelle_btn} <span>*</span>
+												</p>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="marquedescription">
+													<h:inputText value="#{carouselsBean.carousel.boutonLibelle}" maxlength="45" required="true" requiredMessage="#{msg.btn_libelle_prod_obligatoire}"/>
+												</div>
+											</div>
+										</div>
+									</div>									
 
 									<div class="clearfix"></div>
 
@@ -121,7 +216,7 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													#{msg.libelle_item_visible}<span>*</span>
+													#{msg.libelle_item_visible} <span>*</span>
 												</p>
 											</div>
 										</div>

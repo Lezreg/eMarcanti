@@ -20,7 +20,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.model.Carousel;
+import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.service.actions.CarouselServiceAction;
+import com.marcanti.ecommerce.service.actions.MarqueServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
 @ManagedBean(name = "carouselsBean")
@@ -31,6 +33,8 @@ public class CarouselsBean implements Serializable {
 	private final static Logger logger = LoggerFactory.getLogger(CarouselsBean.class);
 
 	private List<Carousel> carouselList;
+	
+	private List<Marque> marqueList;
 
 	private Carousel carousel;
 	
@@ -47,6 +51,9 @@ public class CarouselsBean implements Serializable {
 
 	@ManagedProperty("#{referentielBean}")
 	private ReferentielBean referentielBean;
+	
+	@ManagedProperty("#{marqueService}")
+	private MarqueServiceAction marqueService;	
 
 	public CarouselsBean() {
 	}
@@ -55,6 +62,7 @@ public class CarouselsBean implements Serializable {
 	public void init() {
 		this.carouselList = carouselService.getCarouselList();
 		this.carousel = new Carousel(0);
+		this.marqueList = marqueService.getMarqueList();
 	}
 	
 	public String getElementRang() {
@@ -127,6 +135,22 @@ public class CarouselsBean implements Serializable {
 
 	public CarouselServiceAction getCarouselService() {
 		return carouselService;
+	}
+	
+	public List<Marque> getMarqueList() {
+		return marqueList;
+	}
+
+	public void setMarqueList(List<Marque> marqueList) {
+		this.marqueList = marqueList;
+	}
+	
+	public MarqueServiceAction getMarqueService() {
+		return marqueService;
+	}
+
+	public void setMarqueService(MarqueServiceAction marqueService) {
+		this.marqueService = marqueService;
 	}
 
 	public void setCarouselService(CarouselServiceAction carouselService) {
