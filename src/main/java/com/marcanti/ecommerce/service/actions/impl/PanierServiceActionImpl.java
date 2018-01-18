@@ -139,6 +139,11 @@ public class PanierServiceActionImpl implements PanierActionService {
 	@Override
 	public List<PanierProduit> recalculer(List<PanierProduit> panierProduitList, UserSessionBean userSessionBean)
 			throws ProductNotAvailableException {
+
+		if (panierProduitList == null || panierProduitList.isEmpty()) {
+			LOGGER.info("panierProduitList is empty");
+			return panierProduitList;
+		}
 		Panier panier = null;
 		CommandeIndividuelle commandeIndividuel = null;
 		BigDecimal totalPanier = BigDecimal.ZERO;
@@ -207,9 +212,11 @@ public class PanierServiceActionImpl implements PanierActionService {
 
 	private Panier updateMontantNbreProduit(BigDecimal totalPanier, Panier panier, Short panierNbreProduit) {
 		LOGGER.info("------------------ panierNbreProduit :" + panierNbreProduit);
-		panier.setPanierNbreProduit(panierNbreProduit);
-		panier.setPanierMontant(totalPanier);
-		panier = panierDao.edit(panier);
+		if (panier != null) {
+			panier.setPanierNbreProduit(panierNbreProduit);
+			panier.setPanierMontant(totalPanier);
+			panier = panierDao.edit(panier);
+		}
 		return panier;
 	}
 
