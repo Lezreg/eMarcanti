@@ -22,6 +22,7 @@ import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Membre;
+import com.marcanti.ecommerce.utils.ParametersChecker;
 
 /**
  *
@@ -88,6 +89,8 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 	@Override
 	public CommandeIndividuelle getCommandeIndividuellByMembreAndCmdGroupe(Membre membre,
 			CommandeGroupee commandeGroupee) {
+		ParametersChecker.checkParameter("membre is null ", membre);
+		ParametersChecker.checkParameter("commandeGroupee is null ", commandeGroupee);
 		Query query = em.createQuery(
 				"SELECT c FROM CommandeIndividuelle c WHERE c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.isPaiementEffectue = :isPaiementEffectue")
 				.setParameter("idMembre", membre.getIdMembre())

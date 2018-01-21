@@ -31,4 +31,6 @@ public interface PanierActionService {
 	void confirmerCommandeIndiv(CommandeIndividuelle commandeIndividuelle, List<PanierProduit> panierProduitList,
 			UserSessionBean userSessionBean) throws ProductNotAvailableException;
 
+	CommandeIndividuelle getLastCommandeIndividuelle(UserSessionBean userSessionBean);
+
 }

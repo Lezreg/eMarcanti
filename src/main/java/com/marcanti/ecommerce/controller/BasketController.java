@@ -190,10 +190,19 @@ public class BasketController implements Serializable {
 	}
 
 	public Panier getPanierEnCours() {
-		if (commandeIndividuelle != null) {
-			panierEnCours = commandeIndividuelle.getIdPanier();
+		// if (commandeIndividuelle != null) {
+		// panierEnCours = commandeIndividuelle.getIdPanier();
+		// return panierEnCours;
+		// }
+
+		CommandeIndividuelle lastCommandeIndividuelle = panierService.getLastCommandeIndividuelle(userSessionBean);
+
+		if (lastCommandeIndividuelle != null && lastCommandeIndividuelle.getIdPanier() != null) {
+			return lastCommandeIndividuelle.getIdPanier();
 		}
-		return panierEnCours;
+
+		return new Panier();
+
 	}
 
 	public void setPanierEnCours(Panier panierEnCours) {
