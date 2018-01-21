@@ -1066,8 +1066,24 @@ margin-top:5px;
 .quanlityavilablclass input {
 	width: 80%;
 	height: 50px;
+}
+	
+	
+.etattitle {
+	float:none;
 }	
-
+	
+	
+.reportingetat .select{
+	  width: 70%;
+}		
+.reportingpaye p {
+    margin-top: 0px;
+}	
+	
+.researchbuttonarea{
+	margin-bottom:40px;
+}	
 	
 }
 
@@ -1530,6 +1546,14 @@ font-size: 11px;
 }	
 	
 	
+.reportingbuttonone{
+	top:34px;
+}	
+.reportingetat .select{
+	  width: 80%;
+}		
+	
+	
 }
 
 
@@ -1703,7 +1727,7 @@ table.dataTable thead .categoryclass::after {
 }	
 	
 	
-	
+
 	
 /* mess commandes css desktop view*/	
 	
@@ -1801,6 +1825,12 @@ table.dataTable thead .categoryclass::after {
   width: 40%;
   top: 20%;
 }	
+	
+	
+.reportingetat .select{
+	  width: 60%;
+}		
+	
 	
 	
 }
@@ -2334,7 +2364,9 @@ left:11%!important;
   margin: 0px 0px 30px;
 }	
 	
-	
+.reportingetat .select{
+	width:70%;
+}	
 	
 }
 

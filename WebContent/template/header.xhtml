@@ -7,25 +7,58 @@
 	
 <ui:composition>
 	<h:form id="formHeader">
+	    <div class="flagtoparea">
+    		<div class="container">
+    			<div class="row">
+    				<div class="col-sm-8">
+    					<div class="headertop">
+    						<p>
+    							Achetez groupé, c'est moins cher !
+    						</p>
+    					</div>
+    				</div>
+    				<div class="col-sm-4">
+    					<div class="flagsinnerarea">
+								<div class="form-group">
+									<div id="advanced"
+										 data-input-name="country3"
+										 data-selected-country="FR"
+										 data-button-size="btn-lg"
+										 data-button-type="btn-warning"
+										 data-scrollable="true"
+										 data-scrollable-height="250px"
+										 data-countries='{"FR": "Français","US": "Anglais", "ES": "Espagnol"}'>
+									</div>
+								</div>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
 		<header>
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4 col-lg-5">
 						<div class="logo">
-							<h:outputLink value="index.xhtml"><h:graphicImage value="/static/img/lOGO.svg" styleClass="img-responsive" alt="logo"/></h:outputLink>
+							<h:link outcome="index"><h:graphicImage value="/static/img/lOGO.svg" styleClass="img-responsive" alt="logo"/></h:link>
 						</div>
 					</div>
 					<!--end col-->
 
-					<div class="col-xs-8 col-sm-3 col-md-2">
-						<div class="myaccount">
-							<ul>
-								<li><i class="fa fa-user-o"></i><h:commandLink value="#{msg.libelle_mon_compte}" action="#{membreBean.editMembreConnected()}" /></li>
-							</ul>
-						</div>
-					</div>
+    				<div class="col-xs-8 col-sm-3 col-md-2">
+    					<div class="myaccount">
+    						<ul class="myacmainnav nav navbar-nav">
+    							<li class="dropdown"><a href="" class="myacccountmlist dropdown-toggle" data-toggle=""><i class="fa fa-user-o"></i>#{msg.libelle_mon_compte}</a>
+    								  <ul class="myAccountmenu dropdown-menu">
+										<li><h:link outcome="#{membreBean.editMembreConnected()}">Mes infos</h:link></li>
+										<li><h:outputLink action="#{authentificationBean.deconnexion()}"><h:graphicImage value="/static/img/logout_button.svg" styleClass="img-responsive" alt="deconnexion"/>Deconnexion</h:outputLink></li>
+									  </ul>
+    							</li>
+    						</ul>
+    					</div>
+    				</div>
 					<!--end col-->
-
+					
 					<div class="col-xs-4 col-sm-3 col-md-2">
 						<div class="cartarea">
 							<p>
@@ -119,7 +152,7 @@
 							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle=""><h:outputText value="#{msg.libelle_admin}" /><i class="fa fa-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<c:if test="${USER_SESSION.MENU_ADMIN_MBR}" scope="session">
-										<li class="kopie"><h:link value="#{msg.libelle_membres}" outcome="membres" /></li>
+										<li><h:commandLink value="#{msg.libelle_membres}" action="#{membresBean.editMembresList()}" /></li>
 									</c:if>
 									<c:if test="${USER_SESSION.MENU_ADMIN_ORGA}" scope="session">
 										<li><h:link value="#{msg.libelle_orgas}" outcome="organisations" /></li>

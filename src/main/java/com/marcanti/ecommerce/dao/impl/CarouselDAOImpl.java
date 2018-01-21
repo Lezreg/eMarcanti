@@ -72,6 +72,11 @@ public class CarouselDAOImpl extends AbstractGenericDAO<Carousel> implements Car
 	public List<Carousel> getCarouselList() {
 		return em.createNamedQuery("Carousel.findAll", Carousel.class).getResultList();
 	}
+	
+	@Override
+	public List<Carousel> getCarouselListView() {
+		return em.createNamedQuery("Carousel.findByIsVisibleOrderBy", Carousel.class).setParameter("isVisible", true).getResultList();
+	}	
 
 	@Override
 	public Carousel getCarousel(Carousel carousel) {
@@ -80,7 +85,7 @@ public class CarouselDAOImpl extends AbstractGenericDAO<Carousel> implements Car
 
 	@Override
 	public void insertCarousel(Carousel carousel) {
-		String produitMarque = (String)em.createNamedQuery("select marqueNom from marque where idMarque=? ").setParameter("idMarque", carousel.getIdMarque()).getSingleResult();
+		String produitMarque = (String)em.createNativeQuery("select marqueNom from marque where idMarque=? ").setParameter(1, carousel.getIdMarque()).getSingleResult();
 		Query query = em.createNativeQuery("INSERT INTO carousel (elementNom, elementImageURL, elementLienURL, elementRang, isVisible, produitMarque, produitPrix, produitNom, produitSousTitre, boutonLibelle) VALUES (?,?,?,?,?,?,?,?,?,?)")
 				.setParameter(1, carousel.getElementNom())
 				.setParameter(2, carousel.getElementImageURL())

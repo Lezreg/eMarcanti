@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Carousel.findByElementImageURL", query = "SELECT c FROM Carousel c WHERE c.elementImageURL = :elementImageURL")
     , @NamedQuery(name = "Carousel.findByElementLienURL", query = "SELECT c FROM Carousel c WHERE c.elementLienURL = :elementLienURL")
     , @NamedQuery(name = "Carousel.findByElementRang", query = "SELECT c FROM Carousel c WHERE c.elementRang = :elementRang")
+    , @NamedQuery(name = "Carousel.findByIsVisibleOrderBy", query = "SELECT c FROM Carousel c WHERE c.isVisible = :isVisible ORDER BY elementRang asc")
     , @NamedQuery(name = "Carousel.findByIsVisible", query = "SELECT c FROM Carousel c WHERE c.isVisible = :isVisible")})
 public class Carousel implements Serializable {
 

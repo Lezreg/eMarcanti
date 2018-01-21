@@ -60,6 +60,14 @@ public class ParfumUtils {
 		return (resu1 && resu2 && resu3 && resu4);
 
 	}
+	
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+	
+	public static boolean checkEmailFormat(String emailStr) {
+
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+	}	
 
 	public static UserSessionBean getUserSessionBean() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -207,7 +215,8 @@ public class ParfumUtils {
 	public static void main(String[] args) {
 		//System.out.println(ParfumUtils.checkPasswordFormat("A1ERTYuI"));
 		//System.out.println(isUniqueName("C:\\RK\\independant\\Parfum\\upload","passede.gif"));
-		System.out.println(getUniqueName("C:\\RK\\independant\\Parfum\\upload","passed.gif"));
+		//System.out.println(getUniqueName("C:\\RK\\independant\\Parfum\\upload","passed.gif"));
+		System.out.println(checkEmailFormat("rachid_khali=fa@gmail.com"));
 	}
 	
 	

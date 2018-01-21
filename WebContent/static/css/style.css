@@ -4499,27 +4499,7 @@ text-align: left;
 
 
 
-.emailmessagelogo{}
-.emaillogomessageinner{}
-.emaillogomessageinner a img{
-	margin: 10px auto;
-width: 40%;
-}
 
-.emailmessagecontentinner {
-  padding: 30px 0;
-}
-.emailmessagecontentinner{}
-.emailmessagecontentinner p{}
-.emailmessagecontentinner ul{
-	text-align: left;
-	list-style: disc;
-	margin-bottom: 20px;
-}
-.emailmessagecontentinner ul li{
-	display: block;
-	margin:5px 0px;
-}
 
 
 /*
@@ -4715,6 +4695,119 @@ tr.even td {
 
 
 
+
+/**************************************************
+		404 PAGE CSS STYLING
+***************************************************/
+
+.errorpagearea{
+	padding:50px 0px;
+	background: #fc8440;
+}
+.erropageimage{}
+.erropageimage img{}
+.erropagetextarea{
+	text-align: center;
+}
+.erropagetextarea h1 {
+	font-size: 10em;
+	color: #fff;
+	font-family: 'Pacifico', cursive;
+}
+.erropagetextarea p{
+	color:#fff;
+	font-size:18px;
+	text-transform: capitalize;
+}
+.erropagetextarea a {
+	background: #fff;
+	color: #fc8440;
+	padding: 15px 20px;
+	text-transform: capitalize;
+	border-radius: 3px;
+	display: inline-block;
+}
+
+.etattitle{
+	margin-right:75px;
+}
+
+.myAccountmenu {
+	z-index: 9999999;
+	
+	
+}
+.myacmainnav{
+	margin:0px!important;
+}
+
+.myAccountmenu{}
+.myAccountmenu li a{
+	color: #222 !important;
+}
+.myacccountmlist:hover{
+	color:#fc8440;
+	background: transparent!important;
+}
+
+
+.myAccountmenu li a img {
+	display: inline-block;
+	width: 16%;
+	margin-right: 5px;
+}
+
+/*reporting  */
+
+.reportingpayelist,
+.reportingetatparent {
+	margin: 20px 0px;
+}
+.etatnewareass{
+	display: inline-block;
+}
+.reportingetat{
+	display: inline;
+	
+}
+
+.reportingetat .select{
+	width: 60%;
+padding-left: 70px;
+margin: 0px auto;
+	
+}
+
+.reportingpaye p{
+	margin-top:20px;
+}
+
+
+/*button research */
+
+.researchbuttonarea{}
+.researchbuttonarea button{
+	background: #fc8440 none repeat scroll 0 0;
+	border: none;
+	padding: 10px 20px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 700;
+	width: 200px;
+	height: 40px;
+	cursor: pointer;
+	border-radius: 0px;
+	margin-left:10px;
+}
+
+
+
+/* search popu*/
+
+
+.webs-error{
+		color:red !important;
+	}
 
 /**************************************************
 		FOOTER AREA

@@ -47,5 +47,10 @@ public class CarouselServiceActionImpl implements CarouselServiceAction {
 	public boolean isRangExist(Carousel carousel) {
 		return carouselDAO.isRangExist(carousel);
 	}
+
+	@Override
+	public List<Carousel> getCarouselListView() {
+		return carouselDAO.getCarouselListView();
+	}
 	
 }

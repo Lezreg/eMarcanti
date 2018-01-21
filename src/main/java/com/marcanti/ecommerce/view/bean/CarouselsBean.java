@@ -204,7 +204,6 @@ public class CarouselsBean implements Serializable {
 			}
 
 			carouselService.insertCarousel(carousel);
-			//this.carouselList = carouselService.getCarouselList();
 			msg = ParfumUtils.getBundleApplication().getString("message.ajouter.carousel");
 			ecran = "carousels";
 
@@ -217,7 +216,12 @@ public class CarouselsBean implements Serializable {
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		
+		//on rafraichit la liste du carousel de la page admin
 		this.carouselList = carouselService.getCarouselList();
+		
+		//on rafraichit la liste du carousel de la page index
+		CarouselIndexBean carouselIndexBean =  (CarouselIndexBean)ParfumUtils.getSessionObject("carouselIndexBean");
+		carouselIndexBean.setCarouselList(carouselService.getCarouselListView());		
 		
 		return ecran;
 	}
@@ -227,7 +231,7 @@ public class CarouselsBean implements Serializable {
 		FileOutputStream fileOuputStream=null;
 		this.uploadedFile = ev.getFile();
 		String elementImageURL = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedFile.getFileName());
-		File fileDest = new File(referentielBean.getUploadFolderPath()+File.separator+elementImageURL);
+		File fileDest = new File(referentielBean.getUploadCarouselFolderPath()+File.separator+elementImageURL);
 		this.carousel.setElementImageURL(elementImageURL);
 		byte[] content = uploadedFile.getContents();
 		try {

@@ -15,5 +15,7 @@ public interface CarouselDAO {
 	public void updateCarousel(Carousel carousel);
 	
 	public boolean isRangExist(Carousel carousel);
+	
+	public List<Carousel> getCarouselListView();
 
 }

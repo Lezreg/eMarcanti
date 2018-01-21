@@ -60,23 +60,6 @@ public class MembresBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		
-		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-		Organisation idOrgaUserConnected = new Organisation(userSessionBean.getIdOrga());
-		
-		this.membre = new Membre(0L);
-		this.membre.setIdOrga(idOrgaUserConnected);
-		this.organisationList = organisationService.getOrganisationList();
-		
-		if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_MANAGER){
-			this.membresList = membreService.getMembreByOrgaList(idOrgaUserConnected);
-			setOrgaDisabled("true");
-		}else if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_ADMIN){
-			Organisation orgaAll = new Organisation(0L);
-			orgaAll.setOrgaNom(ParfumUtils.getBundleApplication().getString("libelle_toutes"));
-			this.organisationList.add(this.organisationList.size(),orgaAll);
-			this.membresList = membreService.getMembreByOrgaList(this.organisationList.get(0));
-			setOrgaDisabled("false");
-		}
 	}
 	
 	public String getMembreNom() {
@@ -228,15 +211,10 @@ public class MembresBean implements Serializable {
 
 		Membre membre = new Membre(getIdMembre());
 		membre= membreService.getMembre(membre);
-		//UserSessionBean userSession = ParfumUtils.getUserSessionBean();
-		//membre.setIdOrga(new Organisation(userSession.getIdOrga()));
-		//membre.setIdDepartement(new Departement(userSession.getIdDepartement()));
 		if(membre.getIdDepartement()==null){
 			membre.setIdDepartement(new Departement(0L));
 		}
-		//membre.setIdOrga(new Organisation(0L));
 		setMembre(membre);
-		//ParfumUtils.getUserSessionBean().setIdOrgaSelected(getIdOrgaSelected());
 		return "membre";
 	}
 	
@@ -254,6 +232,28 @@ public class MembresBean implements Serializable {
 		}
 		//return "membres";
     }
+	
+	public String editMembresList() {
+		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
+		Organisation idOrgaUserConnected = new Organisation(userSessionBean.getIdOrga());
+		
+		this.membre = new Membre(0L);
+		this.membre.setIdOrga(idOrgaUserConnected);
+		this.organisationList = organisationService.getOrganisationList();
+		
+		if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_MANAGER){
+			this.membresList = membreService.getMembreByOrgaList(idOrgaUserConnected);
+			setOrgaDisabled("true");
+		}else if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_ADMIN){
+			Organisation orgaAll = new Organisation(0L);
+			orgaAll.setOrgaNom(ParfumUtils.getBundleApplication().getString("libelle_toutes"));
+			this.organisationList.add(this.organisationList.size(),orgaAll);
+			this.membresList = membreService.getMembreByOrgaList(this.organisationList.get(0));
+			setOrgaDisabled("false");
+		}
+		return "membres";
+
+	}
 	
 
 }

@@ -1,5 +1,6 @@
 package com.marcanti.ecommerce.view.bean;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -34,6 +35,9 @@ public class ReferentielBean implements Serializable {
 	
 	public static final String BEAN_SESSION_NAME = "USER_SESSION";
 	
+	public static final String CATALOGUE = "catalogue";
+	public static final String CAROUSEL = "carousel";
+	
 	public static final short PROFIL_MEMBRE  = 1;
 	public static final short PROFIL_FILLEUL = 2;
 	public static final short PROFIL_MANAGER = 3;
@@ -66,6 +70,10 @@ public class ReferentielBean implements Serializable {
 	private static String smtpFrom;
 	
 	private String uploadFolderPath;
+	
+	private String uploadCatalogFolderPath;
+	
+	private String uploadCarouselFolderPath;
 	
 	private String uploadFileExt;
 	
@@ -214,6 +222,22 @@ public class ReferentielBean implements Serializable {
 		this.uploadFolderPath = uploadFolderPath;
 	}
 	
+	public String getUploadCatalogFolderPath() {
+		return uploadFolderPath+File.separator+CATALOGUE;
+	}
+
+	public void setUploadCatalogFolderPath(String uploadCatalogFolderPath) {
+		this.uploadCatalogFolderPath = uploadCatalogFolderPath;
+	}
+
+	public String getUploadCarouselFolderPath() {
+		return uploadFolderPath+File.separator+CAROUSEL;
+	}
+
+	public void setUploadCarouselFolderPath(String uploadCarouselFolderPath) {
+		this.uploadCarouselFolderPath = uploadCarouselFolderPath;
+	}
+
 	public String getUploadFileExt() {
 		return uploadFileExt;
 	}

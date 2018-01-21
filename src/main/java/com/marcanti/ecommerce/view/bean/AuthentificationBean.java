@@ -12,12 +12,14 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.service.actions.AuthentificationServiceAction;
+import com.marcanti.ecommerce.service.actions.CarouselServiceAction;
 import com.marcanti.ecommerce.utils.Mail;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
@@ -34,9 +36,14 @@ public class AuthentificationBean implements Serializable {
 	private String password;
 	private String passwordConfirmation;
 	private String code;
+	
+	//private List<Carousel> carouselList;
 
 	@ManagedProperty("#{authentificationService}")
 	private AuthentificationServiceAction service;
+	
+	@ManagedProperty("#{carouselService}")
+	private CarouselServiceAction carouselService;	
 	
 	public AuthentificationBean() 
 	{
@@ -77,7 +84,15 @@ public class AuthentificationBean implements Serializable {
 	public void setPasswordConfirmation(String passwordConfirmation) {
 		this.passwordConfirmation = passwordConfirmation;
 	}
-	
+
+	public CarouselServiceAction getCarouselService() {
+		return carouselService;
+	}
+
+	public void setCarouselService(CarouselServiceAction carouselService) {
+		this.carouselService = carouselService;
+	}
+
 	public AuthentificationServiceAction getService() {
 		return service;
 	}
@@ -312,6 +327,13 @@ public class AuthentificationBean implements Serializable {
 		
     	return "index";
 	}	
+	
+	public String deconnexion()
+	{	
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		session.invalidate();
+		return "login";
+	}
 	
 
 }

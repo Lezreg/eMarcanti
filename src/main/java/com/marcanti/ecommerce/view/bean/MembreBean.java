@@ -387,14 +387,6 @@ public class MembreBean implements Serializable {
 		this.referentielBean = referentielBean;
 	}
 	
-	/*public MessageBean getMessageBean() {
-		return messageBean;
-	}
-
-	public void setMessageBean(MessageBean messageBean) {
-		this.messageBean = messageBean;
-	}*/
-
 	public List<Organisation> getOrganisationList() {
 		return organisationList;
 	}
@@ -463,7 +455,6 @@ public class MembreBean implements Serializable {
 		if(membre.getIdDepartement()==null){
 			membre.setIdDepartement(new Departement(0L));
 		}
-		//setMembre(membre);
 		this.oldMembreEmail=membre.getMembreEmail();
 		this.departementList = departementService.getDepartementByOrgaList(membre.getIdOrga());
 		onRoleChange();

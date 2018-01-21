@@ -16,5 +16,7 @@ public interface CarouselServiceAction {
 	
 	public boolean isRangExist(Carousel carousel) ;
 	
+	public List<Carousel> getCarouselListView();
+	
      
 }
