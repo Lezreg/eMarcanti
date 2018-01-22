@@ -34,7 +34,12 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="purchaseordertextitle filterheading">
-									<h3><h:link outcome="membres"><h:graphicImage value="/static/img/commandes/purchaseorder.png" styleClass="img-responsive" alt="purchaseorder"/></h:link>Retour à la liste des membres</h3>
+									<c:if test="${membreBean.isEditMembre}" scope="session">
+										<h3><h:link outcome="membres"><h:graphicImage value="/static/img/commandes/purchaseorder.png" styleClass="img-responsive" alt="purchaseorder"/></h:link>Retour à la liste des membres</h3>
+									</c:if>
+									<c:if test="${!membreBean.isEditMembre}" scope="session">
+										<h3><h:link outcome="index"><h:graphicImage value="/static/img/commandes/purchaseorder.png" styleClass="img-responsive" alt="purchaseorder"/></h:link>Home</h3>
+									</c:if>
 								</div>
 							</div>
 						</div>

@@ -69,7 +69,7 @@
 									<div class="newbutton mobilenewbuttonajour adlistajourbuttonpos">
 										<div class="button-2">
 											<div class="eff-2"></div>
-											<h:link styleClass="adminajourlistbutton"  value="#{msg.libelle_ajouter}" outcome="#{membreBean.addMembreView()}" />
+											<h:commandLink  styleClass="adminajourlistbutton" action="#{membreBean.addMembreView()}">#{msg.libelle_ajouter}</h:commandLink>
 										 </div>
 									</div>									
 									

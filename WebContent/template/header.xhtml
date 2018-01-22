@@ -50,8 +50,8 @@
     						<ul class="myacmainnav nav navbar-nav">
     							<li class="dropdown"><a href="" class="myacccountmlist dropdown-toggle" data-toggle=""><i class="fa fa-user-o"></i>#{msg.libelle_mon_compte}</a>
     								  <ul class="myAccountmenu dropdown-menu">
-										<li><h:link outcome="#{membreBean.editMembreConnected()}">Mes infos</h:link></li>
-										<li><h:outputLink action="#{authentificationBean.deconnexion()}"><h:graphicImage value="/static/img/logout_button.svg" styleClass="img-responsive" alt="deconnexion"/>Deconnexion</h:outputLink></li>
+										<li><h:commandLink action="#{membreBean.editMembreConnected()}">Mes infos</h:commandLink></li>
+										<li><h:commandLink action="#{authentificationBean.deconnexion()}"><h:graphicImage value="/static/img/logout_button.svg" styleClass="img-responsive" alt="deconnexion"/>Deconnexion</h:commandLink></li>
 									  </ul>
     							</li>
     						</ul>
