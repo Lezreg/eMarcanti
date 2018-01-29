@@ -137,4 +137,5 @@ public class Soins {
 	public void setSelectedProduit(ProduitBean selectedProduit) {
 		this.selectedProduit = selectedProduit;
 	}
+	
 }

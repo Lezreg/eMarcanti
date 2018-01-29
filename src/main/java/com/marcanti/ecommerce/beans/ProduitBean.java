@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.marcanti.ecommerce.constants.Categories;
 import com.marcanti.ecommerce.model.Produit;
 
 public class ProduitBean {
@@ -36,6 +37,18 @@ public class ProduitBean {
 	private Date dateFinADecouvrir;
 	private Date dateDebutPromo;
 	private Date dateFinPromo;
+	
+    private boolean isBestSellerHomme;
+    private boolean isBestSellerFemme;
+    private boolean isPetitPrix;
+    private boolean isNouveauteSurHomePage;
+    private boolean isPromoSurHomePage;
+    private boolean isADecouvrirSurHomePage;
+	
+	private String categorieCodeCss;
+	private String categorieNomCss;
+    private String isNouveauteSurHomePageCss;   
+    private String isPromoSurHomePageCss; 
 
 	private List<Produit> produitsAssocies;
 
@@ -271,4 +284,90 @@ public class ProduitBean {
 		this.produitsAssocies = produitsAssocies;
 	}
 
+	public boolean isBestSellerHomme() {
+		return isBestSellerHomme;
+	}
+
+	public void setBestSellerHomme(boolean isBestSellerHomme) {
+		this.isBestSellerHomme = isBestSellerHomme;
+	}
+
+	public boolean isBestSellerFemme() {
+		return isBestSellerFemme;
+	}
+
+	public void setBestSellerFemme(boolean isBestSellerFemme) {
+		this.isBestSellerFemme = isBestSellerFemme;
+	}
+
+	public boolean isPetitPrix() {
+		return isPetitPrix;
+	}
+
+	public void setPetitPrix(boolean isPetitPrix) {
+		this.isPetitPrix = isPetitPrix;
+	}
+
+	public boolean isNouveauteSurHomePage() {
+		return isNouveauteSurHomePage;
+	}
+
+	public void setNouveauteSurHomePage(boolean isNouveauteSurHomePage) {
+		this.isNouveauteSurHomePage = isNouveauteSurHomePage;
+	}
+
+	public boolean isPromoSurHomePage() {
+		return isPromoSurHomePage;
+	}
+
+	public void setPromoSurHomePage(boolean isPromoSurHomePage) {
+		this.isPromoSurHomePage = isPromoSurHomePage;
+	}
+
+	public boolean isADecouvrirSurHomePage() {
+		return isADecouvrirSurHomePage;
+	}
+
+	public void setADecouvrirSurHomePage(boolean isADecouvrirSurHomePage) {
+		this.isADecouvrirSurHomePage = isADecouvrirSurHomePage;
+	}
+
+	public String getCategorieCodeCss() {
+		return categorieCodeCss;
+	}
+
+	public void setCategorieCodeCss(String categorieCodeCss) {
+		this.categorieCodeCss = categorieCodeCss;
+	}
+
+	public String getCategorieNomCss() {
+		return categorieNomCss;
+	}
+
+	public void setCategorieNomCss(String categorieNomCss) {
+		this.categorieNomCss = categorieNomCss;
+	}
+
+	public String getIsNouveauteSurHomePageCss() {
+		return isNouveauteSurHomePageCss;
+	}
+
+	public void setIsNouveauteSurHomePageCss(String isNouveauteSurHomePageCss) {
+		this.isNouveauteSurHomePageCss = isNouveauteSurHomePageCss;
+	}
+
+	public String getIsPromoSurHomePageCss() {
+		return isPromoSurHomePageCss;
+	}
+
+	public void setIsPromoSurHomePageCss(String isPromoSurHomePageCss) {
+		this.isPromoSurHomePageCss = isPromoSurHomePageCss;
+	}
+
+	public void setFullAccess(boolean isFullAccess) {
+		this.isFullAccess = isFullAccess;
+	}
+
+	
+	
 }

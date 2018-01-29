@@ -33,6 +33,9 @@ public class ProduitConvertor {
 		// decouvrir
 		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
 		produitBean.setTitreADecouvrir(catalogue.getTitreADecouvrir());
+		
+		produitBean.setCategorieCodeCss(catalogue.getCategorieCodeCss());
+		produitBean.setCategorieNomCss(catalogue.getCategorieNomCss());
 
 		return produitBean;
 	}
@@ -62,6 +65,10 @@ public class ProduitConvertor {
 		// decouvrir
 		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
 		produitBean.setTitreADecouvrir(catalogue.getTitreADecouvrir());
+		
+		produitBean.setCategorieCodeCss(catalogue.getCategorieCodeCss());
+		produitBean.setCategorieNomCss(catalogue.getCategorieNomCss());
+		
 		return produitBean;
 	}
 

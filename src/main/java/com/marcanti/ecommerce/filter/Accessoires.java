@@ -114,8 +114,7 @@ public class Accessoires {
 	}
 
 	public List<ProduitBean> getProduits() {
-		return produitServiceAction.getProductsByCategorie(userSessionBean.getIdOrga(),
-				Categories.PILE_ACCESSOIRE.getCode());
+		return produitServiceAction.getProductsByCategorie(userSessionBean.getIdOrga(),Categories.PILE_ACCESSOIRE.getCode());
 	}
 
 	public void setProduits(List<ProduitBean> produits) {

@@ -114,8 +114,7 @@ public class ParfumEnfant {
 	}
 
 	public List<ProduitBean> getProduits() {
-		return produitServiceAction.getProductsByCategorie(userSessionBean.getIdOrga(),
-				Categories.PARFUM_ENFANT.getCode());
+		return produitServiceAction.getProductsByCategorie(userSessionBean.getIdOrga(),Categories.PARFUM_ENFANT.getCode());
 	}
 
 	public void setProduits(List<ProduitBean> produits) {
@@ -138,5 +137,4 @@ public class ParfumEnfant {
 	public void setSelectedProduit(ProduitBean selectedProduit) {
 		this.selectedProduit = selectedProduit;
 	}
-
 }

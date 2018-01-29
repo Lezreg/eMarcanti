@@ -52,6 +52,6 @@ public interface ProduitServiceAction {
 
 	public List<ProduitBean> searchProduct(String searchChar);
 
-	List<ProduitBean> getAllProducts(Long orgId);
+	public List<ProduitBean> getAllProducts(Long orgId);
 
 }

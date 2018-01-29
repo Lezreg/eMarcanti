@@ -1,5 +1,6 @@
-package com.marcanti.ecommerce.filter;
+package com.marcanti.ecommerce.view.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -8,7 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -19,19 +20,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.beans.ProduitBean;
-import com.marcanti.ecommerce.constants.Categories;
 import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.exception.CommandeGroupeeNotFoundException;
 import com.marcanti.ecommerce.exception.CommandeGroupeeValidatedExeception;
+import com.marcanti.ecommerce.filter.ParfumHomme;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
-import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
-@ManagedBean(name = "PHFilterView")
-@ViewScoped
-public class ParfumHomme {
+@ManagedBean(name = "catalogueBean")
+@SessionScoped
+public class CatalogueBean implements Serializable {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ParfumHomme.class);
 
@@ -114,7 +114,7 @@ public class ParfumHomme {
 	}
 
 	public List<ProduitBean> getProduits() {
-		return produitServiceAction.getProductsByCategorie(userSessionBean.getIdOrga(),Categories.PARFUM_HOMME.getCode());
+		return produitServiceAction.getAllProducts(userSessionBean.getIdOrga());
 	}
 
 	public void setProduits(List<ProduitBean> produits) {

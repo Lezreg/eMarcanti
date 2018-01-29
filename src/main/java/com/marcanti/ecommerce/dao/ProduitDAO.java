@@ -42,20 +42,36 @@ public interface ProduitDAO extends GenericDAO<Produit> {
 	 */
 	List<VCatalogueRestreintAvecStock> getRestrictedNewProduit();
 
+/*	*//**
+	 * all product list
+	 * 
+	 * @return VCatalogueAvecStock View
+	 *//*
+	public List<VCatalogueAvecStock> getProductsByCategorie(String codeCategorie);*/
+	
 	/**
 	 * all product list
 	 * 
 	 * @return VCatalogueAvecStock View
 	 */
-	public List<VCatalogueAvecStock> getProductsByCategorie(String codeCategorie);
+	//public List<VCatalogueAvecStock> getProductsByCategorie();	
+	
 
 	/**
 	 * restricted product list
 	 * 
 	 * @param codeCategorie
 	 * @return
+	 *//*
+	List<VCatalogueRestreintAvecStock> getRestrictedProduitsByCategorie(String codeCategorie);*/
+	
+	/**
+	 * restricted product list
+	 * 
+	 * @param codeCategorie
+	 * @return
 	 */
-	List<VCatalogueRestreintAvecStock> getRestrictedProduitsByCategorie(String codeCategorie);
+	//List<VCatalogueRestreintAvecStock> getRestrictedProduitsByCategorie();	
 
 	/**
 	 * all product list

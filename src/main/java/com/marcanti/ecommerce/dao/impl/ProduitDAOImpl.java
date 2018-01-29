@@ -106,12 +106,12 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 		return restrictedNewProducts;
 	}
 
-	@Override
+/*	@Override
 	public List<VCatalogueAvecStock> getProductsByCategorie(String codeCategorie) {
 		LOGGER.info("----------getProductsByCategorie--------");
 		return em.createNamedQuery("VCatalogueAvecStock.findByCategorieCode", VCatalogueAvecStock.class)
 				.setParameter("categorieCode", codeCategorie).getResultList();
-	}
+	}*/
 
 	@Override
 	public List<VCatalogueAvecStock> getAllProducts() {
@@ -122,18 +122,7 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 	@Override
 	public List<VCatalogueRestreintAvecStock> getRestrictedAllProduits() {
 		LOGGER.info("----------getRestrictedProduits--------VCatalogueRestreintAvecStock");
-		return em.createNamedQuery("VCatalogueRestreintAvecStock.findAll", VCatalogueRestreintAvecStock.class)
-				.getResultList();
-
-	}
-
-	@Override
-	public List<VCatalogueRestreintAvecStock> getRestrictedProduitsByCategorie(String codeCategorie) {
-		LOGGER.info("----------getRestrictedProduitsByCategorie--------VCatalogueRestreintAvecStock");
-		return em
-				.createNamedQuery("VCatalogueRestreintAvecStock.findByCategorieCode",
-						VCatalogueRestreintAvecStock.class)
-				.setParameter("categorieCode", codeCategorie).getResultList();
+		return em.createNamedQuery("VCatalogueRestreintAvecStock.findAll", VCatalogueRestreintAvecStock.class).getResultList();
 
 	}
 

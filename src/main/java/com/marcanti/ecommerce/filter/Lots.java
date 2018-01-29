@@ -137,4 +137,5 @@ public class Lots {
 	public void setSelectedProduit(ProduitBean selectedProduit) {
 		this.selectedProduit = selectedProduit;
 	}
+	
 }

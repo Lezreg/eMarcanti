@@ -87,258 +87,39 @@
 														</tfoot>
 														<tbody class="catalougetbodyarea">
 
-															<ui:repeat var="produit" value="#{PHFilterView.produits}">
-																<tr type="phomme2" class="catainnertrow">
-																	<td class="catalougenew catalougeimagename">
-																		<p>
-																			<img src="/eCommerce/static/img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
+															<ui:repeat var="produit" value="#{catalogueBean.produits}">
+																<tr type="#{produit.categorieCodeCss}" class="catainnertrow">
+																	<td class="#{produit.isNouveauteSurHomePageCss} #{produit.isPromoSurHomePageCss} catalougeimagename">
+																		<p> 
+																			<ui:fragment rendered="#{empty produit.produitPhotoURL}"><br/>
+																				<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
+																			</ui:fragment>
+																			<ui:fragment rendered="#{!empty produit.produitPhotoURL}"><br/>
+																				<img src="#{request.contextPath}/upload/#{produit.produitPhotoURL}" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
+																			</ui:fragment>
 																		</p>
 																	</td>
 																	<td class="catgeneraltd">#{produit.produitDescription}</td>
-																	<td class="catgeneraltd">Perfume Homme</td>
+																	<td class="catgeneraltd">#{produit.categorieNomCss}</td>
 																	<td class="catgeneraltd">#{produit.sousCategorieNom}</td>
 																	<td class="catgeneraltd">#{produit.prixPublic}&#8364;</td>
 																	<td class="catelougeaddtocart">
 																		<p>
 																			<strong>#{produit.notrePrix}&#8364;</strong> <br />
 																			<button>
-																				<h:commandLink action="#{PHFilterView.addToBasket}"> 
-																					<f:setPropertyActionListener value="#{produit}" target="#{PHFilterView.selectedProduit}" />
+																				<h:commandLink action="#{catalogueBean.addToBasket}"> 
+																					<f:setPropertyActionListener value="#{produit}" target="#{catalogueBean.selectedProduit}" />
 																			    	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />add to cart
 																				</h:commandLink>
 																			</button>
 																		</p>
 																	</td>
-	
+															
 																	<td class="catgeneraltd">#{produit.produitDetail}</td>
 																	<td class="catgeneraltd">#{produit.familleOlfactive}</td>
 																</tr>
 															</ui:repeat>
 															
-															<ui:repeat var="produit" value="#{PFFilterView.produits}">
-																<tr type="pfemme" class="catainnertrow">
-																	<td class="catalougenew catalougeimagename">
-																		<p>
-																			<img src="/eCommerce/static/img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
-																		</p>
-																	</td>
-																	<td class="catgeneraltd">#{produit.produitDescription}</td>
-																	<td class="catgeneraltd">Perfume Femme</td>
-																	<td class="catgeneraltd">#{produit.sousCategorieNom}</td>
-																	<td class="catgeneraltd">#{produit.prixPublic}&#8364;</td>
-																	<td class="catelougeaddtocart">
-																		<p>
-																			<strong>#{produit.notrePrix}&#8364;</strong> <br />
-																			<button>
-																				<h:commandLink action="#{PFFilterView.addToBasket()}"> 
-																					<f:setPropertyActionListener value="#{produit}" target="#{PFFilterView.selectedProduit}" />
-																			    	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />add to cart
-																				</h:commandLink>
-																			</button>
-																		</p>
-																	</td>
-	
-																	<td class="catgeneraltd">#{produit.produitDetail}</td>
-																	<td class="catgeneraltd">#{produit.familleOlfactive}</td>
-																</tr>
-															</ui:repeat>															
-
-															<ui:repeat var="produit" value="#{PEFilterView.produits}">
-																<tr type="penfant" class="catainnertrow">
-																	<td class="catalougenew catalougeimagename">
-																		<p>
-																			<img src="/eCommerce/static/img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
-																		</p>
-																	</td>
-																	<td class="catgeneraltd">#{produit.produitDescription}</td>
-																	<td class="catgeneraltd">Perfume Enfant</td>
-																	<td class="catgeneraltd">#{produit.sousCategorieNom}</td>
-																	<td class="catgeneraltd">#{produit.prixPublic}&#8364;</td>
-																	<td class="catelougeaddtocart">
-																		<p>
-																			<strong>#{produit.notrePrix}&#8364;</strong> <br />
-																			<button>
-																				<h:commandLink action="#{PEFilterView.addToBasket}"> 
-																					<f:setPropertyActionListener value="#{produit}" target="#{PEFilterView.selectedProduit}" />
-																			    	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />add to cart
-																				</h:commandLink>
-																			</button>
-																		</p>
-																	</td>
-	
-																	<td class="catgeneraltd">#{produit.produitDetail}</td>
-																	<td class="catgeneraltd">#{produit.familleOlfactive}</td>
-																</tr>
-															</ui:repeat>															
-															
-															<ui:repeat var="produit" value="#{TFilterView.produits}">
-																<tr type="testeur" class="catainnertrow">
-																	<td class="catalougenew catalougeimagename">
-																		<p>
-																			<img src="/eCommerce/static/img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
-																		</p>
-																	</td>
-																	<td class="catgeneraltd">#{produit.produitDescription}</td>
-																	<td class="catgeneraltd">Testeur</td>
-																	<td class="catgeneraltd">#{produit.sousCategorieNom}</td>
-																	<td class="catgeneraltd">#{produit.prixPublic}&#8364;</td>
-																	<td class="catelougeaddtocart">
-																		<p>
-																			<strong>#{produit.notrePrix}&#8364;</strong> <br />
-																			<button>
-																				<h:commandLink action="#{TFilterView.addToBasket()}"> 
-																					<f:setPropertyActionListener value="#{produit}" target="#{TFilterView.selectedProduit}" />
-																			    	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />add to cart
-																				</h:commandLink>
-																			</button>
-																		</p>
-																	</td>
-	
-																	<td class="catgeneraltd">#{produit.produitDetail}</td>
-																	<td class="catgeneraltd">#{produit.familleOlfactive}</td>
-																</tr>
-															</ui:repeat>															
-															
-															<ui:repeat var="produit" value="#{COFFilterView.produits}">
-																<tr type="coffret" class="catainnertrow">
-																	<td class="catalougenew catalougeimagename">
-																		<p>
-																			<img src="/eCommerce/static/img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
-																		</p>
-																	</td>
-																	<td class="catgeneraltd">#{produit.produitDescription}</td>
-																	<td class="catgeneraltd">Coffret</td>
-																	<td class="catgeneraltd">#{produit.sousCategorieNom}</td>
-																	<td class="catgeneraltd">#{produit.prixPublic}&#8364;</td>
-																	<td class="catelougeaddtocart">
-																		<p>
-																			<strong>#{produit.notrePrix}&#8364;</strong> <br />
-																			<button>
-																				<h:commandLink action="#{COFFilterView.addToBasket()}"> 
-																					<f:setPropertyActionListener value="#{produit}" target="#{COFFilterView.selectedProduit}" />
-																			    	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />add to cart
-																				</h:commandLink>
-																			</button>
-																		</p>
-																	</td>
-	
-																	<td class="catgeneraltd">#{produit.produitDetail}</td>
-																	<td class="catgeneraltd">#{produit.familleOlfactive}</td>
-																</tr>
-															</ui:repeat>															
-
-															<ui:repeat var="produit" value="#{SOFilterView.produits}">
-																<tr type="etsoins" class="catainnertrow">
-																	<td class="catalougenew catalougeimagename">
-																		<p>
-																			<img src="/eCommerce/static/img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
-																		</p>
-																	</td>
-																	<td class="catgeneraltd">#{produit.produitDescription}</td>
-																	<td class="catgeneraltd">Crêmes et Soins</td>
-																	<td class="catgeneraltd">#{produit.sousCategorieNom}</td>
-																	<td class="catgeneraltd">#{produit.prixPublic}&#8364;</td>
-																	<td class="catelougeaddtocart">
-																		<p>
-																			<strong>#{produit.notrePrix}&#8364;</strong> <br />
-																			<button>
-																				<h:commandLink action="#{SOFilterView.addToBasket()}"> 
-																					<f:setPropertyActionListener value="#{produit}" target="#{SOFilterView.selectedProduit}" />
-																			    	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />add to cart
-																				</h:commandLink>
-																			</button>
-																		</p>
-																	</td>
-	
-																	<td class="catgeneraltd">#{produit.produitDetail}</td>
-																	<td class="catgeneraltd">#{produit.familleOlfactive}</td>
-																</tr>
-															</ui:repeat>															
-															
-															<ui:repeat var="produit" value="#{MINFilterView.produits}">
-																<tr type="miniatures" class="catainnertrow">
-																	<td class="catalougenew catalougeimagename">
-																		<p>
-																			<img src="/eCommerce/static/img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
-																		</p>
-																	</td>
-																	<td class="catgeneraltd">#{produit.produitDescription}</td>
-																	<td class="catgeneraltd">Miniatures</td>
-																	<td class="catgeneraltd">#{produit.sousCategorieNom}</td>
-																	<td class="catgeneraltd">#{produit.prixPublic}&#8364;</td>
-																	<td class="catelougeaddtocart">
-																		<p>
-																			<strong>#{produit.notrePrix}&#8364;</strong> <br />
-																			<button>
-																				<h:commandLink action="#{MINFilterView.addToBasket()}"> 
-																					<f:setPropertyActionListener value="#{produit}" target="#{MINFilterView.selectedProduit}" />
-																			    	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />add to cart
-																				</h:commandLink>
-																			</button>
-																		</p>
-																	</td>
-	
-																	<td class="catgeneraltd">#{produit.produitDetail}</td>
-																	<td class="catgeneraltd">#{produit.familleOlfactive}</td>
-																</tr>
-															</ui:repeat>
-
-															<ui:repeat var="produit" value="#{ACCFilterView.produits}">
-																<tr type="piles" class="catainnertrow">
-																	<td class="catalougenew catalougeimagename">
-																		<p>
-																			<img src="/eCommerce/static/img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
-																		</p>
-																	</td>
-																	<td class="catgeneraltd">#{produit.produitDescription}</td>
-																	<td class="catgeneraltd">piles &#38; Accessories</td>
-																	<td class="catgeneraltd">#{produit.sousCategorieNom}</td>
-																	<td class="catgeneraltd">#{produit.prixPublic}&#8364;</td>
-																	<td class="catelougeaddtocart">
-																		<p>
-																			<strong>#{produit.notrePrix}&#8364;</strong> <br />
-																			<button>
-																				<h:commandLink action="#{ACCFilterView.addToBasket()}"> 
-																					<f:setPropertyActionListener value="#{produit}" target="#{ACCFilterView.selectedProduit}" />
-																			    	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />add to cart
-																				</h:commandLink>
-																			</button>
-																		</p>
-																	</td>
-	
-																	<td class="catgeneraltd">#{produit.produitDetail}</td>
-																	<td class="catgeneraltd">#{produit.familleOlfactive}</td>
-																</tr>
-															</ui:repeat>
-
-															<ui:repeat var="produit" value="#{LOTFilterView.produits}">
-																<tr type="saisir" class="catainnertrow">
-																	<td class="catalougenew catalougeimagename">
-																		<p>
-																			<img src="/eCommerce/static/img/cat/img1.jpg" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
-																		</p>
-																	</td>
-																	<td class="catgeneraltd">#{produit.produitDescription}</td>
-																	<td class="catgeneraltd">Lots à Saisir</td>
-																	<td class="catgeneraltd">#{produit.sousCategorieNom}</td>
-																	<td class="catgeneraltd">#{produit.prixPublic}&#8364;</td>
-																	<td class="catelougeaddtocart">
-																		<p>
-																			<strong>#{produit.notrePrix}&#8364;</strong> <br />
-																			<button>
-																				<h:commandLink action="#{LOTFilterView.addToBasket()}"> 
-																					<f:setPropertyActionListener value="#{produit}" target="#{LOTFilterView.selectedProduit}" />
-																			    	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />add to cart
-																				</h:commandLink>
-																			</button>
-																		</p>
-																	</td>
-	
-																	<td class="catgeneraltd">#{produit.produitDetail}</td>
-																	<td class="catgeneraltd">#{produit.familleOlfactive}</td>
-																</tr>
-															</ui:repeat>
-
 														</tbody>
 
 														<div class="modal fade" id="DescModal" role="dialog">
