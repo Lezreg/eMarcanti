@@ -40,11 +40,19 @@
 				<div class="row">
 					<div class="col-md-4 col-lg-5">
 						<div class="logo">
+<<<<<<< HEAD
 							<h:link outcome="index"><h:graphicImage value="/static/img/lOGO.svg" styleClass="img-responsive" alt="logo"/></h:link>
+=======
+							<h:outputLink value="index.xhtml">
+								<h:graphicImage value="/static/img/lOGO.svg"
+									styleClass="img-responsive" alt="logo" />
+							</h:outputLink>
+>>>>>>> Page index (part 1) to be continue
 						</div>
 					</div>
 					<!--end col-->
 
+<<<<<<< HEAD
     				<div class="col-xs-8 col-sm-3 col-md-2">
     					<div class="myaccount">
     						<ul class="myacmainnav nav navbar-nav">
@@ -59,6 +67,31 @@
     				</div>
 					<!--end col-->
 					
+=======
+					<div class="col-xs-8 col-sm-3 col-md-2">
+						<div class="myaccount">
+							<ul>
+								<li><i class="fa fa-user-o"></i> <h:commandLink
+										value="#{msg.libelle_mon_compte}"
+										action="#{membreBean.editMembreConnected()}" /></li>
+							</ul>
+						</div>
+					</div>
+					<!--end col-->
+
+					<!-- 					<div class="col-xs-4 col-sm-3 col-md-2"> -->
+					<!-- 						<div class="cartarea"> -->
+					<!-- 							<p> -->
+					<!-- 							<h:link outcome="panier"> -->
+					<!-- 								<h:graphicImage value="/static/img/cart.png" styleClass="img-responsive" alt="cart" /><sup -->
+					<!-- 									class="cartnumber">#{basketView.panierEnCours.panierNbreProduit}</sup> -->
+					<!-- 							</h:link> -->
+					<!-- 							</p> -->
+					<!-- 						</div> -->
+					<!-- 					</div> -->
+					<!--end col-->
+
+>>>>>>> Page index (part 1) to be continue
 					<div class="col-xs-4 col-sm-3 col-md-2">
 						<div class="cartarea cartareatwoss">
 							<p class="cartlinkarea">
@@ -90,6 +123,10 @@
 
 								<div class="singlecartitems">
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Page index (part 1) to be continue
 									<div class="media">
 										<div class="media-body">
 											<div class="singleitemstexts">
@@ -104,6 +141,11 @@
 										</div>
 									</div>
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> Page index (part 1) to be continue
 								</div>
 								<!--end single cart item-->
 
@@ -115,8 +157,7 @@
 									</p>
 									<div class="clearfix"></div>
 								</div>
-								<a href="/eCommerce/pages/private/panier/panier.xhtml"
-									class="commanderbutton">Commander</a>
+								<a href="/eCommerce/pages/private/panier/panier.xhtml"	class="commanderbutton">Commander</a>
 							</div>
 							<!-- end cart roll over area-->
 
@@ -170,6 +211,7 @@
 						<c:if test="${USER_SESSION.MENU_PROMOS}" scope="session">
 							<li><h:link value="#{msg.libelle_promos}"
 									outcome="promotion" /></li>
+<<<<<<< HEAD
 						</c:if>
 
 						<c:if test="${USER_SESSION.MENU_DECOUVRIR}" scope="session">
@@ -177,6 +219,15 @@
 									outcome="aDecouvrir" /></li>
 						</c:if>
 
+=======
+						</c:if>
+
+						<c:if test="${USER_SESSION.MENU_DECOUVRIR}" scope="session">
+							<li><h:link value="#{msg.libelle_decouvrir}"
+									outcome="aDecouvrir" /></li>
+						</c:if>
+
+>>>>>>> Page index (part 1) to be continue
 						<c:if test="${USER_SESSION.MENU_COMMANDES}" scope="session">
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle=""><h:outputText value="#{msg.libelle_mes_cmd}" /><i
@@ -231,7 +282,12 @@
 									class="fa fa-angle-down"></i></a>
 								<ul class="dropdown-menu">
 									<c:if test="${USER_SESSION.MENU_ADMIN_MBR}" scope="session">
+<<<<<<< HEAD
 										<li><h:commandLink value="#{msg.libelle_membres}" action="#{membresBean.editMembresList()}" /></li>
+=======
+										<li class="kopie"><h:link value="#{msg.libelle_membres}"
+												outcome="membres" /></li>
+>>>>>>> Page index (part 1) to be continue
 									</c:if>
 									<c:if test="${USER_SESSION.MENU_ADMIN_ORGA}" scope="session">
 										<li><h:link value="#{msg.libelle_orgas}"
