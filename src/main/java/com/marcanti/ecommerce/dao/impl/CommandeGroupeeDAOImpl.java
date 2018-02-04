@@ -80,7 +80,8 @@ public class CommandeGroupeeDAOImpl extends AbstractGenericDAO<CommandeGroupee> 
 			return Collections.emptyList();
 		}
 		List<VCdeGroupeeDetail> cmdGroupees = em
-				.createQuery("SELECT v FROM VCdeGroupeeDetail v WHERE v.idMembre IN (:ids)", VCdeGroupeeDetail.class)
+				.createQuery("SELECT DISTINCT v FROM VCdeGroupeeDetail v WHERE v.idMembre IN (:ids)",
+						VCdeGroupeeDetail.class)
 				.setParameter("ids", idsMembre).getResultList();
 		return cmdGroupees;
 	}

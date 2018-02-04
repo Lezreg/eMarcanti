@@ -388,6 +388,14 @@
 		</navigation-case>
 	</navigation-rule>	
 	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>resultat</from-outcome>
+			<to-view-id>/pages/private/catalogue/resultat_recherche.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
 	<application>
 		<resource-bundle>
 			<base-name>ressources.parfumLibelle</base-name>
