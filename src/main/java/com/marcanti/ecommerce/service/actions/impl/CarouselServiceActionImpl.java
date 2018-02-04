@@ -3,18 +3,20 @@ package com.marcanti.ecommerce.service.actions.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.marcanti.ecommerce.dao.CarouselDAO;
 import com.marcanti.ecommerce.model.Carousel;
 import com.marcanti.ecommerce.service.actions.CarouselServiceAction;
 
-
+@Service("carouselService")
+@Transactional
 public class CarouselServiceActionImpl implements CarouselServiceAction {
 
-
 	@Autowired
-	private CarouselDAO carouselDAO;	
- 
+	private CarouselDAO carouselDAO;
+
 	public CarouselDAO getCarouselDAO() {
 		return carouselDAO;
 	}
@@ -52,5 +54,5 @@ public class CarouselServiceActionImpl implements CarouselServiceAction {
 	public List<Carousel> getCarouselListView() {
 		return carouselDAO.getCarouselListView();
 	}
-	
+
 }
