@@ -81,19 +81,19 @@ public class BasketController implements Serializable {
 
 	}
 
-	public String addPoduct(Produit produit, int quantite)
+	public void addPoduct(Produit produit, int quantite)
 			throws CommandeGroupeeNotFoundException, CommandeGroupeeValidatedExeception {
 		ParametersChecker.checkParameter("produit is null ", produit);
 		LOGGER.debug(produit.toString());
 
 		if (produit.getQteEnStock() < 1) {
-			return "rupture";
+			// return "rupture";
 		}
 
 		panierEnCours = panierService.addProduct(produit, userSessionBean);
 		// panierService
 		setPanierProduitList(panierService.getProduitsByPAnier(panierEnCours));
-		return "";
+		// return "";
 	}
 
 	public String redirectCurrentCmd() {

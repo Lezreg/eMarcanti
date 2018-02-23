@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close buttonclose" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+			</div>
+			
+				<c:if test="${ModalController.ajoutPanier}" scope="request">
+				
+					<div class="modal-body">
+						 <div class="bigpopupimage">
+							<h:graphicImage value="/static/img/Popupimage.png" class="img-responsive" alt="image"/>
+						</div>
+		
+						 <div class="popupdetals sucessfulpopup modalbodyright">
+							<h2><h:graphicImage value="/static/img/Popupsuccesful.png" class="img-responsive" alt="error"/> The Product Was Successfully added</h2>
+							<p class="popupdescription">#{ModalController.selectedProduit.produitDescription}</p>
+							<div class="popbothbutton">
+<!-- 								<button class="cobutton">continue</button> -->
+<!-- 								<a class="commanderbutton" onclick="">continue</a> -->
+
+								<button class="commanderbutton">continue</button>
+								<a href="/eCommerce/pages/private/panier/panier.xhtml" class="commanderbutton">Finalisez la commander</a>
+							</div>
+						 </div><!---end-->
+		
+					</div>
+			 </c:if>
+			 
+			 
+			 <c:if test="${!ModalController.ajoutPanier}" scope="request">
+			 		<div class="modal-body">
+						<div class="bigpopupimage">
+							<h:graphicImage value="/static/img/Popupimage.png" class="img-responsive" alt="image"/>
+						</div>
+
+						 <div class="popupdetals  modalbodyright">
+							<h2><h:graphicImage value="/static/img/Popuperror.png" class="img-responsive" alt="error"/> Sorry the Product is Out of Stock!</h2>
+							<p class="popupdescription">#{ModalController.selectedProduit.produitDescription}</p>
+							<div class="popbothbutton">
+								<button class="continuebutton">continue</button>
+<!-- 								<button class="finishbutton" >Finish Order</button> -->
+<!-- 								<a href="/eCommerce/pages/private/panier/panier.xhtml"	class="commanderbutton">Commander</a> -->
+							</div>
+						 </div><!---end-->
+			 		</div>
+			 </c:if>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+
+
+</html>

@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -164,8 +165,15 @@ public class ProduitDAOImpl extends AbstractGenericDAO<Produit> implements Produ
 
 	@Override
 	public Produit getProduit(Long idProduit) {
-		return em.createNamedQuery("Produit.findByIdProduit", Produit.class).setParameter("idProduit", idProduit)
-				.getSingleResult();
+		Produit produit = null;
+		try {
+			produit = em.createNamedQuery("Produit.findByIdProduit", Produit.class).setParameter("idProduit", idProduit)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			LOGGER.error("no result found for id:" + idProduit, e);
+		}
+
+		return produit;
 	}
 
 	@Override
