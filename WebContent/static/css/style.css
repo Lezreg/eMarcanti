@@ -4228,6 +4228,24 @@ padding-left: 10px;
 }
 
 
+.cobutton{
+	background: #fc8440;
+	color:#fff;
+	display: block;
+	padding:30px 20px;
+	text-align: center;
+	margin-top:10px;
+	margin-left:10px;
+	margin-right:10px;
+	line-height: 18px;
+	
+}
+
+.cobutton:hover{
+	color:#fff;
+	background:#E67935;
+}
+
 
 .singlecartitems{
 padding: 10px;

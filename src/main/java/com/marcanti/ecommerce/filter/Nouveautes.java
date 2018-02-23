@@ -1,8 +1,10 @@
 package com.marcanti.ecommerce.filter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -32,7 +34,12 @@ import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 @ManagedBean(name = "NovFilterView")
 @ViewScoped
-public class Nouveautes {
+public class Nouveautes implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4035287012655004471L;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Nouveautes.class);
 
@@ -42,9 +49,13 @@ public class Nouveautes {
 
 	private ProduitBean selectedProduit;
 
+	private Produit produit;
+
 	private List<ProduitBean> newProducts;
 
 	private List<Marque> brands;
+
+	private String hello;
 
 	private String selectedBrandName;
 
@@ -78,22 +89,36 @@ public class Nouveautes {
 		return brands;
 	}
 
-	public String addToBasket() {
+	public void addToBasket() {
 
 		try {
 			Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
 			basket.addPoduct(produit, 1);
 		} catch (CommandeGroupeeNotFoundException e) {
 			LOGGER.info(e.getMessage());
-			return "/pages/private/errors/cmdNotFoundError.xhtml?faces-redirect=true";
+			// return "/pages/private/errors/cmdNotFoundError.xhtml?faces-redirect=true";
 		} catch (CommandeGroupeeValidatedExeception e) {
 			LOGGER.info(e.getMessage());
-			return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
+			// return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
 		} catch (Exception e) {
 			LOGGER.info(e.getMessage());
-			return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
+			// return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
 		}
-		return null;
+
+	}
+
+	public String getHello() {
+		// HttpServletRequest req = (HttpServletRequest)
+		// FacesContext.getCurrentInstance().getExternalContext()
+		// .getRequest();
+
+		// String attribute = (String) req.getAttribute("id");
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map<String, String> paramMap = context.getExternalContext().getRequestParameterMap();
+		String id = paramMap.get("id");
+
+		return "hello" + id;
 	}
 
 	public List<ProduitBean> getFilteredProduits() {
@@ -220,6 +245,24 @@ public class Nouveautes {
 
 	public void setCategories(List<Categorie> categories) {
 		this.categories = categories;
+	}
+
+	public void setHello(String hello) {
+		this.hello = hello;
+	}
+
+	public Produit getProduit() {
+
+		FacesContext context = FacesContext.getCurrentInstance();
+		Map<String, String> paramMap = context.getExternalContext().getRequestParameterMap();
+		String id = paramMap.get("id");
+		LOGGER.info(id);
+
+		return produitServiceAction.getProduit(new Long(id));
+	}
+
+	public void setProduit(Produit produit) {
+		this.produit = produit;
 	}
 
 }
