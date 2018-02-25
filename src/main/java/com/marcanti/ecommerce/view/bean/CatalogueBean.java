@@ -21,11 +21,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.beans.ProduitBean;
 import com.marcanti.ecommerce.controller.BasketController;
-import com.marcanti.ecommerce.exception.CommandeGroupeeNotFoundException;
-import com.marcanti.ecommerce.exception.CommandeGroupeeValidatedExeception;
-import com.marcanti.ecommerce.filter.ParfumHomme;
 import com.marcanti.ecommerce.model.Marque;
-import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 
@@ -33,7 +29,12 @@ import com.marcanti.ecommerce.utils.ParfumUtils;
 @SessionScoped
 public class CatalogueBean implements Serializable {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ParfumHomme.class);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2939979774335133893L;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(CatalogueBean.class);
 
 	private List<ProduitBean> produits;
 
@@ -91,19 +92,20 @@ public class CatalogueBean implements Serializable {
 
 	}
 
-	public String addToBasket() {
-		Produit produit = produitServiceAction.getProduitById(selectedProduit.getIdProduit());
-		try {
-			basket.addPoduct(produit, 1);
-		} catch (CommandeGroupeeNotFoundException e) {
-			LOGGER.info(e.getMessage());
-			return "/pages/private/errors/cmdNotFoundError.xhtml?faces-redirect=true";
-		} catch (CommandeGroupeeValidatedExeception e) {
-			LOGGER.info(e.getMessage());
-			return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
-		}
-		return null;
-	}
+	// public String addToBasket() {
+	// Produit produit =
+	// produitServiceAction.getProduitById(selectedProduit.getIdProduit());
+	// try {
+	// basket.addPoduct(produit, 1);
+	// } catch (CommandeGroupeeNotFoundException e) {
+	// LOGGER.info(e.getMessage());
+	// return "/pages/private/errors/cmdNotFoundError.xhtml?faces-redirect=true";
+	// } catch (CommandeGroupeeValidatedExeception e) {
+	// LOGGER.info(e.getMessage());
+	// return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
+	// }
+	// return null;
+	// }
 
 	public List<ProduitBean> getFilteredProduits() {
 		return filteredProduits;
@@ -137,5 +139,5 @@ public class CatalogueBean implements Serializable {
 	public void setSelectedProduit(ProduitBean selectedProduit) {
 		this.selectedProduit = selectedProduit;
 	}
-	
+
 }

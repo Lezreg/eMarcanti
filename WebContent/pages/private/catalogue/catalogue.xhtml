@@ -106,13 +106,45 @@
 																	<td class="catelougeaddtocart">
 																		<p>
 																			<strong>#{produit.notrePrix}&#8364;</strong> <br />
-																			<button>
-																				<h:commandLink action="#{catalogueBean.addToBasket}"> 
-																					<f:setPropertyActionListener value="#{produit}" target="#{catalogueBean.selectedProduit}" />
-																			    	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />add to cart
-																				</h:commandLink>
-																			</button>
+																			
+																			<button id="hu1" class="nouveprobutton" onclick="addBasket(#{produit.idProduit});return false;"><img class="img-responsive" src="#{request.contextPath}/static/img/whitecartsmall.png"/> Ajouter</button>
+<!-- 																			<button id="gfr5" class="nouveprobutton" onclick="addBasket(#{produit.idProduit});return false;">Ajouter au panier</button> -->
+																			
 																		</p>
+																		
+																		
+																		<!-- start modal one-->
+																			<div class="modal fade" id="nouve-13" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+																				<div class="modal-dialog">
+																					<div class="modal-content">
+																						<div class="modal-header">
+																							<button type="button" class="close buttonclose" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+																						</div>
+																						
+																						<div class="modal-body">
+												
+																							 <div class="bigpopupimage">
+																								<h:graphicImage value="/static/img/Popupimage.png" class="img-responsive" alt="image"/>
+																							</div>
+												
+																							 <div class="popupdetals sucessfulpopup modalbodyright">
+																								<h2><h:graphicImage value="/static/img/Popupsuccesful.png" class="img-responsive" alt="error"/> The Product Was Successfully added</h2>
+																								<p class="popupdescription">1 #{product.produitDescription}</p>
+																								<div class="popbothbutton">
+																									<button class="continuebutton">continue</button>
+																									<button class="finishbutton">Finish Order</button>
+																								</div>
+																							 </div><!---end-->
+												
+																						</div>
+												
+																					</div>
+																					<!-- /.modal-content -->
+																				</div>
+																				<!-- /.modal-dialog -->
+																			</div>
+																			<!-- /end .modal -->
+							
 																	</td>
 															
 																	<td class="catgeneraltd">#{produit.produitDetail}</td>
@@ -130,8 +162,6 @@
 																			data-dismiss="modal" aria-hidden="true">
 																			<i class="fa fa-times"></i>
 																		</button>
-
-
 																	</div>
 																	<div class="modal-body">
 
@@ -171,8 +201,6 @@
 																			data-dismiss="modal" aria-hidden="true">
 																			<i class="fa fa-times"></i>
 																		</button>
-
-
 																	</div>
 																	<div class="modal-body">
 
@@ -241,6 +269,7 @@
 															</div>
 														</div>
 													</table>
+												<!-- table -->
 												</div>
 											</div>
 										</div>
