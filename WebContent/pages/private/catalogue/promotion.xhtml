@@ -47,7 +47,7 @@
 									
 									<div class="marqueinfo admindetailsopuptext marginRow">
 										
-										<p class="last">C'était la première soirée <br/>Du mois d'avril.<br/>Je m'en souviens, mon adorée. <br/>T'en souvient-il ?<br/><br/>Nous errions dans la ville immense, <br/>Tous deux, sans bruit,<br/>A l'heure où le repos commence <br/>Avec la nuit !<br/><br/>Heure calme, charmante, austère, <br/>Où le soir naît !<br/>Dans cet ineffable mystère <br/>Tout rayonnait,<br/><br/>Tout ! l'amour dans tes yeux sans voile, <br/>Fiers, ingénus !<br/>Aux vitres mainte pauvre étoile, <br/>Au ciel Vénus !<br/><br/>Notre-Dame, parmi les dômes <br/>Des vieux faubourgs,<br/>Dressait comme deux grands fantômes <br/>Ses grandes tours.<br/><br/>La Seine, découpant les ombres <br/>En angles noirs,<br/>Faisait luire sous les ponts sombres <br/>De clairs miroirs.<br/><br/>L'oeil voyait sur la plage amie <br/>Briller ses eaux <br/>Comme une couleuvre endormie <br/>Dans les roseaux.<br/><br/>Et les passants, le long des grèves <br/>Où l'onde fuit,<br/>Étaient vagues comme les rêves <br/>Qu'on a la nuit !<br/><br/>Je te disais : - " Clartés bénies, <br/>Bruits lents et doux, <br/>Dieu met toutes les harmonies <br/>Autour de nous !<br/><br/>Aube qui luit, soir qui flamboie, <br/>Tout a son tour ;<br/>Et j'ai l'âme pleine de joie, <br/>Ô mon amour !<br/><br/>Que m'importe que la nuit tombe,<br/>Et rende, Ô Dieu ! <br/>Semblable au plafond d'une tombe<br/>Le beau ciel bleu !<br/><br/>Que m'importe que Paris dorme,<br/>Ivre d'oubli,<br/>Dans la brume épaisse et sans forme <br/>Enseveli !<br/><br/>Que m'importe, aux heures nocturnes <br/>Où nous errons,<br/>Les ombres qui versent leurs urnes <br/>Sur tous les fronts,<br/><br/>Et, noyant de leurs plis funèbres <br/>L'âme et le corps, <br/>Font les vivants dans les ténèbres <br/>Pareils aux morts !<br/><br/>Moi, lorsque tout subit l'empire <br/>Du noir sommeil,<br/>J'ai ton regard, j'ai ton sourire, <br/>J'ai le soleil ! "<br/><br/>Je te parlais, ma bien-aimée ; <br/>Ô doux instants ! <br/>Ta main pressait ma main charmée. <br/>Puis, bien longtemps,<br/><br/>Nous nous regardions pleins de flamme, <br/>Silencieux,<br/>Et l'âme répondait à l'âme, <br/>Les yeux aux yeux !<br/><br/>Sous tes cils une larme obscure <br/>Brillait parfois ;<br/>Puis ta voix parlait, tendre et pure, <br/>Après ma voix,<br/><br/>Comme on entend dans la coupole <br/>Un double écho ;<br/>Comme après un oiseau s'envole <br/>Un autre oiseau.<br/><br/>Tu disais : " Je suis calme et fière, <br/>Je t'aime ! oui ! "<br/>Et je rêvais à ta lumière <br/>Tout ébloui !<br/><br/>Oh ! ce fut une heure sacrée, <br/>T'en souvient-il ?<br/>Que cette première soirée <br/>Du mois d'avril !<br/><br/>Tout en disant toutes les choses, <br/>Tous les discours<br/>Qu'on dit dans la saison des roses <br/>Et des amours,<br/><br/>Nous allions, contemplant dans l'onde <br/>Et dans l'azur<br/>Cette lune qui jette au monde <br/>Son rayon pur,<br/><br/>Et qui, d'en haut, sereine comme <br/>Un front dormant,<br/>Regarde le bonheur de l'homme <br/>Si doucement ! [...]</p>
+										<p class="last">C'était la première soirée <br/>Du mois d'avril.</p>
 									</div><!--end inner div-->
 									
 										
@@ -142,19 +142,13 @@
 									 </div>
 								</div><!--singleProductareass-->
 								
-								
 								<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
 								<p>#{product.produitDetail}</p>
 								
-								<button class="nouveprobutton" data-toggle="modal" data-target="#nouve1" onclick="return false;">
-									<h:commandLink action="#{PromFilterView.addToBasket()}"> 
-										<f:setPropertyActionListener value="#{product}" target="#{PromFilterView.selectedProduit}" />
-										<h:graphicImage value="/static/img/whitecart.png" styleClass="img-responsive" />Ajouter au panier
-									</h:commandLink>
-								</button>
+								<button class="nouveprobutton" onclick="addBasket(#{product.idProduit});return false;" >Ajouter au panier</button>
 								
 								<!-- start modal one-->
-								<div class="modal fade" id="nouve1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								<div class="modal fade" id="nouve-13" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
