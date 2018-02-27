@@ -70,13 +70,12 @@
 							<!-- start cart roll over area-->
 							<div class="cartrolloverdetails">
 
-
+							<ui:repeat var="produit" value="#{basketView.panierProduitList}">
 								<div class="singlecartitems">
 									<div class="media">
 										<div class="media-body">
 											<div class="singleitemstexts">
-												<a href="">1 x Burberry Body</a> <a href="">Lait pour le
-													corps, Flacon, 85 ml</a> <span>23,87 € </span>
+												<a href="">#{produit.qteSouhaitee} x #{produit.produit.produitDetail}</a> <a href="">#{produit.produit.produitDescription}</a> <span>#{produit.sousTotal} € </span>
 											</div>
 										</div>
 										<div class="media-left">
@@ -88,30 +87,13 @@
 								</div>
 								<!--end single cart item-->
 
-								<div class="singlecartitems">
-
-									<div class="media">
-										<div class="media-body">
-											<div class="singleitemstexts">
-												<a href="">1 x Burberry Body</a> <a href="">Lolita
-													Lempicka EDP 100ml Vapo Tester</a> <span>39€</span>
-											</div>
-										</div>
-										<div class="media-left">
-											<div class="trashbutton">
-												<i class="fa fa-trash"></i>
-											</div>
-										</div>
-									</div>
-
-								</div>
-								<!--end single cart item-->
+							</ui:repeat>
 
 								<div class="clearfix"></div>
 
 								<div class="totaltextitem">
 									<p>
-										Total<span>27,86 €</span>
+										Total<span>#{basketView.commandeIndividuelle.totalAPayer} €</span>
 									</p>
 									<div class="clearfix"></div>
 								</div>
