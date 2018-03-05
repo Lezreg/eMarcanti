@@ -128,4 +128,9 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 		this.membreDAO = membreDAO;
 	}
 
+	@Override
+	public List<CommandeGroupeeStatus> getAllCommandeGroupeeStatus() {
+		return commandeGroupeeStatusDAO.findAll();
+	}
+
 }

@@ -32,7 +32,7 @@
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="purchaseordertextitle filterheading">
-								<h3><a href="javascript:history.go(-1);"><p:graphicImage	url="/static/img/commandes/purchaseorder.png" styleClass="img-responsive"/> </a>commande groupée : Club-Foot-2017-01-Janv</h3>
+								<h3><a href="javascript:history.go(-1);"><p:graphicImage	url="/static/img/commandes/purchaseorder.png" styleClass="img-responsive"/> </a>commande groupée : #{cmdGroupeeView.commandeGroupee.cdeGroupeeNom}</h3>
 							</div>
 						</div>
 					</div>
@@ -84,14 +84,8 @@
 									<div class="paddingless col-sm-8">
 										<div class="commandgrmodifyinfop marquedescription oransationadmin">
 											<div class="select">
-											
-											  <h:selectOneMenu id="cmdIdiv" value="#{cmdGroupeeView.statusCode}">
-											   	 <f:selectItems value="#{cmdGroupeeView.referentielBean.commandeGroupeeStatusList}" var="status" itemLabel="#{status.statusLibelle}" itemValue="#{status.statusCode}" />
-											  </h:selectOneMenu>
-									
-											  <div class="select__arrow"></div>
+											 	 <h:outputText id="cmdIdiv" value="#{cmdGroupeeView.commandeGroupee.idStatus.statusLibelle}" />
 											</div>
-	
 										</div>
 									</div>
 								</div><!--end inner div-->
@@ -106,9 +100,9 @@
 									</div>
 									<div class="paddingless col-sm-8">
 										<div class="marquedescription admininput">
-											<h:inputText id="dateCreationId" value="#{cmdGroupeeView.commandeGroupee.dateCreation}">
+											<h:outputText id="dateCreationId" value="#{cmdGroupeeView.commandeGroupee.dateCreation}">
 												<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
-											</h:inputText>
+											</h:outputText>
 										</div>
 									</div>
 								</div><!--end inner div-->
@@ -124,11 +118,9 @@
 									<div class="paddingless col-sm-8">
 										<div class="marquedescription">
 											<div class="form-group">
-												 <rich:calendar value="#{cmdGroupeeView.commandeGroupee.dateLivraisonPrevue}"
-								                        locale="#{cmdGroupeeView.locale}"
-								                        datePattern="dd-MM-yyyy"
-								                         cellWidth="24px" cellHeight="22px" style="width:200px"/>
-												 
+												<h:outputText id="dlrsId" value="#{cmdGroupeeView.commandeGroupee.dateLivraisonPrevue}">
+													<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
+												</h:outputText>
 											</div>
 										</div>
 									</div>
@@ -145,10 +137,9 @@
 									<div class="paddingless col-sm-8">
 										<div class="marquedescription">
 											<div class="form-group">
-												<rich:calendar value="#{cmdGroupeeView.commandeGroupee.dateLivraisonReelle}"
-								                        locale="#{cmdGroupeeView.locale}"
-								                        datePattern="dd-MM-yyyy"
-								                         cellWidth="24px" cellHeight="22px" style="width:200px"/>
+												<h:outputText id="dlrId" value="#{cmdGroupeeView.commandeGroupee.dateLivraisonReelle}">
+													<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
+												</h:outputText>
 											</div>
 										</div>
 									</div>
@@ -165,7 +156,7 @@
 									<div class="paddingless col-sm-8">
 										<div class="marquedescription">
 											<div class="marquedescription cgropupsmodiyarea">
-											<textarea class="form-control" rows="1"></textarea>
+											<h:outputText value="#{cmdGroupeeView.commandeGroupee.compteurDerniereMinuteMax}" id="nbrModId" />
 										</div>
 	
 										</div>
@@ -182,7 +173,7 @@
 									</div>
 									<div class="paddingless col-sm-8">
 										<div class="marquedescription cgropupsmodiyarea">
-											<h:inputText id="suiId" value="#{cmdGroupeeView.commandeGroupee.numeroSuivi}" />
+											<h:outputText id="suiId" value="#{cmdGroupeeView.commandeGroupee.numeroSuivi}" />
 										</div>
 									</div>
 								</div><!--end inner div-->
@@ -197,7 +188,7 @@
 									</div>
 									<div class="paddingless col-sm-8">
 										<div class="marquedescription cgropupsmodiyarea fordesktopfulwidth">
-											<h:inputText id="transid" value="#{cmdGroupeeView.commandeGroupee.nomTransporteur}" />
+											<h:outputText id="transid" value="#{cmdGroupeeView.commandeGroupee.nomTransporteur}" />
 										</div>
 									</div>
 								</div><!--end inner div-->
@@ -226,11 +217,6 @@
 											  <div class="button-1">
 												<div class="eff-1"></div>
 												<a href="#"> Annuler </a>
-											  </div>
-											  
-											  <div class="button-2">
-													<div class="eff-2"></div>
-													<h:commandLink value="Valider" action="#{cmdGroupeeView.saveCmdGroupee()}"> Valider </h:commandLink>
 											  </div>
 										</div>
 									</div>

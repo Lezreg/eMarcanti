@@ -176,13 +176,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 				if (qteSouhaitee == 0) {
 					LOGGER.info("Produit supprimé qte souhaité 0 :"
 							+ panierProduit.getProduit().getIdMarque().getMarqueNom());
-					panierProduitDAO.removeById(panierProduit.getPanierProduitPK());
-
-					if (commandeIndividuel != null && commandeIndividuel.getIdPanier() != null
-							&& commandeIndividuel.getIdPanier().getPanierProduitCollection() != null) {
-						commandeIndividuel.getIdPanier().getPanierProduitCollection().remove(panierProduit);
-					}
-					commandeIndividuelleDAO.edit(commandeIndividuel);
+					removeProduit(commandeIndividuel, panierProduit);
 					continue;
 				}
 				checkPanierProduit(panierProduit, qteSouhaitee, userSessionBean);
@@ -195,13 +189,56 @@ public class PanierServiceActionImpl implements PanierActionService {
 			}
 		}
 		// update montant panier
+		CommandeIndividuelle cmdIndiv = updatePanierAndCommande(userSessionBean, panier, commandeIndividuel,
+				totalPanier, panierNbreProduit);
+		// return updated list of panier produit
+		return getProduitsByCmdIndiv(cmdIndiv.getIdCdeIndiv());
+	}
+
+	/**
+	 * update montant panier et commande indiv
+	 * 
+	 * @param userSessionBean
+	 * @param panier
+	 * @param commandeIndividuel
+	 * @param totalPanier
+	 * @param panierNbreProduit
+	 * @return
+	 */
+
+	private CommandeIndividuelle updatePanierAndCommande(UserSessionBean userSessionBean, Panier panier,
+			CommandeIndividuelle commandeIndividuel, BigDecimal totalPanier, Short panierNbreProduit) {
 		panier = updateMontantNbreProduit(totalPanier, panier, panierNbreProduit);
 
 		// TODO commandeIndividuelle.setReduction(reduction);
 		// update commande individuelle
 		CommandeIndividuelle cmdIndiv = updateCommandeIndividuelle(userSessionBean, commandeIndividuel, panier);
-		// return updated list of panier produit
-		return getProduitsByCmdIndiv(cmdIndiv.getIdCdeIndiv());
+		return cmdIndiv;
+	}
+
+	/**
+	 * supprimer un produit de panier
+	 * 
+	 * @param commandeIndividuel
+	 * @param panierProduit
+	 */
+	private void removeProduit(CommandeIndividuelle commandeIndividuel, PanierProduit panierProduit) {
+		panierProduitDAO.removeById(panierProduit.getPanierProduitPK());
+
+		if (commandeIndividuel != null && commandeIndividuel.getIdPanier() != null
+				&& commandeIndividuel.getIdPanier().getPanierProduitCollection() != null) {
+			commandeIndividuel.getIdPanier().getPanierProduitCollection().remove(panierProduit);
+		}
+		commandeIndividuelleDAO.edit(commandeIndividuel);
+	}
+
+	public void removeProduitFromPanier(CommandeIndividuelle commandeIndividuel, PanierProduit panierProduit) {
+
+		removeProduit(commandeIndividuel, panierProduit);
+		// FIXME
+		// updatePanierAndCommande( panierProduit.getPanier(), commandeIndividuel,
+		// totalPanier, panierNbreProduit)
+
 	}
 
 	private void checkPanierProduit(PanierProduit panierProduit, short qteSouhaitee, UserSessionBean userSessionBean)

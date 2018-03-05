@@ -24,4 +24,6 @@ public interface CommandeGroupeeServiceAction {
 	List<VReduction> getAllReductions();
 
 	List<VCdeGroupeeDetail> getCmdGroupeesFilleulsByStatus(Long membreId, String status);
+
+	List<CommandeGroupeeStatus> getAllCommandeGroupeeStatus();
 }

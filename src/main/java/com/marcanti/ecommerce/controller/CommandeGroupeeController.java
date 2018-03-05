@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -24,6 +25,7 @@ import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 import com.marcanti.ecommerce.service.actions.OrganisationServiceAction;
 import com.marcanti.ecommerce.utils.DateUtils;
 import com.marcanti.ecommerce.utils.ParfumUtils;
+import com.marcanti.ecommerce.view.bean.ReferentielBean;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 @ManagedBean(name = "cmdGroupeeView")
@@ -42,6 +44,9 @@ public class CommandeGroupeeController implements Serializable {
 	@Autowired
 	private OrganisationServiceAction organisationServiceAction;
 
+	@ManagedProperty("#{referentielBean}")
+	private ReferentielBean referentielBean;
+
 	private CommandeGroupee commandeGroupee;
 
 	private List<CommandeGroupee> cmdGroupees;
@@ -56,7 +61,13 @@ public class CommandeGroupeeController implements Serializable {
 
 	private Long organisationId;
 
+	private List<com.marcanti.ecommerce.model.CommandeGroupeeStatus> commandeGroupeeStatus;
+
 	private List<Organisation> organisations;
+
+	private Locale locale;
+
+	private String StatusCode;
 
 	@PostConstruct
 	private void init() {
@@ -65,9 +76,10 @@ public class CommandeGroupeeController implements Serializable {
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
 
-		commandeGroupee = new CommandeGroupee();
+		// commandeGroupee = new CommandeGroupee();
 		userSessionBean = ParfumUtils.getUserSessionBean();
 		organisation = organisationServiceAction.getOrganisationById(userSessionBean.getIdOrga());
+		locale = Locale.FRANCE;
 	}
 
 	public String createNew() {
@@ -77,29 +89,76 @@ public class CommandeGroupeeController implements Serializable {
 
 	public String saveCmdGroupee() {
 		LOGGER.info("********************save and update methode ******************************");
-		Date date = new Date();
+
 		// create new commande
 		if (commandeGroupee != null && commandeGroupee.getIdCdeGroupee() == null) {
-			String monthName = DateUtils.getMonthName(DateUtils.getMonth(date), Locale.FRANCE);
-			commandeGroupee.setCdeGroupeeNom(organisation.getOrgaAlias() + "_" + DateUtils.getYear(date) + "_"
-					+ monthName.substring(0, 3).toUpperCase() + "_" + DateUtils.getDay(date));
+			commandeGroupee.setCdeGroupeeNom(getCommandeGroupeName());
 			commandeGroupee.setNomCreateur(userSessionBean.getMembreNom().toUpperCase());
 			commandeGroupee.setPrenomCreateur(userSessionBean.getMembrePrenom());
-			commandeGroupee.setDateCreation(date);
+			commandeGroupee.setDateCreation(new Date());
 			commandeGroupee.setIdOrga(organisation);
 			commandeGroupee.setIsPaiementEffectue(false);
 			commandeGroupee.setIsEnCours(true);
-			com.marcanti.ecommerce.model.CommandeGroupeeStatus commandeGroupeeStatus = commandeGroupeeServiceAction
-					.getCommandeGroupeeStatusByCode(CommandeGroupeeStatus.CDE_GROUPEE_A_LIVRER.getCode());
-			commandeGroupee.setIdStatus(commandeGroupeeStatus);
+			commandeGroupee.setIdStatus(commandeGroupeeServiceAction
+					.getCommandeGroupeeStatusByCode(CommandeGroupeeStatus.CDE_GROUPEE_A_LIVRER.getCode()));
 			// update exist command
 		} else {
-			commandeGroupee.setDateModification(date);
+			commandeGroupee.setDateModification(new Date());
 			commandeGroupee.setNomModifieur(userSessionBean.getMembreNom().toUpperCase());
 			commandeGroupee.setPrenomModifieur(userSessionBean.getMembrePrenom());
+			commandeGroupee.getIdStatus();
+			LOGGER.info(commandeGroupee.getIdStatus().toString());
+			// FIXME date creation, n'est pas date du jour lors de mise à jour
+			// problème jsf ou hibernate à resoudre
+			commandeGroupee.setDateCreation(new Date());
+			// commandeGroupee.setIdStatus(commandeGroupeeServiceAction
+			// .);
+
+			commandeGroupee.setIdStatus(commandeGroupeeServiceAction.getCommandeGroupeeStatusByCode(StatusCode));
 		}
 		commandeGroupeeServiceAction.saveCmdGroupee(commandeGroupee);
 		return "cmdGroupees";
+	}
+
+	private String getCommandeGroupeName() {
+		Date date = new Date();
+		String monthName = DateUtils.getMonthName(DateUtils.getMonth(date), Locale.FRANCE);
+		return organisation.getOrgaAlias() + "_" + DateUtils.getYear(date) + "_"
+				+ monthName.substring(0, 3).toUpperCase() + "_" + DateUtils.getDay(date);
+	}
+
+	public String editCommandeGroupee() {
+		/**
+		 * 
+		 */
+		return "commandeGroupee";
+	}
+
+	public String showCommandeGroupee() {
+		/**
+		 * 
+		 */
+		return "showCommandeGroupee";
+	}
+
+	public List<CommandeGroupee> getCmdGroupees() {
+		// default value (pour selected by Admin)
+		Long idOrga = organisationId;
+		// else organisation of current user
+		if (idOrga == null || idOrga == 0) {
+			idOrga = userSessionBean.getIdOrga();
+		}
+		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(idOrga, true);
+	}
+
+	public List<CommandeGroupee> getCmdGroupeesPrec() {
+		// default value (pour selected by Admin)
+		Long idOrga = organisationId;
+		// else organisation of current user
+		if (idOrga == null || idOrga == 0) {
+			idOrga = userSessionBean.getIdOrga();
+		}
+		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(idOrga, false);
 	}
 
 	private CommandeGroupee newCommandeGroupee() {
@@ -121,26 +180,6 @@ public class CommandeGroupeeController implements Serializable {
 
 	public void setCommandeGroupee(CommandeGroupee commandeGroupee) {
 		this.commandeGroupee = commandeGroupee;
-	}
-
-	public List<CommandeGroupee> getCmdGroupees() {
-		// default value (pour selected by Admin)
-		Long idOrga = organisationId;
-		// else organisation of current user
-		if (idOrga == null || idOrga == 0) {
-			idOrga = userSessionBean.getIdOrga();
-		}
-		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(idOrga, true);
-	}
-
-	public List<CommandeGroupee> getCmdGroupeesPrec() {
-		// default value (pour selected by Admin)
-		Long idOrga = organisationId;
-		// else organisation of current user
-		if (idOrga == null || idOrga == 0) {
-			idOrga = userSessionBean.getIdOrga();
-		}
-		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(idOrga, false);
 	}
 
 	public void setCmdGroupees(List<CommandeGroupee> cmdGroupees) {
@@ -186,4 +225,38 @@ public class CommandeGroupeeController implements Serializable {
 	public void setOrganisationId(Long organisationId) {
 		this.organisationId = organisationId;
 	}
+
+	public List<com.marcanti.ecommerce.model.CommandeGroupeeStatus> getCommandeGroupeeStatus() {
+		return commandeGroupeeServiceAction.getAllCommandeGroupeeStatus();
+	}
+
+	public void setCommandeGroupeeStatus(
+			List<com.marcanti.ecommerce.model.CommandeGroupeeStatus> commandeGroupeeStatus) {
+		this.commandeGroupeeStatus = commandeGroupeeStatus;
+	}
+
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
+	public ReferentielBean getReferentielBean() {
+		return referentielBean;
+	}
+
+	public void setReferentielBean(ReferentielBean referentielBean) {
+		this.referentielBean = referentielBean;
+	}
+
+	public String getStatusCode() {
+		return StatusCode;
+	}
+
+	public void setStatusCode(String statusCode) {
+		StatusCode = statusCode;
+	}
+
 }

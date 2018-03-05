@@ -176,10 +176,21 @@
 													<td><h:outputText value="#{cmdGr.dateLivraisonPrevue}">
 															<f:convertDateTime pattern="dd/MM/yyyy"	timeZone="Europe/Paris" />
 														</h:outputText></td>
-													<td><a href="commandes_groupees_modify.html"><i
-															class="fa fa-pencil-square-o"></i></a></td>
-													<td><a href="commandes_groupees_confirmer.html"><i
-															class="fa fa-eye"></i></a></td>
+													<td>
+														<h:commandLink action="createCmd" styleClass="fa fa-pencil-square-o">
+															 <f:setPropertyActionListener value="#{cmdGr}" target="#{cmdGroupeeView.commandeGroupee}" />
+														</h:commandLink>
+													</td>
+													<td>
+<!-- 														<a href="commandes_groupees_confirmer.html"><i -->
+<!-- 															class="fa fa-eye"></i></a> -->
+														<h:commandLink action="showCommandeGroupee" styleClass="fa fa-eye">
+															 <f:setPropertyActionListener value="#{cmdGr}" target="#{cmdGroupeeView.commandeGroupee}" />
+														</h:commandLink>
+													</td>
+															
+															
+															
 													<td><h:outputText value="#{cmdGr.dateModification}">
 															<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
 														</h:outputText></td>

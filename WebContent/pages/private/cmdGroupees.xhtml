@@ -32,7 +32,6 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
-		       
 		      </div>
 		      <div class="modal-body">
 		        	<div class="row">
@@ -169,8 +168,16 @@
 													<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 												</h:outputText>
 											</td>
-											<td><a href="commandes_groupees_modify.html"><i class="fa fa-pencil-square-o"></i></a></td>
-											<td><a href="commandes_groupees_confirmer.html"><i class="fa fa-eye"></i></a></td>
+											<td>
+												<h:commandLink action="createCmd" styleClass="fa fa-pencil-square-o">
+													 <f:setPropertyActionListener value="#{cmdGr}" target="#{cmdGroupeeView.commandeGroupee}" />
+												</h:commandLink>
+											</td>
+											<td>
+												<h:commandLink action="showCommandeGroupee" styleClass="fa fa-eye">
+													 <f:setPropertyActionListener value="#{cmdGr}" target="#{cmdGroupeeView.commandeGroupee}" />
+												</h:commandLink>
+											</td>
 											<td>
 												<h:outputText value="#{cmdGr.dateModification}">
 													<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="Europe/Paris" />
@@ -189,204 +196,7 @@
 		</section><!--end sec-->
 		</h:form>
 
-		<!-- Modal -->
-		<div class="messftopmodal modal fade" id="cgropusid" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		  <div class="messmodaldia modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
-		      </div>
-		      <div class="modal-body">
-		        	<div class="row">
-							<div class="col-xs-12">
-								<div class="comandomodifyarea modifyproductinner">
-									<div class="modifymaintitle">
-										<h3>Nouvelle commande groupée</h3>
-									</div>
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>Nom commande <span>*</span></p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="cogmodifirst marquedescription admininput">
-												<input type="text" name="nomco" />
-											</div>
-										</div>
-									</div><!--end inner div-->
-									
-									<div class="clearfix"></div>
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>Organisation <span>*</span></p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="cogmodifirst marquedescription admininput">
-												<input type="text" name="organisation" />
-											</div>
-										</div>
-									</div><!--end inner div-->
-									
-									
-									<div class="clearfix"></div>
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>Etat<span>*</span></p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="cogmodifirst marquedescription admininput">
-												<input type="text" name="nomco" />
-											</div>
-										</div>
-									</div><!--end inner div-->
-									
-									<div class="clearfix"></div>
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>Date création </p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquedescription admininput">
-												<input type="text" name="organisation" />
-											</div>
-										</div>
-									</div><!--end inner div-->
-									
-									<div class="clearfix"></div>
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>Date Livraison prévue</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquedescription">
-												<div class="form-group"><input id="datepicker-example9" type="text"/></div>
-											</div>
-										</div>
-									</div><!--end inner div-->
-									
-									<div class="clearfix"></div>
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>Date Livraison réelle</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquedescription">
-												<div class="form-group"><input id="datepicker-example10" type="text"/></div>
-											</div>
-										</div>
-									</div><!--end inner div-->
-									
-									<div class="clearfix"></div>
-									
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>Nbre modifications de<br/>dernière minute max.</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquedescription">
-												<div class="marquedescription cgropupsmodiyarea">
-												<textarea class="form-control" rows="1"></textarea>
-											</div>
 		
-											</div>
-										</div>
-									</div><!--end inner div-->
-									
-									<div class="clearfix"></div>
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>N Suivi</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquedescription cgropupsmodiyarea">
-												<textarea class="form-control" rows="1"></textarea>
-											</div>
-										</div>
-									</div><!--end inner div-->
-									
-									<div class="clearfix"></div>
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>Transporteur</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="marquedescription cgropupsmodiyarea fordesktopfulwidth">
-												<textarea class="form-control" rows="1"></textarea>
-											</div>
-										</div>
-									</div><!--end inner div-->
-									
-									
-									<div class="clearfix"></div>
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-4">
-											<div class="marquestext">
-												<p>Paiement réalisé</p>
-											</div>
-										</div>
-										<div class="paddingless col-sm-8">
-											<div class="paiementreinput marquedescription admininput paiementinput">
-												<input type="text" name="non" />
-											</div>
-										</div>
-									</div><!--end inner div-->
-									
-									<div class="clearfix"></div>
-									
-									<div class="marqueinfo marginRow">
-										<div class="paddingless col-sm-12">
-											<div class="newmodiysvecan modifysavecancelbutton">
-												 <div class="button-1">
-													<div class="eff-1"></div>
-													<a href="" data-dismiss="modal"> Annuler </a>
-												  </div>
-												  
-												  <div class="button-2">
-													<div class="eff-2"></div>
-													<a href="#"> Valider </a>
-												  </div>
-											</div>
-										</div>
-										
-									</div><!--end inner div-->
-									<div class="clearfix"></div>
-									
-								</div><!--end main inner div-->
-							</div>
-						</div><!--end row-->
-		      </div><!--end modal body-->
-		     
-		    </div>
-		  </div>
-		</div>
-		 <!-- modal-->	
 		</ui:define>
 		
 		<ui:define name="script">
