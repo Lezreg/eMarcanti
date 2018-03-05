@@ -1,5 +1,6 @@
 package com.marcanti.ecommerce.service.actions.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,14 @@ public class VReportingCdeGroupeeServiceActionImpl implements VReportingCdeGroup
 	@Override
 	public List<VReportingCdeGroupee> getReportingCdeGroupeeList() {
 		return reportingCdeGroupeeDAO.getReportingCdeGroupeeList();
+	}
+
+	@Override
+	public List<VReportingCdeGroupee> searchReportingCdeGroupeeList(Date dateDebut, Date dateFin, String idStatus, String isPaiementEffectue) {
+		return reportingCdeGroupeeDAO.searchReportingCdeGroupeeList(dateDebut,dateFin,idStatus,isPaiementEffectue);
 	}	
+	
+	
  
 
 

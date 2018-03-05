@@ -14,7 +14,7 @@
 						<div class="col-xs-12">
 							<div class="breadcrumslist">
 								<ul>
-									<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="reporting1.xhtml"><h:outputLabel value="#{msg.libelle_reporting1}" /></h:outputLink></li>
+									<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="reporting1.xhtml"><h:outputLabel value="#{msg.libelle_commandes}" /></h:outputLink></li>
 								</ul>
 							</div>
 						</div>
@@ -22,18 +22,20 @@
 				</div>
 			</div>
 
-			<h:form id="formMembres">
+			<h:form id="formReporting">
 				<section class="messcomandesarea">
 					<h2 class="section_header">sec</h2>
 					<div class="container">
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="filterheading">
-									<h3>REPORTING</h3>
-									<h4>
-										<strong>Reporting sur les commandes groupées</strong>
+								<div class="filterheading" style="margin-bottom: 0px;">
+									<!--<h3>REPORTING</h3>-->
+									<h4 style="margin-bottom: 10px;">
+										<strong>#{msg.libelle_rpt_cmd_grp}</strong>
 									</h4>
-									<p>Date de création de la commande groupée :</p>
+								</div>
+								<div>
+									<h:messages errorClass="redclass" infoClass="greenclass" />
 								</div>
 							</div>
 						</div>
@@ -42,51 +44,63 @@
 							<div class="paddingless col-sm-6">
 								<div class="marquestext">
 									<div class="form-group">
-										Date début<input id="datepicker-example36" type="text"/>
+										#{msg.libelle_date_debut}<h:inputText id="datepicker-example36" value="#{reportingCdeGroupeeBean.dateDebut}" maxlength="10">
+												  	<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+												  </h:inputText>
 									</div>
 								</div>
 							</div>
 							<div class="paddingless col-sm-6">
 								<div class="marquedescription">
 									<div class="form-group">
-										Date de fin<input id="datepicker-example37" type="text"/>
+										#{msg.libelle_date_fin}<h:inputText id="datepicker-example37" value="#{reportingCdeGroupeeBean.dateFin}" maxlength="10">
+													<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+												  </h:inputText>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="row marginRow">
-							<div class="col-xs-12">
-
-								<div class="filterbytitle">
-									<p>Etat</p>
-								</div>
-								<div class="messcommedsfilter filterbyarea">
-									<div class="select">
-										<h:selectOneMenu value="#{reportingCdeGroupeeBean.idStatus}"> 
-											<f:selectItems value="#{referentielBean.commandeGroupeeStatusList}" var="c" itemLabel="#{c.statusLibelle}" itemValue="#{c.idStatus}" />
-										</h:selectOneMenu>
-										<div class="select__arrow"></div>
+						<div class="marqueinfo marginRow" >
+							<div class="paddingless col-sm-6">
+								<div class="reportingetatparent marquestext">
+									<div class="etatnewareass">
+										<p style="color: inherit;">#{msg.libelle_etat}</p>
+									</div>
+								
+									<div class="reportingetat messcommedsfilter filterbyarea">
+										<div class="select">
+											<h:selectOneMenu value="#{reportingCdeGroupeeBean.idStatus}" > 
+												<f:selectItems value="#{referentielBean.commandeGroupeeStatusList}" var="c" itemLabel="#{c.statusLibelle}" itemValue="#{c.idStatus}"  />
+											</h:selectOneMenu>
+											<div class="select__arrow"></div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-
-						<div class="row marginRow">
-							<div class="col-sm-2">
-								<div class="filterbytitle">
+							<div class="paddingless col-sm-6">
+								<div class="reportingpaye filterbytitle">
 									<p>Payée</p>
 								</div>
-							</div>
 
-							<div class="col-sm-10">
-								<ul>
-									<li>
-										<h:selectOneRadio value="#{reportingCdeGroupeeBean.isPaid}">
-								   			<f:selectItems value="#{referentielBean.radioButtonOuiNonInd}" />
-								   		</h:selectOneRadio>
-							   		</li>
-								</ul>
+								<div class="reportingpayelist reportingonemobilmar adminmembercheckbox marquestext">
+									<ul>
+										<li>
+											<h:selectOneRadio id="radio_paye" value="#{reportingCdeGroupeeBean.isPaid}">
+								   				<f:selectItems value="#{referentielBean.radioButtonOuiNonInd}" />
+								   			</h:selectOneRadio>
+										</li>
+									</ul>
+								</div>
+
+							</div>
+						</div>
+
+						<div class="row marginRow">
+							<div class="col-sm-11 col-sm-offset-1">
+								<div class="researchbuttonarea">
+									<h:commandLink  styleClass="researchbuttonarea" action="#{reportingCdeGroupeeBean.editCdeGroupee}">#{msg.libelle_rechercher}</h:commandLink>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -101,29 +115,26 @@
 								<div class="mess-innertablearea">
 									<div
 										class="exporttobutton reportingbuttonone mobilenewbuttonajour reportingtext">
-										<button>Imprimer</button>
-										<button>Export excel</button>
+										<button>#{msg.libelle_imprimer}</button>
+										<button>#{msg.libelle_import_excel}</button>
 									</div>
-									<table id="reportingoneid"
-										class="table table-striped table-bordered dt-responsive"
-										cellspacing="0" width="100%">
+									<table id="reportingoneid" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
 										<thead>
 											<tr>
-												<th class="nameoforder">Nom commande</th>
-												<th class="creationdate">Statut</th>
-												<th class="status">Montant</th>
-												<th class="payment">Nbre Cde individuelles</th>
-												<th class="deliverydate">Nbre Cde indiv. payées</th>
-												<th class="modified">Déjà payé</th>
-												<th class="createdby">Reste à payer</th>
-												<th class="email none">Date livraison prévue</th>
-												<th class="email none">Date livraison réelle</th>
-												<th class="email none">Paiement effectué ?</th>
-												<th class="email none">Modifiée le</th>
-												<th class="email none">Crée le</th>
+												<th class="nameoforder">#{msg.libelle_nom_cmd}</th>
+												<th class="creationdate">#{msg.libelle_statut}</th>
+												<th class="status">#{msg.libelle_montant}</th>
+												<th class="createdby">#{msg.libelle_reste_payer}</th>
+												<th class="createdby">#{msg.libelle_date_liv_prevu}</th>
+												<th class="createdby">#{msg.libelle_date_liv_reel}</th>
+												<th class="createdby">#{msg.libelle_paiement_effectue}</th>
+												<th class="createdby">#{msg.libelle_modifie_le}</th>
+												<th class="payment none">#{msg.libelle_nbr_cmd_ind}</th>
+												<th class="deliverydate none">#{msg.libelle_nbr_cmd_ind_paye}</th>
+												<th class="modified none">#{msg.libelle_montant_paye}</th>
+												<th class="email none">#{msg.libelle_cree_le}</th>
 												<th class="blankth"></th>
 												<th class="blankth"></th>
-
 											</tr>
 										</thead>
 
@@ -135,6 +146,7 @@
 												<th></th>
 												<th></th>
 												<th></th>
+												<th class=""></th>
 												<th class="blankth"></th>
 												<th class="blankth"></th>
 												<th class="blankth"></th>
@@ -142,13 +154,11 @@
 												<th class="blankth"></th>
 												<th class="blankth"></th>
 												<th class="blankth"></th>
-												<th class="blankth"></th>
-
 											</tr>
 										</tfoot>
 
 										<tbody>
-											
+										
 											<ui:repeat var="reportingCdeGroupee" value="#{reportingCdeGroupeeBean.reportingCdeGroupeeList}">
 												<tr>
 													<td>#{reportingCdeGroupee.cdeGroupeeNom}</td>
@@ -184,7 +194,7 @@
 	
 												</tr>
 											</ui:repeat>
-											
+
 										</tbody>
 									</table>
 								</div>
@@ -196,7 +206,7 @@
 		</ui:define>
 		<ui:define name="footer">
 			<ui:include src="/template/footer4.xhtml" />
-		</ui:define>		
+		</ui:define>
 	</ui:composition>
 </h:body>
 </html>

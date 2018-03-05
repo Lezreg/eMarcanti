@@ -5,10 +5,12 @@
  */
 package com.marcanti.ecommerce.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,7 +25,6 @@ import org.springframework.stereotype.Repository;
 
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.VReportingCdeGroupeeDAO;
-import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.VReportingCdeGroupee;
 
 /**
@@ -98,7 +99,34 @@ public class VReportingCdeGroupeeDAOImpl extends AbstractGenericDAO<VReportingCd
 		return em.createNamedQuery("VReportingCdeGroupee.findAll", VReportingCdeGroupee.class).getResultList();
 	}
 
-
+	@Override
+	public List<VReportingCdeGroupee> searchReportingCdeGroupeeList(Date dateDebut, Date dateFin, String idStatus, String isPaiementEffectue) {
+		int i = 1;
+		StringBuffer querrySB = new StringBuffer("SELECT * FROM v_reporting_cde_groupee where dateCreation>=?");
+		if(dateFin!=null){
+			querrySB.append(" and dateCreation<=?");
+		}
+		if(idStatus!=null){
+			querrySB.append(" and idStatus=?");
+		}	
+		if(isPaiementEffectue!=null){
+			querrySB.append(" and isPaiementEffectue=?");
+		}		
+		Query query = em.createNativeQuery(querrySB.toString()).setParameter(1, dateDebut);
+		if(dateFin!=null){
+			i++;
+			query.setParameter(i, dateFin);
+		}
+		if(idStatus!=null){
+			i++;
+			query.setParameter(i, idStatus);
+		}
+		if(isPaiementEffectue!=null){
+			i++;
+			query.setParameter(i, isPaiementEffectue);
+		}
+		return query.getResultList();
+	}
 
     
 }
