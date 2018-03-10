@@ -154,10 +154,10 @@
 	<beans:bean id="carouselDAO"
 		class="com.marcanti.ecommerce.dao.impl.CarouselDAOImpl">
 	</beans:bean>
-<!-- 	<beans:bean id="carouselService" -->
-<!-- 		class="com.marcanti.ecommerce.service.actions.impl.CarouselServiceActionImpl"> -->
-<!-- 		<beans:property name="carouselDAO" ref="carouselDAO"></beans:property> -->
-<!-- 	</beans:bean> -->
+	<beans:bean id="carouselService"
+		class="com.marcanti.ecommerce.service.actions.impl.CarouselServiceActionImpl">
+		<beans:property name="carouselDAO" ref="carouselDAO"></beans:property>
+	</beans:bean>
 			
 	<beans:bean id="catalogueDAO"
 		class="com.marcanti.ecommerce.dao.impl.VCatalogueAdminDAOImpl">
