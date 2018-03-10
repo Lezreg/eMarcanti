@@ -15,9 +15,9 @@
 				
 					<div class="modal-body">
 						 <div class="bigpopupimage">
-<!-- 						 	<ui:fragment rendered="#{empty ModalController.selectedProduit.produitPhotoURL}"><br/> -->
-<!-- 								<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="image"/> -->
-<!-- 							</ui:fragment> -->
+						 	<ui:fragment rendered="#{empty ModalController.selectedProduit.produitPhotoURL}"><br/>
+								<img src="#{request.contextPath}/static/img/cat/Popupimage.png" class="img-responsive" alt="image"/>
+							</ui:fragment>
 							<ui:fragment rendered="#{!empty produit.produitPhotoURL}"><br/>
 								<img src="#{request.contextPath}/upload/#{ModalController.selectedProduit.produitPhotoURL}" class="img-responsive" alt="image"/>
 							</ui:fragment>
