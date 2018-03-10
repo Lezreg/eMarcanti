@@ -16,7 +16,7 @@
 					<div class="modal-body">
 						 <div class="bigpopupimage">
 						 	<ui:fragment rendered="#{empty ModalController.selectedProduit.produitPhotoURL}"><br/>
-								<img src="#{request.contextPath}/static/img/cat/Popupimage.png" class="img-responsive" alt="image"/>
+								<img src="#{request.contextPath}/static/img/cat/default-panier-img.png" class="img-responsive" alt="image"/>
 							</ui:fragment>
 							<ui:fragment rendered="#{!empty produit.produitPhotoURL}"><br/>
 								<img src="#{request.contextPath}/upload/#{ModalController.selectedProduit.produitPhotoURL}" class="img-responsive" alt="image"/>
@@ -25,7 +25,7 @@
 		
 						 <div class="popupdetals sucessfulpopup modalbodyright">
 							<h2><h:graphicImage value="/static/img/Popupsuccesful.png" class="img-responsive" alt="error"/> Ajouté au panier avec succès </h2>
-							<p class="popupdescription">#{ModalController.selectedProduit.produitDetail}</p>
+							<p class="popupdescription">#{ModalController.selectedProduit.produitDescription}</p>
 							
 							<div class="popbothbutton">
 								<button class="commanderbutton">continue</button>
@@ -44,7 +44,7 @@
 
 						 <div class="popupdetals  modalbodyright">
 							<h2><h:graphicImage value="/static/img/Popuperror.png" class="img-responsive" alt="error"/> Sorry the Product is Out of Stock!</h2>
-							<p class="popupdescription">#{ModalController.selectedProduit.produitDetail}</p>
+							<p class="popupdescription">#{ModalController.selectedProduit.produitDescription}</p>
 							<div class="popbothbutton">
 								<button class="continuebutton">continue</button>
 							</div>
