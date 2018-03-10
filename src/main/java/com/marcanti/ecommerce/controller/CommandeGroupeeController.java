@@ -84,6 +84,8 @@ public class CommandeGroupeeController implements Serializable {
 
 	public String createNew() {
 		this.commandeGroupee = newCommandeGroupee();
+		commandeGroupee.setDateCreation(new Date());
+
 		return "createCmd";
 	}
 
