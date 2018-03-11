@@ -99,7 +99,7 @@
 				console.log("start")
 				console.log(id)
 				$.ajax({
-				  url: "http://recette-parfumengroupe.com/eCommerce/pages/private/catalogue/productModal.xhtml?id="+id,
+				  url: "#{request.contextPath}/pages/private/catalogue/productModal.xhtml?id="+id,
 				  context: document.body
 				}).success(function(data) {
 					$('#nouve-13').html(data);
