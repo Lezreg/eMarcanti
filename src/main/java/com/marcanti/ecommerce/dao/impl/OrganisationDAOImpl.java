@@ -82,7 +82,7 @@ public class OrganisationDAOImpl extends AbstractGenericDAO<Organisation> implem
 
 	@Override
 	public void insertOrganisation(Organisation organisation) {
-		Query query = em.createNativeQuery("INSERT INTO organisation (orgaNom,orgaAdresse,orgaCodePostal,orgaVille,orgaPays,orgaTel,orgaAdresseLivraison,orgaAlias,isAlivrerAvantPaiement,dateCreation,isActive,accesCatalogueComplet,envoiMailConfirmation) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)")
+		Query query = em.createNativeQuery("INSERT INTO organisation (orgaNom,orgaAdresse,orgaCodePostal,orgaVille,orgaPays,orgaTel,orgaAdresseLivraison,orgaAlias,isAlivrerAvantPaiement,dateCreation,isActive,accesCatalogueComplet,envoiMailConfirmation,nbreMaxProduitParItem) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")
 				.setParameter(1, organisation.getOrgaNom())
 				.setParameter(2, organisation.getOrgaAdresse())
 				.setParameter(3, organisation.getOrgaCodePostal())
@@ -95,7 +95,8 @@ public class OrganisationDAOImpl extends AbstractGenericDAO<Organisation> implem
 				.setParameter(10, organisation.getDateCreation())
 				.setParameter(11, organisation.getIsActive())
 				.setParameter(12, organisation.getAccesCatalogueComplet())
-				.setParameter(13, organisation.getEnvoiMailConfirmation());
+				.setParameter(13, organisation.getEnvoiMailConfirmation())
+				.setParameter(14, organisation.getNbreMaxProduitParItem());
 		query.executeUpdate();
 		//em.persist(departement);
 	}
@@ -114,7 +115,8 @@ public class OrganisationDAOImpl extends AbstractGenericDAO<Organisation> implem
 				+ "dateModification=?, "
 				+ "isActive=?, "
 				+ "accesCatalogueComplet=?, "
-				+ "envoiMailConfirmation=? "
+				+ "envoiMailConfirmation=?, "
+				+ "nbreMaxProduitParItem=? "
 				+ "WHERE idOrga=?")
 				.setParameter(1, organisation.getOrgaNom())
 				.setParameter(2, organisation.getOrgaAdresse())
@@ -129,7 +131,8 @@ public class OrganisationDAOImpl extends AbstractGenericDAO<Organisation> implem
 				.setParameter(11, organisation.getIsActive())
 				.setParameter(12, organisation.getAccesCatalogueComplet())
 				.setParameter(13, organisation.getEnvoiMailConfirmation())
-				.setParameter(14, organisation.getIdOrga());
+				.setParameter(14, organisation.getNbreMaxProduitParItem())
+				.setParameter(15, organisation.getIdOrga());
 		query.executeUpdate();
 		//em.persist(departement);
 		

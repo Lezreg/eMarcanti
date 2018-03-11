@@ -504,6 +504,7 @@ public class MembreBean implements Serializable {
 		Date dateToday =  calendar.getTime();
 		String msg;
 		String ecran ="membre";
+		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 		
 		if(membre.getIdDepartement().getIdDepartement()==0L){
 			membre.getIdDepartement().setIdDepartement(null);
@@ -517,7 +518,6 @@ public class MembreBean implements Serializable {
 			    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 			}else{
 				
-				UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 				String password = referentielBean.getDefaultPassword();
 				membre.setPassword(DigestUtils.sha512Hex(password));
 				membre.setDateCreation(dateToday);
@@ -557,7 +557,16 @@ public class MembreBean implements Serializable {
 				}else{
 					membreService.updateMembre(membre);
 				}
-				
+				if(getIsDefaultPassword()){
+					String password = referentielBean.getDefaultPassword();
+					membre.setPassword(DigestUtils.sha512Hex(password));
+					try {
+						logger.info("send mail membre with password : " + password);
+						Mail.send(membre.getMembreEmail(), ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.nouveau.membre.modifie"),userSessionBean.getMembrePrenom(),userSessionBean.getMembreNom(),membre.getMembreEmail(),password));
+					} catch (MessagingException e) {
+						logger.error("ERROR send mail membre with password : ",e);
+					}
+				}
 				msg = ParfumUtils.getBundleApplication().getString("message.modif.membre");
 				facesMessage.setSummary(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
@@ -573,6 +582,16 @@ public class MembreBean implements Serializable {
 				}else{
 					membre.setDateModification(dateToday);
 					membreService.updateMembre(membre);
+					if(getIsDefaultPassword()){
+						String password = referentielBean.getDefaultPassword();
+						membre.setPassword(DigestUtils.sha512Hex(password));
+						try {
+							logger.info("send mail membre with password : " + password);
+							Mail.send(membre.getMembreEmail(), ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.nouveau.membre.modifie"),userSessionBean.getMembrePrenom(),userSessionBean.getMembreNom(),membre.getMembreEmail(),password));
+						} catch (MessagingException e) {
+							logger.error("ERROR send mail membre with password : ",e);
+						}
+					}
 					msg = ParfumUtils.getBundleApplication().getString("message.modif.membre");
 					facesMessage.setSummary(msg); 
 					facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);

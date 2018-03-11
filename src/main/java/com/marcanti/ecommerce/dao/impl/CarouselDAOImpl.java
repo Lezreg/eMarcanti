@@ -5,6 +5,7 @@
  */
 package com.marcanti.ecommerce.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.CarouselDAO;
 import com.marcanti.ecommerce.model.Carousel;
+import com.marcanti.ecommerce.model.Marque;
 
 /**
  *
@@ -71,11 +73,75 @@ public class CarouselDAOImpl extends AbstractGenericDAO<Carousel> implements Car
 	@Override
 	public List<Carousel> getCarouselList() {
 		return em.createNamedQuery("Carousel.findAll", Carousel.class).getResultList();
+		/*List<Carousel> listCarousel = new ArrayList<Carousel>();
+		Carousel carousel;
+		Query query = em.createNativeQuery("select c.idCarousel, "
+				+ "c.idMarque, "
+				+ "c.elementNom, "
+				+ "c.elementImageURL, "
+				+ "c.elementLienURL, "
+				+ "c.elementRang, "
+				+ "c.isVisible, "
+				+ "m.marqueNom, "
+				+ "c.produitPrix, "
+				+ "c.produitNom, "
+				+ "c.produitSousTitre, "
+				+ "c.boutonLibelle from carousel c, marque m where c.idMarque=m.idMarque");
+		List<Object[]> resuList = query.getResultList();
+		for (Object[] entity : resuList) {
+			carousel = new Carousel();
+			carousel.setIdCarousel((Integer)(entity[0]));
+			carousel.setIdMarque(new Marque(((Short)(entity[1])).shortValue()));
+			carousel.setElementNom((String)(entity[2]));
+			carousel.setElementImageURL((String)entity[3]);
+			carousel.setElementLienURL((String)entity[4]);
+			carousel.setElementRang(((Short)(entity[5])).shortValue());
+			carousel.setIsVisible(((Boolean)(entity[6])).booleanValue());
+			carousel.setProduitMarque((String)entity[7]);
+			carousel.setProduitPrix((String)entity[8]);
+			carousel.setProduitNom((String)entity[9]);
+			carousel.setProduitSousTitre((String)entity[10]);
+			carousel.setBoutonLibelle((String)entity[11]);
+			listCarousel.add(carousel);
+		}
+		return listCarousel;*/
 	}
 	
 	@Override
 	public List<Carousel> getCarouselListView() {
-		return em.createNamedQuery("Carousel.findByIsVisibleOrderBy", Carousel.class).setParameter("isVisible", true).getResultList();
+		//return em.createNamedQuery("Carousel.findByIsVisibleOrderBy", Carousel.class).setParameter("isVisible", true).getResultList();
+		List<Carousel> listCarousel = new ArrayList<Carousel>();
+		Carousel carousel;
+		Query query = em.createNativeQuery("select c.idCarousel, "
+				+ "c.idMarque, "
+				+ "c.elementNom, "
+				+ "c.elementImageURL, "
+				+ "c.elementLienURL, "
+				+ "c.elementRang, "
+				+ "c.isVisible, "
+				+ "m.marqueNom, "
+				+ "c.produitPrix, "
+				+ "c.produitNom, "
+				+ "c.produitSousTitre, "
+				+ "c.boutonLibelle from carousel c, marque m where c.idMarque=m.idMarque and c.isVisible=1 ORDER BY elementRang asc");
+		List<Object[]> resuList = query.getResultList();
+		for (Object[] entity : resuList) {
+			carousel = new Carousel();
+			carousel.setIdCarousel((Integer)(entity[0]));
+			carousel.setIdMarque(new Marque(((Short)(entity[1])).shortValue()));
+			carousel.setElementNom((String)(entity[2]));
+			carousel.setElementImageURL((String)entity[3]);
+			carousel.setElementLienURL((String)entity[4]);
+			carousel.setElementRang(((Short)(entity[5])).shortValue());
+			carousel.setIsVisible(((Boolean)(entity[6])).booleanValue());
+			carousel.setProduitMarque((String)entity[7]);
+			carousel.setProduitPrix((String)entity[8]);
+			carousel.setProduitNom((String)entity[9]);
+			carousel.setProduitSousTitre((String)entity[10]);
+			carousel.setBoutonLibelle((String)entity[11]);
+			listCarousel.add(carousel);
+		}
+		return listCarousel;
 	}	
 
 	@Override
@@ -85,14 +151,14 @@ public class CarouselDAOImpl extends AbstractGenericDAO<Carousel> implements Car
 
 	@Override
 	public void insertCarousel(Carousel carousel) {
-		String produitMarque = (String)em.createNativeQuery("select marqueNom from marque where idMarque=? ").setParameter(1, carousel.getIdMarque()).getSingleResult();
-		Query query = em.createNativeQuery("INSERT INTO carousel (elementNom, elementImageURL, elementLienURL, elementRang, isVisible, produitMarque, produitPrix, produitNom, produitSousTitre, boutonLibelle) VALUES (?,?,?,?,?,?,?,?,?,?)")
-				.setParameter(1, carousel.getElementNom())
-				.setParameter(2, carousel.getElementImageURL())
-				.setParameter(3, carousel.getElementLienURL())
-				.setParameter(4, carousel.getElementRang())
-				.setParameter(5, carousel.getIsVisible())
-				.setParameter(6, produitMarque)
+		//String produitMarque = (String)em.createNativeQuery("select marqueNom from marque where idMarque=? ").setParameter(1, carousel.getIdMarque()).getSingleResult();
+		Query query = em.createNativeQuery("INSERT INTO carousel (idMarque, elementNom, elementImageURL, elementLienURL, elementRang, isVisible, produitPrix, produitNom, produitSousTitre, boutonLibelle) VALUES (?,?,?,?,?,?,?,?,?,?)")
+				.setParameter(1, carousel.getIdMarque().getIdMarque())
+				.setParameter(2, carousel.getElementNom())
+				.setParameter(3, carousel.getElementImageURL())
+				.setParameter(4, carousel.getElementLienURL())
+				.setParameter(5, carousel.getElementRang())
+				.setParameter(6, carousel.getIsVisible())
 				.setParameter(7, carousel.getProduitPrix())
 				.setParameter(8, carousel.getProduitNom())
 				.setParameter(9, carousel.getProduitSousTitre())
@@ -104,19 +170,30 @@ public class CarouselDAOImpl extends AbstractGenericDAO<Carousel> implements Car
 
 	@Override
 	public void updateCarousel(Carousel carousel) {
+		//String produitMarque = (String)em.createNativeQuery("select marqueNom from marque where idMarque=? ").setParameter(1, carousel.getIdMarque()).getSingleResult();
 		Query query = em.createNativeQuery("UPDATE carousel SET "
+				+ "idMarque=?, "
 				+ "elementNom=?, "
 				+ "elementImageURL=?, "
 				+ "elementLienURL=?, "
 				+ "elementRang=?, "
-				+ "isVisible=? "
+				+ "isVisible=?, "
+				+ "produitPrix=?, "
+				+ "produitNom=?, "
+				+ "produitSousTitre=?, "
+				+ "boutonLibelle=? "
 				+ "WHERE idCarousel=?")
-				.setParameter(1, carousel.getElementNom())
-				.setParameter(2, carousel.getElementImageURL())
-				.setParameter(3, carousel.getElementLienURL())
-				.setParameter(4, carousel.getElementRang())
-				.setParameter(5, carousel.getIsVisible())
-				.setParameter(6, carousel.getIdCarousel());
+				.setParameter(1, carousel.getIdMarque().getIdMarque())
+				.setParameter(2, carousel.getElementNom())
+				.setParameter(3, carousel.getElementImageURL())
+				.setParameter(4, carousel.getElementLienURL())
+				.setParameter(5, carousel.getElementRang())
+				.setParameter(6, carousel.getIsVisible())
+				.setParameter(7, carousel.getProduitPrix())
+				.setParameter(8, carousel.getProduitNom())
+				.setParameter(9, carousel.getProduitSousTitre())
+				.setParameter(10, carousel.getBoutonLibelle())
+				.setParameter(11, carousel.getIdCarousel());
 		query.executeUpdate();
 		//em.persist(carousel);
 	}

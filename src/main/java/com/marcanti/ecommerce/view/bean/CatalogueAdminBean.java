@@ -291,8 +291,8 @@ public class CatalogueAdminBean implements Serializable {
 
 		FileOutputStream fileOuputStream=null;
 		this.uploadedPhoto = ev.getFile();
-		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedPhoto.getFileName());
-		File fileDest = new File(referentielBean.getUploadFolderPath()+File.separator+photoCatalogue);
+		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadCatalogFolderPath(), uploadedPhoto.getFileName());
+		File fileDest = new File(referentielBean.getUploadCatalogFolderPath()+File.separator+photoCatalogue);
 		this.produit.setProduitPhotoURL(photoCatalogue);
 		byte[] content = uploadedPhoto.getContents();
 		try {
@@ -316,8 +316,8 @@ public class CatalogueAdminBean implements Serializable {
 
 		FileOutputStream fileOuputStream=null;
 		this.uploadedPhotoMoyenne = ev.getFile();
-		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedPhotoMoyenne.getFileName());
-		File fileDest = new File(referentielBean.getUploadFolderPath()+File.separator+photoCatalogue);
+		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadCatalogFolderPath(), uploadedPhotoMoyenne.getFileName());
+		File fileDest = new File(referentielBean.getUploadCatalogFolderPath()+File.separator+photoCatalogue);
 		this.produit.setProduitPhotoTailleMediumURL(photoCatalogue);
 		byte[] content = uploadedPhotoMoyenne.getContents();
 		try {
@@ -341,8 +341,8 @@ public class CatalogueAdminBean implements Serializable {
 
 		FileOutputStream fileOuputStream=null;
 		this.uploadedPhotoLarge = ev.getFile();
-		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedPhotoLarge.getFileName());
-		File fileDest = new File(referentielBean.getUploadFolderPath()+File.separator+photoCatalogue);
+		String photoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadCatalogFolderPath(), uploadedPhotoLarge.getFileName());
+		File fileDest = new File(referentielBean.getUploadCatalogFolderPath()+File.separator+photoCatalogue);
 		this.produit.setProduitPhotoTailleLargeURL(photoCatalogue);
 		byte[] content = uploadedPhotoLarge.getContents();
 		try {

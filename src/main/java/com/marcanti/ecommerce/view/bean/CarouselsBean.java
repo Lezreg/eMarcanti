@@ -230,7 +230,7 @@ public class CarouselsBean implements Serializable {
 
 		FileOutputStream fileOuputStream=null;
 		this.uploadedFile = ev.getFile();
-		String elementImageURL = ParfumUtils.getUniqueName(referentielBean.getUploadFolderPath(), uploadedFile.getFileName());
+		String elementImageURL = ParfumUtils.getUniqueName(referentielBean.getUploadCarouselFolderPath(), uploadedFile.getFileName());
 		File fileDest = new File(referentielBean.getUploadCarouselFolderPath()+File.separator+elementImageURL);
 		this.carousel.setElementImageURL(elementImageURL);
 		byte[] content = uploadedFile.getContents();

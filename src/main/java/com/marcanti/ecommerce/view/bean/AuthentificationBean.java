@@ -42,8 +42,8 @@ public class AuthentificationBean implements Serializable {
 	@ManagedProperty("#{authentificationService}")
 	private AuthentificationServiceAction service;
 	
-	@ManagedProperty("#{carouselService}")
-	private CarouselServiceAction carouselService;	
+	//@ManagedProperty("#{carouselService}")
+	//private CarouselServiceAction carouselService;	
 	
 	public AuthentificationBean() 
 	{
@@ -85,13 +85,13 @@ public class AuthentificationBean implements Serializable {
 		this.passwordConfirmation = passwordConfirmation;
 	}
 
-	public CarouselServiceAction getCarouselService() {
+	/*public CarouselServiceAction getCarouselService() {
 		return carouselService;
 	}
 
 	public void setCarouselService(CarouselServiceAction carouselService) {
 		this.carouselService = carouselService;
-	}
+	}*/
 
 	public AuthentificationServiceAction getService() {
 		return service;

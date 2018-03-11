@@ -152,7 +152,7 @@
 												<div class="marquedescription oransationadmin">
 													<div class="select">
 														<h:selectOneMenu id="idorga" value="#{membreBean.membre.idOrga.idOrga}" disabled="#{membreBean.orgaDisabled}">
-															<p:ajax listener="#{membreBean.onOrganisationChange}" update="idDepartement,idParrain" />
+															<p:ajax listener="#{membreBean.onOrganisationChange}" update="idDepartement,idMembreParrain" />
 															<f:selectItems value="#{membreBean.organisationList}" var="c" itemLabel="#{c.orgaNom}" itemValue="#{c.idOrga}" />
 														</h:selectOneMenu>
 														<div class="select__arrow"></div>
@@ -200,7 +200,7 @@
 												<div class="marquedescription oransationadmin">
 													<div class="select">
 														<h:selectOneMenu value="#{membreBean.membre.idProfil.idProfil}">
-															<p:ajax listener="#{membreBean.onRoleChange}" update="formMembre" />
+															<f:ajax listener="#{membreBean.onRoleChange}" render="idMembreParrain"   />
 															<f:selectItems value="#{membreBean.roleList}" var="c" itemLabel="#{c.profilLibelle}" itemValue="#{c.idProfil}" />
 														</h:selectOneMenu>
 														<div class="select__arrow"></div>
@@ -216,13 +216,13 @@
 											<div class="paddingless col-sm-4">
 												<div class="marquestext">
 													<p>
-														<h:outputLabel id="idParrain_libelle" value="#{msg.libelle_parrain}" rendered="#{membreBean.parrainRendered}" />
+														<h:outputLabel for="idMembreParrain" value="#{msg.libelle_parrain}" rendered="#{membreBean.parrainRendered}" />
 													</p>
 												</div>
 											</div>
 											<div class="paddingless col-sm-8">
 												<div class="marquedescription oransationadmin">
-													<h:selectOneMenu id="idParrain" value="#{membreBean.idMembreParrain}" rendered="#{membreBean.parrainRendered}">
+													<h:selectOneMenu id="idMembreParrain" value="#{membreBean.idMembreParrain}" rendered="#{membreBean.parrainRendered}">
 														<f:selectItems value="#{membreBean.parrainList}" var="c" itemLabel="#{c.membrePrenom} #{c.membreNom}" itemValue="#{c.idMembre}" />
 													</h:selectOneMenu>
 												</div>

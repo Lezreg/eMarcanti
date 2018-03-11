@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -28,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name="carousel")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Carousel.findAll", query = "SELECT c FROM Carousel c")
+    @NamedQuery(name = "Carousel.findAll", query = "SELECT c FROM Carousel c, Marque m WHERE c.idMarque = m.idMarque ")
     , @NamedQuery(name = "Carousel.findByIdCarousel", query = "SELECT c FROM Carousel c WHERE c.idCarousel = :idCarousel")
     , @NamedQuery(name = "Carousel.findByElementNom", query = "SELECT c FROM Carousel c WHERE c.elementNom = :elementNom")
     , @NamedQuery(name = "Carousel.findByElementImageURL", query = "SELECT c FROM Carousel c WHERE c.elementImageURL = :elementImageURL")
@@ -43,6 +45,9 @@ public class Carousel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer idCarousel;
+    @JoinColumn(name = "idMarque", referencedColumnName = "idMarque")
+    @ManyToOne(optional = false)
+    private Marque idMarque;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
@@ -59,12 +64,13 @@ public class Carousel implements Serializable {
     @Basic(optional = false)
     @NotNull
     private boolean isVisible;
+    @Transient
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 120)
     private String produitMarque;   
-    @Transient
-    private Short idMarque;
+    //@Transient
+    //private Short idMarque;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
@@ -89,13 +95,13 @@ public class Carousel implements Serializable {
         this.idCarousel = idCarousel;
     }
 
-    public Carousel(Integer idCarousel, String elementNom, String elementImageURL, short elementRang, boolean isVisible, String produitMarque, String produitPrix, String produitNom, String produitSousTitre, String boutonLibelle) {
+    public Carousel(Integer idCarousel, Marque idMarque, String elementNom, String elementImageURL, short elementRang, boolean isVisible, String produitMarque, String produitPrix, String produitNom, String produitSousTitre, String boutonLibelle) {
         this.idCarousel = idCarousel;
+        this.idMarque = idMarque;
         this.elementNom = elementNom;
         this.elementImageURL = elementImageURL;
         this.elementRang = elementRang;
         this.isVisible = isVisible;
-        this.produitMarque = produitMarque;
         this.produitPrix = produitPrix;
         this.produitNom = produitNom;
         this.produitSousTitre = produitSousTitre;
@@ -109,8 +115,16 @@ public class Carousel implements Serializable {
     public void setIdCarousel(Integer idCarousel) {
         this.idCarousel = idCarousel;
     }
+    
+    public Marque getIdMarque() {
+		return idMarque;
+	}
 
-    public String getElementNom() {
+	public void setIdMarque(Marque idMarque) {
+		this.idMarque = idMarque;
+	}
+
+	public String getElementNom() {
         return elementNom;
     }
 
@@ -168,14 +182,14 @@ public class Carousel implements Serializable {
 		this.produitMarque = produitMarque;
 	}
 	
-	public Short getIdMarque() {
+	/*public Short getIdMarque() {
 		return idMarque;
 	}
 
 	public void setIdMarque(Short idMarque) {
 		this.idMarque = idMarque;
 	}
-
+*/
 	public String getProduitPrix() {
 		return produitPrix;
 	}
