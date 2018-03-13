@@ -10,9 +10,8 @@
 			<div class="modal-header">
 				<button type="button" class="close buttonclose" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
 			</div>
-			
-				<c:if test="${ModalController.ajoutPanier}" scope="request">
-				
+			<c:choose>
+				<c:when test="${ModalController.ajoutPanier == 'OK'}" scope="request">
 					<div class="modal-body">
 						 <div class="bigpopupimage">
 						 	<ui:fragment rendered="#{empty ModalController.selectedProduit.produitPhotoURL}"><br/>
@@ -23,7 +22,7 @@
 							</ui:fragment>
 						</div>
 		
-						 <div class="popupdetals sucessfulpopup modalbodyright">
+						<div class="popupdetals sucessfulpopup modalbodyright">
 							<h2><h:graphicImage value="/static/img/Popupsuccesful.png" class="img-responsive" alt="error"/> Ajouté au panier avec succès </h2>
 							<p class="popupdescription">#{ModalController.selectedProduit.produitDescription}</p>
 							
@@ -33,10 +32,9 @@
 							</div>
 						 </div><!---end-->
 					</div>
-			 </c:if>
-			 
-			 
-			 <c:if test="${!ModalController.ajoutPanier}" scope="request">
+				 </c:when>
+		 
+				 <c:when test="${ModalController.ajoutPanier == 'KO'}" scope="request">
 			 		<div class="modal-body">
 						<div class="bigpopupimage">
 							<h:graphicImage value="/static/img/Popupimage.png" class="img-responsive" alt="image"/>
@@ -50,7 +48,46 @@
 							</div>
 						 </div><!---end-->
 			 		</div>
-			 </c:if>
+				 </c:when>
+				 
+				 <c:when test="${ModalController.ajoutPanier == 'cmdValidatedError'}" scope="request">
+					 <div class="modal-body">
+					 <div class="popupdetals  modalbodyright">
+					 <h2><h:graphicImage value="/static/img/Popuperror.png" class="img-responsive" alt="error"/>
+					 	<h:outputText id="cmdencours22" value=" Impossible d'ajouter le produit !" />	
+						<br />  
+						<h:outputText id="cmdencours23" value="La commande pour votre groupe a dejâ été validée par votre correspondant." />
+						<br />
+						<h:outputText id="cmdencours53" value="Contactez le : il pourra autoriser une modification de dernière minute pour la commande groupée." />
+					</h2>
+						<div class="popbothbutton">
+							<button class="continuebutton">continue</button>
+						</div>
+					</div>
+					</div>
+				 </c:when>
+				 
+				 <c:when test="${ModalController.ajoutPanier == 'cmdNotFoundError'}" scope="request">
+					 <div class="modal-body">
+						 <div class="popupdetals  modalbodyright">
+						 	<h2><h:graphicImage value="/static/img/Popuperror.png" class="img-responsive" alt="error"/>
+						 	<h:outputText id="cmdencours1" value="Ma commande en cours ..."/>
+						 	<br />
+						 	<br />
+							<h:outputText id="cmdencours2" value="Impossible d'ajouter le produit. La commande groupée n'a pas encore débuté." />	  
+							<br />
+							<br />
+							<h:outputText id="cmdencours3" value="Contactez votre correspondant au sein de votre organisation." />
+							</h2>
+							<div class="popbothbutton">
+								<button class="continuebutton">continue</button>
+							</div>
+						</div>
+					</div>
+				 </c:when>
+		 
+		</c:choose> 
+			 
 
 		</div>
 		<!-- /.modal-content -->

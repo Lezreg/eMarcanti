@@ -141,7 +141,6 @@ public class PanierServiceActionImpl implements PanierActionService {
 		Long cmdgroupeeId = commandeGroupeeDAO.getIdDerniereCdeGoupee(userSessionBean.getIdOrga());
 		CommandeGroupee currentCmdGroupee = commandeGroupeeDAO.find(cmdgroupeeId);
 		Membre membre = membreDAO.find(userSessionBean.getIdMembre());
-
 		CommandeIndividuelle commandeIndividuel = commandeIndividuelleDAO
 				.getCommandeIndividuellByMembreAndCmdGroupe(membre, currentCmdGroupee);
 

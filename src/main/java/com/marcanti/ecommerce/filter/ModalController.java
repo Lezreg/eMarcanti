@@ -19,6 +19,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.exception.CommandeGroupeeNotFoundException;
 import com.marcanti.ecommerce.exception.CommandeGroupeeValidatedExeception;
+import com.marcanti.ecommerce.exception.ProductOutOfStockException;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.CategorieServiceAction;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
@@ -32,7 +33,7 @@ public class ModalController implements Serializable {
 	 */
 	private static final long serialVersionUID = 2707311747399783891L;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(Nouveautes.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ModalController.class);
 
 	@Autowired
 	private ProduitServiceAction produitServiceAction;
@@ -44,11 +45,7 @@ public class ModalController implements Serializable {
 
 	private Produit selectedProduit;
 
-	private String ajoutPanier = "false";
-
-	private String cmdNotFoundError = "false";
-
-	private String cmdValidatedError = "false";
+	private String ajoutPanier = "cmdNotFoundError";
 
 	@PostConstruct
 	public void init() {
@@ -65,20 +62,22 @@ public class ModalController implements Serializable {
 			basket.addPoduct(produit, 1);
 		} catch (CommandeGroupeeNotFoundException e) {
 			LOGGER.info(e.getMessage());
-			cmdNotFoundError = "true";
-			ajoutPanier = "false";
+			ajoutPanier = "cmdNotFoundError";
 			// return "/pages/private/errors/cmdNotFoundError.xhtml?faces-redirect=true";
 		} catch (CommandeGroupeeValidatedExeception e) {
 			LOGGER.info(e.getMessage());
-			cmdValidatedError = "true";
-			ajoutPanier = "false";
+			ajoutPanier = "cmdValidatedError";
 			// return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
+		} catch (ProductOutOfStockException e) {
+			LOGGER.info(e.getMessage());
+			ajoutPanier = "KO";
 		} catch (Exception e) {
 			LOGGER.info(e.getMessage());
-			cmdValidatedError = "true";
-			ajoutPanier = "false";
+			ajoutPanier = "cmdValidatedError";
 			// return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
 		}
+
+		ajoutPanier = "cmdNotFoundError";
 
 	}
 
@@ -115,16 +114,14 @@ public class ModalController implements Serializable {
 	}
 
 	public String getAjoutPanier() {
-
 		FacesContext context = FacesContext.getCurrentInstance();
 		Map<String, String> paramMap = context.getExternalContext().getRequestParameterMap();
 		String id = paramMap.get("id");
-		LOGGER.info("-----------------------------------id:" + id);
+		LOGGER.info("----------------ajout produit ------------------id:" + id);
 
 		selectedProduit = produitServiceAction.getProduit(new Long(id));
 
-		if (selectedProduit != null && "false".equals(ajoutPanier) && selectedProduit.getQteEnStock() > 0) {
-			ajoutPanier = "true";
+		if (selectedProduit != null) {
 			addToBasket(selectedProduit);
 		}
 
@@ -133,22 +130,6 @@ public class ModalController implements Serializable {
 
 	public void setAjoutPanier(String ajoutPanier) {
 		this.ajoutPanier = ajoutPanier;
-	}
-
-	public String getCmdNotFoundError() {
-		return cmdNotFoundError;
-	}
-
-	public void setCmdNotFoundError(String cmdNotFoundError) {
-		this.cmdNotFoundError = cmdNotFoundError;
-	}
-
-	public String getCmdValidatedError() {
-		return cmdValidatedError;
-	}
-
-	public void setCmdValidatedError(String cmdValidatedError) {
-		this.cmdValidatedError = cmdValidatedError;
 	}
 
 }

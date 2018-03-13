@@ -22,6 +22,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.marcanti.ecommerce.exception.CommandeGroupeeNotFoundException;
 import com.marcanti.ecommerce.exception.CommandeGroupeeValidatedExeception;
 import com.marcanti.ecommerce.exception.ProductNotAvailableException;
+import com.marcanti.ecommerce.exception.ProductOutOfStockException;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Panier;
 import com.marcanti.ecommerce.model.PanierProduit;
@@ -82,12 +83,12 @@ public class BasketController implements Serializable {
 	}
 
 	public void addPoduct(Produit produit, int quantite)
-			throws CommandeGroupeeNotFoundException, CommandeGroupeeValidatedExeception {
+			throws CommandeGroupeeNotFoundException, CommandeGroupeeValidatedExeception, ProductOutOfStockException {
 		ParametersChecker.checkParameter("produit is null ", produit);
 		LOGGER.debug(produit.toString());
 
 		if (produit.getQteEnStock() < 1) {
-			// return "rupture";
+			throw new ProductOutOfStockException("Product out of stock");
 		}
 
 		panierEnCours = panierService.addProduct(produit, userSessionBean);

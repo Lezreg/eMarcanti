@@ -22,6 +22,7 @@ import com.marcanti.ecommerce.beans.ProduitBean;
 import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.exception.CommandeGroupeeNotFoundException;
 import com.marcanti.ecommerce.exception.CommandeGroupeeValidatedExeception;
+import com.marcanti.ecommerce.exception.ProductOutOfStockException;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
@@ -100,6 +101,9 @@ public class ParfumAllCatalogue {
 		} catch (CommandeGroupeeValidatedExeception e) {
 			LOGGER.info(e.getMessage());
 			return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
+		} catch (ProductOutOfStockException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;
 	}
