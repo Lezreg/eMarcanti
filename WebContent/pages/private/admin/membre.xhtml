@@ -66,9 +66,7 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="marquedescription">
-													<h:inputText value="#{membreBean.membre.membreNom}"
-														maxlength="60" required="true"
-														requiredMessage="#{msg.nom_obligatoire}" />
+													<h:inputText id="idNom" value="#{membreBean.membre.membreNom}" maxlength="60" />
 												</div>
 
 											</div>
@@ -88,9 +86,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<h:inputText value="#{membreBean.membre.membrePrenom}"
-													maxlength="60" required="true"
-													requiredMessage="#{msg.prenom_obligatoire}" />
+												<h:inputText id="idPrenom" value="#{membreBean.membre.membrePrenom}" maxlength="60" />
 											</div>
 										</div>
 									</div>
@@ -108,12 +104,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<h:inputText value="#{membreBean.membre.membreEmail}"
-													maxlength="120" required="true"
-													requiredMessage="#{msg.email_obligatoire}" validatorMessage="#{msg.email_format}">
-													<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-												</h:inputText>
-													
+												<h:inputText id="idEmail" value="#{membreBean.membre.membreEmail}" maxlength="120"  />
 											</div>
 										</div>
 									</div>
@@ -130,7 +121,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<h:inputText value="#{membreBean.membre.membreTel}"
+												<h:inputText id="idTel" value="#{membreBean.membre.membreTel}"
 													maxlength="20" />
 											</div>
 										</div>
@@ -143,7 +134,7 @@
 											<div class="paddingless col-sm-4">
 												<div class="marquestext">
 													<p>
-														<h:outputLabel for="idorga" value="#{msg.libelle_orga}" />
+														<h:outputLabel value="#{msg.libelle_orga}" />
 														<span>*</span>
 													</p>
 												</div>
@@ -151,7 +142,7 @@
 											<div class="paddingless col-sm-8">
 												<div class="marquedescription oransationadmin">
 													<div class="select">
-														<h:selectOneMenu id="idorga" value="#{membreBean.membre.idOrga.idOrga}" disabled="#{membreBean.orgaDisabled}">
+														<h:selectOneMenu id="idOrganisation" value="#{membreBean.membre.idOrga.idOrga}" disabled="#{membreBean.orgaDisabled}">
 															<p:ajax listener="#{membreBean.onOrganisationChange}" update="idDepartement,idMembreParrain" />
 															<f:selectItems value="#{membreBean.organisationList}" var="c" itemLabel="#{c.orgaNom}" itemValue="#{c.idOrga}" />
 														</h:selectOneMenu>
@@ -167,8 +158,7 @@
 											<div class="paddingless col-sm-4">
 												<div class="marquestext">
 													<p>
-														<h:outputLabel for="idDepartement"
-															value="#{msg.libelle_dept}" />
+														<h:outputLabel value="#{msg.libelle_dept}" />
 													</p>
 												</div>
 											</div>
@@ -200,7 +190,7 @@
 												<div class="marquedescription oransationadmin">
 													<div class="select">
 														<h:selectOneMenu value="#{membreBean.membre.idProfil.idProfil}">
-															<f:ajax listener="#{membreBean.onRoleChange}" render="idMembreParrain"   />
+															<f:ajax listener="#{membreBean.onRoleChange}" render="formMembre" execute="idNom idPrenom idEmail idTel idOrganisation idDepartement idActif idReduc idPassword"   />
 															<f:selectItems value="#{membreBean.roleList}" var="c" itemLabel="#{c.profilLibelle}" itemValue="#{c.idProfil}" />
 														</h:selectOneMenu>
 														<div class="select__arrow"></div>
@@ -242,7 +232,7 @@
 											<div class="paddingless col-sm-8">
 												<div class="marquestext">
 													<div class="maequescheckb checkbox">
-														<h:selectOneRadio value="#{membreBean.membre.isActif}">
+														<h:selectOneRadio id="idActif" value="#{membreBean.membre.isActif}">
 															<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
 														</h:selectOneRadio>	
 													</div>									        
@@ -263,7 +253,7 @@
 											<div class="paddingless col-sm-8">
 												<div class="marquestext">
 													<div class="maequescheckb checkbox">
-														<h:selectOneRadio value="#{membreBean.membre.hasReduc}" rendered="#{membreBean.hasReducRendered}">
+														<h:selectOneRadio id="idReduc" value="#{membreBean.membre.hasReduc}" rendered="#{membreBean.hasReducRendered}">
 															<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
 														</h:selectOneRadio>
 													</div>
@@ -288,7 +278,7 @@
 											<div class="marquestext">
 
 												<div class="maequescheckb checkbox">
-													<h:selectOneRadio value="#{membreBean.membre.isDefaultPassword}">
+													<h:selectOneRadio id="idPassword" value="#{membreBean.membre.isDefaultPassword}">
 														<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
 													</h:selectOneRadio>
 												</div>

@@ -19,16 +19,18 @@
 						</div>
 					</div>
 					<!--end col-->
-
 					<div class="col-xs-8 col-sm-3 col-md-2">
-						<div class="myaccount">
-							<ul>
-								<li><i class="fa fa-user-o"></i>
-								<h:commandLink value="#{msg.libelle_mon_compte}"
-										action="new_password" /></li>
-							</ul>
-						</div>
-					</div>
+    					<div class="myaccount">
+    						<ul class="myacmainnav nav navbar-nav">
+    							<li class="dropdown"><a href="" class="myacccountmlist dropdown-toggle" data-toggle=""><i class="fa fa-user-o"></i>#{msg.libelle_mon_compte}</a>
+    								  <ul class="myAccountmenu dropdown-menu">
+										<li><h:commandLink action="#{authentificationBean.deconnexion()}"><h:graphicImage value="/static/img/logout_button.svg" styleClass="img-responsive" alt="deconnexion"/>Deconnexion</h:commandLink></li>
+									  </ul>
+    							</li>
+    						</ul>
+    					</div>
+    				</div>
+    				
 					<!--end col-->
 
 					<div class="col-xs-4 col-sm-3 col-md-2">

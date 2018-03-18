@@ -3,6 +3,7 @@ package com.marcanti.ecommerce.controller;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -170,23 +171,25 @@ public class BasketController implements Serializable {
 	 */
 	public List<CommandeIndividuelle> getCommandes() {
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-
+		
 		Long derniereCdeGoupee = commandeGroupeeServiceAction.getIdDerniereCdeGoupee(userSessionBean.getIdOrga());
-		LOGGER.info(derniereCdeGoupee.toString());
-
-		LOGGER.info(userSessionBean.getIdMembre().toString());
-
-		commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(),
-				derniereCdeGoupee, isCurrrentCmds);
-
-		if (selectedCmd == null || selectedCmd.isEmpty()) {
-			if (commandes != null && !commandes.isEmpty()) {
-				CommandeIndividuelle commandeIndividuelle2 = commandes.get(0);
-				selectedCmd = commandeIndividuelle2.getIdCdeIndiv().toString();
+		if(derniereCdeGoupee!=null){
+			LOGGER.info(derniereCdeGoupee.toString());
+			
+			LOGGER.info(userSessionBean.getIdMembre().toString());
+	
+			commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(),derniereCdeGoupee, isCurrrentCmds);
+			
+			if (selectedCmd == null || selectedCmd.isEmpty()) {
+				if (commandes != null && !commandes.isEmpty()) {
+					CommandeIndividuelle commandeIndividuelle2 = commandes.get(0);
+					selectedCmd = commandeIndividuelle2.getIdCdeIndiv().toString();
+				}
 			}
+
+			LOGGER.info(selectedCmd);
 		}
 
-		LOGGER.info(selectedCmd);
 		return commandes;
 	}
 

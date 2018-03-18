@@ -96,7 +96,7 @@
 																			<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
 																		</ui:fragment>
 																		<ui:fragment rendered="#{!empty produit.produitPhotoURL}"><br/>
-																			<img src="#{request.contextPath}/upload/#{produit.produitPhotoURL}" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
+																			<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderPath}/#{produit.produitPhotoURL}" class="img-responsive" alt="product"/><span>#{produit.marqueNom}</span>
 																		</ui:fragment>																		
 																	</p>
 																</td>

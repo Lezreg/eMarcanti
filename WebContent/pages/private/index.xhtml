@@ -31,7 +31,7 @@
 						<ui:repeat var="carousel" value="#{carouselIndexBean.carouselList}">
 
 							<div class="item">
-								<img src="#{request.contextPath}/upload/carousel/#{carousel.elementImageURL}" class="img-responsive" alt="slider"/>
+								<img src="#{request.contextPath}/#{referentielBean.uploadCarouselFolderPath}/#{carousel.elementImageURL}" class="img-responsive" alt="slider"/>
 								<div class="newfirstslidecontent carousel-caption">
 									<div class="newslidermiddlearea newspcialslider specialslideinner">
 										<div class="first_slideInner newsliderheadeing">

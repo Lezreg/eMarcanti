@@ -61,12 +61,14 @@ public class ParfumUtils {
 
 	}
 	
-	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+	//public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", Pattern.CASE_INSENSITIVE);
 	
 	public static boolean checkEmailFormat(String emailStr) {
 
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
-        return matcher.find();
+        //Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        //return matcher.find();
+		return Pattern.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$", emailStr);
 	}	
 
 	public static UserSessionBean getUserSessionBean() {
@@ -216,7 +218,7 @@ public class ParfumUtils {
 		//System.out.println(ParfumUtils.checkPasswordFormat("A1ERTYuI"));
 		//System.out.println(isUniqueName("C:\\RK\\independant\\Parfum\\upload","passede.gif"));
 		//System.out.println(getUniqueName("C:\\RK\\independant\\Parfum\\upload","passed.gif"));
-		System.out.println(checkEmailFormat("rachid_khali=fa@gmail.com"));
+		System.out.println(checkEmailFormat("rachid_khalifa@gmail.com"));
 	}
 	
 	

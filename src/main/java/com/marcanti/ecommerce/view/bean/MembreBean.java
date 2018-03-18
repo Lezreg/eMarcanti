@@ -131,6 +131,7 @@ public class MembreBean implements Serializable {
 			setParrainRendered("true");
 		}else{
 			setParrainRendered("false");
+			this.parrainList = new ArrayList<Membre>();
 		}
 	}
 	
@@ -484,6 +485,7 @@ public class MembreBean implements Serializable {
 		this.membre.setIdOrga(new Organisation(0L));
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_membre");
 		setParrainRendered("false");
+		this.parrainList = new ArrayList<Membre>();
 		if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_MANAGER){
 			this.membre.setIdOrga(new Organisation((userSessionBean.getIdOrga())));
 			this.departementList = departementService.getDepartementByOrgaList(new Organisation((userSessionBean.getIdOrga())));
@@ -506,6 +508,34 @@ public class MembreBean implements Serializable {
 		String ecran ="membre";
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 		
+		if(getMembreNom()==null || getMembreNom().equals("")){
+			msg = ParfumUtils.getBundleApplication().getString("nom_obligatoire");
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		    return ecran;
+		}
+		if(getMembrePrenom()==null || getMembrePrenom().equals("")){
+			msg = ParfumUtils.getBundleApplication().getString("prenom_obligatoire");
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		    return ecran;
+		}	
+		if(getMembreEmail()==null || getMembreEmail().equals("")){
+			msg = ParfumUtils.getBundleApplication().getString("email_obligatoire");
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		    return ecran;
+		}else if(!ParfumUtils.checkEmailFormat(getMembreEmail())){
+			msg = ParfumUtils.getBundleApplication().getString("email_format");
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		    return ecran;
+		}
+		
 		if(membre.getIdDepartement().getIdDepartement()==0L){
 			membre.getIdDepartement().setIdDepartement(null);
 		}
@@ -522,8 +552,17 @@ public class MembreBean implements Serializable {
 				membre.setPassword(DigestUtils.sha512Hex(password));
 				membre.setDateCreation(dateToday);
 				if(getIdProfil() !=null && getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
-					Membre membreParrain = membreService.getMembre(new Membre(getIdMembreParrain()));
-					membreService.insertMembreFilleul(membre, membreParrain);
+					if(getIdMembreParrain()==null){
+						msg = ParfumUtils.getBundleApplication().getString("message.parrain.obligatoire");
+						facesMessage.setSummary(msg); 
+						facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+					    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+					    return ecran;
+					}else{
+						Membre membreParrain = membreService.getMembre(new Membre(getIdMembreParrain()));
+						membreService.insertMembreFilleul(membre, membreParrain);
+					}
+
 				}else{
 					membreService.insertMembre(membre);
 				}
@@ -552,8 +591,17 @@ public class MembreBean implements Serializable {
 			if(getMembreEmail().equals(getOldMembreEmail())){
 				membre.setDateModification(dateToday);
 				if(getIdProfil() !=null && getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
-					Membre membreParrain = membreService.getMembre(new Membre(getIdMembreParrain()));
-					membreService.updateMembreFilleul(membre, membreParrain);
+					if(getIdMembreParrain()==null){
+						msg = ParfumUtils.getBundleApplication().getString("message.parrain.obligatoire");
+						facesMessage.setSummary(msg); 
+						facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+					    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+					    return ecran;
+					}else{
+						Membre membreParrain = membreService.getMembre(new Membre(getIdMembreParrain()));
+						membreService.updateMembreFilleul(membre, membreParrain);	
+					}
+					
 				}else{
 					membreService.updateMembre(membre);
 				}
@@ -619,7 +667,7 @@ public class MembreBean implements Serializable {
 	}	
 	
 	public void onOrganisationChange() {
-        if(getIdOrga() !=null && !getIdOrga().equals("0")){
+		if(getIdOrga() !=null && !getIdOrga().equals("0")){
         	this.departementList = departementService.getDepartementByOrgaList(getIdOrga());
         }else{
         	this.departementList = new ArrayList<Departement>();
@@ -629,10 +677,11 @@ public class MembreBean implements Serializable {
 	
 	public void onRoleChange() {
 		
-        if(getIdProfil() !=null && getIdProfil().getIdProfil()!=null && getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
+		if(getIdProfil() !=null && getIdProfil().getIdProfil()!=null && getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
         	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
         	if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_MANAGER || userSessionBean.getIdProfil()==ReferentielBean.PROFIL_ADMIN){
 	        	List<Profil> idProfilList = new ArrayList<Profil>();
+	        	idProfilList.add(new Profil(ReferentielBean.PROFIL_ADMIN));
 	        	idProfilList.add(new Profil(ReferentielBean.PROFIL_MANAGER));
 	        	idProfilList.add(new Profil(ReferentielBean.PROFIL_MEMBRE));
 	        	this.parrainList = membreService.getParrainByOrgaList(getIdOrga(),idProfilList);
@@ -646,7 +695,12 @@ public class MembreBean implements Serializable {
         	setParrainRendered("true");
         }else{
         	setParrainRendered("false");
+        	this.parrainList = new ArrayList<Membre>();
         }
+		/*FacesMessage facesMessage = new FacesMessage();
+		facesMessage.setSummary(""); 
+		facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);*/
     }	
 	
 

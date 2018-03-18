@@ -18,7 +18,7 @@
 								<img src="#{request.contextPath}/static/img/cat/default-panier-img.png" class="img-responsive" alt="image"/>
 							</ui:fragment>
 							<ui:fragment rendered="#{!empty produit.produitPhotoURL}"><br/>
-								<img src="#{request.contextPath}/upload/#{ModalController.selectedProduit.produitPhotoURL}" class="img-responsive" alt="image"/>
+								<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderPath}/#{ModalController.selectedProduit.produitPhotoURL}" class="img-responsive" alt="image"/>
 							</ui:fragment>
 						</div>
 		
