@@ -463,6 +463,7 @@ public class MembreBean implements Serializable {
 			Filleul filleul = filleulsService.getFilleul(getIdMembre());
 			if(filleul!=null){
 				setIdMembreParrain(filleul.getIdMembreParrain().getIdMembre());
+				this.parrainList = new ArrayList<Membre>();
 			}
 		}
 		if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_ADMIN){

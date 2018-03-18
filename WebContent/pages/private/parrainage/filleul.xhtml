@@ -16,7 +16,7 @@
 						<div class="col-xs-12">
 							<div class="breadcrumslist">
 								<ul>
-									<li><h:outputLink value="index.xhtml"><h:outputLabel value="#{msg.libelle_home}" /></h:outputLink></li> / <li class="current_item"><h:outputLink value="filleuls.xhtml"><h:outputLabel value="#{msg.libelle_mes_filleuls}" /></h:outputLink></li>
+									<li><h:link outcome="index"><h:outputLabel value="#{msg.libelle_home}"/></h:link></li> / <li class="current_item"><h:link outcome="filleul"><h:outputLabel value="#{msg.libelle_filleul}" /></h:link></li>
 								</ul>
 							</div>
 						</div>
@@ -29,6 +29,15 @@
 				<section class="modifyaproductarea">
 					<h2 class="section_header">sec</h2>
 					<div class="container">
+					
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="purchaseordertextitle filterheading">
+									<h3><h:link outcome="filleuls"><h:graphicImage value="/static/img/commandes/purchaseorder.png" styleClass="img-responsive" alt="purchaseorder"/></h:link><h:outputLabel value="#{msg.libelle_ret_liste_filleuls}"/></h3>
+								</div>
+							</div>
+						</div>
+					
 						<div class="row">
 							<div class="col-xs-12">
 								<div class="modifyproductinner">
@@ -95,7 +104,9 @@
 											<div class="marquedescription fordesktopfulwidth">
 												<h:inputText value="#{filleulsBean.filleul.membreEmail}"
 													maxlength="120" required="true"
-													requiredMessage="#{msg.email_obligatoire}" />
+													requiredMessage="#{msg.email_obligatoire}" validatorMessage="#{msg.email_format}">
+													<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+												</h:inputText>
 											</div>
 										</div>
 									</div>
@@ -112,9 +123,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<h:inputText value="#{filleulsBean.filleul.membreTel}"
-													maxlength="20" required="true"
-													requiredMessage="#{msg.tel_obligatoire}" />
+												<h:inputText value="#{filleulsBean.filleul.membreTel}" maxlength="20" />
 											</div>
 										</div>
 									</div>

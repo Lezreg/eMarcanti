@@ -35,10 +35,10 @@
 							<div class="col-xs-12">
 								<div class="purchaseordertextitle filterheading">
 									<c:if test="${membreBean.isEditMembre}" scope="session">
-										<h3><h:link outcome="membres"><h:graphicImage value="/static/img/commandes/purchaseorder.png" styleClass="img-responsive" alt="purchaseorder"/></h:link>Retour à la liste des membres</h3>
+										<h3><h:link outcome="membres"><h:graphicImage value="/static/img/commandes/purchaseorder.png" styleClass="img-responsive" alt="purchaseorder"/></h:link><h:outputLabel value="#{msg.libelle_ret_liste_membres}"/></h3>
 									</c:if>
 									<c:if test="${!membreBean.isEditMembre}" scope="session">
-										<h3><h:link outcome="index"><h:graphicImage value="/static/img/commandes/purchaseorder.png" styleClass="img-responsive" alt="purchaseorder"/></h:link>Home</h3>
+										<h3><h:link outcome="index"><h:graphicImage value="/static/img/commandes/purchaseorder.png" styleClass="img-responsive" alt="purchaseorder"/></h:link><h:outputLabel value="#{msg.libelle_home}"/></h3>
 									</c:if>
 								</div>
 							</div>

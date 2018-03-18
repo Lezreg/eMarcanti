@@ -75,7 +75,7 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
 
 	@Override
 	public void insertFilleulMembre(Membre filleul, UserSessionBean parrain) {
-		Query query = em.createNativeQuery("INSERT INTO membre (idOrga, idDepartement, idProfil, membreNom, membrePrenom, membreEmail, membreTel, isActif, password, isDefaultPassword, dateCreation) VALUES (?,?,?,?,?,?,?,?,?,?,?)")
+		Query query = em.createNativeQuery("INSERT INTO membre (idOrga, idDepartement, idProfil, membreNom, membrePrenom, membreEmail, membreTel, isActif, password, isDefaultPassword, dateCreation, dateModification) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)")
 				.setParameter(1, filleul.getIdOrga().getIdOrga())
 				.setParameter(2, filleul.getIdDepartement().getIdDepartement())
 				.setParameter(3, filleul.getIdProfil().getIdProfil())
@@ -86,7 +86,8 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
 				.setParameter(8, filleul.getIsActif())
 				.setParameter(9, filleul.getPassword())
 				.setParameter(10, filleul.getIsDefaultPassword())
-				.setParameter(11, filleul.getDateCreation());
+				.setParameter(11, filleul.getDateCreation())
+				.setParameter(12, filleul.getDateCreation());
 		query.executeUpdate();
 		//create(filleul);
 		//em.persist(filleul);

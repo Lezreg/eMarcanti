@@ -176,10 +176,8 @@
 										value="#{msg.libelle_parrainage}" /> <i
 									class="fa fa-angle-down"></i></a>
 								<ul class="dropdown-menu">
-									<li class="kopie"><h:link
-											value="#{msg.libelle_mes_filleuls}" outcome="filleuls" /></li>
-									<li><h:link value="#{msg.libelle_leur_cmd}"
-											outcome="commandes_filleuls" /></li>
+									<li class="kopie"><h:commandLink value="#{msg.libelle_mes_filleuls}" action="#{filleulsBean.editFilleulsList()}" /></li>
+									<li><h:link value="#{msg.libelle_leur_cmd}" outcome="commandes_filleuls" /></li>
 								</ul></li>
 						</c:if>
 
@@ -230,18 +228,15 @@
 										<li><h:link value="#{msg.libelle_menu_categories}"
 												outcome="categories" /></li>
 									</c:if>
-									<c:if test="${USER_SESSION.MENU_ADMIN_SS_CATEG}"
-										scope="session">
+									<c:if test="${USER_SESSION.MENU_ADMIN_SS_CATEG}" scope="session">
 										<li><h:link value="#{msg.libelle_menu_ss_categories}"
 												outcome="sousCategories" /></li>
 									</c:if>
-									<c:if test="${USER_SESSION.MENU_ADMIN_CAROUSEL}"
-										scope="session">
+									<c:if test="${USER_SESSION.MENU_ADMIN_CAROUSEL}" scope="session">
 										<li><h:link value="#{msg.libelle_menu_carousel}"
 												outcome="carousels" /></li>
 									</c:if>
-									<c:if test="${USER_SESSION.MENU_ADMIN_CATALOGUE}"
-										scope="session">
+									<c:if test="${USER_SESSION.MENU_ADMIN_CATALOGUE}" scope="session">
 										<li><h:link value="#{msg.libelle_cat}" outcome="produits" /></li>
 									</c:if>
 								</ul></li>

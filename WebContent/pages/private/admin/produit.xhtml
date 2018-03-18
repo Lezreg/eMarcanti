@@ -421,9 +421,8 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													#{msg.libelle_date_debut}<h:inputText id="datepicker-example30" value="#{catalogueAdminBean.produit.dateDebutPromo}" validatorMessage="le format de la date est dd/MM/yyyy" maxlength="10">
-														<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"  />
-													</h:inputText>
+													#{msg.libelle_date_debut}
+													<p:calendar id="button" value="#{catalogueAdminBean.produit.dateDebutPromo}" pattern="dd/MM/yyyy" size="" timeZone="Europe/Paris" showOn="button" />
 												</div>
 											</div>
 										</div>

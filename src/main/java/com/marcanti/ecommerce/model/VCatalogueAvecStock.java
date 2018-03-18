@@ -501,8 +501,13 @@ public class VCatalogueAvecStock implements Serializable {
 	}
 
 	public String getIsNouveauteSurHomePageCss() {
-		if(isNouveauteSurHomePage) isNouveauteSurHomePageCss="catalougenew";
-		else isNouveauteSurHomePageCss="";
+		Date toDay = new Date();
+		isNouveauteSurHomePageCss="";
+		if(dateDebutNouveaute!=null && dateFinNouveaute!=null){
+			if(dateDebutNouveaute.before(toDay) && toDay.before(dateFinNouveaute)){
+				isNouveauteSurHomePageCss="catalougenew";
+			}
+		}
 		return isNouveauteSurHomePageCss;
 	}
 
@@ -511,8 +516,13 @@ public class VCatalogueAvecStock implements Serializable {
 	}
 
 	public String getIsPromoSurHomePageCss() {
-		if(isPromoSurHomePage) isPromoSurHomePageCss="catalougepromo";
-		else isPromoSurHomePageCss="";
+		Date toDay = new Date();
+		isPromoSurHomePageCss="";
+		if(dateDebutPromo!=null && dateFinPromo!=null){
+			if(dateDebutPromo.before(toDay) && toDay.before(dateFinPromo)){
+				isPromoSurHomePageCss="catalougepromo";
+			}
+		}
 		return isPromoSurHomePageCss;
 	}
 

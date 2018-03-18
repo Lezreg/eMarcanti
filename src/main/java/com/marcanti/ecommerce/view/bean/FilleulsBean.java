@@ -180,10 +180,11 @@ public class FilleulsBean implements Serializable {
 	
 	public String addFilleulView() {
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-		if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_MANAGER){
+		this.filleul = new Membre(0L);
+		//if(userSessionBean.getIdProfil()==ReferentielBean.PROFIL_MANAGER){
 			this.filleul.setIdOrga(new Organisation((userSessionBean.getIdOrga())));
 			this.filleul.setIdProfil((new Profil(ReferentielBean.PROFIL_FILLEUL)));
-		}
+		//}
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_filleul");
 		return "filleul";
 	}	
@@ -259,7 +260,17 @@ public class FilleulsBean implements Serializable {
 		return ecran;
 	}	
 	
-	
+	public String editFilleulsList() {
+		
+		UserSessionBean userSession = ParfumUtils.getUserSessionBean();
+		Membre userConnected = new Membre(userSession.getIdMembre());
+		this.filleulsList = filleulsService.getFilleulsList(userConnected);
+		this.filleul = new Membre(0L);
+		this.filleul.setIdOrga(new Organisation((userSession.getIdOrga())));
+		this.filleul.setIdProfil((new Profil(ReferentielBean.PROFIL_FILLEUL)));
+		return "filleuls";
+
+	}
 	
 
 }
