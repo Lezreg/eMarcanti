@@ -54,6 +54,10 @@ public class MembreBean implements Serializable {
 	
 	private String orgaDisabled="true";
 	
+	private String listParrainDisabled="true";
+	
+	private String roleDisabled="true";
+	
 	private String hasReducRendered="false";
 	
 	private String parrainRendered="false";
@@ -347,6 +351,23 @@ public class MembreBean implements Serializable {
 	public void setOrgaDisabled(String orgaDisabled) {
 		this.orgaDisabled = orgaDisabled;
 	}
+	
+	public String getListParrainDisabled() {
+		return listParrainDisabled;
+	}
+
+	public void setListParrainDisabled(String listParrainDisabled) {
+		this.listParrainDisabled = listParrainDisabled;
+	}
+	
+
+	public String getRoleDisabled() {
+		return roleDisabled;
+	}
+
+	public void setRoleDisabled(String roleDisabled) {
+		this.roleDisabled = roleDisabled;
+	}
 
 	public OrganisationServiceAction getOrganisationService() {
 		return organisationService;
@@ -460,12 +481,27 @@ public class MembreBean implements Serializable {
 		this.departementList = departementService.getDepartementByOrgaList(membre.getIdOrga());
 		onRoleChange();
 		if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
-			Filleul filleul = filleulsService.getFilleul(getIdMembre());
+			Filleul filleul = filleulsService.getFilleul(this.membre.getIdMembre());
 			if(filleul!=null){
 				setIdMembreParrain(filleul.getIdMembreParrain().getIdMembre());
-				this.parrainList = new ArrayList<Membre>();
+	        	List<Profil> idProfilList = new ArrayList<Profil>();
+	        	idProfilList.add(new Profil(ReferentielBean.PROFIL_ADMIN));
+	        	idProfilList.add(new Profil(ReferentielBean.PROFIL_MANAGER));
+	        	idProfilList.add(new Profil(ReferentielBean.PROFIL_MEMBRE));
+				this.parrainList = membreService.getParrainByOrgaList(getIdOrga(),idProfilList);
+				this.roleList=ReferentielBean.getMemberRoleList();
+				setListParrainDisabled("true");
+				setRoleDisabled("true");
 			}
+		}else if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_MEMBRE){
+			this.roleList=ReferentielBean.getManagerRoleList();
+			
+		}else if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_MANAGER){
+			this.roleList=ReferentielBean.getAdminRoleList();
+			
 		}
+			
+		
 		if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_ADMIN){
 			setIsAdminRendered("true");
 		}else{
@@ -591,7 +627,7 @@ public class MembreBean implements Serializable {
 		}else{
 			if(getMembreEmail().equals(getOldMembreEmail())){
 				membre.setDateModification(dateToday);
-				if(getIdProfil() !=null && getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
+				if(getIdProfil()!=null && getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
 					if(getIdMembreParrain()==null){
 						msg = ParfumUtils.getBundleApplication().getString("message.parrain.obligatoire");
 						facesMessage.setSummary(msg); 

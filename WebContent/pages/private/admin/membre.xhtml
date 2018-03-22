@@ -189,8 +189,8 @@
 											<div class="paddingless col-sm-8">
 												<div class="marquedescription oransationadmin">
 													<div class="select">
-														<h:selectOneMenu value="#{membreBean.membre.idProfil.idProfil}">
-															<f:ajax listener="#{membreBean.onRoleChange}" render="formMembre" execute="idNom idPrenom idEmail idTel idOrganisation idDepartement idActif idReduc idPassword"   />
+														<h:selectOneMenu value="#{membreBean.membre.idProfil.idProfil}" disabled="#{membreBean.roleDisabled}">
+															<f:ajax listener="#{membreBean.onRoleChange}" render="formMembre" execute="idNom idPrenom idEmail idTel idOrganisation idDepartement idActif idReduc idPassword"  />
 															<f:selectItems value="#{membreBean.roleList}" var="c" itemLabel="#{c.profilLibelle}" itemValue="#{c.idProfil}" />
 														</h:selectOneMenu>
 														<div class="select__arrow"></div>
@@ -212,7 +212,7 @@
 											</div>
 											<div class="paddingless col-sm-8">
 												<div class="marquedescription oransationadmin">
-													<h:selectOneMenu id="idMembreParrain" value="#{membreBean.idMembreParrain}" rendered="#{membreBean.parrainRendered}">
+													<h:selectOneMenu id="idMembreParrain" value="#{membreBean.idMembreParrain}" rendered="#{membreBean.parrainRendered}" disabled="#{membreBean.listParrainDisabled}">
 														<f:selectItems value="#{membreBean.parrainList}" var="c" itemLabel="#{c.membrePrenom} #{c.membreNom}" itemValue="#{c.idMembre}" />
 													</h:selectOneMenu>
 												</div>
