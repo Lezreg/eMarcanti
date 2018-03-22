@@ -3,7 +3,6 @@ package com.marcanti.ecommerce.controller;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -171,15 +170,16 @@ public class BasketController implements Serializable {
 	 */
 	public List<CommandeIndividuelle> getCommandes() {
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-		
+
 		Long derniereCdeGoupee = commandeGroupeeServiceAction.getIdDerniereCdeGoupee(userSessionBean.getIdOrga());
-		if(derniereCdeGoupee!=null){
+		if (derniereCdeGoupee != null) {
 			LOGGER.info(derniereCdeGoupee.toString());
-			
+
 			LOGGER.info(userSessionBean.getIdMembre().toString());
-	
-			commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(),derniereCdeGoupee, isCurrrentCmds);
-			
+
+			commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(),
+					derniereCdeGoupee, isCurrrentCmds);
+
 			if (selectedCmd == null || selectedCmd.isEmpty()) {
 				if (commandes != null && !commandes.isEmpty()) {
 					CommandeIndividuelle commandeIndividuelle2 = commandes.get(0);
@@ -194,10 +194,6 @@ public class BasketController implements Serializable {
 	}
 
 	public Panier getPanierEnCours() {
-		// if (commandeIndividuelle != null) {
-		// panierEnCours = commandeIndividuelle.getIdPanier();
-		// return panierEnCours;
-		// }
 
 		CommandeIndividuelle lastCommandeIndividuelle = panierService.getLastCommandeIndividuelle(userSessionBean);
 

@@ -139,10 +139,15 @@ public class PanierServiceActionImpl implements PanierActionService {
 	public CommandeIndividuelle getLastCommandeIndividuelle(UserSessionBean userSessionBean) {
 		ParametersChecker.checkParameter("userSessionBean is null ", userSessionBean);
 		Long cmdgroupeeId = commandeGroupeeDAO.getIdDerniereCdeGoupee(userSessionBean.getIdOrga());
-		CommandeGroupee currentCmdGroupee = commandeGroupeeDAO.find(cmdgroupeeId);
-		Membre membre = membreDAO.find(userSessionBean.getIdMembre());
-		CommandeIndividuelle commandeIndividuel = commandeIndividuelleDAO
-				.getCommandeIndividuellByMembreAndCmdGroupe(membre, currentCmdGroupee);
+		CommandeIndividuelle commandeIndividuel = null;
+		if (cmdgroupeeId != null) {
+			CommandeGroupee currentCmdGroupee = commandeGroupeeDAO.find(cmdgroupeeId);
+			Membre membre = membreDAO.find(userSessionBean.getIdMembre());
+			if (membre != null && currentCmdGroupee != null) {
+				commandeIndividuel = commandeIndividuelleDAO.getCommandeIndividuellByMembreAndCmdGroupe(membre,
+						currentCmdGroupee);
+			}
+		}
 
 		return commandeIndividuel;
 
