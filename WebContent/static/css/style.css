@@ -4858,3 +4858,7 @@ footer{
 .paymentlist ul li a img{
 	display: inline-block;
 }
+
+#theImage {
+    display: none;
+}

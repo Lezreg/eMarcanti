@@ -166,6 +166,8 @@
 <!-- 								<p class="redclass"><i class="fa fa-warning"></i>Une erreur technique est survenue … <a href=""  data-toggle="modal" data-target="#cindinotconpopu">Détail</a></p> -->
 						</div>
 						<div class="updatecartcheck">
+						
+						<p class="greenclass"> <h:messages globalOnly="true" infoClass="greenclass fa fa-check"></h:messages></p>
 <!-- 							<h:message for="box2" errorClass="errorMessage" /> Message for username -->
 <!-- 							<p><i class="fa fa-exclamation-triangle"></i> Mettez à jour votre panier !</p> -->
 <!-- 							<p><i class="fa fa-exclamation-triangle"></i> Veuillez confirmer la commande, afin que les produits vous soient réservés !</p> -->
@@ -181,6 +183,7 @@
 				
 				
 			</div><!--end cont-->
+				
 		</section>
 		<!--end sec-->
 		
@@ -238,7 +241,7 @@
 		<section class="comandeindialstatusarea">
 			<h2 class="section_header">sect</h2>
 			<div class="container">
-				
+				<c:if test="#{basketView.panierProduitList.size() gt 0}">
 				<div class="row ">
 					<div class="col-xs-12 paddingrightless">
 						<div class="sauvegarderbutton">
@@ -246,7 +249,7 @@
 						</div>
 					</div>
 				</div>
-				
+				</c:if>
 				<div class="individualrowareatotal row marginRow">
 					<div class="col-sm-12">
 						<div class="innerinditotal">
@@ -261,10 +264,11 @@
 					
 				</div>
 				
+				<c:if test="#{basketView.panierProduitList.size() gt 0}">
 				<div class="row marginRow">
 					<div class="col-xs-12 paddingrightless">
 						<div class="sauvegarderbutton confirmbutton">
-							<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_confirmer}" action="#{basketView.confirmerCommandeIndiv}" />
+							<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_confirmer}" action="#{basketView.confirmerCommandeIndiv}"/>
 						</div>
 					</div>
 				</div>
@@ -278,7 +282,7 @@
 						</div>
 					</div>
 				</div>
-				
+				</c:if>
 				<!-- modal-->
 				
 					<!-- Modal -->
