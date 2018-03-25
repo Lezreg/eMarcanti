@@ -54,9 +54,9 @@ public class MembreBean implements Serializable {
 	
 	private String orgaDisabled="true";
 	
-	private String listParrainDisabled="true";
+	private String listParrainDisabled="false";
 	
-	private String roleDisabled="true";
+	private String roleDisabled="false";
 	
 	private String hasReducRendered="false";
 	
@@ -538,39 +538,47 @@ public class MembreBean implements Serializable {
 	
 	public String insertOrUpdateMembre() {
 		
-		FacesMessage facesMessage = new FacesMessage();
+		FacesMessage facesMessage = null;
 		Calendar calendar = Calendar.getInstance();
 		Date dateToday =  calendar.getTime();
 		String msg;
+		boolean isError = false;
 		String ecran ="membre";
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 		
 		if(getMembreNom()==null || getMembreNom().equals("")){
 			msg = ParfumUtils.getBundleApplication().getString("nom_obligatoire");
+			facesMessage = new FacesMessage();
 			facesMessage.setSummary(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-		    return ecran;
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
 		}
 		if(getMembrePrenom()==null || getMembrePrenom().equals("")){
 			msg = ParfumUtils.getBundleApplication().getString("prenom_obligatoire");
+			facesMessage = new FacesMessage();
 			facesMessage.setSummary(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-		    return ecran;
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
 		}	
 		if(getMembreEmail()==null || getMembreEmail().equals("")){
 			msg = ParfumUtils.getBundleApplication().getString("email_obligatoire");
+			facesMessage = new FacesMessage();
 			facesMessage.setSummary(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-		    return ecran;
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
 		}else if(!ParfumUtils.checkEmailFormat(getMembreEmail())){
 			msg = ParfumUtils.getBundleApplication().getString("email_format");
+			facesMessage = new FacesMessage();
 			facesMessage.setSummary(msg); 
 			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
-		    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-		    return ecran;
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}
+		if(isError){
+			return ecran;
 		}
 		
 		if(membre.getIdDepartement().getIdDepartement()==0L){
