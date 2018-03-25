@@ -99,6 +99,7 @@
 											<div class="marquedescription">
 												<div class="select">
 													<h:selectOneMenu id="idCategorie" value="#{catalogueAdminBean.produit.idCategorie.idCategorie}">
+														<p:ajax listener="#{catalogueAdminBean.onCategorieChange()}" update="idSousCategorie" />
 														<f:selectItems value="#{catalogueAdminBean.categorieList}" var="c" itemLabel="#{c.categorieNom}" itemValue="#{c.idCategorie}" />
 													</h:selectOneMenu>
 													<div class="select__arrow"></div>
@@ -421,15 +422,16 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													#{msg.libelle_date_debut}
-													<p:calendar id="button" value="#{catalogueAdminBean.produit.dateDebutPromo}" pattern="dd/MM/yyyy" size="" timeZone="Europe/Paris" showOn="button" />
-												</div>
+													#{msg.libelle_date_debut}<h:inputText id="datepicker-example1" value="#{catalogueAdminBean.produit.dateDebutPromo}" validatorMessage="le format de la date est dd/MM/yyyy" maxlength="10">
+														<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+													</h:inputText>
+												</div>												
 											</div>
 										</div>
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquedescription">
 												<div class="form-group">
-													#{msg.libelle_date_fin}<h:inputText id="datepicker-example31" value="#{catalogueAdminBean.produit.dateFinPromo}" validatorMessage="le format de la date est dd/MM/yyyy" maxlength="10">
+													#{msg.libelle_date_fin}<h:inputText id="datepicker-example2" value="#{catalogueAdminBean.produit.dateFinPromo}" validatorMessage="le format de la date est dd/MM/yyyy" maxlength="10">
 														<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 													</h:inputText>
 												</div>

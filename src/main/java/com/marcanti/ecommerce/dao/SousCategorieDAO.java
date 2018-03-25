@@ -2,6 +2,7 @@ package com.marcanti.ecommerce.dao;
 
 import java.util.List;
 
+import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.SousCategorie;
 
 public interface SousCategorieDAO {
@@ -13,5 +14,7 @@ public interface SousCategorieDAO {
 	public void updateSousCategorie(SousCategorie sousCategorie);
 	
 	public void insertSousCategorie(SousCategorie sousCategorie);
+	
+	public List<SousCategorie> getSousCategorieByCategorieList(Categorie idCategorie);
 
 }

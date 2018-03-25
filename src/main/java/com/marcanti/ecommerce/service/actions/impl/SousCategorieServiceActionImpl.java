@@ -52,5 +52,10 @@ public class SousCategorieServiceActionImpl implements SousCategorieServiceActio
 	public void insertSousCategorie(SousCategorie sousCategorie) {
 		sousCategorieDAO.insertSousCategorie(sousCategorie);
 	}
+
+	@Override
+	public List<SousCategorie> getSousCategorieByCategorieList(Categorie idCategorie) {
+		return sousCategorieDAO.getSousCategorieByCategorieList(idCategorie);
+	}
 	
 }

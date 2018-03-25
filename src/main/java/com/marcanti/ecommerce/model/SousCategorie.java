@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SousCategorie.findAll", query = "SELECT s FROM SousCategorie s")
     , @NamedQuery(name = "SousCategorie.findByIdSousCategorie", query = "SELECT s FROM SousCategorie s WHERE s.idSousCategorie = :idSousCategorie")
+    , @NamedQuery(name = "SousCategorie.findByIdCategorie", query = "SELECT s FROM SousCategorie s WHERE s.idCategorieProduit = :idCategorieProduit")
     , @NamedQuery(name = "SousCategorie.findBySousCategorieNom", query = "SELECT s FROM SousCategorie s WHERE s.sousCategorieNom = :sousCategorieNom")})
 public class SousCategorie implements Serializable {
 

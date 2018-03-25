@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.model.Categorie;
+import com.marcanti.ecommerce.model.Departement;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.model.SousCategorie;
@@ -85,7 +87,7 @@ public class CatalogueAdminBean implements Serializable {
 		this.catalogueList = catalogueService.getCatalogueList();
 		this.marqueList = marqueService.getMarqueList();
 		this.categorieList = categorieService.getCategorieList();
-		this.sousCategorieList = sousCategorieService.getSousCategorieList();
+		this.sousCategorieList = sousCategorieService.getSousCategorieByCategorieList(categorieList.get(0));
 	}
 
 	public List<VCatalogueAdmin> getCatalogueList() {
@@ -361,5 +363,13 @@ public class CatalogueAdminBean implements Serializable {
 			}
 		}
 	}
+	
+	public void onCategorieChange() {
+		if(getProduit() !=null && getProduit().getIdCategorie()!=null && getProduit().getIdCategorie().getIdCategorie()!=0){
+        	this.sousCategorieList = sousCategorieService.getSousCategorieByCategorieList(getProduit().getIdCategorie());
+        }else{
+        	this.sousCategorieList = new ArrayList<SousCategorie>();
+        }
+    }
 
 }

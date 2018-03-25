@@ -109,5 +109,10 @@ public class SousCategorieDAOImpl extends AbstractGenericDAO<SousCategorie> impl
 		query.executeUpdate();
 		//em.persist(sousCategorie);
 	}
+
+	@Override
+	public List<SousCategorie> getSousCategorieByCategorieList(Categorie idCategorie) {
+		return em.createNamedQuery("SousCategorie.findByIdCategorie", SousCategorie.class).setParameter("idCategorieProduit", idCategorie).getResultList();
+	}
     
 }
