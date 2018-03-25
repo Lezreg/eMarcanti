@@ -222,7 +222,12 @@
 														</td>
 														<td class="catgeneraltd">#{produit.produit.produitDescription}</td>
 														<td class="inputcommandarea"><input id="box1" value="#{produit.produit.notrePrix}"/>€</td>
-														<td class="quantityformarea quanlityavilablclass"><h:inputText id="box2" value="#{produit.qteSouhaitee}" type="number" oninput="calculate()" min="0" /> <span class="quantityamountspan"> #{msg.libelle_qte_disponible} #{produit.produit.qteEnStock}</span></td>
+														<td class="quantityformarea quanlityavilablclass">
+															<h:inputText id="qte" value="#{produit.qteSouhaitee}" type="number" oninput="calculate()" min="0" validatorMessage="Qte disponible"> 
+																<f:validateLongRange for="qte" minimum="1" maximum="4" />
+															</h:inputText>
+															<span class="quantityamountspan"><h:message for="qte" style="color:red"  /></span>
+														</td>
 														<h:outputLabel for="box2"/>
 														<td class="inputcommandarea"><input id="result" value="#{produit.sousTotal}"/>€</td>
 												</tr>
@@ -273,15 +278,16 @@
 					</div>
 				</div>
 				
-				
-				<div class="row marginRow">
-					<div class="col-xs-12 paddingrightless">
-						<div class="sauvegarderbutton commandbutton">
-							<a href="" class="othermeanbutotn" data-toggle="modal" data-target="#moyenbutton">Autre Moyen de paiement</a>
-							<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_payer}" action="payer"/>
+					<c:if test="${USER_SESSION.MENU_ADMIN_CATALOGUE}" scope="session">
+						<div class="row marginRow">
+							<div class="col-xs-12 paddingrightless">
+								<div class="sauvegarderbutton commandbutton">
+									<a href="" class="othermeanbutotn" data-toggle="modal" data-target="#moyenbutton">Autre Moyen de paiement</a>
+									<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_payer}" action="payer"/>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
+					</c:if>
 				</c:if>
 				<!-- modal-->
 				
