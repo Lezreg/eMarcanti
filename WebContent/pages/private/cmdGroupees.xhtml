@@ -74,17 +74,14 @@
 					</div>
 				</div><!--end row-->
 				
-				<c:if test="${USER_SESSION.MENU_ADMIN_MBR}" scope="session">
 				<div class="row marginRow">
 					<div class="col-xs-12">
-						
 						<div class="filterbytitle">
-							
 							<p>Nom de l'organisation</p>
 						</div>
 						<div class="messcommedsfilter filterbyarea">
 							<div class="select">
-								<h:selectOneMenu id="cmdIdiv" value="#{cmdGroupeeView.organisationId}">
+								<h:selectOneMenu id="cmdIdiv" value="#{cmdGroupeeView.organisationId}" disabled="#{cmdGroupeeView.canModifyOrganisation}">
 								    <f:selectItems value="#{cmdGroupeeView.organisations}" var="org" itemLabel="#{org.orgaNom}" itemValue="#{org.idOrga}" />
 								    <p:ajax  update="formCmdGrp" />
 								</h:selectOneMenu>
@@ -94,7 +91,6 @@
 					</div>
 				</div>
 				<!--end row-->
-				</c:if>
 				
 				<div class="row">
 					<div class="col-xs-12">
@@ -122,6 +118,9 @@
 											<h:commandLink  styleClass="adminajourlistbutton" action="#{cmdGroupeeView.createNew()}">Nouvelle</h:commandLink>
 										 </div>
 							</div>	
+							
+							<br />
+							<br />
 							
 							<table id="messcommandes" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
 								<thead>
@@ -172,9 +171,11 @@
 												</h:outputText>
 											</td>
 											<td>
-												<h:commandLink action="createCmd" styleClass="fa fa-pencil-square-o">
-													 <f:setPropertyActionListener value="#{cmdGr}" target="#{cmdGroupeeView.commandeGroupee}" />
-												</h:commandLink>
+												<c:if test="${USER_SESSION.MENU_ADMIN_CATALOGUE}" scope="session">
+													<h:commandLink action="createCmd" styleClass="fa fa-pencil-square-o">
+														 <f:setPropertyActionListener value="#{cmdGr}" target="#{cmdGroupeeView.commandeGroupee}" />
+													</h:commandLink>
+												</c:if>
 											</td>
 											<td>
 												<h:commandLink action="showCommandeGroupee" styleClass="fa fa-eye">

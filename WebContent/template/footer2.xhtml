@@ -103,7 +103,11 @@
 				  context: document.body
 				}).success(function(data) {
 					$('#nouve-13').html(data);
-					$('#nouve-13').modal('toggle')
+					$('#nouve-13').modal('show');
+					$('#nouve-13').on('hidden.bs.modal', function () {
+						 location.reload();
+						})
+
 				});
 			}
 		</script>

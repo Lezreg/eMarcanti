@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -69,6 +70,8 @@ public class CommandeGroupeeController implements Serializable {
 
 	private String StatusCode;
 
+	private boolean canModifyOrganisation;
+
 	@PostConstruct
 	private void init() {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
@@ -78,14 +81,15 @@ public class CommandeGroupeeController implements Serializable {
 
 		// commandeGroupee = new CommandeGroupee();
 		userSessionBean = ParfumUtils.getUserSessionBean();
-		organisation = organisationServiceAction.getOrganisationById(userSessionBean.getIdOrga());
 		locale = Locale.FRANCE;
 	}
 
 	public String createNew() {
 		this.commandeGroupee = newCommandeGroupee();
 		commandeGroupee.setDateCreation(new Date());
-
+		Organisation organisation = organisationServiceAction.getOrganisationById(getOrganisationId());
+		commandeGroupee.setIdOrga(organisation);
+		commandeGroupee.setCdeGroupeeNom(getCommandeGroupeName());
 		return "createCmd";
 	}
 
@@ -98,7 +102,7 @@ public class CommandeGroupeeController implements Serializable {
 			commandeGroupee.setNomCreateur(userSessionBean.getMembreNom().toUpperCase());
 			commandeGroupee.setPrenomCreateur(userSessionBean.getMembrePrenom());
 			commandeGroupee.setDateCreation(new Date());
-			commandeGroupee.setIdOrga(organisation);
+			commandeGroupee.setIdOrga(getOrganisation());
 			commandeGroupee.setIsPaiementEffectue(false);
 			commandeGroupee.setIsEnCours(true);
 			commandeGroupee.setIdStatus(commandeGroupeeServiceAction
@@ -119,13 +123,19 @@ public class CommandeGroupeeController implements Serializable {
 			commandeGroupee.setIdStatus(commandeGroupeeServiceAction.getCommandeGroupeeStatusByCode(StatusCode));
 		}
 		commandeGroupeeServiceAction.saveCmdGroupee(commandeGroupee);
+
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		UIViewRoot viewRoot = facesContext.getViewRoot();
+
+		LOGGER.info(viewRoot.getClientId());
+
 		return "cmdGroupees";
 	}
 
 	private String getCommandeGroupeName() {
 		Date date = new Date();
 		String monthName = DateUtils.getMonthName(DateUtils.getMonth(date), Locale.FRANCE);
-		return organisation.getOrgaAlias() + "_" + DateUtils.getYear(date) + "_"
+		return getOrganisation().getOrgaAlias() + "_" + DateUtils.getYear(date) + "_"
 				+ monthName.substring(0, 3).toUpperCase() + "_" + DateUtils.getDay(date);
 	}
 
@@ -144,27 +154,18 @@ public class CommandeGroupeeController implements Serializable {
 	}
 
 	public List<CommandeGroupee> getCmdGroupees() {
-		// default value (pour selected by Admin)
-		Long idOrga = organisationId;
-		// else organisation of current user
-		if (idOrga == null || idOrga == 0) {
-			idOrga = userSessionBean.getIdOrga();
-		}
-		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(idOrga, true);
+		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(getOrganisationId(), true);
 	}
 
 	public List<CommandeGroupee> getCmdGroupeesPrec() {
-		// default value (pour selected by Admin)
-		Long idOrga = organisationId;
 		// else organisation of current user
-		if (idOrga == null || idOrga == 0) {
-			idOrga = userSessionBean.getIdOrga();
-		}
-		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(idOrga, false);
+		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(getOrganisationId(), false);
 	}
 
 	private CommandeGroupee newCommandeGroupee() {
 		CommandeGroupee commandeGroupee = new CommandeGroupee();
+		Organisation organisation = organisationServiceAction.getOrganisationById(getOrganisationId());
+		commandeGroupee.setIdOrga(organisation);
 		return commandeGroupee;
 	}
 
@@ -205,7 +206,7 @@ public class CommandeGroupeeController implements Serializable {
 	}
 
 	public Organisation getOrganisation() {
-		return organisation;
+		return organisationServiceAction.getOrganisationById(getOrganisationId());
 	}
 
 	public void setOrganisation(Organisation organisation) {
@@ -221,6 +222,9 @@ public class CommandeGroupeeController implements Serializable {
 	}
 
 	public Long getOrganisationId() {
+		if (organisationId == null || organisationId == 0) {
+			organisationId = userSessionBean.getIdOrga();
+		}
 		return organisationId;
 	}
 
@@ -259,6 +263,17 @@ public class CommandeGroupeeController implements Serializable {
 
 	public void setStatusCode(String statusCode) {
 		StatusCode = statusCode;
+	}
+
+	public boolean isCanModifyOrganisation() {
+		if ((userSessionBean.getIdProfil() < 4)) {
+			canModifyOrganisation = true;
+		}
+		return canModifyOrganisation;
+	}
+
+	public void setCanModifyOrganisation(boolean canModifyOrganisation) {
+		this.canModifyOrganisation = canModifyOrganisation;
 	}
 
 }

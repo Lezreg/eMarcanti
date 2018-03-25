@@ -416,10 +416,17 @@ margin-right: 0;
 	
 .single_nouveProduct{
 	margin-bottom: 30px;
-}	
+}
+	
 .filterbytitle {
     margin-right: 10px;
+}
+
+.filterbytitle2 {
+    margin-right: 3px;
+    margin-top: 10px;
 }	
+	
 .select {
     margin-bottom: 0px;
     width: 32%;

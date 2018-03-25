@@ -67,7 +67,7 @@
 									</div>
 									<div class="paddingless col-sm-8">
 										<div class="cogmodifirst marquedescription admininput">
-											<h:outputText id="ttp" value="#{cmdGroupeeView.organisation.orgaNom}" title="Organisation" />
+											<h:outputText id="ttp" value="#{cmdGroupeeView.commandeGroupee.idOrga.orgaNom}" title="Organisation" />
 										</div>
 									</div>
 								</div><!--end inner div-->
@@ -85,7 +85,7 @@
 										<div class="commandgrmodifyinfop marquedescription oransationadmin">
 											<div class="select">
 											
-											  <h:selectOneMenu id="cmdIdiv" value="#{cmdGroupeeView.statusCode}">
+											  <h:selectOneMenu id="cmdIdiv" value="#{cmdGroupeeView.statusCode}" disabled="#{cmdGroupeeView.canModifyOrganisation}">
 											   	 <f:selectItems value="#{cmdGroupeeView.referentielBean.commandeGroupeeStatusList}" var="status" itemLabel="#{status.statusLibelle}" itemValue="#{status.statusCode}" />
 											  </h:selectOneMenu>
 									
@@ -225,12 +225,12 @@
 										<div class="newmodiysvecan modifysavecancelbutton">
 											  <div class="button-1">
 												<div class="eff-1"></div>
-												<a href="#"> Annuler </a>
+												<a href="javascript:history.go(-1);"> Annuler </a>
 											  </div>
 											  
 											  <div class="button-2">
 													<div class="eff-2"></div>
-													<h:commandLink value="Valider" action="#{cmdGroupeeView.saveCmdGroupee()}"> Valider </h:commandLink>
+													<h:commandLink value="Valider" action="#{cmdGroupeeView.saveCmdGroupee()}"></h:commandLink>
 											  </div>
 										</div>
 									</div>

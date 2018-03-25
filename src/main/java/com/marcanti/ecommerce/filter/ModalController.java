@@ -45,7 +45,7 @@ public class ModalController implements Serializable {
 
 	private Produit selectedProduit;
 
-	private String ajoutPanier = "cmdNotFoundError";
+	private String ajoutPanier = "OK";
 
 	@PostConstruct
 	public void init() {
@@ -76,8 +76,6 @@ public class ModalController implements Serializable {
 			ajoutPanier = "cmdValidatedError";
 			// return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
 		}
-
-		ajoutPanier = "cmdNotFoundError";
 
 	}
 

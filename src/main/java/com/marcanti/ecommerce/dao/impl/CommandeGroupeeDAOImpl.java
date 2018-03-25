@@ -52,8 +52,8 @@ public class CommandeGroupeeDAOImpl extends AbstractGenericDAO<CommandeGroupee> 
 	@Override
 	public Long getIdDerniereCdeGoupee(Long idOrg) {
 		LOGGER.info("-----getIdDerniereCdeGoupee : idOrg =" + idOrg);
-		Query query = em
-				.createQuery("SELECT max (c.idCdeGroupee) FROM CommandeGroupee c WHERE c.idOrga.idOrga = :idOrga  ")
+		Query query = em.createQuery(
+				"SELECT max (c.idCdeGroupee) FROM CommandeGroupee c WHERE c.idOrga.idOrga = :idOrga AND c.idStatus.statusCode in ('CDE_GROUPEE_CONFIRMEE','CDE_GROUPEE_NON_CONFIRMEE') ")
 				.setParameter("idOrga", idOrg);
 
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {

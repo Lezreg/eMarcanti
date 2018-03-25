@@ -102,7 +102,6 @@ public class PanierServiceActionImpl implements PanierActionService {
 				panierProduitDAO.edit(panierProduit);
 				// update panier
 				panierEnCours = panierProduit.getPanier();
-				updatePanier(produit, panierEnCours);
 				LOGGER.info("panierProduit exist qte after : " + panierProduit.getQteSouhaitee());
 
 			} else {
@@ -112,9 +111,9 @@ public class PanierServiceActionImpl implements PanierActionService {
 				panierEnCours = commandeIndividuel.getIdPanier();
 				panierProduit = getNewPanierProduit(commandeIndividuel.getIdPanier(), produit);
 				panierProduitDAO.create(panierProduit);
-				// update panier (quantite et Montant)
-				updatePanier(produit, panierEnCours);
 			}
+			// update panier (quantite et Montant)
+			updatePanier(produit, panierEnCours);
 			// update commande individuelle
 			updateCommandeIndividuelle(userSessionBean, commandeIndividuel, panierEnCours);
 		} else {
@@ -129,6 +128,8 @@ public class PanierServiceActionImpl implements PanierActionService {
 			CommandeIndividuelle commandeIndividuelle = getNewCommandeIndividuelle(membre, panierEnCours,
 					currentCmdGroupee);
 			commandeIndividuelleDAO.create(commandeIndividuelle);
+			// update qte produit
+			updateQteProduit(produit);
 		}
 
 		return panierEnCours;
@@ -364,9 +365,18 @@ public class PanierServiceActionImpl implements PanierActionService {
 	 * @param panierEnCours
 	 */
 	private void updatePanier(Produit produit, Panier panierEnCours) {
+		// update panier en cours
 		panierEnCours.setPanierMontant(BigDecimalUtils.sum(panierEnCours.getPanierMontant(), produit.getNotrePrix()));
 		panierEnCours.setPanierNbreProduit(ShortUtils.incrementShort(panierEnCours.getPanierNbreProduit()));
 		panierDao.edit(panierEnCours);
+
+		updateQteProduit(produit);
+	}
+
+	private void updateQteProduit(Produit produit) {
+		// update qte produit
+		produit.setQteEnStock(ShortUtils.incrementShort(produit.getQteEnStock(), -1));
+		produitDAO.edit(produit);
 	}
 
 	/**
