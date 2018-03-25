@@ -24,11 +24,13 @@ import com.marcanti.ecommerce.exception.CommandeGroupeeValidatedExeception;
 import com.marcanti.ecommerce.exception.ProductNotAvailableException;
 import com.marcanti.ecommerce.exception.ProductOutOfStockException;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
+import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.Panier;
 import com.marcanti.ecommerce.model.PanierProduit;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 import com.marcanti.ecommerce.service.actions.CommandeIndividuelleServiceAction;
+import com.marcanti.ecommerce.service.actions.OrganisationServiceAction;
 import com.marcanti.ecommerce.service.actions.PanierActionService;
 import com.marcanti.ecommerce.utils.ParametersChecker;
 import com.marcanti.ecommerce.utils.ParfumUtils;
@@ -55,6 +57,9 @@ public class BasketController implements Serializable {
 
 	@Autowired
 	private CommandeIndividuelleServiceAction commandeIndividuelleServiceAction;
+
+	@Autowired
+	private OrganisationServiceAction organisationServiceAction;
 
 	private Panier panierEnCours;
 
@@ -170,6 +175,18 @@ public class BasketController implements Serializable {
 			this.commandeIndividuelle = commandeIndividuelleServiceAction
 					.getCommandeIndividuelleById(new Long(selectedCmd));
 			panierProduitList = panierService.getProduitsByCmdIndiv(new Long(selectedCmd));
+			Organisation organisation = organisationServiceAction.getOrganisationById(userSessionBean.getIdOrga());
+
+			for (PanierProduit panierProduit : panierProduitList) {
+				Short qtePossible = 0;
+				if (organisation != null) {
+					qtePossible = (short) organisation.getNbreMaxProduitParItem();
+				}
+				if (panierProduit.getProduit() != null && panierProduit.getProduit().getQteEnStock() < qtePossible) {
+					qtePossible = panierProduit.getProduit().getQteEnStock();
+				}
+				panierProduit.getProduit().setQtePossible(qtePossible);
+			}
 		}
 		return panierProduitList;
 	}
@@ -266,6 +283,14 @@ public class BasketController implements Serializable {
 
 	public void setCommandeGroupeeServiceAction(CommandeGroupeeServiceAction commandeGroupeeServiceAction) {
 		this.commandeGroupeeServiceAction = commandeGroupeeServiceAction;
+	}
+
+	public OrganisationServiceAction getOrganisationServiceAction() {
+		return organisationServiceAction;
+	}
+
+	public void setOrganisationServiceAction(OrganisationServiceAction organisationServiceAction) {
+		this.organisationServiceAction = organisationServiceAction;
 	}
 
 }

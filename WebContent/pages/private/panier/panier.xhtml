@@ -208,28 +208,28 @@
 								</thead>
 								
 								<tbody class="individulaallrow">
-									<ui:repeat var="produit" value="#{basketView.panierProduitList}">
+									<ui:repeat var="panierProduit" value="#{basketView.panierProduitList}">
 												<tr>
 														<td class="individualtablerow">
 																	<p>
-																		<ui:fragment rendered="#{empty produit.produit.produitPhotoURL}"><br/>
-																			<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="product"/><span>#{produit.produit.idMarque.marqueNom}</span>
+																		<ui:fragment rendered="#{empty panierProduit.produit.produitPhotoURL}"><br/>
+																			<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="product"/><span>#{panierProduit.produit.idMarque.marqueNom}</span>
 																		</ui:fragment>
-																		<ui:fragment rendered="#{!empty produit.produit.produitPhotoURL}"><br/>
-																			<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderPath}/#{produit.produit.produitPhotoURL}" class="img-responsive" alt="product"/><span>#{produit.produit.idMarque.marqueNom}</span>
+																		<ui:fragment rendered="#{!empty panierProduit.produit.produitPhotoURL}"><br/>
+																			<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderPath}/#{produit.produit.produitPhotoURL}" class="img-responsive" alt="product"/><span>#{panierProduit.produit.idMarque.marqueNom}</span>
 																		</ui:fragment>
 																	</p>
 														</td>
-														<td class="catgeneraltd">#{produit.produit.produitDescription}</td>
-														<td class="inputcommandarea"><input id="box1" value="#{produit.produit.notrePrix}"/>€</td>
+														<td class="catgeneraltd">#{panierProduit.produit.produitDescription}</td>
+														<td class="inputcommandarea"><input id="box1" value="#{panierProduit.produit.notrePrix}"/>€</td>
 														<td class="quantityformarea quanlityavilablclass">
-															<h:inputText id="qte" value="#{produit.qteSouhaitee}" type="number" oninput="calculate()" min="0" validatorMessage="Qte disponible"> 
-																<f:validateLongRange for="qte" minimum="1" maximum="4" />
+															<h:inputText id="qte" value="#{panierProduit.qteSouhaitee}" type="number" oninput="calculate()" min="0" validatorMessage="Quantité possible : #{panierProduit.produit.qtePossible}"> 
+																<f:validateLongRange for="qte" minimum="1" maximum="#{panierProduit.produit.qtePossible}" />
 															</h:inputText>
 															<span class="quantityamountspan"><h:message for="qte" style="color:red"  /></span>
 														</td>
-														<h:outputLabel for="box2"/>
-														<td class="inputcommandarea"><input id="result" value="#{produit.sousTotal}"/>€</td>
+														<h:outputLabel for="qte"/>
+														<td class="inputcommandarea"><input id="result" value="#{panierProduit.sousTotal}"/>€</td>
 												</tr>
 									</ui:repeat>
 								
