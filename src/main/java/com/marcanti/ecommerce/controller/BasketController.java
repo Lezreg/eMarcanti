@@ -146,6 +146,12 @@ public class BasketController implements Serializable {
 		try {
 			UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 			panierService.confirmerCommandeIndiv(commandeIndividuelle, panierProduitList, userSessionBean);
+
+			// La commande est confirmée ! Les produits vous ont été réservés.
+			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"La commande est confirmée ! Les produits vous ont été réservés.", null);
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+
 		} catch (ProductNotAvailableException e) {
 			LOGGER.error(e.getMessage());
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, e.getMessage(),
