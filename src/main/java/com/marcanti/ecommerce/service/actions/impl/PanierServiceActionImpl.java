@@ -256,11 +256,11 @@ public class PanierServiceActionImpl implements PanierActionService {
 		if (organisation.getNbreMaxProduitParItem() < qteSouhaitee) {
 			throw new ProductNotAvailableException(
 					"Vérifiez votre commande ! " + panierProduit.getProduit().getProduitDescription()
-							+ " quantité max par produit : " + organisation.getNbreMaxProduitParItem());
+							+ " | quantité max par produit : " + organisation.getNbreMaxProduitParItem());
 		}
 
 		if (panierProduit.getProduit().getQteEnStock() - qteSouhaitee < 0) {
-			throw new ProductNotAvailableException("Vérifiez votre commande : Quantité disponible pour le produit "
+			throw new ProductNotAvailableException("Vérifiez votre commande ! Quantité disponible pour le produit "
 					+ panierProduit.getProduit().getProduitDescription() + " est : "
 					+ panierProduit.getProduit().getQteEnStock());
 		}
@@ -287,7 +287,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 			Produit produit = panierProduit.getProduit();
 			Short qteDispo = ShortUtils.substract2Short(produit.getQteEnStock(), panierProduit.getQteSouhaitee());
 			if (qteDispo < 0) {
-				throw new ProductNotAvailableException("Vérifier votre commande : Quantité disponible pour le produit "
+				throw new ProductNotAvailableException("Vérifier votre commande ! Quantité disponible pour le produit "
 						+ produit.getProduitDescription() + " est : " + produit.getQteEnStock());
 			}
 			// update stock

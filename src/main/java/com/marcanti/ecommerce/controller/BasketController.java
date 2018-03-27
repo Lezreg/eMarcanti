@@ -133,14 +133,14 @@ public class BasketController implements Serializable {
 
 		} catch (ProductNotAvailableException e) {
 			LOGGER.info(e.getMessage());
-			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, e.getMessage(),
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(),
 					"! Mettez à jour le panier");
-			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
+			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 		} catch (Exception e) {
 			LOGGER.info(e.getMessage());
-			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Problème Technique : ",
+			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problème Technique : ",
 					" Contactez votre administrateur");
-			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
+			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 		}
 	}
 
@@ -161,7 +161,7 @@ public class BasketController implements Serializable {
 			LOGGER.error(e.getMessage());
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, e.getMessage(),
 					"! Mettez à jour le panier");
-			FacesContext.getCurrentInstance().addMessage("qte", facesMsg);
+			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 		}
 
 	}
