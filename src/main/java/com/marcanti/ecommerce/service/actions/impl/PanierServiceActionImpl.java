@@ -81,12 +81,14 @@ public class PanierServiceActionImpl implements PanierActionService {
 		}
 		// FIXME search directly last commande
 		CommandeGroupee currentCmdGroupee = commandeGroupeeDAO.find(cmdgroupeeId);
+
 		String statusCode = currentCmdGroupee.getIdStatus().getStatusCode();
 		if (!CommandeGroupeeStatus.CDE_GROUPEE_CONFIRMEE.getCode().equals(statusCode)
 				&& !CommandeGroupeeStatus.CDE_GROUPEE_NON_CONFIRMEE.getCode().equals(statusCode)) {
 			throw new CommandeGroupeeValidatedExeception(
 					"Commande groupee a deja été validé pour l organisation: " + userSessionBean.getIdOrga());
 		}
+
 		Membre membre = membreDAO.find(userSessionBean.getIdMembre());
 		// verifier si panier existe deja (commande indiv)
 		// FIXME verifer le statut de commande indiv
@@ -125,15 +127,23 @@ public class PanierServiceActionImpl implements PanierActionService {
 			PanierProduit panierProduit = getNewPanierProduit(panierEnCours, produit);
 			panierProduitDAO.create(panierProduit);
 			// create commande indiv
-			CommandeIndividuelle commandeIndividuelle = getNewCommandeIndividuelle(membre, panierEnCours,
-					currentCmdGroupee);
-			commandeIndividuelleDAO.create(commandeIndividuelle);
+			saveCommandeIndividuelle(panierEnCours, currentCmdGroupee, membre);
 			// update qte produit
 			updateQteProduit(produit);
 		}
 
 		return panierEnCours;
 
+	}
+
+	private void saveCommandeIndividuelle(Panier panierEnCours, CommandeGroupee currentCmdGroupee, Membre membre) {
+		CommandeIndividuelle commandeIndividuelle = getNewCommandeIndividuelle(membre, panierEnCours,
+				currentCmdGroupee);
+		commandeIndividuelleDAO.create(commandeIndividuelle);
+		// update nom commande Individuelle
+		commandeIndividuelle
+				.setCdeIndivNom(commandeIndividuelle.getCdeIndivNom() + "_" + commandeIndividuelle.getIdCdeIndiv());
+		commandeIndividuelleDAO.edit(commandeIndividuelle);
 	}
 
 	@Override
@@ -216,6 +226,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 		panier = updateMontantNbreProduit(totalPanier, panier, panierNbreProduit);
 
 		// TODO commandeIndividuelle.setReduction(reduction);
+		commandeIndividuel.setCommentaire("MAJ PANIER");
 		// update commande individuelle
 		CommandeIndividuelle cmdIndiv = updateCommandeIndividuelle(userSessionBean, commandeIndividuel, panier);
 		return cmdIndiv;
@@ -394,8 +405,10 @@ public class PanierServiceActionImpl implements PanierActionService {
 		commandeIndividuelle.setIdMembre(utilisateur);
 		commandeIndividuelle.setIdPanier(panier);
 		commandeIndividuelle.setIdCdeGroupee(cmdgroupee);
+
 		commandeIndividuelle.setCdeIndivNom(
-				utilisateur.getIdOrga().getOrgaNom() + "_" + utilisateur.getMembreNom() + "_" + new Date().toString());
+				cmdgroupee.getCdeGroupeeNom() + "_" + utilisateur.getMembrePrenom() + "_" + utilisateur.getMembreNom());
+
 		commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO.getCommandeIndividuelleStatusByCode(
 				CommandeIndividuelleStatusEnum.CDE_INDIVID_NON_CONFIRMEE.getCode()));
 

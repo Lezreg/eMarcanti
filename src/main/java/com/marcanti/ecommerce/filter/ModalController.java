@@ -65,14 +65,14 @@ public class ModalController implements Serializable {
 			ajoutPanier = "cmdNotFoundError";
 			// return "/pages/private/errors/cmdNotFoundError.xhtml?faces-redirect=true";
 		} catch (CommandeGroupeeValidatedExeception e) {
-			LOGGER.info(e.getMessage());
+			LOGGER.error(e.getMessage());
 			ajoutPanier = "cmdValidatedError";
 			// return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
 		} catch (ProductOutOfStockException e) {
-			LOGGER.info(e.getMessage());
+			LOGGER.error(e.getMessage());
 			ajoutPanier = "KO";
 		} catch (Exception e) {
-			LOGGER.info(e.getMessage());
+			LOGGER.error(e.getMessage());
 			ajoutPanier = "cmdValidatedError";
 			// return "/pages/private/errors/cmdValidatedError.xhtml?faces-redirect=true";
 		}

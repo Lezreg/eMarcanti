@@ -23,6 +23,16 @@ public class DateUtils {
 		return cal.get(Calendar.DAY_OF_MONTH);
 	}
 
+	public static String getStringDay(final Date date) {
+		String sDay = "";
+		int day = getDay(date);
+		if (day < 10) {
+			sDay = "0" + day;
+		}
+		return sDay;
+
+	}
+
 	public static int getYear(final Date date) {
 		final Calendar cal = Calendar.getInstance();
 		cal.setTime(date);

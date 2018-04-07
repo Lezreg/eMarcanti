@@ -126,11 +126,8 @@ public class BasketController implements Serializable {
 
 		try {
 			this.panierProduitList = panierService.recalculer(panierProduitList, userSessionBean);
-			// La commande est confirmée ! Les produits vous ont été réservés.
-			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"La commande a été sauvegardée dans votre espace internet", null);
-			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-
+			// add messages
+			addFacesMessages();
 		} catch (ProductNotAvailableException e) {
 			LOGGER.info(e.getMessage());
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(),
@@ -142,6 +139,16 @@ public class BasketController implements Serializable {
 					" Contactez votre administrateur");
 			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 		}
+	}
+
+	private void addFacesMessages() {
+		FacesMessage saveMessageInfo = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"La commande a été sauvegardée dans votre espace internet", null);
+		FacesContext.getCurrentInstance().addMessage(null, saveMessageInfo);
+
+		FacesMessage saveMessageWarning = new FacesMessage(FacesMessage.SEVERITY_WARN,
+				"Veuillez confirmer la commande, afin que les produits vous soient réservés !", null);
+		FacesContext.getCurrentInstance().addMessage(null, saveMessageWarning);
 	}
 
 	/**

@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIViewRoot;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
@@ -87,15 +86,13 @@ public class CommandeGroupeeController implements Serializable {
 	public String createNew() {
 		this.commandeGroupee = newCommandeGroupee();
 		commandeGroupee.setDateCreation(new Date());
-		Organisation organisation = organisationServiceAction.getOrganisationById(getOrganisationId());
-		commandeGroupee.setIdOrga(organisation);
+		commandeGroupee.setIdOrga(organisationServiceAction.getOrganisationById(getOrganisationId()));
 		commandeGroupee.setCdeGroupeeNom(getCommandeGroupeName());
 		return "createCmd";
 	}
 
 	public String saveCmdGroupee() {
 		LOGGER.info("********************save and update methode ******************************");
-
 		// create new commande
 		if (commandeGroupee != null && commandeGroupee.getIdCdeGroupee() == null) {
 			commandeGroupee.setCdeGroupeeNom(getCommandeGroupeName());
@@ -106,7 +103,7 @@ public class CommandeGroupeeController implements Serializable {
 			commandeGroupee.setIsPaiementEffectue(false);
 			commandeGroupee.setIsEnCours(true);
 			commandeGroupee.setIdStatus(commandeGroupeeServiceAction
-					.getCommandeGroupeeStatusByCode(CommandeGroupeeStatus.CDE_GROUPEE_A_LIVRER.getCode()));
+					.getCommandeGroupeeStatusByCode(CommandeGroupeeStatus.CDE_GROUPEE_NON_CONFIRMEE.getCode()));
 			// update exist command
 		} else {
 			commandeGroupee.setDateModification(new Date());
@@ -124,10 +121,9 @@ public class CommandeGroupeeController implements Serializable {
 		}
 		commandeGroupeeServiceAction.saveCmdGroupee(commandeGroupee);
 
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		UIViewRoot viewRoot = facesContext.getViewRoot();
-
-		LOGGER.info(viewRoot.getClientId());
+		// FacesContext facesContext = FacesContext.getCurrentInstance();
+		// UIViewRoot viewRoot = facesContext.getViewRoot();
+		// LOGGER.info(viewRoot.getClientId());
 
 		return "cmdGroupees";
 	}
@@ -135,8 +131,8 @@ public class CommandeGroupeeController implements Serializable {
 	private String getCommandeGroupeName() {
 		Date date = new Date();
 		String monthName = DateUtils.getMonthName(DateUtils.getMonth(date), Locale.FRANCE);
-		return getOrganisation().getOrgaAlias() + "_" + DateUtils.getYear(date) + "_"
-				+ monthName.substring(0, 3).toUpperCase() + "_" + DateUtils.getDay(date);
+		return getOrganisation().getOrgaAlias() + "_" + DateUtils.getStringDay(date) + "_"
+				+ monthName.substring(0, 3).toUpperCase() + "_" + DateUtils.getYear(date);
 	}
 
 	public String editCommandeGroupee() {
