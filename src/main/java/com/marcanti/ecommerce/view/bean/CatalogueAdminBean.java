@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.marcanti.ecommerce.model.Categorie;
-import com.marcanti.ecommerce.model.Departement;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.model.SousCategorie;
@@ -84,6 +84,12 @@ public class CatalogueAdminBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		this.produit = new Produit();
+		//this.produit.setIdCategorie(new Categorie());
+		//this.produit.setIdMarque(new Marque());
+		this.produit.setProduitDescription("");
+		this.produit.setNotrePrix(new BigDecimal(0));
+		this.produit.setPrixPublic(new BigDecimal(0));
 		this.catalogueList = catalogueService.getCatalogueList();
 		this.marqueList = marqueService.getMarqueList();
 		this.categorieList = categorieService.getCategorieList();
@@ -262,11 +268,57 @@ public class CatalogueAdminBean implements Serializable {
 	
 	public String insertOrUpdateProduit() {
 		
-		FacesMessage facesMessage = new FacesMessage();
+		FacesMessage facesMessage = null;
 		String msg;
+		boolean isError = false;
 		String ecran ="produit";
 		
 		logger.info("insertOrUpdateProduit");
+		
+		if(getProduit().getProduitDescription()==null || getProduit().getProduitDescription().equals("")){
+			msg = ParfumUtils.getBundleApplication().getString("description_obligatoire");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}
+		if(getProduit().getNotrePrix()==null){
+			msg = ParfumUtils.getBundleApplication().getString("notre_prix_obligatoire");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}
+		if(getProduit().getPrixPublic()==null){
+			msg = ParfumUtils.getBundleApplication().getString("prix_public_constate_obligatoire");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}	
+		if(getProduit().getProduitDetail()!=null && getProduit().getProduitDetail().length()>600){
+			msg = ParfumUtils.getBundleApplication().getString("description_taille");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}		
+		if(getProduit().getDescriptionADecouvrir()!=null && getProduit().getDescriptionADecouvrir().length()>600){
+			msg = ParfumUtils.getBundleApplication().getString("description_decouvrir_taille");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}		
+		
+		if(isError){
+			return ecran;
+		}
 
 		if(this.produit.getIdProduit()==null || this.produit.getIdProduit()==0L){
 				
@@ -283,6 +335,7 @@ public class CatalogueAdminBean implements Serializable {
 		}
 		//on rafraichit la liste des sous-categories
 		this.catalogueList=catalogueService.getCatalogueList();
+		facesMessage = new FacesMessage();
 		facesMessage.setSummary(msg); 
 		facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
 	    FacesContext.getCurrentInstance().addMessage(null, facesMessage);		

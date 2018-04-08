@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.faces.bean.ManagedBean;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -60,7 +59,6 @@ import javax.xml.bind.annotation.XmlTransient;
 		@NamedQuery(name = "Produit.findByDescriptionADecouvrir", query = "SELECT p FROM Produit p WHERE p.descriptionADecouvrir = :descriptionADecouvrir"),
 		@NamedQuery(name = "Produit.findByMotCleADecouvrir", query = "SELECT p FROM Produit p WHERE p.motCleADecouvrir = :motCleADecouvrir"),
 		@NamedQuery(name = "Produit.findByCodeEAN", query = "SELECT p FROM Produit p WHERE p.codeEAN = :codeEAN") })
-@ManagedBean(name = "produit")
 public class Produit implements Serializable {
 
 	private static final long serialVersionUID = 1L;

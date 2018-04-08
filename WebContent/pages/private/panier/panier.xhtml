@@ -216,7 +216,7 @@
 																			<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="product"/><span>#{panierProduit.produit.idMarque.marqueNom}</span>
 																		</ui:fragment>
 																		<ui:fragment rendered="#{!empty panierProduit.produit.produitPhotoURL}">
-																			<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderPath}/#{panierProduit.produit.produitPhotoURL}" class="img-responsive" alt="product"/><span>#{panierProduit.produit.idMarque.marqueNom}</span>
+																			<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{panierProduit.produit.produitPhotoURL}" class="img-responsive" alt="product"/><span>#{panierProduit.produit.idMarque.marqueNom}</span>
 																		</ui:fragment>
 																	</p>
 														</td>

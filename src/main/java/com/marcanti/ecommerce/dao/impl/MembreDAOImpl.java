@@ -103,6 +103,7 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
 				+ "membreEmail=?, "
 				+ "membreTel=?, "
 				+ "isActif=?, "
+				+ "password=?, "
 				+ "isDefaultPassword=?, "
 				+ "dateModification=? "
 				+ "WHERE idMembre=?")
@@ -111,9 +112,10 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
 				.setParameter(3, filleul.getMembreEmail())
 				.setParameter(4, filleul.getMembreTel())
 				.setParameter(5, filleul.getIsActif())
-				.setParameter(6, filleul.getIsDefaultPassword())
-				.setParameter(7, filleul.getDateModification())
-				.setParameter(8, filleul.getIdMembre());
+				.setParameter(6, filleul.getPassword())
+				.setParameter(7, filleul.getIsDefaultPassword())
+				.setParameter(8, filleul.getDateModification())
+				.setParameter(9, filleul.getIdMembre());
 		query.executeUpdate();
 		//em.merge(filleul);
 		//em.refresh(filleul);
@@ -162,6 +164,7 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
 				+ "membreTel=?, "
 				+ "hasReduc=?, "
 				+ "isActif=?, "
+				+ "password=?, "
 				+ "isDefaultPassword=?, "
 				+ "dateModification=? "
 				+ "WHERE idMembre=?")
@@ -174,9 +177,10 @@ public class MembreDAOImpl extends AbstractGenericDAO<Membre> implements MembreD
 				.setParameter(7, membre.getMembreTel())
 				.setParameter(8, membre.getHasReduc())
 				.setParameter(9, membre.getIsActif())
-				.setParameter(10, membre.getIsDefaultPassword())
-				.setParameter(11, membre.getDateModification())
-				.setParameter(12, membre.getIdMembre());
+				.setParameter(10, membre.getPassword())
+				.setParameter(11, membre.getIsDefaultPassword())
+				.setParameter(12, membre.getDateModification())
+				.setParameter(13, membre.getIdMembre());
 		query.executeUpdate();
 	}
 	

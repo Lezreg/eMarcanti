@@ -219,47 +219,49 @@
 											</div>
 										</div>
 	
-										<div class="clearfix"></div>
-	
-										<div class="marqueinfo marginRow">
-											<div class="paddingless col-sm-4">
-												<div class="marquestext">
-													<p>
-														<h:outputLabel value="#{msg.libelle_cpt_active}" />
-													</p>
+										<c:if test="#{membreBean.compteRendered}" scope="session">	
+											<div class="clearfix"></div>
+											<div class="marqueinfo marginRow">
+												<div class="paddingless col-sm-4">
+													<div class="marquestext">
+														<p>
+															<h:outputLabel value="#{msg.libelle_cpt_active}" />
+														</p>
+													</div>
 												</div>
-											</div>
-											<div class="paddingless col-sm-8">
-												<div class="marquestext">
-													<div class="maequescheckb checkbox">
-														<h:selectOneRadio id="idActif" value="#{membreBean.membre.isActif}">
-															<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
-														</h:selectOneRadio>	
-													</div>									        
-												</div>
-											</div>
-										</div>
-	
-										<div class="clearfix"></div>
-	
-										<div class="marqueinfo marginRow">
-											<div class="paddingless col-sm-4">
-												<div class="marquestext">
-													<p>
-														<h:outputLabel value="#{msg.libelle_drt_reduc}" rendered="#{membreBean.hasReducRendered}" />
-													</p>
-												</div>
-											</div>
-											<div class="paddingless col-sm-8">
-												<div class="marquestext">
-													<div class="maequescheckb checkbox">
-														<h:selectOneRadio id="idReduc" value="#{membreBean.membre.hasReduc}" rendered="#{membreBean.hasReducRendered}">
-															<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
-														</h:selectOneRadio>
+												<div class="paddingless col-sm-8">
+													<div class="marquestext">
+														<div class="maequescheckb checkbox">
+															<h:selectOneRadio id="idActif" value="#{membreBean.membre.isActif}" >
+																<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+															</h:selectOneRadio>	
+														</div>									        
 													</div>
 												</div>
 											</div>
-										</div>
+										</c:if>											
+	
+										<c:if test="#{membreBean.hasReducRendered}" scope="session">
+											<div class="clearfix"></div>
+											<div class="marqueinfo marginRow">
+												<div class="paddingless col-sm-4">
+													<div class="marquestext">
+														<p>
+															<h:outputLabel value="#{msg.libelle_drt_reduc}" rendered="#{membreBean.hasReducRendered}" />
+														</p>
+													</div>
+												</div>
+												<div class="paddingless col-sm-8">
+													<div class="marquestext">
+														<div class="maequescheckb checkbox">
+															<h:selectOneRadio id="idReduc" value="#{membreBean.membre.hasReduc}" rendered="#{membreBean.hasReducRendered}">
+																<f:selectItems value="#{referentielBean.radioButtonOuiNon}" />
+															</h:selectOneRadio>
+														</div>
+													</div>
+												</div>
+											</div>
+										</c:if>
 									</c:if>
 
 									<div class="clearfix"></div>

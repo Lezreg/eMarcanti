@@ -62,6 +62,8 @@ public class CarouselsBean implements Serializable {
 	public void init() {
 		this.carouselList = carouselService.getCarouselList();
 		this.carousel = new Carousel(0);
+		Short idMarque = 0;
+		this.carousel.setIdMarque(new Marque(idMarque));
 		this.marqueList = marqueService.getMarqueList();
 	}
 	

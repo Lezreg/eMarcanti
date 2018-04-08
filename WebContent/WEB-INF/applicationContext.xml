@@ -30,6 +30,11 @@
 		<beans:property name="dataSource" ref="jndiDataSource" />
 		<beans:property name="packagesToScan" value="com.marcanti.ecommerce.model" />
 		<beans:property name="jpaVendorAdapter" ref="hibernateJpaAdapter" />
+        <beans:property name="jpaPropertyMap">
+            <beans:map>
+                <beans:entry key="javax.persistence.validation.mode" value="none"/>
+            </beans:map>
+        </beans:property>		
 	</beans:bean>
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 

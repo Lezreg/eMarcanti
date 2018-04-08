@@ -71,9 +71,11 @@ public class ReferentielBean implements Serializable {
 	
 	private String uploadFolderPath;
 	
-	private String uploadCatalogFolderPath;
+	private String uploadFolderUrl;
 	
-	private String uploadCarouselFolderPath;
+	//private String uploadCatalogFolderPath;
+	
+	//private String uploadCarouselFolderPath;
 	
 	private String uploadFileExt;
 	
@@ -222,20 +224,37 @@ public class ReferentielBean implements Serializable {
 		this.uploadFolderPath = uploadFolderPath;
 	}
 	
+	public String getUploadFolderUrl() {
+		return uploadFolderUrl;
+	}
+
+	public void setUploadFolderUrl(String uploadFolderUrl) {
+		this.uploadFolderUrl = uploadFolderUrl;
+	}
+
 	public String getUploadCatalogFolderPath() {
 		return uploadFolderPath+File.separator+CATALOGUE;
 	}
 
-	public void setUploadCatalogFolderPath(String uploadCatalogFolderPath) {
+	/*public void setUploadCatalogFolderPath(String uploadCatalogFolderPath) {
 		this.uploadCatalogFolderPath = uploadCatalogFolderPath;
-	}
+	}*/
 
 	public String getUploadCarouselFolderPath() {
 		return uploadFolderPath+File.separator+CAROUSEL;
 	}
 
-	public void setUploadCarouselFolderPath(String uploadCarouselFolderPath) {
+	/*public void setUploadCarouselFolderPath(String uploadCarouselFolderPath) {
 		this.uploadCarouselFolderPath = uploadCarouselFolderPath;
+	}*/
+	
+	
+	public String getUploadCatalogFolderUrl() {
+		return uploadFolderUrl+File.separator+CATALOGUE;
+	}
+
+	public String getUploadCarouselFolderUrl() {
+		return uploadFolderUrl+File.separator+CAROUSEL;
 	}
 
 	public String getUploadFileExt() {
@@ -293,6 +312,7 @@ public class ReferentielBean implements Serializable {
 			uploadFileExt=prop.getProperty("upload.file.ext");
 			uploadFileSize=prop.getProperty("upload.file.size");
 			mailFolderPath=prop.getProperty("mail.folder.path");
+			uploadFolderUrl="upload";
 			
 		} catch (Exception e) {
 			logger.error("ERROR loading conf file : " + confFilePath,e);

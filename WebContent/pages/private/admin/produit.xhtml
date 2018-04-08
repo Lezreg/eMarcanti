@@ -3,6 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:body>
@@ -43,7 +44,7 @@
 										<h3>#{catalogueAdminBean.titre}</h3>
 									</div>
 									<div>
-										<h:messages errorClass="redclass" infoClass="greenclass" />
+										<h:messages errorClass="redclass" infoClass="greenclass" id="messages_view" />
 									</div>
 
 									<div class="marqueinfo marginRow">
@@ -78,9 +79,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<h:inputText value="#{catalogueAdminBean.produit.produitDescription}"
-													maxlength="600" required="true"
-													requiredMessage="#{msg.description_obligatoire}" />
+												<h:inputText id="produitDescription" value="#{catalogueAdminBean.produit.produitDescription}" maxlength="600"  />
 											</div>
 										</div>
 									</div>
@@ -142,9 +141,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription notthreeretextarea">
-												<h:inputText value="#{catalogueAdminBean.produit.notrePrix}"
-													maxlength="10" required="true"
-													requiredMessage="#{msg.notre_prix_obligatoire}" />
+												<h:inputText value="#{catalogueAdminBean.produit.notrePrix}" maxlength="10" />
 											</div>
 										</div>
 									</div>
@@ -161,9 +158,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription notthreeretextarea">
-												<h:inputText value="#{catalogueAdminBean.produit.prixPublic}"
-													maxlength="10" required="true"
-													requiredMessage="#{msg.prix_public_constate_obligatoire}" />
+												<h:inputText value="#{catalogueAdminBean.produit.prixPublic}" maxlength="10" />
 											</div>
 										</div>
 									</div>
@@ -180,9 +175,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription notthreeretextarea">
-												<h:inputText value="#{catalogueAdminBean.qteEnStock}"
-													maxlength="6" required="true"
-													requiredMessage="#{msg.qte_stock_obligatoire}" />
+												<h:inputText value="#{catalogueAdminBean.qteEnStock}" maxlength="6"  />
 											</div>
 										</div>
 									</div>
@@ -199,7 +192,7 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<p:fileUpload value="#{catalogueAdminBean.uploadedPhoto}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhoto}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
+													<p:fileUpload value="#{catalogueAdminBean.uploadedPhoto}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhoto}" multiple="true" mode="advanced"  auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
 												</div>
 												<span class="upload-path"></span>
 											</div>
@@ -218,7 +211,7 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoMoyenne}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoMoyenne}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
+													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoMoyenne}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoMoyenne}" multiple="true" mode="advanced"  auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
 												</div>
 												<span class="upload-pathtwo"></span>
 											</div>
@@ -235,7 +228,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription maindescriptiontext">
-												<h:inputTextarea styleClass="form-control" value="#{catalogueAdminBean.produit.produitDetail}" rows="3" />
+												<h:inputTextarea styleClass="form-control" value="#{catalogueAdminBean.produit.produitDetail}" rows="1" pt:maxlength="600" />
 											</div>
 										</div>
 									</div>
@@ -573,7 +566,7 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription maindescriptiontext">
-												<h:inputTextarea styleClass="form-control" value="#{catalogueAdminBean.produit.descriptionADecouvrir}" rows="3" />
+												<h:inputTextarea styleClass="form-control" value="#{catalogueAdminBean.produit.descriptionADecouvrir}" rows="1" pt:maxlength="600"  />
 											</div>
 										</div>
 									</div>
@@ -610,7 +603,7 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoLarge}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoLarge}" multiple="true" mode="advanced" required="true" auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
+													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoLarge}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoLarge}" multiple="true" mode="advanced"  auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
 												</div>
 												<span class="upload-paththree"></span>
 											</div>

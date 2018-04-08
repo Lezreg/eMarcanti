@@ -62,6 +62,8 @@ public class MembreBean implements Serializable {
 	
 	private String parrainRendered="false";
 	
+	private String compteRendered="true";
+	
 	private String isMembreConnectedAdmin="false";
 	
 	private String isAdminRendered="false";
@@ -128,6 +130,7 @@ public class MembreBean implements Serializable {
 			setOrgaDisabled("true");
 			this.roleList=ReferentielBean.getMemberRoleList();
 		}
+		setCompteRendered("true");
 		this.organisationList = organisationService.getOrganisationList();
 		this.departementList = departementService.getDepartementByOrgaList(organisationList.get(0));
 		this.parrainList = new ArrayList<Membre>();
@@ -283,6 +286,18 @@ public class MembreBean implements Serializable {
 	public String getParrainRendered() {
 		return parrainRendered;
 	}
+	
+	public void setParrainRendered(String parrainRendered) {
+		this.parrainRendered = parrainRendered;
+	}
+
+	public String getCompteRendered() {
+		return compteRendered;
+	}
+
+	public void setCompteRendered(String compteRendered) {
+		this.compteRendered = compteRendered;
+	}
 
 	public String getIsMembreConnectedAdmin() {
 		return isMembreConnectedAdmin;
@@ -300,10 +315,6 @@ public class MembreBean implements Serializable {
 		this.isMembreConnectedAdmin = isMembreConnectedAdmin;
 	}
 
-	public void setParrainRendered(String parrainRendered) {
-		this.parrainRendered = parrainRendered;
-	}
-	
 	public String getOldMembreEmail() {
 		return oldMembreEmail;
 	}
@@ -491,7 +502,7 @@ public class MembreBean implements Serializable {
 				this.parrainList = membreService.getParrainByOrgaList(getIdOrga(),idProfilList);
 				this.roleList=ReferentielBean.getMemberRoleList();
 				setListParrainDisabled("true");
-				setRoleDisabled("true");
+				//setRoleDisabled("true");
 			}
 		}else if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_MEMBRE){
 			this.roleList=ReferentielBean.getManagerRoleList();
@@ -500,7 +511,6 @@ public class MembreBean implements Serializable {
 			this.roleList=ReferentielBean.getAdminRoleList();
 			
 		}
-			
 		
 		if(this.membre!=null && this.membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_ADMIN){
 			setIsAdminRendered("true");
@@ -509,6 +519,8 @@ public class MembreBean implements Serializable {
 		}
 		setIsAddAction("false");
 		setIsEditMembre("false");
+		setRoleDisabled("true");
+		setCompteRendered("false");
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_mon_compte");
 		return "membre";
 	}	
@@ -533,12 +545,13 @@ public class MembreBean implements Serializable {
 		setIsAdminRendered("false");
 		setIsAddAction("true");
 		setIsEditMembre("true");
+		setCompteRendered("true");
 		return "membre";
 	}	
 	
 	public String insertOrUpdateMembre() {
 		
-		FacesMessage facesMessage = null;
+		FacesMessage facesMessage = new FacesMessage();
 		Calendar calendar = Calendar.getInstance();
 		Date dateToday =  calendar.getTime();
 		String msg;
@@ -635,6 +648,16 @@ public class MembreBean implements Serializable {
 		}else{
 			if(getMembreEmail().equals(getOldMembreEmail())){
 				membre.setDateModification(dateToday);
+				if(getIsDefaultPassword()){
+					String password = referentielBean.getDefaultPassword();
+					membre.setPassword(DigestUtils.sha512Hex(password));
+					try {
+						logger.info("send mail membre with password : " + password);
+						Mail.send(membre.getMembreEmail(), ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.nouveau.membre.modifie"),userSessionBean.getMembrePrenom(),userSessionBean.getMembreNom(),membre.getMembreEmail(),password));
+					} catch (MessagingException e) {
+						logger.error("ERROR send mail membre with password : ",e);
+					}
+				}				
 				if(getIdProfil()!=null && getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
 					if(getIdMembreParrain()==null){
 						msg = ParfumUtils.getBundleApplication().getString("message.parrain.obligatoire");
@@ -650,16 +673,7 @@ public class MembreBean implements Serializable {
 				}else{
 					membreService.updateMembre(membre);
 				}
-				if(getIsDefaultPassword()){
-					String password = referentielBean.getDefaultPassword();
-					membre.setPassword(DigestUtils.sha512Hex(password));
-					try {
-						logger.info("send mail membre with password : " + password);
-						Mail.send(membre.getMembreEmail(), ParfumUtils.getBundleApplication().getString("message.membre.topic"),MessageFormat.format(ParfumUtils.getBundleApplication().getString("message.nouveau.membre.modifie"),userSessionBean.getMembrePrenom(),userSessionBean.getMembreNom(),membre.getMembreEmail(),password));
-					} catch (MessagingException e) {
-						logger.error("ERROR send mail membre with password : ",e);
-					}
-				}
+
 				msg = ParfumUtils.getBundleApplication().getString("message.modif.membre");
 				facesMessage.setSummary(msg); 
 				facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);
@@ -674,7 +688,6 @@ public class MembreBean implements Serializable {
 				    FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 				}else{
 					membre.setDateModification(dateToday);
-					membreService.updateMembre(membre);
 					if(getIsDefaultPassword()){
 						String password = referentielBean.getDefaultPassword();
 						membre.setPassword(DigestUtils.sha512Hex(password));
@@ -684,7 +697,8 @@ public class MembreBean implements Serializable {
 						} catch (MessagingException e) {
 							logger.error("ERROR send mail membre with password : ",e);
 						}
-					}
+					}					
+					membreService.updateMembre(membre);
 					msg = ParfumUtils.getBundleApplication().getString("message.modif.membre");
 					facesMessage.setSummary(msg); 
 					facesMessage.setSeverity(FacesMessage.SEVERITY_INFO);

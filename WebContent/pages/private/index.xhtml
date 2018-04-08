@@ -31,7 +31,7 @@
 						<ui:repeat var="carousel" value="#{carouselIndexBean.carouselList}">
 
 							<div class="item">
-								<img src="#{request.contextPath}/#{referentielBean.uploadCarouselFolderPath}/#{carousel.elementImageURL}" class="img-responsive" alt="slider"/>
+								<img src="#{request.contextPath}/#{referentielBean.uploadCarouselFolderUrl}/#{carousel.elementImageURL}" class="img-responsive" alt="slider"/>
 								<div class="newfirstslidecontent carousel-caption">
 									<div class="newslidermiddlearea newspcialslider specialslideinner">
 										<div class="first_slideInner newsliderheadeing">
@@ -44,7 +44,7 @@
 												<span>#{carousel.produitSousTitre}</span>
 											</div>
 										</div>
-										<button class="ourproductbutton" onclick="location.href='#{carousel.elementLienURL}';">Notre Produit</button>
+										<button class="ourproductbutton" onclick="location.href='#{carousel.elementLienURL}';">#{carousel.boutonLibelle}</button>
 									</div>
 								</div>
 							</div>
