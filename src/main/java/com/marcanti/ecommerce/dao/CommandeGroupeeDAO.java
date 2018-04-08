@@ -22,4 +22,6 @@ public interface CommandeGroupeeDAO extends GenericDAO<CommandeGroupee> {
 
 	List<VCdeGroupeeDetail> getCmdGroupeesFilleulsByStatus(List<Long> idsMembre, String status);
 
+	List<CommandeGroupee> getCmdGroupeesPaiementByOrganisation(Long idOrg, boolean isPaiementEffectue);
+
 }

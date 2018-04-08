@@ -133,4 +133,9 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 		return commandeGroupeeStatusDAO.findAll();
 	}
 
+	@Override
+	public List<CommandeGroupee> getCmdGroupeesPaiementByOrganisation(Long idOrg, boolean isPaiementEffectue) {
+		return commandeGroupeeDAO.getCmdGroupeesPaiementByOrganisation(idOrg, isPaiementEffectue);
+	}
+
 }

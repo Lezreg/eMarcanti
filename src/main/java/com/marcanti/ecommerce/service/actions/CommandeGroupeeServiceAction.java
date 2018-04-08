@@ -26,4 +26,6 @@ public interface CommandeGroupeeServiceAction {
 	List<VCdeGroupeeDetail> getCmdGroupeesFilleulsByStatus(Long membreId, String status);
 
 	List<CommandeGroupeeStatus> getAllCommandeGroupeeStatus();
+
+	List<CommandeGroupee> getCmdGroupeesPaiementByOrganisation(Long idOrg, boolean isPaiementEffectue);
 }

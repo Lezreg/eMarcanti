@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -84,11 +85,29 @@ public class CommandeGroupeeController implements Serializable {
 	}
 
 	public String createNew() {
+		// checkCommandeGroupee
+		List<CommandeGroupee> cmdGroupeesList = commandeGroupeeServiceAction
+				.getCmdGroupeesPaiementByOrganisation(getOrganisationId(), Boolean.FALSE);
+
+		if (cmdGroupeesList != null && !cmdGroupeesList.isEmpty()) {
+			addFacesMessages(cmdGroupeesList.get(0));
+			return "";
+		}
 		this.commandeGroupee = newCommandeGroupee();
 		commandeGroupee.setDateCreation(new Date());
 		commandeGroupee.setIdOrga(organisationServiceAction.getOrganisationById(getOrganisationId()));
 		commandeGroupee.setCdeGroupeeNom(getCommandeGroupeName());
 		return "createCmd";
+	}
+
+	private void addFacesMessages(CommandeGroupee currentCommandeGroupee) {
+
+		FacesMessage newCmdMessageWarning = new FacesMessage(FacesMessage.SEVERITY_WARN,
+				"La commande précédente : " + currentCommandeGroupee.getCdeGroupeeNom()
+						+ " n’a pas été complètement payée !\r\n"
+						+ "Vérifier la (ou les) personnes concernée (s) dans le détail. ",
+				null);
+		FacesContext.getCurrentInstance().addMessage(null, newCmdMessageWarning);
 	}
 
 	public String saveCmdGroupee() {

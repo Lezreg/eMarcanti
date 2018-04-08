@@ -113,6 +113,17 @@ public class CommandeGroupeeDAOImpl extends AbstractGenericDAO<CommandeGroupee> 
 	}
 
 	@Override
+	public List<CommandeGroupee> getCmdGroupeesPaiementByOrganisation(Long idOrg, boolean isPaiementEffectue) {
+		LOGGER.info(
+				"-----getCmdGroupeesByOrganisation : idOrg =" + idOrg + " isPaiementEffectue :" + isPaiementEffectue);
+		List<CommandeGroupee> cmdGroupees = em.createQuery(
+				"SELECT v FROM CommandeGroupee v WHERE v.idOrga.idOrga = :idOrga and v.isPaiementEffectue = :isPaiementEffectue",
+				CommandeGroupee.class).setParameter("idOrga", idOrg)
+				.setParameter("isPaiementEffectue", isPaiementEffectue).getResultList();
+		return cmdGroupees;
+	}
+
+	@Override
 	public List<VReduction> getAllReductions() {
 		LOGGER.info("-----getReductions");
 		List<VReduction> reductions = em.createQuery("SELECT v FROM VReduction v", VReduction.class).getResultList();
