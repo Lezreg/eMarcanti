@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.marcanti.ecommerce.constants.CommandeGroupeeStatus;
 import com.marcanti.ecommerce.dao.AbstractGenericDAO;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.model.CommandeGroupee;
@@ -117,9 +118,11 @@ public class CommandeGroupeeDAOImpl extends AbstractGenericDAO<CommandeGroupee> 
 		LOGGER.info(
 				"-----getCmdGroupeesByOrganisation : idOrg =" + idOrg + " isPaiementEffectue :" + isPaiementEffectue);
 		List<CommandeGroupee> cmdGroupees = em.createQuery(
-				"SELECT v FROM CommandeGroupee v WHERE v.idOrga.idOrga = :idOrga and v.isPaiementEffectue = :isPaiementEffectue",
+				"SELECT v FROM CommandeGroupee v WHERE v.idOrga.idOrga = :idOrga and v.isPaiementEffectue = :isPaiementEffectue and v.idStatus.statusCode not in (:statusCode) ",
 				CommandeGroupee.class).setParameter("idOrga", idOrg)
-				.setParameter("isPaiementEffectue", isPaiementEffectue).getResultList();
+				.setParameter("isPaiementEffectue", isPaiementEffectue)
+				.setParameter("statusCode", CommandeGroupeeStatus.CDE_GROUPEE_ANNULEE.getCode()).getResultList();
+		LOGGER.info("********************************************: " + em.toString());
 		return cmdGroupees;
 	}
 

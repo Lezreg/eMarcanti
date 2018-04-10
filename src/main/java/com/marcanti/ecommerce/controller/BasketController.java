@@ -118,7 +118,7 @@ public class BasketController implements Serializable {
 	}
 
 	/**
-	 * recalculer la panier après la modification
+	 * recalculer le panier après la modification
 	 */
 	public void reCalculer() {
 
@@ -129,12 +129,18 @@ public class BasketController implements Serializable {
 			// add messages
 			addFacesMessages();
 		} catch (ProductNotAvailableException e) {
-			LOGGER.info(e.getMessage());
+
+			try {
+				panierService.updatePanierProduits(panierProduitList);
+			} catch (Exception e1) {
+				LOGGER.error(e1.getMessage());
+			}
+			LOGGER.error(e.getMessage());
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(),
 					"! Mettez à jour le panier");
 			FacesContext.getCurrentInstance().addMessage(null, facesMsg);
 		} catch (Exception e) {
-			LOGGER.info(e.getMessage());
+			LOGGER.error(e.getMessage());
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Problème Technique : ",
 					" Contactez votre administrateur");
 			FacesContext.getCurrentInstance().addMessage(null, facesMsg);

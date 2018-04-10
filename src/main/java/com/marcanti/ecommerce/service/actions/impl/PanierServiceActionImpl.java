@@ -210,6 +210,15 @@ public class PanierServiceActionImpl implements PanierActionService {
 		return getProduitsByCmdIndiv(cmdIndiv.getIdCdeIndiv());
 	}
 
+	@Override
+	public void updatePanierProduits(List<PanierProduit> panierProduitList) {
+		// save panierProduit
+		for (PanierProduit panierProduit : panierProduitList) {
+			panierProduitDAO.edit(panierProduit);
+		}
+
+	}
+
 	/**
 	 * update montant panier et commande indiv
 	 * 
@@ -271,6 +280,10 @@ public class PanierServiceActionImpl implements PanierActionService {
 		}
 
 		if (panierProduit.getProduit().getQteEnStock() - qteSouhaitee < 0) {
+
+			// 4.1.10.1 mise a jour panier par la qte disponible !
+			panierProduit.setQteSouhaitee(panierProduit.getProduit().getQteEnStock());
+
 			throw new ProductNotAvailableException("Vérifiez votre commande ! Quantité disponible pour le produit "
 					+ panierProduit.getProduit().getProduitDescription() + " est : "
 					+ panierProduit.getProduit().getQteEnStock());

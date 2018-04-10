@@ -121,6 +121,18 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 	}
 
 	@Override
+	public List<CommandeIndividuelle> getCommandeIndivListByCmdGroupe(Long idCdeGroupee) {
+		Query query = em.createQuery(
+				"SELECT c FROM CommandeIndividuelle c WHERE ( c.idCdeGroupee.idCdeGroupee = :idCdeGroupee) order by date(dateCreation) desc")
+				.setParameter("idCdeGroupee", idCdeGroupee);
+
+		if (query.getResultList() == null || query.getResultList().isEmpty()) {
+			return Collections.emptyList();
+		}
+		return (List<CommandeIndividuelle>) query.getResultList();
+	}
+
+	@Override
 	public List<CommandeIndividuelle> getCommandeIndivLivreListByMembre(Long idMembre) {
 		Query query = em.createQuery(
 				"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.isPaiementEffectue = :isPaiementEffectue) order by date(dateCreation) desc")

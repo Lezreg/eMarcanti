@@ -33,4 +33,6 @@ public interface PanierActionService {
 
 	CommandeIndividuelle getLastCommandeIndividuelle(UserSessionBean userSessionBean);
 
+	void updatePanierProduits(List<PanierProduit> panierProduitList);
+
 }

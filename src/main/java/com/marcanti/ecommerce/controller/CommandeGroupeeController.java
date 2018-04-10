@@ -79,7 +79,6 @@ public class CommandeGroupeeController implements Serializable {
 		WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext).getAutowireCapableBeanFactory()
 				.autowireBean(this);
 
-		// commandeGroupee = new CommandeGroupee();
 		userSessionBean = ParfumUtils.getUserSessionBean();
 		locale = Locale.FRANCE;
 	}
@@ -93,7 +92,7 @@ public class CommandeGroupeeController implements Serializable {
 			addFacesMessages(cmdGroupeesList.get(0));
 			return "";
 		}
-		this.commandeGroupee = newCommandeGroupee();
+		this.commandeGroupee = new CommandeGroupee();
 		commandeGroupee.setDateCreation(new Date());
 		commandeGroupee.setIdOrga(organisationServiceAction.getOrganisationById(getOrganisationId()));
 		commandeGroupee.setCdeGroupeeNom(getCommandeGroupeName());
@@ -133,17 +132,17 @@ public class CommandeGroupeeController implements Serializable {
 			// FIXME date creation, n'est pas date du jour lors de mise à jour
 			// problème jsf ou hibernate à resoudre
 			commandeGroupee.setDateCreation(new Date());
-			// commandeGroupee.setIdStatus(commandeGroupeeServiceAction
-			// .);
-
 			commandeGroupee.setIdStatus(commandeGroupeeServiceAction.getCommandeGroupeeStatusByCode(StatusCode));
 		}
 		commandeGroupeeServiceAction.saveCmdGroupee(commandeGroupee);
 
-		// FacesContext facesContext = FacesContext.getCurrentInstance();
-		// UIViewRoot viewRoot = facesContext.getViewRoot();
-		// LOGGER.info(viewRoot.getClientId());
+		return "cmdGroupees";
+	}
 
+	public String annulerCmdGroupee() {
+		if (commandeGroupee.getIdCdeGroupee() != null) {
+			commandeGroupeeServiceAction.annulerCmdGroupee(commandeGroupee);
+		}
 		return "cmdGroupees";
 	}
 

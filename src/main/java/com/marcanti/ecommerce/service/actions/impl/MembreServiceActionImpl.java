@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.marcanti.ecommerce.dao.FilleulDAO;
 import com.marcanti.ecommerce.dao.MembreDAO;
@@ -15,17 +16,16 @@ import com.marcanti.ecommerce.service.actions.MembreServiceAction;
 import com.marcanti.ecommerce.view.bean.ReferentielBean;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
-
 @Service("membreService")
+@Transactional
 public class MembreServiceActionImpl implements MembreServiceAction {
-
 
 	@Autowired
 	private MembreDAO membreDAO;
-	
+
 	@Autowired
-	private FilleulDAO filleulDAO;	
- 
+	private FilleulDAO filleulDAO;
+
 	public MembreDAO getMembreDAO() {
 		return membreDAO;
 	}
@@ -42,13 +42,13 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 	@Override
 	public void updateFilleulMembre(Membre filleul) {
 		membreDAO.updateFilleulMembre(filleul);
-		
+
 	}
 
 	@Override
 	public void insertFilleulMembre(Membre filleul, UserSessionBean parrain) {
-		membreDAO.insertFilleulMembre(filleul,parrain);
-		
+		membreDAO.insertFilleulMembre(filleul, parrain);
+
 	}
 
 	@Override
@@ -57,9 +57,9 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 		List<Membre> membres = membreDAO.findAll();
 		for (int i = 0; i < membres.size(); i++) {
 			membre = membres.get(i);
-			if(membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
+			if (membre.getIdProfil().getIdProfil() == ReferentielBean.PROFIL_FILLEUL) {
 				Filleul filleul = filleulDAO.getFilleul(membre.getIdMembre());
-				if(filleul!=null){
+				if (filleul != null) {
 					membre.setNomParrain(filleul.getParrainNom());
 				}
 			}
@@ -73,9 +73,9 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 		List<Membre> membres = membreDAO.getMembreByOrgaList(idOrga);
 		for (int i = 0; i < membres.size(); i++) {
 			membre = membres.get(i);
-			if(membre.getIdProfil().getIdProfil()==ReferentielBean.PROFIL_FILLEUL){
+			if (membre.getIdProfil().getIdProfil() == ReferentielBean.PROFIL_FILLEUL) {
 				Filleul filleul = filleulDAO.getFilleul(membre.getIdMembre());
-				if(filleul!=null){
+				if (filleul != null) {
 					membre.setNomParrain(filleul.getParrainNom());
 				}
 			}
@@ -100,8 +100,8 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 
 	@Override
 	public void insertMembreFilleul(Membre filleul, Membre membreParrain) {
-		membreDAO.insertMembreFilleul(filleul,membreParrain);
-		
+		membreDAO.insertMembreFilleul(filleul, membreParrain);
+
 	}
 
 	@Override
@@ -109,6 +109,4 @@ public class MembreServiceActionImpl implements MembreServiceAction {
 		membreDAO.updateMembreFilleul(filleul, membreParrain);
 	}
 
-
-	
 }

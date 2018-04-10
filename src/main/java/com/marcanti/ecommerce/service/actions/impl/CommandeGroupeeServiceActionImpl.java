@@ -1,5 +1,6 @@
 package com.marcanti.ecommerce.service.actions.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,19 +9,30 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeGroupeeStatusDAO;
+import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
+import com.marcanti.ecommerce.dao.CommandeIndividuelleStatusDAO;
 import com.marcanti.ecommerce.dao.FilleulDAO;
 import com.marcanti.ecommerce.dao.MembreDAO;
+import com.marcanti.ecommerce.dao.PanierProduitDAO;
+import com.marcanti.ecommerce.dao.ProduitDAO;
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
+import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Membre;
+import com.marcanti.ecommerce.model.PanierProduit;
+import com.marcanti.ecommerce.model.Produit;
 import com.marcanti.ecommerce.model.VCdeGroupeeDetail;
 import com.marcanti.ecommerce.model.VReduction;
 import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
+import com.marcanti.ecommerce.utils.ShortUtils;
 
 @Service("commandeGroupeeServiceAction")
+@Transactional
 public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceAction {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommandeGroupeeServiceActionImpl.class);
@@ -32,10 +44,22 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 	private CommandeGroupeeStatusDAO commandeGroupeeStatusDAO;
 
 	@Autowired
+	private CommandeIndividuelleDAO commandeIndividuelleDAO;
+
+	@Autowired
+	private CommandeIndividuelleStatusDAO commandeIndividuelleStatusDAO;
+
+	@Autowired
 	private FilleulDAO filleulDAO;
 
 	@Autowired
 	private MembreDAO membreDAO;
+
+	@Autowired
+	private ProduitDAO produitDAO;
+
+	@Autowired
+	private PanierProduitDAO panierProduitDAO;
 
 	@Override
 	public Long getIdDerniereCdeGoupee(Long idOrg) {
@@ -136,6 +160,81 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 	@Override
 	public List<CommandeGroupee> getCmdGroupeesPaiementByOrganisation(Long idOrg, boolean isPaiementEffectue) {
 		return commandeGroupeeDAO.getCmdGroupeesPaiementByOrganisation(idOrg, isPaiementEffectue);
+	}
+
+	@Override
+	public void annulerCmdGroupee(CommandeGroupee commandeGroupee) {
+		// On met à jour l’état de la commande groupée : cdeGroupee.idStatus = xx
+		// (récupéré par code = ‘CDE_GROUPEE_ANNULEE’
+
+		List<CommandeIndividuelle> commandeIndivList = commandeIndividuelleDAO
+				.getCommandeIndivListByCmdGroupe(commandeGroupee.getIdCdeGroupee());
+
+		for (CommandeIndividuelle commandeIndividuelle : commandeIndivList) {
+			// On met à jour l’état des commandes individuelles associées à la commande
+			// groupée :CDE_INDIVID_ANNULEE’
+
+			commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO
+					.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatusEnum.CDE_INDIVID_ANNULEE.getCode()));
+			commandeIndividuelle.setTotalAPayer(BigDecimal.ZERO);
+
+			if (commandeIndividuelle.getIdPanier() != null
+					&& commandeIndividuelle.getIdPanier().getPanierProduitCollection() != null) {
+				for (PanierProduit panierProduit : commandeIndividuelle.getIdPanier().getPanierProduitCollection()) {
+					// On met à jour le panier associé à chaque commande individuelle :
+					// panier.NbreProduit à 0, panier.panierMontant à 0
+					Produit produit = panierProduit.getProduit();
+					// met à jour produit.qteEnStock = produit.qteEnStock +
+					// panierProduit.qteSouhaitee
+					produit.setQteEnStock(
+							ShortUtils.sum2Short(panierProduit.getQteSouhaitee(), produit.getQteEnStock()));
+					panierProduit.setQteSouhaitee(ShortUtils.toShort(0));
+					panierProduit.setSousTotal(BigDecimal.ZERO);
+					produitDAO.edit(produit);
+					panierProduitDAO.edit(panierProduit);
+
+				}
+			}
+			commandeIndividuelleDAO.edit(commandeIndividuelle);
+		}
+		commandeGroupee.setCommentaire("ANNULEE");
+		commandeGroupee.setIdStatus(commandeGroupeeStatusDAO.getCommandeGroupeeStatusByCode(
+				com.marcanti.ecommerce.constants.CommandeGroupeeStatus.CDE_GROUPEE_ANNULEE.getCode()));
+		commandeGroupee.setIsEnCours(Boolean.FALSE);
+
+		commandeGroupeeDAO.edit(commandeGroupee);
+	}
+
+	public CommandeIndividuelleDAO getCommandeIndividuelleDAO() {
+		return commandeIndividuelleDAO;
+	}
+
+	public void setCommandeIndividuelleDAO(CommandeIndividuelleDAO commandeIndividuelleDAO) {
+		this.commandeIndividuelleDAO = commandeIndividuelleDAO;
+	}
+
+	public CommandeIndividuelleStatusDAO getCommandeIndividuelleStatusDAO() {
+		return commandeIndividuelleStatusDAO;
+	}
+
+	public void setCommandeIndividuelleStatusDAO(CommandeIndividuelleStatusDAO commandeIndividuelleStatusDAO) {
+		this.commandeIndividuelleStatusDAO = commandeIndividuelleStatusDAO;
+	}
+
+	public ProduitDAO getProduitDAO() {
+		return produitDAO;
+	}
+
+	public void setProduitDAO(ProduitDAO produitDAO) {
+		this.produitDAO = produitDAO;
+	}
+
+	public PanierProduitDAO getPanierProduitDAO() {
+		return panierProduitDAO;
+	}
+
+	public void setPanierProduitDAO(PanierProduitDAO panierProduitDAO) {
+		this.panierProduitDAO = panierProduitDAO;
 	}
 
 }

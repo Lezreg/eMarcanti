@@ -3,18 +3,18 @@ package com.marcanti.ecommerce.service.actions.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.marcanti.ecommerce.dao.MarqueDAO;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.service.actions.MarqueServiceAction;
 
-
+@Transactional
 public class MarqueServiceActionImpl implements MarqueServiceAction {
 
-
 	@Autowired
-	private MarqueDAO marqueDAO;	
- 
+	private MarqueDAO marqueDAO;
+
 	public MarqueDAO getMarqueDAO() {
 		return marqueDAO;
 	}
@@ -42,5 +42,5 @@ public class MarqueServiceActionImpl implements MarqueServiceAction {
 	public void insertMarque(Marque marque) {
 		marqueDAO.insertMarque(marque);
 	}
-	
+
 }

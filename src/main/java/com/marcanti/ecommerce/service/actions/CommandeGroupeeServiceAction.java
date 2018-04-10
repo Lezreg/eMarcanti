@@ -28,4 +28,6 @@ public interface CommandeGroupeeServiceAction {
 	List<CommandeGroupeeStatus> getAllCommandeGroupeeStatus();
 
 	List<CommandeGroupee> getCmdGroupeesPaiementByOrganisation(Long idOrg, boolean isPaiementEffectue);
+
+	void annulerCmdGroupee(CommandeGroupee commandeGroupee);
 }

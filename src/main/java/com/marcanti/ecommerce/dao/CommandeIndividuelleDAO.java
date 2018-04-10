@@ -18,8 +18,7 @@ public interface CommandeIndividuelleDAO extends GenericDAO<CommandeIndividuelle
 	boolean verifyExistingCommandeIndividuelle(Membre membre, CommandeGroupee commandeGroupee);
 
 	/**
-	 * rechercher commande individuelle par commande groupee et utlisateur
-	 * connecté
+	 * rechercher commande individuelle par commande groupee et utlisateur connecté
 	 * 
 	 * @param membre
 	 * @param commandeGroupee
@@ -43,4 +42,13 @@ public interface CommandeIndividuelleDAO extends GenericDAO<CommandeIndividuelle
 	 * @return
 	 */
 	List<CommandeIndividuelle> getCommandeIndivLivreListByMembre(Long idMembre);
+
+	/**
+	 * Recherche de la liste des commandes individuelle par commande groupee
+	 * 
+	 * @param idCdeGroupee
+	 * @return
+	 */
+
+	List<CommandeIndividuelle> getCommandeIndivListByCmdGroupe(Long idCdeGroupee);
 }
