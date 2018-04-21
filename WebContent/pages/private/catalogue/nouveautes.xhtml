@@ -119,7 +119,12 @@
 									<h5>#{product.marqueNom}</h5>
 									<div class="singleProductareass">
 										<figure>
-											<h:graphicImage value="/static/img/nouve/nouve1.jpg" class="productimage img-responsive" alt="perfume"></h:graphicImage>
+											<ui:fragment rendered="#{empty produit.produitPhotoURL}"><br/>
+												<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="perfume"/><span>#{produit.marqueNom}</span>
+											</ui:fragment>
+											<ui:fragment rendered="#{!empty produit.produitPhotoURL}"><br/>
+												<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{produit.produitPhotoURL}" class="img-responsive" alt="perfume"/><span>#{produit.marqueNom}</span>
+											</ui:fragment>
 										</figure>
 									
 										 <div class="overlayitem">
@@ -134,19 +139,19 @@
 												<p>#{product.noteDeFond}</p>
 												
 												<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-												<p class="blackparagraph">#{product.produitDescription}</p>
+												<p class="blackparagraph">#{product.produitDetail}</p>
 		
 											</div>
 										 </div>
 									</div><!--singleProductareass-->
 									<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-									<p>#{product.produitDetail}</p>
+									<p>#{product.produitDescription}</p>
 										
-									<button class="nouveprobutton" onclick="addBasket(#{product.idProduit});return false;" >Ajouter au panier</button>
+									<button id="hu1" class="nouveprobutton" onclick="addBasket(#{product.idProduit});return false;">Ajouter au panier</button>
 									
 									
 									<!-- start modal one-->
-									<div class="modal fade" id="nouve-#{product.idProduit}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal fade" id="nouve-13" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
