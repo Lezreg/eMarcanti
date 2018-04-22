@@ -35,412 +35,421 @@ import com.marcanti.ecommerce.constants.Categories;
 @Immutable
 @Table(name = "v_catalogue_avec_stock")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "VCatalogueAvecStock.findAll", query = "SELECT v FROM VCatalogueAvecStock v")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByProduitPhotoURL", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.produitPhotoURL = :produitPhotoURL")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByMarqueNom", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.marqueNom = :marqueNom")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByProduitDescription", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.produitDescription = :produitDescription")
-    , @NamedQuery(name = "VCatalogueAvecStock.findBySousCategorieNom", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.sousCategorieNom = :sousCategorieNom")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByNotrePrix", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.notrePrix = :notrePrix")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByPrixPublic", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.prixPublic = :prixPublic")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByProduitDetail", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.produitDetail = :produitDetail")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByCategorieNom", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.categorieNom = :categorieNom")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByCategorieCode", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.categorieCode = :categorieCode")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByIdProduit", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.idProduit = :idProduit")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByIdCategorie", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.idCategorie = :idCategorie")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByIdSousCategorie", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.idSousCategorie = :idSousCategorie")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByIdMarque", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.idMarque = :idMarque")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByNoteDeTete", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.noteDeTete = :noteDeTete")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByNoteDeCoeur", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.noteDeCoeur = :noteDeCoeur")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByNoteDeFond", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.noteDeFond = :noteDeFond")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByTitreADecouvrir", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.titreADecouvrir = :titreADecouvrir")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByDescriptionADecouvrir", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.descriptionADecouvrir = :descriptionADecouvrir")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByFamilleOlfactive", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.familleOlfactive = :familleOlfactive")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByIsFullAccess", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.isFullAccess = :isFullAccess")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByQteEnStock", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.qteEnStock = :qteEnStock")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByCategorieIconeURL", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.categorieIconeURL = :categorieIconeURL")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByDateDebutNouveaute", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutNouveaute = :dateDebutNouveaute")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByDateFinNouveaute", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateFinNouveaute = :dateFinNouveaute")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByDateDebutADecouvrir", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutADecouvrir = :dateDebutADecouvrir")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByDateFinADecouvrir", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateFinADecouvrir = :dateFinADecouvrir")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByDateDebutPromo", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutPromo = :dateDebutPromo")
-    , @NamedQuery(name = "VCatalogueAvecStock.findByDateFinPromo", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateFinPromo = :dateFinPromo")})
-
+@NamedQueries({ @NamedQuery(name = "VCatalogueAvecStock.findAll", query = "SELECT v FROM VCatalogueAvecStock v"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByProduitPhotoURL", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.produitPhotoURL = :produitPhotoURL"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByMarqueNom", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.marqueNom = :marqueNom"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByProduitDescription", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.produitDescription = :produitDescription"),
+		@NamedQuery(name = "VCatalogueAvecStock.findBySousCategorieNom", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.sousCategorieNom = :sousCategorieNom"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByNotrePrix", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.notrePrix = :notrePrix"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByPrixPublic", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.prixPublic = :prixPublic"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByProduitDetail", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.produitDetail = :produitDetail"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByCategorieNom", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.categorieNom = :categorieNom"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByCategorieCode", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.categorieCode = :categorieCode"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByIdProduit", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.idProduit = :idProduit"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByIdCategorie", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.idCategorie = :idCategorie"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByIdSousCategorie", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.idSousCategorie = :idSousCategorie"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByIdMarque", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.idMarque = :idMarque"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByNoteDeTete", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.noteDeTete = :noteDeTete"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByNoteDeCoeur", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.noteDeCoeur = :noteDeCoeur"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByNoteDeFond", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.noteDeFond = :noteDeFond"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByTitreADecouvrir", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.titreADecouvrir = :titreADecouvrir"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByDescriptionADecouvrir", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.descriptionADecouvrir = :descriptionADecouvrir"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByFamilleOlfactive", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.familleOlfactive = :familleOlfactive"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByIsFullAccess", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.isFullAccess = :isFullAccess"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByQteEnStock", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.qteEnStock = :qteEnStock"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByCategorieIconeURL", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.categorieIconeURL = :categorieIconeURL"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByDateDebutNouveaute", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutNouveaute = :dateDebutNouveaute"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByDateFinNouveaute", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateFinNouveaute = :dateFinNouveaute"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByDateDebutADecouvrir", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutADecouvrir = :dateDebutADecouvrir"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByDateFinADecouvrir", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateFinADecouvrir = :dateFinADecouvrir"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByDateDebutPromo", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateDebutPromo = :dateDebutPromo"),
+		@NamedQuery(name = "VCatalogueAvecStock.findByDateFinPromo", query = "SELECT v FROM VCatalogueAvecStock v WHERE v.dateFinPromo = :dateFinPromo") })
 
 public class VCatalogueAvecStock implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Size(max = 512)
-    private String produitPhotoURL;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 120)
-    private String marqueNom;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 400)
-    private String produitDescription;
-    @Size(max = 120)
-    private String sousCategorieNom;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    private BigDecimal notrePrix;
-    @Basic(optional = false)
-    @NotNull
-    private BigDecimal prixPublic;
-    @Size(max = 600)
-    private String produitDetail;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 120)
-    private String categorieNom;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 60)
-    private String categorieCode;
-    @Basic(optional = false)
-    @NotNull
-    @Id
-    @Column(name = "idProduit", updatable = false, nullable = false)
-    private long idProduit;
-    @Basic(optional = false)
-    @NotNull
-    private short idCategorie;
-    @Basic(optional = false)
-    @NotNull
-    private short idSousCategorie;
-    @Basic(optional = false)
-    @NotNull
-    private short idMarque;
-    @Size(max = 80)
-    private String noteDeTete;
-    @Size(max = 80)
-    private String noteDeCoeur;
-    @Size(max = 80)
-    private String noteDeFond;
-    @Size(max = 80)
-    private String titreADecouvrir;
-    @Size(max = 600)
-    private String descriptionADecouvrir;
-    @Size(max = 45)
-    private String familleOlfactive;
-    @Basic(optional = false)
-    @NotNull
-    private boolean isFullAccess;
-    @Basic(optional = false)
-    @NotNull
-    private short qteEnStock;
-    @Size(max = 512)
-    private String categorieIconeURL;
-    @Temporal(TemporalType.DATE)
-    private Date dateDebutNouveaute;
-    @Temporal(TemporalType.DATE)
-    private Date dateFinNouveaute;
-    @Temporal(TemporalType.DATE)
-    private Date dateDebutADecouvrir;
-    @Temporal(TemporalType.DATE)
-    private Date dateFinADecouvrir;
-    @Temporal(TemporalType.DATE)
-    private Date dateDebutPromo;
-    @Temporal(TemporalType.DATE)
-    private Date dateFinPromo;
-    
-    private boolean isBestSellerHomme;
-    private boolean isBestSellerFemme;
-    private boolean isPetitPrix;
-    private boolean isNouveauteSurHomePage;
-    private boolean isPromoSurHomePage;
-    private boolean isADecouvrirSurHomePage;
-    
-    @Transient
-    private String categorieNomCss;
-    
-    @Transient
-    private String categorieCodeCss;
-    
-    @Transient
-    private String isNouveauteSurHomePageCss;   
-    
-    @Transient
-    private String isPromoSurHomePageCss;
+	private static final long serialVersionUID = 1L;
+	@Size(max = 512)
+	private String produitPhotoURL;
+	@Size(max = 512)
+	private String produitPhotoTailleMediumURL;
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 120)
+	private String marqueNom;
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 400)
+	private String produitDescription;
+	@Size(max = 120)
+	private String sousCategorieNom;
+	// @Max(value=?) @Min(value=?)//if you know range of your decimal fields
+	// consider using these annotations to enforce field validation
+	@Basic(optional = false)
+	@NotNull
+	private BigDecimal notrePrix;
+	@Basic(optional = false)
+	@NotNull
+	private BigDecimal prixPublic;
+	@Size(max = 600)
+	private String produitDetail;
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 120)
+	private String categorieNom;
+	@Basic(optional = false)
+	@NotNull
+	@Size(min = 1, max = 60)
+	private String categorieCode;
+	@Basic(optional = false)
+	@NotNull
+	@Id
+	@Column(name = "idProduit", updatable = false, nullable = false)
+	private long idProduit;
+	@Basic(optional = false)
+	@NotNull
+	private short idCategorie;
+	@Basic(optional = false)
+	@NotNull
+	private short idSousCategorie;
+	@Basic(optional = false)
+	@NotNull
+	private short idMarque;
+	@Size(max = 80)
+	private String noteDeTete;
+	@Size(max = 80)
+	private String noteDeCoeur;
+	@Size(max = 80)
+	private String noteDeFond;
+	@Size(max = 80)
+	private String titreADecouvrir;
+	@Size(max = 600)
+	private String descriptionADecouvrir;
+	@Size(max = 45)
+	private String familleOlfactive;
+	@Basic(optional = false)
+	@NotNull
+	private boolean isFullAccess;
+	@Basic(optional = false)
+	@NotNull
+	private short qteEnStock;
+	@Size(max = 512)
+	private String categorieIconeURL;
+	@Temporal(TemporalType.DATE)
+	private Date dateDebutNouveaute;
+	@Temporal(TemporalType.DATE)
+	private Date dateFinNouveaute;
+	@Temporal(TemporalType.DATE)
+	private Date dateDebutADecouvrir;
+	@Temporal(TemporalType.DATE)
+	private Date dateFinADecouvrir;
+	@Temporal(TemporalType.DATE)
+	private Date dateDebutPromo;
+	@Temporal(TemporalType.DATE)
+	private Date dateFinPromo;
 
-    public VCatalogueAvecStock() {
-    }
+	private boolean isBestSellerHomme;
+	private boolean isBestSellerFemme;
+	private boolean isPetitPrix;
+	private boolean isNouveauteSurHomePage;
+	private boolean isPromoSurHomePage;
+	private boolean isADecouvrirSurHomePage;
 
-    public String getProduitPhotoURL() {
-        return produitPhotoURL;
-    }
+	@Transient
+	private String categorieNomCss;
 
-    public void setProduitPhotoURL(String produitPhotoURL) {
-        this.produitPhotoURL = produitPhotoURL;
-    }
+	@Transient
+	private String categorieCodeCss;
 
-    public String getMarqueNom() {
-        return marqueNom;
-    }
+	@Transient
+	private String isNouveauteSurHomePageCss;
 
-    public void setMarqueNom(String marqueNom) {
-        this.marqueNom = marqueNom;
-    }
+	@Transient
+	private String isPromoSurHomePageCss;
 
-    public String getProduitDescription() {
-        return produitDescription;
-    }
+	public VCatalogueAvecStock() {
+	}
 
-    public void setProduitDescription(String produitDescription) {
-        this.produitDescription = produitDescription;
-    }
+	public String getProduitPhotoURL() {
+		return produitPhotoURL;
+	}
 
-    public String getSousCategorieNom() {
-        return sousCategorieNom;
-    }
+	public void setProduitPhotoURL(String produitPhotoURL) {
+		this.produitPhotoURL = produitPhotoURL;
+	}
 
-    public void setSousCategorieNom(String sousCategorieNom) {
-        this.sousCategorieNom = sousCategorieNom;
-    }
+	public String getProduitPhotoTailleMediumURL() {
+		return produitPhotoTailleMediumURL;
+	}
 
-    public BigDecimal getNotrePrix() {
-        return notrePrix;
-    }
+	public void setProduitPhotoTailleMediumURL(String produitPhotoTailleMediumURL) {
+		this.produitPhotoTailleMediumURL = produitPhotoTailleMediumURL;
+	}
 
-    public void setNotrePrix(BigDecimal notrePrix) {
-        this.notrePrix = notrePrix;
-    }
+	public String getMarqueNom() {
+		return marqueNom;
+	}
 
-    public BigDecimal getPrixPublic() {
-        return prixPublic;
-    }
+	public void setMarqueNom(String marqueNom) {
+		this.marqueNom = marqueNom;
+	}
 
-    public void setPrixPublic(BigDecimal prixPublic) {
-        this.prixPublic = prixPublic;
-    }
+	public String getProduitDescription() {
+		return produitDescription;
+	}
 
-    public String getProduitDetail() {
-        return produitDetail;
-    }
+	public void setProduitDescription(String produitDescription) {
+		this.produitDescription = produitDescription;
+	}
 
-    public void setProduitDetail(String produitDetail) {
-        this.produitDetail = produitDetail;
-    }
+	public String getSousCategorieNom() {
+		return sousCategorieNom;
+	}
 
-    public String getCategorieNom() {
-        return categorieNom;
-    }
+	public void setSousCategorieNom(String sousCategorieNom) {
+		this.sousCategorieNom = sousCategorieNom;
+	}
 
-    public void setCategorieNom(String categorieNom) {
-        this.categorieNom = categorieNom;
-    }
+	public BigDecimal getNotrePrix() {
+		return notrePrix;
+	}
 
-    public String getCategorieCode() {
-        return categorieCode;
-    }
+	public void setNotrePrix(BigDecimal notrePrix) {
+		this.notrePrix = notrePrix;
+	}
 
-    public void setCategorieCode(String categorieCode) {
-        this.categorieCode = categorieCode;
-    }
+	public BigDecimal getPrixPublic() {
+		return prixPublic;
+	}
 
-    public long getIdProduit() {
-        return idProduit;
-    }
+	public void setPrixPublic(BigDecimal prixPublic) {
+		this.prixPublic = prixPublic;
+	}
 
-    public void setIdProduit(long idProduit) {
-        this.idProduit = idProduit;
-    }
+	public String getProduitDetail() {
+		return produitDetail;
+	}
 
-    public short getIdCategorie() {
-        return idCategorie;
-    }
+	public void setProduitDetail(String produitDetail) {
+		this.produitDetail = produitDetail;
+	}
 
-    public void setIdCategorie(short idCategorie) {
-        this.idCategorie = idCategorie;
-    }
+	public String getCategorieNom() {
+		return categorieNom;
+	}
 
-    public short getIdSousCategorie() {
-        return idSousCategorie;
-    }
+	public void setCategorieNom(String categorieNom) {
+		this.categorieNom = categorieNom;
+	}
 
-    public void setIdSousCategorie(short idSousCategorie) {
-        this.idSousCategorie = idSousCategorie;
-    }
+	public String getCategorieCode() {
+		return categorieCode;
+	}
 
-    public short getIdMarque() {
-        return idMarque;
-    }
+	public void setCategorieCode(String categorieCode) {
+		this.categorieCode = categorieCode;
+	}
 
-    public void setIdMarque(short idMarque) {
-        this.idMarque = idMarque;
-    }
+	public long getIdProduit() {
+		return idProduit;
+	}
 
-    public String getNoteDeTete() {
-        return noteDeTete;
-    }
+	public void setIdProduit(long idProduit) {
+		this.idProduit = idProduit;
+	}
 
-    public void setNoteDeTete(String noteDeTete) {
-        this.noteDeTete = noteDeTete;
-    }
+	public short getIdCategorie() {
+		return idCategorie;
+	}
 
-    public String getNoteDeCoeur() {
-        return noteDeCoeur;
-    }
+	public void setIdCategorie(short idCategorie) {
+		this.idCategorie = idCategorie;
+	}
 
-    public void setNoteDeCoeur(String noteDeCoeur) {
-        this.noteDeCoeur = noteDeCoeur;
-    }
+	public short getIdSousCategorie() {
+		return idSousCategorie;
+	}
 
-    public String getNoteDeFond() {
-        return noteDeFond;
-    }
+	public void setIdSousCategorie(short idSousCategorie) {
+		this.idSousCategorie = idSousCategorie;
+	}
 
-    public void setNoteDeFond(String noteDeFond) {
-        this.noteDeFond = noteDeFond;
-    }
+	public short getIdMarque() {
+		return idMarque;
+	}
 
-    public String getTitreADecouvrir() {
-        return titreADecouvrir;
-    }
+	public void setIdMarque(short idMarque) {
+		this.idMarque = idMarque;
+	}
 
-    public void setTitreADecouvrir(String titreADecouvrir) {
-        this.titreADecouvrir = titreADecouvrir;
-    }
+	public String getNoteDeTete() {
+		return noteDeTete;
+	}
 
-    public String getDescriptionADecouvrir() {
-        return descriptionADecouvrir;
-    }
+	public void setNoteDeTete(String noteDeTete) {
+		this.noteDeTete = noteDeTete;
+	}
 
-    public void setDescriptionADecouvrir(String descriptionADecouvrir) {
-        this.descriptionADecouvrir = descriptionADecouvrir;
-    }
+	public String getNoteDeCoeur() {
+		return noteDeCoeur;
+	}
 
-    public String getFamilleOlfactive() {
-        return familleOlfactive;
-    }
+	public void setNoteDeCoeur(String noteDeCoeur) {
+		this.noteDeCoeur = noteDeCoeur;
+	}
 
-    public void setFamilleOlfactive(String familleOlfactive) {
-        this.familleOlfactive = familleOlfactive;
-    }
+	public String getNoteDeFond() {
+		return noteDeFond;
+	}
 
-    public boolean getIsFullAccess() {
-        return isFullAccess;
-    }
+	public void setNoteDeFond(String noteDeFond) {
+		this.noteDeFond = noteDeFond;
+	}
 
-    public void setIsFullAccess(boolean isFullAccess) {
-        this.isFullAccess = isFullAccess;
-    }
+	public String getTitreADecouvrir() {
+		return titreADecouvrir;
+	}
 
-    public short getQteEnStock() {
-        return qteEnStock;
-    }
+	public void setTitreADecouvrir(String titreADecouvrir) {
+		this.titreADecouvrir = titreADecouvrir;
+	}
 
-    public void setQteEnStock(short qteEnStock) {
-        this.qteEnStock = qteEnStock;
-    }
+	public String getDescriptionADecouvrir() {
+		return descriptionADecouvrir;
+	}
 
-    public String getCategorieIconeURL() {
-        return categorieIconeURL;
-    }
+	public void setDescriptionADecouvrir(String descriptionADecouvrir) {
+		this.descriptionADecouvrir = descriptionADecouvrir;
+	}
 
-    public void setCategorieIconeURL(String categorieIconeURL) {
-        this.categorieIconeURL = categorieIconeURL;
-    }
+	public String getFamilleOlfactive() {
+		return familleOlfactive;
+	}
 
-    public Date getDateDebutNouveaute() {
-        return dateDebutNouveaute;
-    }
+	public void setFamilleOlfactive(String familleOlfactive) {
+		this.familleOlfactive = familleOlfactive;
+	}
 
-    public void setDateDebutNouveaute(Date dateDebutNouveaute) {
-        this.dateDebutNouveaute = dateDebutNouveaute;
-    }
+	public boolean getIsFullAccess() {
+		return isFullAccess;
+	}
 
-    public Date getDateFinNouveaute() {
-        return dateFinNouveaute;
-    }
+	public void setIsFullAccess(boolean isFullAccess) {
+		this.isFullAccess = isFullAccess;
+	}
 
-    public void setDateFinNouveaute(Date dateFinNouveaute) {
-        this.dateFinNouveaute = dateFinNouveaute;
-    }
+	public short getQteEnStock() {
+		return qteEnStock;
+	}
 
-    public Date getDateDebutADecouvrir() {
-        return dateDebutADecouvrir;
-    }
+	public void setQteEnStock(short qteEnStock) {
+		this.qteEnStock = qteEnStock;
+	}
 
-    public void setDateDebutADecouvrir(Date dateDebutADecouvrir) {
-        this.dateDebutADecouvrir = dateDebutADecouvrir;
-    }
+	public String getCategorieIconeURL() {
+		return categorieIconeURL;
+	}
 
-    public Date getDateFinADecouvrir() {
-        return dateFinADecouvrir;
-    }
+	public void setCategorieIconeURL(String categorieIconeURL) {
+		this.categorieIconeURL = categorieIconeURL;
+	}
 
-    public void setDateFinADecouvrir(Date dateFinADecouvrir) {
-        this.dateFinADecouvrir = dateFinADecouvrir;
-    }
+	public Date getDateDebutNouveaute() {
+		return dateDebutNouveaute;
+	}
 
-    public Date getDateDebutPromo() {
-        return dateDebutPromo;
-    }
+	public void setDateDebutNouveaute(Date dateDebutNouveaute) {
+		this.dateDebutNouveaute = dateDebutNouveaute;
+	}
 
-    public void setDateDebutPromo(Date dateDebutPromo) {
-        this.dateDebutPromo = dateDebutPromo;
-    }
+	public Date getDateFinNouveaute() {
+		return dateFinNouveaute;
+	}
 
-    public Date getDateFinPromo() {
-        return dateFinPromo;
-    }
+	public void setDateFinNouveaute(Date dateFinNouveaute) {
+		this.dateFinNouveaute = dateFinNouveaute;
+	}
 
-    public void setDateFinPromo(Date dateFinPromo) {
-        this.dateFinPromo = dateFinPromo;
-    }
+	public Date getDateDebutADecouvrir() {
+		return dateDebutADecouvrir;
+	}
 
-    public String getCategorieNomCss() {
-		if(categorieCode.equals(Categories.PARFUM_HOMME.getCode())){
-			categorieNomCss="Perfume Homme";
-		}else if(categorieCode.equals(Categories.PARFUM_FEMME.getCode())){
-			categorieNomCss="Perfume Femme";
-		}else if(categorieCode.equals(Categories.PARFUM_ENFANT.getCode())){
-			categorieNomCss="Perfume Enfant";
-		}else if(categorieCode.equals(Categories.TESTER.getCode())){
-			categorieNomCss="Testeur";
-		}else if(categorieCode.equals(Categories.COFFRET.getCode())){
-			categorieNomCss="Coffret";
-		}else if(categorieCode.equals(Categories.CREME.getCode())){
-			categorieNomCss="Crêmes et Soins";
-		}else if(categorieCode.equals(Categories.MINIATURE.getCode())){
-			categorieNomCss="Miniatures";
-		}else if(categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())){
-			categorieNomCss="piles &#38; Accessories";
-		}else if(categorieCode.equals(Categories.LOTS.getCode())){
-			categorieNomCss="Lots à Saisir";
+	public void setDateDebutADecouvrir(Date dateDebutADecouvrir) {
+		this.dateDebutADecouvrir = dateDebutADecouvrir;
+	}
+
+	public Date getDateFinADecouvrir() {
+		return dateFinADecouvrir;
+	}
+
+	public void setDateFinADecouvrir(Date dateFinADecouvrir) {
+		this.dateFinADecouvrir = dateFinADecouvrir;
+	}
+
+	public Date getDateDebutPromo() {
+		return dateDebutPromo;
+	}
+
+	public void setDateDebutPromo(Date dateDebutPromo) {
+		this.dateDebutPromo = dateDebutPromo;
+	}
+
+	public Date getDateFinPromo() {
+		return dateFinPromo;
+	}
+
+	public void setDateFinPromo(Date dateFinPromo) {
+		this.dateFinPromo = dateFinPromo;
+	}
+
+	public String getCategorieNomCss() {
+		if (categorieCode.equals(Categories.PARFUM_HOMME.getCode())) {
+			categorieNomCss = "Perfume Homme";
+		} else if (categorieCode.equals(Categories.PARFUM_FEMME.getCode())) {
+			categorieNomCss = "Perfume Femme";
+		} else if (categorieCode.equals(Categories.PARFUM_ENFANT.getCode())) {
+			categorieNomCss = "Perfume Enfant";
+		} else if (categorieCode.equals(Categories.TESTER.getCode())) {
+			categorieNomCss = "Testeur";
+		} else if (categorieCode.equals(Categories.COFFRET.getCode())) {
+			categorieNomCss = "Coffret";
+		} else if (categorieCode.equals(Categories.CREME.getCode())) {
+			categorieNomCss = "Crêmes et Soins";
+		} else if (categorieCode.equals(Categories.MINIATURE.getCode())) {
+			categorieNomCss = "Miniatures";
+		} else if (categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())) {
+			categorieNomCss = "piles &#38; Accessories";
+		} else if (categorieCode.equals(Categories.LOTS.getCode())) {
+			categorieNomCss = "Lots à Saisir";
 		}
-				
+
 		return categorieNomCss;
 	}
 
 	public void setCategorieNomCss(String categorieNomCss) {
 		this.categorieNomCss = categorieNomCss;
 	}
-	
+
 	public String getCategorieCodeCss() {
-		if(categorieCode.equals(Categories.PARFUM_HOMME.getCode())){
-			categorieCodeCss="phomme2";
-		}else if(categorieCode.equals(Categories.PARFUM_FEMME.getCode())){
-			categorieCodeCss="pfemme";
-		}else if(categorieCode.equals(Categories.PARFUM_ENFANT.getCode())){
-			categorieCodeCss="penfant";
-		}else if(categorieCode.equals(Categories.TESTER.getCode())){
-			categorieCodeCss="testeur";
-		}else if(categorieCode.equals(Categories.COFFRET.getCode())){
-			categorieCodeCss="coffret";
-		}else if(categorieCode.equals(Categories.CREME.getCode())){
-			categorieCodeCss="etsoins";
-		}else if(categorieCode.equals(Categories.MINIATURE.getCode())){
-			categorieCodeCss="miniatures";
-		}else if(categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())){
-			categorieCodeCss="piles";
-		}else if(categorieCode.equals(Categories.LOTS.getCode())){
-			categorieCodeCss="saisir";
+		if (categorieCode.equals(Categories.PARFUM_HOMME.getCode())) {
+			categorieCodeCss = "phomme2";
+		} else if (categorieCode.equals(Categories.PARFUM_FEMME.getCode())) {
+			categorieCodeCss = "pfemme";
+		} else if (categorieCode.equals(Categories.PARFUM_ENFANT.getCode())) {
+			categorieCodeCss = "penfant";
+		} else if (categorieCode.equals(Categories.TESTER.getCode())) {
+			categorieCodeCss = "testeur";
+		} else if (categorieCode.equals(Categories.COFFRET.getCode())) {
+			categorieCodeCss = "coffret";
+		} else if (categorieCode.equals(Categories.CREME.getCode())) {
+			categorieCodeCss = "etsoins";
+		} else if (categorieCode.equals(Categories.MINIATURE.getCode())) {
+			categorieCodeCss = "miniatures";
+		} else if (categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())) {
+			categorieCodeCss = "piles";
+		} else if (categorieCode.equals(Categories.LOTS.getCode())) {
+			categorieCodeCss = "saisir";
 		}
-				
+
 		return categorieCodeCss;
 	}
 
@@ -502,10 +511,10 @@ public class VCatalogueAvecStock implements Serializable {
 
 	public String getIsNouveauteSurHomePageCss() {
 		Date toDay = new Date();
-		isNouveauteSurHomePageCss="";
-		if(dateDebutNouveaute!=null && dateFinNouveaute!=null){
-			if(dateDebutNouveaute.before(toDay) && toDay.before(dateFinNouveaute)){
-				isNouveauteSurHomePageCss="catalougenew";
+		isNouveauteSurHomePageCss = "";
+		if (dateDebutNouveaute != null && dateFinNouveaute != null) {
+			if (dateDebutNouveaute.before(toDay) && toDay.before(dateFinNouveaute)) {
+				isNouveauteSurHomePageCss = "catalougenew";
 			}
 		}
 		return isNouveauteSurHomePageCss;
@@ -517,10 +526,10 @@ public class VCatalogueAvecStock implements Serializable {
 
 	public String getIsPromoSurHomePageCss() {
 		Date toDay = new Date();
-		isPromoSurHomePageCss="";
-		if(dateDebutPromo!=null && dateFinPromo!=null){
-			if(dateDebutPromo.before(toDay) && toDay.before(dateFinPromo)){
-				isPromoSurHomePageCss="catalougepromo";
+		isPromoSurHomePageCss = "";
+		if (dateDebutPromo != null && dateFinPromo != null) {
+			if (dateDebutPromo.before(toDay) && toDay.before(dateFinPromo)) {
+				isPromoSurHomePageCss = "catalougepromo";
 			}
 		}
 		return isPromoSurHomePageCss;
@@ -529,6 +538,5 @@ public class VCatalogueAvecStock implements Serializable {
 	public void setIsPromoSurHomePageCss(String isPromoSurHomePageCss) {
 		this.isPromoSurHomePageCss = isPromoSurHomePageCss;
 	}
-    
-    
+
 }

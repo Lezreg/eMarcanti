@@ -18,8 +18,8 @@
 					<div class="col-xs-12">
 						<div class="breadcrumslist">
 							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li class="current_item"><a href="nouveautes.html">Nouveautés</a></li>
+								<li><h:link outcome="index"><h:outputLabel value="#{msg.libelle_home}" /></h:link></li>
+								<li class="current_item"><a href="promotion.xhtml">Promos</a></li>
 							</ul>
 						</div>
 					</div>
@@ -29,7 +29,7 @@
 		<!--end breadcrumsrea-->
 		
 					
-						<!-- Modal -->
+		<!-- Modal -->
 		<div class="messftopmodal modal fade" id="nouvepopusstes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="messmodaldia modal-dialog" role="document">
 		    <div class="modal-content">
@@ -120,7 +120,12 @@
 								<div class="singleProductareass">
 									
 									<figure>
-										<h:graphicImage value="/static/img/nouve/nouve1.jpg" class="productimage img-responsive" alt="perfume"></h:graphicImage>
+										<ui:fragment rendered="#{empty product.produitPhotoTailleMediumURL}"><br/>
+												<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="perfume"/><span>#{product.marqueNom}</span>
+											</ui:fragment>
+											<ui:fragment rendered="#{!empty product.produitPhotoTailleMediumURL}"><br/>
+												<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="img-responsive" alt="perfume"/><span>#{product.marqueNom}</span>
+										</ui:fragment>
 									</figure>
 								
 								
@@ -136,14 +141,14 @@
 											<p>#{product.noteDeFond}</p>
 											
 											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-											<p class="blackparagraph">#{product.produitDescription}</p>
+											<p class="blackparagraph">#{product.produitDetail}</p>
 	
 										</div>
 									 </div>
 								</div><!--singleProductareass-->
 								
 								<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-								<p>#{product.produitDetail}</p>
+								<p>#{product.produitDescription}</p>
 								
 								<button class="nouveprobutton" onclick="addBasket(#{product.idProduit});return false;" >Ajouter au panier</button>
 								

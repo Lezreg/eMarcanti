@@ -29,22 +29,24 @@ public class ProduitConvertor {
 		produitBean.setPrixPublic(catalogue.getPrixPublic());
 		// categorie
 		produitBean.setCategorieNom(catalogue.getCategorieNom());
-		//sous-categorie
-		produitBean.setSousCategorieNom(catalogue.getSousCategorieNom());	
+		// sous-categorie
+		produitBean.setSousCategorieNom(catalogue.getSousCategorieNom());
 
 		// decouvrir
 		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
 		produitBean.setTitreADecouvrir(catalogue.getTitreADecouvrir());
-		
-		//categorie css
+
+		// categorie css
 		produitBean.setCategorieCodeCss(catalogue.getCategorieCodeCss());
 		produitBean.setCategorieNomCss(catalogue.getCategorieNomCss());
-		
-		//nouveau css
+
+		// nouveau css
 		produitBean.setIsNouveauteSurHomePageCss(catalogue.getIsNouveauteSurHomePageCss());
-		
-		//promo css
+
+		// promo css
 		produitBean.setIsPromoSurHomePageCss(catalogue.getIsPromoSurHomePageCss());
+
+		produitBean.setProduitPhotoTailleMediumURL(catalogue.getProduitPhotoURL());
 
 		return produitBean;
 	}
@@ -70,23 +72,23 @@ public class ProduitConvertor {
 		produitBean.setPrixPublic(catalogue.getPrixPublic());
 		// categorie
 		produitBean.setCategorieNom(catalogue.getCategorieNom());
-		//sous-categorie
+		// sous-categorie
 		produitBean.setSousCategorieNom(catalogue.getSousCategorieNom());
 
 		// decouvrir
 		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
 		produitBean.setTitreADecouvrir(catalogue.getTitreADecouvrir());
-		
-		//categorie css
+
+		// categorie css
 		produitBean.setCategorieCodeCss(catalogue.getCategorieCodeCss());
 		produitBean.setCategorieNomCss(catalogue.getCategorieNomCss());
-		
-		//nouveau css
+
+		// nouveau css
 		produitBean.setIsNouveauteSurHomePageCss(catalogue.getIsNouveauteSurHomePageCss());
-		
-		//promo css
+
+		// promo css
 		produitBean.setIsPromoSurHomePageCss(catalogue.getIsPromoSurHomePageCss());
-		
+
 		return produitBean;
 	}
 

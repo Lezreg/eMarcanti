@@ -68,6 +68,8 @@ public class VCatalogueRestreintAvecStock implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Size(max = 512)
 	private String produitPhotoURL;
+	@Size(max = 512)
+	private String produitPhotoTailleMediumURL;
 	@Basic(optional = false)
 	@NotNull
 	@Size(min = 1, max = 120)
@@ -142,25 +144,25 @@ public class VCatalogueRestreintAvecStock implements Serializable {
 	private Date dateDebutPromo;
 	@Temporal(TemporalType.DATE)
 	private Date dateFinPromo;
-	
-    private boolean isBestSellerHomme;
-    private boolean isBestSellerFemme;
-    private boolean isPetitPrix;
-    private boolean isNouveauteSurHomePage;
-    private boolean isPromoSurHomePage;
-    private boolean isADecouvrirSurHomePage;
-	
-    @Transient
-    private String categorieNomCss;
-    
-    @Transient
-    private String categorieCodeCss;
-    
-    @Transient
-    private String isNouveauteSurHomePageCss;   
-    
-    @Transient
-    private String isPromoSurHomePageCss;
+
+	private boolean isBestSellerHomme;
+	private boolean isBestSellerFemme;
+	private boolean isPetitPrix;
+	private boolean isNouveauteSurHomePage;
+	private boolean isPromoSurHomePage;
+	private boolean isADecouvrirSurHomePage;
+
+	@Transient
+	private String categorieNomCss;
+
+	@Transient
+	private String categorieCodeCss;
+
+	@Transient
+	private String isNouveauteSurHomePageCss;
+
+	@Transient
+	private String isPromoSurHomePageCss;
 
 	public VCatalogueRestreintAvecStock() {
 	}
@@ -341,6 +343,14 @@ public class VCatalogueRestreintAvecStock implements Serializable {
 		this.categorieIconeURL = categorieIconeURL;
 	}
 
+	public String getProduitPhotoTailleMediumURL() {
+		return produitPhotoTailleMediumURL;
+	}
+
+	public void setProduitPhotoTailleMediumURL(String produitPhotoTailleMediumURL) {
+		this.produitPhotoTailleMediumURL = produitPhotoTailleMediumURL;
+	}
+
 	public Date getDateDebutNouveaute() {
 		return dateDebutNouveaute;
 	}
@@ -390,54 +400,54 @@ public class VCatalogueRestreintAvecStock implements Serializable {
 	}
 
 	public String getCategorieNomCss() {
-		if(categorieCode.equals(Categories.PARFUM_HOMME.getCode())){
-			categorieNomCss="Perfume Homme";
-		}else if(categorieCode.equals(Categories.PARFUM_FEMME.getCode())){
-			categorieNomCss="Perfume Femme";
-		}else if(categorieCode.equals(Categories.PARFUM_ENFANT.getCode())){
-			categorieNomCss="Perfume Enfant";
-		}else if(categorieCode.equals(Categories.TESTER.getCode())){
-			categorieNomCss="Testeur";
-		}else if(categorieCode.equals(Categories.COFFRET.getCode())){
-			categorieNomCss="Coffret";
-		}else if(categorieCode.equals(Categories.CREME.getCode())){
-			categorieNomCss="Crêmes et Soins";
-		}else if(categorieCode.equals(Categories.MINIATURE.getCode())){
-			categorieNomCss="Miniatures";
-		}else if(categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())){
-			categorieNomCss="piles &#38; Accessories";
-		}else if(categorieCode.equals(Categories.LOTS.getCode())){
-			categorieNomCss="Lots à Saisir";
+		if (categorieCode.equals(Categories.PARFUM_HOMME.getCode())) {
+			categorieNomCss = "Perfume Homme";
+		} else if (categorieCode.equals(Categories.PARFUM_FEMME.getCode())) {
+			categorieNomCss = "Perfume Femme";
+		} else if (categorieCode.equals(Categories.PARFUM_ENFANT.getCode())) {
+			categorieNomCss = "Perfume Enfant";
+		} else if (categorieCode.equals(Categories.TESTER.getCode())) {
+			categorieNomCss = "Testeur";
+		} else if (categorieCode.equals(Categories.COFFRET.getCode())) {
+			categorieNomCss = "Coffret";
+		} else if (categorieCode.equals(Categories.CREME.getCode())) {
+			categorieNomCss = "Crêmes et Soins";
+		} else if (categorieCode.equals(Categories.MINIATURE.getCode())) {
+			categorieNomCss = "Miniatures";
+		} else if (categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())) {
+			categorieNomCss = "piles &#38; Accessories";
+		} else if (categorieCode.equals(Categories.LOTS.getCode())) {
+			categorieNomCss = "Lots à Saisir";
 		}
-				
+
 		return categorieNomCss;
 	}
 
 	public void setCategorieNomCss(String categorieNomCss) {
 		this.categorieNomCss = categorieNomCss;
 	}
-	
+
 	public String getCategorieCodeCss() {
-		if(categorieCode.equals(Categories.PARFUM_HOMME.getCode())){
-			categorieCodeCss="phomme2";
-		}else if(categorieCode.equals(Categories.PARFUM_FEMME.getCode())){
-			categorieCodeCss="pfemme";
-		}else if(categorieCode.equals(Categories.PARFUM_ENFANT.getCode())){
-			categorieCodeCss="penfant";
-		}else if(categorieCode.equals(Categories.TESTER.getCode())){
-			categorieCodeCss="testeur";
-		}else if(categorieCode.equals(Categories.COFFRET.getCode())){
-			categorieCodeCss="coffret";
-		}else if(categorieCode.equals(Categories.CREME.getCode())){
-			categorieCodeCss="etsoins";
-		}else if(categorieCode.equals(Categories.MINIATURE.getCode())){
-			categorieCodeCss="miniatures";
-		}else if(categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())){
-			categorieCodeCss="piles";
-		}else if(categorieCode.equals(Categories.LOTS.getCode())){
-			categorieCodeCss="saisir";
+		if (categorieCode.equals(Categories.PARFUM_HOMME.getCode())) {
+			categorieCodeCss = "phomme2";
+		} else if (categorieCode.equals(Categories.PARFUM_FEMME.getCode())) {
+			categorieCodeCss = "pfemme";
+		} else if (categorieCode.equals(Categories.PARFUM_ENFANT.getCode())) {
+			categorieCodeCss = "penfant";
+		} else if (categorieCode.equals(Categories.TESTER.getCode())) {
+			categorieCodeCss = "testeur";
+		} else if (categorieCode.equals(Categories.COFFRET.getCode())) {
+			categorieCodeCss = "coffret";
+		} else if (categorieCode.equals(Categories.CREME.getCode())) {
+			categorieCodeCss = "etsoins";
+		} else if (categorieCode.equals(Categories.MINIATURE.getCode())) {
+			categorieCodeCss = "miniatures";
+		} else if (categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())) {
+			categorieCodeCss = "piles";
+		} else if (categorieCode.equals(Categories.LOTS.getCode())) {
+			categorieCodeCss = "saisir";
 		}
-				
+
 		return categorieCodeCss;
 	}
 
@@ -499,10 +509,10 @@ public class VCatalogueRestreintAvecStock implements Serializable {
 
 	public String getIsNouveauteSurHomePageCss() {
 		Date toDay = new Date();
-		isNouveauteSurHomePageCss="";
-		if(dateDebutNouveaute!=null && dateFinNouveaute!=null){
-			if(dateDebutNouveaute.before(toDay) && toDay.before(dateFinNouveaute)){
-				isNouveauteSurHomePageCss="catalougenew";
+		isNouveauteSurHomePageCss = "";
+		if (dateDebutNouveaute != null && dateFinNouveaute != null) {
+			if (dateDebutNouveaute.before(toDay) && toDay.before(dateFinNouveaute)) {
+				isNouveauteSurHomePageCss = "catalougenew";
 			}
 		}
 		return isNouveauteSurHomePageCss;
@@ -514,10 +524,10 @@ public class VCatalogueRestreintAvecStock implements Serializable {
 
 	public String getIsPromoSurHomePageCss() {
 		Date toDay = new Date();
-		isPromoSurHomePageCss="";
-		if(dateDebutPromo!=null && dateFinPromo!=null){
-			if(dateDebutPromo.before(toDay) && toDay.before(dateFinPromo)){
-				isPromoSurHomePageCss="catalougepromo";
+		isPromoSurHomePageCss = "";
+		if (dateDebutPromo != null && dateFinPromo != null) {
+			if (dateDebutPromo.before(toDay) && toDay.before(dateFinPromo)) {
+				isPromoSurHomePageCss = "catalougepromo";
 			}
 		}
 		return isPromoSurHomePageCss;
@@ -526,6 +536,5 @@ public class VCatalogueRestreintAvecStock implements Serializable {
 	public void setIsPromoSurHomePageCss(String isPromoSurHomePageCss) {
 		this.isPromoSurHomePageCss = isPromoSurHomePageCss;
 	}
-	
-	
+
 }

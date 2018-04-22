@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import com.marcanti.ecommerce.constants.Categories;
 import com.marcanti.ecommerce.model.Produit;
 
 public class ProduitBean {
@@ -37,18 +36,20 @@ public class ProduitBean {
 	private Date dateFinADecouvrir;
 	private Date dateDebutPromo;
 	private Date dateFinPromo;
-	
-    private boolean isBestSellerHomme;
-    private boolean isBestSellerFemme;
-    private boolean isPetitPrix;
-    private boolean isNouveauteSurHomePage;
-    private boolean isPromoSurHomePage;
-    private boolean isADecouvrirSurHomePage;
-	
+
+	private boolean isBestSellerHomme;
+	private boolean isBestSellerFemme;
+	private boolean isPetitPrix;
+	private boolean isNouveauteSurHomePage;
+	private boolean isPromoSurHomePage;
+	private boolean isADecouvrirSurHomePage;
+
 	private String categorieCodeCss;
 	private String categorieNomCss;
-    private String isNouveauteSurHomePageCss;   
-    private String isPromoSurHomePageCss; 
+	private String isNouveauteSurHomePageCss;
+	private String isPromoSurHomePageCss;
+
+	private String produitPhotoTailleMediumURL;
 
 	private List<Produit> produitsAssocies;
 
@@ -368,6 +369,12 @@ public class ProduitBean {
 		this.isFullAccess = isFullAccess;
 	}
 
-	
-	
+	public String getProduitPhotoTailleMediumURL() {
+		return produitPhotoTailleMediumURL;
+	}
+
+	public void setProduitPhotoTailleMediumURL(String produitPhotoTailleMediumURL) {
+		this.produitPhotoTailleMediumURL = produitPhotoTailleMediumURL;
+	}
+
 }

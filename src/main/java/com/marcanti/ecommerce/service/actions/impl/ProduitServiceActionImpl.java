@@ -163,9 +163,10 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	public List<ProduitBean> getPromoProducts(Long orgId) {
 		Organisation organisation = organisationDAO.find(orgId);
 		if (organisation != null && organisation.getAccesCatalogueComplet()) {
-			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getPromoProducts());
-		} else {
 			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedPromoProduit());
+		} else {
+
+			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getPromoProducts());
 		}
 	}
 
