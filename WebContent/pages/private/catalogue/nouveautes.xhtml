@@ -17,8 +17,8 @@
 					<div class="col-xs-12">
 						<div class="breadcrumslist">
 							<ul>
-								<li><a href="index.html">Home</a></li>
-								<li class="current_item"><a href="nouveautes.html">Nouveautés</a></li>
+								<li><h:link outcome="index"><h:outputLabel value="#{msg.libelle_home}" /></h:link></li>
+								<li class="current_item"><a href="nouveautes.xhtml">Nouveautés</a></li>
 							</ul>
 						</div>
 					</div>
@@ -119,11 +119,11 @@
 									<h5>#{product.marqueNom}</h5>
 									<div class="singleProductareass">
 										<figure>
-											<ui:fragment rendered="#{empty produit.produitPhotoURL}"><br/>
+											<ui:fragment rendered="#{empty produit.produitPhotoTailleMediumURL}"><br/>
 												<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="perfume"/><span>#{produit.marqueNom}</span>
 											</ui:fragment>
-											<ui:fragment rendered="#{!empty produit.produitPhotoURL}"><br/>
-												<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{produit.produitPhotoURL}" class="img-responsive" alt="perfume"/><span>#{produit.marqueNom}</span>
+											<ui:fragment rendered="#{!empty produit.produitPhotoTailleMediumURL}"><br/>
+												<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{produit.produitPhotoTailleMediumURL}" class="img-responsive" alt="perfume"/><span>#{produit.marqueNom}</span>
 											</ui:fragment>
 										</figure>
 									
