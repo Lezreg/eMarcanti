@@ -150,12 +150,18 @@
 	<!-- 										<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button> -->
 	
 											<!-- TODO button with ajax -->
-											<button>
-												<h:commandLink action="#{DecouvFilterView.addToBasket()}"> 
-													<f:setPropertyActionListener value="#{productAsso}" target="#{DecouvFilterView.selectedProduit}" />
-													<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />
-												</h:commandLink>
-											</button>
+											 <button onclick="addBasket(#{product.idProduit});return false;" >
+											 	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />
+											 </button>
+<!-- 											<button> -->
+<!-- 												<h:commandLink action="#{DecouvFilterView.addToBasket()}">  -->
+<!-- 													<f:setPropertyActionListener value="#{productAsso}" target="#{DecouvFilterView.selectedProduit}" /> -->
+<!-- 													<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" /> -->
+<!-- 												</h:commandLink> -->
+<!-- 											</button> -->
+											<!-- start modal one-->
+											<div class="modal fade" id="nouve-13" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											</div>
 										</li>
 									</ui:repeat>
 									</h:form>

@@ -3,5 +3,23 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<script src="#{request.contextPath}/static/js/string-length.js"></script>
+	
+	<script type="text/javascript">
+			function addBasket(id) {
+				console.log("start")
+				console.log(id)
+				$.ajax({
+				  url: "#{request.contextPath}/pages/private/catalogue/productModal.xhtml?id="+id,
+				  context: document.body
+				}).success(function(data) {
+					$('#nouve-13').html(data);
+					$('#nouve-13').modal('show');
+					$('#nouve-13').on('hidden.bs.modal', function () {
+						 location.reload();
+						})
+
+				});
+			}
+		</script>
 		
 </ui:composition>
