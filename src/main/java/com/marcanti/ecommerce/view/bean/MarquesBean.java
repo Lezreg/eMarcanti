@@ -118,7 +118,7 @@ public class MarquesBean implements Serializable {
 	
 	public String addMarqueView() {
 		logger.info("addMarqueView");
-		this.marque=new Marque();
+		this.marque = new Marque((short)0);
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_marque");
 		return "marque";
 

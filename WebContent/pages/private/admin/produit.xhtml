@@ -79,7 +79,8 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
-												<h:inputText id="produitDescription" value="#{catalogueAdminBean.produit.produitDescription}" maxlength="600"  />
+												<h:inputText id="produitDescription" value="#{catalogueAdminBean.produit.produitDescription}" maxlength="600" required="true"
+													requiredMessage="#{msg.description_obligatoire}" />
 											</div>
 										</div>
 									</div>
@@ -141,7 +142,8 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription notthreeretextarea">
-												<h:inputText value="#{catalogueAdminBean.produit.notrePrix}" maxlength="10" />
+												<h:inputText value="#{catalogueAdminBean.produit.notrePrix}" maxlength="10" required="true"
+													requiredMessage="#{msg.notre_prix_obligatoire}" />
 											</div>
 										</div>
 									</div>
@@ -158,7 +160,8 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription notthreeretextarea">
-												<h:inputText value="#{catalogueAdminBean.produit.prixPublic}" maxlength="10" />
+												<h:inputText value="#{catalogueAdminBean.produit.prixPublic}" maxlength="10" required="true"
+													requiredMessage="#{msg.prix_public_constate_obligatoire}" />
 											</div>
 										</div>
 									</div>
@@ -175,7 +178,8 @@
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription notthreeretextarea">
-												<h:inputText value="#{catalogueAdminBean.qteEnStock}" maxlength="6"  />
+												<h:inputText value="#{catalogueAdminBean.qteEnStock}" maxlength="6" required="true"
+													requiredMessage="#{msg.qte_stock_obligatoire}"  />
 											</div>
 										</div>
 									</div>
@@ -187,6 +191,9 @@
 
 											<div class="marquestext">
 												<p>#{msg.libelle_photo_catalogue}</p>
+												<ui:fragment rendered="#{!empty catalogueAdminBean.produit.produitPhotoURL}">
+												<p><img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{catalogueAdminBean.produit.produitPhotoURL}" class="img-responsive" alt="product"/></p>
+												</ui:fragment>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -206,6 +213,9 @@
 
 											<div class="marquestext">
 												<p>#{msg.libelle_photo_moyenne}</p>
+												<ui:fragment rendered="#{!empty catalogueAdminBean.produit.produitPhotoTailleMediumURL}">
+												<p><img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{catalogueAdminBean.produit.produitPhotoURL}" class="img-responsive" alt="product"/></p>
+												</ui:fragment>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
@@ -598,6 +608,9 @@
 													#{msg.libelle_photo}<br />
 													<small>(#{msg.libelle_a_decouvrir})</small>
 												</p>
+												<ui:fragment rendered="#{!empty catalogueAdminBean.produit.produitPhotoTailleMediumURL}">
+												<p><img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{catalogueAdminBean.produit.produitPhotoTailleLargeURL}" class="img-responsive" alt="product"/></p>
+												</ui:fragment>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">

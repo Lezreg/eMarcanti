@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.validator.routines.ShortValidator;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
@@ -62,8 +63,8 @@ public class CarouselsBean implements Serializable {
 	public void init() {
 		this.carouselList = carouselService.getCarouselList();
 		this.carousel = new Carousel(0);
-		Short idMarque = 0;
-		this.carousel.setIdMarque(new Marque(idMarque));
+		//Short idMarque = new Short((short)0);
+		//this.carousel.setIdMarque(new Marque(idMarque));
 		this.marqueList = marqueService.getMarqueList();
 	}
 	
@@ -172,6 +173,7 @@ public class CarouselsBean implements Serializable {
 	public String addCarouselView() {
 		logger.info("addCarouselView");
 		this.carousel = new Carousel(0);
+		this.carousel.setIdMarque(new Marque((short)0));
 		setOldRangItem("0");
 		this.uploadedFile = null;
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_item");
@@ -183,9 +185,71 @@ public class CarouselsBean implements Serializable {
 
 		FacesMessage facesMessage = new FacesMessage();
 		String msg;
+		boolean isError = false;
 		String ecran = "carousel";
 
 		logger.info("insertOrUpdateCarousel");
+		
+/*		if(getCarousel().getElementNom()==null || getCarousel().getElementNom().equals("")){
+			msg = ParfumUtils.getBundleApplication().getString("nom_item_obligatoire");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}
+		if(uploadedFile==null){
+			msg = ParfumUtils.getBundleApplication().getString("image_item_obligatoire");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}
+		if((new Short(getCarousel().getElementRang()))==null){
+			msg = ParfumUtils.getBundleApplication().getString("nom_rang_obligatoire");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}	
+		if(getCarousel().getProduitPrix()==null){
+			msg = ParfumUtils.getBundleApplication().getString("prix_prod_obligatoire");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}		
+		if(getCarousel().getProduitNom()==null || getCarousel().getProduitNom().equals("")){
+			msg = ParfumUtils.getBundleApplication().getString("nom_prod_obligatoire");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}
+		if(getCarousel().getProduitSousTitre()==null || getCarousel().getProduitSousTitre().equals("")){
+			msg = ParfumUtils.getBundleApplication().getString("ss_titre_prod_obligatoire");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}		
+		if(getCarousel().getBoutonLibelle()==null || getCarousel().getBoutonLibelle().equals("")){
+			msg = ParfumUtils.getBundleApplication().getString("btn_libelle_prod_obligatoire");
+			facesMessage = new FacesMessage();
+			facesMessage.setSummary(msg); 
+			facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+		    FacesContext.getCurrentInstance().addMessage("messages_view", facesMessage);
+		    isError = true;
+		}		
+		
+		if(isError){
+			return ecran;
+		}*/
 		
 		if(!getOldRangItem().equals(getElementRang()) && carouselService.isRangExist(carousel)){
 			msg = MessageFormat.format(ParfumUtils.getBundleApplication().getString("libelle_Erreur_rang"),String.valueOf(getElementRang()));

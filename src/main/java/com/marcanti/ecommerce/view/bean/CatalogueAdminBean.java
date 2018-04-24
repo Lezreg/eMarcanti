@@ -275,7 +275,7 @@ public class CatalogueAdminBean implements Serializable {
 		
 		logger.info("insertOrUpdateProduit");
 		
-		if(getProduit().getProduitDescription()==null || getProduit().getProduitDescription().equals("")){
+/*		if(getProduit().getProduitDescription()==null || getProduit().getProduitDescription().equals("")){
 			msg = ParfumUtils.getBundleApplication().getString("description_obligatoire");
 			facesMessage = new FacesMessage();
 			facesMessage.setSummary(msg); 
@@ -318,7 +318,7 @@ public class CatalogueAdminBean implements Serializable {
 		
 		if(isError){
 			return ecran;
-		}
+		}*/
 
 		if(this.produit.getIdProduit()==null || this.produit.getIdProduit()==0L){
 				
