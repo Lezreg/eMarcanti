@@ -608,7 +608,7 @@
 													#{msg.libelle_photo}<br />
 													<small>(#{msg.libelle_a_decouvrir})</small>
 												</p>
-												<ui:fragment rendered="#{!empty catalogueAdminBean.produit.produitPhotoTailleMediumURL}">
+												<ui:fragment rendered="#{!empty catalogueAdminBean.produit.produitPhotoTailleLargeURL}">
 												<p><img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{catalogueAdminBean.produit.produitPhotoTailleLargeURL}" class="img-responsive" alt="product"/></p>
 												</ui:fragment>
 											</div>
