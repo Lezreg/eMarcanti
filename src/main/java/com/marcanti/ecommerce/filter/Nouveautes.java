@@ -191,6 +191,28 @@ public class Nouveautes implements Serializable {
 		}
 		return filtredProducts;
 	}
+	
+	public List<ProduitBean> getNewProductsIndex() {
+
+		List<ProduitBean> filtredProducts = new ArrayList<ProduitBean>();
+		newProducts = produitServiceAction.getNewProducts(userSessionBean.getIdOrga());
+		/*ProduitBean produitBean = null;
+
+		for (Iterator<ProduitBean> iterator = newProducts.iterator(); iterator.hasNext();) {
+			produitBean = (ProduitBean) iterator.next();
+			if (produitBean.isNouveauteSurHomePage()) {
+				filtredProducts.add(produitBean);
+			}
+			
+		}*/
+		for (ProduitBean produitBean : newProducts) {
+
+			if (produitBean.isNouveauteSurHomePage()) {
+				filtredProducts.add(produitBean);
+			}
+		}
+		return filtredProducts;
+	}	
 
 	public void setNewProducts(List<ProduitBean> newProducts) {
 		this.newProducts = newProducts;

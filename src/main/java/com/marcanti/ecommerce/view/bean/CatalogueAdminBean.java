@@ -20,6 +20,7 @@ import org.primefaces.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.marcanti.ecommerce.beans.ProduitBean;
 import com.marcanti.ecommerce.model.Categorie;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.model.Produit;
@@ -424,5 +425,44 @@ public class CatalogueAdminBean implements Serializable {
         	this.sousCategorieList = new ArrayList<SousCategorie>();
         }
     }
+	
+	public List<ProduitBean> getBestSellerHommeProduits() {
+		List<ProduitBean> filtredProducts = new ArrayList<>();
+		List<ProduitBean> produits = produitService.getAllProducts(ParfumUtils.getUserSessionBean().getIdOrga());
+
+			for (ProduitBean produitBean : produits) {
+
+				if (produitBean.isBestSellerHomme()) {
+					filtredProducts.add(produitBean);
+				}
+			}
+		return filtredProducts;
+	}
+	
+	public List<ProduitBean> getBestSellerFemmeProduits() {
+		List<ProduitBean> filtredProducts = new ArrayList<>();
+		List<ProduitBean> produits = produitService.getAllProducts(ParfumUtils.getUserSessionBean().getIdOrga());
+
+			for (ProduitBean produitBean : produits) {
+
+				if (produitBean.isBestSellerFemme()) {
+					filtredProducts.add(produitBean);
+				}
+			}
+		return filtredProducts;
+	}
+	
+	public List<ProduitBean> getPetitPrixProduits() {
+		List<ProduitBean> filtredProducts = new ArrayList<>();
+		List<ProduitBean> produits = produitService.getAllProducts(ParfumUtils.getUserSessionBean().getIdOrga());
+
+			for (ProduitBean produitBean : produits) {
+
+				if (produitBean.isPetitPrix()) {
+					filtredProducts.add(produitBean);
+				}
+			}
+		return filtredProducts;
+	}	
 
 }

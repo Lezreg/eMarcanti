@@ -106,6 +106,20 @@ public class ADecouvrir {
 	public List<ProduitBean> getProduits() {
 		return produitServiceAction.getDecouvProducts(userSessionBean.getIdOrga());
 	}
+	
+	public List<ProduitBean> getDecouvProduitsIndex() {
+		
+		List<ProduitBean> filtredProducts = new ArrayList<>();
+		produits = produitServiceAction.getDecouvProducts(userSessionBean.getIdOrga());
+
+			for (ProduitBean produitBean : produits) {
+
+				if (produitBean.isADecouvrirSurHomePage()) {
+					filtredProducts.add(produitBean);
+				}
+			}
+		return filtredProducts;
+	}	
 
 	public void setProduits(List<ProduitBean> produits) {
 		this.produits = produits;

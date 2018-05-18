@@ -146,6 +146,19 @@ public class Promotion {
 		return filtredProducts;
 	}
 
+	public List<ProduitBean> getPromProduitsIndex() {
+		List<ProduitBean> filtredProducts = new ArrayList<>();
+		produits = produitServiceAction.getNewProducts(userSessionBean.getIdOrga());
+
+			for (ProduitBean produitBean : produits) {
+
+				if (produitBean.isPromoSurHomePage()) {
+					filtredProducts.add(produitBean);
+				}
+			}
+		return filtredProducts;
+	}
+	
 	public List<Categorie> getCategories() {
 		if (categories == null) {
 			categories = categorieServiceAction.getCategorieList();

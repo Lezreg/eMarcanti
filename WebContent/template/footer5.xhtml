@@ -1,0 +1,162 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<!-- start footer top area-->
+	<section class="footerToplistarea" style="margin-top: 0px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="footerToparea">
+						<h5>support</h5>
+						<ul>
+							<li><i class="fa fa-angle-right"></i><a href="">blogs</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">FAQs</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">terms
+									&amp; conditions</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">privacy
+									policy</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="footerToparea">
+						<h5>about us</h5>
+						<ul>
+							<li><i class="fa fa-angle-right"></i><a href="">why us</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">who we
+									are</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="footerToparea">
+						<h5>social links</h5>
+						<ul>
+							<li><i class="fa fa-angle-right"></i><a href="">facebook</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">twitter</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">linkedin</a></li>
+							<li><i class="fa fa-angle-right"></i><a href="">pinterest</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-sm-3">
+					<div class="footerToparea">
+						<h5>contact us</h5>
+						<ul>
+							<li>6th floor, Bat A</li>
+							<li>3 rue des Parfums, Paris</li>
+							<li>Email:contact@parfum achat groupé</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="copyrightarea">
+						<p>© 2017 parfum achat groupé all right reserved</p>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="paymentlist">
+						<ul>
+							<li><a href=""><img
+									src="#{request.contextPath}/static/img/visacard.png"
+									class="img-responsive" alt="paymentcard" /></a></li>
+							<li><a href=""><img
+									src="#{request.contextPath}/static/img/mastercard.png"
+									class="img-responsive" alt="paymentcard" /></a></li>
+							<li><a href=""><img
+									src="#{request.contextPath}/static/img/discovercard.png"
+									class="img-responsive" alt="paymentcard" /></a></li>
+							<li><a href=""><img
+									src="#{request.contextPath}/static/img/americanexpress.png"
+									class="img-responsive" alt="paymentcard" /></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h:outputScript>
+			<![CDATA[
+		    	window.jQuery || document.write('<script src="#{request.contextPath}/static/js/vendor/jquery.min.js"><\/script>')
+		   	]]>
+		</h:outputScript>
+
+		<script src="#{request.contextPath}/static/js/jquery-1.12.4.js"></script>
+		<script src="#{request.contextPath}/static/js/jquery.owl-filter.js"></script>
+		<script src="#{request.contextPath}/static/js/owl.carousel.js"></script>
+		<script src="#{request.contextPath}/static/js/jquery.flagstrap.js"></script>
+		<script src="#{request.contextPath}/static/js/scripts.js"></script>
+		<script src="#{request.contextPath}/static/js/bootstrap.min.js"></script>
+		<script src="#{request.contextPath}/static/js/jquery-confirm.min.js"></script>
+		
+		
+		<script>
+			 var _webs_bucket = $('#_webs_search_inpt').attr("placeholder");;
+			// owl carousel 
+				jQuery(document).ready(function(){
+					jQuery('.owl-carouseltwo').owlCarousel({
+						loop:true,
+						margin:10,
+						responsiveClass:true,
+						responsive:{
+							0:{
+								items:1,
+								nav:true
+							},
+							600:{
+								items:2,
+								nav:true
+							},
+							1000:{
+								items:3,
+								nav:true,
+								loop:false
+							}
+						}
+					});
+				});
+			
+			
+			// search form 
+			
+			$(document).on("click", '#_webs_search_btn', function(){
+            _webs_bucket = $('#_webs_search_inpt').attr("placeholder");
+            if($('#_webs_search_inpt').val().length == 0){
+                $('#_webs_search_inpt').addClass("webs-error");
+                $('#_webs_search_inpt').val("Veuillez indiquer un mot-clé");
+            }else{
+                if($('#_webs_search_inpt').val().length>2){
+                    $('#_webs_search_btn_').trigger("click");
+                }else{
+                    $.alert({
+                        title: 'Warning!',
+                        icon: 'fa fa-warning',
+                        type: 'orange',
+                        content: 'le nombre de caractère minimal est 3!',
+                    });
+                }
+            }
+        });
+        
+        $(document).on("focus", "#_webs_search_inpt", function(){
+            $('#_webs_search_inpt').val("");
+            $('#_webs_search_inpt').removeClass("webs-error");
+        });
+
+		</script>
+
+	</footer>
+
+</ui:composition>

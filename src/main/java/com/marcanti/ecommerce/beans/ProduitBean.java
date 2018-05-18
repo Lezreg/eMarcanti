@@ -9,6 +9,8 @@ import com.marcanti.ecommerce.model.Produit;
 public class ProduitBean {
 
 	private String produitPhotoURL;
+	private String produitPhotoTailleMediumURL;
+	private String produitPhotoTailleLargeURL;
 	private String marqueNom;
 	private String produitDescription;
 	private String sousCategorieNom;
@@ -48,8 +50,9 @@ public class ProduitBean {
 	private String categorieNomCss;
 	private String isNouveauteSurHomePageCss;
 	private String isPromoSurHomePageCss;
-
-	private String produitPhotoTailleMediumURL;
+	
+	private String nouveauteSurHomePageIndexCss;
+	private String promoSurHomePageIndexCss;
 
 	private List<Produit> produitsAssocies;
 
@@ -376,5 +379,31 @@ public class ProduitBean {
 	public void setProduitPhotoTailleMediumURL(String produitPhotoTailleMediumURL) {
 		this.produitPhotoTailleMediumURL = produitPhotoTailleMediumURL;
 	}
+	
+	public String getProduitPhotoTailleLargeURL() {
+		return produitPhotoTailleLargeURL;
+	}
+
+	public void setProduitPhotoTailleLargeURL(String produitPhotoTailleLargeURL) {
+		this.produitPhotoTailleLargeURL = produitPhotoTailleLargeURL;
+	}
+
+	public String getNouveauteSurHomePageIndexCss() {
+		return nouveauteSurHomePageIndexCss;
+	}
+
+	public void setNouveauteSurHomePageIndexCss(String nouveauteSurHomePageIndexCss) {
+		this.nouveauteSurHomePageIndexCss = nouveauteSurHomePageIndexCss;
+	}
+
+	public String getPromoSurHomePageIndexCss() {
+		return promoSurHomePageIndexCss;
+	}
+
+	public void setPromoSurHomePageIndexCss(String promoSurHomePageIndexCss) {
+		this.promoSurHomePageIndexCss = promoSurHomePageIndexCss;
+	}
+	
+	
 
 }

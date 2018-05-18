@@ -25,6 +25,7 @@ public class ProduitConvertor {
 		produitBean.setNoteDeFond(catalogue.getNoteDeFond());
 		produitBean.setNoteDeTete(catalogue.getNoteDeTete());
 		// prix
+		produitBean.setPetitPrix(catalogue.isPetitPrix());
 		produitBean.setNotrePrix(catalogue.getNotrePrix());
 		produitBean.setPrixPublic(catalogue.getPrixPublic());
 		// categorie
@@ -33,6 +34,7 @@ public class ProduitConvertor {
 		produitBean.setSousCategorieNom(catalogue.getSousCategorieNom());
 
 		// decouvrir
+		produitBean.setADecouvrirSurHomePage(catalogue.isADecouvrirSurHomePage());
 		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
 		produitBean.setTitreADecouvrir(catalogue.getTitreADecouvrir());
 
@@ -41,12 +43,22 @@ public class ProduitConvertor {
 		produitBean.setCategorieNomCss(catalogue.getCategorieNomCss());
 
 		// nouveau css
+		produitBean.setNouveauteSurHomePage(catalogue.isNouveauteSurHomePage());
 		produitBean.setIsNouveauteSurHomePageCss(catalogue.getIsNouveauteSurHomePageCss());
+		produitBean.setNouveauteSurHomePageIndexCss(catalogue.getNouveauteSurHomePageIndexCss());
 
 		// promo css
+		produitBean.setPromoSurHomePage(catalogue.isPromoSurHomePage());
 		produitBean.setIsPromoSurHomePageCss(catalogue.getIsPromoSurHomePageCss());
+		produitBean.setPromoSurHomePageIndexCss(catalogue.getPromoSurHomePageIndexCss());
+		
+		// Best Seller
+		produitBean.setBestSellerFemme(catalogue.isBestSellerFemme());
+		produitBean.setBestSellerHomme(catalogue.isBestSellerHomme());
 
-		produitBean.setProduitPhotoTailleMediumURL(catalogue.getProduitPhotoURL());
+		produitBean.setProduitPhotoURL(catalogue.getProduitPhotoURL());
+		produitBean.setProduitPhotoTailleMediumURL(catalogue.getProduitPhotoTailleMediumURL());
+		produitBean.setProduitPhotoTailleLargeURL(catalogue.getProduitPhotoTailleLargeURL());
 
 		return produitBean;
 	}
@@ -57,7 +69,6 @@ public class ProduitConvertor {
 		produitBean.setProduitPhotoURL(catalogue.getProduitPhotoURL());
 		// marque
 		produitBean.setMarqueNom(catalogue.getMarqueNom());
-
 		// description
 		produitBean.setProduitDescription(catalogue.getProduitDescription());
 		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
@@ -68,6 +79,7 @@ public class ProduitConvertor {
 		produitBean.setNoteDeFond(catalogue.getNoteDeFond());
 		produitBean.setNoteDeTete(catalogue.getNoteDeTete());
 		// prix
+		produitBean.setPetitPrix(catalogue.isPetitPrix());
 		produitBean.setNotrePrix(catalogue.getNotrePrix());
 		produitBean.setPrixPublic(catalogue.getPrixPublic());
 		// categorie
@@ -76,6 +88,7 @@ public class ProduitConvertor {
 		produitBean.setSousCategorieNom(catalogue.getSousCategorieNom());
 
 		// decouvrir
+		produitBean.setADecouvrirSurHomePage(catalogue.isADecouvrirSurHomePage());
 		produitBean.setDescriptionADecouvrir(catalogue.getDescriptionADecouvrir());
 		produitBean.setTitreADecouvrir(catalogue.getTitreADecouvrir());
 
@@ -84,10 +97,22 @@ public class ProduitConvertor {
 		produitBean.setCategorieNomCss(catalogue.getCategorieNomCss());
 
 		// nouveau css
+		produitBean.setNouveauteSurHomePage(catalogue.isNouveauteSurHomePage());
 		produitBean.setIsNouveauteSurHomePageCss(catalogue.getIsNouveauteSurHomePageCss());
+		produitBean.setNouveauteSurHomePageIndexCss(catalogue.getNouveauteSurHomePageIndexCss());
 
 		// promo css
+		produitBean.setPromoSurHomePage(catalogue.isPromoSurHomePage());
 		produitBean.setIsPromoSurHomePageCss(catalogue.getIsPromoSurHomePageCss());
+		produitBean.setPromoSurHomePageIndexCss(catalogue.getPromoSurHomePageIndexCss());
+
+		// Best Seller
+		produitBean.setBestSellerFemme(catalogue.isBestSellerFemme());
+		produitBean.setBestSellerHomme(catalogue.isBestSellerHomme());
+		
+		produitBean.setProduitPhotoURL(catalogue.getProduitPhotoURL());
+		produitBean.setProduitPhotoTailleMediumURL(catalogue.getProduitPhotoTailleMediumURL());
+		produitBean.setProduitPhotoTailleLargeURL(catalogue.getProduitPhotoTailleLargeURL());
 
 		return produitBean;
 	}

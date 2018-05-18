@@ -1,9 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:body>
@@ -12,11 +9,13 @@
 		<ui:define name="content">
 			<h:form id="formAcceuil">
 
-				<div id="carousel-example-generic" class="carouselarea carousel slide" data-ride="carousel">
+				<div id="carousel-example-generic"
+					class="carouselarea carousel slide" data-ride="carousel">
 					<div class="carousel-inner" role="listbox">
-						
+
 						<div class="item active">
-							<h:graphicImage value="/static/img/banner.jpg" styleClass="img-responsive" alt="slider"/>
+							<h:graphicImage value="/static/img/banner.jpg"
+								styleClass="img-responsive" alt="slider" />
 							<div class="first_slide_content carousel-caption">
 								<div class="specialslideinner firstSoldessliderinner">
 									<div class="first_slideInner">
@@ -27,13 +26,17 @@
 								</div>
 							</div>
 						</div>
-						
-						<ui:repeat var="carousel" value="#{carouselIndexBean.carouselList}">
+
+						<ui:repeat var="carousel"
+							value="#{carouselIndexBean.carouselList}">
 
 							<div class="item">
-								<img src="#{request.contextPath}/#{referentielBean.uploadCarouselFolderUrl}/#{carousel.elementImageURL}" class="img-responsive" alt="slider"/>
+								<img
+									src="#{request.contextPath}/#{referentielBean.uploadCarouselFolderUrl}/#{carousel.elementImageURL}"
+									class="img-responsive" alt="slider" />
 								<div class="newfirstslidecontent carousel-caption">
-									<div class="newslidermiddlearea newspcialslider specialslideinner">
+									<div
+										class="newslidermiddlearea newspcialslider specialslideinner">
 										<div class="first_slideInner newsliderheadeing">
 											<h1>#{carousel.produitMarque}</h1>
 											<div class="sliderpriceitem">
@@ -44,29 +47,396 @@
 												<span>#{carousel.produitSousTitre}</span>
 											</div>
 										</div>
-										<button class="ourproductbutton" onclick="location.href='#{carousel.elementLienURL}';">#{carousel.boutonLibelle}</button>
+										<button class="ourproductbutton"
+											onclick="location.href='#{carousel.elementLienURL}';">#{carousel.boutonLibelle}</button>
 									</div>
 								</div>
 							</div>
-							
+
 						</ui:repeat>
-						
+
 					</div>
 
-					<a class="left_carousel left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+					<a class="left_carousel left carousel-control"
+						href="#carousel-example-generic" role="button" data-slide="prev">
 						<i class="fa fa-angle-left"></i> <span class="sr-only">Previous</span>
-					</a> 
-					<a class="right_carousel right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+					</a> <a class="right_carousel right carousel-control"
+						href="#carousel-example-generic" role="button" data-slide="next">
 						<i class="fa fa-angle-right"></i> <span class="sr-only">Next</span>
 					</a>
 
 				</div>
+
+
+				<section class="moisarea">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="moistitle cemoistitle">
+									<h2>
+										<div class="borderright"></div>
+										Ce mois ci ...
+									</h2>
+								</div>
+							</div>
+						</div>
+						<div class="row marginRow">
+							<div class="col-xs-12">
+								<div class="moisproductarea">
+									<div id="demos">
+										<div class="btn-filter-wrap">
+
+											<button class="btn-filter btn-active" data-filter=".narrival">Nouveautés</button>
+											<button class="btn-filter" data-filter=".promos">Promos</button>
+											<button class="btn-filter" data-filter=".tdiscount">A découvrir</button>
+										</div>
+										<div class="owl-carousel">
+
+											<ui:repeat var="product" value="#{NovFilterView.newProductsIndex}">
+												<div class="item narrival">
+													<div class="single_item_caro">
+														<h5>#{product.marqueNom}</h5>
+														<figure>
+															<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}"
+																class="imageposition img-responsive" alt="cemoisci" />
+														</figure>
+														<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
+														<p>#{product.produitDetail}</p>
+														<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
+															<img src="#{request.contextPath}/static/img/whitecart.png" class="img-responsive" alt="button" />Ajouter au panier
+														</button>
+													</div>
+												</div>
+											</ui:repeat>
+
+											<ui:repeat var="product" value="#{PromFilterView.promProduitsIndex}">
+												<div class="item promos">
+													<div class="single_item_caro">
+														<h5>#{product.marqueNom}</h5>
+														<figure>
+															<img
+																src="{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}"
+																class="imageposition img-responsive" alt="cemoisci" />
+														</figure>
+														<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
+														<p>#{product.produitDetail}</p>
+														<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
+															<img src="#{request.contextPath}/static/img/whitecart.png"
+																class="img-responsive" alt="button" />Ajouter au panier
+														</button>
+													</div>
+												</div>
+											</ui:repeat>
+
+											<ui:repeat var="product" value="#{DecouvFilterView.decouvProduitsIndex}">
+												<div class="item tdiscount">
+													<div class="single_item_caro">
+														<h5>#{product.marqueNom}</h5>
+														<figure>
+															<img
+																src="{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}"
+																class="imageposition img-responsive" alt="cemoisci" />
+														</figure>
+														<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
+														<p>#{product.produitDetail}</p>
+														<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
+															<img
+																src="#{request.contextPath}/static/img/whitecart.png"
+																class="img-responsive" alt="button" />Ajouter au panier
+														</button>
+													</div>
+												</div>
+											</ui:repeat>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
+					<!-- start modal one-->
+					<div class="modal fade" id="nouve-13" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close buttonclose" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+								</div>
+								<div class="modal-body">
+									 <div class="bigpopupimage">
+										<h:graphicImage value="/static/img/Popupimage.png" class="img-responsive" alt="image"/>
+									</div>
+									 <div class="popupdetals sucessfulpopup modalbodyright">
+										<h2><h:graphicImage value="/static/img/Popupsuccesful.png" class="img-responsive" alt="error"/> The Product Was Successfully added</h2>
+										<p class="popupdescription">1 #{product.produitDescription}</p>
+										<div class="popbothbutton">
+											<button class="continuebutton">continue</button>
+											<button class="finishbutton">Finish Order</button>
+										</div>
+									 </div>
+								</div>
+							</div>
+						</div>
+					</div>
+									
+									
+				</section>
+				<!--end sec-->
+
+				<ui:fragment rendered="#{!empty catalogueAdminBean.bestSellerFemmeProduits}">
+				<section class="bestSellerWomen">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="moistitle">
+									<h2>
+										Best Sellers For Woman
+										<div class="borderright"></div>
+									</h2>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--end container-->
+
+					<div class="container-fluid">
+						<div class="row marginRow">
+							<div class="col-md-8 col-lg-9">
+								<div class="bestwomenseller">
+									
+									<ui:repeat var="product" value="#{catalogueAdminBean.bestSellerFemmeProduits}">
+										<div class="single_bfw_product">
+											<h5>#{product.marqueNom}</h5>
+											<div class="innerbfwproduct">
+												<div class="productimage">
+													<ui:fragment rendered="#{!empty product.nouveauteSurHomePageIndexCss}">
+														<h:outputFormat value="#{product.nouveauteSurHomePageIndexCss}" escape="false"/>
+													</ui:fragment>
+													<ui:fragment rendered="#{!empty product.promoSurHomePageIndexCss}">
+														<h:outputFormat value="#{product.promoSurHomePageIndexCss}" escape="false"/>
+													</ui:fragment>
+													<img src="{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="img-responsive" alt="cemoisci" />
+												</div>
+											</div>
+											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
+											<p>#{product.produitDetail}</p>
+											<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
+												<img src="#{request.contextPath}/static/img/whitecartsmall.png" class="img-responsive" alt="button" />Ajouter au panier
+											</button>
+										</div>
+										<!--end single_bfw_product-->
+									</ui:repeat>
+
+								</div>
+							</div>
+							<div class="hidden-xs hidden-sm col-md-4 col-lg-3">
+								<div class="best_sellerWomenimage">
+									<img src="#{request.contextPath}/static/img/bestwomen.jpg"
+										class="img-responsive" alt="img" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+				<!--end section-->
+				</ui:fragment>
+
+				<ui:fragment rendered="#{!empty catalogueAdminBean.bestSellerHommeProduits}">
+				<section class="bestSellerfmen">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="moistitle">
+									<h2>
+										<div class="borderright"></div>
+										Best Sellers For Man
+									</h2>
+									<div class="clearfix"></div>
+
+								</div>
+							</div>
+							<!--end col-->
+						</div>
+						<!--end row-->
+					</div>
+					<!--end container-->
+					<div class="container-fluid">
+						<div class="row marginRow">
+
+							<div class="col-md-4 col-lg-3 hidden-xs hidden-sm">
+								<div class="best_sellerWomenimage bestsellermenimg">
+									<img src="#{request.contextPath}/static/img/bestmen.jpg"
+										class="img-responsive" alt="img" />
+								</div>
+							</div>
+
+
+							<div class="col-md-8 col-lg-9">
+								<div class="bestwomenseller bestmanseller">
+									
+									
+									<ui:repeat var="product" value="#{catalogueAdminBean.bestSellerHommeProduits}">
+										<div class="single_bfw_product single_bfm_product">
+											<h5>#{product.marqueNom}</h5>
+											<div class="innerbfwproduct">
+												<div class="productimage">
+													<ui:fragment rendered="#{!empty product.nouveauteSurHomePageIndexCss}">
+														<h:outputFormat value="#{product.nouveauteSurHomePageIndexCss}" escape="false"/>
+													</ui:fragment>
+													<ui:fragment rendered="#{!empty product.promoSurHomePageIndexCss}">
+														<h:outputFormat value="#{product.promoSurHomePageIndexCss}" escape="false"/>
+													</ui:fragment>
+													<img src="{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}"
+														class="img-responsive" alt="cemoisci" />
+												</div>
+											</div>
+											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
+											<p>#{product.produitDetail}</p>
+											<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
+												<img
+													src="#{request.contextPath}/static/img/whitecartsmall.png"
+													class="img-responsive" alt="button" />Ajouter au panier
+											</button>
+										</div>
+										<!--end single_bfw_product-->
+									 </ui:repeat>
+									
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</section>
+				</ui:fragment>
+
+				<ui:fragment rendered="#{!empty catalogueAdminBean.petitPrixProduits}">
+				<section class="bestSellerWomen">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="moistitle">
+									<h2>
+										Petits Prix
+										<div class="borderright"></div>
+									</h2>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+							<!--end col-->
+						</div>
+						<!--end row-->
+					</div>
+					<!--end container-->
+
+					<div class="container-fluid">
+						<div class="row marginRow">
+							<div class="col-md-8 col-lg-9">
+								<div class="owl-carouseltwo bestwomenseller">
+									
+									<ui:repeat var="product" value="#{catalogueAdminBean.petitPrixProduits}">
+										<div class="item desktopmarleftless single_bfw_product">
+											<h5>#{product.marqueNom}</h5>
+											<div class="innerbfwproduct">
+												<div class="productimage">
+													<ui:fragment rendered="#{!empty product.nouveauteSurHomePageIndexCss}">
+														<h:outputFormat value="#{product.nouveauteSurHomePageIndexCss}" escape="false"/>
+													</ui:fragment>
+													<ui:fragment rendered="#{!empty product.promoSurHomePageIndexCss}">
+														<h:outputFormat value="#{product.promoSurHomePageIndexCss}" escape="false"/>
+													</ui:fragment>
+													<img src="{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}"
+														class="img-responsive" alt="cemoisci" />
+												</div>
+											</div>
+											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
+											<p>#{product.produitDetail}</p>
+											<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
+												<img
+													src="#{request.contextPath}/static/img/whitecartsmall.png"
+													class="img-responsive" alt="button" />Ajouter au panier
+											</button>
+										</div>
+										<!--end single_bfw_product-->
+									</ui:repeat>
+
+								</div>
+							</div>
+
+							<div class="col-md-4 col-lg-3 hidden-xs hidden-sm">
+								<div class="best_sellerWomenimage">
+									<img src="#{request.contextPath}/static/img/Perfumeprix.jpg" class="img-responsive" alt="img" />
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</section>
+				<!--end section-->
+				</ui:fragment>
+
+				<section class="customerSuportOthers">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="single_customerSupport forborderright">
+									<div class="innercustominfo">
+										<i class="fa fa-lock"></i>
+										<p>
+											Paiement 100% sécurisé <span>3D Secure, SSL</span>
+										</p>
+									</div>
+
+									<hr class="visible-xs mobileborder" />
+								</div>
+							</div>
+							<!--end col-->
+
+							<div class="col-sm-4">
+								<div class="single_customerSupport forborderright">
+
+									<div class="innercustominfo">
+										<i class="fa fa-check"></i>
+										<p>
+											Besoin d’aide <span>Consulter notre FAQ</span>
+										</p>
+									</div>
+
+									<hr class="visible-xs mobileborder" />
+								</div>
+							</div>
+							<!--end col-->
+
+							<div class="col-sm-4">
+								<div class="single_customerSupport">
+									<div class="innercustominfo">
+										<i class="fa fa-bus"></i>
+										<p>
+											Livraison rapide <span>48h en moyenne</span>
+										</p>
+									</div>
+								</div>
+							</div>
+							<!--end col-->
+						</div>
+					</div>
+				</section>
+
+
 			</h:form>
 		</ui:define>
-		
+
 		<ui:define name="footer">
-			<ui:include src="/template/footer2.xhtml" />
-		</ui:define>	
+			<ui:include src="/template/footer5.xhtml" />
+		</ui:define>
+		<ui:define name="script">
+			<ui:include src="/scripts/aDecouvrirScripts.xhtml" />
+		</ui:define>		
 	</ui:composition>
 </h:body>
 </html>

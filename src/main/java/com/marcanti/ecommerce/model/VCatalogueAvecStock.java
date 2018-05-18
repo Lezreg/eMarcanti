@@ -72,6 +72,8 @@ public class VCatalogueAvecStock implements Serializable {
 	private String produitPhotoURL;
 	@Size(max = 512)
 	private String produitPhotoTailleMediumURL;
+	@Transient
+	private String produitPhotoTailleLargeURL;	
 	@Basic(optional = false)
 	@NotNull
 	@Size(min = 1, max = 120)
@@ -165,6 +167,12 @@ public class VCatalogueAvecStock implements Serializable {
 
 	@Transient
 	private String isPromoSurHomePageCss;
+	
+	@Transient
+	private String nouveauteSurHomePageIndexCss;
+
+	@Transient
+	private String promoSurHomePageIndexCss;	
 
 	public VCatalogueAvecStock() {
 	}
@@ -183,6 +191,14 @@ public class VCatalogueAvecStock implements Serializable {
 
 	public void setProduitPhotoTailleMediumURL(String produitPhotoTailleMediumURL) {
 		this.produitPhotoTailleMediumURL = produitPhotoTailleMediumURL;
+	}
+	
+	public String getProduitPhotoTailleLargeURL() {
+		return produitPhotoTailleLargeURL;
+	}
+
+	public void setProduitPhotoTailleLargeURL(String produitPhotoTailleLargeURL) {
+		this.produitPhotoTailleLargeURL = produitPhotoTailleLargeURL;
 	}
 
 	public String getMarqueNom() {
@@ -538,5 +554,37 @@ public class VCatalogueAvecStock implements Serializable {
 	public void setIsPromoSurHomePageCss(String isPromoSurHomePageCss) {
 		this.isPromoSurHomePageCss = isPromoSurHomePageCss;
 	}
+
+	public String getNouveauteSurHomePageIndexCss() {
+		Date toDay = new Date();
+		nouveauteSurHomePageIndexCss = "";
+		if (dateDebutNouveaute != null && dateFinNouveaute != null) {
+			if (dateDebutNouveaute.before(toDay) && toDay.before(dateFinNouveaute)) {
+				nouveauteSurHomePageIndexCss = "<div class=\"productNew\">New</div>";
+			}
+		}
+		return nouveauteSurHomePageIndexCss;
+	}
+
+	public void setNouveauteSurHomePageIndexCss(String nouveauteSurHomePageIndexCss) {
+		this.nouveauteSurHomePageIndexCss = nouveauteSurHomePageIndexCss;
+	}
+
+	public String getPromoSurHomePageIndexCss() {
+		Date toDay = new Date();
+		promoSurHomePageIndexCss = "";
+		if (dateDebutPromo != null && dateFinPromo != null) {
+			if (dateDebutPromo.before(toDay) && toDay.before(dateFinPromo)) {
+				promoSurHomePageIndexCss = "<div class=\"productNew ProductPromo\">Promo</div>";
+			}
+		}
+		return promoSurHomePageIndexCss;
+	}
+
+	public void setPromoSurHomePageIndexCss(String promoSurHomePageIndexCss) {
+		this.promoSurHomePageIndexCss = promoSurHomePageIndexCss;
+	}
+	
+	
 
 }

@@ -125,11 +125,12 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 		Organisation organisation = organisationDAO.find(orgId);
 
 		if (organisation != null && organisation.getAccesCatalogueComplet()) {
-			// organisation.accesCatalogueComplet = 1 => V_CATALOGUE_RESTREINT_EN_STOCK
-			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedNewProduit());
-		} else {
-			// organisation.accesCatalogueComplet = 0 => V_CATALOGUE_EN_STOCK
+			// organisation.accesCatalogueComplet = 1 => V_CATALOGUE_EN_STOCK
 			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getNewProducts());
+			
+		} else {
+			// organisation.accesCatalogueComplet = 0 => V_CATALOGUE_RESTREINT_EN_STOCK
+			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedNewProduit());
 		}
 
 	}
