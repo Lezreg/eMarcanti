@@ -141,23 +141,21 @@
 										
 										<!-- TODO image a decouvrir  -->
 										
-											<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb" />
+<!-- 											<h:graphicImage value="/static/img/product-decouvrir/smallthumb.png" class="relatedimages img-responsive" alt="smallthumb" /> -->
+											<ui:fragment rendered="#{empty productAsso.produitPhotoURL}"><br/>
+												<img src="#{request.contextPath}/static/img/cat/default-img.png" class="relatedimages img-responsive" alt="smallthumb"/>
+											</ui:fragment>
+											<ui:fragment rendered="#{!empty productAsso.produitPhotoURL}"><br/>
+												<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{productAsso.produitPhotoURL}" class="relatedimages img-responsive" alt="smallthumb"/>
+											</ui:fragment>
 											
 											
-											
-											<span class="productlistitle">#{productAsso.produitDescription}</span><span class="productpricelist">#{productAsso.notrePrix}€</span>
+											<span class="productlistitle">#{productAsso.produitDescription}</span><span class="productpricelist">#{productAsso.notrePrix} €</span>
 	<!-- 										<button><h:graphicImage value="/static/img/whitecartsmall.png" class="img-responsive"/></button> -->
 	
-											<!-- TODO button with ajax -->
 											 <button onclick="addBasket(#{product.idProduit});return false;" >
 											 	<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" />
 											 </button>
-<!-- 											<button> -->
-<!-- 												<h:commandLink action="#{DecouvFilterView.addToBasket()}">  -->
-<!-- 													<f:setPropertyActionListener value="#{productAsso}" target="#{DecouvFilterView.selectedProduit}" /> -->
-<!-- 													<h:graphicImage value="/static/img/whitecartsmall.png" styleClass="img-responsive" /> -->
-<!-- 												</h:commandLink> -->
-<!-- 											</button> -->
 											<!-- start modal one-->
 											<div class="modal fade" id="nouve-13" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 											</div>
