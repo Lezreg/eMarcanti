@@ -22,9 +22,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.marcanti.ecommerce.constants.CommandeGroupeeStatus;
+import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
 
 /**
  *
@@ -76,6 +80,8 @@ public class CommandeIndividuelle implements Serializable {
 	private BigDecimal totalAPayer;
 	@Size(max = 100)
 	private String commentaire;
+	@Transient
+	private boolean isAuthorisedToModify;
 	@JoinColumn(name = "idCdeGroupee", referencedColumnName = "idCdeGroupee")
 	@ManyToOne(optional = false)
 	private CommandeGroupee idCdeGroupee;
@@ -227,6 +233,31 @@ public class CommandeIndividuelle implements Serializable {
 
 	public void setIdTransactionPaiement(TransactionPaiement idTransactionPaiement) {
 		this.idTransactionPaiement = idTransactionPaiement;
+	}
+
+	public boolean isAuthorisedToModify() {
+
+		if (this.getIdCdeGroupee() != null
+				|| CommandeGroupeeStatus.CDE_GROUPEE_NON_CONFIRMEE.getCode()
+						.equals(this.getIdCdeGroupee().getIdStatus().getStatusCode())
+				|| CommandeGroupeeStatus.CDE_GROUPEE_CONFIRMEE.getCode()
+						.equals(this.getIdCdeGroupee().getIdStatus().getStatusCode())) {
+			if (CommandeIndividuelleStatusEnum.CDE_INDIVID_CONFIRMEE.getCode()
+					.equals(this.getIdStatus().getStatusCode())
+					|| CommandeIndividuelleStatusEnum.CDE_INDIVID_NON_CONFIRMEE.getCode()
+							.equals(this.getIdStatus().getStatusCode())) {
+				return true;
+			}
+		}
+		return isAuthorisedToModify;
+	}
+
+	public void setAuthorisedToModify(boolean isAuthorisedToModify) {
+		this.isAuthorisedToModify = isAuthorisedToModify;
+	}
+
+	public void setPaiementEffectue(boolean isPaiementEffectue) {
+		this.isPaiementEffectue = isPaiementEffectue;
 	}
 
 	@Override

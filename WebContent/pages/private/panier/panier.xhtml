@@ -223,7 +223,7 @@
 														<td class="catgeneraltd">#{panierProduit.produit.produitDescription}</td>
 														<td class="inputcommandarea"><input id="box1" value="#{panierProduit.produit.notrePrix}"/>€</td>
 														<td class="quantityformarea quanlityavilablclass">
-															<h:inputText id="qte" value="#{panierProduit.qteSouhaitee}" type="number" oninput="calculate()" min="0" validatorMessage="Quantité possible : #{panierProduit.produit.qtePossible}"> 
+															<h:inputText id="qte" value="#{panierProduit.qteSouhaitee}" type="number" oninput="calculate()" min="0" validatorMessage="Quantité possible : #{panierProduit.produit.qtePossible}" readonly="#{!basketView.commandeIndividuelle.authorisedToModify}"> 
 <!-- 																<f:validateLongRange for="qte" minimum="1" maximum="4" /> -->
 															</h:inputText>
 															<span class="quantityamountspan"><h:message for="qte" style="color:red"  /></span>
@@ -246,14 +246,14 @@
 		<section class="comandeindialstatusarea">
 			<h2 class="section_header">sect</h2>
 			<div class="container">
-				<c:if test="#{basketView.panierProduitList.size() gt 0}">
-				<div class="row ">
-					<div class="col-xs-12 paddingrightless">
-						<div class="sauvegarderbutton">
-							<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_sauvegarder}" action="#{basketView.reCalculer}" />
+				<c:if test="#{basketView.panierProduitList.size() gt 0 and basketView.commandeIndividuelle.authorisedToModify}">
+					<div class="row ">
+						<div class="col-xs-12 paddingrightless">
+							<div class="sauvegarderbutton">
+								<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_sauvegarder}" action="#{basketView.reCalculer}" />
+							</div>
 						</div>
 					</div>
-				</div>
 				</c:if>
 				<div class="individualrowareatotal row marginRow">
 					<div class="col-sm-12">
@@ -269,15 +269,15 @@
 					
 				</div>
 				
-				<c:if test="#{basketView.panierProduitList.size() gt 0}">
-				<div class="row marginRow">
-					<div class="col-xs-12 paddingrightless">
-						<div class="sauvegarderbutton confirmbutton">
-							<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_confirmer}" action="#{basketView.confirmerCommandeIndiv}"/>
+				<c:if test="#{basketView.panierProduitList.size() gt 0 and basketView.commandeIndividuelle.authorisedToModify}">
+					<div class="row marginRow">
+						<div class="col-xs-12 paddingrightless">
+							<div class="sauvegarderbutton confirmbutton">
+								<h:commandLink styleClass="samewidthnotcon" value="#{msg.libelle_confirmer}" action="#{basketView.confirmerCommandeIndiv}"/>
+							</div>
 						</div>
 					</div>
-				</div>
-				
+					
 					<c:if test="${USER_SESSION.MENU_ADMIN_CATALOGUE}" scope="session">
 						<div class="row marginRow">
 							<div class="col-xs-12 paddingrightless">
@@ -289,66 +289,6 @@
 						</div>
 					</c:if>
 				</c:if>
-				<!-- modal-->
-				
-					<!-- Modal -->
-					<div class="modal fade" id="moyenbutton" tabindex="-1" role="dialog" aria-labelledby="moyenbutton">
-					  <div class="moyenbodyareatotal modal-dialog" role="document">
-						<div class="moyencontenmodal modal-content">
-						  <div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">times</span></button>
-							<h4 class="modal-title" id="moyenbutton">Renseigner un autre moyen de paiement</h4>
-						  </div>
-						  <div class="moyenbodyarea modal-body">
-						  
-						  		<div class="marqueinfo marginRow">
-								<div class="paddingless col-sm-4">
-									<div class="marquestext">
-										<p>Nom de la commande</p>
-									</div>
-								</div>
-								<div class="paddingless col-sm-8">
-									<div class="comindiconinput marquedescription admininput">
-										<input name="crele" placeholder="commande-individual_2017-01-10" required="" type="text"/>
-									</div>
-								</div>
-							</div>
-							
-							<div class="clearfix"></div>
-							
-								<div class="marqueinfo marginRow">
-									<div class="paddingless col-sm-4">
-										<div class="marquestext">
-											<p>Commentaire</p>
-										</div>
-									</div>
-									<div class="paddingless col-sm-8">
-										<div class="marquedescription">
-											<div class="marquedescription">
-											<textarea class="form-control" rows="1"></textarea>
-										</div>
-
-										</div>
-									</div>
-								</div><!--end inner div-->
-						  </div>
-						  <div class="custommodalfooter modal-footer">
-							<div class="newmodiysvecan">
-								 <div class="button-1">
-									<div class="eff-1"></div>
-									<a href="" data-dismiss="modal"> Annuler </a>
-								  </div>
-
-								  <div class="button-2">
-									<div class="eff-2"></div>
-										<a href=""> Valider </a>
-								  </div>
-							</div>
-						  </div>
-						</div>
-					  </div>
-					</div>
-				<!-- modal-->
 				
 			</div>
 		</section>

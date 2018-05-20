@@ -127,7 +127,7 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 		if (organisation != null && organisation.getAccesCatalogueComplet()) {
 			// organisation.accesCatalogueComplet = 1 => V_CATALOGUE_EN_STOCK
 			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getNewProducts());
-			
+
 		} else {
 			// organisation.accesCatalogueComplet = 0 => V_CATALOGUE_RESTREINT_EN_STOCK
 			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedNewProduit());
@@ -164,10 +164,10 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	public List<ProduitBean> getPromoProducts(Long orgId) {
 		Organisation organisation = organisationDAO.find(orgId);
 		if (organisation != null && organisation.getAccesCatalogueComplet()) {
-			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedPromoProduit());
-		} else {
-
 			return ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getPromoProducts());
+		} else {
+			return ProduitConvertor.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedPromoProduit());
+
 		}
 	}
 
@@ -176,10 +176,10 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 		List<ProduitBean> produitBeans = null;
 		Organisation organisation = organisationDAO.find(orgId);
 		if (organisation != null && organisation.getAccesCatalogueComplet()) {
+			produitBeans = ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getDecouvProducts());
+		} else {
 			produitBeans = ProduitConvertor
 					.convertVCatalogueRestreintAvecStock(produitDAO.getRestrictedDecouvProduit());
-		} else {
-			produitBeans = ProduitConvertor.convertVCatalogueAvecStock(produitDAO.getDecouvProducts());
 		}
 
 		for (ProduitBean produitBean : produitBeans) {
