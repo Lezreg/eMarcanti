@@ -166,8 +166,9 @@
 <!-- 								<p class="redclass"><i class="fa fa-warning"></i>Une erreur technique est survenue … <a href=""  data-toggle="modal" data-target="#cindinotconpopu">Détail</a></p> -->
 						</div>
 						<div class="updatecartcheck">
-						
-						<p class="greenclass"> <h:messages globalOnly="true" infoClass="greenclass fa fa-check" errorClass="redclass fa fa-warning" warnClass="orangeclass fa fa-exclamation-triangle"></h:messages></p>
+							<c:if test="#{basketView.panierProduitList.size() gt 0}">
+								<p class="greenclass"> <h:messages globalOnly="true" infoClass="greenclass fa fa-check" errorClass="redclass fa fa-warning" warnClass="orangeclass fa fa-exclamation-triangle"></h:messages></p>
+							</c:if>
 							<h:message for="qte" errorClass="errorMessage" /> 
 <!-- 							<p><i class="fa fa-exclamation-triangle"></i> Mettez à jour votre panier !</p> -->
 <!-- 							<p><i class="fa fa-exclamation-triangle"></i> Veuillez confirmer la commande, afin que les produits vous soient réservés !</p> -->
@@ -261,7 +262,9 @@
 						
 							<ul>
 								<li><p>Sous Total<span>#{basketView.panierEnCours.panierMontant} €</span></p></li>
-								<li><p>Reduction<span>#{basketView.commandeIndividuelle.reduction} €</span></p></li>
+								<c:if test="#{basketView.panierEnCours.panierMontant gt 0}">
+									<li><p>Reduction<span>#{basketView.commandeIndividuelle.reduction} €</span></p></li>
+								</c:if>
 								<li class="totalcostindi"><p>Total<span>#{basketView.commandeIndividuelle.totalAPayer} €</span></p></li>
 							</ul>
 						</div>
