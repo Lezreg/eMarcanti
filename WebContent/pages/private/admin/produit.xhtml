@@ -425,7 +425,7 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													#{msg.libelle_date_debut}<h:inputText id="datepicker-example1" value="#{catalogueAdminBean.produit.dateDebutPromo}" validatorMessage="le format de la date est dd/MM/yyyy" maxlength="10">
+													#{msg.libelle_date_debut}<h:inputText id="datepicker-example1" value="#{catalogueAdminBean.produit.dateDebutPromo}" validatorMessage="#{msg.msg_date_debut_promo}" converterMessage="#{msg.msg_date_debut_promo}" maxlength="10">
 														<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 													</h:inputText>
 												</div>												
@@ -434,7 +434,7 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquedescription">
 												<div class="form-group">
-													#{msg.libelle_date_fin}<h:inputText id="datepicker-example2" value="#{catalogueAdminBean.produit.dateFinPromo}" validatorMessage="le format de la date est dd/MM/yyyy" maxlength="10">
+													#{msg.libelle_date_fin}<h:inputText id="datepicker-example2" value="#{catalogueAdminBean.produit.dateFinPromo}" validatorMessage="#{msg.msg_date_fin_promo}" converterMessage="#{msg.msg_date_fin_promo}" maxlength="10">
 														<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 													</h:inputText>
 												</div>
@@ -480,7 +480,7 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													#{msg.libelle_date_debut}<h:inputText id="datepicker-example32" value="#{catalogueAdminBean.produit.dateDebutNouveaute}" maxlength="10">
+													#{msg.libelle_date_debut}<h:inputText id="datepicker-example32" value="#{catalogueAdminBean.produit.dateDebutNouveaute}" validatorMessage="#{msg.msg_date_debut_nouv}" converterMessage="#{msg.msg_date_debut_nouv}" maxlength="10">
 														<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 													</h:inputText>
 												</div>
@@ -489,7 +489,7 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquedescription">
 												<div class="form-group">
-													#{msg.libelle_date_fin}<h:inputText id="datepicker-example33" value="#{catalogueAdminBean.produit.dateFinNouveaute}" maxlength="10">
+													#{msg.libelle_date_fin}<h:inputText id="datepicker-example33" value="#{catalogueAdminBean.produit.dateFinNouveaute}" validatorMessage="#{msg.msg_date_fin_nouv}" converterMessage="#{msg.msg_date_fin_nouv}" maxlength="10">
 														<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 													</h:inputText>
 												</div>
@@ -534,7 +534,7 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquestext">
 												<div class="form-group">
-													#{msg.libelle_date_debut}<h:inputText id="datepicker-example34" value="#{catalogueAdminBean.produit.dateDebutADecouvrir}" maxlength="10">
+													#{msg.libelle_date_debut}<h:inputText id="datepicker-example34" value="#{catalogueAdminBean.produit.dateDebutADecouvrir}" validatorMessage="#{msg.msg_date_debut_decouv}" converterMessage="#{msg.msg_date_debut_decouv}" maxlength="10">
 														<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 													</h:inputText>
 												</div>
@@ -543,7 +543,7 @@
 										<div class="paddingless col-sm-6">
 											<div class="admincatdatepicker marquedescription">
 												<div class="form-group">
-													#{msg.libelle_date_fin}<h:inputText id="datepicker-example35" value="#{catalogueAdminBean.produit.dateFinADecouvrir}" maxlength="10">
+													#{msg.libelle_date_fin}<h:inputText id="datepicker-example35" value="#{catalogueAdminBean.produit.dateFinADecouvrir}"  validatorMessage="#{msg.msg_date_fin_decouv}" converterMessage="#{msg.msg_date_fin_decouv}" maxlength="10">
 														<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 													</h:inputText>
 												</div>

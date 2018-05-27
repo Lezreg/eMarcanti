@@ -98,8 +98,12 @@
 													<div class="single_item_caro">
 														<h5>#{product.marqueNom}</h5>
 														<figure>
-															<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}"
-																class="imageposition img-responsive" alt="cemoisci" />
+															<ui:fragment rendered="#{empty product.produitPhotoTailleMediumURL}">
+																<img src="#{request.contextPath}/static/img/cat/default-img.png" class="imageposition img-responsive" alt="cemoisci"/>
+															</ui:fragment>
+															<ui:fragment rendered="#{!empty product.produitPhotoTailleMediumURL}">
+																<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="imageposition img-responsive" alt="cemoisci" />
+															</ui:fragment>
 														</figure>
 														<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
 														<p>#{product.produitDetail}</p>
@@ -115,9 +119,12 @@
 													<div class="single_item_caro">
 														<h5>#{product.marqueNom}</h5>
 														<figure>
-															<img
-																src="{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}"
-																class="imageposition img-responsive" alt="cemoisci" />
+															<ui:fragment rendered="#{empty product.produitPhotoTailleMediumURL}">
+																<img src="#{request.contextPath}/static/img/cat/default-img.png" class="imageposition img-responsive" alt="cemoisci"/>
+															</ui:fragment>
+															<ui:fragment rendered="#{!empty product.produitPhotoTailleMediumURL}">
+																<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="imageposition img-responsive" alt="cemoisci" />
+															</ui:fragment>
 														</figure>
 														<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
 														<p>#{product.produitDetail}</p>
@@ -134,9 +141,12 @@
 													<div class="single_item_caro">
 														<h5>#{product.marqueNom}</h5>
 														<figure>
-															<img
-																src="{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}"
-																class="imageposition img-responsive" alt="cemoisci" />
+															<ui:fragment rendered="#{empty product.produitPhotoTailleMediumURL}">
+																<img src="#{request.contextPath}/static/img/cat/default-img.png" class="imageposition img-responsive" alt="cemoisci"/>
+															</ui:fragment>
+															<ui:fragment rendered="#{!empty product.produitPhotoTailleMediumURL}">
+																<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="imageposition img-responsive" alt="cemoisci" />
+															</ui:fragment>
 														</figure>
 														<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
 														<p>#{product.produitDetail}</p>
@@ -218,7 +228,13 @@
 													<ui:fragment rendered="#{!empty product.promoSurHomePageIndexCss}">
 														<h:outputFormat value="#{product.promoSurHomePageIndexCss}" escape="false"/>
 													</ui:fragment>
-													<img src="{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="img-responsive" alt="cemoisci" />
+
+													<ui:fragment rendered="#{empty product.produitPhotoTailleMediumURL}">
+														<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="cemoisci"/>
+													</ui:fragment>
+													<ui:fragment rendered="#{!empty product.produitPhotoTailleMediumURL}">
+														<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="img-responsive" alt="cemoisci" />
+													</ui:fragment>
 												</div>
 											</div>
 											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
@@ -290,8 +306,14 @@
 													<ui:fragment rendered="#{!empty product.promoSurHomePageIndexCss}">
 														<h:outputFormat value="#{product.promoSurHomePageIndexCss}" escape="false"/>
 													</ui:fragment>
-													<img src="{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}"
-														class="img-responsive" alt="cemoisci" />
+													
+													<ui:fragment rendered="#{empty product.produitPhotoTailleMediumURL}">
+														<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="cemoisci"/>
+													</ui:fragment>
+													<ui:fragment rendered="#{!empty product.produitPhotoTailleMediumURL}">
+														<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="img-responsive" alt="cemoisci" />
+													</ui:fragment>
+													
 												</div>
 											</div>
 											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
@@ -349,8 +371,13 @@
 													<ui:fragment rendered="#{!empty product.promoSurHomePageIndexCss}">
 														<h:outputFormat value="#{product.promoSurHomePageIndexCss}" escape="false"/>
 													</ui:fragment>
-													<img src="{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}"
-														class="img-responsive" alt="cemoisci" />
+													
+													<ui:fragment rendered="#{empty product.produitPhotoTailleMediumURL}">
+														<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive" alt="cemoisci"/>
+													</ui:fragment>
+													<ui:fragment rendered="#{!empty product.produitPhotoTailleMediumURL}">
+														<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="img-responsive" alt="cemoisci" />
+													</ui:fragment>
 												</div>
 											</div>
 											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
