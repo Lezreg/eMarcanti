@@ -16,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
+import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.model.VCdeGroupeeDetail;
 import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
+import com.marcanti.ecommerce.service.actions.OrganisationServiceAction;
 import com.marcanti.ecommerce.utils.ParfumUtils;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
@@ -35,8 +37,13 @@ public class CommandesFilleulsController {
 
 	private VCdeGroupeeDetail selectedCdeGroupee;
 
+	private List<Organisation> organisations;
+
 	@Autowired
 	private CommandeGroupeeServiceAction commandeGroupeeServiceAction;
+
+	@Autowired
+	private OrganisationServiceAction organisationServiceAction;
 
 	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 
@@ -106,6 +113,22 @@ public class CommandesFilleulsController {
 
 	public void setCmdeGroupeesPrec(List<VCdeGroupeeDetail> cmdeGroupeesPrec) {
 		this.cmdeGroupeesPrec = cmdeGroupeesPrec;
+	}
+
+	public List<Organisation> getOrganisations() {
+		return organisationServiceAction.getOrganisationList();
+	}
+
+	public void setOrganisations(List<Organisation> organisations) {
+		this.organisations = organisations;
+	}
+
+	public OrganisationServiceAction getOrganisationServiceAction() {
+		return organisationServiceAction;
+	}
+
+	public void setOrganisationServiceAction(OrganisationServiceAction organisationServiceAction) {
+		this.organisationServiceAction = organisationServiceAction;
 	}
 
 }
