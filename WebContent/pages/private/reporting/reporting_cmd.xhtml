@@ -44,7 +44,7 @@
 							<div class="paddingless col-sm-6">
 								<div class="marquestext">
 									<div class="form-group">
-										#{msg.libelle_date_debut}<h:inputText id="datepicker-example36" value="#{reportingCdeGroupeeBean.dateDebut}" maxlength="10">
+										#{msg.libelle_date_debut}<h:inputText id="datepicker-example36" value="#{reportingCdeGroupeeBean.dateDebut}" validatorMessage="#{msg.msg_date_debut}" converterMessage="#{msg.msg_date_debut}" maxlength="10">
 												  	<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 												  </h:inputText>
 									</div>
@@ -53,7 +53,7 @@
 							<div class="paddingless col-sm-6">
 								<div class="marquedescription">
 									<div class="form-group">
-										#{msg.libelle_date_fin}<h:inputText id="datepicker-example37" value="#{reportingCdeGroupeeBean.dateFin}" maxlength="10">
+										#{msg.libelle_date_fin}<h:inputText id="datepicker-example37" value="#{reportingCdeGroupeeBean.dateFin}" validatorMessage="#{msg.msg_date_fin}" converterMessage="#{msg.msg_date_fin}" maxlength="10">
 													<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 												  </h:inputText>
 									</div>
