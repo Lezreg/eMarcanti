@@ -100,7 +100,8 @@ public class CategorieDAOImpl extends AbstractGenericDAO<Categorie> implements C
 
 	@Override
 	public Categorie getCategorie(Categorie categorie) {
-		return em.createNamedQuery("Categorie.findByIdCategorie", Categorie.class).setParameter("idCategorieProduit", categorie.getIdCategorie()).getSingleResult();
+		//return em.createNamedQuery("Categorie.findByIdCategorie", Categorie.class).setParameter("idCategorieProduit", categorie.getIdCategorie()).getSingleResult();
+		return em.createNamedQuery("Categorie.findByIdCategorie", Categorie.class).setParameter("idCategorie", categorie.getIdCategorie()).getSingleResult();
 	}
 
 	@Override

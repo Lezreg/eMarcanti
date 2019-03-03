@@ -202,9 +202,9 @@ public class CatalogueAdminBean implements Serializable {
 	}
 	
 	public String getQteEnStock() {
-		if(String.valueOf(this.produit.getQteEnStock()).equals("0")){
-			return "";
-		}else
+		//if(String.valueOf(this.produit.getQteEnStock()).equals("0")){
+		//	return "";
+		//}else
 			return String.valueOf(this.produit.getQteEnStock());
 	}
 
@@ -250,6 +250,7 @@ public class CatalogueAdminBean implements Serializable {
 		Produit produit = produitService.getProduit(getIdProduit());
 		setProduit(produit);
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_modifier_produit");
+		this.sousCategorieList = sousCategorieService.getSousCategorieByCategorieList(produit.getIdCategorie());
 		return "produit";
 
 	}
@@ -258,7 +259,8 @@ public class CatalogueAdminBean implements Serializable {
 		logger.info("addProduitView");
 		this.produit = new Produit();
 		this.produit.setIdMarque(new Marque((short)0));
-		this.produit.setIdCategorie(new Categorie((short)0));
+		this.produit.setIdCategorie(new Categorie((short)1));
+		this.sousCategorieList = sousCategorieService.getSousCategorieByCategorieList(produit.getIdCategorie());
 		this.produit.setIdSousCategorie(new SousCategorie((short)0));
 		this.uploadedPhoto = null;
 		this.titre = ParfumUtils.getBundleApplication().getString("libelle_ajouter_produit");

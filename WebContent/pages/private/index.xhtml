@@ -27,8 +27,7 @@
 							</div>
 						</div>
 
-						<ui:repeat var="carousel"
-							value="#{carouselIndexBean.carouselList}">
+						<ui:repeat var="carousel" value="#{carouselIndexBean.carouselList}">
 
 							<div class="item">
 								<img
@@ -47,8 +46,8 @@
 												<span>#{carousel.produitSousTitre}</span>
 											</div>
 										</div>
-										<button class="ourproductbutton"
-											onclick="location.href='#{carousel.elementLienURL}';">#{carousel.boutonLibelle}</button>
+										<!--button class="ourproductbutton" onclick="location.href='#{carousel.elementLienURL}';">#{carousel.boutonLibelle}</button-->
+										<button class="ourproductbutton" onclick="window.open('#{carousel.elementLienURL}')">#{carousel.boutonLibelle}</button>
 									</div>
 								</div>
 							</div>
@@ -105,8 +104,8 @@
 																<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="imageposition img-responsive" alt="cemoisci" />
 															</ui:fragment>
 														</figure>
-														<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-														<p>#{product.produitDetail}</p>
+														<span>#{product.notrePrix}€ <strike>#{product.prixPublic}€</strike></span>
+														<p>#{product.produitDescription}</p>
 														<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
 															<img src="#{request.contextPath}/static/img/whitecart.png" class="img-responsive" alt="button" />Ajouter au panier
 														</button>
@@ -126,8 +125,8 @@
 																<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="imageposition img-responsive" alt="cemoisci" />
 															</ui:fragment>
 														</figure>
-														<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-														<p>#{product.produitDetail}</p>
+														<span>#{product.notrePrix}€ <strike>#{product.prixPublic}€</strike></span>
+														<p>#{product.produitDescription}</p>
 														<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
 															<img src="#{request.contextPath}/static/img/whitecart.png"
 																class="img-responsive" alt="button" />Ajouter au panier
@@ -148,8 +147,8 @@
 																<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleMediumURL}" class="imageposition img-responsive" alt="cemoisci" />
 															</ui:fragment>
 														</figure>
-														<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-														<p>#{product.produitDetail}</p>
+														<span>#{product.notrePrix}€ <strike>#{product.prixPublic}€</strike></span>
+														<p>#{product.produitDescription}</p>
 														<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
 															<img
 																src="#{request.contextPath}/static/img/whitecart.png"
@@ -237,8 +236,8 @@
 													</ui:fragment>
 												</div>
 											</div>
-											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-											<p>#{product.produitDetail}</p>
+											<span>#{product.notrePrix}€ <strike>#{product.prixPublic}€</strike></span>
+											<p>#{product.produitDescription}</p>
 											<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
 												<img src="#{request.contextPath}/static/img/whitecartsmall.png" class="img-responsive" alt="button" />Ajouter au panier
 											</button>
@@ -316,8 +315,8 @@
 													
 												</div>
 											</div>
-											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-											<p>#{product.produitDetail}</p>
+											<span>#{product.notrePrix}€ <strike>#{product.prixPublic}€</strike></span>
+											<p>#{product.produitDescription}</p>
 											<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
 												<img
 													src="#{request.contextPath}/static/img/whitecartsmall.png"
@@ -380,8 +379,8 @@
 													</ui:fragment>
 												</div>
 											</div>
-											<span>#{product.notrePrix}€<strike>#{product.prixPublic}€</strike></span>
-											<p>#{product.produitDetail}</p>
+											<span>#{product.notrePrix}€ <strike>#{product.prixPublic}€</strike></span>
+											<p>#{product.produitDescription}</p>
 											<button class="addtocartbutton" onclick="addBasket(#{product.idProduit});return false;">
 												<img
 													src="#{request.contextPath}/static/img/whitecartsmall.png"

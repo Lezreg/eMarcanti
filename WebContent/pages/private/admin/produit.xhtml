@@ -172,7 +172,7 @@
 										<div class="paddingless col-sm-4">
 											<div class="marquestext">
 												<p>
-													#{msg.libelle_quantite_stock}(€)<span>*</span>
+													#{msg.libelle_quantite_stock}<span>*</span>
 												</p>
 											</div>
 										</div>
@@ -213,15 +213,15 @@
 
 											<div class="marquestext">
 												<p>#{msg.libelle_photo_moyenne}</p>
-												<ui:fragment rendered="#{!empty catalogueAdminBean.produit.produitPhotoTailleMediumURL}">
-												<p><img width="60" height="80" src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{catalogueAdminBean.produit.produitPhotoURL}" class="img-responsive" alt="product"/></p>
+												<ui:fragment id="produitPhotoMediumUrlId" rendered="#{!empty catalogueAdminBean.produit.produitPhotoTailleMediumURL}">
+												<p><img width="60" height="80" src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{catalogueAdminBean.produit.produitPhotoTailleMediumURL}" class="img-responsive" alt="product"/></p>
 												</ui:fragment>
 											</div>
 										</div>
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoMoyenne}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoMoyenne}" multiple="true" mode="advanced"  auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
+													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoMoyenne}" update="produitPhotoMediumUrlId" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoMoyenne}" multiple="true" mode="advanced"  auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
 												</div>
 												<span class="upload-pathtwo"></span>
 											</div>
@@ -608,7 +608,7 @@
 													#{msg.libelle_photo}<br />
 													<small>(#{msg.libelle_a_decouvrir})</small>
 												</p>
-												<ui:fragment rendered="#{!empty catalogueAdminBean.produit.produitPhotoTailleLargeURL}">
+												<ui:fragment id="produitPhotoLargeUrlId" rendered="#{!empty catalogueAdminBean.produit.produitPhotoTailleLargeURL}">
 												<p><img width="60" height="80" src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{catalogueAdminBean.produit.produitPhotoTailleLargeURL}" class="img-responsive" alt="product"/></p>
 												</ui:fragment>
 											</div>
@@ -616,7 +616,7 @@
 										<div class="paddingless col-sm-8">
 											<div class="marquedescription">
 												<div class="browse-wrap">
-													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoLarge}" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoLarge}" multiple="true" mode="advanced"  auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
+													<p:fileUpload value="#{catalogueAdminBean.uploadedPhotoLarge}" update="produitPhotoLargeUrlId" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerPhotoLarge}" multiple="true" mode="advanced"  auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadFileExt}" sizeLimit="#{referentielBean.uploadFileSize}"/>
 												</div>
 												<span class="upload-paththree"></span>
 											</div>
