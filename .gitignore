@@ -59,4 +59,5 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 WebContent/upload/*
+*_old
 .gitignore
