@@ -129,7 +129,9 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
 			return Collections.emptyList();
 		}
-		return (List<CommandeIndividuelle>) query.getResultList();
+		@SuppressWarnings("unchecked")
+		List<CommandeIndividuelle> resultList = (List<CommandeIndividuelle>) query.getResultList();
+		return resultList;
 	}
 
 	@Override

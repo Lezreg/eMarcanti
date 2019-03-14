@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeGroupeeStatus;
+import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.VCdeGroupeeDetail;
 import com.marcanti.ecommerce.model.VReduction;
 
@@ -30,4 +31,6 @@ public interface CommandeGroupeeServiceAction {
 	List<CommandeGroupee> getCmdGroupeesPaiementByOrganisation(Long idOrg, boolean isPaiementEffectue);
 
 	void annulerCmdGroupee(CommandeGroupee commandeGroupee);
+
+	List<CommandeIndividuelle> getCommandeIndividuelleListByGroupee(CommandeGroupee commandeGroupee);
 }

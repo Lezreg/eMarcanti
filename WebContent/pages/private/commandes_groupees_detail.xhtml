@@ -1,0 +1,200 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="/template/template.xhtml">
+
+		<ui:define name="content">
+			<h:form>
+			<!-- start mess commandes area-->
+				<section class="messcomandesarea">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="purchaseordertextitle filterheading">
+									<h3><a href="javascript:history.go(-1);"><p:graphicImage url="/static/img/commandes/purchaseorder.png" styleClass="img-responsive"/></a>Commande groupée : #{cmdGroupeeView.commandeGroupee.cdeGroupeeNom}</h3>
+								</div>
+							</div>
+						</div>
+						
+						<div class="row marginRow">
+							<div class="col-xs-12">
+								<div class="warningallert filterheading progressbartitle">
+									<h3>Statut de la commande</h3>
+									<div class="messProgressBararea">
+										<ul>
+											<li>
+												<h:graphicImage value="/static/img/commandes/notconfirm.png" class="img-responsive" alt="notconfirm" />
+												<div class="innerlistone">
+													<p><i class="fa fa-exclamation-triangle"></i>Non confirmée</p>
+												</div>
+											</li>
+											
+											<li class="smallerpbar">
+												<h:graphicImage value="/static/img/commandes/confirm.png" class="img-responsive" alt="confirm" />
+												<div class="innerlistone">
+													<p>Confirmée</p>
+												</div>
+											</li>
+											
+											<li class="smallerpbar">
+												<h:graphicImage value="/static/img/commandes/livraisendemandee.png" class="img-responsive" alt="livraisendemandee" />
+												<div class="innerlistone">
+													<p>Livraison demandée</p>
+												</div>
+											</li>
+											
+											<li class="smallerpbar marginlesstablet">
+												<h:graphicImage value="/static/img/commandes/livree.png" class="img-responsive" alt="livree" />
+												<div class="innerlistone">
+													<p>Livrée</p>
+												</div>
+											</li>
+											
+											<li class="smallerpbar">
+												<h:graphicImage value="/static/img/commandes/annulee.png" class="img-responsive" alt="livree"/>
+												<div class="innerlistone">
+													<p>Annulée</p>
+												</div>
+											</li>
+											
+											
+										</ul>
+										
+									
+										
+										
+									</div>
+									<span><strong>Dernier mise à jour:</strong>#{cmdGroupeeView.commandeGroupee.dateModification} by <em> #{cmdGroupeeView.commandeGroupee.nomModifieur} </em></span>
+								</div>
+							</div>
+						</div><!--end row-->
+						
+						
+					</div><!--end cont-->
+				</section>
+				<!--end sec-->
+				
+				
+				<section class="mess-commandestable">
+					<h2 class="section_header">sec</h2>
+					<div class="container">
+						<div class="row customrow">
+							<div class="col-xs-12">
+								<div class="mess-innertablearea">
+									<div class="newbutton printexcelbutton">
+										<button>Print</button>
+										<button>Export to Excel</button>
+									</div>
+									<table id="commandesid" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
+										<thead>
+											<tr>
+												<th class="creationdate">Nom</th>
+												<th class="status">Prénom</th>
+												<th class="nameoforder">Département</th>
+												<th class="payment">Parrain</th>
+												<th class="deliverydate">Montant</th>
+												<th class="deliverydate">Confirmé ?</th>
+												<th class="deliverydate">Payé ?</th>
+												<th class="blankth"></th>
+												<th class="deliverydate none">Telephone</th>
+												
+											</tr>
+										</thead>
+										
+										<tfoot class="catalougetfootarea messcommandestfarea">
+											<tr>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th></th>
+												<th class="blankth"></th>
+												<th></th>
+												
+											</tr>
+										</tfoot>
+										<tbody>
+											<ui:repeat var="commandeIndiv" value="#{cmdGroupeeView.selectedCommmandeIndividuelleList}">
+												<tr>
+													
+													<td><strong>#{commandeIndiv.idMembre.membreNom}</strong></td>
+													<td>#{commandeIndiv.idMembre.membrePrenom} </td>
+													<td>#{commandeIndiv.idMembre.idDepartement.departementNom}</td>
+													<td>#{commandeIndiv.idMembre.nomParrain}</td>
+													<td>#{commandeIndiv.totalAPayer}</td>
+													
+ 													<td class="organyesnooption"><small>#{cmdGr.isPaiementEffectue ? 'y' : 'n'}</small><i class="#{cmdGr.isPaiementEffectue ? 'fa fa-check-square-o' : 'fa fa-times'}" title="N"></i></td>
+													
+													<td class="paididicontwo organyesnooption"><small>#{commandeIndiv.confirmed ? 'y' : 'n'}</small><i class="#{commandeIndiv.confirmed ? 'fa fa-check-square-o' : 'fa fa-times'}"></i></td>
+													<td><i class="fa fa-eye"></i></td>
+													<td>#{commandeIndiv.idMembre.membreTel}</td>
+													
+												</tr>
+											</ui:repeat>
+																						
+										</tbody>
+									</table>
+								</div><!--end-->
+							</div>
+						</div><!--end row-->
+					
+					</div><!--end cont.-->
+				</section><!--end sec-->
+				
+				
+				<section class="globalpayentautobutton">
+					<h2 class="section_header">sect</h2>
+					<div class="container">
+					
+						
+						
+						<div class="totalamountarea row">
+							<div class="col-sm-6">
+								<div class="totalamounttext">
+									<h3>Total</h3>
+								</div>
+							</div>
+							
+							
+							<div class="col-sm-6">
+								<div class="totalamount">
+									<h3>#{cmdGroupeeView.commandeGroupee.sommeCommandeGroupee}</h3>
+								</div>
+							</div>
+							
+						</div>
+						
+						
+						<div class="row marginRow">
+							<div class="col-xs-12">
+								<div class="globalauthorisbutton">
+									<button class="globalpayment">Paiement global <span class="tooltiptextss">La commande groupée peut-être payée en une  seule fois de manière globale </span></button>
+									<button class="authorizebutton" data-toggle="modal" data-target="#derminuteid2"> Autoriser Modif. dernière minute<span class="tooltiptextss">Vous pouvez encore modifier la commande 2 fois </span></button>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+		
+				
+			
+			</h:form>
+		
+		</ui:define>
+		
+		<ui:define name="script">
+			<ui:include src="/scripts/cmdGroupeesScripts.xhtml" />
+		</ui:define>		
+		
+	</ui:composition>
+</h:body>
+</html>

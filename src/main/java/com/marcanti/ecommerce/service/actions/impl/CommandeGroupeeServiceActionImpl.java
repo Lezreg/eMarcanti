@@ -237,4 +237,10 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 		this.panierProduitDAO = panierProduitDAO;
 	}
 
+	@Override
+	public List<CommandeIndividuelle> getCommandeIndividuelleListByGroupee(CommandeGroupee commandeGroupee) {
+
+		return commandeIndividuelleDAO.getCommandeIndivListByCmdGroupe(commandeGroupee.getIdCdeGroupee());
+	}
+
 }

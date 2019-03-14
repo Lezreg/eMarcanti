@@ -17,7 +17,7 @@
 						<div class="breadcrumslist">
 							<ul>
 								<li><a href="index.xhtml">Home</a></li> /
-								<li class="current_item"><a href="commandes_groupees.html">Commandes Groupées</a></li>
+								<li class="current_item"><a href="cmdGroupees.xhtml">Commandes Groupées</a></li>
 							</ul>
 						</div>
 					</div>
@@ -179,7 +179,7 @@
 												</c:if>
 											</td>
 											<td>
-												<h:commandLink action="showCommandeGroupee" styleClass="fa fa-eye">
+												<h:commandLink action="showCommandeGroupeeDetail" styleClass="fa fa-eye">
 													 <f:setPropertyActionListener value="#{cmdGr}" target="#{cmdGroupeeView.commandeGroupee}" />
 												</h:commandLink>
 											</td>

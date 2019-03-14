@@ -280,8 +280,8 @@
 	<navigation-rule>
 		<from-view-id>/*</from-view-id>
 		<navigation-case>
-			<from-outcome>showCommandeGroupee</from-outcome>
-			<to-view-id>/pages/private/cmdGroupeeConsult.xhtml</to-view-id>
+			<from-outcome>showCommandeGroupeeDetail</from-outcome>
+			<to-view-id>/pages/private/commandes_groupees_detail.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
 	

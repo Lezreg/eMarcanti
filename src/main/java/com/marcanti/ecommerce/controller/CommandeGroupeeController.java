@@ -1,6 +1,7 @@
 package com.marcanti.ecommerce.controller;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -21,6 +22,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.constants.CommandeGroupeeStatus;
 import com.marcanti.ecommerce.model.CommandeGroupee;
+import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Organisation;
 import com.marcanti.ecommerce.service.actions.CommandeGroupeeServiceAction;
 import com.marcanti.ecommerce.service.actions.OrganisationServiceAction;
@@ -42,6 +44,7 @@ public class CommandeGroupeeController implements Serializable {
 
 	@Autowired
 	private CommandeGroupeeServiceAction commandeGroupeeServiceAction;
+
 	@Autowired
 	private OrganisationServiceAction organisationServiceAction;
 
@@ -49,6 +52,8 @@ public class CommandeGroupeeController implements Serializable {
 	private ReferentielBean referentielBean;
 
 	private CommandeGroupee commandeGroupee;
+
+	private List<CommandeIndividuelle> selectedCommmandeIndividuelleList;
 
 	private List<CommandeGroupee> cmdGroupees;
 
@@ -71,6 +76,8 @@ public class CommandeGroupeeController implements Serializable {
 	private String StatusCode;
 
 	private boolean canModifyOrganisation;
+
+	private BigDecimal somme;
 
 	@PostConstruct
 	private void init() {
@@ -288,6 +295,22 @@ public class CommandeGroupeeController implements Serializable {
 
 	public void setCanModifyOrganisation(boolean canModifyOrganisation) {
 		this.canModifyOrganisation = canModifyOrganisation;
+	}
+
+	public List<CommandeIndividuelle> getSelectedCommmandeIndividuelleList() {
+		List<CommandeIndividuelle> CommandeIndividuelleList = commandeGroupeeServiceAction
+				.getCommandeIndividuelleListByGroupee(commandeGroupee);
+		somme = new BigDecimal(0);
+		for (CommandeIndividuelle commandeIndividuelle : CommandeIndividuelleList) {
+			somme = somme.add(commandeIndividuelle.getTotalAPayer());
+		}
+
+		commandeGroupee.setSommeCommandeGroupee(somme);
+		return CommandeIndividuelleList;
+	}
+
+	public void setSelectedCommmandeIndividuelleList(List<CommandeIndividuelle> selectedCommmandeIndividuelleList) {
+		this.selectedCommmandeIndividuelleList = selectedCommmandeIndividuelleList;
 	}
 
 }

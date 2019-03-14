@@ -82,6 +82,10 @@ public class CommandeIndividuelle implements Serializable {
 	private String commentaire;
 	@Transient
 	private boolean isAuthorisedToModify;
+
+	@Transient
+	private boolean confirmed;
+
 	@JoinColumn(name = "idCdeGroupee", referencedColumnName = "idCdeGroupee")
 	@ManyToOne(optional = false)
 	private CommandeGroupee idCdeGroupee;
@@ -258,6 +262,15 @@ public class CommandeIndividuelle implements Serializable {
 
 	public void setPaiementEffectue(boolean isPaiementEffectue) {
 		this.isPaiementEffectue = isPaiementEffectue;
+	}
+
+	public boolean isConfirmed() {
+		return CommandeIndividuelleStatusEnum.CDE_INDIVID_CONFIRMEE.getCode()
+				.equals(this.getIdStatus().getStatusCode());
+	}
+
+	public void setConfirmed(boolean confirmed) {
+		this.confirmed = confirmed;
 	}
 
 	@Override
