@@ -115,6 +115,7 @@ public class AuthentificationBean implements Serializable {
 		try {
 			resu = service.emailExist(getUsername());
 		} catch (Exception e) {
+			resu = false;
 			logger.error("ERROR check email exist : ",e);
 		}
 		if(resu){
@@ -122,6 +123,7 @@ public class AuthentificationBean implements Serializable {
 				String passwordSHA512 = DigestUtils.sha512Hex(getPassword());
 				resu = service.isAuthenticated(getUsername(),passwordSHA512);
 			} catch (Exception e) {
+				resu = false;
 				logger.error("ERROR authentication : ",e);
 			}
 			if(resu){
