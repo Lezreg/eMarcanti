@@ -123,8 +123,9 @@ public class AuthentificationBean implements Serializable {
 				if(getPassword()!=null && !getPassword().equals("")){
 					String passwordSHA512 = DigestUtils.sha512Hex(getPassword());
 					resu = service.isAuthenticated(getUsername(),passwordSHA512);
+				}else{
+					resu = false;
 				}
-				resu = false;
 			} catch (Exception e) {
 				resu = false;
 				logger.error("ERROR authentication : ",e);
