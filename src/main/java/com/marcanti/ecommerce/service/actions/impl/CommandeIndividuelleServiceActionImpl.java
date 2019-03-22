@@ -19,8 +19,7 @@ public class CommandeIndividuelleServiceActionImpl implements CommandeIndividuel
 	private CommandeIndividuelleDAO CommandeIndividuelleDAO;
 	@Autowired
 	private CommandeGroupeeDAO commandeGroupeeDAO;
-	
-	
+
 	@Override
 	public List<CommandeIndividuelle> getCmdEnCoursParMembre(Long idMembre, Long idCdeGroupee, boolean isCurrentCmd) {
 		if (isCurrentCmd) {
@@ -34,11 +33,9 @@ public class CommandeIndividuelleServiceActionImpl implements CommandeIndividuel
 		return CommandeIndividuelleDAO.find(idCde);
 	}
 
-
 	public CommandeIndividuelleDAO getCommandeIndividuelleDAO() {
 		return CommandeIndividuelleDAO;
 	}
-
 
 	public void setCommandeIndividuelleDAO(CommandeIndividuelleDAO commandeIndividuelleDAO) {
 		CommandeIndividuelleDAO = commandeIndividuelleDAO;
