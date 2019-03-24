@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -271,7 +272,7 @@ public class CatalogueAdminBean implements Serializable {
 	
 	public String insertOrUpdateProduit() {
 		
-		FacesMessage facesMessage = null;
+		FacesMessage facesMessage = new FacesMessage();
 		String msg;
 		boolean isError = false;
 		String ecran ="produit";
@@ -322,6 +323,51 @@ public class CatalogueAdminBean implements Serializable {
 		if(isError){
 			return ecran;
 		}*/
+		
+		if(getProduit().getDateDebutPromo()!=null || getProduit().getDateFinPromo()!=null){
+			if(getProduit().getDateDebutPromo()==null){
+				msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_date_debut_promo");
+				facesMessage.setSummary(msg);
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				return ecran;
+			}
+			if(getProduit().getDateFinPromo()==null){
+				msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_date_fin_promo");
+				facesMessage.setSummary(msg);
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				return ecran;
+			}			
+			if(getProduit().getDateDebutPromo().compareTo(getProduit().getDateFinPromo())>0){
+				msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_date_promo");
+				facesMessage.setSummary(msg);
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				return ecran;
+			}
+		}
+		
+		if(getProduit().getDateDebutNouveaute()!=null || getProduit().getDateFinNouveaute()!=null){
+			if(getProduit().getDateDebutNouveaute().compareTo(getProduit().getDateFinNouveaute())>0){
+				msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_date_nouveau");
+				facesMessage.setSummary(msg);
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				return ecran;
+			}
+		}		
+		
+		if(getProduit().getDateDebutADecouvrir()!=null || getProduit().getDateFinADecouvrir()!=null){
+			if(getProduit().getDateDebutADecouvrir().compareTo(getProduit().getDateFinADecouvrir())>0){
+				msg = ParfumUtils.getBundleApplication().getString("libelle_Erreur_date_decouvrir");
+				facesMessage.setSummary(msg);
+				facesMessage.setSeverity(FacesMessage.SEVERITY_ERROR);
+				FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+				return ecran;
+			}
+		}		
+		
 
 		if(this.produit.getIdProduit()==null || this.produit.getIdProduit()==0L){
 				
