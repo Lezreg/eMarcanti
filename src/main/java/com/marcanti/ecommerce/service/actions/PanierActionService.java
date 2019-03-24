@@ -1,5 +1,6 @@
 package com.marcanti.ecommerce.service.actions;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.marcanti.ecommerce.exception.CommandeGroupeeNotFoundException;
@@ -25,11 +26,11 @@ public interface PanierActionService {
 
 	List<PanierProduit> getProduitsByCmdIndiv(Long idCmdIndiv);
 
-	List<PanierProduit> recalculer(List<PanierProduit> panierProduitList, UserSessionBean userSessionBean)
-			throws ProductNotAvailableException;
+	List<PanierProduit> recalculer(List<PanierProduit> panierProduitList, BigDecimal reduction,
+			UserSessionBean userSessionBean) throws ProductNotAvailableException;
 
 	void confirmerCommandeIndiv(CommandeIndividuelle commandeIndividuelle, List<PanierProduit> panierProduitList,
-			UserSessionBean userSessionBean) throws ProductNotAvailableException;
+			BigDecimal reduction, UserSessionBean userSessionBean) throws ProductNotAvailableException;
 
 	CommandeIndividuelle getLastCommandeIndividuelle(UserSessionBean userSessionBean);
 

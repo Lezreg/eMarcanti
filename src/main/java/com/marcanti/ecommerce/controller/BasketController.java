@@ -3,6 +3,7 @@ package com.marcanti.ecommerce.controller;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -71,6 +72,8 @@ public class BasketController implements Serializable {
 
 	private boolean isCurrrentCmds = true;
 
+	private BigDecimal reduction;
+
 	UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 
 	private List<PanierProduit> panierProduitList;
@@ -118,6 +121,7 @@ public class BasketController implements Serializable {
 	}
 
 	/**
+	 * sauvegarder en IHM<br>
 	 * recalculer le panier après la modification
 	 */
 	public void reCalculer() {
@@ -125,7 +129,8 @@ public class BasketController implements Serializable {
 		UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
 
 		try {
-			this.panierProduitList = panierService.recalculer(panierProduitList, userSessionBean);
+			// TODO biding reduction in IHM
+			this.panierProduitList = panierService.recalculer(panierProduitList, reduction, userSessionBean);
 			// add messages
 			addFacesMessages();
 		} catch (ProductNotAvailableException e) {
@@ -163,7 +168,7 @@ public class BasketController implements Serializable {
 	public void confirmerCommandeIndiv() {
 		try {
 			UserSessionBean userSessionBean = ParfumUtils.getUserSessionBean();
-			panierService.confirmerCommandeIndiv(commandeIndividuelle, panierProduitList, userSessionBean);
+			panierService.confirmerCommandeIndiv(commandeIndividuelle, panierProduitList, reduction, userSessionBean);
 
 			// La commande est confirmée ! Les produits vous ont été réservés.
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,

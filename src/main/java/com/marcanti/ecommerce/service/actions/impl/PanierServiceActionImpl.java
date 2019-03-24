@@ -164,10 +164,9 @@ public class PanierServiceActionImpl implements PanierActionService {
 
 	}
 
-	@Transactional
 	@Override
-	public List<PanierProduit> recalculer(List<PanierProduit> panierProduitList, UserSessionBean userSessionBean)
-			throws ProductNotAvailableException {
+	public List<PanierProduit> recalculer(List<PanierProduit> panierProduitList, BigDecimal reduction,
+			UserSessionBean userSessionBean) throws ProductNotAvailableException {
 
 		if (panierProduitList == null || panierProduitList.isEmpty()) {
 			LOGGER.info("panierProduitList is empty");
@@ -205,7 +204,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 		}
 		// update montant panier
 		CommandeIndividuelle cmdIndiv = updatePanierAndCommande(userSessionBean, panier, commandeIndividuel,
-				totalPanier, panierNbreProduit);
+				totalPanier, reduction, panierNbreProduit);
 		// return updated list of panier produit
 		return getProduitsByCmdIndiv(cmdIndiv.getIdCdeIndiv());
 	}
@@ -231,10 +230,11 @@ public class PanierServiceActionImpl implements PanierActionService {
 	 */
 
 	private CommandeIndividuelle updatePanierAndCommande(UserSessionBean userSessionBean, Panier panier,
-			CommandeIndividuelle commandeIndividuel, BigDecimal totalPanier, Short panierNbreProduit) {
+			CommandeIndividuelle commandeIndividuel, BigDecimal totalPanier, BigDecimal reduction,
+			Short panierNbreProduit) {
 		panier = updateMontantNbreProduit(totalPanier, panier, panierNbreProduit);
 
-		// TODO commandeIndividuelle.setReduction(reduction);
+		commandeIndividuel.setReduction(reduction);
 		commandeIndividuel.setCommentaire("MAJ PANIER");
 		// update commande individuelle
 		CommandeIndividuelle cmdIndiv = updateCommandeIndividuelle(userSessionBean, commandeIndividuel, panier);
@@ -300,12 +300,11 @@ public class PanierServiceActionImpl implements PanierActionService {
 		return panier;
 	}
 
-	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public void confirmerCommandeIndiv(CommandeIndividuelle commandeIndividuelle, List<PanierProduit> panierProduitList,
-			UserSessionBean userSessionBean) throws ProductNotAvailableException {
+			BigDecimal reduction, UserSessionBean userSessionBean) throws ProductNotAvailableException {
 		// recalculer et verifier la disponibilité de produit en stock
-		recalculer(panierProduitList, userSessionBean);
+		recalculer(panierProduitList, reduction, userSessionBean);
 		// mettre à jour la quantité dispo
 		for (PanierProduit panierProduit : panierProduitList) {
 			Produit produit = panierProduit.getProduit();
@@ -321,6 +320,9 @@ public class PanierServiceActionImpl implements PanierActionService {
 		// mettre a jour statut
 		commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO
 				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatusEnum.CDE_INDIVID_CONFIRMEE.getCode()));
+
+		// cdeIndiv.dateModification
+		commandeIndividuelle.setDateModification(new Date());
 		// save
 		commandeIndividuelleDAO.edit(commandeIndividuelle);
 	}
@@ -370,7 +372,6 @@ public class PanierServiceActionImpl implements PanierActionService {
 		commandeIndividuel.setNomModifieur(userSessionBean.getMembreNom());
 		commandeIndividuel.setPrenomModifieur(userSessionBean.getMembrePrenom());
 		if (commandeIndividuel.getReduction() == null) {
-			// TODO reduction
 			commandeIndividuel.setReduction(new BigDecimal(0));
 		}
 		BigDecimal total = panierEnCours.getPanierMontant().subtract(commandeIndividuel.getReduction());

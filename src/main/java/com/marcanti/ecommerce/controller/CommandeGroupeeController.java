@@ -143,7 +143,7 @@ public class CommandeGroupeeController implements Serializable {
 		}
 		commandeGroupeeServiceAction.saveCmdGroupee(commandeGroupee);
 
-		return "cmdGroupees";
+		return "cmdGroupeesPrec";
 	}
 
 	public String annulerCmdGroupee() {

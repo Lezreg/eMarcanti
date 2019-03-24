@@ -70,12 +70,14 @@ public class PaiementServiceImpl implements PaiementService {
 	private void updateCommandeIndividuelle(CommandeIndividuelle commandeIndividuelle,
 			TransactionPaiement transactionPaiement, UserSessionBean userSessionBean) {
 		commandeIndividuelle.setNomModifieur(userSessionBean.getMembreNom());
-		commandeIndividuelle.setPrenomModifieur(userSessionBean.getMembreNom());
+		commandeIndividuelle.setPrenomModifieur(userSessionBean.getMembrePrenom());
 
 		commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO
 				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatusEnum.CDE_INDIVID_PAYEE.getCode()));
 		commandeIndividuelle.setIdTransactionPaiement(transactionPaiement);
 		commandeIndividuelle.setDateModification(new Date());
+		commandeIndividuelle.setPaiementEffectue(true);
+		commandeIndividuelle.setCommentaire("Paiement par CB");
 
 		commandeIndividuelleDAO.edit(commandeIndividuelle);
 	}
