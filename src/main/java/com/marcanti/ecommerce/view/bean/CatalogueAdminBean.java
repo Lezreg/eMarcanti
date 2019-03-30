@@ -63,6 +63,8 @@ public class CatalogueAdminBean implements Serializable {
 	
 	private UploadedFile uploadedPhotoLarge;
 	
+	private UploadedFile uploadedVideo;
+	
 	@ManagedProperty("#{catalogueService}")
 	private VCatalogueAdminServiceAction catalogueService;
 	
@@ -236,6 +238,14 @@ public class CatalogueAdminBean implements Serializable {
 
 	public void setUploadedPhotoLarge(UploadedFile uploadedPhotoLarge) {
 		this.uploadedPhotoLarge = uploadedPhotoLarge;
+	}
+	
+	public UploadedFile getUploadedVideo() {
+		return uploadedVideo;
+	}
+
+	public void setUploadedVideo(UploadedFile uploadedVideo) {
+		this.uploadedVideo = uploadedVideo;
 	}
 
 	public ReferentielBean getReferentielBean() {
@@ -465,6 +475,31 @@ public class CatalogueAdminBean implements Serializable {
 			}
 		}
 	}
+	
+	public void uploadHandlerVideo(FileUploadEvent ev) {
+
+		FileOutputStream fileOuputStream=null;
+		this.uploadedVideo = ev.getFile();
+		String videoCatalogue = ParfumUtils.getUniqueName(referentielBean.getUploadCatalogFolderPath(), uploadedVideo.getFileName());
+		File fileDest = new File(referentielBean.getUploadCatalogFolderPath()+File.separator+videoCatalogue);
+		this.produit.setProduitVideoURL(videoCatalogue);
+		byte[] content = uploadedVideo.getContents();
+		try {
+			fileOuputStream = new FileOutputStream(fileDest);
+			fileOuputStream.write(content);
+			fileOuputStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(fileOuputStream!=null) {
+				try {
+					fileOuputStream.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}	
 	
 	public void onCategorieChange() {
 		if(getProduit() !=null && getProduit().getIdCategorie()!=null && getProduit().getIdCategorie().getIdCategorie()!=0){

@@ -624,6 +624,34 @@
 									</div>
 
 									<div class="clearfix"></div>
+									
+									<div class="marqueinfo marginRow">
+										<div class="paddingless col-sm-4">
+											<div class="marquestext">
+												<p>
+													#{msg.libelle_video}<br />
+													<small>(#{msg.libelle_a_decouvrir})</small>
+												</p>
+												<ui:fragment id="produitVideoUrlId" rendered="#{!empty catalogueAdminBean.produit.produitVideoURL}">
+												<p>
+													<p:media value="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{catalogueAdminBean.produit.produitVideoURL}" width="60" height="80">
+													    <f:param name="autostart" value="false" />
+													</p:media>
+												</p>
+												</ui:fragment>
+											</div>
+										</div>
+										<div class="paddingless col-sm-8">
+											<div class="marquedescription">
+												<div class="browse-wrap">
+													<p:fileUpload value="#{catalogueAdminBean.uploadedVideo}" update="produitVideoUrlId" label="#{msg.libelle_ajouter_fichier}" invalidFileMessage="#{msg.libelle_fichier_invalide}" fileLimitMessage="#{msg.libelle_fichier_max}" invalidSizeMessage="#{msg.libelle_size_invalide}" fileLimit="1" uploadLabel="#{msg.libelle_telecharger}" cancelLabel="#{msg.libelle_annuler}" fileUploadListener="#{catalogueAdminBean.uploadHandlerVideo}" multiple="true" mode="advanced"  auto="false" skinSimple="true" allowTypes="#{referentielBean.uploadVideoExt}" sizeLimit="#{referentielBean.uploadVideoSize}"/>
+												</div>
+												<span class="upload-paththree"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="clearfix"></div>									
 
 									<div class="marqueinfo marginRow">
 										<div class="paddingless col-sm-12">

@@ -81,6 +81,10 @@ public class ReferentielBean implements Serializable {
 	
 	public String uploadFileSize;
 	
+	private String uploadVideoExt;
+	
+	public String uploadVideoSize;	
+	
 	private static String mailFolderPath;
 	
 	public Map<String,Object> radioButtonOuiNon;
@@ -273,6 +277,22 @@ public class ReferentielBean implements Serializable {
 		this.uploadFileSize = uploadFileSize;
 	}
 	
+	public String getUploadVideoExt() {
+		return uploadVideoExt;
+	}
+
+	public void setUploadVideoExt(String uploadVideoExt) {
+		this.uploadVideoExt = uploadVideoExt;
+	}
+
+	public String getUploadVideoSize() {
+		return uploadVideoSize;
+	}
+
+	public void setUploadVideoSize(String uploadVideoSize) {
+		this.uploadVideoSize = uploadVideoSize;
+	}
+
 	public static String getMailFolderPath() {
 		return mailFolderPath;
 	}
@@ -311,6 +331,8 @@ public class ReferentielBean implements Serializable {
 			uploadFolderPath=prop.getProperty("upload.folder.path");
 			uploadFileExt=prop.getProperty("upload.file.ext");
 			uploadFileSize=prop.getProperty("upload.file.size");
+			uploadVideoExt=prop.getProperty("upload.video.ext");
+			uploadVideoSize=prop.getProperty("upload.video.size");			
 			mailFolderPath=prop.getProperty("mail.folder.path");
 			uploadFolderUrl="upload";
 			
