@@ -39,7 +39,6 @@ import com.marcanti.ecommerce.utils.ShortUtils;
 import com.marcanti.ecommerce.view.bean.UserSessionBean;
 
 @Service("panierActionService")
-@Transactional
 public class PanierServiceActionImpl implements PanierActionService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PanierServiceActionImpl.class);
@@ -114,8 +113,10 @@ public class PanierServiceActionImpl implements PanierActionService {
 				panierProduit = getNewPanierProduit(commandeIndividuel.getIdPanier(), produit);
 				panierProduitDAO.create(panierProduit);
 			}
-			// update panier (quantite et Montant)
-			updatePanier(produit, panierEnCours);
+			if (commandeIndividuel.isConfirmed()) {
+				// update panier (quantite et Montant)
+				updatePanier(produit, panierEnCours);
+			}
 			// update commande individuelle
 			updateCommandeIndividuelle(userSessionBean, commandeIndividuel, panierEnCours);
 		} else {
@@ -128,8 +129,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 			panierProduitDAO.create(panierProduit);
 			// create commande indiv
 			saveCommandeIndividuelle(panierEnCours, currentCmdGroupee, membre);
-			// update qte produit
-			updateQteProduit(produit);
+
 		}
 
 		return panierEnCours;
@@ -164,9 +164,10 @@ public class PanierServiceActionImpl implements PanierActionService {
 
 	}
 
+	@Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Override
 	public List<PanierProduit> recalculer(List<PanierProduit> panierProduitList, BigDecimal reduction,
-			UserSessionBean userSessionBean) throws ProductNotAvailableException {
+			UserSessionBean userSessionBean, boolean isConfirmation) throws ProductNotAvailableException {
 
 		if (panierProduitList == null || panierProduitList.isEmpty()) {
 			LOGGER.info("panierProduitList is empty");
@@ -186,29 +187,104 @@ public class PanierServiceActionImpl implements PanierActionService {
 					commandeIndividuel = commandeIndividuelleDAO.find(panier.getCommandeIndividuelle().getIdCdeIndiv());
 				}
 				// id qte zero then delete panierProduit
-				short qteSouhaitee = panierProduit.getQteSouhaitee();
-				if (qteSouhaitee == 0) {
+				short qtedemande = panierProduit.getQteSouhaitee();
+				LOGGER.info("short qtedemande : " + qtedemande);
+				if (qtedemande == 0) {
 					LOGGER.info("Produit supprimé qte souhaité 0 :"
 							+ panierProduit.getProduit().getIdMarque().getMarqueNom());
 					removeProduit(commandeIndividuel, panierProduit);
 					continue;
 				}
-				checkPanierProduit(panierProduit, qteSouhaitee, userSessionBean);
-				panierProduitDAO.edit(panierProduit);
+
+				checkNbreMaxProduitParItem(panierProduit, qtedemande, userSessionBean);
+
+				checkQteDemandeAndUpdateStock(commandeIndividuel, panierProduit, isConfirmation);
+
 				// sous total panier produit
 				BigDecimal notrePrix = panierProduit.getProduit().getNotrePrix();
 				// total panier
-				totalPanier = totalPanier.add(notrePrix.multiply(new BigDecimal(qteSouhaitee)));
-				panierNbreProduit = ShortUtils.sum2Short(panierNbreProduit, qteSouhaitee);
+				totalPanier = totalPanier.add(notrePrix.multiply(new BigDecimal(qtedemande)));
+				panierNbreProduit = ShortUtils.sum2Short(panierNbreProduit, qtedemande);
+
+				panierProduitDAO.edit(panierProduit);
 			}
 		}
 		// update montant panier
 		CommandeIndividuelle cmdIndiv = updatePanierAndCommande(userSessionBean, panier, commandeIndividuel,
 				totalPanier, reduction, panierNbreProduit);
+
 		// return updated list of panier produit
 		return getProduitsByCmdIndiv(cmdIndiv.getIdCdeIndiv());
 	}
 
+	private void checkQteDemandeAndUpdateStock(CommandeIndividuelle commandeIndividuel, PanierProduit panierProduit,
+			boolean isConfirmation) throws ProductNotAvailableException {
+
+		PanierProduit panierBeforeEdit = null;
+
+		Produit produit = panierProduit.getProduit();
+		Short qtStock = produit.getQteEnStock();
+		Short qtDisponible = ShortUtils.substract2Short(qtStock, panierProduit.getQteSouhaitee());
+
+		// si la commande individuelle confirmée, on calcule le adding qte:
+
+		// QtéDispo (id Produit) = produit.qteEnStock(id Produit) – qDemandee
+		// (idProduit)
+
+		// qDemandee (idProduit) =Quantité récupéré du formulaire – Quantité
+		// initiale récupérée du formulaire pour chaque idProduit
+
+		if (commandeIndividuel.isConfirmed()) {
+			panierBeforeEdit = panierProduitDAO.find(panierProduit.getPanierProduitPK());
+			Short qteDemande = ShortUtils.substract2Short(panierProduit.getQteSouhaitee(),
+					panierBeforeEdit.getQteSouhaitee());
+			qtDisponible = ShortUtils.substract2Short(produit.getQteEnStock(), qteDemande);
+
+			qtStock = ShortUtils.substract2Short(qtStock, qteDemande);
+
+			LOGGER.info("short qtedemande after calculation with adding qte : " + qteDemande);
+		}
+
+		if (qtDisponible < 0) {
+			// 4.1.10.1 mise a jour panier par la qte disponible !
+			Short qtePossible = produit.getQteEnStock();
+			if (commandeIndividuel.isConfirmed()) {
+				qtePossible = ShortUtils.sum2Short(produit.getQteEnStock(), panierBeforeEdit.getQteSouhaitee());
+			}
+			// panierProduit.setQteSouhaitee(qtePossible);
+			throw new ProductNotAvailableException("Vérifier votre commande ! Quantité disponible pour le produit "
+					+ produit.getProduitDescription() + " est : " + qtePossible);
+		}
+
+		if (commandeIndividuel.isConfirmed() || isConfirmation) {
+			// update stock
+			produit.setQteEnStock(qtStock);
+			produitDAO.edit(produit);
+		}
+
+		// udate panier
+		// panierProduitDAO.edit(panierProduit);
+
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED)
+	@Override
+	public void confirmerCommandeIndiv(CommandeIndividuelle commandeIndividuelle, List<PanierProduit> panierProduitList,
+			BigDecimal reduction, UserSessionBean userSessionBean) throws ProductNotAvailableException {
+		// recalculer et verifier la disponibilité de produit en stock
+		recalculer(panierProduitList, reduction, userSessionBean, true);
+		// mettre à jour la quantité dispo
+		// updateAllStock(panierProduitList);
+		commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO
+				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatusEnum.CDE_INDIVID_CONFIRMEE.getCode()));
+
+		// cdeIndiv.dateModification
+		commandeIndividuelle.setDateModification(new Date());
+		// save
+		commandeIndividuelleDAO.edit(commandeIndividuelle);
+	}
+
+	@Transactional(propagation = Propagation.REQUIRED)
 	@Override
 	public void updatePanierProduits(List<PanierProduit> panierProduitList) {
 		// save panierProduit
@@ -266,8 +342,8 @@ public class PanierServiceActionImpl implements PanierActionService {
 
 	}
 
-	private void checkPanierProduit(PanierProduit panierProduit, short qteSouhaitee, UserSessionBean userSessionBean)
-			throws ProductNotAvailableException {
+	private void checkNbreMaxProduitParItem(PanierProduit panierProduit, short qteSouhaitee,
+			UserSessionBean userSessionBean) throws ProductNotAvailableException {
 
 		Organisation organisation = organisationDAO.find(userSessionBean.getIdOrga());
 
@@ -279,15 +355,6 @@ public class PanierServiceActionImpl implements PanierActionService {
 							+ " | quantité max par produit : " + organisation.getNbreMaxProduitParItem());
 		}
 
-		if (panierProduit.getProduit().getQteEnStock() - qteSouhaitee < 0) {
-
-			// 4.1.10.1 mise a jour panier par la qte disponible !
-			panierProduit.setQteSouhaitee(panierProduit.getProduit().getQteEnStock());
-
-			throw new ProductNotAvailableException("Vérifiez votre commande ! Quantité disponible pour le produit "
-					+ panierProduit.getProduit().getProduitDescription() + " est : "
-					+ panierProduit.getProduit().getQteEnStock());
-		}
 	}
 
 	private Panier updateMontantNbreProduit(BigDecimal totalPanier, Panier panier, Short panierNbreProduit) {
@@ -298,33 +365,6 @@ public class PanierServiceActionImpl implements PanierActionService {
 			panier = panierDao.edit(panier);
 		}
 		return panier;
-	}
-
-	@Override
-	public void confirmerCommandeIndiv(CommandeIndividuelle commandeIndividuelle, List<PanierProduit> panierProduitList,
-			BigDecimal reduction, UserSessionBean userSessionBean) throws ProductNotAvailableException {
-		// recalculer et verifier la disponibilité de produit en stock
-		recalculer(panierProduitList, reduction, userSessionBean);
-		// mettre à jour la quantité dispo
-		for (PanierProduit panierProduit : panierProduitList) {
-			Produit produit = panierProduit.getProduit();
-			Short qteDispo = ShortUtils.substract2Short(produit.getQteEnStock(), panierProduit.getQteSouhaitee());
-			if (qteDispo < 0) {
-				throw new ProductNotAvailableException("Vérifier votre commande ! Quantité disponible pour le produit "
-						+ produit.getProduitDescription() + " est : " + produit.getQteEnStock());
-			}
-			// update stock
-			produit.setQteEnStock(qteDispo);
-			produitDAO.edit(produit);
-		}
-		// mettre a jour statut
-		commandeIndividuelle.setIdStatus(commandeIndividuelleStatusDAO
-				.getCommandeIndividuelleStatusByCode(CommandeIndividuelleStatusEnum.CDE_INDIVID_CONFIRMEE.getCode()));
-
-		// cdeIndiv.dateModification
-		commandeIndividuelle.setDateModification(new Date());
-		// save
-		commandeIndividuelleDAO.edit(commandeIndividuelle);
 	}
 
 	/**
@@ -427,8 +467,6 @@ public class PanierServiceActionImpl implements PanierActionService {
 				CommandeIndividuelleStatusEnum.CDE_INDIVID_NON_CONFIRMEE.getCode()));
 
 		commandeIndividuelle.setTotalAPayer(panier.getPanierMontant());
-		// TODO
-		// commandeIndividuelle.setReduction(reduction);
 
 		return commandeIndividuelle;
 	}

@@ -26,45 +26,46 @@ import com.marcanti.ecommerce.model.PanierProduit;
 @Repository
 public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> implements PanierProduitDAO {
 
-	@PersistenceContext
-    private EntityManager em;
+	@PersistenceContext(name = "entityManagerFactory")
+	private EntityManager em;
 
-    public PanierProduitDAOImpl() {
-        super(PanierProduit.class);
-    }
+	public PanierProduitDAOImpl() {
+		super(PanierProduit.class);
+	}
 
-    public void create(PanierProduit entity) {
-        super.create(entity);
-    }
+	public void create(PanierProduit entity) {
+		super.create(entity);
+	}
 
+	public PanierProduit edit(PanierProduit entity) {
+		return super.edit(entity);
+	}
 
 	public void remove(long id) {
 		super.remove(super.find(id));
-    }
+	}
 
 	public PanierProduit find(long id) {
 		return super.find(id);
-    }
+	}
 
-    public List<PanierProduit> findAll() {
-        return super.findAll();
-    }
+	public List<PanierProduit> findAll() {
+		return super.findAll();
+	}
 
 	public List<PanierProduit> findRange(Integer from, Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
+		return super.findRange(new int[] { from, to });
+	}
 
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
 	@Override
 	public PanierProduit getPanierProduitByPanierAndProduit(Long idPanier, Long idProduit) {
-		Query query = em
-				.createQuery(
-						"SELECT p FROM PanierProduit p WHERE p.panierProduitPK.idProduit = :idProduit AND p.panierProduitPK.idPanier = :idPanier")
+		Query query = em.createQuery(
+				"SELECT p FROM PanierProduit p WHERE p.panierProduitPK.idProduit = :idProduit AND p.panierProduitPK.idPanier = :idPanier")
 				.setParameter("idProduit", idProduit).setParameter("idPanier", idPanier);
 
 		if (query.getResultList().size() > 1) {
@@ -83,9 +84,7 @@ public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> impl
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<PanierProduit> getPanierProduitByPanier(Long idPanier) {
-		Query query = em
-				.createQuery(
-						"SELECT p FROM PanierProduit p WHERE p.panierProduitPK.idPanier = :idPanier")
+		Query query = em.createQuery("SELECT p FROM PanierProduit p WHERE p.panierProduitPK.idPanier = :idPanier")
 				.setParameter("idPanier", idPanier);
 
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
@@ -106,5 +105,5 @@ public class PanierProduitDAOImpl extends AbstractGenericDAO<PanierProduit> impl
 		}
 		return query.getResultList();
 	}
-    
+
 }
