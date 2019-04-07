@@ -4,6 +4,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
+	
 
 <h:body>
 	<ui:composition template="/template/template.xhtml">
@@ -55,7 +56,6 @@
 								
 									<div class="image">
 									  <div class="content">
-<!-- 									  		<h:graphicImage value="/static/img/img7.png" class="img-responsive" /> -->
 										<ui:fragment rendered="#{empty product.produitPhotoURL}"><br/>
 											<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive"/>
 										</ui:fragment>
@@ -109,14 +109,20 @@
 								<div class="single_keylist">
 									<h6>Notes de tête</h6>
 									<ul>
-										<li><i class="fa fa-check-circle-o"></i>#{product.noteDeTete}</li>
+										<!-- li><i class="fa fa-check-circle-o"></i>#{product.noteDeTete}</li-->
+										<ui:repeat var="note" value="#{product.noteDeTeteList}">
+										    <li><i class="fa fa-check-circle-o"></i>#{note}</li>
+										</ui:repeat>
 									</ul>
 								</div><!--end -->
 								
 								<div class="single_keylist">
 									<h6>Notes de coeur</h6>
 									<ul>
-										<li><i class="fa fa-check-circle-o"></i>#{product.noteDeCoeur}</li>
+										<!--li><i class="fa fa-check-circle-o"></i>#{product.noteDeCoeur}</li-->
+										<ui:repeat var="note" value="#{product.noteDeCoeurList}">
+										    <li><i class="fa fa-check-circle-o"></i>#{note}</li>
+										</ui:repeat>										
 									</ul>
 								</div><!--end -->
 								
@@ -124,7 +130,10 @@
 								<div class="single_keylist">
 									<h6>Notes de fond</h6>
 									<ul>
-										<li><i class="fa fa-check-circle-o"></i>#{product.noteDeFond}</li>
+										<!--li><i class="fa fa-check-circle-o"></i>#{product.noteDeFond}</li-->
+										<ui:repeat var="note" value="#{product.noteDeFondList}">
+										    <li><i class="fa fa-check-circle-o"></i>#{note}</li>
+										</ui:repeat>										
 									</ul>
 								</div><!--end -->
 								

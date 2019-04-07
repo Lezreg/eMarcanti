@@ -1,8 +1,10 @@
 package com.marcanti.ecommerce.beans;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import com.marcanti.ecommerce.model.Produit;
 
@@ -24,8 +26,11 @@ public class ProduitBean {
 	private short idSousCategorie;
 	private short idMarque;
 	private String noteDeTete;
+	private List<String> noteDeTeteList;
 	private String noteDeCoeur;
+	private List<String> noteDeCoeurList;
 	private String noteDeFond;
+	private List<String> noteDeFondList;
 	private String titreADecouvrir;
 	private String descriptionADecouvrir;
 	private String familleOlfactive;
@@ -167,6 +172,22 @@ public class ProduitBean {
 	public void setNoteDeTete(String noteDeTete) {
 		this.noteDeTete = noteDeTete;
 	}
+	
+	public List<String> getNoteDeTeteList() {
+		this.noteDeTeteList = new ArrayList<String>();
+		if(this.noteDeTete!=null){
+			StringTokenizer st = new StringTokenizer(noteDeTete, ";");
+			while (st.hasMoreElements()) {
+				String note = (String) st.nextElement();
+				noteDeTeteList.add(note);
+			}
+		}
+		return this.noteDeTeteList;
+	}
+
+	public void setNoteDeTeteList(List<String> noteDeTeteList) {
+		this.noteDeTeteList = noteDeTeteList;
+	}
 
 	public String getNoteDeCoeur() {
 		return noteDeCoeur;
@@ -175,6 +196,22 @@ public class ProduitBean {
 	public void setNoteDeCoeur(String noteDeCoeur) {
 		this.noteDeCoeur = noteDeCoeur;
 	}
+	
+	public List<String> getNoteDeCoeurList() {
+		this.noteDeCoeurList = new ArrayList<String>();
+		if(this.noteDeCoeur!=null){
+			StringTokenizer st = new StringTokenizer(noteDeCoeur, ";");
+			while (st.hasMoreElements()) {
+				String note = (String) st.nextElement();
+				noteDeCoeurList.add(note);
+			}
+		}
+		return this.noteDeCoeurList;
+	}
+
+	public void setNoteDeCoeurList(List<String> noteDeCoeurList) {
+		this.noteDeCoeurList = noteDeCoeurList;
+	}
 
 	public String getNoteDeFond() {
 		return noteDeFond;
@@ -182,6 +219,22 @@ public class ProduitBean {
 
 	public void setNoteDeFond(String noteDeFond) {
 		this.noteDeFond = noteDeFond;
+	}
+
+	public List<String> getNoteDeFondList() {
+		this.noteDeFondList = new ArrayList<String>();
+		if(this.noteDeFond!=null){
+			StringTokenizer st = new StringTokenizer(noteDeFond, ";");
+			while (st.hasMoreElements()) {
+				String note = (String) st.nextElement();
+				noteDeFondList.add(note);
+			}
+		}
+		return this.noteDeFondList;
+	}
+
+	public void setNoteDeFondList(List<String> noteDeFondList) {
+		this.noteDeFondList = noteDeFondList;
 	}
 
 	public String getTitreADecouvrir() {
