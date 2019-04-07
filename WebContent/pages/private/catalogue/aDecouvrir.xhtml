@@ -56,11 +56,11 @@
 									<div class="image">
 									  <div class="content">
 <!-- 									  		<h:graphicImage value="/static/img/img7.png" class="img-responsive" /> -->
-										<ui:fragment rendered="#{empty product.produitPhotoURL}"><br/>
+										<ui:fragment rendered="#{empty product.produitPhotoTailleLargeURL}"><br/>
 											<img src="#{request.contextPath}/static/img/cat/default-img.png" class="img-responsive"/>
 										</ui:fragment>
 										<ui:fragment rendered="#{!empty product.produitPhotoURL}"><br/>
-											<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoURL}" class="img-responsive"/>
+											<img src="#{request.contextPath}/#{referentielBean.uploadCatalogFolderUrl}/#{product.produitPhotoTailleLargeURL}" class="img-responsive"/>
 										</ui:fragment>
 									  </div>
 									</div>

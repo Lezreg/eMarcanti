@@ -34,64 +34,64 @@ import com.marcanti.ecommerce.model.Categorie;
 public class CategorieDAOImpl extends AbstractGenericDAO<Categorie> implements CategorieDAO {
 
 	@PersistenceContext
-    private EntityManager em;
+	private EntityManager em;
 
-    public CategorieDAOImpl() {
-        super(Categorie.class);
-    }
+	public CategorieDAOImpl() {
+		super(Categorie.class);
+	}
 
-    @POST
-    @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Categorie entity) {
-        super.create(entity);
-    }
+	@POST
+	@Override
+	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	public void create(Categorie entity) {
+		super.create(entity);
+	}
 
-    @PUT
-    @Path("{id}")
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Short id, Categorie entity) {
-        super.edit(entity);
-    }
+	@PUT
+	@Path("{id}")
+	@Consumes({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	public void edit(@PathParam("id") Short id, Categorie entity) {
+		super.edit(entity);
+	}
 
-    @DELETE
-    @Path("{id}")
-    public void remove(@PathParam("id") Short id) {
-        super.remove(super.find(id));
-    }
+	@DELETE
+	@Path("{id}")
+	public void remove(@PathParam("id") Short id) {
+		super.remove(super.find(id));
+	}
 
-    @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Categorie find(@PathParam("id") Short id) {
-        return super.find(id);
-    }
+	@GET
+	@Path("{id}")
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	public Categorie find(@PathParam("id") Short id) {
+		return super.find(id);
+	}
 
-    @GET
-    @Override
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Categorie> findAll() {
-        return super.findAll();
-    }
+	@GET
+	@Override
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	public List<Categorie> findAll() {
+		return super.findAll();
+	}
 
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Categorie> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
+	@GET
+	@Path("{from}/{to}")
+	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
+	public List<Categorie> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+		return super.findRange(new int[] { from, to });
+	}
 
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
+	@GET
+	@Path("count")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String countREST() {
+		return String.valueOf(super.count());
+	}
 
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
+	@Override
+	protected EntityManager getEntityManager() {
+		return em;
+	}
 
 	@Override
 	public List<Categorie> getCategorieList() {
@@ -100,29 +100,29 @@ public class CategorieDAOImpl extends AbstractGenericDAO<Categorie> implements C
 
 	@Override
 	public Categorie getCategorie(Categorie categorie) {
-		//return em.createNamedQuery("Categorie.findByIdCategorie", Categorie.class).setParameter("idCategorieProduit", categorie.getIdCategorie()).getSingleResult();
-		return em.createNamedQuery("Categorie.findByIdCategorie", Categorie.class).setParameter("idCategorie", categorie.getIdCategorie()).getSingleResult();
+		// return em.createNamedQuery("Categorie.findByIdCategorie",
+		// Categorie.class).setParameter("idCategorieProduit",
+		// categorie.getIdCategorie()).getSingleResult();
+		return em.createNamedQuery("Categorie.findByIdCategorie", Categorie.class)
+				.setParameter("idCategorie", categorie.getIdCategorie()).getSingleResult();
 	}
 
 	@Override
 	public void insertCategorie(Categorie categorie) {
 		Query query = em.createNativeQuery("INSERT INTO categorie (categorieNom, categorieCode) VALUES (?,?)")
-				.setParameter(1, categorie.getCategorieNom())
-				.setParameter(2, categorie.getCategorieCode());
+				.setParameter(1, categorie.getCategorieNom()).setParameter(2, categorie.getCategorieCode());
 		query.executeUpdate();
-		//em.persist(categorie);
+		// em.persist(categorie);
 	}
 
 	@Override
 	public void updateCategorie(Categorie categorie) {
-		Query query = em.createNativeQuery("UPDATE categorie SET categorieNom=?, "
-				+ "categorieCode=? "
-				+ "WHERE idCategorie=?")
-				.setParameter(1, categorie.getCategorieNom())
-				.setParameter(2, categorie.getCategorieCode())
+		Query query = em
+				.createNativeQuery("UPDATE categorie SET categorieNom=?, " + "categorieCode=? " + "WHERE idCategorie=?")
+				.setParameter(1, categorie.getCategorieNom()).setParameter(2, categorie.getCategorieCode())
 				.setParameter(3, categorie.getIdCategorie().shortValue());
 		query.executeUpdate();
-		//em.persist(categorie);
+		// em.persist(categorie);
 	}
-    
+
 }

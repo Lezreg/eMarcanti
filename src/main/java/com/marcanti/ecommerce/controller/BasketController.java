@@ -130,16 +130,16 @@ public class BasketController implements Serializable {
 
 		try {
 			// TODO biding reduction in IHM
-			this.panierProduitList = panierService.recalculer(panierProduitList, reduction, userSessionBean);
+			this.panierProduitList = panierService.recalculer(panierProduitList, reduction, userSessionBean, false);
 			// add messages
 			addFacesMessages();
 		} catch (ProductNotAvailableException e) {
 
-			try {
-				panierService.updatePanierProduits(panierProduitList);
-			} catch (Exception e1) {
-				LOGGER.error(e1.getMessage());
-			}
+			// try {
+			// panierService.updatePanierProduits(panierProduitList);
+			// } catch (Exception e1) {
+			// LOGGER.error(e1.getMessage());
+			// }
 			LOGGER.error(e.getMessage());
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(),
 					"! Mettez à jour le panier");
@@ -193,6 +193,7 @@ public class BasketController implements Serializable {
 			this.commandeIndividuelle = commandeIndividuelleServiceAction
 					.getCommandeIndividuelleById(new Long(selectedCmd));
 			panierProduitList = panierService.getProduitsByCmdIndiv(new Long(selectedCmd));
+			LOGGER.info("Id organisation " + userSessionBean.getIdOrga());
 			Organisation organisation = organisationServiceAction.getOrganisationById(userSessionBean.getIdOrga());
 
 			for (PanierProduit panierProduit : panierProduitList) {
