@@ -157,9 +157,11 @@ public class BasketController implements Serializable {
 				"La commande a été sauvegardée dans votre espace internet", null);
 		FacesContext.getCurrentInstance().addMessage(null, saveMessageInfo);
 
-		FacesMessage saveMessageWarning = new FacesMessage(FacesMessage.SEVERITY_WARN,
-				"Veuillez confirmer la commande, afin que les produits vous soient réservés !", null);
-		FacesContext.getCurrentInstance().addMessage(null, saveMessageWarning);
+		if (commandeIndividuelle != null && !commandeIndividuelle.isConfirmed()) {
+			FacesMessage saveMessageWarning = new FacesMessage(FacesMessage.SEVERITY_WARN,
+					"Veuillez confirmer la commande, afin que les produits vous soient réservés !", null);
+			FacesContext.getCurrentInstance().addMessage(null, saveMessageWarning);
+		}
 	}
 
 	/**

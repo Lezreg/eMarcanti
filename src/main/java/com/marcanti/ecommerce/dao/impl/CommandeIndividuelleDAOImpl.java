@@ -92,10 +92,11 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 		ParametersChecker.checkParameter("membre is null ", membre);
 		ParametersChecker.checkParameter("commandeGroupee is null ", commandeGroupee);
 		Query query = em.createQuery(
-				"SELECT c FROM CommandeIndividuelle c WHERE c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.isPaiementEffectue = :isPaiementEffectue")
+				"SELECT c FROM CommandeIndividuelle c WHERE c.idMembre.idMembre = :idMembre and c.idCdeGroupee.idCdeGroupee = :idCdeGroupee and c.isPaiementEffectue = :isPaiementEffectue and c.idStatus.statusCode != :statusCode")
 				.setParameter("idMembre", membre.getIdMembre())
 				.setParameter("idCdeGroupee", commandeGroupee.getIdCdeGroupee())
-				.setParameter("isPaiementEffectue", Boolean.FALSE);
+				.setParameter("isPaiementEffectue", Boolean.FALSE)
+				.setParameter("statusCode", CommandeIndividuelleStatusEnum.CDE_INDIVID_ANNULEE.getCode());
 
 		LOGGER.info(query.toString());
 
