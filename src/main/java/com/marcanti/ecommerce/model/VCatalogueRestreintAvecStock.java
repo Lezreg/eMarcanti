@@ -70,7 +70,7 @@ public class VCatalogueRestreintAvecStock implements Serializable {
 	private String produitPhotoURL;
 	@Size(max = 512)
 	private String produitPhotoTailleMediumURL;
-	@Transient
+	@Size(max = 512)
 	private String produitPhotoTailleLargeURL;	
 	@Basic(optional = false)
 	@NotNull
