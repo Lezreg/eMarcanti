@@ -1,6 +1,7 @@
 package com.marcanti.ecommerce.utils;
 
 import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -24,13 +25,8 @@ public class DateUtils {
 	}
 
 	public static String getStringDay(final Date date) {
-		String sDay = "";
-		int day = getDay(date);
-		if (day < 10) {
-			sDay = "0" + day;
-		}
-		return sDay;
-
+		SimpleDateFormat formatNowDay = new SimpleDateFormat("dd");
+		return formatNowDay.format(date);
 	}
 
 	public static int getYear(final Date date) {

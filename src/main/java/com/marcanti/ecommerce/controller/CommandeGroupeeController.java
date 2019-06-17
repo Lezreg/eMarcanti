@@ -143,7 +143,7 @@ public class CommandeGroupeeController implements Serializable {
 		}
 		commandeGroupeeServiceAction.saveCmdGroupee(commandeGroupee);
 
-		return "cmdGroupeesPrec";
+		return "cmdGroupees";
 	}
 
 	public String annulerCmdGroupee() {
@@ -155,9 +155,17 @@ public class CommandeGroupeeController implements Serializable {
 
 	private String getCommandeGroupeName() {
 		Date date = new Date();
+		return getOrganisation().getOrgaAlias() + "_" + DateUtils.getYear(date) + "_"
+				+ getMonthForCommandeGroupeName(date) + "_" + DateUtils.getStringDay(date);
+	}
+
+	private String getMonthForCommandeGroupeName(Date date) {
 		String monthName = DateUtils.getMonthName(DateUtils.getMonth(date), Locale.FRANCE);
-		return getOrganisation().getOrgaAlias() + "_" + DateUtils.getStringDay(date) + "_"
-				+ monthName.substring(0, 3).toUpperCase() + "_" + DateUtils.getYear(date);
+		if ("juin".equalsIgnoreCase(monthName) || "juillet".equalsIgnoreCase(monthName)) {
+			return monthName.substring(0, 4).toUpperCase();
+		}
+
+		return monthName.substring(0, 3).toUpperCase();
 	}
 
 	public String editCommandeGroupee() {
@@ -181,13 +189,6 @@ public class CommandeGroupeeController implements Serializable {
 	public List<CommandeGroupee> getCmdGroupeesPrec() {
 		// else organisation of current user
 		return commandeGroupeeServiceAction.getCmdGroupeesByOrganisation(getOrganisationId(), false);
-	}
-
-	private CommandeGroupee newCommandeGroupee() {
-		CommandeGroupee commandeGroupee = new CommandeGroupee();
-		Organisation organisation = organisationServiceAction.getOrganisationById(getOrganisationId());
-		commandeGroupee.setIdOrga(organisation);
-		return commandeGroupee;
 	}
 
 	public CommandeGroupeeServiceAction getCommandeGroupeeServiceAction() {
@@ -286,6 +287,11 @@ public class CommandeGroupeeController implements Serializable {
 		StatusCode = statusCode;
 	}
 
+	/**
+	 * tester si l'utilisateur courant peut modifier la commande
+	 * 
+	 * @return
+	 */
 	public boolean isCanModifyOrganisation() {
 		if ((userSessionBean.getIdProfil() < 4)) {
 			canModifyOrganisation = true;
@@ -298,14 +304,17 @@ public class CommandeGroupeeController implements Serializable {
 	}
 
 	public List<CommandeIndividuelle> getSelectedCommmandeIndividuelleList() {
+		somme = new BigDecimal(0);
+
 		List<CommandeIndividuelle> CommandeIndividuelleList = commandeGroupeeServiceAction
 				.getCommandeIndividuelleListByGroupee(commandeGroupee);
-		somme = new BigDecimal(0);
+		// somme des commandes individuelle
 		for (CommandeIndividuelle commandeIndividuelle : CommandeIndividuelleList) {
 			somme = somme.add(commandeIndividuelle.getTotalAPayer());
 		}
-
+		// mettre à jour la commande
 		commandeGroupee.setSommeCommandeGroupee(somme);
+		// return de la commande après la mise à jour
 		return CommandeIndividuelleList;
 	}
 
