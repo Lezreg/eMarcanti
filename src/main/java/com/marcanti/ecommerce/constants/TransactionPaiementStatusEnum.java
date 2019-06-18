@@ -1,6 +1,6 @@
 package com.marcanti.ecommerce.constants;
 
-public enum StatutTransactionFournissPaiement {
+public enum TransactionPaiementStatusEnum {
 
 	TRANSACTION_NON_CONFIRMEE("TRANSACTION_NON_CONFIRMEE"), TRANSACTION_CONFIRMEE("TRANSACTION_CONFIRMEE");
 
@@ -9,7 +9,7 @@ public enum StatutTransactionFournissPaiement {
 	 */
 	private String code;
 
-	private StatutTransactionFournissPaiement(String code) {
+	private TransactionPaiementStatusEnum(String code) {
 		this.setCode(code);
 	}
 

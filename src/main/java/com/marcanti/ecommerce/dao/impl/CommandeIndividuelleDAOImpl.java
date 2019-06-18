@@ -98,8 +98,6 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 				.setParameter("isPaiementEffectue", Boolean.FALSE)
 				.setParameter("statusCode", CommandeIndividuelleStatusEnum.CDE_INDIVID_ANNULEE.getCode());
 
-		LOGGER.info(query.toString());
-
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
 			return null;
 		}
@@ -121,6 +119,7 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 		return (List<CommandeIndividuelle>) query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<CommandeIndividuelle> getCommandeIndivListByCmdGroupe(Long idCdeGroupee) {
 		Query query = em.createQuery(
@@ -130,9 +129,7 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
 			return Collections.emptyList();
 		}
-		@SuppressWarnings("unchecked")
-		List<CommandeIndividuelle> resultList = (List<CommandeIndividuelle>) query.getResultList();
-		return resultList;
+		return (List<CommandeIndividuelle>) query.getResultList();
 	}
 
 	@Override
@@ -140,8 +137,6 @@ public class CommandeIndividuelleDAOImpl extends AbstractGenericDAO<CommandeIndi
 		Query query = em.createQuery(
 				"SELECT c FROM CommandeIndividuelle c WHERE (c.idMembre.idMembre = :idMembre and c.isPaiementEffectue = :isPaiementEffectue) order by date(dateCreation) desc")
 				.setParameter("idMembre", idMembre).setParameter("isPaiementEffectue", Boolean.TRUE);
-
-		LOGGER.info(query.toString());
 
 		if (query.getResultList() == null || query.getResultList().isEmpty()) {
 			return Collections.emptyList();

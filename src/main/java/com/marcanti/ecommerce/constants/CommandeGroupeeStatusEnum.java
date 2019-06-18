@@ -1,6 +1,6 @@
 package com.marcanti.ecommerce.constants;
 
-public enum CommandeGroupeeStatus {
+public enum CommandeGroupeeStatusEnum {
 
 	CDE_GROUPEE_NON_CONFIRMEE("CDE_GROUPEE_NON_CONFIRMEE"), CDE_GROUPEE_CONFIRMEE(
 			"CDE_GROUPEE_CONFIRMEE"), CDE_GROUPEE_PAYEE("CDE_GROUPEE_PAYEE"), CDE_GROUPEE_A_LIVRER(
@@ -8,7 +8,7 @@ public enum CommandeGroupeeStatus {
 							"CDE_GROUPEE_LIVREE"), CDE_GROUPEE_ANNULEE("CDE_GROUPEE_ANNULEE");
 	private String code;
 
-	CommandeGroupeeStatus(String code) {
+	CommandeGroupeeStatusEnum(String code) {
 		this.setCode(code);
 	}
 

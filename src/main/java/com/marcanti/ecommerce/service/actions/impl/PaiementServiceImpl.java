@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
-import com.marcanti.ecommerce.constants.StatutTransactionFournissPaiement;
+import com.marcanti.ecommerce.constants.TransactionPaiementStatusEnum;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleStatusDAO;
@@ -63,7 +63,7 @@ public class PaiementServiceImpl implements PaiementService {
 		transactionPaiement.setMontantPaiement(commandeIndividuelle.getTotalAPayer());
 		transactionPaiement.setIdTransactionPaiement(generateTransactionId(userSessionBean, commandeIndividuelle));
 		transactionPaiement.setStatutTransactionFournissPaiement(
-				StatutTransactionFournissPaiement.TRANSACTION_CONFIRMEE.getCode());
+				TransactionPaiementStatusEnum.TRANSACTION_CONFIRMEE.getCode());
 		transactionPaiementDAO.create(transactionPaiement);
 	}
 

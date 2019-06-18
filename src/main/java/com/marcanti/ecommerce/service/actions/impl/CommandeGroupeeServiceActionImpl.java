@@ -199,7 +199,7 @@ public class CommandeGroupeeServiceActionImpl implements CommandeGroupeeServiceA
 		}
 		commandeGroupee.setCommentaire("ANNULEE");
 		commandeGroupee.setIdStatus(commandeGroupeeStatusDAO.getCommandeGroupeeStatusByCode(
-				com.marcanti.ecommerce.constants.CommandeGroupeeStatus.CDE_GROUPEE_ANNULEE.getCode()));
+				com.marcanti.ecommerce.constants.CommandeGroupeeStatusEnum.CDE_GROUPEE_ANNULEE.getCode()));
 		commandeGroupee.setIsEnCours(Boolean.FALSE);
 
 		commandeGroupeeDAO.edit(commandeGroupee);

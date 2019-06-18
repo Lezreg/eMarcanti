@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.marcanti.ecommerce.constants.Categories;
+import com.marcanti.ecommerce.constants.CategoriesEnum;
 
 /**
  *
@@ -404,23 +404,23 @@ public class VCatalogueAdmin implements Serializable {
     }
 
 	public String getCategorieNomCss() {
-		if(categorieCode.equals(Categories.PARFUM_HOMME.getCode())){
+		if(categorieCode.equals(CategoriesEnum.PARFUM_HOMME.getCode())){
 			categorieNomCss="Perfume Homme";
-		}else if(categorieCode.equals(Categories.PARFUM_FEMME.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.PARFUM_FEMME.getCode())){
 			categorieNomCss="Perfume Femme";
-		}else if(categorieCode.equals(Categories.PARFUM_ENFANT.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.PARFUM_ENFANT.getCode())){
 			categorieNomCss="Perfume Enfant";
-		}else if(categorieCode.equals(Categories.TESTER.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.TESTER.getCode())){
 			categorieNomCss="Testeur";
-		}else if(categorieCode.equals(Categories.COFFRET.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.COFFRET.getCode())){
 			categorieNomCss="Coffret";
-		}else if(categorieCode.equals(Categories.CREME.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.CREME.getCode())){
 			categorieNomCss="Crêmes et Soins";
-		}else if(categorieCode.equals(Categories.MINIATURE.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.MINIATURE.getCode())){
 			categorieNomCss="Miniatures";
-		}else if(categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.PILE_ACCESSOIRE.getCode())){
 			categorieNomCss="piles &#38; Accessories";
-		}else if(categorieCode.equals(Categories.LOTS.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.LOTS.getCode())){
 			categorieNomCss="Lots à Saisir";
 		}
 				
@@ -432,23 +432,23 @@ public class VCatalogueAdmin implements Serializable {
 	}
 	
 	public String getCategorieCodeCss() {
-		if(categorieCode.equals(Categories.PARFUM_HOMME.getCode())){
+		if(categorieCode.equals(CategoriesEnum.PARFUM_HOMME.getCode())){
 			categorieCodeCss="phomme2";
-		}else if(categorieCode.equals(Categories.PARFUM_FEMME.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.PARFUM_FEMME.getCode())){
 			categorieCodeCss="pfemme";
-		}else if(categorieCode.equals(Categories.PARFUM_ENFANT.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.PARFUM_ENFANT.getCode())){
 			categorieCodeCss="penfant";
-		}else if(categorieCode.equals(Categories.TESTER.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.TESTER.getCode())){
 			categorieCodeCss="testeur";
-		}else if(categorieCode.equals(Categories.COFFRET.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.COFFRET.getCode())){
 			categorieCodeCss="coffret";
-		}else if(categorieCode.equals(Categories.CREME.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.CREME.getCode())){
 			categorieCodeCss="etsoins";
-		}else if(categorieCode.equals(Categories.MINIATURE.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.MINIATURE.getCode())){
 			categorieCodeCss="miniatures";
-		}else if(categorieCode.equals(Categories.PILE_ACCESSOIRE.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.PILE_ACCESSOIRE.getCode())){
 			categorieCodeCss="piles";
-		}else if(categorieCode.equals(Categories.LOTS.getCode())){
+		}else if(categorieCode.equals(CategoriesEnum.LOTS.getCode())){
 			categorieCodeCss="saisir";
 		}
 				

@@ -101,8 +101,7 @@ public class BasketController implements Serializable {
 
 		panierEnCours = panierService.addProduct(produit, userSessionBean);
 		// panierService
-		setPanierProduitList(panierService.getProduitsByPAnier(panierEnCours));
-		// return "";
+		setPanierProduitList(panierService.getProduitsByPanier(panierEnCours));
 	}
 
 	public String redirectCurrentCmd() {
@@ -134,12 +133,6 @@ public class BasketController implements Serializable {
 			// add messages
 			addFacesMessages();
 		} catch (ProductNotAvailableException e) {
-
-			// try {
-			// panierService.updatePanierProduits(panierProduitList);
-			// } catch (Exception e1) {
-			// LOGGER.error(e1.getMessage());
-			// }
 			LOGGER.error(e.getMessage());
 			FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(),
 					"! Mettez à jour le panier");
@@ -221,17 +214,16 @@ public class BasketController implements Serializable {
 
 		Long derniereCdeGoupee = commandeGroupeeServiceAction.getIdDerniereCdeGoupee(userSessionBean.getIdOrga());
 		if (derniereCdeGoupee != null) {
-			LOGGER.info(derniereCdeGoupee.toString());
-
-			LOGGER.info(userSessionBean.getIdMembre().toString());
-
+			LOGGER.debug("derniereCdeGoupee : " + derniereCdeGoupee.toString());
+			LOGGER.debug("member : " + userSessionBean.getIdMembre().toString());
+			// récupérer les commandes en cours du member connecté
 			commandes = commandeIndividuelleServiceAction.getCmdEnCoursParMembre(userSessionBean.getIdMembre(),
 					derniereCdeGoupee, isCurrrentCmds);
-
+			// renseigner le selected commande ID
 			if (selectedCmd == null || selectedCmd.isEmpty()) {
 				if (commandes != null && !commandes.isEmpty()) {
-					CommandeIndividuelle commandeIndividuelle2 = commandes.get(0);
-					selectedCmd = commandeIndividuelle2.getIdCdeIndiv().toString();
+					CommandeIndividuelle selectedCommandeIndividuelle = commandes.get(0);
+					selectedCmd = selectedCommandeIndividuelle.getIdCdeIndiv().toString();
 				}
 			}
 

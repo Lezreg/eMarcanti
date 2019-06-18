@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.marcanti.ecommerce.constants.CommandeGroupeeStatus;
+import com.marcanti.ecommerce.constants.CommandeGroupeeStatusEnum;
 import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
 
 /**
@@ -242,9 +242,9 @@ public class CommandeIndividuelle implements Serializable {
 	public boolean isAuthorisedToModify() {
 
 		if (this.getIdCdeGroupee() != null
-				|| CommandeGroupeeStatus.CDE_GROUPEE_NON_CONFIRMEE.getCode()
+				|| CommandeGroupeeStatusEnum.CDE_GROUPEE_NON_CONFIRMEE.getCode()
 						.equals(this.getIdCdeGroupee().getIdStatus().getStatusCode())
-				|| CommandeGroupeeStatus.CDE_GROUPEE_CONFIRMEE.getCode()
+				|| CommandeGroupeeStatusEnum.CDE_GROUPEE_CONFIRMEE.getCode()
 						.equals(this.getIdCdeGroupee().getIdStatus().getStatusCode())) {
 			if (CommandeIndividuelleStatusEnum.CDE_INDIVID_CONFIRMEE.getCode()
 					.equals(this.getIdStatus().getStatusCode())

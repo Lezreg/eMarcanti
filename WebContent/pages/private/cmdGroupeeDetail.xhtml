@@ -85,7 +85,7 @@
 										<div class="commandgrmodifyinfop marquedescription oransationadmin">
 											<div class="select">
 											
-											  <h:selectOneMenu id="cmdIdiv" value="#{cmdGroupeeView.statusCode}" disabled="#{cmdGroupeeView.canModifyOrganisation}">
+											  <h:selectOneMenu id="cmdIdiv" value="#{cmdGroupeeView.statusCode}" disabled="true">
 											   	 <f:selectItems value="#{cmdGroupeeView.referentielBean.commandeGroupeeStatusList}" var="status" itemLabel="#{status.statusLibelle}" itemValue="#{status.statusCode}" />
 											  </h:selectOneMenu>
 									
@@ -127,7 +127,7 @@
 												 <rich:calendar value="#{cmdGroupeeView.commandeGroupee.dateLivraisonPrevue}"
 								                        locale="#{cmdGroupeeView.locale}"
 								                        datePattern="dd-MM-yyyy"
-								                         cellWidth="24px" cellHeight="22px" style="width:200px"/>
+								                         cellWidth="24px" cellHeight="22px" style="width:200px" disabled="#{USER_SESSION.READ_ONLY_COMMANDE_GROUPEE}"/>
 												 
 											</div>
 										</div>
@@ -148,7 +148,7 @@
 												<rich:calendar value="#{cmdGroupeeView.commandeGroupee.dateLivraisonReelle}"
 								                        locale="#{cmdGroupeeView.locale}"
 								                        datePattern="dd-MM-yyyy"
-								                         cellWidth="24px" cellHeight="22px" style="width:200px"/>
+								                         cellWidth="24px" cellHeight="22px" style="width:200px" disabled="#{USER_SESSION.READ_ONLY_COMMANDE_GROUPEE}"/>
 											</div>
 										</div>
 									</div>
@@ -165,7 +165,7 @@
 									<div class="paddingless col-sm-8">
 										<div class="marquedescription">
 											<div class="marquedescription cgropupsmodiyarea">
-											<h:inputText id="cmptId" value="#{cmdGroupeeView.commandeGroupee.compteurDerniereMinuteMax}" />
+											<h:inputText id="cmptId" value="#{cmdGroupeeView.commandeGroupee.compteurDerniereMinuteMax}" readonly="#{USER_SESSION.READ_ONLY_COMMANDE_GROUPEE}"/>
 										</div>
 	
 										</div>
@@ -182,7 +182,7 @@
 									</div>
 									<div class="paddingless col-sm-8">
 										<div class="marquedescription cgropupsmodiyarea">
-											<h:inputText id="suiId" value="#{cmdGroupeeView.commandeGroupee.numeroSuivi}" />
+											<h:inputText id="suiId" value="#{cmdGroupeeView.commandeGroupee.numeroSuivi}" readonly="#{USER_SESSION.READ_ONLY_COMMANDE_GROUPEE}"/>
 										</div>
 									</div>
 								</div><!--end inner div-->
@@ -197,7 +197,7 @@
 									</div>
 									<div class="paddingless col-sm-8">
 										<div class="marquedescription cgropupsmodiyarea fordesktopfulwidth">
-											<h:inputText id="transid" value="#{cmdGroupeeView.commandeGroupee.nomTransporteur}" />
+											<h:inputText id="transid" value="#{cmdGroupeeView.commandeGroupee.nomTransporteur}" readonly="#{USER_SESSION.READ_ONLY_COMMANDE_GROUPEE}"/>
 										</div>
 									</div>
 								</div><!--end inner div-->

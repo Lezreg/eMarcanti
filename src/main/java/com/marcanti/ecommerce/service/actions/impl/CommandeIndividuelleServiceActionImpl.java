@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.service.actions.CommandeIndividuelleServiceAction;
@@ -17,8 +16,6 @@ public class CommandeIndividuelleServiceActionImpl implements CommandeIndividuel
 
 	@Autowired
 	private CommandeIndividuelleDAO CommandeIndividuelleDAO;
-	@Autowired
-	private CommandeGroupeeDAO commandeGroupeeDAO;
 
 	@Override
 	public List<CommandeIndividuelle> getCmdEnCoursParMembre(Long idMembre, Long idCdeGroupee, boolean isCurrentCmd) {

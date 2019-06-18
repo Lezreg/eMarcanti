@@ -20,61 +20,62 @@ import org.slf4j.LoggerFactory;
  * @author admin
  */
 
-@ManagedBean(name="USER_SESSION")
+@ManagedBean(name = "USER_SESSION")
 @SessionScoped
 public class UserSessionBean implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    private final static Logger logger = LoggerFactory.getLogger(UserSessionBean.class);
+	private static final long serialVersionUID = 1L;
+	private final static Logger logger = LoggerFactory.getLogger(UserSessionBean.class);
 
-    private Long idMembre;
-    
-    private Short idProfil;
-    
+	private Long idMembre;
+
+	private Short idProfil;
+
 	private Long idOrga;
-    
-    private Long idDepartement;
-    
-    private String membreNom;
-    
-    private String membrePrenom;
-    
-    private String membreEmail;
-    
-    private String orgaNom;
-    
-    private String departementNom;
-    
-    //MENU
-    private String MENU_CATALOGUE="false";
-    private String MENU_NOUVEAUTE="false";
-    private String MENU_PROMOS="false";
-    private String MENU_DECOUVRIR="false";
-    private String MENU_COMMANDES="false";
-    private String MENU_PARRAINAGE="false";
-    private String MENU_COMMANDES_GRP="false";
-    private String MENU_COMMANDES_GRP_RC="false";
-    private String MENU_COMMANDES_GRP_RP="false";
-    private String MENU_COMMANDES_GRP_REDUC="false";
-    private String MENU_ADMIN="false";
-    private String MENU_ADMIN_MBR="false";
-    private String MENU_ADMIN_ORGA="false";
-    private String MENU_ADMIN_DPT="false";
-    private String MENU_ADMIN_MARQUE="false";
-    private String MENU_ADMIN_CATEG="false";
-    private String MENU_ADMIN_SS_CATEG="false";
-    private String MENU_ADMIN_CAROUSEL="false";
-    private String MENU_ADMIN_CATALOGUE="false";
-    private String MENU_REPORTING="false";
-    
-    //private Long idOrgaSelected;
 
-    public UserSessionBean() {
-    }
+	private Long idDepartement;
 
-    public UserSessionBean(Long idMembre) {
-        this.idMembre = idMembre;
-    }
+	private String membreNom;
+
+	private String membrePrenom;
+
+	private String membreEmail;
+
+	private String orgaNom;
+
+	private String departementNom;
+
+	// MENU
+	private String MENU_CATALOGUE = "false";
+	private String MENU_NOUVEAUTE = "false";
+	private String MENU_PROMOS = "false";
+	private String MENU_DECOUVRIR = "false";
+	private String MENU_COMMANDES = "false";
+	private String MENU_PARRAINAGE = "false";
+	private String MENU_COMMANDES_GRP = "false";
+	private String MENU_COMMANDES_GRP_RC = "false";
+	private String MENU_COMMANDES_GRP_RP = "false";
+	private String MENU_COMMANDES_GRP_REDUC = "false";
+	private String MENU_ADMIN = "false";
+	private String MENU_ADMIN_MBR = "false";
+	private String MENU_ADMIN_ORGA = "false";
+	private String MENU_ADMIN_DPT = "false";
+	private String MENU_ADMIN_MARQUE = "false";
+	private String MENU_ADMIN_CATEG = "false";
+	private String MENU_ADMIN_SS_CATEG = "false";
+	private String MENU_ADMIN_CAROUSEL = "false";
+	private String MENU_ADMIN_CATALOGUE = "false";
+	private String MENU_REPORTING = "false";
+	private String READ_ONLY_COMMANDE_GROUPEE = "true";
+
+	// private Long idOrgaSelected;
+
+	public UserSessionBean() {
+	}
+
+	public UserSessionBean(Long idMembre) {
+		this.idMembre = idMembre;
+	}
 
 	public UserSessionBean(Long idMembre, Short idProfil, Long idOrga, Long idDepartement, String membreNom,
 			String membrePrenom, String membreEmail, String orgaNom, String departementNom) {
@@ -89,7 +90,7 @@ public class UserSessionBean implements Serializable {
 		this.orgaNom = orgaNom;
 		this.departementNom = departementNom;
 	}
-	
+
 	public Long getIdMembre() {
 		return idMembre;
 	}
@@ -145,7 +146,7 @@ public class UserSessionBean implements Serializable {
 	public void setMembreEmail(String membreEmail) {
 		this.membreEmail = membreEmail;
 	}
-	
+
 	public String getOrgaNom() {
 		return orgaNom;
 	}
@@ -161,15 +162,14 @@ public class UserSessionBean implements Serializable {
 	public void setDepartementNom(String departementNom) {
 		this.departementNom = departementNom;
 	}
-	
-	/*public Long getIdOrgaSelected() {
-		return idOrgaSelected;
-	}
 
-	public void setIdOrgaSelected(Long idOrgaSelected) {
-		this.idOrgaSelected = idOrgaSelected;
-	}*/
-	
+	/*
+	 * public Long getIdOrgaSelected() { return idOrgaSelected; }
+	 * 
+	 * public void setIdOrgaSelected(Long idOrgaSelected) { this.idOrgaSelected =
+	 * idOrgaSelected; }
+	 */
+
 	public String getMENU_CATALOGUE() {
 		return MENU_CATALOGUE;
 	}
@@ -313,7 +313,7 @@ public class UserSessionBean implements Serializable {
 	public void setMENU_ADMIN_CAROUSEL(String mENU_ADMIN_CAROUSEL) {
 		MENU_ADMIN_CAROUSEL = mENU_ADMIN_CAROUSEL;
 	}
-	
+
 	public String getMENU_ADMIN_CATALOGUE() {
 		return MENU_ADMIN_CATALOGUE;
 	}
@@ -329,107 +329,115 @@ public class UserSessionBean implements Serializable {
 	public void setMENU_REPORTING(String mENU_REPORTING) {
 		MENU_REPORTING = mENU_REPORTING;
 	}
-	
-	
-	public void setMenuRight() {
-		if(this.idProfil==ReferentielBean.PROFIL_FILLEUL){
-			MENU_CATALOGUE="true";
-		    MENU_NOUVEAUTE="true";
-		    MENU_PROMOS="true";
-		    MENU_DECOUVRIR="true";
-		    MENU_COMMANDES="true";
-		    //MENU_PARRAINAGE="false";
-		    //MENU_COMMANDES_GRP="false";
-		    //MENU_COMMANDES_GRP_RC="false";
-		    //MENU_COMMANDES_GRP_RP="false";
-		    //MENU_COMMANDES_GRP_REDUC="false";
-		    //MENU_ADMIN="false";
-		    //MENU_ADMIN_MBR="false";
-		    //MENU_ADMIN_ORGA="false";
-		    //MENU_ADMIN_DPT="false";
-		    //MENU_ADMIN_MARQUE="false";
-		    //MENU_ADMIN_CATEG="false";
-		    //MENU_ADMIN_SS_CATEG="false";
-		    //MENU_ADMIN_CAROUSEL="false";		    
-		    //MENU_REPORTING="false";
-		}else if(this.idProfil==ReferentielBean.PROFIL_MEMBRE){
-			MENU_CATALOGUE="true";
-		    MENU_NOUVEAUTE="true";
-		    MENU_PROMOS="true";
-		    MENU_DECOUVRIR="true";
-		    MENU_COMMANDES="true";
-		    MENU_PARRAINAGE="true";
-		    //MENU_COMMANDES_GRP="false";
-		    //MENU_COMMANDES_GRP_RC="false";
-		    //MENU_COMMANDES_GRP_RP="false";
-		    //MENU_COMMANDES_GRP_REDUC="false";		    
-		    //MENU_ADMIN="false";
-		    //MENU_ADMIN_MBR="false";
-		    //MENU_ADMIN_ORGA="false";
-		    //MENU_ADMIN_DPT="false";
-		    //MENU_ADMIN_MARQUE="false";
-		    //MENU_ADMIN_CATEG="false";
-		    //MENU_ADMIN_SS_CATEG="false";
-		    //MENU_ADMIN_CAROUSEL="false";		    
-		    //MENU_REPORTING="false";			
-		}else if(this.idProfil==ReferentielBean.PROFIL_MANAGER){
-			MENU_CATALOGUE="true";
-		    MENU_NOUVEAUTE="true";
-		    MENU_PROMOS="true";
-		    MENU_DECOUVRIR="true";
-		    MENU_COMMANDES="true";
-		    MENU_PARRAINAGE="true";
-		    MENU_COMMANDES_GRP="true";
-		    MENU_COMMANDES_GRP_RC="true";
-		    MENU_COMMANDES_GRP_RP="true";
-		    //MENU_COMMANDES_GRP_REDUC="false";		    
-		    MENU_ADMIN="true";
-		    MENU_ADMIN_MBR="true";
-		    //MENU_ADMIN_ORGA="false";
-		    MENU_ADMIN_DPT="true";
-		    //MENU_ADMIN_MARQUE="false";
-		    //MENU_ADMIN_CATEG="false";
-		    //MENU_ADMIN_SS_CATEG="false";
-		    //MENU_ADMIN_CAROUSEL="false";		    
-		    //MENU_REPORTING="false";			
-		}else if(this.idProfil==ReferentielBean.PROFIL_ADMIN){
-			this.MENU_CATALOGUE="true";
-		    MENU_NOUVEAUTE="true";
-		    MENU_PROMOS="true";
-		    MENU_DECOUVRIR="true";
-		    MENU_COMMANDES="true";
-		    MENU_PARRAINAGE="true";
-		    MENU_COMMANDES_GRP="true";
-		    MENU_COMMANDES_GRP_RC="true";
-		    MENU_COMMANDES_GRP_RP="true";
-		    MENU_COMMANDES_GRP_REDUC="true";		    
-		    MENU_ADMIN="true";
-		    MENU_ADMIN_MBR="true";
-		    MENU_ADMIN_ORGA="true";
-		    MENU_ADMIN_DPT="true";
-		    MENU_ADMIN_MARQUE="true";
-		    MENU_ADMIN_CATEG="true";
-		    MENU_ADMIN_SS_CATEG="true";
-		    MENU_ADMIN_CAROUSEL="true";
-		    MENU_ADMIN_CATALOGUE="true";
-		    MENU_REPORTING="true";			
-		}
-	}	
 
+	public void setMenuRight() {
+		if (this.idProfil == ReferentielBean.PROFIL_FILLEUL) {
+			MENU_CATALOGUE = "true";
+			MENU_NOUVEAUTE = "true";
+			MENU_PROMOS = "true";
+			MENU_DECOUVRIR = "true";
+			MENU_COMMANDES = "true";
+			// MENU_PARRAINAGE="false";
+			// MENU_COMMANDES_GRP="false";
+			// MENU_COMMANDES_GRP_RC="false";
+			// MENU_COMMANDES_GRP_RP="false";
+			// MENU_COMMANDES_GRP_REDUC="false";
+			// MENU_ADMIN="false";
+			// MENU_ADMIN_MBR="false";
+			// MENU_ADMIN_ORGA="false";
+			// MENU_ADMIN_DPT="false";
+			// MENU_ADMIN_MARQUE="false";
+			// MENU_ADMIN_CATEG="false";
+			// MENU_ADMIN_SS_CATEG="false";
+			// MENU_ADMIN_CAROUSEL="false";
+			// MENU_REPORTING="false";
+		} else if (this.idProfil == ReferentielBean.PROFIL_MEMBRE) {
+			MENU_CATALOGUE = "true";
+			MENU_NOUVEAUTE = "true";
+			MENU_PROMOS = "true";
+			MENU_DECOUVRIR = "true";
+			MENU_COMMANDES = "true";
+			MENU_PARRAINAGE = "true";
+			// MENU_COMMANDES_GRP="false";
+			// MENU_COMMANDES_GRP_RC="false";
+			// MENU_COMMANDES_GRP_RP="false";
+			// MENU_COMMANDES_GRP_REDUC="false";
+			// MENU_ADMIN="false";
+			// MENU_ADMIN_MBR="false";
+			// MENU_ADMIN_ORGA="false";
+			// MENU_ADMIN_DPT="false";
+			// MENU_ADMIN_MARQUE="false";
+			// MENU_ADMIN_CATEG="false";
+			// MENU_ADMIN_SS_CATEG="false";
+			// MENU_ADMIN_CAROUSEL="false";
+			// MENU_REPORTING="false";
+		} else if (this.idProfil == ReferentielBean.PROFIL_MANAGER) {
+			MENU_CATALOGUE = "true";
+			MENU_NOUVEAUTE = "true";
+			MENU_PROMOS = "true";
+			MENU_DECOUVRIR = "true";
+			MENU_COMMANDES = "true";
+			MENU_PARRAINAGE = "true";
+			MENU_COMMANDES_GRP = "true";
+			MENU_COMMANDES_GRP_RC = "true";
+			MENU_COMMANDES_GRP_RP = "true";
+			// MENU_COMMANDES_GRP_REDUC="false";
+			MENU_ADMIN = "true";
+			MENU_ADMIN_MBR = "true";
+			// MENU_ADMIN_ORGA="false";
+			MENU_ADMIN_DPT = "true";
+			// MENU_ADMIN_MARQUE="false";
+			// MENU_ADMIN_CATEG="false";
+			// MENU_ADMIN_SS_CATEG="false";
+			// MENU_ADMIN_CAROUSEL="false";
+			// MENU_REPORTING="false";
+		} else if (this.idProfil == ReferentielBean.PROFIL_ADMIN) {
+			this.MENU_CATALOGUE = "true";
+			MENU_NOUVEAUTE = "true";
+			MENU_PROMOS = "true";
+			MENU_DECOUVRIR = "true";
+			MENU_COMMANDES = "true";
+			MENU_PARRAINAGE = "true";
+			MENU_COMMANDES_GRP = "true";
+			MENU_COMMANDES_GRP_RC = "true";
+			MENU_COMMANDES_GRP_RP = "true";
+			MENU_COMMANDES_GRP_REDUC = "true";
+			MENU_ADMIN = "true";
+			MENU_ADMIN_MBR = "true";
+			MENU_ADMIN_ORGA = "true";
+			MENU_ADMIN_DPT = "true";
+			MENU_ADMIN_MARQUE = "true";
+			MENU_ADMIN_CATEG = "true";
+			MENU_ADMIN_SS_CATEG = "true";
+			MENU_ADMIN_CAROUSEL = "true";
+			MENU_ADMIN_CATALOGUE = "true";
+			MENU_REPORTING = "true";
+			setREAD_ONLY_COMMANDE_GROUPEE("false");
+		}
+	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	public void deconnection() throws Exception
-	{
+
+	public void deconnection() throws Exception {
 
 		logger.info("deconnexion : " + getMembreNom());
-	    FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-	    HttpServletResponse response = (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		response.sendRedirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()+"/pages/login.xhtml");
-		
-	    //return "/pages/login.xhtml";
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
+				.getResponse();
+		response.sendRedirect(FacesContext.getCurrentInstance().getExternalContext().getApplicationContextPath()
+				+ "/pages/login.xhtml");
+
+		// return "/pages/login.xhtml";
+	}
+
+	public String getREAD_ONLY_COMMANDE_GROUPEE() {
+		return READ_ONLY_COMMANDE_GROUPEE;
+	}
+
+	public void setREAD_ONLY_COMMANDE_GROUPEE(String rEAD_ONLY_COMMANDE_GROUPEE) {
+		READ_ONLY_COMMANDE_GROUPEE = rEAD_ONLY_COMMANDE_GROUPEE;
 	}
 
 }

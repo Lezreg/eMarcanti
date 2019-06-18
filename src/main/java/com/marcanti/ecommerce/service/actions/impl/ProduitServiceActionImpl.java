@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.marcanti.ecommerce.beans.ProduitBean;
-import com.marcanti.ecommerce.constants.Categories;
+import com.marcanti.ecommerce.constants.CategoriesEnum;
 import com.marcanti.ecommerce.dao.MarqueDAO;
 import com.marcanti.ecommerce.dao.OrganisationDAO;
 import com.marcanti.ecommerce.dao.ProduitDAO;
@@ -78,46 +78,46 @@ public class ProduitServiceActionImpl implements ProduitServiceAction {
 	}
 
 	public List<Produit> getParfumHomme() {
-		return produitDAO.findProduitByCategorie(Categories.PARFUM_HOMME.getCode());
+		return produitDAO.findProduitByCategorie(CategoriesEnum.PARFUM_HOMME.getCode());
 	}
 
 	public List<Produit> getParfumFemme() {
-		return produitDAO.findProduitByCategorie(Categories.PARFUM_FEMME.getCode());
+		return produitDAO.findProduitByCategorie(CategoriesEnum.PARFUM_FEMME.getCode());
 
 	}
 
 	public List<Produit> getParfumEnfant() {
-		return produitDAO.findProduitByCategorie(Categories.PARFUM_ENFANT.getCode());
+		return produitDAO.findProduitByCategorie(CategoriesEnum.PARFUM_ENFANT.getCode());
 	}
 
 	public List<Produit> getTesteurs() {
-		return produitDAO.findProduitByCategorie(Categories.TESTER.getCode());
+		return produitDAO.findProduitByCategorie(CategoriesEnum.TESTER.getCode());
 	}
 
 	@Override
 	public List<Produit> getCoffrets() {
-		return produitDAO.findProduitByCategorie(Categories.COFFRET.getCode());
+		return produitDAO.findProduitByCategorie(CategoriesEnum.COFFRET.getCode());
 	}
 
 	@Override
 	public List<Produit> getSoins() {
 		// Miniatures et soins
-		return produitDAO.findProduitByCategorie(Categories.CREME.getCode());
+		return produitDAO.findProduitByCategorie(CategoriesEnum.CREME.getCode());
 	}
 
 	@Override
 	public List<Produit> getAccessoires() {
-		return produitDAO.findProduitByCategorie(Categories.PILE_ACCESSOIRE.getCode());
+		return produitDAO.findProduitByCategorie(CategoriesEnum.PILE_ACCESSOIRE.getCode());
 	}
 
 	@Override
 	public List<Produit> getLots() {
-		return produitDAO.findProduitByCategorie(Categories.LOTS.getCode());
+		return produitDAO.findProduitByCategorie(CategoriesEnum.LOTS.getCode());
 	}
 
 	@Override
 	public List<Produit> getMiniatures() {
-		return produitDAO.findProduitByCategorie(Categories.MINIATURE.getCode());
+		return produitDAO.findProduitByCategorie(CategoriesEnum.MINIATURE.getCode());
 	}
 
 	@Override

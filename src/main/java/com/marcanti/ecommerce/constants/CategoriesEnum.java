@@ -1,6 +1,6 @@
 package com.marcanti.ecommerce.constants;
 
-public enum Categories {
+public enum CategoriesEnum {
 
 	PARFUM_HOMME("PARFUM.HOMME"),
 
@@ -22,7 +22,7 @@ public enum Categories {
 
 	private String code;
 
-	Categories(String code) {
+	CategoriesEnum(String code) {
 		this.setCode(code);
 	}
 

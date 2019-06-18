@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.marcanti.ecommerce.constants.CommandeGroupeeStatus;
+import com.marcanti.ecommerce.constants.CommandeGroupeeStatusEnum;
 import com.marcanti.ecommerce.model.CommandeGroupee;
 import com.marcanti.ecommerce.model.CommandeIndividuelle;
 import com.marcanti.ecommerce.model.Organisation;
@@ -128,7 +128,7 @@ public class CommandeGroupeeController implements Serializable {
 			commandeGroupee.setIsPaiementEffectue(false);
 			commandeGroupee.setIsEnCours(true);
 			commandeGroupee.setIdStatus(commandeGroupeeServiceAction
-					.getCommandeGroupeeStatusByCode(CommandeGroupeeStatus.CDE_GROUPEE_NON_CONFIRMEE.getCode()));
+					.getCommandeGroupeeStatusByCode(CommandeGroupeeStatusEnum.CDE_GROUPEE_NON_CONFIRMEE.getCode()));
 			// update exist command
 		} else {
 			commandeGroupee.setDateModification(new Date());

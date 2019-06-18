@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.marcanti.ecommerce.constants.CommandeGroupeeStatus;
+import com.marcanti.ecommerce.constants.CommandeGroupeeStatusEnum;
 import com.marcanti.ecommerce.constants.CommandeIndividuelleStatusEnum;
 import com.marcanti.ecommerce.dao.CommandeGroupeeDAO;
 import com.marcanti.ecommerce.dao.CommandeIndividuelleDAO;
@@ -82,8 +82,8 @@ public class PanierServiceActionImpl implements PanierActionService {
 		CommandeGroupee currentCmdGroupee = commandeGroupeeDAO.find(cmdgroupeeId);
 
 		String statusCode = currentCmdGroupee.getIdStatus().getStatusCode();
-		if (!CommandeGroupeeStatus.CDE_GROUPEE_CONFIRMEE.getCode().equals(statusCode)
-				&& !CommandeGroupeeStatus.CDE_GROUPEE_NON_CONFIRMEE.getCode().equals(statusCode)) {
+		if (!CommandeGroupeeStatusEnum.CDE_GROUPEE_CONFIRMEE.getCode().equals(statusCode)
+				&& !CommandeGroupeeStatusEnum.CDE_GROUPEE_NON_CONFIRMEE.getCode().equals(statusCode)) {
 			throw new CommandeGroupeeValidatedExeception(
 					"Commande groupee a deja été validé pour l organisation: " + userSessionBean.getIdOrga());
 		}
@@ -483,7 +483,7 @@ public class PanierServiceActionImpl implements PanierActionService {
 	}
 
 	@Override
-	public List<PanierProduit> getProduitsByPAnier(Panier panier) {
+	public List<PanierProduit> getProduitsByPanier(Panier panier) {
 		ParametersChecker.checkParameter("------------------panier is null ", panier);
 		return panierProduitDAO.getPanierProduitByPanier(panier.getIdPanier());
 	}

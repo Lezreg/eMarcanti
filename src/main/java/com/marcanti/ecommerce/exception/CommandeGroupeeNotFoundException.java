@@ -1,5 +1,10 @@
 package com.marcanti.ecommerce.exception;
 
+/**
+ * 
+ * @author rlezreg
+ *
+ */
 public class CommandeGroupeeNotFoundException extends Exception {
 
 	/**

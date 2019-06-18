@@ -25,7 +25,7 @@ public interface PanierActionService {
 
 	boolean isExistingCommandeGroupee(Membre utilisateur);
 
-	List<PanierProduit> getProduitsByPAnier(Panier panier);
+	List<PanierProduit> getProduitsByPanier(Panier panier);
 
 	List<PanierProduit> getProduitsByCmdIndiv(Long idCmdIndiv);
 

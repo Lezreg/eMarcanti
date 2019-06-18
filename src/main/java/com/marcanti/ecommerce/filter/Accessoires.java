@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.marcanti.ecommerce.beans.ProduitBean;
-import com.marcanti.ecommerce.constants.Categories;
+import com.marcanti.ecommerce.constants.CategoriesEnum;
 import com.marcanti.ecommerce.controller.BasketController;
 import com.marcanti.ecommerce.model.Marque;
 import com.marcanti.ecommerce.service.actions.ProduitServiceAction;
@@ -98,7 +98,7 @@ public class Accessoires {
 
 	public List<ProduitBean> getProduits() {
 		return produitServiceAction.getProductsByCategorie(userSessionBean.getIdOrga(),
-				Categories.PILE_ACCESSOIRE.getCode());
+				CategoriesEnum.PILE_ACCESSOIRE.getCode());
 	}
 
 	public void setProduits(List<ProduitBean> produits) {
